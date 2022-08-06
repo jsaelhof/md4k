@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const Test = () => {
+export const Test = () => {
   const GET_MOVIES = gql`
     query {
       movie {
@@ -15,7 +15,7 @@ const Test = () => {
   console.log(loading, error, data);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>GraphQL -- Error</p>;
   return (
     <div className="App">
       {data.movies.map((movie: { id: string; title: string }) => (
@@ -24,5 +24,3 @@ const Test = () => {
     </div>
   );
 };
-
-export default Test;

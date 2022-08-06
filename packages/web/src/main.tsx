@@ -7,7 +7,7 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/client";
-import Test from "./components/test/Test.tsx";
+import { Test } from "./components/test/test";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
