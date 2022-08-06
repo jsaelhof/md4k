@@ -1,0 +1,9 @@
+{
+  "name": "md4k-api",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "yarn@3.2.2",
+  "dependencies": {
+    "apollo-server-micro": "^3.10.0"
+  }
+}
