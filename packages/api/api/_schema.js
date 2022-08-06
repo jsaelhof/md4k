@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Movie {
@@ -10,6 +10,7 @@ export const typeDefs = gql`
     movie: [Movie]
   }
 `;
+
 export const resolvers = {
   Query: {
     movie: () => [

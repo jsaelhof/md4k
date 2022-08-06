@@ -1,9 +1,14 @@
 {
   "name": "md4k-api",
-  "version": "1.0.0",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "packageManager": "yarn@3.2.2",
   "dependencies": {
-    "apollo-server-micro": "^3.10.0"
+    "apollo-server-core": "^3.10.0",
+    "apollo-server-express": "^3.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "graphql": "^16.5.0"
   }
 }
