@@ -18,7 +18,7 @@ export const Test = () => {
   if (error) return <p>GraphQL -- Error</p>;
   return (
     <div className="App">
-      {data.movies.map((movie: { id: string; title: string }) => (
+      {data.movie.map((movie: { id: string; title: string }) => (
         <div key={movie.id}>{movie.title}</div>
       ))}
     </div>
