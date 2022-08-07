@@ -10,8 +10,8 @@ import {
 import { Test } from "./components/test/test";
 
 const client = new ApolloClient({
+  uri: import.meta.env.VITE_GRAPHQL_URL,
   cache: new InMemoryCache(),
-  link: createHttpLink({ uri: "/api/graphql" }),
 });
 
 ReactDOM.render(
