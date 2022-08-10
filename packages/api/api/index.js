@@ -7,6 +7,7 @@ import cors from "cors";
 import { typeDefs } from "../graphql/schemas";
 import { resolvers } from "../graphql/resolvers";
 import dotenv from "dotenv";
+import { isTokenValid } from "../auth/validate";
 
 dotenv.config();
 
@@ -36,25 +37,30 @@ const startApolloServer = async (app, httpServer) => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // context: async ({ req, res }) => {
-    //   if (!db) {
-    //     try {
-    //       const dbClient = new MongoClient(MONGODB_URI);
-    //       await dbClient.connect();
-    //       db = dbClient.db(MONGODB_DB); // database name
-    //     } catch (e) {
-    //       console.log("error while connecting with graphql context (db)", e);
-    //     }
-    //   }
+    context: async ({ req, res }) => {
+      // Connect to the the DB
+      if (!db) {
+        try {
+          const dbClient = new MongoClient(MONGODB_URI);
+          await dbClient.connect();
+          db = dbClient.db(MONGODB_DB); // database name
+        } catch (e) {
+          console.log("error while connecting with graphql context (db)", e);
+        }
+      }
 
-    //   // FIXME: HOW TO DO THIS? getSession is Next.js code.
-    //   // const {
-    //   //   user: { sub: userId },
-    //   //   idToken: token,
-    //   // } = getSession(req, res);
+      // Get the Auth0 bearer token from the header
+      const { authorization: token } = req.headers;
 
-    //   return { db, token, userId };
-    // },
+      // Validate the token.
+      // If valid, the decoded token is returned which contains the subject ("sub").
+      // If invalid, error is returned.
+      // Only one of invalid or decoded will be returned.
+      const { error, decoded } = await isTokenValid(token);
+      if (error) throw new Error(error);
+
+      return { db, userId: decoded?.sub };
+    },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
