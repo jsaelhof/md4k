@@ -56,10 +56,10 @@ const startApolloServer = async (app, httpServer) => {
       // If valid, the decoded token is returned which contains the subject ("sub").
       // If invalid, error is returned.
       // Only one of invalid or decoded will be returned.
-      const { error, decoded } = await isTokenValid(token);
-      if (error) throw new Error(error);
+      const tokenResult = await isTokenValid(token);
+      if (tokenResult.error) throw new Error(tokenResult.error);
 
-      return { db, userId: decoded?.sub };
+      return { db, userId: tokenResult.decoded?.sub };
     },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
