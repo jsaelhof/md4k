@@ -26,8 +26,6 @@ export const AuthenticatedApolloProvider = ({ children }) => {
 
     if (!token) return { headers, ...rest };
 
-    console.log("AUth Link", token);
-
     return {
       ...rest,
       headers: {
