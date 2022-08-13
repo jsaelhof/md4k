@@ -7,11 +7,6 @@ import { App } from "./components/app/app";
 ReactDOM.render(
   <React.StrictMode>
     {/* https://auth0.com/docs/get-started/architecture-scenarios/spa-api */}
-    {console.log(
-      import.meta.env.VITE_AUTH0_DOMAIN,
-      import.meta.env.VITE_AUTH0_CLIENT_ID,
-      import.meta.env.VITE_AUTH0_AUDIENCE
-    )}
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN} // This is the domain of the SPA App on Auth0
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID} // This is the client id of the SPA App on Auth0

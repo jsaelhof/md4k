@@ -6,6 +6,14 @@ import { AuthenticatedApolloProvider } from "../authenticated-apollo-provider/au
 export const App = () => {
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
+  {
+    console.log(
+      import.meta.env.VITE_AUTH0_DOMAIN,
+      import.meta.env.VITE_AUTH0_CLIENT_ID,
+      import.meta.env.VITE_AUTH0_AUDIENCE
+    );
+  }
+
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
       loginWithRedirect();
