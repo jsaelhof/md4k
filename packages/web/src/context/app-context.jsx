@@ -41,8 +41,6 @@ const AppProvider = ({ children }) => {
     clearPick,
   };
 
-  console.log(context);
-
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 };
 
