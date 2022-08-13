@@ -7,7 +7,13 @@ export const App = () => {
   const { user, isAuthenticated, isLoading, loginWithRedirect, error } =
     useAuth0();
 
-  console.log({ isAuthenticated, error });
+  console.log({
+    isAuthenticated,
+    error,
+    domain: import.meta.env.VITE_AUTH0_DOMAIN,
+    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+    audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+  });
 
   useEffect(() => {
     if (!error && !isAuthenticated && !isLoading) {
