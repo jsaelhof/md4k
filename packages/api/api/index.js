@@ -49,6 +49,8 @@ const startApolloServer = async (app, httpServer) => {
         }
       }
 
+      console.log(req, res);
+
       // Get the Auth0 bearer token from the header
       const { authorization: token } = req.headers;
 
