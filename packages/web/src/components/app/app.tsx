@@ -4,10 +4,14 @@ import { AppProvider } from "../../context/app-context";
 import { AuthenticatedApolloProvider } from "../authenticated-apollo-provider/authenticated-apollo-provider";
 
 export const App = () => {
-  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading, loginWithRedirect, error } =
+    useAuth0();
+
+  console.log({ isAuthenticated, error });
 
   useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
+    if (!error && !isAuthenticated && !isLoading) {
+      console.log("Login");
       loginWithRedirect();
     }
   });
