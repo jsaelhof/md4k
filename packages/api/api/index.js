@@ -4,10 +4,10 @@ import { MongoClient } from "mongodb";
 import http from "http";
 import express from "express";
 import cors from "cors";
-import { typeDefs } from "../graphql/schemas";
-import { resolvers } from "../graphql/resolvers";
+import { typeDefs } from "../graphql/schemas/index.js";
+import { resolvers } from "../graphql/resolvers/index.js";
 import dotenv from "dotenv";
-import { isTokenValid } from "../auth/validate";
+import { isTokenValid } from "../auth/validate.js";
 
 dotenv.config();
 
@@ -48,8 +48,6 @@ const startApolloServer = async (app, httpServer) => {
           console.log("error while connecting with graphql context (db)", e);
         }
       }
-
-      console.log(req, res);
 
       // Get the Auth0 bearer token from the header
       const { authorization: token } = req.headers;

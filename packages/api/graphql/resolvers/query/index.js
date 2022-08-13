@@ -1,2 +1,2 @@
-export { lists } from "./lists";
-export { movies } from "./movies";
+export { lists } from "./lists.js";
+export { movies } from "./movies.js";
