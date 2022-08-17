@@ -5,5 +5,9 @@
   "packageManager": "yarn@3.2.2",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "dev": "yarn workspaces foreach -vpi run dev",
+    "lint": "yarn workspaces foreach -vp run lint"
+  }
 }
