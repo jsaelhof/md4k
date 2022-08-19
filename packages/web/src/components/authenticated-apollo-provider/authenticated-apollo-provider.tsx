@@ -11,8 +11,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export const AuthenticatedApolloProvider = ({
   children,
-}: PropsWithChildren<{}>) => {
-  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+}: PropsWithChildren) => {
+  const { getAccessTokenSilently } = useAuth0();
 
   const httpLink = new HttpLink({
     uri: import.meta.env.VITE_GRAPHQL_URL,

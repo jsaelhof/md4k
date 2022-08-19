@@ -37,7 +37,7 @@ const startApolloServer = async (app, httpServer) => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: async ({ req, res }) => {
+    context: async ({ req }) => {
       // Connect to the the DB
       if (!db) {
         try {
