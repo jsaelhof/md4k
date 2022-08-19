@@ -6,7 +6,8 @@
   "packageManager": "yarn@3.2.2",
   "scripts": {
     "dev": "NODE_ENV=development node ./scripts/dev.js",
-    "lint": "eslint \"./**/*.{js,ts}\" --max-warnings=0"
+    "lint": "eslint \"./**/*.{js,ts}\" --max-warnings=0",
+    "prettier": "npx prettier --write ."
   },
   "dependencies": {
     "apollo-server-core": "^3.10.0",
