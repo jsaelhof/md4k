@@ -1,0 +1,66 @@
+# When pull request is closed and merged, this workflow will checkout the repo, read the change log, 
+# add the details of the pull request to it, and commit it.
+
+name: Changelog
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+        
+    - name: Parse Date
+      id: parseDate
+      run: |
+        MERGED=${{ github.event.pull_request.merged_at }}
+        echo "::set-output name=DATE::${MERGED:0:10}"
+        
+    - name: Read changelog
+      id: read
+      uses: juliangruber/read-file-action@v1.1.4
+      with:
+        path: ./changelog.md
+
+    - name: Update changelog
+      uses: DamianReeves/write-file-action@v1.0
+      with:
+        path: ./changelog.md
+        contents: |
+          ### PR #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}
+          ##### ${{ steps.parseDate.outputs.DATE }}
+          
+          ${{ github.event.pull_request.body }}
+          
+          ![](public/images/link.png) [Pull Request](${{ github.event.pull_request.html_url }})
+      
+          ----
+          
+          ${{ steps.read.outputs.content }}
+        write-mode: overwrite
+        
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v9.0.0
+      with:
+        add: ./changelog.md
+        message: update changelog
+        
+    - name: Comment
+      uses: actions/github-script@v5
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '[Changelog](${{github.server_url}}/${{github.repository}}/blob/main/changelog.md)'
+          })     
