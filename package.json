@@ -11,7 +11,9 @@
     "lint": "yarn workspaces foreach -vp run lint",
     "prettier": "yarn workspaces foreach -vp run prettier",
     "prepare": "husky install",
-    "lintstaged": "yarn workspaces foreach -p run lint-staged"
+    "lintstaged": "yarn workspaces foreach -vp run lint-staged",
+    "test": "yarn workspaces foreach -vpi run vitest",
+    "coverage": "yarn workspaces foreach -vpi run coverage"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.0",

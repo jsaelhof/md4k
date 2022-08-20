@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "NODE_ENV=development node ./scripts/dev.js",
     "lint": "eslint \"./**/*.{js,ts}\" --max-warnings=0",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "test": "vitest",
+    "test-ui": "vitest --ui",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "apollo-server-core": "^3.10.0",
@@ -19,6 +22,11 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.1.4",
     "mongodb": "^4.8.1"
+  },
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.22.1",
+    "@vitest/ui": "^0.22.1",
+    "vitest": "^0.22.1"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "*",
