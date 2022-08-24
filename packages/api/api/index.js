@@ -1,5 +1,8 @@
 import { ApolloServer } from "apollo-server-express";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import {
+  ApolloServerPluginDrainHttpServer,
+  AuthenticationError,
+} from "apollo-server-core";
 import { MongoClient } from "mongodb";
 import http from "http";
 import express from "express";
@@ -57,7 +60,7 @@ const startApolloServer = async (app, httpServer) => {
       // If invalid, error is returned.
       // Only one of invalid or decoded will be returned.
       const tokenResult = await isTokenValid(token);
-      if (tokenResult.error) throw new Error(tokenResult.error);
+      if (tokenResult.error) throw new AuthenticationError(tokenResult.error);
 
       return { db, userId: tokenResult.decoded?.sub };
     },
