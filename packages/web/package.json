@@ -34,13 +34,13 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^20.0.0",
+    "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vitest": "^0.22.1"
   },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
-    "eslint": "*",
-    "typescript": "*"
+    "eslint": "*"
   }
 }
