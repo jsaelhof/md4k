@@ -16,14 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Temporarily disable "include administrators" branch protection
-        uses: benjefferies/branch-protection-bot@master
-        if: always()
-        with:
-          access_token: ${{ secrets.BOT_TOKEN }}
-          branch: ${{ github.event.repository.default_branch }}
-          enforce_admins: false
-
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -74,11 +66,3 @@ jobs:
               repo: context.repo.repo,
               body: '[Changelog](${{github.server_url}}/${{github.repository}}/blob/main/changelog.md)'
             })
-
-      - name: Temporarily disable "include administrators" branch protection
-        uses: benjefferies/branch-protection-bot@master
-        if: always()
-        with:
-          access_token: ${{ secrets.BOT_TOKEN }}
-          branch: ${{ github.event.repository.default_branch }}
-          enforce_admins: true
