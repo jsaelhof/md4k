@@ -28,11 +28,8 @@ export const List = () => {
   const navigate = useNavigate();
   const { list, movies, loadingMovies, lists } = useAppContext();
   const [enableAddMovie, setEnableAddMovie] = useState(false);
-  const [enableEditMovie, setEnableEditMovie] = useState<boolean | null>(null);
-  const [toastProps, setToastProps] = useState<{
-    message: string;
-    onUndo?: () => void;
-  } | null>(null);
+  const [enableEditMovie, setEnableEditMovie] = useState(null);
+  const [toastProps, setToastProps] = useState(null);
   const [error, setError] = useState(null);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
