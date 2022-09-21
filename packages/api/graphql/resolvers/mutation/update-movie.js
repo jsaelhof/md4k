@@ -1,6 +1,6 @@
 import axios from "axios";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
-import { api } from "../../../constants/api.js";
+import { api } from "md4k-constants";
 
 export const updateMovie = async (parent, { movieId, list }, { db }) => {
   // Get the movie from my DB

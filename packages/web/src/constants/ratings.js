@@ -1,20 +1,4 @@
-export const ratingsSource = {
-  IMDB: "IMDB",
-  ROTTEN_TOMATOES: "ROTTEN_TOMATOES",
-  METACRITIC: "METACRITIC",
-};
-
-export const fromOmdbSource = {
-  "Internet Movie Database": ratingsSource.IMDB,
-  "Rotten Tomatoes": ratingsSource.ROTTEN_TOMATOES,
-  Metacritic: ratingsSource.METACRITIC,
-};
-
-export const ratingsSources = [
-  ratingsSource.IMDB,
-  ratingsSource.ROTTEN_TOMATOES,
-  ratingsSource.METACRITIC,
-];
+import { ratingsSource } from "md4k-constants";
 
 export const ratingsSourceImage = {
   [ratingsSource.IMDB]: "imdb.svg",

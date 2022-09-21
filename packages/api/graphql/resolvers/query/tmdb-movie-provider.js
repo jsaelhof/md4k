@@ -1,9 +1,15 @@
 import axios from "axios";
-import { fromTMDBProvider } from "../../../constants/sources.js";
-import { api } from "../../../constants/api.js";
 import lodash from "lodash";
+import { api, sources } from "md4k-constants";
 
 const { first, isNil } = lodash;
+
+const fromTMDBProvider = {
+  "Disney Plus": sources.DISNEY_PLUS,
+  Netflix: sources.NETFLIX,
+  "Amazon Prime Video": sources.PRIME_VIDEO,
+  "Apple TV Plus": sources.APPLE_TV,
+};
 
 export const tmdbMovieProvider = async (parent) => {
   // Look up the TMDB data using the imdbID.

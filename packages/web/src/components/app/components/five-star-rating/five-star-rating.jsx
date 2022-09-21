@@ -2,7 +2,7 @@ import { isNil, times } from "lodash";
 import { filter, flow, map, mean, pick } from "lodash/fp";
 
 import { Star, StarRatingContainer } from "./five-star-rating.styles";
-import { ratingsSources } from "../../../../constants/ratings";
+import { ratingsSources } from "md4k-constants";
 
 const toAverageRating = flow(
   pick(ratingsSources),

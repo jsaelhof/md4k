@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.1.4",
     "lodash": "^4.17.21",
+    "md4k-constants": "*",
     "mongodb": "^4.8.1"
   },
   "devDependencies": {

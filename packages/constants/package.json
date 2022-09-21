@@ -1,0 +1,8 @@
+{
+  "name": "md4k-constants",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "yarn@3.2.2",
+  "main": "src/index.js"
+}

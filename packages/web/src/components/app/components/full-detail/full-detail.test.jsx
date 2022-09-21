@@ -2,7 +2,7 @@ import FullDetail from "./full-detail";
 import { GET_MOVIE_EXTENDED_DETAILS } from "../../../../graphql/queries/get-movie-extended-details";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { EDIT_MOVIE } from "../../../../graphql/mutations";
-import { sources } from "../../../../constants/sources";
+import { sources } from "md4k-constants";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { createMatchMedia } from "../../../../utils/create-match-media";

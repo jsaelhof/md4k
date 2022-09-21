@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { ratingsSource } from "../../../../../../constants/ratings";
+import { ratingsSource } from "md4k-constants";
 import Ratings from "./ratings";
 
 describe("ratings", () => {

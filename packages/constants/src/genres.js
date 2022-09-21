@@ -1,4 +1,4 @@
-export const genres = {
+export const genres = Object.freeze({
   NONE: 0,
   COMEDY: 1,
   DRAMA: 2,
@@ -10,9 +10,9 @@ export const genres = {
   MUSICAL: 8,
   DOCUMENTARY: 9,
   HORROR: 10,
-};
+});
 
-export const genreLabels = {
+export const genreLabels = Object.freeze({
   [genres.NONE]: "None",
   [genres.COMEDY]: "Comedy",
   [genres.DRAMA]: "Drama",
@@ -24,4 +24,4 @@ export const genreLabels = {
   [genres.MUSICAL]: "Musical",
   [genres.DOCUMENTARY]: "Documentary",
   [genres.HORROR]: "Horror",
-};
+});

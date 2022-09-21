@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button, useMediaQuery } from "@mui/material";
 import { ChevronLeft, ChevronRight, PlayArrow } from "@mui/icons-material";
@@ -8,13 +8,12 @@ import TelevisionPlay from "@mitch528/mdi-material-ui/TelevisionPlay";
 import CloseThick from "@mitch528/mdi-material-ui/CloseThick";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
-import { genreLabels } from "../../../../constants/genres";
 import {
   searchStreaming,
   searchTMDB,
   searchTorrent,
 } from "../../../../utils/search";
-import { sourceLogosLarge, sources } from "../../../../constants/sources";
+import { genreLabels, sources } from "md4k-constants";
 import { useGetMovieExtendedDetails } from "../../../../graphql/queries";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { useAppContext } from "../../../../context/app-context";
@@ -44,6 +43,7 @@ import Trailer from "./components/trailer/trailer";
 import ScrollArea from "./components/scroll-area/scroll-area";
 import Footer from "./components/footer/footer";
 import { StarRatingLayout } from "./components/star-rating-layout/star-rating-layout";
+import { sourceLogosLarge } from "../../../../constants/sources";
 
 const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
   const { list } = useAppContext();

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import isNil from "lodash/isNil";
 
 import { Container } from "./watched.styles";
-import { errorMessage } from "../../../../constants/error_codes";
+import { errorMessage } from "../../../../constants/error-messages";
 import DeleteDialog from "../delete-dialog/delete-dialog";
 import ErrorDialog from "../error-dialog/error-dialog";
 import WatchedMovie from "./components/watched-movie/watched-movie";

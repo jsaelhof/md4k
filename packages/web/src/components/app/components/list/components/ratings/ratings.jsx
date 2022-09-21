@@ -1,9 +1,7 @@
 import React from "react";
 
-import {
-  ratingsSource,
-  ratingsSourceImage,
-} from "../../../../../../constants/ratings";
+import { ratingsSource } from "md4k-constants";
+import { ratingsSourceImage } from "../../../../../../constants/ratings";
 import {
   denseMargins,
   RatingsList,

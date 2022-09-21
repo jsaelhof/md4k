@@ -1,5 +1,5 @@
 import axios from "axios";
-import { api } from "../../../constants/api.js";
+import { api } from "md4k-constants";
 
 export const searchByTitle = async (parent, { title }) => {
   const { data } = await axios.get(
