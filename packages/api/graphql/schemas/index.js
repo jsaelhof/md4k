@@ -93,7 +93,7 @@ export const typeDefs = gql`
     backdrops: [String]
     trailer: TmdbTrailer
     plot: String
-    provider: String
+    provider: Int
   }
 
   type TmdbTrailer {
