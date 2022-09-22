@@ -28,10 +28,10 @@ export const useGetMovieDetails = (movie, { onCompleted = noop } = {}) => {
   const { data, ...rest } = useQuery(GET_MOVIE_DETAILS, {
     skip: !movie || !movie?.imdbID,
     variables: { imdbID: movie?.imdbID },
-    onCompleted: ({ omdbMovie, tmdbProvider }) => {
+    onCompleted: ({ omdbMovie, tmdbMovie }) => {
       onCompleted({
         ...omdbMovie,
-        ...(tmdbProvider && { source: tmdbProvider.provider }),
+        ...(tmdbMovie && { source: tmdbMovie.provider }),
       });
     },
   });
