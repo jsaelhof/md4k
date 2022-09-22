@@ -1,3 +1,12 @@
+### PR #22 - Issue #21: Fix provider
+##### 2022-09-22
+
+convert provider type to Int, destructure from the correct response object
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/22)
+
+----
+
 ### PR #20 - Constants package
 ##### 2022-09-22
 
