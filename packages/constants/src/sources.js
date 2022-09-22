@@ -1,4 +1,4 @@
-export const sources = {
+export const sources = Object.freeze({
   NONE: 0,
   NETFLIX: 1,
   PRIME_VIDEO: 2,
@@ -6,9 +6,9 @@ export const sources = {
   PLEX: 4,
   DVD: 5,
   DISNEY_PLUS: 6,
-};
+});
 
-export const sourceLabels = {
+export const sourceLabels = Object.freeze({
   [sources.NONE]: "None",
   [sources.NETFLIX]: "Netflix",
   [sources.PRIME_VIDEO]: "Prime Video",
@@ -16,11 +16,11 @@ export const sourceLabels = {
   [sources.PLEX]: "Plex",
   [sources.DVD]: "DVD",
   [sources.DISNEY_PLUS]: "Disney+",
-};
+});
 
 const sourceLogoBase = "/images/source/";
 
-export const sourceLogos = {
+export const sourceLogos = Object.freeze({
   [sources.NONE]: `${sourceLogoBase}none.png`,
   [sources.NETFLIX]: `${sourceLogoBase}netflix.png`,
   [sources.PRIME_VIDEO]: `${sourceLogoBase}primevideo.png`,
@@ -28,11 +28,11 @@ export const sourceLogos = {
   [sources.PLEX]: `${sourceLogoBase}plex.png`,
   [sources.DVD]: `${sourceLogoBase}dvd.png`,
   [sources.DISNEY_PLUS]: `${sourceLogoBase}disney+.png`,
-};
+});
 
 const sourceLogoLargeBase = "/images/source_large/";
 
-export const sourceLogosLarge = {
+export const sourceLogosLarge = Object.freeze({
   [sources.NONE]: `${sourceLogoLargeBase}none.png`,
   [sources.NETFLIX]: `${sourceLogoLargeBase}netflix.png`,
   [sources.PRIME_VIDEO]: `${sourceLogoLargeBase}primevideo.png`,
@@ -40,11 +40,11 @@ export const sourceLogosLarge = {
   [sources.PLEX]: `${sourceLogoLargeBase}plex.png`,
   [sources.DVD]: `${sourceLogoLargeBase}dvd.png`,
   [sources.DISNEY_PLUS]: `${sourceLogoLargeBase}disney+.png`,
-};
+});
 
-export const fromTMDBProvider = {
+export const fromTMDBProvider = Object.freeze({
   "Disney Plus": sources.DISNEY_PLUS,
   Netflix: sources.NETFLIX,
   "Amazon Prime Video": sources.PRIME_VIDEO,
   "Apple TV Plus": sources.APPLE_TV,
-};
+});

@@ -1,12 +1,4 @@
-export const sources = {
-  NONE: 0,
-  NETFLIX: 1,
-  PRIME_VIDEO: 2,
-  APPLE_TV: 3,
-  PLEX: 4,
-  DVD: 5,
-  DISNEY_PLUS: 6,
-};
+import { sources } from "md4k-constants";
 
 export const sourceLabels = {
   [sources.NONE]: "None",
@@ -40,11 +32,4 @@ export const sourceLogosLarge = {
   [sources.PLEX]: `${sourceLogoLargeBase}plex.png`,
   [sources.DVD]: `${sourceLogoLargeBase}dvd.png`,
   [sources.DISNEY_PLUS]: `${sourceLogoLargeBase}disney+.png`,
-};
-
-export const fromTMDBProvider = {
-  "Disney Plus": sources.DISNEY_PLUS,
-  Netflix: sources.NETFLIX,
-  "Amazon Prime Video": sources.PRIME_VIDEO,
-  "Apple TV Plus": sources.APPLE_TV,
 };

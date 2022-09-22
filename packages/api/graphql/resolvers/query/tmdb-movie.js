@@ -1,6 +1,6 @@
 import axios from "axios";
 import lodash from "lodash";
-import { api } from "../../../constants/api.js";
+import { api } from "md4k-constants";
 
 const { filter, find, first, isNil, pick, reject } = lodash;
 

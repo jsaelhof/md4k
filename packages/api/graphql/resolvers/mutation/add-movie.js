@@ -1,8 +1,6 @@
 import { ApolloError } from "apollo-server-errors";
 import lodash from "lodash";
-
-import { errorCodes } from "../../../constants/error_codes.js";
-import { sources } from "../../../constants/sources.js";
+import { sources, errorCodes } from "md4k-constants";
 
 const { isNil } = lodash;
 

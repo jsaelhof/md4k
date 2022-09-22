@@ -1,8 +1,4 @@
-export const errorCodes = {
-  PICKING: "PICKING",
-  NO_TITLE: "NO_TITLE",
-  NO_LIST_NAME: "NO_LIST_NAME",
-};
+import { errorCodes } from "md4k-constants";
 
 export const errorMessage = {
   [errorCodes.PICKING]: "No movies are available to pick from.",

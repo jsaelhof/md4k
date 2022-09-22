@@ -9,12 +9,9 @@ import { isNil } from "lodash";
 import { useRef, useState } from "react";
 
 import { formatRuntime } from "../../../../../../utils/format-runtime";
-import { genreLabels, genres } from "../../../../../../constants/genres";
-import {
-  sourceLabels,
-  sourceLogos,
-  sources,
-} from "../../../../../../constants/sources";
+import { genreLabels, genres } from "md4k-constants";
+import { sourceLabels, sourceLogos } from "../../../../../../constants/sources";
+import { sources } from "md4k-constants";
 import { parseRuntime } from "../../../../../../utils/parse-runtime";
 import {
   useGetMovieDetails,

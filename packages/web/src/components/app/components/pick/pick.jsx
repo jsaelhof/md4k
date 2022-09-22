@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { useAppContext } from "../../../../context/app-context";
-import { errorCodes, errorMessage } from "../../../../constants/error_codes";
+import { errorCodes } from "md4k-constants";
+import { errorMessage } from "../../../../constants/error-messages";
 import ErrorDialog from "../error-dialog/error-dialog";
 import FullDetail from "../full-detail/full-detail";
 import { filter, conforms, sample, size, reject } from "lodash";

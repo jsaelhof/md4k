@@ -1,8 +1,8 @@
 import axios from "axios";
 import lodash from "lodash";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
-import { genreLabels } from "../../../constants/genres.js";
-import { api } from "../../../constants/api.js";
+import { genreLabels } from "md4k-constants";
+import { api } from "md4k-constants";
 
 const { findKey } = lodash;
 

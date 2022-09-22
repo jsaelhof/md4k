@@ -1,4 +1,4 @@
-import { sources } from "../constants/sources";
+import { sources } from "md4k-constants";
 
 export const searchIMDB = (imdbId) => `https://www.imdb.com/title/${imdbId}`;
 

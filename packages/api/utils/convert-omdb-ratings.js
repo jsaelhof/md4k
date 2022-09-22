@@ -1,8 +1,6 @@
-import {
-  fromOmdbSource,
-  ratingsSources,
-  ratingsSource,
-} from "../constants/ratings.js";
+import { fromOmdbSource } from "../constants/ratings.js";
+
+import { ratingsSources, ratingsSource } from "md4k-constants";
 
 const normalizeRating = (source, value) => {
   switch (source) {

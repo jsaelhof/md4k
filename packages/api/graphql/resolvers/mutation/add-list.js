@@ -1,5 +1,5 @@
 import { ApolloError } from "apollo-server-errors";
-import { errorCodes } from "../../../constants/error_codes.js";
+import { errorCodes } from "md4k-constants";
 import { v4 as uuidv4 } from "uuid";
 
 export const addList = async (parent, { name }, { db, userId }) => {

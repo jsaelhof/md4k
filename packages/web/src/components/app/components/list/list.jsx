@@ -21,7 +21,7 @@ import ListGrid from "./components/list-grid/list-grid";
 import Toast from "./components/toast/toast";
 import ErrorDialog from "../error-dialog/error-dialog";
 import AddMovieDialog from "./components/add-movie-dialog/add-movie-dialog";
-import { errorMessage } from "../../../../constants/error_codes";
+import { errorMessage } from "../../../../constants/error-messages";
 import { map } from "lodash";
 
 export const List = () => {
