@@ -1,3 +1,15 @@
+### PR #26 - #24: fix small bugs related to query and pick length
+##### 2022-09-24
+
+1. Runtime condition bug fixed
+2. Changed to useSearchParams instead of useParams
+3. Handled the case where only a single movie exists
+4. Redirected to the home screen on error. Filed #25 to address a better UX.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/26)
+
+----
+
 ### PR #22 - Issue #21: Fix provider
 ##### 2022-09-22
 
