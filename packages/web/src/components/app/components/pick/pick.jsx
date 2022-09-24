@@ -6,11 +6,14 @@ import { errorMessage } from "../../../../constants/error-messages";
 import ErrorDialog from "../error-dialog/error-dialog";
 import FullDetail from "../full-detail/full-detail";
 import { filter, conforms, sample, size, reject } from "lodash";
-import { useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const useRandomPick = () => {
   const { movies, pick, setPick, clearPick } = useAppContext();
-  const query = useParams();
+  const [searchParams] = useSearchParams();
+  const minRuntime = searchParams.get("minRuntime");
+  const maxRuntime = searchParams.get("maxRuntime");
+
   const [history, setHistory] = useState([]);
   const [error, setError] = useState();
 
@@ -20,16 +23,17 @@ const useRandomPick = () => {
         locked: (locked) => !locked,
       };
 
-      if (!query.minRuntime || !query.maxRuntime) {
+      if (minRuntime || maxRuntime) {
         filters.runtime = (runtime) =>
-          runtime >= (query.minRuntime || 0) &&
-          runtime <= (query.maxRuntime || Infinity);
+          runtime >= (minRuntime || 0) && runtime <= (maxRuntime || Infinity);
       }
 
       const list = filter(movies, conforms(filters));
 
       if (size(list) === 0) {
         setError(errorCodes.PICKING);
+      } else if (size(list) === 1) {
+        setPick(list[0].id);
       } else {
         const unpickedMovies = reject(list, ({ id }) => history.includes(id));
 
@@ -46,15 +50,7 @@ const useRandomPick = () => {
         }
       }
     }
-  }, [
-    clearPick,
-    history,
-    movies,
-    pick,
-    query.maxRuntime,
-    query.minRuntime,
-    setPick,
-  ]);
+  }, [clearPick, history, maxRuntime, minRuntime, movies, pick, setPick]);
 
   if (error) {
     return { pick: null, error };
@@ -65,8 +61,9 @@ const useRandomPick = () => {
 
 export const Pick = () => {
   const { moviesById, clearPick } = useAppContext();
+  const navigate = useNavigate();
 
-  // This is used to reset the pick in app state whne the page loads the first time.
+  // This is used to reset the pick in app state when the page loads the first time.
   // Without this, when leaving the pick page and then picking again, the last pick will remain
   // in app state. This also means it does not conform to new pick options.
   // eslint-disable-next-line
@@ -84,8 +81,9 @@ export const Pick = () => {
           content={
             errorMessage[error] || errorMessage.UNKNOWN.replace("%%", error)
           }
-          // FIXME: There is no setError... figure out what to do with this
-          //onConfirm={() => setError(null)}
+          // FIXME: Can't clear the error easily because it's in the hook. Navigate home for now.
+          // The only cause of an error right now is 0 movies matching the criteria so maybe build an empty state for that.
+          onConfirm={() => navigate("/")}
         />
       )}
     </>
