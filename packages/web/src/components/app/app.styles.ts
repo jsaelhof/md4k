@@ -7,3 +7,7 @@ export const AppLayout = styled("div")`
   min-height: 100vh;
   background: radial-gradient(#fff, #dfdfdf 80%);
 `;
+
+export const OutletLayout = styled("div")`
+  margin-top: 64px;
+`

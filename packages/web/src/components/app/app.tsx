@@ -5,7 +5,7 @@ import { theme } from "../../theme/theme";
 import { AppProvider } from "../../context/app-context";
 import { AuthenticatedApolloProvider } from "../authenticated-apollo-provider/authenticated-apollo-provider";
 import { Outlet } from "react-router-dom";
-import { AppLayout } from "./app.styles";
+import { AppLayout, OutletLayout } from "./app.styles";
 import TitleBar from "./components/titlebar/titlebar";
 import Footer from "./components/footer/footer";
 
@@ -25,7 +25,9 @@ export const App = () => {
           <AppProvider>
             <AppLayout>
               <TitleBar />
-              <Outlet />
+              <OutletLayout>
+                <Outlet />
+              </OutletLayout>
               <Footer />
             </AppLayout>
           </AppProvider>
