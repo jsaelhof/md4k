@@ -6,6 +6,7 @@ export const SplitButtonContainer = styled(ButtonGroup)`
 
 export const MainButton = styled(Button)`
   width: 180px;
+  white-space: nowrap;
 
   @media (max-width: 500px) {
     width: unset;

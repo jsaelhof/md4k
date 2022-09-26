@@ -1,12 +1,22 @@
 import { styled, Toolbar } from "@mui/material";
 import AddToQueue from "@mui/icons-material/AddToQueue";
+import { app } from "../../../../../../constants/app";
 
 export const ActionBarContainer = styled("div")(
-  ({ theme: { breakpoints, spacing } }) => ({
+  ({ theme: { breakpoints, palette, spacing }, $showScrollIndicator }) => ({
     flexGrow: 1,
+    position: "sticky",
+    top: app.APP_BAR_HEIGHT,
+    zIndex: 1000,
+    background: palette.grey[100],
+    padding: `0 ${app.LIST_MARGIN}px`,
+    boxShadow: $showScrollIndicator
+      ? "0 5px 10px rgb(0 0 0 / 25%)"
+      : "0 5px 10px rgb(0 0 0 0)",
+    transition: "box-shadow 400ms",
 
     [breakpoints.down(615)]: {
-      marginTop: spacing(3),
+      paddingTop: spacing(3),
     },
   })
 );

@@ -1,4 +1,5 @@
 import { styled } from "@mui/material";
+import { app } from "../../../../../../constants/app";
 
 export const MovieList = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",
@@ -7,4 +8,9 @@ export const MovieList = styled("div")(({ theme: { spacing } }) => ({
   marginTop: spacing(3),
   marginBottom: 200,
   justifyContent: "center",
+  padding: `0 ${app.LIST_MARGIN}px`,
+
+  "@media (max-width: 500px)": {
+    padding: "0 16px",
+  },
 }));
