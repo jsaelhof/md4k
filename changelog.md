@@ -1,3 +1,12 @@
+### PR #29 - 23/app layout
+##### 2022-09-27
+
+Fix the position of the title bar which requires some refactoring of the overall layout.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/29)
+
+----
+
 ### PR #26 - #24: fix small bugs related to query and pick length
 ##### 2022-09-24
 
