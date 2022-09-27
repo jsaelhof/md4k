@@ -22,7 +22,6 @@ import ErrorDialog from "../error-dialog/error-dialog";
 import AddMovieDialog from "./components/add-movie-dialog/add-movie-dialog";
 import { errorMessage } from "../../../../constants/error-messages";
 import { map } from "lodash";
-import { useIntersectionObserverRef } from "rooks";
 
 export const List = () => {
   const navigate = useNavigate();
@@ -137,13 +136,6 @@ export const List = () => {
     delay: 500,
   });
 
-  // FIXME: This could possibly extracted into it's own hook?
-  const [isIntersecting, setIntersecting] = useState(false);
-  const [intersectionRef] = useIntersectionObserverRef(
-    (entries) => entries?.[0] && setIntersecting(entries[0].isIntersecting),
-    { rootMargin: "-48px 0px 0px 0px" }
-  );
-
   if (lists?.length === 0) navigate("/create", { replace: true });
 
   return (
@@ -160,14 +152,10 @@ export const List = () => {
 
         {movies && (
           <>
-            {/* This 0 height div is used with the intersection observer to detect when the top edge has been scrolled out of view. */}
-            <div ref={intersectionRef} />
-
             <ActionBar
               disabled={!movies || loadingMovies || movies?.length === 0}
               onAdd={onEnableAddMovie}
               onPick={onPick}
-              showScrollIndicator={!isIntersecting}
             />
 
             <animated.div style={moviesSpring}>

@@ -5,7 +5,7 @@ import NavButton from "./components/nav-button/nav-button";
 export const appBarContainerStyles = ({ palette }) => ({
   position: "fixed",
   width: "100%",
-  zIndex: 900,
+  zIndex: 10000,
   background: `linear-gradient(75deg, ${palette.darkGrey[600]}, ${palette.darkGrey[800]} 80%)`,
 });
 

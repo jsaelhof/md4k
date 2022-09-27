@@ -6,7 +6,7 @@ export const MovieList = styled("div")(({ theme: { spacing } }) => ({
   gridTemplateColumns: "repeat(auto-fill, 160px)",
   gap: spacing(2),
   marginTop: spacing(3),
-  marginBottom: 200,
+  marginBottom: 120,
   justifyContent: "center",
   padding: `0 ${app.LIST_MARGIN}px`,
 

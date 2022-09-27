@@ -10,11 +10,11 @@ import {
   SecondaryActions,
 } from "./action-bar.styles";
 
-const ActionBar = ({ disabled, showScrollIndicator, onAdd, onPick }) => {
+const ActionBar = ({ disabled, onAdd, onPick }) => {
   const { medium } = useResponsive();
 
   return (
-    <ActionBarContainer $showScrollIndicator={showScrollIndicator}>
+    <ActionBarContainer>
       <AppBar position="static" color="transparent" elevation={0}>
         {!disabled && (
           <ActionToolbar data-testid="ActionToolbar">
