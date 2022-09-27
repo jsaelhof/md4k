@@ -6,9 +6,9 @@ export const MovieContainer = styled(animated.div)(() => ({
   borderRadius: 4,
 }));
 
-export const movieContainerFocused = {
-  zIndex: 1000,
-};
+export const movieContainerFocused = ({ zIndex }) => ({
+  zIndex: zIndex.movieHover,
+});
 
 export const MoviePosterContainer = styled("div")`
   border-radius: 4px;

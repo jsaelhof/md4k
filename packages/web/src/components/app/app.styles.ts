@@ -10,5 +10,5 @@ export const AppLayout = styled("div")(({ theme: { palette } }) => ({
 }));
 
 export const OutletLayout = styled("div")`
-  margin-top: ${app.APP_BAR_HEIGHT}px;
+  margin-top: ${app.TITLE_BAR_HEIGHT}px;
 `;

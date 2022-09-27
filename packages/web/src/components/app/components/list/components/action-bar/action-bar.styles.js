@@ -3,10 +3,10 @@ import AddToQueue from "@mui/icons-material/AddToQueue";
 import { app } from "../../../../../../constants/app";
 
 export const ActionBarContainer = styled("div")(
-  ({ theme: { breakpoints, palette, spacing } }) => ({
+  ({ theme: { breakpoints, palette, spacing, zIndex } }) => ({
     flexGrow: 1,
-    top: app.APP_BAR_HEIGHT,
-    zIndex: 1000,
+    top: app.TITLE_BAR_HEIGHT,
+    zIndex: zIndex.actionBar,
     background: palette.grey[100],
     padding: `0 ${app.LIST_MARGIN}px`,
 
