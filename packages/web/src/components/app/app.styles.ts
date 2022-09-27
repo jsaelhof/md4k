@@ -1,9 +1,14 @@
 import { styled } from "@mui/material";
+import { app } from "../../constants/app";
 
-export const AppLayout = styled("div")`
-  display: grid;
-  grid-template-columns: minmax(0, auto);
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-  background: radial-gradient(#fff, #dfdfdf 80%);
+export const AppLayout = styled("div")(({ theme: { palette } }) => ({
+  display: "grid",
+  gridTemplateColumns: "minmax(0, auto)",
+  gridTemplateRows: "auto 1fr auto",
+  minHeight: "100vh",
+  backgroundColor: palette.grey[100],
+}));
+
+export const OutletLayout = styled("div")`
+  margin-top: ${app.APP_BAR_HEIGHT}px;
 `;

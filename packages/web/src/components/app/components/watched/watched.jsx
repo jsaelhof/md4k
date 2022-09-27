@@ -33,20 +33,16 @@ export const Watched = () => {
 
   useEffect(() => {
     const onScroll = ({ target: { documentElement } }) => {
-      console.log("-------------------", "Scroll", documentElement);
       if (
         documentElement.scrollHeight - documentElement.scrollTop ===
         documentElement.clientHeight
       ) {
-        console.log("IF");
         setInfiniteLoadPointer(
           Math.min(
             watchedMovies?.length ?? 0,
             infiniteLoadPointer + INFINITE_LOAD_CHUNK_SIZE
           )
         );
-      } else {
-        console.log("ELSE");
       }
     };
     window.addEventListener("scroll", onScroll);

@@ -9,6 +9,7 @@ const darkBlue = {
 
 const darkGrey = {
   50: "#e3e3e3",
+  100: "#e7e7e7",
   600: "#434343",
   800: "#131313",
 };

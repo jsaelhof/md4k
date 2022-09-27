@@ -1,9 +1,11 @@
 import { styled } from "@mui/system";
+import { app } from "../../../../constants/app";
 import NavButton from "./components/nav-button/nav-button";
 
 export const appBarContainerStyles = ({ palette }) => ({
-  flexGrow: 1,
-  zIndex: 1000,
+  position: "fixed",
+  width: "100%",
+  zIndex: 10000,
   background: `linear-gradient(75deg, ${palette.darkGrey[600]}, ${palette.darkGrey[800]} 80%)`,
 });
 
@@ -11,7 +13,7 @@ export const toolbarStyles = {
   display: "grid",
   gridTemplateColumns: "auto 1fr auto",
   gridTemplateAreas: `"logo nav profile"`,
-  minHeight: "64px",
+  minHeight: `${app.APP_BAR_HEIGHT}px`,
 
   "@media (max-width: 580px)": {
     gridTemplateAreas: `"nav logo profile"`,

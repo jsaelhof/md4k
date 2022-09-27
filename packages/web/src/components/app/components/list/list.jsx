@@ -12,7 +12,6 @@ import {
   useRemoveMovie,
   useUndoMarkWatched,
 } from "../../../../graphql/mutations";
-import { Container } from "./list.styles";
 import { useNavigate } from "react-router-dom";
 import { animated, useSpring, useTransition } from "react-spring";
 import { Countdown } from "./components/countdown/countdown";
@@ -105,7 +104,6 @@ export const List = () => {
 
   const onAddMovie = useCallback(
     (movie) => {
-      console.log({ movie });
       addMovieMutation(addMovieOptions(movie, list));
       setEnableAddMovie(false);
     },
@@ -142,7 +140,7 @@ export const List = () => {
 
   return (
     <>
-      <Container>
+      <div>
         {loadingTransitions(
           (styles, item) =>
             item && (
@@ -153,25 +151,25 @@ export const List = () => {
         )}
 
         {movies && (
-          <ActionBar
-            disabled={!movies || loadingMovies || movies?.length === 0}
-            onAdd={onEnableAddMovie}
-            onPick={onPick}
-          />
-        )}
-
-        {movies && (
-          <animated.div style={moviesSpring}>
-            <ListGrid
-              movies={movies}
-              onAddMovie={onEnableAddMovie}
-              onEditMovie={onEnableEditMovie}
-              onRemoveMovie={onRemoveMovie}
-              onMarkWatched={onMarkWatched}
+          <>
+            <ActionBar
+              disabled={!movies || loadingMovies || movies?.length === 0}
+              onAdd={onEnableAddMovie}
+              onPick={onPick}
             />
-          </animated.div>
+
+            <animated.div style={moviesSpring}>
+              <ListGrid
+                movies={movies}
+                onAddMovie={onEnableAddMovie}
+                onEditMovie={onEnableEditMovie}
+                onRemoveMovie={onRemoveMovie}
+                onMarkWatched={onMarkWatched}
+              />
+            </animated.div>
+          </>
         )}
-      </Container>
+      </div>
 
       <Toast
         open={toastProps !== null}
