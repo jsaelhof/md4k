@@ -32,6 +32,15 @@ export const theme = createTheme({
     icon,
   },
 
+  zIndex: {
+    actionBar: 100,
+    movieHover: 200,
+    titleBar: 300,
+    expandedBackdrop: 400,
+    expandedContent: 450,
+    trailer: 500,
+  },
+
   components: {
     MuiButton: {
       variants: [

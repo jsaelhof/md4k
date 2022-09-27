@@ -7,7 +7,8 @@ export const TrailerInline = styled(animated.div)`
   position: relative;
 `;
 
-export const TrailerOverlay = styled(animated.div)`
+export const TrailerOverlay = styled(animated.div)(
+  ({ theme: { zIndex } }) => `
   position: fixed;
   top: 0;
   left: 0;
@@ -17,8 +18,9 @@ export const TrailerOverlay = styled(animated.div)`
   justify-content: center;
   align-items: center;
   background: radial-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
-  z-index: 1000000;
-`;
+  z-index: ${zIndex.trailer};
+`
+);
 
 export const YouTubePlayerInline = styled(YouTube)(({ width, height }) => ({
   position: "absolute",
