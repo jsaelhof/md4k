@@ -97,7 +97,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
         >
           <MovieDetail style={posterSpring}>
             <OverflowWrapper>
-              <MoviePoster movie={movie} height={375} />
+              <MoviePoster movie={movie} height={375} variant="zoom" />
 
               <InfoLayout>
                 <StarRatingLayout
