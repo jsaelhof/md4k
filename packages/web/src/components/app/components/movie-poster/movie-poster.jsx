@@ -1,6 +1,15 @@
 import TheatresIcon from "@mui/icons-material/Theaters";
 
-import { active, Lock, locked, NoPoster, Poster } from "./movie-poster.styles";
+import {
+  active,
+  Lock,
+  locked,
+  NoPoster,
+  noPosterZoom,
+  Poster,
+  PosterLayout,
+  shadowStyles,
+} from "./movie-poster.styles";
 
 const MoviePoster = ({
   movie,
@@ -8,6 +17,8 @@ const MoviePoster = ({
   onClick,
   noLock = false,
   noRel = false,
+  variant,
+  shadow,
 }) => {
   const posterStyles = {
     width: height * 0.64,
@@ -15,32 +26,40 @@ const MoviePoster = ({
   };
 
   return (
-    <div style={{ ...(!noRel && { position: "relative" }) }}>
-      {movie.poster ? (
-        <Poster
-          aria-label="Movie Poster"
-          sx={[
-            posterStyles,
-            {
-              backgroundImage: `url(${movie.poster})`,
-            },
-            onClick && active,
-            movie.locked && !noLock && locked,
-          ]}
-          onClick={onClick}
-        />
-      ) : (
-        <NoPoster
-          aria-label="Movie Poster"
-          sx={[posterStyles]}
-          onClick={onClick}
-        >
-          <TheatresIcon fontSize="large" />
-          <div>{movie.title}</div>
-        </NoPoster>
-      )}
+    <PosterLayout
+      style={{
+        ...(!noRel && { position: "relative" }),
+      }}
+    >
+      {/* Fallback if the poster is missing or a broken link */}
+      <NoPoster
+        aria-label="Movie Poster"
+        sx={[
+          posterStyles,
+          variant === "zoom" && noPosterZoom,
+          shadow && shadowStyles,
+        ]}
+        onClick={onClick}
+      >
+        <TheatresIcon sx={{ fontSize: variant === "zoom" ? 60 : 40 }} />
+        <div>{movie.title.length ? movie.title : "No Title"}</div>
+      </NoPoster>
+
+      <Poster
+        aria-label="Movie Poster"
+        sx={[
+          posterStyles,
+          {
+            backgroundImage: `url(${movie.poster})`,
+          },
+          onClick && active,
+          movie.locked && !noLock && locked,
+        ]}
+        onClick={onClick}
+      />
+
       {movie.locked && !noLock && <Lock />}
-    </div>
+    </PosterLayout>
   );
 };
 

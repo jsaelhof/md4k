@@ -3,8 +3,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useMediaQuery } from "@mui/material";
 
-import MoviePoster from "../movie-poster/movie-poster";
 import { StatusMessage, Slider } from "./carousel.styles";
+import CarouselPoster from "./components/carousel-poster/carousel-poster";
 
 const Carousel = ({ movies, searching, onSelectMovie }) => {
   const xsmall = useMediaQuery("(max-width: 600px), (max-height: 414px)");
@@ -53,13 +53,11 @@ const Carousel = ({ movies, searching, onSelectMovie }) => {
                 },
               ]}
             >
-              {movies?.map(({ poster, title, year, imdbID }, index) => (
-                <MoviePoster
-                  key={imdbID}
-                  poster={poster}
-                  title={title}
-                  year={year}
-                  height={xsmall ? 110 : undefined}
+              {movies?.map((movie, index) => (
+                <CarouselPoster
+                  key={movies.imdbID}
+                  movie={movie}
+                  height={xsmall ? 110 : 200}
                   onClick={() => {
                     onSelectMovie(index);
                   }}

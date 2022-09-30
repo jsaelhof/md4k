@@ -169,6 +169,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
             movie={movie}
             onClick={search}
             noLock
+            variant="zoom"
           />
         </Poster>
 
