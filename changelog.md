@@ -1,3 +1,12 @@
+### PR #32 - 13/poster fallback
+##### 2022-09-30
+
+Added a fallback view and aligned all poster images to use one component.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/32)
+
+----
+
 ### PR #30 - 28: Organize z-indexes into the theme
 ##### 2022-09-27
 
