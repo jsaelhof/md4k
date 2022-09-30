@@ -8,6 +8,7 @@ import {
   noPosterZoom,
   Poster,
   PosterLayout,
+  shadowStyles,
 } from "./movie-poster.styles";
 
 const MoviePoster = ({
@@ -17,6 +18,7 @@ const MoviePoster = ({
   noLock = false,
   noRel = false,
   variant,
+  shadow,
 }) => {
   const posterStyles = {
     width: height * 0.64,
@@ -24,15 +26,23 @@ const MoviePoster = ({
   };
 
   return (
-    <PosterLayout style={{ ...(!noRel && { position: "relative" }) }}>
+    <PosterLayout
+      style={{
+        ...(!noRel && { position: "relative" }),
+      }}
+    >
       {/* Fallback if the poster is missing or a broken link */}
       <NoPoster
         aria-label="Movie Poster"
-        sx={[posterStyles, variant === "zoom" && noPosterZoom]}
+        sx={[
+          posterStyles,
+          variant === "zoom" && noPosterZoom,
+          shadow && shadowStyles,
+        ]}
         onClick={onClick}
       >
         <TheatresIcon sx={{ fontSize: variant === "zoom" ? 60 : 40 }} />
-        <div>{movie.title}</div>
+        <div>{movie.title.length ? movie.title : "No Title"}</div>
       </NoPoster>
 
       <Poster

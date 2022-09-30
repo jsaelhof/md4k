@@ -30,6 +30,7 @@ import {
   Actions,
 } from "./add-movie-dialog.styles";
 import Ratings from "../ratings/ratings";
+import MoviePoster from "../../../movie-poster/movie-poster";
 
 const AUTO_REFRESH_TIMEOUT = 1500;
 
@@ -93,7 +94,14 @@ const AddMovieDialog = ({
       {!xsmall && <DialogTitle>Add a Movie</DialogTitle>}
       <DialogContent>
         <Input>
-          <Poster poster={input.poster} height={xsmall ? 130 : undefined} />
+          <Poster>
+            <MoviePoster
+              height={xsmall ? 130 : 200}
+              movie={{ title: input.title, poster: input.poster }}
+              shadow
+            />
+          </Poster>
+
           <Title
             label="Title"
             value={input.title}

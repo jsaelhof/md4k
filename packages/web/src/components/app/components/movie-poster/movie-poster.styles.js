@@ -16,6 +16,10 @@ export const Poster = styled("div")`
   opacity: 1;
 `;
 
+export const shadowStyles = {
+  boxShadow: "rgb(0 0 0 / 40%) 0px 2px 6px",
+};
+
 export const active = {
   cursor: "pointer",
   "&:hover": {

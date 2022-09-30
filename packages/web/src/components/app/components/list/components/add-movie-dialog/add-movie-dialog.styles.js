@@ -1,7 +1,6 @@
 import { DialogActions, styled, TextField } from "@mui/material";
 
 import ListSelect from "./components/list-select/list-select";
-import MoviePoster from "./components/movie-poster/movie-poster";
 
 export const Input = styled("div")(({ theme: { breakpoints, spacing } }) => ({
   margin: `${spacing(2)} 0 ${spacing(8)}`,
@@ -63,8 +62,9 @@ export const Input = styled("div")(({ theme: { breakpoints, spacing } }) => ({
   },
 }));
 
-export const Poster = styled(MoviePoster)`
+export const Poster = styled("div")`
   grid-area: poster;
+  justify-self: center;
 `;
 
 export const Title = styled(TextField)`
