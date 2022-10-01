@@ -2,6 +2,11 @@ import { fireEvent, waitFor } from "@testing-library/react";
 import Movie from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+import { Globals } from "react-spring";
+
+Globals.assign({
+  skipAnimation: true,
+});
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -61,7 +66,7 @@ describe("movie", () => {
     } = await renderWithProviders(<Movie {...props} />);
 
     // Should be two posters, the second is the larger overlaid one that is wrapped in an invisible div
-    expect(getAllByLabelText("Movie Poster")).toHaveLength(2);
+    expect(getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
 
     // The larger poster is invisible by default
     expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 });

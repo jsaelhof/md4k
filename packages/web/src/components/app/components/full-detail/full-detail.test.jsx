@@ -205,18 +205,20 @@ describe("full-detail", () => {
   it("should render the movie details", async () => {
     const { getByText, getByLabelText } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      {
+        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+      }
     );
 
     await waitFor(() =>
-      expect(getByText("The Bourne Identity")).toBeInTheDocument()
+      expect(getByLabelText(/Bourne.*Poster/)).toBeInTheDocument()
     );
+
     expect(getByText("1h 59m")).toBeInTheDocument();
     expect(getByText("2002")).toBeInTheDocument();
     expect(getByText("Action")).toBeInTheDocument();
     expect(getByText("PG-13")).toBeInTheDocument();
     expect(getByText("Wounded to the brink of death")).toBeInTheDocument();
-    expect(getByLabelText("Movie Poster")).toBeInTheDocument();
   });
 
   it("should search when the movie poster is clicked", async () => {
@@ -228,9 +230,9 @@ describe("full-detail", () => {
     );
 
     await waitFor(() =>
-      expect(getByLabelText("Movie Poster")).toBeInTheDocument()
+      expect(getByLabelText(/Bourne.*Poster/)).toBeInTheDocument()
     );
-    fireEvent.click(getByLabelText("Movie Poster"));
+    fireEvent.click(getByLabelText(/Bourne.*Poster/));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/themoviedb.*Bourne/),
       "moviedb"

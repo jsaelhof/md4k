@@ -4,6 +4,7 @@ import LockIcon from "@mui/icons-material/Lock";
 export const PosterLayout = styled("div")`
   display: grid;
   grid-template-areas: "poster";
+  opacity: 1;
 `;
 
 export const Poster = styled("div")`
@@ -13,7 +14,6 @@ export const Poster = styled("div")`
   background-repeat: no-repeat;
   overflow: hidden;
   border-radius: 4px;
-  opacity: 1;
 `;
 
 export const shadowStyles = {

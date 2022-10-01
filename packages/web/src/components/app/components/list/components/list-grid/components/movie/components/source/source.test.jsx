@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import { sources, sourceLogos } from "../../../../../../../../../../constants/sources";
+import { sources } from "md4k-constants";
+import { sourceLogos } from "../../../../../../../../../../constants/sources";
 import Source from "./source";
-
 
 describe("empty-list", () => {
   it("should render the correct source and logo", () => {

@@ -4,7 +4,6 @@ import { vi } from "vitest";
 
 describe("movie-poster", () => {
   let props;
-  let noPosterProps;
 
   beforeEach(() => {
     props = {
@@ -31,74 +30,53 @@ describe("movie-poster", () => {
       },
       onClick: vi.fn(),
     };
-
-    noPosterProps = { ...props, movie: { ...props.movie, poster: null } };
   });
 
   it("should render the correct height and width ratio", () => {
     const { getByLabelText } = render(<MoviePoster {...props} height={1000} />);
-    expect(getByLabelText("Movie Poster")).toHaveStyle({
+    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       width: "640px",
       height: "1000px",
     });
   });
 
   it("should render the poster when a url exists in the movie", () => {
-    const { getByLabelText, queryByText } = render(<MoviePoster {...props} />);
-    expect(getByLabelText("Movie Poster")).toHaveStyle({
+    const { getByTestId, getByText } = render(<MoviePoster {...props} />);
+    expect(getByTestId("poster")).toHaveStyle({
       "background-image": `url(${props.movie.poster})`,
     });
-    expect(queryByText(/Bourne/)).not.toBeInTheDocument();
-  });
-
-  it("should render the 'no poster' view when a url does not exist in the movie", () => {
-    const { getByText } = render(<MoviePoster {...noPosterProps} />);
     expect(getByText(/Bourne/)).toBeInTheDocument();
   });
 
   it("should be active when an onClick handler is provided", () => {
-    const { getByLabelText } = render(<MoviePoster {...props} />);
+    const { getByTestId } = render(<MoviePoster {...props} />);
 
-    expect(getByLabelText("Movie Poster")).toHaveStyle({
+    expect(getByTestId("poster")).toHaveStyle({
       cursor: "pointer",
     });
   });
 
   it("should not be active when an onClick handler is omitted", () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <MoviePoster {...props} onClick={undefined} />
     );
 
-    expect(getByLabelText("Movie Poster")).not.toHaveStyle({
+    expect(getByTestId("poster")).not.toHaveStyle({
       cursor: "pointer",
     });
   });
 
-  it("should invoke the handler onClick when there is a poster", () => {
+  it("should invoke the handler onClick when provided", () => {
     const { getByLabelText } = render(<MoviePoster {...props} />);
-    fireEvent.click(getByLabelText("Movie Poster"));
+    fireEvent.click(getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should invoke the handler onClick when there is not a poster", () => {
-    const { getByLabelText } = render(<MoviePoster {...noPosterProps} />);
-    fireEvent.click(getByLabelText("Movie Poster"));
-    expect(props.onClick).toHaveBeenCalled();
-  });
-
-  it("should not invoke the handler onClick when there is a poster and no onClick", () => {
+  it("should not invoke the handler onClick when not provided", () => {
     const { getByLabelText } = render(
       <MoviePoster {...props} onClick={undefined} />
     );
-    fireEvent.click(getByLabelText("Movie Poster"));
-    expect(props.onClick).not.toHaveBeenCalled();
-  });
-
-  it("should invoke the handler onClick when there is not a poster and no onClick", () => {
-    const { getByLabelText } = render(
-      <MoviePoster {...noPosterProps} onClick={undefined} />
-    );
-    fireEvent.click(getByLabelText("Movie Poster"));
+    fireEvent.click(getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).not.toHaveBeenCalled();
   });
 
@@ -107,7 +85,7 @@ describe("movie-poster", () => {
       <MoviePoster {...props} movie={{ ...props.movie, locked: true }} />
     );
 
-    expect(getByLabelText("Movie Poster")).toHaveStyle({
+    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       opacity: "0.3",
     });
   });
@@ -117,7 +95,7 @@ describe("movie-poster", () => {
       <MoviePoster {...props} movie={{ ...props.movie, locked: true }} noLock />
     );
 
-    expect(getByLabelText("Movie Poster")).toHaveStyle({
+    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       opacity: "1",
     });
   });
@@ -125,7 +103,7 @@ describe("movie-poster", () => {
   it("should be relatively positioned when noRel is false", () => {
     const { getByLabelText } = render(<MoviePoster {...props} />);
 
-    expect(getByLabelText("Movie Poster").parentNode).toHaveStyle({
+    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       position: "relative",
     });
   });
@@ -133,7 +111,7 @@ describe("movie-poster", () => {
   it("should not be relatively positioned when noRel is true", () => {
     const { getByLabelText } = render(<MoviePoster {...props} noRel />);
 
-    expect(getByLabelText("Movie Poster").parentNode).not.toHaveStyle({
+    expect(getByLabelText(/Bourne.*Poster/)).not.toHaveStyle({
       position: "relative",
     });
   });

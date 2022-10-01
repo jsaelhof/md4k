@@ -19,48 +19,40 @@ const MoviePoster = ({
   noRel = false,
   variant,
   shadow,
-}) => {
-  const posterStyles = {
-    width: height * 0.64,
-    height,
-  };
-
-  return (
-    <PosterLayout
-      style={{
-        ...(!noRel && { position: "relative" }),
-      }}
+}) => (
+  <PosterLayout
+    sx={[
+      !noRel && { position: "relative" },
+      movie.locked && !noLock && locked,
+      {
+        width: height * 0.64,
+        height,
+      },
+    ]}
+    aria-label={`${movie.title} Poster`}
+    onClick={onClick}
+  >
+    {/* Fallback if the poster is missing or a broken link */}
+    <NoPoster
+      data-testid="fallback"
+      sx={[variant === "zoom" && noPosterZoom, shadow && shadowStyles]}
     >
-      {/* Fallback if the poster is missing or a broken link */}
-      <NoPoster
-        aria-label="Movie Poster"
-        sx={[
-          posterStyles,
-          variant === "zoom" && noPosterZoom,
-          shadow && shadowStyles,
-        ]}
-        onClick={onClick}
-      >
-        <TheatresIcon sx={{ fontSize: variant === "zoom" ? 60 : 40 }} />
-        <div>{movie.title.length ? movie.title : "No Title"}</div>
-      </NoPoster>
+      <TheatresIcon sx={{ fontSize: variant === "zoom" ? 60 : 40 }} />
+      <div>{movie.title.length ? movie.title : "No Title"}</div>
+    </NoPoster>
 
-      <Poster
-        aria-label="Movie Poster"
-        sx={[
-          posterStyles,
-          {
-            backgroundImage: `url(${movie.poster})`,
-          },
-          onClick && active,
-          movie.locked && !noLock && locked,
-        ]}
-        onClick={onClick}
-      />
+    <Poster
+      data-testid="poster"
+      sx={[
+        {
+          backgroundImage: `url(${movie.poster})`,
+        },
+        onClick && active,
+      ]}
+    />
 
-      {movie.locked && !noLock && <Lock />}
-    </PosterLayout>
-  );
-};
+    {movie.locked && !noLock && <Lock />}
+  </PosterLayout>
+);
 
 export default MoviePoster;
