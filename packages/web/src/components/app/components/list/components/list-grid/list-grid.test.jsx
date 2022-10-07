@@ -3,6 +3,7 @@ import ListGrid from "./list-grid";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import { AppContext } from "../../../../../../context/app-context";
+import { sort, sortDirection } from "../../../../../../constants/sorts";
 
 vi.mock("./components/movie/movie", () => ({
   default: ({ onDeleteMovie, movie }) => (
@@ -64,7 +65,7 @@ describe("", () => {
 
   it("should render movies starting with the least recently added", () => {
     const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["addedOn", "asc"] }}>
+      <AppContext.Provider value={{ order: [sort.ADDED, sortDirection.ASC] }}>
         <ListGrid {...props} />
       </AppContext.Provider>
     );
@@ -82,7 +83,9 @@ describe("", () => {
 
   it("should render movies starting with the longest runtime", () => {
     const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["runtime", "desc"] }}>
+      <AppContext.Provider
+        value={{ order: [sort.RUNTIME, sortDirection.DESC] }}
+      >
         <ListGrid {...props} />
       </AppContext.Provider>
     );
@@ -100,7 +103,7 @@ describe("", () => {
 
   it("should render movies starting with the shortest runtime", () => {
     const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["runtime", "asc"] }}>
+      <AppContext.Provider value={{ order: [sort.RUNTIME, sortDirection.ASC] }}>
         <ListGrid {...props} />
       </AppContext.Provider>
     );
@@ -118,7 +121,7 @@ describe("", () => {
 
   it("should render movies alphabetically", () => {
     const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["title", "asc"] }}>
+      <AppContext.Provider value={{ order: [sort.TITLE, sortDirection.ASC] }}>
         <ListGrid {...props} />
       </AppContext.Provider>
     );
@@ -136,7 +139,7 @@ describe("", () => {
 
   it("should render movies reverse alphabetically", () => {
     const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["title", "desc"] }}>
+      <AppContext.Provider value={{ order: [sort.TITLE, sortDirection.DESC] }}>
         <ListGrid {...props} />
       </AppContext.Provider>
     );
