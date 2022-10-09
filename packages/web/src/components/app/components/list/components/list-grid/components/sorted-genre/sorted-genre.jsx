@@ -29,9 +29,13 @@ const SortedGenre = ({ movies, ...handlers }) => {
       : sectionDescriptors.reverse();
   }, [direction, byGenre]);
 
-  return sections.map((props) => (
-    <MovieSection key={props.title} {...props} {...handlers} />
-  ));
+  return (
+    <span data-testid={sort.GENRE}>
+      {sections.map((props) => (
+        <MovieSection key={props.title} {...props} {...handlers} />
+      ))}
+    </span>
+  );
 };
 
 export default SortedGenre;

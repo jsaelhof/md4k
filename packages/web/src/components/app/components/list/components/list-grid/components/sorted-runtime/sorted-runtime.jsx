@@ -55,9 +55,13 @@ const SortedRuntime = ({ movies, ...handlers }) => {
     ];
   }, [direction, long, regular, short, unknown]);
 
-  return sections.map((props) => (
-    <MovieSection key={props.title} {...props} {...handlers} />
-  ));
+  return (
+    <span data-testid={sort.RUNTIME}>
+      {sections.map((props) => (
+        <MovieSection key={props.title} {...props} {...handlers} />
+      ))}
+    </span>
+  );
 };
 
 export default SortedRuntime;

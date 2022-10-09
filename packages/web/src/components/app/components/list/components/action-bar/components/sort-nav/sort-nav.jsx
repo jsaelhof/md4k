@@ -31,8 +31,8 @@ const SortNav = () => {
     key,
     key !== order
       ? key === sort.ADDED
-        ? sortDirection.DESC
-        : sortDirection.ASC
+        ? sortDirection.ASC
+        : sortDirection.DESC
       : direction === sortDirection.ASC
       ? sortDirection.DESC
       : sortDirection.ASC,

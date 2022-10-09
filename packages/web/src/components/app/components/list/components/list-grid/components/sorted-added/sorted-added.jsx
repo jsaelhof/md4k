@@ -59,14 +59,18 @@ const SortedAdded = ({ movies, ...handlers }) => {
 
     return [
       ...(direction === sortDirection.ASC
-        ? sectionDescriptors.reverse()
-        : sectionDescriptors),
+        ? sectionDescriptors
+        : sectionDescriptors.reverse()),
     ];
   }, [beyond, direction, month, quarter, year]);
 
-  return sections.map((props) => (
-    <MovieSection key={props.title} {...props} {...handlers} />
-  ));
+  return (
+    <span data-testid={sort.ADDED}>
+      {sections.map((props) => (
+        <MovieSection key={props.title} {...props} {...handlers} />
+      ))}
+    </span>
+  );
 };
 
 export default SortedAdded;

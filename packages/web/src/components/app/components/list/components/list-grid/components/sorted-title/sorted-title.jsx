@@ -12,7 +12,11 @@ const SortedTitle = ({ movies, ...handlers }) => {
     [direction, movies]
   );
 
-  return <MovieSection list={alphabeticallySorted} {...handlers} />;
+  return (
+    <span data-testid={sort.TITLE}>
+      <MovieSection list={alphabeticallySorted} {...handlers} />
+    </span>
+  );
 };
 
 export default SortedTitle;
