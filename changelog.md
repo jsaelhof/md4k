@@ -1,3 +1,12 @@
+### PR #36 - 16/sort groups
+##### 2022-10-13
+
+Adds react-router 6 and displays custom views for each sort category. Also adds a new sort category to sort by genre.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/36)
+
+----
+
 ### PR #32 - 13/poster fallback
 ##### 2022-09-30
 
