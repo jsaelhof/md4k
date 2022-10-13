@@ -59,8 +59,8 @@ const SortedAdded = ({ movies, ...handlers }) => {
 
     return [
       ...(direction === sortDirection.ASC
-        ? sectionDescriptors
-        : sectionDescriptors.reverse()),
+        ? sectionDescriptors.reverse()
+        : sectionDescriptors),
     ];
   }, [beyond, direction, month, quarter, year]);
 
