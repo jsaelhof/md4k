@@ -14,6 +14,7 @@ import {
   useEditMovie,
   useRemoveWatchedMovie,
 } from "../../../../graphql/mutations";
+import { sortDirection } from "../../../../constants/sorts";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
@@ -27,7 +28,7 @@ export const Watched = () => {
   );
 
   const sortedMovies = useMemo(
-    () => orderBy(watchedMovies, "watchedOn", ["desc"]),
+    () => orderBy(watchedMovies, "watchedOn", [sortDirection.DESC]),
     [watchedMovies]
   );
 

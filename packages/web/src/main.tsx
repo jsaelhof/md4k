@@ -4,11 +4,12 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { App } from "./components/app/app";
 import { ErrorBoundary } from "./components/error-boundary/error-boundary";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { List } from "./components/app/components/list/list";
 import { Watched } from "./components/app/components/watched/watched";
 import { Create } from "./components/app/components/create/create";
 import { Pick } from "./components/app/components/pick/pick";
+import { sort, sortDirection } from "./constants/sorts";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,7 +24,25 @@ ReactDOM.render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />}>
-              <Route index element={<List />} />
+              <Route
+                index
+                element={
+                  <Navigate
+                    replace
+                    to={`/list/${sort.ADDED}/${sortDirection.ASC}`}
+                  />
+                }
+              />
+              <Route
+                path="/list"
+                element={
+                  <Navigate
+                    replace
+                    to={`/list/${sort.ADDED}/${sortDirection.ASC}`}
+                  />
+                }
+              />
+              <Route path="/list/*" element={<List />} />
               <Route path="/watched" element={<Watched />} />
               <Route path="/create" element={<Create />} />
               <Route path="/pick" element={<Pick />} />

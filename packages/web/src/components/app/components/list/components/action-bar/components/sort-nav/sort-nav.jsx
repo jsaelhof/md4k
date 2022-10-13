@@ -6,51 +6,52 @@ import {
   sortNavSelectedItem,
   sortOrderIcon,
 } from "./sort-nav.styles";
-import { useAppContext } from "../../../../../../../../context/app-context";
-
-const options = [
-  ["Added", "addedOn"],
-  ["Title", "title"],
-  ["Runtime", "runtime"],
-];
+import { useNavigate } from "react-router-dom";
+import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-and-direction";
+import {
+  sort,
+  sortDirection,
+  sortLabels,
+} from "../../../../../../../../constants/sorts";
 
 const SortNav = () => {
-  const { order, setOrder } = useAppContext();
+  const navigate = useNavigate();
+  const { order, direction } = useOrderAndDirection();
 
   const SortOrderIcon =
-    order[0] === "addedOn"
-      ? order[1] === "asc"
+    order === sort.ADDED
+      ? direction === sortDirection.ASC
         ? KeyboardArrowUp
         : KeyboardArrowDown
-      : order[1] === "asc"
+      : direction === sortDirection.ASC
       ? KeyboardArrowDown
       : KeyboardArrowUp;
 
   const resolveOrder = (key) => [
     key,
-    key !== order[0]
-      ? key === "addedOn"
-        ? "desc"
-        : "asc"
-      : order[1] === "asc"
-      ? "desc"
-      : "asc",
+    key !== order
+      ? key === sort.ADDED
+        ? sortDirection.ASC
+        : sortDirection.DESC
+      : direction === sortDirection.ASC
+      ? sortDirection.DESC
+      : sortDirection.ASC,
   ];
 
   return (
     <SortNavList>
-      {options.map(([label, key]) => (
+      {Object.values(sort).map((key) => (
         <SortNavListItem
           key={key}
-          data-active={key === order[0]}
-          data-sort={key === order[0] && order[1]}
-          sx={[key === order[0] && sortNavSelectedItem]}
+          data-active={key === order}
+          data-sort={key === order && direction}
+          sx={[key === order && sortNavSelectedItem]}
           onClick={() => {
-            setOrder(resolveOrder(key));
+            navigate(`/list/${resolveOrder(key).join("/")}`);
           }}
         >
-          {label}
-          {key === order[0] && (
+          {sortLabels[key]}
+          {key === order && (
             <SortOrderIcon fontSize="small" style={sortOrderIcon} />
           )}
         </SortNavListItem>

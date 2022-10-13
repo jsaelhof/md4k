@@ -44,7 +44,7 @@ export const ProfileActions = styled("div")(({ theme: { spacing } }) => ({
   textAlign: "center",
   padding: `${spacing(2)} 0`,
 
-  "& :first-child": {
+  "& :first-of-type": {
     textTransform: "capitalize",
   },
 }));

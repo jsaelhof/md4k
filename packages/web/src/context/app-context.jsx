@@ -13,7 +13,6 @@ const AppProvider = ({ children }) => {
     watchedMovies,
     loading: loadingMovies,
   } = useGetMovies(list);
-  const [order, setOrder] = useState(["addedOn", "desc"]);
   const [pick, setPick] = useState(null);
 
   // Expose a list change function so that we can clear any state from the old list while changing to a new one
@@ -153,8 +152,6 @@ const AppProvider = ({ children }) => {
     moviesById,
     watchedMovies,
     loadingMovies,
-    order,
-    setOrder,
     pick,
     setPick,
     clearPick,

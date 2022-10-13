@@ -32,7 +32,9 @@ const NavFull = () => {
 
       {!["/pick", "/create"].includes(pathname) && (
         <>
-          {pathname !== "/" && returnToMoviesNavButton}
+          {pathname !== "/" &&
+            !pathname.startsWith("/list") &&
+            returnToMoviesNavButton}
 
           {pathname !== "/watched" && (
             <NavButton href="/watched">Watched</NavButton>

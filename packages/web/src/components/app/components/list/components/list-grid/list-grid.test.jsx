@@ -1,15 +1,12 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import ListGrid from "./list-grid";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
-import { AppContext } from "../../../../../../context/app-context";
 
 vi.mock("./components/movie/movie", () => ({
   default: ({ onDeleteMovie, movie }) => (
     <div
       aria-label="movieMock"
-      data-runtime={movie.runtime}
-      data-addedon={movie.addedOn}
       data-title={movie.title}
       onClick={() => onDeleteMovie(movie)}
     >
@@ -18,7 +15,8 @@ vi.mock("./components/movie/movie", () => ({
   ),
 }));
 
-describe("", () => {
+// NOTE: Routes passed to render-with-providers within this file are relative to the sub-routes since I am only rendering the list-grid itself.
+describe("list-grid", () => {
   let props;
 
   beforeEach(() => {
@@ -27,141 +25,52 @@ describe("", () => {
         {
           id: 0,
           title: "Movie 1",
-          addedOn: new Date(100000),
-          runtime: 20000,
-        },
-        {
-          id: 1,
-          title: "Movie 2",
-          addedOn: new Date(10000),
-          runtime: 10000,
-        },
-        {
-          id: 2,
-          title: "Movie 3",
-          addedOn: new Date(500000),
-          runtime: 5000,
         },
       ],
       onRemoveMovie: vi.fn(),
     };
   });
 
-  it("should render movies starting with the most recently added", async () => {
-    const { queryAllByText } = await renderWithProviders(
-      <ListGrid {...props} />
-    );
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
+  it("should render the addedOn list", async () => {
+    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+      route: "/addedOn/asc",
+    });
+    expect(getByTestId("addedOn")).toBeInTheDocument();
   });
 
-  it("should render movies starting with the least recently added", () => {
-    const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["addedOn", "asc"] }}>
-        <ListGrid {...props} />
-      </AppContext.Provider>
-    );
-
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
+  it("should render the title list", async () => {
+    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+      route: "/title/asc",
+    });
+    expect(getByTestId("title")).toBeInTheDocument();
   });
 
-  it("should render movies starting with the longest runtime", () => {
-    const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["runtime", "desc"] }}>
-        <ListGrid {...props} />
-      </AppContext.Provider>
-    );
-
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
+  it("should render the runtime list", async () => {
+    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+      route: "/runtime/asc",
+    });
+    expect(getByTestId("runtime")).toBeInTheDocument();
   });
 
-  it("should render movies starting with the shortest runtime", () => {
-    const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["runtime", "asc"] }}>
-        <ListGrid {...props} />
-      </AppContext.Provider>
-    );
-
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
-  });
-
-  it("should render movies alphabetically", () => {
-    const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["title", "asc"] }}>
-        <ListGrid {...props} />
-      </AppContext.Provider>
-    );
-
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
-  });
-
-  it("should render movies reverse alphabetically", () => {
-    const { queryAllByText } = render(
-      <AppContext.Provider value={{ order: ["title", "desc"] }}>
-        <ListGrid {...props} />
-      </AppContext.Provider>
-    );
-
-    expect(queryAllByText(/Movie/)[0].getAttribute("data-title")).toBe(
-      "Movie 3"
-    );
-    expect(queryAllByText(/Movie/)[1].getAttribute("data-title")).toBe(
-      "Movie 2"
-    );
-    expect(queryAllByText(/Movie/)[2].getAttribute("data-title")).toBe(
-      "Movie 1"
-    );
+  it("should render the genre list", async () => {
+    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+      route: "/genre/asc",
+    });
+    expect(getByTestId("genre")).toBeInTheDocument();
   });
 
   it("should render the empty list when there are no movies", async () => {
     const { getByRole } = await renderWithProviders(
-      <ListGrid {...props} movies={[]} />
+      <ListGrid {...props} movies={[]} />,
+      { route: "/addedOn/asc" }
     );
     expect(getByRole("button", { name: "Add a Movie" })).toBeInTheDocument();
   });
 
   it("should render null when movies is undefined", async () => {
     const { queryByRole, queryByText } = await renderWithProviders(
-      <ListGrid {...props} movies={undefined} />
+      <ListGrid {...props} movies={undefined} />,
+      { route: "/addedOn/asc" }
     );
     expect(queryByText(/Movie/)).not.toBeInTheDocument();
     expect(
@@ -170,9 +79,12 @@ describe("", () => {
   });
 
   it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async () => {
-    const { getByText, getByRole, queryByText } = await renderWithProviders(
-      <ListGrid {...props} />
-    );
+    const { debug, getByText, getByRole, queryByText } =
+      await renderWithProviders(<ListGrid {...props} />, {
+        route: "/addedOn/asc",
+      });
+
+    debug();
 
     fireEvent.click(getByText("Movie 1"));
     expect(getByText("'Movie 1' will be removed")).toBeInTheDocument();
@@ -184,7 +96,8 @@ describe("", () => {
 
   it("should render the delete confirmation and cancel correctly when deleting a movie", async () => {
     const { getByText, getByRole, queryByText } = await renderWithProviders(
-      <ListGrid {...props} />
+      <ListGrid {...props} />,
+      { route: "/addedOn/asc" }
     );
 
     fireEvent.click(getByText("Movie 1"));

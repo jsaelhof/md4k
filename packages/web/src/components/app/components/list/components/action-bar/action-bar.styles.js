@@ -10,7 +10,7 @@ export const ActionBarContainer = styled("div")(
     background: palette.grey[100],
     padding: `0 ${app.LIST_MARGIN}px`,
 
-    [breakpoints.down(615)]: {
+    [breakpoints.down(640)]: {
       paddingTop: spacing(3),
     },
   })
@@ -22,7 +22,7 @@ export const ActionToolbar = styled(Toolbar)(
     columnGap: spacing(2),
     padding: "0 !important",
 
-    [breakpoints.down(615)]: {
+    [breakpoints.down(640)]: {
       flexDirection: "column-reverse",
       height: 100,
       marginBottom: spacing(2),
