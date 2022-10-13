@@ -1,3 +1,12 @@
+### PR #40 - #39: add vercel.json
+##### 2022-10-13
+
+Adding a vercel.json with a rewrite rule fixes the issue. I learned about the fix fro a discussion here: https://github.com/orgs/vercel/discussions/261
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/40)
+
+----
+
 ### PR #38 - #37: fix sort order
 ##### 2022-10-13
 
