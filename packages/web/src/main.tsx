@@ -29,7 +29,7 @@ ReactDOM.render(
                 element={
                   <Navigate
                     replace
-                    to={`/list/${sort.ADDED}/${sortDirection.ASC}`}
+                    to={`/list/${sort.ADDED}/${sortDirection.DESC}`}
                   />
                 }
               />
@@ -38,7 +38,7 @@ ReactDOM.render(
                 element={
                   <Navigate
                     replace
-                    to={`/list/${sort.ADDED}/${sortDirection.ASC}`}
+                    to={`/list/${sort.ADDED}/${sortDirection.DESC}`}
                   />
                 }
               />
