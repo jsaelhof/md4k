@@ -1,3 +1,12 @@
+### PR #38 - #37: fix sort order
+##### 2022-10-13
+
+Fixes the sort ordering
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/38)
+
+----
+
 ### PR #36 - 16/sort groups
 ##### 2022-10-13
 
