@@ -37,7 +37,10 @@ export const useEditMovie = () => {
 };
 
 export const editMovieOptions = (movie, list) => ({
-  variables: { movie: omitTypename(movie), list: list.id },
+  variables: {
+    movie: { ...omitTypename(movie), fiveStarRating: undefined },
+    list: list.id,
+  },
   optimisticResponse: {
     editMovie: {
       ...movie,

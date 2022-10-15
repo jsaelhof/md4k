@@ -25,6 +25,7 @@ const ADD_MOVIE = gql`
         ROTTEN_TOMATOES
         METACRITIC
       }
+      fiveStarRating
       background
     }
   }
@@ -69,6 +70,8 @@ export const addMovieOptions = (movie, list) => {
       addMovie: {
         addedOn: new Date().toISOString(), // This is actually set on the server
         watchedOn: null,
+        background: null,
+        fiveStarRating: null,
         ...movieWithId,
       },
     },

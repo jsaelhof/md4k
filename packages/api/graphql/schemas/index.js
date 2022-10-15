@@ -36,6 +36,7 @@ export const typeDefs = gql`
     watchedOn: String
     locked: Boolean
     ratings: Ratings
+    fiveStarRating: Float
     background: String
   }
 
