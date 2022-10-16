@@ -11,7 +11,7 @@ import {
 } from "./action-bar.styles";
 
 const ActionBar = ({ disabled, onAdd, onPick }) => {
-  const { medium } = useResponsive();
+  const { small } = useResponsive();
 
   return (
     <ActionBarContainer>
@@ -28,7 +28,7 @@ const ActionBar = ({ disabled, onAdd, onPick }) => {
                 onClick={onAdd}
               >
                 <AddToQueueIcon />
-                {!medium && "Add Movie"}
+                {!small && "Add Movie"}
               </Button>
               <SplitButton onPick={onPick} />
             </SecondaryActions>

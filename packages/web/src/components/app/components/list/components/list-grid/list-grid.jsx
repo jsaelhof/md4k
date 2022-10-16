@@ -9,6 +9,7 @@ import SortedTitle from "./components/sorted-title/sorted-title";
 import SortedAdded from "./components/sorted-added/sorted-added";
 import SortedGenre from "./components/sorted-genre/sorted-genre";
 import { sort } from "../../../../../../constants/sorts";
+import SortedRating from "./components/sorted-rating/sorted-rating";
 
 const ListGrid = ({
   movies,
@@ -66,6 +67,18 @@ const ListGrid = ({
               path={`${sort.GENRE}/:direction`}
               element={
                 <SortedGenre
+                  movies={movies}
+                  onEditMovie={onEditMovie}
+                  onMarkWatched={onMarkWatched}
+                  onDeleteMovie={setDeleteMovie}
+                />
+              }
+            />
+
+            <Route
+              path={`${sort.RATING}/:direction`}
+              element={
+                <SortedRating
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}

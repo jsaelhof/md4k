@@ -3,6 +3,7 @@ export const sort = {
   TITLE: "title",
   RUNTIME: "runtime",
   GENRE: "genre",
+  RATING: "rating",
 };
 
 export const sortLabels = {
@@ -10,6 +11,7 @@ export const sortLabels = {
   [sort.TITLE]: "Title",
   [sort.RUNTIME]: "Runtime",
   [sort.GENRE]: "Genre",
+  [sort.RATING]: "Rating",
 };
 
 export const sortDirection = {

@@ -124,7 +124,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
                   }}
                   data-testid="rating"
                 >
-                  <FiveStarRating ratings={movie.ratings} />
+                  <FiveStarRating stars={movie.fiveStarRating} />
                 </StarRatingLayout>
 
                 <InfoRuntime>{formatRuntime(movie.runtime)}</InfoRuntime>

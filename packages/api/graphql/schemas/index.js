@@ -78,6 +78,7 @@ export const typeDefs = gql`
     rated: String
     actors: [String]
     ratings: OmdbRatings
+    fiveStarRating: Float
     poster: String
   }
 

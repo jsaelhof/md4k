@@ -13,6 +13,7 @@ export const GET_MOVIE_EXTENDED_DETAILS = gql`
         ROTTEN_TOMATOES
         METACRITIC
       }
+      fiveStarRating
     }
     tmdbMovie(imdbID: $imdbID) {
       imdbID

@@ -1,22 +1,10 @@
-import { isNil, times } from "lodash";
-import { filter, flow, map, mean, pick } from "lodash/fp";
-
+import { times } from "lodash";
 import { Star, StarRatingContainer } from "./five-star-rating.styles";
-import { ratingsSources } from "md4k-constants";
-
-const toAverageRating = flow(
-  pick(ratingsSources),
-  filter((rating) => !isNil(rating)),
-  map((rating) => parseInt(rating)),
-  mean,
-  (val) => Math.round(val / 10) / 2
-);
 
 const heights = [16, 18, 20, 18, 16];
 const margins = [0, 1, 1.5, 1, 0];
 
-const FiveStarRating = ({ ratings }) => {
-  const avgRating = toAverageRating(ratings);
+const FiveStarRating = ({ stars }) => {
   return (
     <StarRatingContainer>
       {times(5, (i) => (
@@ -28,9 +16,9 @@ const FiveStarRating = ({ ratings }) => {
           }}
         >
           {[
-            avgRating - i >= 1
+            stars - i >= 1
               ? "star-full"
-              : avgRating - i === 0.5
+              : stars - i === 0.5
               ? "star-half"
               : "star-outline",
           ].map((image) => (

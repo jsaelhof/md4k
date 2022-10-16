@@ -30,7 +30,7 @@ const SortNav = () => {
   const resolveOrder = (key) => [
     key,
     key !== order
-      ? key === sort.ADDED
+      ? [sort.ADDED, sort.RATING].includes(key)
         ? sortDirection.DESC
         : sortDirection.ASC
       : direction === sortDirection.ASC
