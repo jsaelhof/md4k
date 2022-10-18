@@ -5,7 +5,7 @@ import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../theme/theme";
 import { vi } from "vitest";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 vi.mock("@auth0/auth0-react", () => ({
   useAuth0: () => ({
@@ -57,6 +57,29 @@ export const renderWithProviders = async (children, options) => {
 
   return result;
 };
+
+/**
+ * Renders the children as the element of a route within a React Router <Routes> tag.
+ * @param children The child to render as the element of the route
+ * @param routePath The path to match. For example, if the real route would be "list/:id", this string needs to be passed so that "id" gets picked up by react router and made available through useParams.
+ * @param route The full URL path to be matched against "routePath". For example, "list/1234" would match the routePath so that useParams will return id=1234.
+ * @param options Options for renderWIthProviders. Note that if "route" is included it will be overriden by the route argument.
+ */
+export const renderWithProvidersAsRoute = async (
+  children,
+  routePath,
+  route,
+  options
+) =>
+  renderWithProviders(
+    <Routes>
+      <Route path={routePath} element={children} />
+    </Routes>,
+    {
+      ...options,
+      route,
+    }
+  );
 
 const GET_LISTS_MOCK = {
   request: {

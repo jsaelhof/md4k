@@ -1,6 +1,9 @@
 import { fireEvent } from "@testing-library/react";
 import { sortDirection } from "../../../../../../../../constants/sorts";
-import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+import {
+  renderWithProviders,
+  renderWithProvidersAsRoute,
+} from "../../../../../../../../utils/render-with-providers";
 import SortNav from "./sort-nav";
 
 describe("sort-nav", () => {
@@ -13,7 +16,12 @@ describe("sort-nav", () => {
   });
 
   it("should select added desc by default", async () => {
-    const { getByText } = await renderWithProviders(<SortNav />);
+    const { getByText } = await renderWithProvidersAsRoute(
+      <SortNav />,
+      "/list/*",
+      "/list/addedOn/desc"
+    );
+
     expect(getByText("Added")).toHaveAttribute("data-active", "true");
     expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.DESC);
     expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
@@ -21,7 +29,11 @@ describe("sort-nav", () => {
   });
 
   it("should toggle runtime", async () => {
-    const { getByText } = await renderWithProviders(<SortNav />);
+    const { getByText } = await renderWithProvidersAsRoute(
+      <SortNav />,
+      "/list/*",
+      "/list/addedOn/desc"
+    );
 
     fireEvent.click(getByText("Runtime"));
     expect(getByText("Runtime")).toHaveAttribute("data-active", "true");
@@ -43,7 +55,11 @@ describe("sort-nav", () => {
   });
 
   it("should toggle title", async () => {
-    const { getByText } = await renderWithProviders(<SortNav />);
+    const { getByText } = await renderWithProvidersAsRoute(
+      <SortNav />,
+      "/list/*",
+      "/list/addedOn/desc"
+    );
 
     fireEvent.click(getByText("Title"));
     expect(getByText("Title")).toHaveAttribute("data-active", "true");
@@ -59,7 +75,11 @@ describe("sort-nav", () => {
   });
 
   it("should toggle added", async () => {
-    const { getByText } = await renderWithProviders(<SortNav />);
+    const { getByText } = await renderWithProvidersAsRoute(
+      <SortNav />,
+      "/list/*",
+      "/list/addedOn/desc"
+    );
 
     fireEvent.click(getByText("Added"));
     expect(getByText("Added")).toHaveAttribute("data-active", "true");
@@ -75,7 +95,11 @@ describe("sort-nav", () => {
   });
 
   it("should show the correct icon for the sort direction and option", async () => {
-    const { getByText, getByTestId } = await renderWithProviders(<SortNav />);
+    const { getByText, getByTestId } = await renderWithProvidersAsRoute(
+      <SortNav />,
+      "/list/*",
+      "/list/addedOn/desc"
+    );
 
     fireEvent.click(getByText("Title"));
     expect(getByText("Title")).toHaveAttribute("data-sort", sortDirection.ASC);

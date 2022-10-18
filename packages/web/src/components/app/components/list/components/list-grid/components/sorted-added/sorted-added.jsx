@@ -6,31 +6,32 @@ import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 
-const partitionMovies = flow(
-  groupBy((movie) => {
-    const now = new Date();
-    const movieDate = parseISO(movie.addedOn);
-    const diff = differenceInDays(now, movieDate);
+const partitionMovies = (direction) =>
+  flow(
+    groupBy((movie) => {
+      const now = new Date();
+      const movieDate = parseISO(movie.addedOn);
+      const diff = differenceInDays(now, movieDate);
 
-    if (diff <= 30) {
-      return "month";
-    } else if (diff <= 90) {
-      return "quarter";
-    } else if (diff <= 270) {
-      return "year";
-    } else {
-      return "beyond";
-    }
-  }),
-  mapValues((movies) => orderBy(movies, [sort.ADDED], [sortDirection.ASC]))
-);
+      if (diff <= 30) {
+        return "month";
+      } else if (diff <= 90) {
+        return "quarter";
+      } else if (diff <= 270) {
+        return "year";
+      } else {
+        return "beyond";
+      }
+    }),
+    mapValues((movies) => orderBy(movies, [sort.ADDED], [direction]))
+  );
 
 const SortedAdded = ({ movies, ...handlers }) => {
   const direction = useSortDirection();
 
   const { month, quarter, year, beyond } = useMemo(
-    () => partitionMovies(movies),
-    [movies]
+    () => partitionMovies(direction)(movies),
+    [direction, movies]
   );
 
   const sections = useMemo(() => {

@@ -1,12 +1,12 @@
 import { fireEvent, render, within } from "@testing-library/react";
 import SortedAdded from "./sorted-added";
 import { vi } from "vitest";
-import { formatISO, subMonths } from "date-fns";
+import { formatISO, subDays, subMonths } from "date-fns";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
 
 vi.mock("../movie/movie", () => ({
   default: ({ onEditMovie, onMarkWatched, onDeleteMovie, movie }) => (
-    <div aria-label="movieMock">
+    <div aria-label={movie.title}>
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
       <button onClick={() => onMarkWatched(movie)}>Mark Watched</button>
@@ -27,23 +27,43 @@ describe("sorted-added", () => {
       movies: [
         {
           id: 0,
-          title: "Movie 1",
+          title: "Movie 1a",
           addedOn: formatISO(new Date()),
         },
         {
           id: 1,
-          title: "Movie 2",
-          addedOn: formatISO(subMonths(new Date(), 2)),
+          title: "Movie 1b",
+          addedOn: formatISO(subDays(new Date(), 1)),
         },
         {
           id: 2,
-          title: "Movie 3",
-          addedOn: formatISO(subMonths(new Date(), 8)),
+          title: "Movie 2a",
+          addedOn: formatISO(subMonths(new Date(), 2)),
         },
         {
           id: 3,
-          title: "Movie 4",
+          title: "Movie 2b",
+          addedOn: formatISO(subDays(subMonths(new Date(), 2), 1)),
+        },
+        {
+          id: 4,
+          title: "Movie 3a",
+          addedOn: formatISO(subMonths(new Date(), 8)),
+        },
+        {
+          id: 5,
+          title: "Movie 3b",
+          addedOn: formatISO(subDays(subMonths(new Date(), 8), 1)),
+        },
+        {
+          id: 6,
+          title: "Movie 4a",
           addedOn: formatISO(subMonths(new Date(), 13)),
+        },
+        {
+          id: 7,
+          title: "Movie 4b",
+          addedOn: formatISO(subDays(subMonths(new Date(), 13), 1)),
         },
       ],
       onEditMovie: vi.fn(),
@@ -56,32 +76,44 @@ describe("sorted-added", () => {
     const { getByTestId } = render(<SortedAdded {...props} />);
 
     expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText(/Recently/)
+      within(getByTestId("addedOn").childNodes[0]).getByText(/Long/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText("Movie 1")
-    ).toBeInTheDocument();
+    const section1 = within(getByTestId("addedOn").childNodes[0]).getAllByText(
+      /Movie 4/
+    );
+    expect(section1).toHaveLength(2);
+    expect(section1[0]).toHaveAttribute("aria-label", "Movie 4b");
+    expect(section1[1]).toHaveAttribute("aria-label", "Movie 4a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText(/While/)
+      within(getByTestId("addedOn").childNodes[1]).getByText(/Year/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText("Movie 2")
-    ).toBeInTheDocument();
+    const section2 = within(getByTestId("addedOn").childNodes[1]).getAllByText(
+      /Movie 3/
+    );
+    expect(section2).toHaveLength(2);
+    expect(section2[0]).toHaveAttribute("aria-label", "Movie 3b");
+    expect(section2[1]).toHaveAttribute("aria-label", "Movie 3a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText(/Year/)
+      within(getByTestId("addedOn").childNodes[2]).getByText(/While/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText("Movie 3")
-    ).toBeInTheDocument();
+    const section3 = within(getByTestId("addedOn").childNodes[2]).getAllByText(
+      /Movie 2/
+    );
+    expect(section3).toHaveLength(2);
+    expect(section3[0]).toHaveAttribute("aria-label", "Movie 2b");
+    expect(section3[1]).toHaveAttribute("aria-label", "Movie 2a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText(/Long/)
+      within(getByTestId("addedOn").childNodes[3]).getByText(/Recently/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText("Movie 4")
-    ).toBeInTheDocument();
+    const section4 = within(getByTestId("addedOn").childNodes[3]).getAllByText(
+      /Movie 1/
+    );
+    expect(section4).toHaveLength(2);
+    expect(section4[0]).toHaveAttribute("aria-label", "Movie 1b");
+    expect(section4[1]).toHaveAttribute("aria-label", "Movie 1a");
   });
 
   it("should render correctly when the order is DESC", () => {
@@ -91,61 +123,75 @@ describe("sorted-added", () => {
     const { getByTestId } = render(<SortedAdded {...props} />);
 
     expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText(/Recently/)
+      within(getByTestId("addedOn").childNodes[0]).getByText(/Recently/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText("Movie 1")
-    ).toBeInTheDocument();
+    const section1 = within(getByTestId("addedOn").childNodes[0]).getAllByText(
+      /Movie 1/
+    );
+    expect(section1).toHaveLength(2);
+    expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
+    expect(section1[1]).toHaveAttribute("aria-label", "Movie 1b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText(/While/)
+      within(getByTestId("addedOn").childNodes[1]).getByText(/While/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText("Movie 2")
-    ).toBeInTheDocument();
+    const section2 = within(getByTestId("addedOn").childNodes[1]).getAllByText(
+      /Movie 2/
+    );
+    expect(section2).toHaveLength(2);
+    expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
+    expect(section2[1]).toHaveAttribute("aria-label", "Movie 2b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText(/Year/)
+      within(getByTestId("addedOn").childNodes[2]).getByText(/Year/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText("Movie 3")
-    ).toBeInTheDocument();
+    const section3 = within(getByTestId("addedOn").childNodes[2]).getAllByText(
+      /Movie 3/
+    );
+    expect(section3).toHaveLength(2);
+    expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
+    expect(section3[1]).toHaveAttribute("aria-label", "Movie 3b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText(/Long/)
+      within(getByTestId("addedOn").childNodes[3]).getByText(/Long/)
     ).toBeInTheDocument();
-    expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText("Movie 4")
-    ).toBeInTheDocument();
+    const section4 = within(getByTestId("addedOn").childNodes[3]).getAllByText(
+      /Movie 4/
+    );
+    expect(section4).toHaveLength(2);
+    expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
+    expect(section4[1]).toHaveAttribute("aria-label", "Movie 4b");
   });
 
   it("should call the edit handler", () => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
+      within(getByText("Movie 1a")).getByRole("button", { name: "Edit" })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Movie 1" })
+      expect.objectContaining({ title: "Movie 1a" })
     );
   });
 
   it("should call the mark watched handler", () => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
+      within(getByText("Movie 1a")).getByRole("button", {
+        name: "Mark Watched",
+      })
     );
     expect(props.onMarkWatched).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Movie 1" })
+      expect.objectContaining({ title: "Movie 1a" })
     );
   });
 
   it("should call the delete handler", () => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Delete" })
+      within(getByText("Movie 1a")).getByRole("button", { name: "Delete" })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Movie 1" })
+      expect.objectContaining({ title: "Movie 1a" })
     );
   });
 });

@@ -44,7 +44,7 @@ const SortNav = () => {
         <SortNavListItem
           key={key}
           data-active={key === order}
-          data-sort={key === order && direction}
+          data-sort={key === order ? direction : undefined}
           sx={[key === order && sortNavSelectedItem]}
           onClick={() => {
             navigate(`/list/${resolveOrder(key).join("/")}`);
