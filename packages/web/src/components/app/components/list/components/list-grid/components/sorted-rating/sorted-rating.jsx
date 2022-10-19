@@ -29,6 +29,7 @@ const SortedRating = ({ movies, ...handlers }) => {
       ([stars, list]) => ({
         title: <FiveStarRating stars={stars} />,
         list,
+        stars,
       })
     );
 
@@ -38,9 +39,9 @@ const SortedRating = ({ movies, ...handlers }) => {
   }, [direction, byRating]);
 
   return (
-    <span data-testid={sort.GENRE}>
-      {sections.map((props) => (
-        <MovieSection key={props.title} {...props} {...handlers} />
+    <span data-testid={sort.RATING}>
+      {sections.map(({ stars, ...props }) => (
+        <MovieSection key={stars} {...props} {...handlers} />
       ))}
     </span>
   );
