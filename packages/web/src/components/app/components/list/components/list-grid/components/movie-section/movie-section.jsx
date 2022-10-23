@@ -31,7 +31,7 @@ const MovieSection = ({
   return list ? (
     <SectionLayout>
       {title && (
-        <MovieSectionTitle style={{ paddingLeft: titleOffset }}>
+        <MovieSectionTitle style={{ marginLeft: titleOffset }}>
           <div>{title}</div>
           {subtitle && <div>{subtitle}</div>}
         </MovieSectionTitle>

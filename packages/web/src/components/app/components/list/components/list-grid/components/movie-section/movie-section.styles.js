@@ -14,16 +14,27 @@ export const SectionLayout = styled("div")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const MovieSectionTitle = styled("div")(({ theme: { palette } }) => ({
-  display: "flex",
-  flexDirection: "column",
-  rowGap: 6,
+export const MovieSectionTitle = styled("div")(
+  ({ theme: { palette, spacing } }) => ({
+    display: "flex",
+    flexDirection: "column",
+    rowGap: 6,
 
-  "& :nth-of-type(2)": {
-    color: palette.grey[500],
-    fontSize: 12,
-  },
-}));
+    "& :nth-of-type(2)": {
+      color: palette.grey[500],
+      fontSize: 12,
+    },
+
+    "@media (max-width: 720px)": {
+      alignItems: "center",
+      marginLeft: "0 !important",
+      paddingBottom: spacing(2),
+      borderBottom: "1px solid",
+      borderImage:
+        "linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 80%) 1",
+    },
+  })
+);
 
 export const MovieList = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",

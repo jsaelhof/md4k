@@ -10,7 +10,7 @@ export const ActionBarContainer = styled("div")(
     background: palette.grey[100],
     padding: `0 ${app.LIST_MARGIN}px`,
 
-    [breakpoints.down(790)]: {
+    [breakpoints.down(720)]: {
       paddingTop: spacing(3),
     },
   })
@@ -22,7 +22,7 @@ export const ActionToolbar = styled(Toolbar)(
     columnGap: spacing(2),
     padding: "0 !important",
 
-    [breakpoints.down(790)]: {
+    [breakpoints.down(720)]: {
       flexDirection: "column-reverse",
       height: 100,
       marginBottom: spacing(2),
@@ -40,7 +40,7 @@ export const AddToQueueIcon = styled(AddToQueue)(
   ({ theme: { breakpoints, spacing } }) => ({
     marginRight: spacing(2),
 
-    [breakpoints.down(575)]: {
+    [breakpoints.down(790)]: {
       marginRight: 0,
     },
   })

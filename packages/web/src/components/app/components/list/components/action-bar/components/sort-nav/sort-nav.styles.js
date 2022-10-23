@@ -8,7 +8,7 @@ export const SortNavList = styled("ul")(
     alignItems: "baseline",
     justifyContent: "flex-start",
 
-    [breakpoints.down(790)]: {
+    [breakpoints.down(720)]: {
       justifyContent: "center",
       marginTop: spacing(4),
       marginBottom: 0,
