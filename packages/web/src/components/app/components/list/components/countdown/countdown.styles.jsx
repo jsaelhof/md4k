@@ -32,9 +32,10 @@ export const Container = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  transform: "scale3d(1,1,1)",
 
   "@media (max-width:550px)": {
-    transform: "scale(0.75, 0.75)",
+    transform: "scale3d(0.75, 0.75, 0.75)",
   },
 }));
 

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSpring } from "react-spring";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 
 import {
   InfoLayout,

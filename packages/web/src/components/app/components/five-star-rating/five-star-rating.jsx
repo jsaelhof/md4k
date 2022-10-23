@@ -1,4 +1,4 @@
-import { times } from "lodash";
+import times from "lodash/times";
 import { Star, StarRatingContainer } from "./five-star-rating.styles";
 
 const heights = [16, 18, 20, 18, 16];

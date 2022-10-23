@@ -5,7 +5,11 @@ import { errorCodes } from "md4k-constants";
 import { errorMessage } from "../../../../constants/error-messages";
 import ErrorDialog from "../error-dialog/error-dialog";
 import FullDetail from "../full-detail/full-detail";
-import { filter, conforms, sample, size, reject } from "lodash";
+import filter from "lodash/filter";
+import conforms from "lodash/conforms";
+import sample from "lodash/sample";
+import size from "lodash/size";
+import reject from "lodash/reject";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const useRandomPick = () => {

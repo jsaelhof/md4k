@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { omit } from "lodash";
+import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
 import { GET_MOVIES } from "../queries";
 

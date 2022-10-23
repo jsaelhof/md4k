@@ -21,7 +21,7 @@ import Toast from "./components/toast/toast";
 import ErrorDialog from "../error-dialog/error-dialog";
 import AddMovieDialog from "./components/add-movie-dialog/add-movie-dialog";
 import { errorMessage } from "../../../../constants/error-messages";
-import { map } from "lodash";
+import map from "lodash/map";
 
 export const List = () => {
   const navigate = useNavigate();

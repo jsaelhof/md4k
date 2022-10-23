@@ -5,7 +5,7 @@ import {
   DialogTitle,
   useMediaQuery,
 } from "@mui/material";
-import { isNil } from "lodash";
+import isNil from "lodash/isNil";
 import { useRef, useState } from "react";
 
 import { formatRuntime } from "../../../../../../utils/format-runtime";
