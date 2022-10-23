@@ -1,3 +1,12 @@
+### PR #43 - 35/sort by rating
+##### 2022-10-23
+
+Add a UI sort option for 5-star rating and update graphql queries to aggregate it from ratings on the server.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/43)
+
+----
+
 ### PR #40 - #39: add vercel.json
 ##### 2022-10-13
 
