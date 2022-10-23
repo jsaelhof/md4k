@@ -1,3 +1,12 @@
+### PR #45 - #44: loading performance
+##### 2022-10-23
+
+Reduce bundle size by rewriting lodash imports to prevent bundling all of lodash, also use a 3D transform on the countdown animation
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/45)
+
+----
+
 ### PR #43 - 35/sort by rating
 ##### 2022-10-23
 
