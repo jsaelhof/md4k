@@ -3,6 +3,7 @@ import lodash from "lodash";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 import { genreLabels } from "md4k-constants";
 import { api } from "md4k-constants";
+import { toFiveStarRating } from "../../../utils/to-five-star-rating.js";
 
 const { findKey } = lodash;
 
@@ -36,6 +37,8 @@ export const omdbMovie = async (parent, { imdbID }) => {
       Genre.split(", ").includes(genre)
     );
 
+    const ratings = convertOmdbRatings(Ratings);
+
     return {
       imdbID,
       title: Title,
@@ -46,8 +49,9 @@ export const omdbMovie = async (parent, { imdbID }) => {
       ...(genre && { genre: parseInt(genre) }),
       ratings: {
         id: imdbID,
-        ...(Ratings && convertOmdbRatings(Ratings)),
+        ...ratings,
       },
+      fiveStarRating: toFiveStarRating(ratings),
       poster: Poster && Poster !== "N/A" ? Poster : null,
     };
   } else {

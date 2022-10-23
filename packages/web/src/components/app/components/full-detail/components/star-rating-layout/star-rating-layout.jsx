@@ -7,7 +7,7 @@ import { RatingContainer } from "./star-rating-layout.styles";
 import FiveStarRating from "../../../five-star-rating/five-star-rating";
 import Ratings from "../../../list/components/ratings/ratings";
 
-export const StarRatingLayout = ({ ratings }) => {
+export const StarRatingLayout = ({ ratings, stars }) => {
   const centered = useMediaQuery("(max-width: 660px)");
   const [showRatings, setShowRatings] = useState(false);
 
@@ -32,7 +32,7 @@ export const StarRatingLayout = ({ ratings }) => {
       }}
       data-testid="starRatingLayout"
     >
-      <FiveStarRating ratings={ratings} />
+      <FiveStarRating stars={stars} />
       <animated.div style={ratingsSpring}>
         <Ratings ratings={ratings} size="small" dense />
       </animated.div>

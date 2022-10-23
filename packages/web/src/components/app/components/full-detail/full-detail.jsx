@@ -179,7 +179,10 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
           <div>{movie.title}</div>
 
           <RatingsArea>
-            <StarRatingLayout ratings={data.ratings} />
+            <StarRatingLayout
+              stars={data.fiveStarRating}
+              ratings={data.ratings}
+            />
           </RatingsArea>
         </MovieTitle>
 

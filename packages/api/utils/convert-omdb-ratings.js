@@ -13,7 +13,7 @@ const normalizeRating = (source, value) => {
   }
 };
 
-export const convertOmdbRatings = (ratings) =>
+export const convertOmdbRatings = (ratings = []) =>
   ratings
     .filter(({ Source }) => ratingsSources.includes(fromOmdbSource[Source]))
     .reduce((acc, { Source, Value }) => {

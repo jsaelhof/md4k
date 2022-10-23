@@ -50,7 +50,7 @@ describe("action-bar", () => {
   it("should render the Add Movie button without a label when space is limited", async () => {
     // eslint-disable-next-line no-import-assign
     useResponsiveModule.useResponsive = vi.fn().mockReturnValue({
-      medium: true,
+      small: true,
     });
 
     const { queryByText, getByLabelText } = await renderWithProviders(

@@ -21,6 +21,7 @@ export const GET_MOVIES = gql`
         ROTTEN_TOMATOES
         METACRITIC
       }
+      fiveStarRating
       background
     }
     watchedMovies(list: $list) {

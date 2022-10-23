@@ -4,6 +4,8 @@ import {
   MovieSectionTitle,
 } from "./movie-section.styles";
 import Movie from "../movie/movie";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useOnWindowResize } from "rooks";
 
 const MovieSection = ({
   title,
@@ -12,16 +14,29 @@ const MovieSection = ({
   onEditMovie,
   onMarkWatched,
   onDeleteMovie,
-}) =>
-  list ? (
+}) => {
+  const ref = useRef();
+  const [titleOffset, setTitleOffset] = useState(0);
+
+  const updateTitleOffset = useCallback(() => {
+    setTitleOffset(
+      ref.current?.childNodes[0]?.getBoundingClientRect().x -
+        ref.current?.getBoundingClientRect().x
+    );
+  }, []);
+
+  useEffect(updateTitleOffset, [updateTitleOffset]);
+  useOnWindowResize(updateTitleOffset);
+
+  return list ? (
     <SectionLayout>
       {title && (
-        <MovieSectionTitle>
+        <MovieSectionTitle style={{ marginLeft: titleOffset }}>
           <div>{title}</div>
           {subtitle && <div>{subtitle}</div>}
         </MovieSectionTitle>
       )}
-      <MovieList>
+      <MovieList ref={ref}>
         {list.map((movie) => (
           <Movie
             key={movie.id}
@@ -34,5 +49,6 @@ const MovieSection = ({
       </MovieList>
     </SectionLayout>
   ) : null;
+};
 
 export default MovieSection;

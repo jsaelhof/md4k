@@ -36,6 +36,7 @@ export const typeDefs = gql`
     watchedOn: String
     locked: Boolean
     ratings: Ratings
+    fiveStarRating: Float
     background: String
   }
 
@@ -77,6 +78,7 @@ export const typeDefs = gql`
     rated: String
     actors: [String]
     ratings: OmdbRatings
+    fiveStarRating: Float
     poster: String
   }
 

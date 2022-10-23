@@ -1,6 +1,5 @@
-import { AppBar, Button } from "@mui/material";
+import { AppBar, Button, useMediaQuery } from "@mui/material";
 
-import { useResponsive } from "../../../../../../hooks/use-responsive";
 import SortNav from "./components/sort-nav/sort-nav";
 import SplitButton from "./components/split-button/split-button";
 import {
@@ -11,7 +10,7 @@ import {
 } from "./action-bar.styles";
 
 const ActionBar = ({ disabled, onAdd, onPick }) => {
-  const { medium } = useResponsive();
+  const omitLabel = useMediaQuery("(max-width: 790px)");
 
   return (
     <ActionBarContainer>
@@ -28,7 +27,7 @@ const ActionBar = ({ disabled, onAdd, onPick }) => {
                 onClick={onAdd}
               >
                 <AddToQueueIcon />
-                {!medium && "Add Movie"}
+                {!omitLabel && "Add Movie"}
               </Button>
               <SplitButton onPick={onPick} />
             </SecondaryActions>
