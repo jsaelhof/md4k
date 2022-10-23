@@ -6,7 +6,7 @@ import { errorMessage } from "../../../../constants/error-messages";
 import DeleteDialog from "../delete-dialog/delete-dialog";
 import ErrorDialog from "../error-dialog/error-dialog";
 import WatchedMovie from "./components/watched-movie/watched-movie";
-import { orderBy } from "lodash";
+import orderBy from "lodash/orderBy";
 import { useAppContext } from "../../../../context/app-context";
 import {
   editMovieOptions,

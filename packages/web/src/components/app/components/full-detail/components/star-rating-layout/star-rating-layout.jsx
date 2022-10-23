@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { animated, useSpring } from "react-spring";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { useMediaQuery } from "@mui/material";
 
 import { RatingContainer } from "./star-rating-layout.styles";

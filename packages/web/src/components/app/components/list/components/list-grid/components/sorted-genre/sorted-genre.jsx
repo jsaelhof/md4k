@@ -1,4 +1,4 @@
-import { orderBy } from "lodash";
+import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
 import { useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";

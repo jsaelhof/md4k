@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { noop } from "lodash";
+import noop from "lodash/noop";
 
 const GET_MOVIE_DETAILS = gql`
   query GetMovieDetails($imdbID: ID!) {

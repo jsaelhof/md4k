@@ -1,4 +1,4 @@
-import { isNil } from "lodash";
+import isNil from "lodash/isNil";
 
 export const formatRuntime = (seconds, editingFormat = false) => {
   if (isNil(seconds)) return "";
