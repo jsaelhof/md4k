@@ -62,7 +62,7 @@ export const InfoLayout = styled(animated.div)(
     ". rating runtime"
     "footer footer footer"
   `,
-    gridTemplateColumns: "repeat(3, 1fr)",
+    gridTemplateColumns: "1fr auto 1fr",
     gridTemplateRows: "max-content 1fr",
     justifyItems: "center",
     alignItems: "end",
@@ -79,6 +79,7 @@ export const InfoLayout = styled(animated.div)(
 export const InfoRuntime = styled("div")`
   grid-area: runtime;
   text-align: right;
+  white-space: nowrap;
 `;
 
 export const InfoFooterLayout = styled(animated.div)`
