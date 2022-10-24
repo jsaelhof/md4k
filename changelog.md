@@ -1,3 +1,12 @@
+### PR #46 - #41: nowrap, fix column widths
+##### 2022-10-24
+
+Add a nowrap on the runtime and set proper grid column widths
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/46)
+
+----
+
 ### PR #45 - #44: loading performance
 ##### 2022-10-23
 
