@@ -1,3 +1,12 @@
+### PR #49 - #47: fix markwatched, standardize omit of fiveStarRating
+##### 2022-11-18
+
+Remove the fiveStarRating key when submitting the markWatched mutation
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/49)
+
+----
+
 ### PR #46 - #41: nowrap, fix column widths
 ##### 2022-10-24
 
