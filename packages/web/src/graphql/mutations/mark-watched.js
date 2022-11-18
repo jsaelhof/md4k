@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
 import { GET_MOVIES } from "../queries";
 
@@ -47,19 +48,22 @@ export const useMarkWatched = ({ onCompleted }) => {
   return [markWatchedMutation, status];
 };
 
-export const markWatchedOptions = (movie, watchedOn, list) => ({
-  variables: {
-    movie: {
-      ...omitTypename(movie),
-      watchedOn,
+export const markWatchedOptions = (movie, watchedOn, list) => {
+  const movieInput = omit(movie, ["fiveStarRating"]);
+  return {
+    variables: {
+      movie: {
+        ...omitTypename(movieInput),
+        watchedOn,
+      },
+      list: list.id,
     },
-    list: list.id,
-  },
-  optimisticResponse: {
-    editMovie: {
-      ...movie,
-      watchedOn,
-      __typename: "Movie",
+    optimisticResponse: {
+      editMovie: {
+        ...movie,
+        watchedOn,
+        __typename: "Movie",
+      },
     },
-  },
-});
+  };
+};
