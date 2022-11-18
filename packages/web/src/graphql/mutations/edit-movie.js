@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
 
 export const EDIT_MOVIE = gql`
@@ -36,15 +37,18 @@ export const useEditMovie = () => {
   return [editMovie, status];
 };
 
-export const editMovieOptions = (movie, list) => ({
-  variables: {
-    movie: { ...omitTypename(movie), fiveStarRating: undefined },
-    list: list.id,
-  },
-  optimisticResponse: {
-    editMovie: {
-      ...movie,
-      __typename: "Movie",
+export const editMovieOptions = (movie, list) => {
+  const movieInput = omit(movie, ["fiveStarRating"]);
+  return {
+    variables: {
+      movie: omitTypename(movieInput),
+      list: list.id,
     },
-  },
-});
+    optimisticResponse: {
+      editMovie: {
+        ...movie,
+        __typename: "Movie",
+      },
+    },
+  };
+};
