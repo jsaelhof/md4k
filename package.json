@@ -13,6 +13,8 @@
     "prepare": "husky install",
     "lintstaged": "yarn workspaces foreach -vp run lint-staged",
     "test": "yarn workspaces foreach -vpi run vitest",
+    "test:api": "cd packages/api && run vitest",
+    "test:web": "cd packages/web && run vitest",
     "coverage": "yarn workspaces foreach -vpi run coverage"
   },
   "devDependencies": {
