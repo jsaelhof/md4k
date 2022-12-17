@@ -6,6 +6,8 @@ import { sources } from "md4k-constants";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { createMatchMedia } from "../../../../utils/create-match-media";
+import { buildOMDBMovieMock } from "../../../../utils/build-omdb-movie-mock";
+import { buildTMDBMovieMock } from "../../../../utils/build-tmdb-movie-mock";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -24,33 +26,8 @@ const GET_MOVIE_EXTENDED_DETAILS_MOCK = {
   },
   result: {
     data: {
-      omdbMovie: {
-        imdbID: "tt0258463",
-        title: "The Bourne Identity",
-        rated: "PG-13",
-        actors: ["Franka Potente", "Matt Damon", "Chris Cooper"],
-        ratings: {
-          id: "tt0258463",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-      },
-      tmdbMovie: {
-        imdbID: "tt0258463",
-        backdrop: "http://image.tmdb.org/t/1.jpg",
-        backdrops: [
-          "http://image.tmdb.org/t/1.jpg",
-          "http://image.tmdb.org/t/2.jpg",
-          "http://image.tmdb.org/t/3.jpg",
-          "http://image.tmdb.org/t/4.jpg",
-        ],
-        trailer: {
-          site: "YouTube",
-          key: "2tqK_3mKQUw",
-        },
-        plot: "Wounded to the brink of death",
-      },
+      omdbMovie: buildOMDBMovieMock(),
+      tmdbMovie: buildTMDBMovieMock(),
     },
   },
 };
@@ -322,7 +299,7 @@ describe("full-detail", () => {
     // Mock a 500 pixel width
     window.matchMedia = createMatchMedia(500);
 
-    const { debug, getByRole, getByLabelText, queryByLabelText } =
+    const { getByRole, getByLabelText, queryByLabelText } =
       await renderWithProviders(<FullDetail {...test.props} />, {
         mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
       });
@@ -334,7 +311,6 @@ describe("full-detail", () => {
     fireEvent.click(getByRole("button", { name: "Watch Trailer" }));
     const trailerElement = getByLabelText("Trailer");
     expect(document.body).toContainElement(trailerElement);
-    debug();
   });
 
   it("should show a stream option when the source is streamable and open the stream site", async () => {

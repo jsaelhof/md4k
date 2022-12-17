@@ -79,12 +79,12 @@ describe("list-grid", () => {
   });
 
   it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async () => {
-    const { debug, getByText, getByRole, queryByText } =
-      await renderWithProviders(<ListGrid {...props} />, {
+    const { getByText, getByRole, queryByText } = await renderWithProviders(
+      <ListGrid {...props} />,
+      {
         route: "/addedOn/asc",
-      });
-
-    debug();
+      }
+    );
 
     fireEvent.click(getByText("Movie 1"));
     expect(getByText("'Movie 1' will be removed")).toBeInTheDocument();

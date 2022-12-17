@@ -2,6 +2,8 @@ import FullDetail from "./full-detail";
 import { GET_MOVIE_EXTENDED_DETAILS } from "../../../../graphql/queries/get-movie-extended-details";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { buildOMDBMovieMock } from "../../../../utils/build-omdb-movie-mock";
+import { buildTMDBMovieMock } from "../../../../utils/build-tmdb-movie-mock";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -20,6 +22,10 @@ const GET_MOVIE_EXTENDED_DETAILS_LOADING_MOCK = {
   },
   result: {
     loading: true,
+    data: {
+      omdbMovie: buildOMDBMovieMock(),
+      tmdbMovie: buildTMDBMovieMock(),
+    },
   },
 };
 

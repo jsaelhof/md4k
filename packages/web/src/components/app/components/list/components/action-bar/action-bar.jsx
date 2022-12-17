@@ -10,7 +10,7 @@ import {
 } from "./action-bar.styles";
 
 const ActionBar = ({ disabled, onAdd, onPick }) => {
-  const omitLabel = useMediaQuery("(max-width: 790px)");
+  const includeLabel = useMediaQuery("(min-width: 790px)");
 
   return (
     <ActionBarContainer>
@@ -27,7 +27,7 @@ const ActionBar = ({ disabled, onAdd, onPick }) => {
                 onClick={onAdd}
               >
                 <AddToQueueIcon />
-                {!omitLabel && "Add Movie"}
+                {includeLabel && "Add Movie"}
               </Button>
               <SplitButton onPick={onPick} />
             </SecondaryActions>

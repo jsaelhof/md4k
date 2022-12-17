@@ -4,6 +4,7 @@ import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
 import { REMOVE_MOVIE } from "../../../../graphql/mutations";
+import { buildMovieMock } from "../../../../utils/build-movie-mock";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
   default: ({ movie, onDelete }) => (
@@ -39,12 +40,11 @@ const GET_MOVIES_MOCK = {
   result: {
     data: {
       watchedMovies: [
-        {
+        buildMovieMock({
           id: "1",
           title: "The Bourne Identity",
           watchedOn: "2022-04-08T02:11:33.166Z",
-          list: "saturday",
-        },
+        }),
       ],
       movies: [],
     },
