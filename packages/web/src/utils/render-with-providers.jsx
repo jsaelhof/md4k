@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "../theme/theme";
 import { vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { buildMovieMock } from "./build-movie-mock";
 
 vi.mock("@auth0/auth0-react", () => ({
   useAuth0: () => ({
@@ -111,10 +112,9 @@ const GET_MOVIES_MOCK = {
   result: {
     data: {
       movies: [
-        {
+        buildMovieMock({
           id: "7614bdcb-d21a-40d8-880d-aae8cbfccb56",
           title: "Blade Runner",
-          list: "saturday",
           runtime: 7020,
           source: 1,
           genre: 3,
@@ -122,9 +122,7 @@ const GET_MOVIES_MOCK = {
           poster:
             "https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
           imdbID: "tt0083658",
-          locked: false,
           addedOn: "2021-01-16T06:39:48.002Z",
-          watchedOn: null,
           ratings: {
             id: "7614bdcb-d21a-40d8-880d-aae8cbfccb56",
             IMDB: "81%",
@@ -132,13 +130,10 @@ const GET_MOVIES_MOCK = {
             METACRITIC: "84%",
             __typename: "Ratings",
           },
-          background: null,
-          __typename: "Movie",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "f8b5063e-8904-49f1-a5c3-5b12e7c57699",
           title: "Glory",
-          list: "saturday",
           runtime: 7320,
           source: 1,
           genre: 2,
@@ -146,9 +141,7 @@ const GET_MOVIES_MOCK = {
           poster:
             "https://m.media-amazon.com/images/M/MV5BODhlNjA5MDEtZDVhNS00ZmM3LTg1YzAtZGRjNjhjNTAzNzVkXkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_SX300.jpg",
           imdbID: "tt0097441",
-          locked: false,
           addedOn: "2021-01-15T00:00:25.000Z",
-          watchedOn: null,
           ratings: {
             id: "f8b5063e-8904-49f1-a5c3-5b12e7c57699",
             IMDB: "78%",
@@ -156,13 +149,10 @@ const GET_MOVIES_MOCK = {
             METACRITIC: "78%",
             __typename: "Ratings",
           },
-          background: null,
-          __typename: "Movie",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "ea8d443b-a4a2-4e0d-9417-e54be3907354",
           title: "Roman J. Israel, Esq.",
-          list: "saturday",
           runtime: 7320,
           source: 0,
           genre: 2,
@@ -170,9 +160,7 @@ const GET_MOVIES_MOCK = {
           poster:
             "https://m.media-amazon.com/images/M/MV5BMjMyNjkxMTg2NV5BMl5BanBnXkFtZTgwNjkyNTk0MzI@._V1_SX300.jpg",
           imdbID: "tt6000478",
-          locked: false,
           addedOn: "2021-01-15T00:00:25.000Z",
-          watchedOn: null,
           ratings: {
             id: "ea8d443b-a4a2-4e0d-9417-e54be3907354",
             IMDB: "65%",
@@ -180,15 +168,12 @@ const GET_MOVIES_MOCK = {
             METACRITIC: "58%",
             __typename: "Ratings",
           },
-          background: null,
-          __typename: "Movie",
-        },
+        }),
       ],
       watchedMovies: [
-        {
+        buildMovieMock({
           id: "fb96baa5-b22c-4306-9dec-163bec4b1faa",
           title: "Tower Heist",
-          list: "saturday",
           runtime: 6240,
           source: 1,
           genre: 1,
@@ -196,7 +181,6 @@ const GET_MOVIES_MOCK = {
           poster:
             "https://m.media-amazon.com/images/M/MV5BMTY1NDQxMTcwOV5BMl5BanBnXkFtZTcwNzMzNTExNg@@._V1_SX300.jpg",
           imdbID: "tt0471042",
-          locked: false,
           addedOn: "2021-05-09T03:37:42.974Z",
           watchedOn: "2021-09-26T04:11:43.269Z",
           ratings: {
@@ -206,13 +190,10 @@ const GET_MOVIES_MOCK = {
             METACRITIC: "59%",
             __typename: "Ratings",
           },
-          background: null,
-          __typename: "Movie",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "0e916dfd-7302-41f4-913f-72b2ea3ba2c0",
           title: "Always Be My Maybe",
-          list: "saturday",
           runtime: 6060,
           source: 1,
           genre: 1,
@@ -220,7 +201,6 @@ const GET_MOVIES_MOCK = {
           poster:
             "https://m.media-amazon.com/images/M/MV5BMGM2NWFjYTctZjFiYy00YzIxLThhY2QtY2UxZTNmNjdjZTU0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
           imdbID: "tt7374948",
-          locked: false,
           addedOn: "2021-05-02T16:21:08.696Z",
           watchedOn: "2022-01-14T07:00:00.000Z",
           ratings: {
@@ -230,9 +210,7 @@ const GET_MOVIES_MOCK = {
             METACRITIC: "64%",
             __typename: "Ratings",
           },
-          background: null,
-          __typename: "Movie",
-        },
+        }),
       ],
     },
   },

@@ -2,13 +2,12 @@ import { fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import ActionBar from "./action-bar";
-import * as useResponsiveModule from "../../../../../../hooks/use-responsive";
+import * as mui from "@mui/material";
 
-vi.mock("../../../../../../hooks/use-responsive", () => ({
-  useResponsive: vi.fn().mockReturnValue({
-    medium: false,
-  }),
-}));
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
+  return { ...actual, useMediaQuery: vi.fn().mockReturnValue(true) };
+});
 
 describe("action-bar", () => {
   let test;
@@ -49,9 +48,7 @@ describe("action-bar", () => {
 
   it("should render the Add Movie button without a label when space is limited", async () => {
     // eslint-disable-next-line no-import-assign
-    useResponsiveModule.useResponsive = vi.fn().mockReturnValue({
-      small: true,
-    });
+    mui.useMediaQuery = vi.fn().mockReturnValue(false);
 
     const { queryByText, getByLabelText } = await renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />

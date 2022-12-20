@@ -2,6 +2,9 @@ import FullDetail from "./full-detail";
 import { GET_MOVIE_EXTENDED_DETAILS } from "../../../../graphql/queries/get-movie-extended-details";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { buildOMDBMovieMock } from "../../../../utils/build-omdb-movie-mock";
+import { buildTMDBMovieMock } from "../../../../utils/build-tmdb-movie-mock";
+import { waitFor } from "@testing-library/dom";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -20,6 +23,10 @@ const GET_MOVIE_EXTENDED_DETAILS_LOADING_MOCK = {
   },
   result: {
     loading: true,
+    data: {
+      omdbMovie: buildOMDBMovieMock(),
+      tmdbMovie: buildTMDBMovieMock(),
+    },
   },
 };
 
@@ -32,8 +39,10 @@ describe("full-detail skeletons", () => {
       }
     );
 
-    expect(
-      document.getElementsByClassName("MuiSkeleton-root").length
-    ).toBeGreaterThan(0);
+    await waitFor(() =>
+      expect(
+        document.getElementsByClassName("MuiSkeleton-root").length
+      ).toBeGreaterThan(0)
+    );
   });
 });

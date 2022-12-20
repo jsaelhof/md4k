@@ -3,6 +3,7 @@ import { fireEvent, waitFor, within } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
+import { buildMovieMock } from "../../../../utils/build-movie-mock";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
   default: ({
@@ -51,42 +52,36 @@ const GET_MOVIES_MOCK = {
   result: {
     data: {
       watchedMovies: [
-        {
+        buildMovieMock({
           id: "0",
           title: "Blade Runner",
           watchedOn: "2021-02-06T06:39:48.002Z",
-          list: "saturday",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "1",
           title: "The Bourne Identity",
           watchedOn: "2022-04-08T02:11:33.166Z",
-          list: "saturday",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "2",
           title: "Star Wars",
           watchedOn: "1977-06-01T02:11:33.166Z",
-          list: "saturday",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "3",
           title: "The Lord Of The Rings",
           watchedOn: "2002-08-08T02:11:33.166Z",
-          list: "saturday",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "4",
           title: "Iron Man",
           watchedOn: "2000-11-08T02:11:33.166Z",
-          list: "saturday",
-        },
-        {
+        }),
+        buildMovieMock({
           id: "5",
           title: "Fight Club",
           watchedOn: "2001-06-08T02:11:33.166Z",
-          list: "saturday",
-        },
+        }),
       ],
       movies: [],
     },
