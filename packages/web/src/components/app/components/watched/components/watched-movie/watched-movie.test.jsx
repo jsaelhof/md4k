@@ -199,7 +199,7 @@ describe("watched-movie", () => {
 
     expect(test.props.onSave).toHaveBeenCalledWith(
       expect.objectContaining({
-        watchedOn: "2021-09-10T06:00:00.000Z",
+        watchedOn: expect.stringContaining("2021-09-10"),
       })
     );
   });
