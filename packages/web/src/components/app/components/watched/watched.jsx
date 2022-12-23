@@ -58,8 +58,6 @@ export const Watched = () => {
     },
   });
 
-  const onEditMovie = useCallback(({ id }) => setEditingMovie(id), []);
-
   const onSaveMovie = useCallback(
     (movie) => {
       editMovieMutation(editMovieOptions(movie, list));
@@ -82,10 +80,10 @@ export const Watched = () => {
             i < infiniteLoadPointer && (
               <WatchedMovie
                 key={movie.id}
-                movie={movie}
+                movie={editingMovie?.id === movie.id ? editingMovie : movie}
                 right={i % 2}
-                isEditing={editingMovie === movie.id}
-                onEditMovie={onEditMovie}
+                isEditing={editingMovie?.id === movie.id}
+                onEditMovie={setEditingMovie}
                 onSave={onSaveMovie}
                 onCancel={onCancelEdit}
                 onDelete={onDeleteMovie}
