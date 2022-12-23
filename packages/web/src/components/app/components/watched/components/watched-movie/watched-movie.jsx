@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useGetMovieExtendedDetails } from "../../../../../../graphql/queries";
 import DatePicker from "../date-picker/date-picker";
 import MoviePoster from "../../../movie-poster/movie-poster";
@@ -29,7 +29,6 @@ const WatchedMovie = ({
 
   const small = useMediaQuery("(max-width: 550px)");
   const xsmall = useMediaQuery("(max-width: 430px)");
-  const [editedMovie, setEditedMovie] = useState(null);
   const [datePickerMounted, setDatePickerMounted] = useState(null);
 
   const calendarSpring = useSpring({
@@ -43,16 +42,16 @@ const WatchedMovie = ({
     },
   });
 
-  // If the date is in process of being changed use that otherwise use the date from the movie.
-  const watchedDate = new Date(
-    isEditing ? editedMovie.watchedOn : movie.watchedOn
+  const watchedDate = useMemo(
+    () => new Date(movie.watchedOn),
+    [movie.watchedOn]
   );
 
   const nodes = [
     <PosterLayout key={`${movie.id}-poster`}>
       <MoviePoster movie={movie} height={small ? 200 : 270} />
     </PosterLayout>,
-    <InfoLayout key={`${movie.id}-info`} $right={right}>
+    <InfoLayout key={`${movie.id}-info`} $right={right} data-testid="info">
       <InfoTitle>{movie.title}</InfoTitle>
       <InfoDate>
         {format(
@@ -73,11 +72,9 @@ const WatchedMovie = ({
       onClick={() => {
         if (isEditing) {
           onCancel();
-          setEditedMovie(null);
         } else {
           setDatePickerMounted(true);
-          setEditedMovie({ ...movie });
-          onEditMovie(movie);
+          onEditMovie({ ...movie });
         }
       }}
     >
@@ -88,7 +85,7 @@ const WatchedMovie = ({
           }}
         />
       </BackdropWrapper>
-      <Content $right={right}>
+      <Content $right={right} data-testid="content">
         {right ? nodes.reverse() : nodes}
 
         {datePickerMounted && (
@@ -98,19 +95,14 @@ const WatchedMovie = ({
             title={movie.title}
             right={right}
             defaultDate={watchedDate}
-            onChange={(day) => {
-              setEditedMovie((state) => ({
-                ...state,
+            onSave={(day) => {
+              onSave({
+                ...movie,
                 watchedOn: day.toISOString(),
-              }));
-            }}
-            onSave={() => {
-              onSave(editedMovie);
-              setEditedMovie(null);
+              });
             }}
             onCancel={() => {
               onCancel();
-              setEditedMovie(null);
             }}
             onDelete={() => {
               onCancel();

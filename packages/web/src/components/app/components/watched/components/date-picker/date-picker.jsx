@@ -1,5 +1,6 @@
 import "react-day-picker/style.css";
 
+import { useState } from "react";
 import { Drawer } from "@mui/material";
 import { Close, Delete } from "@mui/icons-material";
 import { CalendarCheck } from "@mitch528/mdi-material-ui";
@@ -31,6 +32,7 @@ const DatePicker = ({
   spring,
 }) => {
   const actionSize = useDrawer ? 28 : 24;
+  const [day, setDay] = useState(defaultDate);
   const picker = (
     <Picker
       sx={[useDrawer && DrawerPicker, right && RightAlignedPicker]}
@@ -51,7 +53,10 @@ const DatePicker = ({
           after: new Date(),
         }}
         mode="single"
-        onSelect={onChange}
+        onSelect={(day) => {
+          setDay(day);
+          onChange && onChange(day);
+        }}
       />
       <ButtonGroup>
         <ActionButton
@@ -64,7 +69,7 @@ const DatePicker = ({
         <ActionButton Icon={Close} onClick={onCancel} fontSize={actionSize} />
         <ActionButton
           Icon={CalendarCheck}
-          onClick={onSave}
+          onClick={() => onSave(day)}
           fontSize={actionSize}
         />
       </ButtonGroup>
