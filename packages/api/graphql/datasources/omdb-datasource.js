@@ -23,7 +23,6 @@ export class OMDBDataSource extends RESTDataSource {
       s: title,
       type: "movie",
     });
-    console.log(">>>>>>", data);
     return data;
   }
 }
