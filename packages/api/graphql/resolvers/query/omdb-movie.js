@@ -1,28 +1,22 @@
-import axios from "axios";
 import lodash from "lodash";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 import { genreLabels } from "md4k-constants";
-import { api } from "md4k-constants";
 import { toFiveStarRating } from "../../../utils/to-five-star-rating.js";
 
 const { findKey } = lodash;
 
-export const omdbMovie = async (parent, { imdbID }) => {
+export const omdbMovie = async (parent, { imdbID }, { dataSources }) => {
   const {
-    data: {
-      Response,
-      Title,
-      Year,
-      Runtime,
-      Genre,
-      Ratings,
-      Poster,
-      Rated,
-      Actors,
-    },
-  } = await axios.get(
-    `${api.OMDB}?i=${imdbID}&apikey=${process.env.OMDB_API_KEY}&plot=full`
-  );
+    Response,
+    Title,
+    Year,
+    Runtime,
+    Genre,
+    Ratings,
+    Poster,
+    Rated,
+    Actors,
+  } = await dataSources.OMDB.getMovie(imdbID);
 
   if (Response === "True") {
     // Runtime includes " min" like "113 min".

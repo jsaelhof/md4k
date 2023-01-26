@@ -2171,6 +2171,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apollo-datasource-rest@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "apollo-datasource-rest@npm:3.7.0"
+  dependencies:
+    "@apollo/utils.keyvaluecache": ^1.0.1
+    apollo-datasource: ^3.3.2
+    apollo-server-env: ^4.2.1
+    apollo-server-errors: ^3.3.1
+    http-cache-semantics: ^4.1.0
+  peerDependencies:
+    graphql: ^15.3.0 || ^16.0.0
+  checksum: 843e132fd024f15e556b05df00f98e50d7942efb7ed12b860fd528f898c2fa2186e1371f3e5fceb0e55b825c2684c3153a5c19a3724a4b2787d83a44df4193bd
+  languageName: node
+  linkType: hard
+
 "apollo-datasource@npm:^3.3.2":
   version: 3.3.2
   resolution: "apollo-datasource@npm:3.3.2"
@@ -5467,6 +5482,7 @@ __metadata:
   dependencies:
     "@vitest/coverage-c8": ^0.22.1
     "@vitest/ui": ^0.22.1
+    apollo-datasource-rest: ^3.7.0
     apollo-server-core: ^3.10.0
     apollo-server-express: ^3.10.0
     axios: ^0.27.2
