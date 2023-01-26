@@ -1,6 +1,4 @@
-import axios from "axios";
 import lodash from "lodash";
-import { api } from "md4k-constants";
 
 const { filter, find, first, isNil, pick, reject } = lodash;
 
@@ -9,25 +7,20 @@ const TMDB_IMAGE_URL = "http://image.tmdb.org/t/p/%size%%path%";
 const toTMDBImageUrl = (path, size = "original") =>
   TMDB_IMAGE_URL.replace("%size%", size).replace("%path%", path);
 
-export const tmdbMovie = async (parent, { imdbID }) => {
+export const tmdbMovie = async (parent, { imdbID }, { dataSources }) => {
   // Find the data by imdbid. This includes the TMDB id so we can look up the actual data.
-  const { data: tmdbData } = await axios.get(
-    `${api.TMDB}/find/${imdbID}?language=en-US&external_source=imdb_id&api_key=${process.env.TMDB_API_KEY}`
-  );
+  const findResults = await dataSources.TMDB.find(imdbID);
 
   // In general there should be only match but it seems possible to get more than one thing back.
   // If there's zero, then we can't find the TMDB data from the imdb id.
-  if (tmdbData.movie_results?.length < 1) {
+  if (findResults.length < 1) {
     throw `No movies found with imdb id ${imdbID}`;
   }
 
   // Look up the TMDB data using the movie id from the first request.
   // ADD "images" TO append_to_respond to get full list of backdrops and posters.
-  const {
-    data: { backdrop_path, videos, overview, images },
-  } = await axios.get(
-    `${api.TMDB}/movie/${tmdbData.movie_results[0].id}?api_key=${process.env.TMDB_API_KEY}&append_to_response=videos,images&include_image_language=en,null`
-  );
+  const { backdrop_path, videos, overview, images } =
+    await dataSources.TMDB.getMovie(findResults[0].id);
 
   const officialTrailer = find(
     filter(videos?.results, ["type", "Trailer"]),

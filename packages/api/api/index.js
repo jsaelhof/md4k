@@ -12,6 +12,7 @@ import { resolvers } from "../graphql/resolvers/index.js";
 import dotenv from "dotenv";
 import { isTokenValid } from "../auth/validate.js";
 import { OMDBDataSource } from "../graphql/datasources/omdb-datasource.js";
+import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ const startApolloServer = async (app, httpServer) => {
     resolvers,
     dataSources: () => ({
       OMDB: new OMDBDataSource(),
+      TMDB: new TMDBDataSource(),
     }),
     context: async ({ req }) => {
       // Connect to the the DB

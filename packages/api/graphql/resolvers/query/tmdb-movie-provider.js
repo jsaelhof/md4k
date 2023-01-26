@@ -1,6 +1,5 @@
-import axios from "axios";
 import lodash from "lodash";
-import { api, sources } from "md4k-constants";
+import { sources } from "md4k-constants";
 
 const { first, isNil } = lodash;
 
@@ -11,12 +10,10 @@ const fromTMDBProvider = {
   "Apple TV Plus": sources.APPLE_TV,
 };
 
-export const tmdbMovieProvider = async (parent) => {
+export const tmdbMovieProvider = async (parent, _, { dataSources }) => {
   // Look up the TMDB data using the imdbID.
   // This depends on the parent having already provided this value.
-  const { data: providerData } = await axios.get(
-    `${api.TMDB}/movie/${parent.imdbID}/watch/providers?api_key=${process.env.TMDB_API_KEY}`
-  );
+  const providerData = await dataSources.TMDB.getProvider(parent.imdbID);
 
   return first(
     (providerData?.results?.CA?.flatrate ?? [])
