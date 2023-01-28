@@ -14,6 +14,7 @@ import {
   removeMovie,
   updateMovie,
 } from "./mutation/index.js";
+import { fiveStarRating } from "./movie/index.js";
 
 export const resolvers = {
   Query: {
@@ -27,6 +28,14 @@ export const resolvers = {
 
   TmdbMovie: {
     provider: tmdbMovieProvider,
+  },
+
+  Movie: {
+    fiveStarRating,
+  },
+
+  OmdbMovie: {
+    fiveStarRating,
   },
 
   Mutation: {
