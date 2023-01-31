@@ -13,6 +13,4 @@ const toFiveStarRating = flow(
   (val) => (isNaN(val) ? 0 : Math.round(val / 10) / 2)
 );
 
-export const fiveStarRating = ({ ratings }) => {
-  return toFiveStarRating(ratings);
-};
+export const fiveStarRating = ({ ratings }) => toFiveStarRating(ratings);

@@ -69,6 +69,36 @@ export const typeDefs = gql`
     poster: String
   }
 
+  type ThirdPartyMovie {
+    imdbID: ID!
+    title: String
+    year: String
+    runtime: Int
+    genre: Int
+    rated: String
+    actors: [String]
+    ratings: ThirdPartyRatings
+    fiveStarRating: Float
+    poster: String
+    backdrop: String
+    backdrops: [String]
+    trailer: ThirdPartyTrailer
+    plot: String
+    source: Int
+  }
+
+  type ThirdPartyRatings {
+    id: ID!
+    IMDB: String
+    ROTTEN_TOMATOES: String
+    METACRITIC: String
+  }
+
+  type ThirdPartyTrailer {
+    site: String
+    key: ID!
+  }
+
   type OmdbMovie {
     imdbID: ID!
     title: String
@@ -110,6 +140,7 @@ export const typeDefs = gql`
     searchByTitle(title: String!): [SearchResult]
     omdbMovie(imdbID: ID!): OmdbMovie
     tmdbMovie(imdbID: ID!): TmdbMovie
+    thirdPartyMovie(imdbID: ID!): ThirdPartyMovie
   }
 
   type Mutation {

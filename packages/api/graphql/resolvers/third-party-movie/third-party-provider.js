@@ -10,10 +10,10 @@ const fromTMDBProvider = {
   "Apple TV Plus": sources.APPLE_TV,
 };
 
-export const tmdbMovieProvider = async (parent, _, { dataSources }) => {
+export const thirdPartyProvider = async ({ imdbID }, _, { dataSources }) => {
   // Look up the TMDB data using the imdbID.
   // This depends on the parent having already provided this value.
-  const providerData = await dataSources.TMDB.getProvider(parent.imdbID);
+  const providerData = await dataSources.TMDB.getProvider(imdbID);
 
   return first(
     (providerData?.results?.CA?.flatrate ?? [])

@@ -31,6 +31,11 @@ export class TMDBDataSource extends RESTDataSource {
     }
   }
 
+  // Technically this is going to overfetch a bit because in theory a query could not ask for
+  // videos or images or both. However the full url + query is used to de-dupe the rest fetches
+  // so splitting up the movie, the trailer and the backdrops would results in three different queries
+  // that all fetch the base data (so overfetching a different way)
+  // Since I don't have a use case for not getting all the data, I'm going to fetch it all at once.
   async getMovie(imdbID) {
     try {
       const data = await this.get(`movie/${imdbID}`, {

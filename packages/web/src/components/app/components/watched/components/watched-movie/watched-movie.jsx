@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 import { useState, useMemo } from "react";
-import { useGetMovieExtendedDetails } from "../../../../../../graphql/queries";
+import { useGetThirdPartyFullDetails } from "../../../../../../graphql/queries";
 import DatePicker from "../date-picker/date-picker";
 import MoviePoster from "../../../movie-poster/movie-poster";
 import {
@@ -25,7 +25,7 @@ const WatchedMovie = ({
   onCancel,
   onDelete,
 }) => {
-  const { data } = useGetMovieExtendedDetails(movie);
+  const { data } = useGetThirdPartyFullDetails(movie);
 
   const small = useMediaQuery("(max-width: 550px)");
   const xsmall = useMediaQuery("(max-width: 430px)");

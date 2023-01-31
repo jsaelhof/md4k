@@ -1,17 +1,17 @@
 import lodash from "lodash";
-import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 import { genreLabels } from "md4k-constants";
+import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 
 const { findKey } = lodash;
 
-export const omdbMovie = async (parent, { imdbID }, { dataSources }) => {
+export const thirdPartyMovie = async (parent, { imdbID }, { dataSources }) => {
   const {
     Response,
     Title,
     Year,
+    Ratings,
     Runtime,
     Genre,
-    Ratings,
     Poster,
     Rated,
     Actors,
@@ -30,8 +30,6 @@ export const omdbMovie = async (parent, { imdbID }, { dataSources }) => {
       Genre.split(", ").includes(genre)
     );
 
-    const ratings = convertOmdbRatings(Ratings);
-
     return {
       imdbID,
       title: Title,
@@ -42,7 +40,7 @@ export const omdbMovie = async (parent, { imdbID }, { dataSources }) => {
       ...(genre && { genre: parseInt(genre) }),
       ratings: {
         id: imdbID,
-        ...ratings,
+        ...convertOmdbRatings(Ratings),
       },
       poster: Poster && Poster !== "N/A" ? Poster : null,
     };
