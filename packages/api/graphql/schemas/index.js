@@ -57,11 +57,6 @@ export const typeDefs = gql`
     background: String
   }
 
-  type Trailer {
-    site: String
-    key: String
-  }
-
   type SearchResult {
     title: String
     year: String
@@ -99,47 +94,11 @@ export const typeDefs = gql`
     key: ID!
   }
 
-  type OmdbMovie {
-    imdbID: ID!
-    title: String
-    year: String
-    runtime: Int
-    genre: Int
-    rated: String
-    actors: [String]
-    ratings: OmdbRatings
-    fiveStarRating: Float
-    poster: String
-  }
-
-  type OmdbRatings {
-    id: ID!
-    IMDB: String
-    ROTTEN_TOMATOES: String
-    METACRITIC: String
-  }
-
-  type TmdbMovie {
-    imdbID: ID!
-    backdrop: String
-    backdrops: [String]
-    trailer: TmdbTrailer
-    plot: String
-    provider: Int
-  }
-
-  type TmdbTrailer {
-    site: String
-    key: ID!
-  }
-
   type Query {
     lists: [List]
     movies(list: String!): [Movie]
     watchedMovies(list: String!): [Movie]
     searchByTitle(title: String!): [SearchResult]
-    omdbMovie(imdbID: ID!): OmdbMovie
-    tmdbMovie(imdbID: ID!): TmdbMovie
     thirdPartyMovie(imdbID: ID!): ThirdPartyMovie
   }
 

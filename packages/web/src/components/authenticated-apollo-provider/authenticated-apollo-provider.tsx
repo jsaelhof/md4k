@@ -93,15 +93,14 @@ export const AuthenticatedApolloProvider = ({
               },
             },
           },
-          OmdbMovie: {
-            merge(existing, incoming, { mergeObjects }) {
-              return mergeObjects(existing, incoming);
-            },
+          ThirdPartyMovie: {
+            keyFields: ["imdbID"],
           },
-          TmdbMovie: {
-            merge(existing, incoming, { mergeObjects }) {
-              return mergeObjects(existing, incoming);
-            },
+          ThirdPartyTrailer: {
+            keyFields: ["key"],
+          },
+          SearchResult: {
+            keyFields: ["imdbID"],
           },
         },
       }),
