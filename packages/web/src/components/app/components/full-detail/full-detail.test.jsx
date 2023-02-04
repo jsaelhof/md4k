@@ -1,13 +1,12 @@
 import FullDetail from "./full-detail";
-import { GET_MOVIE_EXTENDED_DETAILS } from "../../../../graphql/queries/get-movie-extended-details";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { EDIT_MOVIE } from "../../../../graphql/mutations";
 import { sources } from "md4k-constants";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { createMatchMedia } from "../../../../utils/create-match-media";
-import { buildOMDBMovieMock } from "../../../../utils/build-omdb-movie-mock";
-import { buildTMDBMovieMock } from "../../../../utils/build-tmdb-movie-mock";
+import { buildThirdPartyMovieMock } from "../../../../utils/build-third-party-movie-mock";
+import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -17,17 +16,16 @@ vi.mock("react-youtube", () => ({
   default: () => <div data-testid="youtube" />,
 }));
 
-const GET_MOVIE_EXTENDED_DETAILS_MOCK = {
+const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   request: {
-    query: GET_MOVIE_EXTENDED_DETAILS,
+    query: GET_THIRD_PARTY_MOVIE_FULL_DETAILS,
     variables: {
       imdbID: "tt0258463",
     },
   },
   result: {
     data: {
-      omdbMovie: buildOMDBMovieMock(),
-      tmdbMovie: buildTMDBMovieMock(),
+      thirdPartyMovie: buildThirdPartyMovieMock(),
     },
   },
 };
@@ -183,7 +181,7 @@ describe("full-detail", () => {
     const { getByText, getByLabelText } = await renderWithProviders(
       <FullDetail {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -203,7 +201,7 @@ describe("full-detail", () => {
 
     const { getByLabelText } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -219,7 +217,7 @@ describe("full-detail", () => {
   it("should show the close button", async () => {
     const { getByTestId } = await renderWithProviders(
       <FullDetail {...test.props} showCloseButton={true} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     fireEvent.click(getByTestId("CloseThickIcon"));
@@ -229,7 +227,7 @@ describe("full-detail", () => {
   it("should show the background saved to the DB if present", async () => {
     const { getByTestId } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -243,7 +241,7 @@ describe("full-detail", () => {
         {...test.props}
         movie={{ ...test.props.movie, background: undefined }}
       />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -254,7 +252,12 @@ describe("full-detail", () => {
   it("should change to the previous background when the left button is pressed", async () => {
     const { getByTestId } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK, EDIT_MOVIE_MUTATION_PREV_BG] }
+      {
+        mocks: [
+          GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+          EDIT_MOVIE_MUTATION_PREV_BG,
+        ],
+      }
     );
 
     await waitFor(() =>
@@ -269,7 +272,12 @@ describe("full-detail", () => {
   it("should change to the next background when the right button is pressed", async () => {
     const { getByTestId } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK, EDIT_MOVIE_MUTATION_NEXT_BG] }
+      {
+        mocks: [
+          GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+          EDIT_MOVIE_MUTATION_NEXT_BG,
+        ],
+      }
     );
 
     await waitFor(() =>
@@ -284,7 +292,7 @@ describe("full-detail", () => {
   it("should launch the trailer", async () => {
     const { getByRole, getByLabelText, queryByLabelText } =
       await renderWithProviders(<FullDetail {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     await waitFor(() =>
@@ -301,7 +309,7 @@ describe("full-detail", () => {
 
     const { getByRole, getByLabelText, queryByLabelText } =
       await renderWithProviders(<FullDetail {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     await waitFor(() =>
@@ -318,7 +326,7 @@ describe("full-detail", () => {
 
     const { getByRole } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -337,7 +345,7 @@ describe("full-detail", () => {
         {...test.props}
         movie={{ ...test.props.movie, source: sources.DVD }}
       />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -355,7 +363,7 @@ describe("full-detail", () => {
         {...test.props}
         movie={{ ...test.props.movie, source: sources.NONE }}
       />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
@@ -373,7 +381,7 @@ describe("full-detail", () => {
   it("should render the footer buttons", async () => {
     const { getByAltText } = await renderWithProviders(
       <FullDetail {...test.props} />,
-      { mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK] }
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>

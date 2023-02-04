@@ -2,29 +2,27 @@ import { renderWithProviders } from "../../../../../../utils/render-with-provide
 import { buildMovieMock } from "../../../../../../utils/build-movie-mock";
 import WatchedMovie from "./watched-movie";
 import { vi } from "vitest";
-import { buildOMDBMovieMock } from "../../../../../../utils/build-omdb-movie-mock";
-import { buildTMDBMovieMock } from "../../../../../../utils/build-tmdb-movie-mock";
-import { GET_MOVIE_EXTENDED_DETAILS } from "../../../../../../graphql/queries/get-movie-extended-details";
+import { buildThirdPartyMovieMock } from "../../../../../../utils/build-third-party-movie-mock";
 import { fireEvent, waitFor, within } from "@testing-library/dom";
 import * as mui from "@mui/material";
 import { Globals } from "@react-spring/web";
+import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
 
 vi.mock("@mui/material", async () => {
   const actual = await vi.importActual("@mui/material");
   return { ...actual, useMediaQuery: vi.fn().mockReturnValue(false) };
 });
 
-const GET_MOVIE_EXTENDED_DETAILS_MOCK = {
+const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   request: {
-    query: GET_MOVIE_EXTENDED_DETAILS,
+    query: GET_THIRD_PARTY_MOVIE_FULL_DETAILS,
     variables: {
       imdbID: "tt0258463",
     },
   },
   result: {
     data: {
-      omdbMovie: buildOMDBMovieMock(),
-      tmdbMovie: buildTMDBMovieMock(),
+      thirdPartyMovie: buildThirdPartyMovieMock(),
     },
   },
 };
@@ -58,7 +56,7 @@ describe("watched-movie", () => {
     const { getByLabelText, getByTestId } = await renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -77,7 +75,7 @@ describe("watched-movie", () => {
     const { getByTestId } = await renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -92,7 +90,7 @@ describe("watched-movie", () => {
     const { getByTestId } = await renderWithProviders(
       <WatchedMovie {...test.props} right />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -113,7 +111,7 @@ describe("watched-movie", () => {
     const { getByTestId } = await renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -132,7 +130,7 @@ describe("watched-movie", () => {
     const { getByTestId } = await renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -144,7 +142,7 @@ describe("watched-movie", () => {
   it("should show the date picker inline at larger sizes", async () => {
     const { getByLabelText, getByTestId, queryByRole } =
       await renderWithProviders(<WatchedMovie {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     fireEvent.click(getByLabelText("Test Movie"));
@@ -166,7 +164,7 @@ describe("watched-movie", () => {
     const { getByLabelText, getByRole } = await renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -184,7 +182,7 @@ describe("watched-movie", () => {
   it("should call onSave with the new date", async () => {
     const { getByLabelText, getByRole, getByTestId } =
       await renderWithProviders(<WatchedMovie {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     fireEvent.click(getByLabelText("Test Movie"));
@@ -207,7 +205,7 @@ describe("watched-movie", () => {
   it("should call onCancel when clicking the cancel button on the date picker", async () => {
     const { getByLabelText, getByRole, getByTestId } =
       await renderWithProviders(<WatchedMovie {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     fireEvent.click(getByLabelText("Test Movie"));
@@ -229,7 +227,7 @@ describe("watched-movie", () => {
     const { getByLabelText } = await renderWithProviders(
       <WatchedMovie {...test.props} isEditing />,
       {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
@@ -241,7 +239,7 @@ describe("watched-movie", () => {
   it("should call onDelete with the correct movie data", async () => {
     const { getByLabelText, getByRole, getByTestId } =
       await renderWithProviders(<WatchedMovie {...test.props} />, {
-        mocks: [GET_MOVIE_EXTENDED_DETAILS_MOCK],
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       });
 
     fireEvent.click(getByLabelText("Test Movie"));
