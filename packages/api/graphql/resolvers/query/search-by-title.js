@@ -1,13 +1,8 @@
-import axios from "axios";
-import { api } from "md4k-constants";
+export const searchByTitle = async (parent, { title }, { dataSources }) => {
+  const { Search, Response } = await dataSources.OMDB.searchByTitle(title);
 
-export const searchByTitle = async (parent, { title }) => {
-  const { data } = await axios.get(
-    `${api.OMDB}?s=${title}&type=movie&apikey=${process.env.OMDB_API_KEY}`
-  );
-
-  return data.Response === "True"
-    ? data.Search.map(({ Title, Year, imdbID, Poster }) => ({
+  return Response === "True"
+    ? Search.map(({ Title, Year, imdbID, Poster }) => ({
         title: Title,
         year: Year,
         imdbID,

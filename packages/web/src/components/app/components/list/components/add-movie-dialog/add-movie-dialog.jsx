@@ -14,7 +14,7 @@ import { sourceLabels, sourceLogos } from "../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 import { parseRuntime } from "../../../../../../utils/parse-runtime";
 import {
-  useGetMovieDetails,
+  useGetThirdPartySummaryDetails,
   useSearchByTitle,
 } from "../../../../../../graphql/queries";
 import Carousel from "./components/carousel/carousel";
@@ -71,7 +71,7 @@ const AddMovieDialog = ({
     },
   });
 
-  useGetMovieDetails(movies?.[selectedMovie], {
+  useGetThirdPartySummaryDetails(movies?.[selectedMovie], {
     onCompleted: (details) =>
       setInput({
         ...input,
@@ -176,7 +176,7 @@ const AddMovieDialog = ({
         <Carousel
           movies={movies}
           searching={searching}
-          onSelectMovie={(index) => setSelectedMovie(index)}
+          onSelectMovie={setSelectedMovie}
         />
 
         <Actions>

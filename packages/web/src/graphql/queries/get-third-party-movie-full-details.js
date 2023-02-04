@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 
-export const GET_MOVIE_EXTENDED_DETAILS = gql`
-  query GetMovieExtendedDetails($imdbID: ID!) {
-    omdbMovie(imdbID: $imdbID) {
+export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
+  query GetThirdPartyMovieFullDetails($imdbID: ID!) {
+    thirdPartyMovie(imdbID: $imdbID) {
       imdbID
       title
       rated
@@ -14,9 +14,6 @@ export const GET_MOVIE_EXTENDED_DETAILS = gql`
         METACRITIC
       }
       fiveStarRating
-    }
-    tmdbMovie(imdbID: $imdbID) {
-      imdbID
       backdrop
       backdrops
       trailer {
@@ -28,8 +25,8 @@ export const GET_MOVIE_EXTENDED_DETAILS = gql`
   }
 `;
 
-export const useGetMovieExtendedDetails = (movie) => {
-  const { data, ...rest } = useQuery(GET_MOVIE_EXTENDED_DETAILS, {
+export const useGetThirdPartyFullDetails = (movie) => {
+  const { data, ...rest } = useQuery(GET_THIRD_PARTY_MOVIE_FULL_DETAILS, {
     skip: !movie.imdbID,
     errorPolicy: "all",
     variables: {
@@ -38,7 +35,7 @@ export const useGetMovieExtendedDetails = (movie) => {
   });
 
   return {
-    data: { ...data?.omdbMovie, ...data?.tmdbMovie },
+    data: { ...data?.thirdPartyMovie },
     ...rest,
   };
 };

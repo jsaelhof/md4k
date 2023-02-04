@@ -1,8 +1,10 @@
-import axios from "axios";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
-import { api } from "md4k-constants";
 
-export const updateMovie = async (parent, { movieId, list }, { db }) => {
+export const updateMovie = async (
+  parent,
+  { movieId, list },
+  { db, dataSources }
+) => {
   // Get the movie from my DB
   const movie = await db.collection(list).findOne({ id: movieId });
 
@@ -11,11 +13,7 @@ export const updateMovie = async (parent, { movieId, list }, { db }) => {
   // If it has an imdbID, update it. If not, just pass back the input movie data
   if (movie.imdbId) {
     // fetch the latest ratings
-    const {
-      data: { Response, Ratings },
-    } = await axios.get(
-      `${api.OMDB}?i=${movie.imdbID}&apikey=${process.env.OMDB_API_KEY}&plot=full`
-    );
+    const { Response, Ratings } = await dataSources.OMDB.getMovie(movie.imdbID);
 
     if (Response === "True") {
       // Build an update for my DB with the latest ratings and an updated editedOn value

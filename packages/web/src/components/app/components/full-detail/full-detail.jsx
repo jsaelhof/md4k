@@ -14,7 +14,7 @@ import {
   searchTorrent,
 } from "../../../../utils/search";
 import { genreLabels, sources } from "md4k-constants";
-import { useGetMovieExtendedDetails } from "../../../../graphql/queries";
+import { useGetThirdPartyFullDetails } from "../../../../graphql/queries";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { useAppContext } from "../../../../context/app-context";
 import {
@@ -54,7 +54,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
   );
 
   const [editMovieMutation] = useEditMovie();
-  const { data, loading } = useGetMovieExtendedDetails(movie);
+  const { data, loading } = useGetThirdPartyFullDetails(movie);
 
   const [trailer, setTrailer] = useState(null);
 

@@ -1,12 +1,4 @@
-import {
-  lists,
-  movies,
-  searchByTitle,
-  omdbMovie,
-  tmdbMovie,
-  watchedMovies,
-} from "./query/index.js";
-import { tmdbMovieProvider } from "./query/index.js";
+import { lists, movies, searchByTitle, watchedMovies } from "./query/index.js";
 import {
   addList,
   addMovie,
@@ -14,6 +6,15 @@ import {
   removeMovie,
   updateMovie,
 } from "./mutation/index.js";
+import { fiveStarRating } from "./five-star-rating/index.js";
+import {
+  thirdPartyBackdrop,
+  thirdPartyBackdrops,
+  thirdPartyMovie,
+  thirdPartyPlot,
+  thirdPartyProvider,
+  thirdPartyTrailer,
+} from "./third-party-movie/index.js";
 
 export const resolvers = {
   Query: {
@@ -21,12 +22,20 @@ export const resolvers = {
     movies,
     watchedMovies,
     searchByTitle,
-    omdbMovie,
-    tmdbMovie,
+    thirdPartyMovie,
   },
 
-  TmdbMovie: {
-    provider: tmdbMovieProvider,
+  ThirdPartyMovie: {
+    backdrop: thirdPartyBackdrop,
+    backdrops: thirdPartyBackdrops,
+    trailer: thirdPartyTrailer,
+    plot: thirdPartyPlot,
+    source: thirdPartyProvider,
+    fiveStarRating,
+  },
+
+  Movie: {
+    fiveStarRating,
   },
 
   Mutation: {
