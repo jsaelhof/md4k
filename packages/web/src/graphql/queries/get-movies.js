@@ -28,21 +28,9 @@ export const GET_MOVIES = gql`
       id
       title
       list
-      runtime
-      source
-      genre
-      year
       poster
       imdbID
-      locked
-      addedOn
       watchedOn
-      ratings {
-        id
-        IMDB
-        ROTTEN_TOMATOES
-        METACRITIC
-      }
       background
     }
   }
