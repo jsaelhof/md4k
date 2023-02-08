@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 
 export const SEARCH_BY_TITLE = gql`
   query SearchByTitle($title: String!) {
@@ -11,10 +11,9 @@ export const SEARCH_BY_TITLE = gql`
   }
 `;
 
-export const useSearchByTitle = (title, { skip, onCompleted }) => {
-  useQuery(SEARCH_BY_TITLE, {
-    skip,
-    variables: { title },
+export const useSearchByTitle = ({ onCompleted }) => {
+  const [search] = useLazyQuery(SEARCH_BY_TITLE, {
     onCompleted: ({ searchByTitle }) => onCompleted(searchByTitle),
   });
+  return (title) => search({ variables: { title } });
 };

@@ -6,7 +6,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import isNil from "lodash/isNil";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { formatRuntime } from "../../../../../../utils/format-runtime";
 import { genreLabels, genres } from "md4k-constants";
@@ -31,6 +31,7 @@ import {
 } from "./add-movie-dialog.styles";
 import Ratings from "../ratings/ratings";
 import MoviePoster from "../../../movie-poster/movie-poster";
+import debounce from "lodash/debounce";
 
 const AUTO_REFRESH_TIMEOUT = 1500;
 
@@ -41,7 +42,6 @@ const AddMovieDialog = ({
 }) => {
   const [movies, setMovies] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [searchStale, setSearchStale] = useState(!!initialInputState.title);
   const [searching, setSearching] = useState(false);
 
   // TODO: This tracks more than just the inputs now (poster, ratings etc) so maybe rename it.
@@ -60,16 +60,40 @@ const AddMovieDialog = ({
 
   const xsmall = useMediaQuery("(max-width: 600px), (max-height: 414px)");
 
-  const timeoutId = useRef();
-
-  useSearchByTitle(input.title, {
-    skip: !(searchStale && input.title?.length > 0),
+  const searchQuery = useSearchByTitle({
     onCompleted: (searchByTitle) => {
-      setSearchStale(false);
       setMovies(searchByTitle);
       setSearching(false);
     },
   });
+
+  // Putting the debounced function in a ref prevents it from being recreated on each render.
+  const debouncedOnTitleChange = useRef(
+    debounce(({ target }) => {
+      if (target.value?.trim().length > 0) {
+        setSearching(true);
+        searchQuery(target.value.trim());
+      }
+    }, AUTO_REFRESH_TIMEOUT)
+  ).current;
+
+  const onTitleChange = useCallback(
+    (event) => {
+      // Reset the search immediately when typing begins to clear any previous results.
+      setSelectedMovie(null);
+      setMovies(null);
+      setInput((state) => ({
+        ...state,
+        title: event.target.value,
+        poster: null,
+        ratings: null,
+      }));
+
+      // Invoke the debounced handler that will do the lazy query
+      debouncedOnTitleChange(event);
+    },
+    [debouncedOnTitleChange]
+  );
 
   useGetThirdPartySummaryDetails(movies?.[selectedMovie], {
     onCompleted: (details) =>
@@ -78,16 +102,6 @@ const AddMovieDialog = ({
         ...details,
       }),
   });
-
-  const resetSearch = () => {
-    setSelectedMovie(null);
-    setMovies(null);
-    setInput((state) => ({
-      ...state,
-      poster: null,
-      ratings: null,
-    }));
-  };
 
   return (
     <Dialog open={true} fullWidth fullScreen={xsmall} maxWidth="lg">
@@ -109,17 +123,7 @@ const AddMovieDialog = ({
             fullWidth
             variant="outlined"
             placeholder="Title"
-            onChange={({ target }) => {
-              clearTimeout(timeoutId.current);
-              setInput({ ...input, title: target.value });
-              resetSearch();
-              if (target.value.length) {
-                timeoutId.current = setTimeout(() => {
-                  setSearchStale(true);
-                  setSearching(true);
-                }, AUTO_REFRESH_TIMEOUT);
-              }
-            }}
+            onChange={onTitleChange}
             autoFocus
           />
 
