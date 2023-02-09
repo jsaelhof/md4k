@@ -1,3 +1,12 @@
+### PR #60 - 58: changelog warnings
+##### 2023-02-09
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/60)
+
+----
+
 ### PR #49 - #47: fix markwatched, standardize omit of fiveStarRating
 ##### 2022-11-18
 
