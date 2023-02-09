@@ -26,12 +26,12 @@ jobs:
         
     - name: Read changelog
       id: read
-      uses: juliangruber/read-file-action@v1.1.4
+      uses: juliangruber/read-file-action@v1.1.6
       with:
         path: ./changelog.md
 
     - name: Update changelog
-      uses: DamianReeves/write-file-action@v1.0
+      uses: DamianReeves/write-file-action@v1.2
       with:
         path: ./changelog.md
         contents: |
@@ -48,7 +48,7 @@ jobs:
         write-mode: overwrite
         
     - name: Add & Commit
-      uses: EndBug/add-and-commit@v9.0.0
+      uses: EndBug/add-and-commit@v9.1.1
       with:
         add: ./changelog.md
         message: update changelog
