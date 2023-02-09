@@ -7,6 +7,42 @@
 
 ----
 
+### PR #57 - #56: Fix stuck search
+##### 2023-02-08
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/57)
+
+----
+
+### PR #55 - #53: update resolvers
+##### 2023-02-03
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/55)
+
+----
+
+### PR #52 - #34: Watched Movie tests
+##### 2022-12-23
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/52)
+
+----
+
+### PR #51 - #48: Add required state check for tests and fix broken tests
+##### 2022-12-19
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/51)
+
+----
+
 ### PR #49 - #47: fix markwatched, standardize omit of fiveStarRating
 ##### 2022-11-18
 
