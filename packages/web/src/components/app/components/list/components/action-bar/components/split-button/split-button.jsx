@@ -4,6 +4,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClockIcon from "@mitch528/mdi-material-ui/ClockOutline";
 import ClockFastIcon from "@mitch528/mdi-material-ui/ClockFast";
 import TimerSandIcon from "@mitch528/mdi-material-ui/TimerSand";
+import CalendarWeek from "@mitch528/mdi-material-ui/CalendarWeek";
 
 import {
   MainButton,
@@ -31,6 +32,12 @@ const splitButtonItems = [
     label: "Pick a Long Movie",
     options: { minRuntime: 7801 },
     Icon: TimerSandIcon,
+  },
+  {
+    value: 3,
+    label: "Added Recently",
+    options: { maxAdded: 30 },
+    Icon: CalendarWeek,
   },
 ];
 
