@@ -11,12 +11,14 @@ import sample from "lodash/sample";
 import size from "lodash/size";
 import reject from "lodash/reject";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { isBefore, parseISO, subDays } from "date-fns";
 
 const useRandomPick = () => {
   const { movies, pick, setPick, clearPick } = useAppContext();
   const [searchParams] = useSearchParams();
   const minRuntime = searchParams.get("minRuntime");
   const maxRuntime = searchParams.get("maxRuntime");
+  const maxAdded = searchParams.get("maxAdded");
 
   const [history, setHistory] = useState([]);
   const [error, setError] = useState();
@@ -30,6 +32,13 @@ const useRandomPick = () => {
       if (minRuntime || maxRuntime) {
         filters.runtime = (runtime) =>
           runtime >= (minRuntime || 0) && runtime <= (maxRuntime || Infinity);
+      }
+
+      // maxAdded is an integer of days (ex: 30)
+      // Find only movies that were added no more than N days ago
+      if (maxAdded) {
+        filters.addedOn = (addedOn) =>
+          !isBefore(parseISO(addedOn), subDays(new Date(), maxAdded));
       }
 
       const list = filter(movies, conforms(filters));
@@ -54,7 +63,16 @@ const useRandomPick = () => {
         }
       }
     }
-  }, [clearPick, history, maxRuntime, minRuntime, movies, pick, setPick]);
+  }, [
+    clearPick,
+    history,
+    maxAdded,
+    maxRuntime,
+    minRuntime,
+    movies,
+    pick,
+    setPick,
+  ]);
 
   if (error) {
     return { pick: null, error };
