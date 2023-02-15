@@ -1,3 +1,12 @@
+### PR #62 - #61: Add an option to pick movies based on a maxAdded param
+##### 2023-02-15
+
+Adds a new filter to the pick screen called maxAdded. The value is in days and when specified, only movies newer than today minus N days will be included.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/62)
+
+----
+
 ### PR #60 - 58: changelog warnings
 ##### 2023-02-09
 
