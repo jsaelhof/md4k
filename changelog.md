@@ -1,3 +1,12 @@
+### PR #66 - 65: add options
+##### 2023-04-01
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/66)
+
+----
+
 ### PR #62 - #61: Add an option to pick movies based on a maxAdded param
 ##### 2023-02-15
 
