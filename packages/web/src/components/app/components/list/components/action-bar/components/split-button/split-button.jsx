@@ -5,6 +5,9 @@ import ClockIcon from "@mitch528/mdi-material-ui/ClockOutline";
 import ClockFastIcon from "@mitch528/mdi-material-ui/ClockFast";
 import TimerSandIcon from "@mitch528/mdi-material-ui/TimerSand";
 import CalendarWeek from "@mitch528/mdi-material-ui/CalendarWeek";
+import CalendarText from "@mitch528/mdi-material-ui/CalendarText";
+import CalendarMonth from "@mitch528/mdi-material-ui/CalendarMonth";
+import CalendarClock from "@mitch528/mdi-material-ui/CalendarClock";
 
 import {
   MainButton,
@@ -35,9 +38,27 @@ const splitButtonItems = [
   },
   {
     value: 3,
-    label: "Added Recently",
+    label: "Added This Month",
     options: { maxAdded: 30 },
     Icon: CalendarWeek,
+  },
+  {
+    value: 4,
+    label: "Added Within 90 Days",
+    options: { maxAdded: 90 },
+    Icon: CalendarText,
+  },
+  {
+    value: 5,
+    label: "Added Within A Year",
+    options: { maxAdded: 365 },
+    Icon: CalendarMonth,
+  },
+  {
+    value: 6,
+    label: "Added Long Ago",
+    options: { minAdded: 365 },
+    Icon: CalendarClock,
   },
 ];
 

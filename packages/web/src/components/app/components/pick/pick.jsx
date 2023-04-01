@@ -19,6 +19,7 @@ const useRandomPick = () => {
   const minRuntime = searchParams.get("minRuntime");
   const maxRuntime = searchParams.get("maxRuntime");
   const maxAdded = searchParams.get("maxAdded");
+  const minAdded = searchParams.get("minAdded");
 
   const [history, setHistory] = useState([]);
   const [error, setError] = useState();
@@ -39,6 +40,13 @@ const useRandomPick = () => {
       if (maxAdded) {
         filters.addedOn = (addedOn) =>
           !isBefore(parseISO(addedOn), subDays(new Date(), maxAdded));
+      }
+
+      // minAded is an integer of days (ex: 30)
+      // Find only movies that were added at least N days ago
+      if (minAdded) {
+        filters.addedOn = (addedOn) =>
+          isBefore(parseISO(addedOn), subDays(new Date(), minAdded));
       }
 
       const list = filter(movies, conforms(filters));
@@ -68,6 +76,7 @@ const useRandomPick = () => {
     history,
     maxAdded,
     maxRuntime,
+    minAdded,
     minRuntime,
     movies,
     pick,
