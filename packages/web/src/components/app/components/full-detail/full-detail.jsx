@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button, useMediaQuery } from "@mui/material";
-import { ChevronLeft, ChevronRight, PlayArrow } from "@mui/icons-material";
+import ChevronLeft from "@mui/icons-material/ChevronLeft";
+import ChevronRight from "@mui/icons-material/ChevronRight";
+import PlayArrow from "@mui/icons-material/PlayArrow";
 import { useSpring } from "react-spring";
 import Search from "@mui/icons-material/Search";
-import TelevisionPlay from "@mitch528/mdi-material-ui/TelevisionPlay";
-import CloseThick from "@mitch528/mdi-material-ui/CloseThick";
+import TelevisionPlay from "mdi-material-ui/TelevisionPlay";
+import CloseThick from "mdi-material-ui/CloseThick";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
 import {

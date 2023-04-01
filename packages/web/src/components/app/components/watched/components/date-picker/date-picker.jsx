@@ -2,8 +2,9 @@ import "react-day-picker/style.css";
 
 import { useState } from "react";
 import { Drawer } from "@mui/material";
-import { Close, Delete } from "@mui/icons-material";
-import { CalendarCheck } from "@mitch528/mdi-material-ui";
+import Close from "@mui/icons-material/Close";
+import Delete from "@mui/icons-material/Delete";
+import CalendarCheck from "mdi-material-ui/CalendarCheck";
 import { DayPicker } from "react-day-picker";
 
 import {

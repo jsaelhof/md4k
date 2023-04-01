@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import ActionButton from "./action-button";
-import { Close } from "@mui/icons-material";
+import Close from "@mui/icons-material/Close";
 import { vi } from "vitest";
 
 describe("action-button", () => {

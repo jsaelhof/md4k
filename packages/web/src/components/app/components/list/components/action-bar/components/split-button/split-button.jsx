@@ -1,13 +1,13 @@
 import { Button, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ClockIcon from "@mitch528/mdi-material-ui/ClockOutline";
-import ClockFastIcon from "@mitch528/mdi-material-ui/ClockFast";
-import TimerSandIcon from "@mitch528/mdi-material-ui/TimerSand";
-import CalendarWeek from "@mitch528/mdi-material-ui/CalendarWeek";
-import CalendarText from "@mitch528/mdi-material-ui/CalendarText";
-import CalendarMonth from "@mitch528/mdi-material-ui/CalendarMonth";
-import CalendarClock from "@mitch528/mdi-material-ui/CalendarClock";
+import ClockIcon from "mdi-material-ui/ClockOutline";
+import ClockFastIcon from "mdi-material-ui/ClockFast";
+import TimerSandIcon from "mdi-material-ui/TimerSand";
+import CalendarWeek from "mdi-material-ui/CalendarWeek";
+import CalendarText from "mdi-material-ui/CalendarText";
+import CalendarMonth from "mdi-material-ui/CalendarMonth";
+import CalendarClock from "mdi-material-ui/CalendarClock";
 
 import {
   MainButton,
