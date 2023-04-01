@@ -9,10 +9,6 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { List } from "./components/app/components/list/list";
-import { Watched } from "./components/app/components/watched/watched";
-import { Create } from "./components/app/components/create/create";
-import { Pick } from "./components/app/components/pick/pick";
 import { sort, sortDirection } from "./constants/sorts";
 
 const router = createBrowserRouter([
@@ -34,19 +30,47 @@ const router = createBrowserRouter([
       },
       {
         path: "/list/*",
-        element: <List />,
+        async lazy() {
+          const { List } = await import(
+            "./components/app/components/list/list"
+          );
+          return {
+            Component: List,
+          };
+        },
       },
       {
         path: "/watched",
-        element: <Watched />,
+        async lazy() {
+          const { Watched } = await import(
+            "./components/app/components/watched/watched"
+          );
+          return {
+            Component: Watched,
+          };
+        },
       },
       {
         path: "/create",
-        element: <Create />,
+        async lazy() {
+          const { Create } = await import(
+            "./components/app/components/create/create"
+          );
+          return {
+            Component: Create,
+          };
+        },
       },
       {
         path: "/pick",
-        element: <Pick />,
+        async lazy() {
+          const { Pick } = await import(
+            "./components/app/components/pick/pick"
+          );
+          return {
+            Component: Pick,
+          };
+        },
       },
     ],
   },
