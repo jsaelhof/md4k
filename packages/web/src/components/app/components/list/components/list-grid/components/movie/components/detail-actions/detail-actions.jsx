@@ -1,8 +1,8 @@
-import DeleteIcon from "@mitch528/mdi-material-ui/MovieRemove";
+import DeleteIcon from "mdi-material-ui/MovieRemove";
 import EditIcon from "@mui/icons-material/Edit";
-import EyeCheckIcon from "@mitch528/mdi-material-ui/EyeCheck";
+import EyeCheckIcon from "mdi-material-ui/EyeCheck";
 import LockIcon from "@mui/icons-material/Lock";
-import UnlockIcon from "@mitch528/mdi-material-ui/LockOpenVariant";
+import UnlockIcon from "mdi-material-ui/LockOpenVariant";
 
 import { Actions } from "./detail-actions.styles";
 import ActionButton from "../../../../../../../action-button/action-button";

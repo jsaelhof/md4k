@@ -4,12 +4,77 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { App } from "./components/app/app";
 import { ErrorBoundary } from "./components/error-boundary/error-boundary";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { List } from "./components/app/components/list/list";
-import { Watched } from "./components/app/components/watched/watched";
-import { Create } from "./components/app/components/create/create";
-import { Pick } from "./components/app/components/pick/pick";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { sort, sortDirection } from "./constants/sorts";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: (
+          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+        ),
+      },
+      {
+        path: "/list",
+        element: (
+          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+        ),
+      },
+      {
+        path: "/list/*",
+        async lazy() {
+          const { List } = await import(
+            "./components/app/components/list/list"
+          );
+          return {
+            Component: List,
+          };
+        },
+      },
+      {
+        path: "/watched",
+        async lazy() {
+          const { Watched } = await import(
+            "./components/app/components/watched/watched"
+          );
+          return {
+            Component: Watched,
+          };
+        },
+      },
+      {
+        path: "/create",
+        async lazy() {
+          const { Create } = await import(
+            "./components/app/components/create/create"
+          );
+          return {
+            Component: Create,
+          };
+        },
+      },
+      {
+        path: "/pick",
+        async lazy() {
+          const { Pick } = await import(
+            "./components/app/components/pick/pick"
+          );
+          return {
+            Component: Pick,
+          };
+        },
+      },
+    ],
+  },
+]);
 
 ReactDOM.render(
   <ErrorBoundary>
@@ -20,34 +85,7 @@ ReactDOM.render(
       redirectUri={window.location.origin}
       audience={import.meta.env.VITE_AUTH0_AUDIENCE} // This is the audience of the API on Auth0, without this the token return will not be valid to access the API
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route
-              index
-              element={
-                <Navigate
-                  replace
-                  to={`/list/${sort.ADDED}/${sortDirection.DESC}`}
-                />
-              }
-            />
-            <Route
-              path="/list"
-              element={
-                <Navigate
-                  replace
-                  to={`/list/${sort.ADDED}/${sortDirection.DESC}`}
-                />
-              }
-            />
-            <Route path="/list/*" element={<List />} />
-            <Route path="/watched" element={<Watched />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/pick" element={<Pick />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </Auth0Provider>
   </ErrorBoundary>,
   document.getElementById("root")

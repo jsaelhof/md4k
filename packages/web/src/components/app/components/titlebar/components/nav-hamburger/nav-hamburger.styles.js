@@ -1,7 +1,7 @@
 import { styled, Divider } from "@mui/material";
 import Refresh from "@mui/icons-material/Refresh";
-import Eye from "@mitch528/mdi-material-ui/Eye";
-import Movie from "@mitch528/mdi-material-ui/Movie";
+import Eye from "mdi-material-ui/Eye";
+import Movie from "mdi-material-ui/Movie";
 import List from "@mui/icons-material/FormatListBulleted";
 import Add from "@mui/icons-material/Add";
 

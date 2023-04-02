@@ -25,7 +25,7 @@ import map from "lodash/map";
 
 export const List = () => {
   const navigate = useNavigate();
-  const { list, movies, loadingMovies, lists } = useAppContext();
+  const { list, movies, lists } = useAppContext();
   const [enableAddMovie, setEnableAddMovie] = useState(false);
   const [enableEditMovie, setEnableEditMovie] = useState(null);
   const [toastProps, setToastProps] = useState(null);
@@ -124,7 +124,7 @@ export const List = () => {
 
   // Controls the fade-out and unmount of the countdown animation.
   // Transition is used so it unmounts after the animation completes.
-  const loadingTransitions = useTransition(loadingMovies, {
+  const loadingTransitions = useTransition(!movies, {
     from: { opacity: 1 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -153,7 +153,7 @@ export const List = () => {
         {movies && (
           <>
             <ActionBar
-              disabled={!movies || loadingMovies || movies?.length === 0}
+              disabled={!movies || movies?.length === 0}
               onAdd={onEnableAddMovie}
               onPick={onPick}
             />

@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { KeyboardArrowLeft, Refresh } from "@mui/icons-material";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import Refresh from "@mui/icons-material/Refresh";
 
 import { Nav } from "./nav-full.styles";
 import { useAppContext } from "../../../../../../context/app-context";

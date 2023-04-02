@@ -1,5 +1,5 @@
 import { Skeleton } from "@mui/material";
-import CloseThick from "@mitch528/mdi-material-ui/CloseThick";
+import CloseThick from "mdi-material-ui/CloseThick";
 
 import {
   Actions,

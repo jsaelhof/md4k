@@ -12,7 +12,7 @@ const Logo = () => {
       }}
       aria-label="Movie Decider 4000"
     >
-      <img style={{ height: 20 }} src={"/images/logo.png"} />
+      <img width="82px" height="20px" src={"/images/logo.png"} />
     </LogoContainer>
   );
 };
