@@ -68,7 +68,7 @@ const SplitButton = ({ onPick }) => {
   return (
     <SplitButtonContainer aria-label="Pick A Movie">
       <MainButton variant="contained" onClick={() => onPick()}>
-        <RandomIcon src="/images/random.png" />
+        <RandomIcon src="/images/random.png" width="20px" height="18px" />
         Pick A Movie
       </MainButton>
       <Button
