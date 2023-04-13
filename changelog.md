@@ -1,3 +1,12 @@
+### PR #74 - #73: Add sorted rating tests
+##### 2023-04-13
+
+Add tests for the sorted rating component
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/74)
+
+----
+
 ### PR #71 - #69: Lazy load poster images
 ##### 2023-04-13
 
