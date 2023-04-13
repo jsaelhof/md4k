@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useOnWindowResize } from "rooks";
 
 const MovieSection = ({
+  stars,
   title,
   subtitle,
   list,
@@ -29,7 +30,7 @@ const MovieSection = ({
   useOnWindowResize(updateTitleOffset);
 
   return list ? (
-    <SectionLayout>
+    <SectionLayout aria-label={`${stars} Star`}>
       {title && (
         <MovieSectionTitle style={{ marginLeft: titleOffset }}>
           <div>{title}</div>

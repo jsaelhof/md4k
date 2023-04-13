@@ -40,8 +40,8 @@ const SortedRating = ({ movies, ...handlers }) => {
 
   return (
     <span data-testid={sort.RATING}>
-      {sections.map(({ stars, ...props }) => (
-        <MovieSection key={stars} {...props} {...handlers} />
+      {sections.map(({ ...props }) => (
+        <MovieSection key={props.stars} {...props} {...handlers} />
       ))}
     </span>
   );
