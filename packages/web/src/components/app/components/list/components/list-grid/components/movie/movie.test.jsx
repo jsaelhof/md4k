@@ -3,6 +3,9 @@ import Movie from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
 import { Globals } from "react-spring";
+import { mockInteresctionObserver } from "../../../../../../../../utils/mock-intersection-observer";
+
+mockInteresctionObserver();
 
 Globals.assign({
   skipAnimation: true,

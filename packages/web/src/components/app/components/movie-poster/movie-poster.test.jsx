@@ -1,6 +1,17 @@
 import { fireEvent, render } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
+import { mockInteresctionObserver } from "../../../../utils/mock-intersection-observer";
+import * as useIntersectionObserverModule from "./hooks/use-intersection-observer";
+
+mockInteresctionObserver();
+
+vi.mock("./hooks/use-intersection-observer", () => ({
+  useIntersectionObserver: vi.fn().mockReturnValue({
+    ref: null,
+    visible: true,
+  }),
+}));
 
 describe("movie-poster", () => {
   let props;
@@ -44,6 +55,23 @@ describe("movie-poster", () => {
     const { getByTestId, getByText } = render(<MoviePoster {...props} />);
     expect(getByTestId("poster")).toHaveStyle({
       "background-image": `url(${props.movie.poster})`,
+    });
+    expect(getByText(/Bourne/)).toBeInTheDocument();
+  });
+
+  it("should render the placeholder when the poster is not intersecting the viewport", () => {
+    // eslint-disable-next-line no-import-assign
+    useIntersectionObserverModule.useIntersectionObserver = vi
+      .fn()
+      .mockReturnValue({
+        ref: null,
+        visible: false,
+      });
+
+    const { getByTestId, getByText } = render(<MoviePoster {...props} />);
+
+    expect(getByTestId("poster")).toHaveStyle({
+      "background-image": "",
     });
     expect(getByText(/Bourne/)).toBeInTheDocument();
   });
