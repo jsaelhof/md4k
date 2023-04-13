@@ -41,7 +41,6 @@ export const Lock = styled(LockIcon)`
 export const NoPoster = styled(Poster)(({ theme: { palette } }) => ({
   gridArea: "poster",
   display: "grid",
-  gridTemplateRows: "1fr 100px",
   justifyItems: "center",
   alignItems: "center",
   textAlign: "center",
