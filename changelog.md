@@ -1,3 +1,12 @@
+### PR #71 - #69: Lazy load poster images
+##### 2023-04-13
+
+lazy load poster background images with intersection observer, update tests
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/71)
+
+----
+
 ### PR #67 - 64: optimize
 ##### 2023-04-02
 
