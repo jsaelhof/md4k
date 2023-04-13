@@ -72,7 +72,7 @@ describe("split-button", () => {
     expect(menuButton).toBeInTheDocument();
     fireEvent.click(menuButton);
 
-    const shortButton = getByText(/short/i);
+    const shortButton = getByText(/pick a short movie/i);
     expect(shortButton).toBeInTheDocument();
     fireEvent.click(shortButton);
     expect(test.onPick).toBeCalledWith({ maxRuntime: 6000 });
@@ -86,7 +86,7 @@ describe("split-button", () => {
     expect(menuButton).toBeInTheDocument();
     fireEvent.click(menuButton);
 
-    const regularButton = getByText(/regular/i);
+    const regularButton = getByText(/pick a regular movie/i);
     expect(regularButton).toBeInTheDocument();
     fireEvent.click(regularButton);
     expect(test.onPick).toBeCalledWith({ minRuntime: 6001, maxRuntime: 7800 });
@@ -100,9 +100,65 @@ describe("split-button", () => {
     expect(menuButton).toBeInTheDocument();
     fireEvent.click(menuButton);
 
-    const longButton = getByText(/long/i);
+    const longButton = getByText(/pick a long movie/i);
     expect(longButton).toBeInTheDocument();
     fireEvent.click(longButton);
     expect(test.onPick).toBeCalledWith({ minRuntime: 7801 });
+  });
+
+  it("should call onPick with correct options when a movie added this month is requested", () => {
+    const { getByLabelText, getByText } = render(
+      <SplitButton onPick={test.onPick} />
+    );
+    const menuButton = getByLabelText("Pick Menu");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+
+    const longButton = getByText(/added this month/i);
+    expect(longButton).toBeInTheDocument();
+    fireEvent.click(longButton);
+    expect(test.onPick).toBeCalledWith({ maxAdded: 30 });
+  });
+
+  it("should call onPick with correct options when a movie added within 90 days is requested", () => {
+    const { getByLabelText, getByText } = render(
+      <SplitButton onPick={test.onPick} />
+    );
+    const menuButton = getByLabelText("Pick Menu");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+
+    const longButton = getByText(/added within 90 days/i);
+    expect(longButton).toBeInTheDocument();
+    fireEvent.click(longButton);
+    expect(test.onPick).toBeCalledWith({ maxAdded: 90 });
+  });
+
+  it("should call onPick with correct options when a movie added within a year is requested", () => {
+    const { getByLabelText, getByText } = render(
+      <SplitButton onPick={test.onPick} />
+    );
+    const menuButton = getByLabelText("Pick Menu");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+
+    const longButton = getByText(/added within a year/i);
+    expect(longButton).toBeInTheDocument();
+    fireEvent.click(longButton);
+    expect(test.onPick).toBeCalledWith({ maxAdded: 365 });
+  });
+
+  it("should call onPick with correct options when a movie added long ago is requested", () => {
+    const { getByLabelText, getByText } = render(
+      <SplitButton onPick={test.onPick} />
+    );
+    const menuButton = getByLabelText("Pick Menu");
+    expect(menuButton).toBeInTheDocument();
+    fireEvent.click(menuButton);
+
+    const longButton = getByText(/added long ago/i);
+    expect(longButton).toBeInTheDocument();
+    fireEvent.click(longButton);
+    expect(test.onPick).toBeCalledWith({ minAdded: 365 });
   });
 });
