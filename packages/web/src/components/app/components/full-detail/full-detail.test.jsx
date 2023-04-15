@@ -7,6 +7,7 @@ import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { createMatchMedia } from "../../../../utils/create-match-media";
 import { buildThirdPartyMovieMock } from "../../../../utils/build-third-party-movie-mock";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
+import { sourceLabels } from "../../../../constants/sources";
 import { mockInteresctionObserver } from "../../../../utils/mock-intersection-observer";
 
 mockInteresctionObserver();
@@ -322,6 +323,57 @@ describe("full-detail", () => {
     fireEvent.click(getByRole("button", { name: "Watch Trailer" }));
     const trailerElement = getByLabelText("Trailer");
     expect(document.body).toContainElement(trailerElement);
+  });
+
+  it("should show a logo for the source and stream the movie when clicked", async () => {
+    const { getByAltText } = await renderWithProviders(
+      <FullDetail {...test.props} />,
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
+    );
+
+    await waitFor(() =>
+      expect(getByAltText(sourceLabels[1])).toBeInTheDocument()
+    );
+
+    fireEvent.click(getByAltText(sourceLabels[1]));
+    expect(window.open).toHaveBeenCalledWith(
+      expect.stringMatching(/netflix.*Bourne/),
+      "movieView"
+    );
+  });
+
+  it("should not stream when the source logo is DVD", async () => {
+    const { getByAltText } = await renderWithProviders(
+      <FullDetail
+        {...test.props}
+        movie={{ ...test.props.movie, source: sources.DVD }}
+      />,
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
+    );
+
+    await waitFor(() =>
+      expect(getByAltText(sourceLabels[sources.DVD])).toBeInTheDocument()
+    );
+
+    fireEvent.click(getByAltText(sourceLabels[sources.DVD]));
+    expect(window.open).not.toHaveBeenCalled();
+  });
+
+  it("should not stream when the source logo is None", async () => {
+    const { getByAltText } = await renderWithProviders(
+      <FullDetail
+        {...test.props}
+        movie={{ ...test.props.movie, source: sources.NONE }}
+      />,
+      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
+    );
+
+    await waitFor(() =>
+      expect(getByAltText(sourceLabels[sources.NONE])).toBeInTheDocument()
+    );
+
+    fireEvent.click(getByAltText(sourceLabels[sources.NONE]));
+    expect(window.open).not.toHaveBeenCalled();
   });
 
   it("should show a stream option when the source is streamable and open the stream site", async () => {

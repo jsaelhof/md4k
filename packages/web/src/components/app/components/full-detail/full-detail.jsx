@@ -45,7 +45,7 @@ import Trailer from "./components/trailer/trailer";
 import ScrollArea from "./components/scroll-area/scroll-area";
 import Footer from "./components/footer/footer";
 import { StarRatingLayout } from "./components/star-rating-layout/star-rating-layout";
-import { sourceLogosLarge } from "../../../../constants/sources";
+import { sourceLabels, sourceLogosLarge } from "../../../../constants/sources";
 
 const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
   const { list } = useAppContext();
@@ -198,6 +198,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
         <Source
           sx={[canStream && streamable]}
           src={sourceLogosLarge[movie.source]}
+          alt={sourceLabels[movie.source]}
           onClick={() =>
             canStream &&
             window.open(searchStreaming(movie.title, movie.source), "movieView")
