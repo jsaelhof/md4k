@@ -1,3 +1,12 @@
+### PR #76 - #75: Full detail additional tests
+##### 2023-04-15
+
+Add additional tests
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/76)
+
+----
+
 ### PR #74 - #73: Add sorted rating tests
 ##### 2023-04-13
 
