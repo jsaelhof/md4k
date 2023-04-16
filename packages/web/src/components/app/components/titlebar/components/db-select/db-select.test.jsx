@@ -1,7 +1,10 @@
 import DbSelect from "./db-select";
 import { fireEvent, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import {
+  GET_MOVIES_MOCK_FAMILY,
+  renderWithProviders,
+} from "../../../../../../utils/render-with-providers";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -46,7 +49,10 @@ describe("db-select", () => {
 
   it("should push to the home page and set a new list when clicking on an existing list", async () => {
     const { getByRole, getByLabelText } = await renderWithProviders(
-      <DbSelect />
+      <DbSelect />,
+      {
+        mocks: [GET_MOVIES_MOCK_FAMILY],
+      }
     );
 
     await waitFor(() =>

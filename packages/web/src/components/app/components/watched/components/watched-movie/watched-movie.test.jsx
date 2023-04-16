@@ -7,9 +7,6 @@ import { fireEvent, waitFor, within } from "@testing-library/dom";
 import * as mui from "@mui/material";
 import { Globals } from "@react-spring/web";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
-import { mockInteresctionObserver } from "../../../../../../utils/mock-intersection-observer";
-
-mockInteresctionObserver();
 
 vi.mock("@mui/material", async () => {
   const actual = await vi.importActual("@mui/material");

@@ -1,7 +1,6 @@
 import FullDetail from "./full-detail";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
-import { buildThirdPartyMovieMock } from "../../../../utils/build-third-party-movie-mock";
 import { waitFor } from "@testing-library/dom";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
 
@@ -22,9 +21,7 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_LOADING_MOCK = {
   },
   result: {
     loading: true,
-    data: {
-      thirdPartyMovie: buildThirdPartyMovieMock(),
-    },
+    data: null,
   },
 };
 

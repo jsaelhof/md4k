@@ -39,7 +39,7 @@ describe("profile-menu", () => {
     // There's some discussion here but seems the click away listener is not "armed" immediately due to a react bug.
     // I've needed to use a wait here to make sure the click away is ready.
     // https://github.com/mui/material-ui/issues/24783#issuecomment-774054038
-    await new Promise((r) => setTimeout(r, 1));
+    await waitFor(() => new Promise((r) => setTimeout(r, 1)));
 
     fireEvent.click(document);
 
