@@ -1,3 +1,12 @@
+### PR #78 - #77: Clean up tests
+##### 2023-04-16
+
+Fixed all the warnings I could except for the one about the cache merge. I still haven't been able to find a solution to that one in the unit tests.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/78)
+
+----
+
 ### PR #76 - #75: Full detail additional tests
 ##### 2023-04-15
 
