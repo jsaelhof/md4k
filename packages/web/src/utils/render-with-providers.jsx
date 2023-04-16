@@ -215,3 +215,62 @@ const GET_MOVIES_MOCK = {
     },
   },
 };
+
+export const GET_MOVIES_MOCK_FAMILY = {
+  request: {
+    query: GET_MOVIES,
+    variables: {
+      list: "family",
+    },
+  },
+  result: {
+    data: {
+      movies: [
+        buildMovieMock({
+          id: "20574a48-f129-4714-9cf3-08c31ec0c382",
+          addedOn: "2021-02-21T05:23:08.484Z",
+          title: "Indiana Jones and the Last Crusade",
+          genre: 3,
+          source: 1,
+          runtime: 7620,
+          imdbID: "tt0097576",
+          poster:
+            "https://m.media-amazon.com/images/M/MV5BMjNkMzc2N2QtNjVlNS00ZTk5LTg0MTgtODY2MDAwNTMwZjBjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
+          ratings: {
+            IMDB: "82%",
+            ROTTEN_TOMATOES: "88%",
+            METACRITIC: "65%",
+            id: "20574a48-f129-4714-9cf3-08c31ec0c382",
+          },
+          year: "1989",
+          list: "family",
+        }),
+      ],
+      watchedMovies: [
+        buildMovieMock({
+          id: "04432771-235d-4789-b2d0-c81e81cacfd9",
+          addedOn: "2021-02-21T04:41:37.796Z",
+          title: "Bill & Ted's Excellent Adventure",
+          source: 0,
+          locked: false,
+          genre: 1,
+          runtime: 5400,
+          imdbID: "tt0096928",
+          poster:
+            "https://m.media-amazon.com/images/M/MV5BMTk3Mjk5MzI3OF5BMl5BanBnXkFtZTcwMTY4MzcyNA@@._V1_SX300.jpg",
+          ratings: {
+            id: "04432771-235d-4789-b2d0-c81e81cacfd9",
+            IMDB: "70%",
+            ROTTEN_TOMATOES: "81%",
+            METACRITIC: "50%",
+          },
+          year: "1989",
+          list: "family",
+          background:
+            "http://image.tmdb.org/t/p/original/ynYdEr7WskeM9dy6oNAQUGldAtE.jpg",
+          watchedOn: "2022-07-31T05:11:47.162Z",
+        }),
+      ],
+    },
+  },
+};
