@@ -1,10 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
-import { mockInteresctionObserver } from "../../../../utils/mock-intersection-observer";
 import * as useIntersectionObserverModule from "./hooks/use-intersection-observer";
-
-mockInteresctionObserver();
 
 vi.mock("./hooks/use-intersection-observer", () => ({
   useIntersectionObserver: vi.fn().mockReturnValue({
