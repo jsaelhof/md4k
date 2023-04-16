@@ -14,6 +14,21 @@ import {
   RefreshIcon,
 } from "./nav-hamburger.styles";
 
+// The MUI Clickaway Listener component passes props like autoFocus and tabIndex through which causes
+// console log errors and excess output in unit test logs. I couldn't find a workaround even though it has
+// been reported and discussed by others. The suggestion I found which works is to use a wrapper that
+// filters out any props that shouldn't passed through (such as autoFocus and tabIndex).
+// This is because I'm using a div as the child and I haven't been able to find an MUI component or another
+// alternative that will work.
+export const MuiClickAwayListenerWrapper = ({
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  autoFocus,
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  tabIndex,
+  children,
+  ...props
+}) => <ClickAwayListener {...props}>{children}</ClickAwayListener>;
+
 const NavHamburger = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -38,7 +53,7 @@ const NavHamburger = () => {
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open}>
-        <ClickAwayListener onClickAway={handleClose}>
+        <MuiClickAwayListenerWrapper onClickAway={handleClose}>
           <div>
             {pathname === "/pick" && (
               <>
@@ -105,7 +120,7 @@ const NavHamburger = () => {
               </>
             )}
           </div>
-        </ClickAwayListener>
+        </MuiClickAwayListenerWrapper>
       </Menu>
     </NavMenu>
   );
