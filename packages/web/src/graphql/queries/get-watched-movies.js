@@ -1,34 +1,21 @@
 import { gql, useQuery } from "@apollo/client";
 
-export const GET_MOVIES = gql`
-  query GetMovies($list: String!) {
-    movies(list: $list) {
+export const GET_WATCHED_MOVIES = gql`
+  query GetWatchedMovies($list: String!) {
+    watchedMovies(list: $list) {
       id
       title
       list
-      runtime
-      source
-      genre
-      year
       poster
       imdbID
-      locked
-      addedOn
       watchedOn
-      ratings {
-        id
-        IMDB
-        ROTTEN_TOMATOES
-        METACRITIC
-      }
-      fiveStarRating
       background
     }
   }
 `;
 
-export const useGetMovies = (list) => {
-  const { data, ...rest } = useQuery(GET_MOVIES, {
+export const useGetWatchedMovies = (list) => {
+  const { data, ...rest } = useQuery(GET_WATCHED_MOVIES, {
     skip: !list,
     variables: { list: list?.id },
   });

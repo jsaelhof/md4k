@@ -41,9 +41,8 @@ export const useAddMovie = ({ onCompleted, onError }) => {
           query: GET_MOVIES,
           variables: { list: addMovie.list },
         },
-        ({ movies, watchedMovies }) => ({
+        ({ movies }) => ({
           movies: [...movies, addMovie],
-          watchedMovies,
         })
       );
     },

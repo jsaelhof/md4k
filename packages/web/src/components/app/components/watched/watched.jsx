@@ -15,11 +15,13 @@ import {
   useRemoveWatchedMovie,
 } from "../../../../graphql/mutations";
 import { sortDirection } from "../../../../constants/sorts";
+import { useGetWatchedMovies } from "../../../../graphql/queries";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
 export const Watched = () => {
-  const { list, watchedMovies } = useAppContext();
+  const { list } = useAppContext();
+  const { watchedMovies } = useGetWatchedMovies(list);
   const [error, setError] = useState(null);
   const [deleteMovie, setDeleteMovie] = useState(null);
   const [editingMovie, setEditingMovie] = useState(null);
@@ -76,19 +78,20 @@ export const Watched = () => {
     <>
       <Container>
         {sortedMovies.map(
-          (movie, i) =>
-            i < infiniteLoadPointer && (
-              <WatchedMovie
-                key={movie.id}
-                movie={editingMovie?.id === movie.id ? editingMovie : movie}
-                right={i % 2}
-                isEditing={editingMovie?.id === movie.id}
-                onEditMovie={setEditingMovie}
-                onSave={onSaveMovie}
-                onCancel={onCancelEdit}
-                onDelete={onDeleteMovie}
-              />
-            )
+          (movie, i) => (
+            // i < infiniteLoadPointer && (
+            <WatchedMovie
+              key={movie.id}
+              movie={editingMovie?.id === movie.id ? editingMovie : movie}
+              right={i % 2}
+              isEditing={editingMovie?.id === movie.id}
+              onEditMovie={setEditingMovie}
+              onSave={onSaveMovie}
+              onCancel={onCancelEdit}
+              onDelete={onDeleteMovie}
+            />
+          )
+          // )
         )}
       </Container>
 
