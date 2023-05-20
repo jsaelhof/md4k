@@ -18,11 +18,13 @@ export class OMDBDataSource extends RESTDataSource {
     return data;
   }
 
-  async searchByTitle(title) {
+  async searchByTitle(title, year) {
     const data = await this.get("", {
       s: title,
+      ...(year && { y: year }),
       type: "movie",
     });
+
     return data;
   }
 }

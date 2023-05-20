@@ -1,5 +1,12 @@
-export const searchByTitle = async (parent, { title }, { dataSources }) => {
-  const { Search, Response } = await dataSources.OMDB.searchByTitle(title);
+export const searchByTitle = async (
+  parent,
+  { title, year },
+  { dataSources }
+) => {
+  const { Search, Response } = await dataSources.OMDB.searchByTitle(
+    title,
+    year
+  );
 
   return Response === "True"
     ? Search.map(({ Title, Year, imdbID, Poster }) => ({

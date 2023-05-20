@@ -68,31 +68,44 @@ const AddMovieDialog = ({
   });
 
   // Putting the debounced function in a ref prevents it from being recreated on each render.
-  const debouncedOnTitleChange = useRef(
-    debounce(({ target }) => {
-      if (target.value?.trim().length > 0) {
+  const onQueryChange = useRef(
+    debounce((title, year) => {
+      if (title.trim().length > 0) {
         setSearching(true);
-        searchQuery(target.value.trim());
+        searchQuery(
+          title.trim(),
+          year.trim().length > 0 ? year.trim() : undefined
+        );
       }
     }, AUTO_REFRESH_TIMEOUT)
   ).current;
 
   const onTitleChange = useCallback(
-    (event) => {
+    ({ target }) => {
       // Reset the search immediately when typing begins to clear any previous results.
       setSelectedMovie(null);
       setMovies(null);
       setInput((state) => ({
         ...state,
-        title: event.target.value,
+        title: target.value,
         poster: null,
         ratings: null,
       }));
 
       // Invoke the debounced handler that will do the lazy query
-      debouncedOnTitleChange(event);
+      onQueryChange(target.value, input.year);
     },
-    [debouncedOnTitleChange]
+    [onQueryChange, input.year]
+  );
+
+  const onYearChange = useCallback(
+    ({ target }) => {
+      setInput((state) => ({ ...state, year: target.value }));
+
+      // Invoke the debounced handler that will do the lazy query
+      onQueryChange(input.title, target.value);
+    },
+    [onQueryChange, input.title]
   );
 
   useGetThirdPartySummaryDetails(movies?.[selectedMovie], {
@@ -157,9 +170,7 @@ const AddMovieDialog = ({
             inputProps={{
               maxLength: 4,
             }}
-            onChange={({ target }) =>
-              setInput({ ...input, year: target.value })
-            }
+            onChange={onYearChange}
           />
 
           <Source
