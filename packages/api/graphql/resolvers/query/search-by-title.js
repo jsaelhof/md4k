@@ -1,11 +1,12 @@
 export const searchByTitle = async (
   parent,
-  { title, year },
+  { title, year, page },
   { dataSources }
 ) => {
   const { Search, Response } = await dataSources.OMDB.searchByTitle(
     title,
-    year
+    year,
+    page
   );
 
   return Response === "True"

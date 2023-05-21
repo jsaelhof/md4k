@@ -62,19 +62,20 @@ const AddMovieDialog = ({
 
   const searchQuery = useSearchByTitle({
     onCompleted: (searchByTitle) => {
-      setMovies(searchByTitle);
+      setMovies(loadedPage > 1 ? [...movies, ...searchByTitle] : searchByTitle);
       setSearching(false);
     },
   });
 
   // Putting the debounced function in a ref prevents it from being recreated on each render.
   const onQueryChange = useRef(
-    debounce((title, year) => {
+    debounce((title, year, page) => {
       if (title.trim().length > 0) {
         setSearching(true);
         searchQuery(
           title.trim(),
-          year.trim().length > 0 ? year.trim() : undefined
+          year.trim().length > 0 ? year.trim() : undefined,
+          page
         );
       }
     }, AUTO_REFRESH_TIMEOUT)
@@ -83,6 +84,7 @@ const AddMovieDialog = ({
   const onTitleChange = useCallback(
     ({ target }) => {
       // Reset the search immediately when typing begins to clear any previous results.
+      setLoadedPage(1);
       setSelectedMovie(null);
       setMovies(null);
       setInput((state) => ({
@@ -115,6 +117,13 @@ const AddMovieDialog = ({
         ...details,
       }),
   });
+
+  const [loadedPage, setLoadedPage] = useState(1);
+  const onLoadMore = useCallback(() => {
+    setSearching(true);
+    setLoadedPage(loadedPage + 1);
+    onQueryChange(input.title, input.year, loadedPage + 1);
+  }, [input.title, input.year, loadedPage, onQueryChange]);
 
   return (
     <Dialog open={true} fullWidth fullScreen={xsmall} maxWidth="lg">
@@ -192,6 +201,8 @@ const AddMovieDialog = ({
           movies={movies}
           searching={searching}
           onSelectMovie={setSelectedMovie}
+          onLoadMore={onLoadMore}
+          page={loadedPage}
         />
 
         <Actions>
