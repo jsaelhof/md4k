@@ -1,3 +1,13 @@
+### PR #80 - #79: upgrade add movie
+##### 2023-05-23
+
+- Added the ability to use the year as an optional input in support of the title search. 
+- Added functionality to fetch additional pages of movies on demand
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/80)
+
+----
+
 ### PR #78 - #77: Clean up tests
 ##### 2023-04-16
 
