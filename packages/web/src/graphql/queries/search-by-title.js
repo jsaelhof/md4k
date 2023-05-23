@@ -1,8 +1,8 @@
 import { gql, useLazyQuery } from "@apollo/client";
 
 export const SEARCH_BY_TITLE = gql`
-  query SearchByTitle($title: String!) {
-    searchByTitle(title: $title) {
+  query SearchByTitle($title: String!, $year: String, $page: Int) {
+    searchByTitle(title: $title, year: $year, page: $page) {
       title
       year
       imdbID
@@ -15,5 +15,5 @@ export const useSearchByTitle = ({ onCompleted }) => {
   const [search] = useLazyQuery(SEARCH_BY_TITLE, {
     onCompleted: ({ searchByTitle }) => onCompleted(searchByTitle),
   });
-  return (title) => search({ variables: { title } });
+  return (title, year, page) => search({ variables: { title, year, page } });
 };

@@ -62,37 +62,52 @@ const AddMovieDialog = ({
 
   const searchQuery = useSearchByTitle({
     onCompleted: (searchByTitle) => {
-      setMovies(searchByTitle);
+      setMovies(loadedPage > 1 ? [...movies, ...searchByTitle] : searchByTitle);
       setSearching(false);
     },
   });
 
   // Putting the debounced function in a ref prevents it from being recreated on each render.
-  const debouncedOnTitleChange = useRef(
-    debounce(({ target }) => {
-      if (target.value?.trim().length > 0) {
+  const onQueryChange = useRef(
+    debounce((title, year, page) => {
+      if (title.trim().length > 0) {
         setSearching(true);
-        searchQuery(target.value.trim());
+        searchQuery(
+          title.trim(),
+          year.trim().length > 0 ? year.trim() : undefined,
+          page
+        );
       }
     }, AUTO_REFRESH_TIMEOUT)
   ).current;
 
   const onTitleChange = useCallback(
-    (event) => {
+    ({ target }) => {
       // Reset the search immediately when typing begins to clear any previous results.
+      setLoadedPage(1);
       setSelectedMovie(null);
       setMovies(null);
       setInput((state) => ({
         ...state,
-        title: event.target.value,
+        title: target.value,
         poster: null,
         ratings: null,
       }));
 
       // Invoke the debounced handler that will do the lazy query
-      debouncedOnTitleChange(event);
+      onQueryChange(target.value, input.year);
     },
-    [debouncedOnTitleChange]
+    [onQueryChange, input.year]
+  );
+
+  const onYearChange = useCallback(
+    ({ target }) => {
+      setInput((state) => ({ ...state, year: target.value }));
+
+      // Invoke the debounced handler that will do the lazy query
+      onQueryChange(input.title, target.value);
+    },
+    [onQueryChange, input.title]
   );
 
   useGetThirdPartySummaryDetails(movies?.[selectedMovie], {
@@ -102,6 +117,13 @@ const AddMovieDialog = ({
         ...details,
       }),
   });
+
+  const [loadedPage, setLoadedPage] = useState(1);
+  const onLoadMore = useCallback(() => {
+    setSearching(true);
+    setLoadedPage(loadedPage + 1);
+    onQueryChange(input.title, input.year, loadedPage + 1);
+  }, [input.title, input.year, loadedPage, onQueryChange]);
 
   return (
     <Dialog open={true} fullWidth fullScreen={xsmall} maxWidth="lg">
@@ -157,9 +179,7 @@ const AddMovieDialog = ({
             inputProps={{
               maxLength: 4,
             }}
-            onChange={({ target }) =>
-              setInput({ ...input, year: target.value })
-            }
+            onChange={onYearChange}
           />
 
           <Source
@@ -181,6 +201,8 @@ const AddMovieDialog = ({
           movies={movies}
           searching={searching}
           onSelectMovie={setSelectedMovie}
+          onLoadMore={onLoadMore}
+          page={loadedPage}
         />
 
         <Actions>

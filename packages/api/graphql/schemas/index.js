@@ -98,7 +98,7 @@ export const typeDefs = gql`
     lists: [List]
     movies(list: String!): [Movie]
     watchedMovies(list: String!): [Movie]
-    searchByTitle(title: String!): [SearchResult]
+    searchByTitle(title: String!, year: String, page: Int): [SearchResult]
     thirdPartyMovie(imdbID: ID!): ThirdPartyMovie
   }
 
