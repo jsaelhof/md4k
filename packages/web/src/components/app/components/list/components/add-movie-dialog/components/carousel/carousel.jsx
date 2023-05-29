@@ -5,9 +5,19 @@ import { useMediaQuery } from "@mui/material";
 
 import { StatusMessage, Slider } from "./carousel.styles";
 import CarouselPoster from "./components/carousel-poster/carousel-poster";
+import { useEffect, useRef } from "react";
+import LoadMore from "./components/load-more/load-more";
 
-const Carousel = ({ movies, searching, onSelectMovie }) => {
+const Carousel = ({ movies, searching, page, onSelectMovie, onLoadMore }) => {
   const xsmall = useMediaQuery("(max-width: 600px), (max-height: 414px)");
+  const currentSlide = useRef(1);
+  const ref = useRef();
+
+  // This monkey-patches a bug with slick carousel. Setting initialSlide works but
+  // the next page button always goes to page 2 from there.
+  useEffect(() => {
+    ref.current?.slickGoTo(page > 1 ? currentSlide.current : 1, true);
+  }, [page]);
 
   return (
     <div
@@ -16,18 +26,23 @@ const Carousel = ({ movies, searching, onSelectMovie }) => {
       }}
     >
       <ConditionalRender cond={!movies && !searching} message="">
-        <ConditionalRender cond={searching} message="Searching...">
+        <ConditionalRender
+          cond={searching && page === 1}
+          message="Searching..."
+        >
           <ConditionalRender
             cond={movies?.length === 0}
             message="No Movies Found"
           >
             <Slider
+              ref={ref}
               arrows
               dots
               infinite={false}
               speed={500}
               slidesToShow={4}
               slidesToScroll={4}
+              afterChange={(index) => (currentSlide.current = index)}
               responsive={[
                 {
                   breakpoint: 1200,
@@ -63,6 +78,18 @@ const Carousel = ({ movies, searching, onSelectMovie }) => {
                   }}
                 />
               ))}
+
+              {/* The API sends back 10 movies. If the count of movies divided by 
+                  the page number is less than the page number then the last load
+                  was an incomplete page and there is no more to load. */}
+              <LoadMore
+                searching={searching}
+                disabled={
+                  searching ||
+                  (!searching && movies && movies.length / 10 < page)
+                }
+                onLoadMore={onLoadMore}
+              />
             </Slider>
           </ConditionalRender>
         </ConditionalRender>
