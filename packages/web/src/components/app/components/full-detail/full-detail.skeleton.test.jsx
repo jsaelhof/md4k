@@ -1,7 +1,7 @@
 import FullDetail from "./full-detail";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
-import { screen, waitFor } from "@testing-library/dom";
+import { waitFor } from "@testing-library/dom";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
 import { buildThirdPartyMovieMock } from "../../../../utils/build-third-party-movie-mock";
 
@@ -27,26 +27,15 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   },
 };
 
-// This test always fails because renderWithProviders has a small sleep
-// that waits for the loading state of the mocks to move past "loading: true".
-// Mocking loading: true doesn't work.
-// https://www.apollographql.com/docs/react/development-testing/testing/#testing-the-loading-and-success-states
-// I need to remove that and then update all the tests to use findBy to wait for the post-loading (data) state to appear.
-describe.skip("full-detail skeletons", () => {
+describe("full-detail skeletons", () => {
   it("should render the skeletons when loading", async () => {
-    renderWithProviders(
+    const { findAllByTestId } = renderWithProviders(
       <FullDetail movie={{ title: "test", imdbID: "tt0258463" }} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
       }
     );
 
-    screen.debug();
-
-    await waitFor(() =>
-      expect(
-        document.getElementsByClassName("MuiSkeleton-root").length
-      ).toBeGreaterThan(0)
-    );
+    expect((await findAllByTestId("skeleton")).length).toBeGreaterThan(0);
   });
 });
