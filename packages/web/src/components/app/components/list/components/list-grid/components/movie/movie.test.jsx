@@ -63,7 +63,7 @@ describe("movie", () => {
       getByAltText,
       getAllByAltText,
       getByText,
-    } = await renderWithProviders(<Movie {...props} />);
+    } = renderWithProviders(<Movie {...props} />);
 
     // Should be two posters, the second is the larger overlaid one that is wrapped in an invisible div
     expect(getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
@@ -91,7 +91,7 @@ describe("movie", () => {
   });
 
   it("should render a movie list entry as locked", async () => {
-    const { getByLabelText } = await renderWithProviders(
+    const { getByLabelText } = renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
 
@@ -99,7 +99,7 @@ describe("movie", () => {
   });
 
   it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async () => {
-    const { getByTestId, getByText } = await renderWithProviders(
+    const { getByTestId, getByText } = renderWithProviders(
       <Movie {...props} />
     );
 
@@ -117,7 +117,7 @@ describe("movie", () => {
   });
 
   it("should close the zoomed poster and open the expanded detail view when clicked", async () => {
-    const { getByTestId, getByText } = await renderWithProviders(
+    const { getByTestId, getByText } = renderWithProviders(
       <Movie {...props} />
     );
 
@@ -134,7 +134,7 @@ describe("movie", () => {
   });
 
   it("should toggle the actions and ratings when mousing over the five star rating", async () => {
-    const { getByTestId } = await renderWithProviders(<Movie {...props} />);
+    const { getByTestId } = renderWithProviders(<Movie {...props} />);
 
     expect(getByTestId("actions")).toHaveStyle({
       transform: "translateX(0px)",
@@ -167,7 +167,7 @@ describe("movie", () => {
   });
 
   it("should toggle the actions and ratings when clicking the five star rating", async () => {
-    const { getByTestId } = await renderWithProviders(<Movie {...props} />);
+    const { getByTestId } = renderWithProviders(<Movie {...props} />);
 
     expect(getByTestId("actions")).toHaveStyle({
       transform: "translateX(0px)",
@@ -200,7 +200,7 @@ describe("movie", () => {
   });
 
   it("should send the edit action and close the zoomed view", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
     fireEvent.click(getByLabelText("Edit"));
@@ -211,7 +211,7 @@ describe("movie", () => {
   });
 
   it("should send the mark watched action and close the zoomed view", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
     fireEvent.click(getByLabelText("Mark as Watched"));
@@ -222,7 +222,7 @@ describe("movie", () => {
   });
 
   it("should send the delete action and close the zoomed view", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
     fireEvent.click(getByLabelText("Delete"));
@@ -233,7 +233,7 @@ describe("movie", () => {
   });
 
   it("should send the edit action with locked:true and close the zoomed view", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
     fireEvent.click(getByLabelText("Lock"));
@@ -250,7 +250,7 @@ describe("movie", () => {
   });
 
   it("should send the edit action with locked:false and close the zoomed view", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
     fireEvent.click(getByLabelText("Unlock"));

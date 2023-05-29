@@ -90,7 +90,7 @@ const GET_MOVIES_MOCK = {
 
 describe("watched", () => {
   it("should render the movies as watched movie items in reverse chronological order", async () => {
-    const { getByText } = await renderWithProviders(<Watched />, {
+    const { getByText } = renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
@@ -111,7 +111,7 @@ describe("watched", () => {
   });
 
   it("should show the delete dialog on delete action and do the 'cancel' action", async () => {
-    const { getByText, getByRole, queryByRole } = await renderWithProviders(
+    const { getByText, getByRole, queryByRole } = renderWithProviders(
       <Watched />,
       {
         moviesMock: GET_MOVIES_MOCK,
@@ -133,7 +133,7 @@ describe("watched", () => {
   });
 
   it("should show the delete dialog on delete action and do the 'delete' action", async () => {
-    const { getByText, getByRole, queryByRole } = await renderWithProviders(
+    const { getByText, getByRole, queryByRole } = renderWithProviders(
       <Watched />,
       {
         moviesMock: GET_MOVIES_MOCK,
@@ -168,7 +168,7 @@ describe("watched", () => {
   });
 
   it("should enable editing", async () => {
-    const { getByText } = await renderWithProviders(<Watched />, {
+    const { getByText } = renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
@@ -183,12 +183,12 @@ describe("watched", () => {
     ).toBeInTheDocument();
   });
 
-  it("should save the move and disable editing", async () => {
-    const { getByText } = await renderWithProviders(<Watched />, {
+  it("should save the movie and disable editing", async () => {
+    const { getByText, findByText } = renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
-    await waitFor(() => expect(getByText(/Bourne/)).toBeInTheDocument());
+    expect(await findByText(/Bourne/)).toBeInTheDocument();
 
     fireEvent.click(
       within(getByText(/Bourne/)).getByRole("button", { name: "EDIT" })
@@ -223,7 +223,7 @@ describe("watched", () => {
   });
 
   it("should cancel editing", async () => {
-    const { getByText } = await renderWithProviders(<Watched />, {
+    const { getByText } = renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 

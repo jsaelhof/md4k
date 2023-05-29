@@ -53,7 +53,7 @@ const GET_MOVIES_MOCK = {
 
 describe("watched - error", () => {
   it("should show the error", async () => {
-    const { getByText, getByRole } = await renderWithProviders(<Watched />, {
+    const { getByText, getByRole } = renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
       mocks: [REMOVE_MOVIE_ERROR_MOCK],
     });

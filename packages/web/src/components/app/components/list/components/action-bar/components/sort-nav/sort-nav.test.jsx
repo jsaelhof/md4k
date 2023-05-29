@@ -8,7 +8,7 @@ import SortNav from "./sort-nav";
 
 describe("sort-nav", () => {
   it("should render all sort options", async () => {
-    const { getByText } = await renderWithProviders(<SortNav />);
+    const { getByText } = renderWithProviders(<SortNav />);
 
     expect(getByText("Added")).toBeInTheDocument();
     expect(getByText("Runtime")).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe("sort-nav", () => {
   });
 
   it("should select added desc by default", async () => {
-    const { getByText } = await renderWithProvidersAsRoute(
+    const { getByText } = renderWithProvidersAsRoute(
       <SortNav />,
       "/list/*",
       "/list/addedOn/desc"
@@ -29,7 +29,7 @@ describe("sort-nav", () => {
   });
 
   it("should toggle runtime", async () => {
-    const { getByText } = await renderWithProvidersAsRoute(
+    const { getByText } = renderWithProvidersAsRoute(
       <SortNav />,
       "/list/*",
       "/list/addedOn/desc"
@@ -55,7 +55,7 @@ describe("sort-nav", () => {
   });
 
   it("should toggle title", async () => {
-    const { getByText } = await renderWithProvidersAsRoute(
+    const { getByText } = renderWithProvidersAsRoute(
       <SortNav />,
       "/list/*",
       "/list/addedOn/desc"
@@ -75,7 +75,7 @@ describe("sort-nav", () => {
   });
 
   it("should toggle added", async () => {
-    const { getByText } = await renderWithProvidersAsRoute(
+    const { getByText } = renderWithProvidersAsRoute(
       <SortNav />,
       "/list/*",
       "/list/addedOn/desc"
@@ -95,7 +95,7 @@ describe("sort-nav", () => {
   });
 
   it("should show the correct icon for the sort direction and option", async () => {
-    const { getByText, getByTestId } = await renderWithProvidersAsRoute(
+    const { getByText, getByTestId } = renderWithProvidersAsRoute(
       <SortNav />,
       "/list/*",
       "/list/addedOn/desc"

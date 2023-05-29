@@ -14,7 +14,7 @@ vi.mock("react-router-dom", async () => {
 
 describe("db-select", () => {
   it("should render the list with the active list when closed", async () => {
-    const { getByLabelText } = await renderWithProviders(<DbSelect />);
+    const { getByLabelText } = renderWithProviders(<DbSelect />);
 
     await waitFor(() =>
       expect(getByLabelText("Choose a List")).toBeInTheDocument()
@@ -24,9 +24,7 @@ describe("db-select", () => {
   });
 
   it("should render the list with the available options and an option for making a new list", async () => {
-    const { getByRole, getByLabelText } = await renderWithProviders(
-      <DbSelect />
-    );
+    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />);
 
     await waitFor(() =>
       expect(getByLabelText("Choose a List")).toBeInTheDocument()
@@ -48,12 +46,9 @@ describe("db-select", () => {
   });
 
   it("should push to the home page and set a new list when clicking on an existing list", async () => {
-    const { getByRole, getByLabelText } = await renderWithProviders(
-      <DbSelect />,
-      {
-        mocks: [GET_MOVIES_MOCK_FAMILY],
-      }
-    );
+    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />, {
+      mocks: [GET_MOVIES_MOCK_FAMILY],
+    });
 
     await waitFor(() =>
       expect(getByLabelText("Choose a List")).toBeInTheDocument()
@@ -69,9 +64,7 @@ describe("db-select", () => {
   });
 
   it("should push to the create page", async () => {
-    const { getByRole, getByLabelText } = await renderWithProviders(
-      <DbSelect />
-    );
+    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />);
 
     await waitFor(() =>
       expect(getByLabelText("Choose a List")).toBeInTheDocument()

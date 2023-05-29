@@ -53,7 +53,7 @@ describe("watched-movie", () => {
   afterEach(() => vi.clearAllMocks());
 
   it("should render the title, date and poster", async () => {
-    const { getByLabelText, getByTestId } = await renderWithProviders(
+    const { getByLabelText, getByTestId } = renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -72,7 +72,7 @@ describe("watched-movie", () => {
   });
 
   it("should render the poster followed by the info when left-aligned", async () => {
-    const { getByTestId } = await renderWithProviders(
+    const { getByTestId } = renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -87,7 +87,7 @@ describe("watched-movie", () => {
   });
 
   it("should render the info followed by the poster when right-aligned", async () => {
-    const { getByTestId } = await renderWithProviders(
+    const { getByTestId } = renderWithProviders(
       <WatchedMovie {...test.props} right />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -108,7 +108,7 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 550px)");
 
-    const { getByTestId } = await renderWithProviders(
+    const { getByTestId } = renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -127,7 +127,7 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 430px)");
 
-    const { getByTestId } = await renderWithProviders(
+    const { getByTestId } = renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -140,10 +140,12 @@ describe("watched-movie", () => {
   });
 
   it("should show the date picker inline at larger sizes", async () => {
-    const { getByLabelText, getByTestId, queryByRole } =
-      await renderWithProviders(<WatchedMovie {...test.props} />, {
+    const { getByLabelText, getByTestId, queryByRole } = renderWithProviders(
+      <WatchedMovie {...test.props} />,
+      {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+      }
+    );
 
     fireEvent.click(getByLabelText("Test Movie"));
 
@@ -161,7 +163,7 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 550px)");
 
-    const { getByLabelText, getByRole } = await renderWithProviders(
+    const { getByLabelText, getByRole } = renderWithProviders(
       <WatchedMovie {...test.props} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -180,10 +182,12 @@ describe("watched-movie", () => {
   });
 
   it("should call onSave with the new date", async () => {
-    const { getByLabelText, getByRole, getByTestId } =
-      await renderWithProviders(<WatchedMovie {...test.props} />, {
+    const { getByLabelText, getByRole, getByTestId } = renderWithProviders(
+      <WatchedMovie {...test.props} />,
+      {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+      }
+    );
 
     fireEvent.click(getByLabelText("Test Movie"));
 
@@ -203,10 +207,12 @@ describe("watched-movie", () => {
   });
 
   it("should call onCancel when clicking the cancel button on the date picker", async () => {
-    const { getByLabelText, getByRole, getByTestId } =
-      await renderWithProviders(<WatchedMovie {...test.props} />, {
+    const { getByLabelText, getByRole, getByTestId } = renderWithProviders(
+      <WatchedMovie {...test.props} />,
+      {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+      }
+    );
 
     fireEvent.click(getByLabelText("Test Movie"));
 
@@ -224,7 +230,7 @@ describe("watched-movie", () => {
   });
 
   it("should call onCancel when clicking the backdrop", async () => {
-    const { getByLabelText } = await renderWithProviders(
+    const { getByLabelText } = renderWithProviders(
       <WatchedMovie {...test.props} isEditing />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -237,10 +243,12 @@ describe("watched-movie", () => {
   });
 
   it("should call onDelete with the correct movie data", async () => {
-    const { getByLabelText, getByRole, getByTestId } =
-      await renderWithProviders(<WatchedMovie {...test.props} />, {
+    const { getByLabelText, getByRole, getByTestId } = renderWithProviders(
+      <WatchedMovie {...test.props} />,
+      {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+      }
+    );
 
     fireEvent.click(getByLabelText("Test Movie"));
 

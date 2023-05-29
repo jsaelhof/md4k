@@ -20,7 +20,7 @@ describe("action-bar", () => {
   });
 
   it("should not render the bar when disabled", async () => {
-    const { queryByText } = await renderWithProviders(
+    const { queryByText } = renderWithProviders(
       <ActionBar disabled={true} onAdd={test.onAdd} onPick={test.onPick} />
     );
 
@@ -28,7 +28,7 @@ describe("action-bar", () => {
   });
 
   it("should not render the bar when enabled", async () => {
-    const { getByText, getByLabelText } = await renderWithProviders(
+    const { getByText, getByLabelText } = renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
     );
 
@@ -38,7 +38,7 @@ describe("action-bar", () => {
   });
 
   it("should render the Add Movie button with a label when space exists", async () => {
-    const { getByText, getByLabelText } = await renderWithProviders(
+    const { getByText, getByLabelText } = renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
     );
 
@@ -50,7 +50,7 @@ describe("action-bar", () => {
     // eslint-disable-next-line no-import-assign
     mui.useMediaQuery = vi.fn().mockReturnValue(false);
 
-    const { queryByText, getByLabelText } = await renderWithProviders(
+    const { queryByText, getByLabelText } = renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
     );
 
@@ -59,7 +59,7 @@ describe("action-bar", () => {
   });
 
   it("should call onAdd when Add Movie is pressed", async () => {
-    const { getByLabelText } = await renderWithProviders(
+    const { getByLabelText } = renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
     );
 
@@ -68,7 +68,7 @@ describe("action-bar", () => {
   });
 
   it("should call onPick when Pick A Movie is pressed", async () => {
-    const { getByRole } = await renderWithProviders(
+    const { getByRole } = renderWithProviders(
       <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
     );
 

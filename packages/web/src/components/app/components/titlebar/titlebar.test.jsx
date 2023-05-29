@@ -7,8 +7,9 @@ import { vi } from "vitest";
 
 describe("titlebar", () => {
   it("should render the titlebar for the home screen", async () => {
-    const { getByLabelText, getByAltText, getByRole } =
-      await renderWithProviders(<TitleBar />);
+    const { getByLabelText, getByAltText, getByRole } = renderWithProviders(
+      <TitleBar />
+    );
 
     await waitFor(() => {
       expect(getByRole("button", { name: "Watched" })).toBeInTheDocument(); // Find the Nav
@@ -21,8 +22,9 @@ describe("titlebar", () => {
     // Mock a 500 pixel width
     window.matchMedia = createMatchMedia(500);
 
-    const { getByLabelText, getByAltText, getByTestId } =
-      await renderWithProviders(<TitleBar />);
+    const { getByLabelText, getByAltText, getByTestId } = renderWithProviders(
+      <TitleBar />
+    );
 
     await waitFor(() => {
       expect(getByTestId("MenuIcon")).toBeInTheDocument(); // Find the Nav
@@ -38,7 +40,7 @@ describe("titlebar", () => {
     const clearPick = vi.fn();
 
     const { getByLabelText, getByAltText, getByTestId, getByRole } =
-      await renderWithProviders(
+      renderWithProviders(
         <AppContext.Provider value={{ movies: [], clearPick }}>
           <TitleBar />
         </AppContext.Provider>,

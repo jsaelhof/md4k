@@ -32,35 +32,35 @@ describe("list-grid", () => {
   });
 
   it("should render the addedOn list", async () => {
-    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/addedOn/asc",
     });
     expect(getByTestId("addedOn")).toBeInTheDocument();
   });
 
   it("should render the title list", async () => {
-    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/title/asc",
     });
     expect(getByTestId("title")).toBeInTheDocument();
   });
 
   it("should render the runtime list", async () => {
-    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/runtime/asc",
     });
     expect(getByTestId("runtime")).toBeInTheDocument();
   });
 
   it("should render the genre list", async () => {
-    const { getByTestId } = await renderWithProviders(<ListGrid {...props} />, {
+    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/genre/asc",
     });
     expect(getByTestId("genre")).toBeInTheDocument();
   });
 
   it("should render the empty list when there are no movies", async () => {
-    const { getByRole } = await renderWithProviders(
+    const { getByRole } = renderWithProviders(
       <ListGrid {...props} movies={[]} />,
       { route: "/addedOn/asc" }
     );
@@ -68,7 +68,7 @@ describe("list-grid", () => {
   });
 
   it("should render null when movies is undefined", async () => {
-    const { queryByRole, queryByText } = await renderWithProviders(
+    const { queryByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} movies={undefined} />,
       { route: "/addedOn/asc" }
     );
@@ -79,7 +79,7 @@ describe("list-grid", () => {
   });
 
   it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async () => {
-    const { getByText, getByRole, queryByText } = await renderWithProviders(
+    const { getByText, getByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} />,
       {
         route: "/addedOn/asc",
@@ -95,7 +95,7 @@ describe("list-grid", () => {
   });
 
   it("should render the delete confirmation and cancel correctly when deleting a movie", async () => {
-    const { getByText, getByRole, queryByText } = await renderWithProviders(
+    const { getByText, getByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} />,
       { route: "/addedOn/asc" }
     );

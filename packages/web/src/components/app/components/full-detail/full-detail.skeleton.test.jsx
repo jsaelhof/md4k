@@ -27,7 +27,7 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_LOADING_MOCK = {
 
 describe("full-detail skeletons", () => {
   it("should render the skeletons when loading", async () => {
-    await renderWithProviders(
+    renderWithProviders(
       <FullDetail movie={{ title: "test", imdbID: "tt0258463" }} />,
       {
         mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_LOADING_MOCK],

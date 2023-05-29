@@ -4,13 +4,13 @@ import ProfileMenu from "./profile-menu";
 
 describe("profile-menu", () => {
   it("should render the menu button with the user image when closed", async () => {
-    const { getByAltText } = await renderWithProviders(<ProfileMenu />);
+    const { getByAltText } = renderWithProviders(<ProfileMenu />);
     expect(getByAltText("Test User")).toBeInTheDocument();
   });
 
   it("should render the profile menu when opened", async () => {
     const { getByAltText, queryAllByAltText, getByText, getByRole } =
-      await renderWithProviders(<ProfileMenu />);
+      renderWithProviders(<ProfileMenu />);
     expect(queryAllByAltText("Test User")).toHaveLength(1); // Main button avatar
     fireEvent.click(getByAltText("Test User"));
     expect(queryAllByAltText("Test User")).toHaveLength(2); // Once opened, the larger avatar is in the menu as well
@@ -20,8 +20,9 @@ describe("profile-menu", () => {
   });
 
   it("should logout when clicked", async () => {
-    const { getByAltText, getByRole, queryAllByAltText } =
-      await renderWithProviders(<ProfileMenu />);
+    const { getByAltText, getByRole, queryAllByAltText } = renderWithProviders(
+      <ProfileMenu />
+    );
     fireEvent.click(getByAltText("Test User"));
     fireEvent.click(getByRole("button", { name: "Logout" }));
     await waitFor(() => expect(queryAllByAltText("Test User")).toHaveLength(1)); // Main button avatar only
@@ -29,7 +30,7 @@ describe("profile-menu", () => {
 
   it("should close when clicking outside", async () => {
     const { getByAltText, queryByRole, queryAllByAltText } =
-      await renderWithProviders(<ProfileMenu />);
+      renderWithProviders(<ProfileMenu />);
 
     fireEvent.click(getByAltText("Test User"));
 

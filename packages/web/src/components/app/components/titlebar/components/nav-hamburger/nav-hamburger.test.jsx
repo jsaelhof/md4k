@@ -6,9 +6,7 @@ import { AppContext } from "../../../../../../context/app-context";
 
 describe("nav-hamburger", () => {
   it("should render the default nav options", async () => {
-    const { getByTestId, getByRole } = await renderWithProviders(
-      <NavHamburger />
-    );
+    const { getByTestId, findByRole } = renderWithProviders(<NavHamburger />);
 
     await waitFor(() => {
       expect(getByTestId("MenuIcon")).toBeInTheDocument();
@@ -16,17 +14,24 @@ describe("nav-hamburger", () => {
 
     fireEvent.click(getByTestId("MenuIcon"));
 
-    expect(getByRole("menuitem", { name: "Watched" })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Saturday/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Family/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /New List/ })).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: "Watched" })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /New List/ })
+    ).toBeInTheDocument();
   });
 
   it("should render the 'watched' nav options", async () => {
-    const { getByTestId, getByRole } = await renderWithProviders(
-      <NavHamburger />,
-      { route: "/watched" }
-    );
+    const { getByTestId, findByRole } = renderWithProviders(<NavHamburger />, {
+      route: "/watched",
+    });
 
     await waitFor(() => {
       expect(getByTestId("MenuIcon")).toBeInTheDocument();
@@ -34,37 +39,46 @@ describe("nav-hamburger", () => {
 
     fireEvent.click(getByTestId("MenuIcon"));
 
-    expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Saturday/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Family/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /New List/ })).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: "Movies" })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /New List/ })
+    ).toBeInTheDocument();
   });
 
   it("should render the 'pick' nav options", async () => {
-    const { getByTestId, getByRole } = await renderWithProviders(
-      <NavHamburger />,
-      { route: "/pick" }
-    );
+    const { getByTestId, getByRole, findByTestId, findByRole } =
+      renderWithProviders(<NavHamburger />, { route: "/pick" });
 
-    await waitFor(() => {
-      expect(getByTestId("MenuIcon")).toBeInTheDocument();
-    });
+    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
 
     fireEvent.click(getByTestId("MenuIcon"));
 
     expect(getByRole("menuitem", { name: "Pick again" })).toBeInTheDocument();
     expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
     expect(getByRole("menuitem", { name: "Watched" })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Saturday/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /Family/ })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: /New List/ })).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await findByRole("menuitem", { name: /New List/ })
+    ).toBeInTheDocument();
   });
 
   it("should render the default 'create' nav options", async () => {
-    const { getByTestId, getByRole } = await renderWithProviders(
-      <NavHamburger />,
-      { route: "/create" }
-    );
+    const { getByTestId, getByRole } = renderWithProviders(<NavHamburger />, {
+      route: "/create",
+    });
 
     await waitFor(() => {
       expect(getByTestId("MenuIcon")).toBeInTheDocument();
@@ -90,7 +104,7 @@ describe("nav-hamburger", () => {
   });
 
   it("should close when clicking outside", async () => {
-    const { getByTestId, getByRole, queryByRole } = await renderWithProviders(
+    const { getByTestId, getByRole, queryByRole } = renderWithProviders(
       <NavHamburger />
     );
 
