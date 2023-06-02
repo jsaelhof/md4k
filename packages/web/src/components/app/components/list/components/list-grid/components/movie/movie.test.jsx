@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import Movie from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
@@ -54,117 +54,112 @@ describe("movie", () => {
   });
 
   it("should render a movie list entry", async ({ props }) => {
-    const {
-      getByTestId,
-      getByLabelText,
-      getAllByLabelText,
-      getByAltText,
-      getAllByAltText,
-      getByText,
-    } = renderWithProviders(<Movie {...props} />);
+    renderWithProviders(<Movie {...props} />);
 
     // Should be two posters, the second is the larger overlaid one that is wrapped in an invisible div
-    expect(getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
+    expect(screen.getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
 
     // The larger poster is invisible by default
-    expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 });
+    expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
 
     // Movie info
-    expect(getAllByAltText(/star-/)).toHaveLength(5);
-    expect(getByText("1h 59m")).toBeInTheDocument();
-    expect(getByLabelText("Edit")).toBeInTheDocument();
-    expect(getByLabelText("Mark as Watched")).toBeInTheDocument();
-    expect(getByLabelText("Lock")).toBeInTheDocument();
-    expect(getByLabelText("Delete")).toBeInTheDocument();
-    expect(getByAltText("IMDB")).toBeInTheDocument();
-    expect(getByText("79%")).toBeInTheDocument();
-    expect(getByAltText("ROTTEN_TOMATOES")).toBeInTheDocument();
-    expect(getByText("84%")).toBeInTheDocument();
-    expect(getByAltText("METACRITIC")).toBeInTheDocument();
-    expect(getByText("68%")).toBeInTheDocument();
-    expect(getByLabelText("Netflix")).toBeInTheDocument();
+    expect(screen.getAllByAltText(/star-/)).toHaveLength(5);
+    expect(screen.getByText("1h 59m")).toBeInTheDocument();
+    expect(screen.getByLabelText("Edit")).toBeInTheDocument();
+    expect(screen.getByLabelText("Mark as Watched")).toBeInTheDocument();
+    expect(screen.getByLabelText("Lock")).toBeInTheDocument();
+    expect(screen.getByLabelText("Delete")).toBeInTheDocument();
+    expect(screen.getByAltText("IMDB")).toBeInTheDocument();
+    expect(screen.getByText("79%")).toBeInTheDocument();
+    expect(screen.getByAltText("ROTTEN_TOMATOES")).toBeInTheDocument();
+    expect(screen.getByText("84%")).toBeInTheDocument();
+    expect(screen.getByAltText("METACRITIC")).toBeInTheDocument();
+    expect(screen.getByText("68%")).toBeInTheDocument();
+    expect(screen.getByLabelText("Netflix")).toBeInTheDocument();
 
     // The expanded detail should be closed by default
-    expect(getByText("Expanded")).toHaveAttribute("data-open", "false");
+    expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "false");
   });
 
   it("should render a movie list entry as locked", async ({ props }) => {
-    const { getByLabelText } = renderWithProviders(
+    renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
 
-    expect(getByLabelText("Unlock")).toBeInTheDocument();
+    expect(screen.getByLabelText("Unlock")).toBeInTheDocument();
   });
 
   it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
     props,
   }) => {
-    const { getByTestId, getByText } = renderWithProviders(
-      <Movie {...props} />
-    );
+    renderWithProviders(<Movie {...props} />);
 
-    fireEvent.mouseOver(getByTestId("listItem"));
+    fireEvent.mouseOver(screen.getByTestId("listItem"));
     await waitFor(() => {
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 1 });
-      expect(getByText("Expanded")).toHaveAttribute("data-preload", "true");
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 });
+      expect(screen.getByText("Expanded")).toHaveAttribute(
+        "data-preload",
+        "true"
+      );
     });
 
-    fireEvent.mouseOut(getByTestId("listItem"));
+    fireEvent.mouseOut(screen.getByTestId("listItem"));
     await waitFor(() => {
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 });
-      expect(getByText("Expanded")).toHaveAttribute("data-preload", "false");
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
+      expect(screen.getByText("Expanded")).toHaveAttribute(
+        "data-preload",
+        "false"
+      );
     });
   });
 
   it("should close the zoomed poster and open the expanded detail view when clicked", async ({
     props,
   }) => {
-    const { getByTestId, getByText } = renderWithProviders(
-      <Movie {...props} />
-    );
+    renderWithProviders(<Movie {...props} />);
 
-    fireEvent.mouseOver(getByTestId("listItem"));
+    fireEvent.mouseOver(screen.getByTestId("listItem"));
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 1 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(getByTestId("positioner"));
+    fireEvent.click(screen.getByTestId("positioner"));
     await waitFor(() => {
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 });
-      expect(getByText("Expanded")).toHaveAttribute("data-open", "true");
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
+      expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "true");
     });
   });
 
   it("should toggle the actions and ratings when mousing over the five star rating", async ({
     props,
   }) => {
-    const { getByTestId } = renderWithProviders(<Movie {...props} />);
+    renderWithProviders(<Movie {...props} />);
 
-    expect(getByTestId("actions")).toHaveStyle({
+    expect(screen.getByTestId("actions")).toHaveStyle({
       transform: "translateX(0px)",
     });
-    expect(getByTestId("ratings")).not.toHaveStyle({
+    expect(screen.getByTestId("ratings")).not.toHaveStyle({
       transform: "translateX(0px)",
     });
 
-    fireEvent.mouseOver(getByTestId("rating"));
+    fireEvent.mouseOver(screen.getByTestId("rating"));
 
     await waitFor(() => {
-      expect(getByTestId("actions")).not.toHaveStyle({
+      expect(screen.getByTestId("actions")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(getByTestId("ratings")).toHaveStyle({
+      expect(screen.getByTestId("ratings")).toHaveStyle({
         transform: "translateX(0px)",
       });
     });
 
-    fireEvent.mouseOut(getByTestId("rating"));
+    fireEvent.mouseOut(screen.getByTestId("rating"));
 
     await waitFor(() => {
-      expect(getByTestId("actions")).toHaveStyle({
+      expect(screen.getByTestId("actions")).toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(getByTestId("ratings")).not.toHaveStyle({
+      expect(screen.getByTestId("ratings")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
     });
@@ -173,33 +168,33 @@ describe("movie", () => {
   it("should toggle the actions and ratings when clicking the five star rating", async ({
     props,
   }) => {
-    const { getByTestId } = renderWithProviders(<Movie {...props} />);
+    renderWithProviders(<Movie {...props} />);
 
-    expect(getByTestId("actions")).toHaveStyle({
+    expect(screen.getByTestId("actions")).toHaveStyle({
       transform: "translateX(0px)",
     });
-    expect(getByTestId("ratings")).not.toHaveStyle({
+    expect(screen.getByTestId("ratings")).not.toHaveStyle({
       transform: "translateX(0px)",
     });
 
-    fireEvent.click(getByTestId("rating"));
+    fireEvent.click(screen.getByTestId("rating"));
 
     await waitFor(() => {
-      expect(getByTestId("actions")).not.toHaveStyle({
+      expect(screen.getByTestId("actions")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(getByTestId("ratings")).toHaveStyle({
+      expect(screen.getByTestId("ratings")).toHaveStyle({
         transform: "translateX(0px)",
       });
     });
 
-    fireEvent.click(getByTestId("rating"));
+    fireEvent.click(screen.getByTestId("rating"));
 
     await waitFor(() => {
-      expect(getByTestId("actions")).toHaveStyle({
+      expect(screen.getByTestId("actions")).toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(getByTestId("ratings")).not.toHaveStyle({
+      expect(screen.getByTestId("ratings")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
     });
@@ -208,49 +203,41 @@ describe("movie", () => {
   it("should send the edit action and close the zoomed view", async ({
     props,
   }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
-      <Movie {...props} />
-    );
-    fireEvent.click(getByLabelText("Edit"));
+    renderWithProviders(<Movie {...props} />);
+    fireEvent.click(screen.getByLabelText("Edit"));
     expect(props.onEditMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );
   });
 
   it("should send the mark watched action and close the zoomed view", async ({
     props,
   }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
-      <Movie {...props} />
-    );
-    fireEvent.click(getByLabelText("Mark as Watched"));
+    renderWithProviders(<Movie {...props} />);
+    fireEvent.click(screen.getByLabelText("Mark as Watched"));
     expect(props.onMarkWatched).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );
   });
 
   it("should send the delete action and close the zoomed view", async ({
     props,
   }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
-      <Movie {...props} />
-    );
-    fireEvent.click(getByLabelText("Delete"));
+    renderWithProviders(<Movie {...props} />);
+    fireEvent.click(screen.getByLabelText("Delete"));
     expect(props.onDeleteMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );
   });
 
   it("should send the edit action with locked:true and close the zoomed view", async ({
     props,
   }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
-      <Movie {...props} />
-    );
-    fireEvent.click(getByLabelText("Lock"));
+    renderWithProviders(<Movie {...props} />);
+    fireEvent.click(screen.getByLabelText("Lock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,
@@ -259,17 +246,17 @@ describe("movie", () => {
       false
     );
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );
   });
 
   it("should send the edit action with locked:false and close the zoomed view", async ({
     props,
   }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
+    renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
-    fireEvent.click(getByLabelText("Unlock"));
+    fireEvent.click(screen.getByLabelText("Unlock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,
@@ -278,7 +265,7 @@ describe("movie", () => {
       false
     );
     await waitFor(() =>
-      expect(getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );
   });
 });

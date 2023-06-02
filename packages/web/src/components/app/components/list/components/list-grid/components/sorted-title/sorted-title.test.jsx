@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { fireEvent, render, within, screen } from "@testing-library/react";
 import SortedTitle from "./sorted-title";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -46,9 +46,9 @@ describe("sorted-title", () => {
   });
 
   it("should render correctly when the order is ASC", ({ props }) => {
-    const { queryAllByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
 
-    const movieNodes = queryAllByText(/Movie/);
+    const movieNodes = screen.queryAllByText(/Movie/);
 
     expect(movieNodes).toHaveLength(4);
     expect(within(movieNodes[0]).getByText("Movie 1")).toBeInTheDocument();
@@ -61,9 +61,9 @@ describe("sorted-title", () => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { queryAllByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
 
-    const movieNodes = queryAllByText(/Movie/);
+    const movieNodes = screen.queryAllByText(/Movie/);
 
     expect(movieNodes).toHaveLength(4);
     expect(within(movieNodes[0]).getByText("Movie 4")).toBeInTheDocument();
@@ -73,9 +73,11 @@ describe("sorted-title", () => {
   });
 
   it("should call the edit handler", ({ props }) => {
-    const { getByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -83,9 +85,11 @@ describe("sorted-title", () => {
   });
 
   it("should call the mark watched handler", ({ props }) => {
-    const { getByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Mark Watched",
+      })
     );
     expect(props.onMarkWatched).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -93,9 +97,11 @@ describe("sorted-title", () => {
   });
 
   it("should call the delete handler", ({ props }) => {
-    const { getByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Delete" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })

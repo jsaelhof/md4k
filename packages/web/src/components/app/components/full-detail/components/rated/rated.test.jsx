@@ -1,14 +1,14 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Rated from "./rated";
 
 describe("rated", () => {
   it("should display the rating", () => {
-    const { getByText } = render(<Rated rated="PG-13" />);
-    expect(getByText("PG-13")).toBeInTheDocument();
+    render(<Rated rated="PG-13" />);
+    expect(screen.getByText("PG-13")).toBeInTheDocument();
   });
 
   it("should not render anything whne rated is null", () => {
-    const { queryByTestId } = render(<Rated rated={null} />);
-    expect(queryByTestId("rated")).not.toBeInTheDocument();
+    render(<Rated rated={null} />);
+    expect(screen.queryByTestId("rated")).not.toBeInTheDocument();
   });
 });

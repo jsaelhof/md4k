@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ActionButton from "./action-button";
 import Close from "@mui/icons-material/Close";
 import { vi } from "vitest";
@@ -13,12 +13,10 @@ describe("action-button", () => {
   });
 
   it("should render the button", ({ onClick, tooltip }) => {
-    const { getByTestId, getByLabelText } = render(
-      <ActionButton Icon={Close} onClick={onClick} tooltip={tooltip} />
-    );
+    render(<ActionButton Icon={Close} onClick={onClick} tooltip={tooltip} />);
 
-    expect(getByLabelText(tooltip)).toBeInTheDocument();
-    expect(getByTestId("CloseIcon")).toBeInTheDocument();
+    expect(screen.getByLabelText(tooltip)).toBeInTheDocument();
+    expect(screen.getByTestId("CloseIcon")).toBeInTheDocument();
   });
 
   it("should return the movie data when clicked", ({
@@ -26,7 +24,7 @@ describe("action-button", () => {
     tooltip,
     movie,
   }) => {
-    const { getByLabelText } = render(
+    render(
       <ActionButton
         Icon={Close}
         onClick={onClick}
@@ -35,12 +33,12 @@ describe("action-button", () => {
       />
     );
 
-    fireEvent.click(getByLabelText(tooltip));
+    fireEvent.click(screen.getByLabelText(tooltip));
     expect(onClick).toHaveBeenCalledWith(movie);
   });
 
   it("should not fire onClick when disabled", ({ onClick, tooltip, movie }) => {
-    const { getByLabelText } = render(
+    render(
       <ActionButton
         Icon={Close}
         onClick={onClick}
@@ -50,7 +48,7 @@ describe("action-button", () => {
       />
     );
 
-    fireEvent.click(getByLabelText(tooltip));
+    fireEvent.click(screen.getByLabelText(tooltip));
     expect(onClick).not.toHaveBeenCalled();
   });
 });

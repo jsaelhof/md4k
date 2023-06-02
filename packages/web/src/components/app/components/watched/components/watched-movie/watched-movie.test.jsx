@@ -3,7 +3,7 @@ import { buildMovieMock } from "../../../../../../utils/build-movie-mock";
 import WatchedMovie from "./watched-movie";
 import { vi } from "vitest";
 import { buildThirdPartyMovieMock } from "../../../../../../utils/build-third-party-movie-mock";
-import { fireEvent, within } from "@testing-library/dom";
+import { fireEvent, within, screen } from "@testing-library/react";
 import * as mui from "@mui/material";
 import { Globals } from "@react-spring/web";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
@@ -49,33 +49,32 @@ describe("watched-movie", () => {
   afterEach(() => vi.clearAllMocks());
 
   it("should render the title, date and poster", async ({ props }) => {
-    const { getByLabelText, getByTestId } = renderWithProviders(
-      <WatchedMovie {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
     expect(
-      within(getByTestId("info")).getByText("Test Movie")
+      within(screen.getByTestId("info")).getByText("Test Movie")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("info")).getByText("Saturday, September 4th, 2021")
+      within(screen.getByTestId("info")).getByText(
+        "Saturday, September 4th, 2021"
+      )
     ).toBeInTheDocument();
 
-    expect(getByLabelText("Test Movie Poster")).toBeInTheDocument();
+    expect(screen.getByLabelText("Test Movie Poster")).toBeInTheDocument();
   });
 
   it("should render the poster followed by the info when left-aligned", async ({
     props,
   }) => {
-    const { getByTestId } = renderWithProviders(<WatchedMovie {...props} />, {
+    renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     // Test the order. When left-aligned, the poster should come before the info
-    const [posterNode, infoNode] = getByTestId("content").childNodes;
+    const [posterNode, infoNode] = screen.getByTestId("content").childNodes;
     expect(posterNode.compareDocumentPosition(infoNode)).toBe(
       Node.DOCUMENT_POSITION_FOLLOWING
     );
@@ -84,15 +83,12 @@ describe("watched-movie", () => {
   it("should render the info followed by the poster when right-aligned", async ({
     props,
   }) => {
-    const { getByTestId } = renderWithProviders(
-      <WatchedMovie {...props} right />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<WatchedMovie {...props} right />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
     // Test the order. When right-aligned, the info should come before the poster
-    const [infoNode, posterNode] = getByTestId("content").childNodes;
+    const [infoNode, posterNode] = screen.getByTestId("content").childNodes;
     expect(posterNode.compareDocumentPosition(infoNode)).toBe(
       Node.DOCUMENT_POSITION_PRECEDING
     );
@@ -107,12 +103,12 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 550px)");
 
-    const { getByTestId } = renderWithProviders(<WatchedMovie {...props} />, {
+    renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(
-      within(getByTestId("info")).getByText("Saturday, Sep 4th, 2021")
+      within(screen.getByTestId("info")).getByText("Saturday, Sep 4th, 2021")
     ).toBeInTheDocument();
   });
 
@@ -125,30 +121,27 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 430px)");
 
-    const { getByTestId } = renderWithProviders(<WatchedMovie {...props} />, {
+    renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(
-      within(getByTestId("info")).getByText("Sat, Sep 4th, 2021")
+      within(screen.getByTestId("info")).getByText("Sat, Sep 4th, 2021")
     ).toBeInTheDocument();
   });
 
   it("should show the date picker inline at larger sizes", async ({
     props,
   }) => {
-    const { getByLabelText, findByTestId, queryByRole } = renderWithProviders(
-      <WatchedMovie {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
-    expect(await findByTestId("datePicker")).toBeInTheDocument();
+    expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    expect(queryByRole("presentation")).not.toBeInTheDocument();
+    expect(screen.queryByRole("presentation")).not.toBeInTheDocument();
   });
 
   it("should show the date picker in a drawer at small size", async ({
@@ -160,35 +153,31 @@ describe("watched-movie", () => {
       .fn()
       .mockImplementation((query) => query === "(max-width: 550px)");
 
-    const { getByLabelText, getByRole, findByRole } = renderWithProviders(
-      <WatchedMovie {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
-    expect(await findByRole("presentation")).toBeInTheDocument();
+    expect(await screen.findByRole("presentation")).toBeInTheDocument();
 
     expect(
-      within(getByRole("presentation")).getByTestId("datePicker")
+      within(screen.getByRole("presentation")).getByTestId("datePicker")
     ).toBeInTheDocument();
   });
 
   it("should call onSave with the new date", async ({ props }) => {
-    const { getByLabelText, getByRole, getByTestId, findByTestId } =
-      renderWithProviders(<WatchedMovie {...props} />, {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
-    expect(await findByTestId("datePicker")).toBeInTheDocument();
+    expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: /10th/ }));
+    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(getByTestId("CalendarCheckIcon"));
+    fireEvent.click(screen.getByTestId("CalendarCheckIcon"));
 
     expect(props.onSave).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -200,18 +189,17 @@ describe("watched-movie", () => {
   it("should call onCancel when clicking the cancel button on the date picker", async ({
     props,
   }) => {
-    const { getByLabelText, getByRole, getByTestId, findByTestId } =
-      renderWithProviders(<WatchedMovie {...props} />, {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
-    expect(await findByTestId("datePicker")).toBeInTheDocument();
+    expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: /10th/ }));
+    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(getByTestId("CloseIcon"));
+    fireEvent.click(screen.getByTestId("CloseIcon"));
 
     expect(props.onCancel).toHaveBeenCalled();
 
@@ -219,31 +207,27 @@ describe("watched-movie", () => {
   });
 
   it("should call onCancel when clicking the backdrop", async ({ props }) => {
-    const { getByLabelText } = renderWithProviders(
-      <WatchedMovie {...props} isEditing />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<WatchedMovie {...props} isEditing />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
     expect(props.onCancel).toHaveBeenCalled();
   });
 
   it("should call onDelete with the correct movie data", async ({ props }) => {
-    const { getByLabelText, getByRole, getByTestId, findByTestId } =
-      renderWithProviders(<WatchedMovie {...props} />, {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByLabelText("Test Movie"));
+    fireEvent.click(screen.getByLabelText("Test Movie"));
 
-    expect(await findByTestId("datePicker")).toBeInTheDocument();
+    expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: /10th/ }));
+    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(getByTestId("DeleteIcon"));
+    fireEvent.click(screen.getByTestId("DeleteIcon"));
 
     expect(props.onCancel).toHaveBeenCalled();
     expect(props.onDelete).toHaveBeenCalledWith(props.movie);

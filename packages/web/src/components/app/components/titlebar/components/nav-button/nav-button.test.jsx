@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import NavButton from "./nav-button";
 import { vi } from "vitest";
 
@@ -14,49 +14,45 @@ describe("nav-button", () => {
   });
 
   it("should navigate to the provided href", () => {
-    const { getByRole } = render(
-      <NavButton href="/test">Test Button</NavButton>
-    );
-    fireEvent.click(getByRole("button", { name: "Test Button" }));
+    render(<NavButton href="/test">Test Button</NavButton>);
+    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
     expect(navigateMock).toBeCalledWith("/test");
   });
 
   it("should call the provided onClick", () => {
     const onClick = vi.fn();
-    const { getByRole } = render(
-      <NavButton onClick={onClick}>Test Button</NavButton>
-    );
-    fireEvent.click(getByRole("button", { name: "Test Button" }));
+    render(<NavButton onClick={onClick}>Test Button</NavButton>);
+    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
     expect(onClick).toHaveBeenCalled();
   });
 
   it("should prefer onClick over the href if both are provided", () => {
     const onClick = vi.fn();
-    const { getByRole } = render(
+    render(
       <NavButton herf="/test" onClick={onClick}>
         Test Button
       </NavButton>
     );
-    fireEvent.click(getByRole("button", { name: "Test Button" }));
+    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
     expect(onClick).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
   });
 
   it("should render the provided children", () => {
-    const { getByText } = render(
+    render(
       <NavButton herf="/test">
         <div>Content</div>
       </NavButton>
     );
-    expect(getByText("Content")).toBeInTheDocument();
+    expect(screen.getByText("Content")).toBeInTheDocument();
   });
 
   it("should pass through props to the button", () => {
-    const { getByLabelText } = render(
+    render(
       <NavButton herf="/test" aria-label="testButton">
         Test Button
       </NavButton>
     );
-    expect(getByLabelText("testButton")).toBeInTheDocument();
+    expect(screen.getByLabelText("testButton")).toBeInTheDocument();
   });
 });

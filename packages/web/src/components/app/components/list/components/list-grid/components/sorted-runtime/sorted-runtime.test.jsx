@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { fireEvent, render, within, screen } from "@testing-library/react";
 import SortedRuntime from "./sorted-runtime";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -50,34 +50,36 @@ describe("sorted-runtime", () => {
   });
 
   it("should render correctly when the order is ASC", ({ props }) => {
-    const { getByTestId } = render(<SortedRuntime {...props} />);
+    render(<SortedRuntime {...props} />);
 
     expect(
-      within(getByTestId("runtime").childNodes[0]).getByText(/Short/)
+      within(screen.getByTestId("runtime").childNodes[0]).getByText(/Short/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[0]).getByText("Movie 1")
-    ).toBeInTheDocument();
-
-    expect(
-      within(getByTestId("runtime").childNodes[1]).getByText(/Regular/)
-    ).toBeInTheDocument();
-    expect(
-      within(getByTestId("runtime").childNodes[1]).getByText("Movie 2")
+      within(screen.getByTestId("runtime").childNodes[0]).getByText("Movie 1")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("runtime").childNodes[2]).getByText(/Long/)
+      within(screen.getByTestId("runtime").childNodes[1]).getByText(/Regular/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[2]).getByText("Movie 3")
+      within(screen.getByTestId("runtime").childNodes[1]).getByText("Movie 2")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("runtime").childNodes[3]).getByText(/No Runtime/)
+      within(screen.getByTestId("runtime").childNodes[2]).getByText(/Long/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[3]).getByText("Movie 4")
+      within(screen.getByTestId("runtime").childNodes[2]).getByText("Movie 3")
+    ).toBeInTheDocument();
+
+    expect(
+      within(screen.getByTestId("runtime").childNodes[3]).getByText(
+        /No Runtime/
+      )
+    ).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("runtime").childNodes[3]).getByText("Movie 4")
     ).toBeInTheDocument();
   });
 
@@ -85,41 +87,45 @@ describe("sorted-runtime", () => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { getByTestId } = render(<SortedRuntime {...props} />);
+    render(<SortedRuntime {...props} />);
 
     expect(
-      within(getByTestId("runtime").childNodes[0]).getByText(/Long/)
+      within(screen.getByTestId("runtime").childNodes[0]).getByText(/Long/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[0]).getByText("Movie 3")
-    ).toBeInTheDocument();
-
-    expect(
-      within(getByTestId("runtime").childNodes[1]).getByText(/Regular/)
-    ).toBeInTheDocument();
-    expect(
-      within(getByTestId("runtime").childNodes[1]).getByText("Movie 2")
+      within(screen.getByTestId("runtime").childNodes[0]).getByText("Movie 3")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("runtime").childNodes[2]).getByText(/Short/)
+      within(screen.getByTestId("runtime").childNodes[1]).getByText(/Regular/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[2]).getByText("Movie 1")
+      within(screen.getByTestId("runtime").childNodes[1]).getByText("Movie 2")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("runtime").childNodes[3]).getByText(/No Runtime/)
+      within(screen.getByTestId("runtime").childNodes[2]).getByText(/Short/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("runtime").childNodes[3]).getByText("Movie 4")
+      within(screen.getByTestId("runtime").childNodes[2]).getByText("Movie 1")
+    ).toBeInTheDocument();
+
+    expect(
+      within(screen.getByTestId("runtime").childNodes[3]).getByText(
+        /No Runtime/
+      )
+    ).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("runtime").childNodes[3]).getByText("Movie 4")
     ).toBeInTheDocument();
   });
 
   it("should call the edit handler", ({ props }) => {
-    const { getByText } = render(<SortedRuntime {...props} />);
+    render(<SortedRuntime {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -127,9 +133,11 @@ describe("sorted-runtime", () => {
   });
 
   it("should call the mark watched handler", ({ props }) => {
-    const { getByText } = render(<SortedRuntime {...props} />);
+    render(<SortedRuntime {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Mark Watched",
+      })
     );
     expect(props.onMarkWatched).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -137,9 +145,11 @@ describe("sorted-runtime", () => {
   });
 
   it("should call the delete handler", ({ props }) => {
-    const { getByText } = render(<SortedRuntime {...props} />);
+    render(<SortedRuntime {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Delete" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })

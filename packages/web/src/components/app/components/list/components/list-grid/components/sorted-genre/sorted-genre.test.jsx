@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { fireEvent, render, within, screen } from "@testing-library/react";
 import SortedGenre from "./sorted-genre";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -50,34 +50,34 @@ describe("sorted-genre", () => {
   });
 
   it("should render correctly when the order is ASC", ({ props }) => {
-    const { getByTestId } = render(<SortedGenre {...props} />);
+    render(<SortedGenre {...props} />);
 
     expect(
-      within(getByTestId("genre").childNodes[0]).getByText(/Comedy/)
+      within(screen.getByTestId("genre").childNodes[0]).getByText(/Comedy/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[0]).getByText("Movie 1")
-    ).toBeInTheDocument();
-
-    expect(
-      within(getByTestId("genre").childNodes[1]).getByText(/Drama/)
-    ).toBeInTheDocument();
-    expect(
-      within(getByTestId("genre").childNodes[1]).getByText("Movie 2")
+      within(screen.getByTestId("genre").childNodes[0]).getByText("Movie 1")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("genre").childNodes[2]).getByText(/Action/)
+      within(screen.getByTestId("genre").childNodes[1]).getByText(/Drama/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[2]).getByText("Movie 3")
+      within(screen.getByTestId("genre").childNodes[1]).getByText("Movie 2")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("genre").childNodes[3]).getByText(/Sci-Fi/)
+      within(screen.getByTestId("genre").childNodes[2]).getByText(/Action/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[3]).getByText("Movie 4")
+      within(screen.getByTestId("genre").childNodes[2]).getByText("Movie 3")
+    ).toBeInTheDocument();
+
+    expect(
+      within(screen.getByTestId("genre").childNodes[3]).getByText(/Sci-Fi/)
+    ).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("genre").childNodes[3]).getByText("Movie 4")
     ).toBeInTheDocument();
   });
 
@@ -85,41 +85,43 @@ describe("sorted-genre", () => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { getByTestId } = render(<SortedGenre {...props} />);
+    render(<SortedGenre {...props} />);
 
     expect(
-      within(getByTestId("genre").childNodes[0]).getByText(/Sci-Fi/)
+      within(screen.getByTestId("genre").childNodes[0]).getByText(/Sci-Fi/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[0]).getByText("Movie 4")
-    ).toBeInTheDocument();
-
-    expect(
-      within(getByTestId("genre").childNodes[1]).getByText(/Action/)
-    ).toBeInTheDocument();
-    expect(
-      within(getByTestId("genre").childNodes[1]).getByText("Movie 3")
+      within(screen.getByTestId("genre").childNodes[0]).getByText("Movie 4")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("genre").childNodes[2]).getByText(/Drama/)
+      within(screen.getByTestId("genre").childNodes[1]).getByText(/Action/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[2]).getByText("Movie 2")
+      within(screen.getByTestId("genre").childNodes[1]).getByText("Movie 3")
     ).toBeInTheDocument();
 
     expect(
-      within(getByTestId("genre").childNodes[3]).getByText(/Comedy/)
+      within(screen.getByTestId("genre").childNodes[2]).getByText(/Drama/)
     ).toBeInTheDocument();
     expect(
-      within(getByTestId("genre").childNodes[3]).getByText("Movie 1")
+      within(screen.getByTestId("genre").childNodes[2]).getByText("Movie 2")
+    ).toBeInTheDocument();
+
+    expect(
+      within(screen.getByTestId("genre").childNodes[3]).getByText(/Comedy/)
+    ).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("genre").childNodes[3]).getByText("Movie 1")
     ).toBeInTheDocument();
   });
 
   it("should call the edit handler", ({ props }) => {
-    const { getByText } = render(<SortedGenre {...props} />);
+    render(<SortedGenre {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -127,9 +129,11 @@ describe("sorted-genre", () => {
   });
 
   it("should call the mark watched handler", ({ props }) => {
-    const { getByText } = render(<SortedGenre {...props} />);
+    render(<SortedGenre {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Mark Watched",
+      })
     );
     expect(props.onMarkWatched).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
@@ -137,9 +141,11 @@ describe("sorted-genre", () => {
   });
 
   it("should call the delete handler", ({ props }) => {
-    const { getByText } = render(<SortedGenre {...props} />);
+    render(<SortedGenre {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Delete" })
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })

@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import NavHamburger from "./nav-hamburger";
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
@@ -11,93 +11,92 @@ describe("nav-hamburger", () => {
   });
 
   it("should render the default nav options", async ({ user }) => {
-    const { getByTestId, findByTestId, findByRole } = renderWithProviders(
-      <NavHamburger />
-    );
+    renderWithProviders(<NavHamburger />);
 
-    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
 
-    await user.click(getByTestId("MenuIcon"));
+    await user.click(screen.getByTestId("MenuIcon"));
 
     expect(
-      await findByRole("menuitem", { name: "Watched" })
+      await screen.findByRole("menuitem", { name: "Watched" })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Saturday/ })
+      await screen.findByRole("menuitem", { name: /Saturday/ })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Family/ })
+      await screen.findByRole("menuitem", { name: /Family/ })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /New List/ })
+      await screen.findByRole("menuitem", { name: /New List/ })
     ).toBeInTheDocument();
   });
 
   it("should render the 'watched' nav options", async ({ user }) => {
-    const { getByTestId, findByTestId, findByRole } = renderWithProviders(
-      <NavHamburger />,
-      {
-        route: "/watched",
-      }
-    );
+    renderWithProviders(<NavHamburger />, {
+      route: "/watched",
+    });
 
-    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
 
-    await user.click(getByTestId("MenuIcon"));
+    await user.click(screen.getByTestId("MenuIcon"));
 
     expect(
-      await findByRole("menuitem", { name: "Movies" })
+      await screen.findByRole("menuitem", { name: "Movies" })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Saturday/ })
+      await screen.findByRole("menuitem", { name: /Saturday/ })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Family/ })
+      await screen.findByRole("menuitem", { name: /Family/ })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /New List/ })
+      await screen.findByRole("menuitem", { name: /New List/ })
     ).toBeInTheDocument();
   });
 
   it("should render the 'pick' nav options", async ({ user }) => {
-    const { getByTestId, getByRole, findByTestId, findByRole } =
-      renderWithProviders(<NavHamburger />, { route: "/pick" });
+    renderWithProviders(<NavHamburger />, { route: "/pick" });
 
-    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
 
-    await user.click(getByTestId("MenuIcon"));
+    await user.click(screen.getByTestId("MenuIcon"));
 
-    expect(getByRole("menuitem", { name: "Pick again" })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
-    expect(getByRole("menuitem", { name: "Watched" })).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Saturday/ })
+      screen.getByRole("menuitem", { name: "Pick again" })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /Family/ })
+      screen.getByRole("menuitem", { name: "Movies" })
     ).toBeInTheDocument();
     expect(
-      await findByRole("menuitem", { name: /New List/ })
+      screen.getByRole("menuitem", { name: "Watched" })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /New List/ })
     ).toBeInTheDocument();
   });
 
   it("should render the default 'create' nav options", async ({ user }) => {
-    const { getByTestId, findByTestId, getByRole } = renderWithProviders(
-      <NavHamburger />,
-      {
-        route: "/create",
-      }
-    );
+    renderWithProviders(<NavHamburger />, {
+      route: "/create",
+    });
 
-    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
 
-    await user.click(getByTestId("MenuIcon"));
+    await user.click(screen.getByTestId("MenuIcon"));
 
-    expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("menuitem", { name: "Movies" })
+    ).toBeInTheDocument();
   });
 
   it("should not render the menu on the 'create' screen when there are no lists created yet", async () => {
-    const { queryByTestId } = render(
+    render(
       <AppContext.Provider value={{ list: undefined }}>
         <MemoryRouter initialEntries={["/create"]}>
           <NavHamburger />
@@ -106,25 +105,26 @@ describe("nav-hamburger", () => {
     );
 
     await waitFor(() => {
-      expect(queryByTestId("MenuIcon")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("MenuIcon")).not.toBeInTheDocument();
     });
   });
 
   it("should close when clicking outside", async ({ user }) => {
-    const { getByTestId, findByTestId, getByRole, queryByRole } =
-      renderWithProviders(<NavHamburger />);
+    renderWithProviders(<NavHamburger />);
 
-    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
 
-    await user.click(getByTestId("MenuIcon"));
+    await user.click(screen.getByTestId("MenuIcon"));
 
-    expect(getByRole("menuitem", { name: "Watched" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("menuitem", { name: "Watched" })
+    ).toBeInTheDocument();
 
     await user.click(document.body);
 
     await waitFor(() =>
       expect(
-        queryByRole("menuitem", { name: "Watched" })
+        screen.queryByRole("menuitem", { name: "Watched" })
       ).not.toBeInTheDocument()
     );
   });

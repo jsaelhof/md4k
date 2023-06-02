@@ -1,4 +1,4 @@
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { sortDirection } from "../../../../../../../../constants/sorts";
 import {
   renderWithProviders,
@@ -8,129 +8,136 @@ import SortNav from "./sort-nav";
 
 describe("sort-nav", () => {
   it("should render all sort options", async () => {
-    const { getByText } = renderWithProviders(<SortNav />);
+    renderWithProviders(<SortNav />);
 
-    expect(getByText("Added")).toBeInTheDocument();
-    expect(getByText("Runtime")).toBeInTheDocument();
-    expect(getByText("Title")).toBeInTheDocument();
+    expect(screen.getByText("Added")).toBeInTheDocument();
+    expect(screen.getByText("Runtime")).toBeInTheDocument();
+    expect(screen.getByText("Title")).toBeInTheDocument();
   });
 
   it("should select added desc by default", async () => {
-    const { getByText } = renderWithProvidersAsRoute(
-      <SortNav />,
-      "/list/*",
-      "/list/addedOn/desc"
-    );
+    renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
 
-    expect(getByText("Added")).toHaveAttribute("data-active", "true");
-    expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.DESC);
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
-    expect(getByText("Title")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Added")).toHaveAttribute(
+      "data-sort",
+      sortDirection.DESC
+    );
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
   });
 
   it("should toggle runtime", async () => {
-    const { getByText } = renderWithProvidersAsRoute(
-      <SortNav />,
-      "/list/*",
-      "/list/addedOn/desc"
-    );
+    renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
 
-    fireEvent.click(getByText("Runtime"));
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "true");
-    expect(getByText("Runtime")).toHaveAttribute(
+    fireEvent.click(screen.getByText("Runtime"));
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
       sortDirection.ASC
     );
-    expect(getByText("Added")).toHaveAttribute("data-active", "false");
-    expect(getByText("Title")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
 
-    fireEvent.click(getByText("Runtime"));
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "true");
-    expect(getByText("Runtime")).toHaveAttribute(
+    fireEvent.click(screen.getByText("Runtime"));
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
       sortDirection.DESC
     );
-    expect(getByText("Added")).toHaveAttribute("data-active", "false");
-    expect(getByText("Title")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
   });
 
   it("should toggle title", async () => {
-    const { getByText } = renderWithProvidersAsRoute(
-      <SortNav />,
-      "/list/*",
-      "/list/addedOn/desc"
-    );
+    renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
 
-    fireEvent.click(getByText("Title"));
-    expect(getByText("Title")).toHaveAttribute("data-active", "true");
-    expect(getByText("Title")).toHaveAttribute("data-sort", sortDirection.ASC);
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
-    expect(getByText("Added")).toHaveAttribute("data-active", "false");
-
-    fireEvent.click(getByText("Title"));
-    expect(getByText("Title")).toHaveAttribute("data-active", "true");
-    expect(getByText("Title")).toHaveAttribute("data-sort", sortDirection.DESC);
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
-    expect(getByText("Added")).toHaveAttribute("data-active", "false");
-  });
-
-  it("should toggle added", async () => {
-    const { getByText } = renderWithProvidersAsRoute(
-      <SortNav />,
-      "/list/*",
-      "/list/addedOn/desc"
-    );
-
-    fireEvent.click(getByText("Added"));
-    expect(getByText("Added")).toHaveAttribute("data-active", "true");
-    expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.ASC);
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
-    expect(getByText("Title")).toHaveAttribute("data-active", "false");
-
-    fireEvent.click(getByText("Added"));
-    expect(getByText("Added")).toHaveAttribute("data-active", "true");
-    expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.DESC);
-    expect(getByText("Runtime")).toHaveAttribute("data-active", "false");
-    expect(getByText("Title")).toHaveAttribute("data-active", "false");
-  });
-
-  it("should show the correct icon for the sort direction and option", async () => {
-    const { getByText, getByTestId } = renderWithProvidersAsRoute(
-      <SortNav />,
-      "/list/*",
-      "/list/addedOn/desc"
-    );
-
-    fireEvent.click(getByText("Title"));
-    expect(getByText("Title")).toHaveAttribute("data-sort", sortDirection.ASC);
-    expect(getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
-
-    fireEvent.click(getByText("Title"));
-    expect(getByText("Title")).toHaveAttribute("data-sort", sortDirection.DESC);
-    expect(getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
-
-    fireEvent.click(getByText("Runtime"));
-    expect(getByText("Runtime")).toHaveAttribute(
+    fireEvent.click(screen.getByText("Title"));
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
       sortDirection.ASC
     );
-    expect(getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
 
-    fireEvent.click(getByText("Runtime"));
-    expect(getByText("Runtime")).toHaveAttribute(
+    fireEvent.click(screen.getByText("Title"));
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
       sortDirection.DESC
     );
-    expect(getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
+  });
+
+  it("should toggle added", async () => {
+    renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
+
+    fireEvent.click(screen.getByText("Added"));
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Added")).toHaveAttribute(
+      "data-sort",
+      sortDirection.ASC
+    );
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
+
+    fireEvent.click(screen.getByText("Added"));
+    expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
+    expect(screen.getByText("Added")).toHaveAttribute(
+      "data-sort",
+      sortDirection.DESC
+    );
+    expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
+    expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
+  });
+
+  it("should show the correct icon for the sort direction and option", async () => {
+    renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
+
+    fireEvent.click(screen.getByText("Title"));
+    expect(screen.getByText("Title")).toHaveAttribute(
+      "data-sort",
+      sortDirection.ASC
+    );
+    expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Title"));
+    expect(screen.getByText("Title")).toHaveAttribute(
+      "data-sort",
+      sortDirection.DESC
+    );
+    expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Runtime"));
+    expect(screen.getByText("Runtime")).toHaveAttribute(
+      "data-sort",
+      sortDirection.ASC
+    );
+    expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Runtime"));
+    expect(screen.getByText("Runtime")).toHaveAttribute(
+      "data-sort",
+      sortDirection.DESC
+    );
+    expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
 
     // Added uses the opposite icon for desc (Down) and defaults to "desc" first
-    fireEvent.click(getByText("Added"));
-    expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.DESC);
-    expect(getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Added"));
+    expect(screen.getByText("Added")).toHaveAttribute(
+      "data-sort",
+      sortDirection.DESC
+    );
+    expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
 
     // Added uses the opposite icon for asc (Up)
-    fireEvent.click(getByText("Added"));
-    expect(getByText("Added")).toHaveAttribute("data-sort", sortDirection.ASC);
-    expect(getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Added"));
+    expect(screen.getByText("Added")).toHaveAttribute(
+      "data-sort",
+      sortDirection.ASC
+    );
+    expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
   });
 });

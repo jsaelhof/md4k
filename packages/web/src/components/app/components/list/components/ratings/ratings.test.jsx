@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ratingsSource } from "md4k-constants";
 import Ratings from "./ratings";
 
 describe("ratings", () => {
   it("should render the ratings correctly", () => {
-    const { getByText, getByAltText } = render(
+    render(
       <Ratings
         ratings={{
           id: "tt0120737",
@@ -14,20 +14,24 @@ describe("ratings", () => {
         }}
       />
     );
-    expect(getByAltText(ratingsSource.IMDB)).toBeInTheDocument();
-    expect(getByText("88%")).toBeInTheDocument();
-    expect(getByAltText(ratingsSource.ROTTEN_TOMATOES)).toBeInTheDocument();
-    expect(getByText("91%")).toBeInTheDocument();
-    expect(getByAltText(ratingsSource.METACRITIC)).toBeInTheDocument();
-    expect(getByText("92%")).toBeInTheDocument();
+    expect(screen.getByAltText(ratingsSource.IMDB)).toBeInTheDocument();
+    expect(screen.getByText("88%")).toBeInTheDocument();
+    expect(
+      screen.getByAltText(ratingsSource.ROTTEN_TOMATOES)
+    ).toBeInTheDocument();
+    expect(screen.getByText("91%")).toBeInTheDocument();
+    expect(screen.getByAltText(ratingsSource.METACRITIC)).toBeInTheDocument();
+    expect(screen.getByText("92%")).toBeInTheDocument();
   });
 
   it("should render null when no ratings are provided", () => {
-    const { queryByAltText } = render(<Ratings />);
-    expect(queryByAltText(ratingsSource.IMDB)).not.toBeInTheDocument();
+    render(<Ratings />);
+    expect(screen.queryByAltText(ratingsSource.IMDB)).not.toBeInTheDocument();
     expect(
-      queryByAltText(ratingsSource.ROTTEN_TOMATOES)
+      screen.queryByAltText(ratingsSource.ROTTEN_TOMATOES)
     ).not.toBeInTheDocument();
-    expect(queryByAltText(ratingsSource.METACRITIC)).not.toBeInTheDocument();
+    expect(
+      screen.queryByAltText(ratingsSource.METACRITIC)
+    ).not.toBeInTheDocument();
   });
 });

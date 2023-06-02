@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Trailer from "./trailer";
 import { vi } from "vitest";
 
@@ -16,11 +16,9 @@ describe("trailer", () => {
     trailerId,
     onComplete,
   }) => {
-    const { getByLabelText } = render(
-      <Trailer overlay trailerId={trailerId} onComplete={onComplete} />
-    );
+    render(<Trailer overlay trailerId={trailerId} onComplete={onComplete} />);
 
-    fireEvent.click(getByLabelText("Trailer"));
+    fireEvent.click(screen.getByLabelText("Trailer"));
     expect(onComplete).toHaveBeenCalled();
   });
 });

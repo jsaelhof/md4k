@@ -1,4 +1,4 @@
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ListGrid from "./list-grid";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
@@ -30,85 +30,83 @@ describe("list-grid", () => {
   });
 
   it("should render the addedOn list", async ({ props }) => {
-    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
+    renderWithProviders(<ListGrid {...props} />, {
       route: "/addedOn/asc",
     });
-    expect(getByTestId("addedOn")).toBeInTheDocument();
+    expect(screen.getByTestId("addedOn")).toBeInTheDocument();
   });
 
   it("should render the title list", async ({ props }) => {
-    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
+    renderWithProviders(<ListGrid {...props} />, {
       route: "/title/asc",
     });
-    expect(getByTestId("title")).toBeInTheDocument();
+    expect(screen.getByTestId("title")).toBeInTheDocument();
   });
 
   it("should render the runtime list", async ({ props }) => {
-    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
+    renderWithProviders(<ListGrid {...props} />, {
       route: "/runtime/asc",
     });
-    expect(getByTestId("runtime")).toBeInTheDocument();
+    expect(screen.getByTestId("runtime")).toBeInTheDocument();
   });
 
   it("should render the genre list", async ({ props }) => {
-    const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
+    renderWithProviders(<ListGrid {...props} />, {
       route: "/genre/asc",
     });
-    expect(getByTestId("genre")).toBeInTheDocument();
+    expect(screen.getByTestId("genre")).toBeInTheDocument();
   });
 
   it("should render the empty list when there are no movies", async ({
     props,
   }) => {
-    const { getByRole } = renderWithProviders(
-      <ListGrid {...props} movies={[]} />,
-      { route: "/addedOn/asc" }
-    );
-    expect(getByRole("button", { name: "Add a Movie" })).toBeInTheDocument();
+    renderWithProviders(<ListGrid {...props} movies={[]} />, {
+      route: "/addedOn/asc",
+    });
+    expect(
+      screen.getByRole("button", { name: "Add a Movie" })
+    ).toBeInTheDocument();
   });
 
   it("should render null when movies is undefined", async ({ props }) => {
-    const { queryByRole, queryByText } = renderWithProviders(
-      <ListGrid {...props} movies={undefined} />,
-      { route: "/addedOn/asc" }
-    );
-    expect(queryByText(/Movie/)).not.toBeInTheDocument();
+    renderWithProviders(<ListGrid {...props} movies={undefined} />, {
+      route: "/addedOn/asc",
+    });
+    expect(screen.queryByText(/Movie/)).not.toBeInTheDocument();
     expect(
-      queryByRole("button", { name: "Add a Movie" })
+      screen.queryByRole("button", { name: "Add a Movie" })
     ).not.toBeInTheDocument();
   });
 
   it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async ({
     props,
   }) => {
-    const { getByText, getByRole, queryByText } = renderWithProviders(
-      <ListGrid {...props} />,
-      {
-        route: "/addedOn/asc",
-      }
-    );
+    renderWithProviders(<ListGrid {...props} />, {
+      route: "/addedOn/asc",
+    });
 
-    fireEvent.click(getByText("Movie 1"));
-    expect(getByText("'Movie 1' will be removed")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Movie 1"));
+    expect(screen.getByText("'Movie 1' will be removed")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: "Delete" }));
+    fireEvent.click(screen.getByRole("button", { name: "Delete" }));
     expect(props.onRemoveMovie).toHaveBeenCalledWith(props.movies[0]);
-    expect(queryByText("'Movie 1' will be removed")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("'Movie 1' will be removed")
+    ).not.toBeInTheDocument();
   });
 
   it("should render the delete confirmation and cancel correctly when deleting a movie", async ({
     props,
   }) => {
-    const { getByText, getByRole, queryByText } = renderWithProviders(
-      <ListGrid {...props} />,
-      { route: "/addedOn/asc" }
-    );
+    renderWithProviders(<ListGrid {...props} />, { route: "/addedOn/asc" });
 
-    fireEvent.click(getByText("Movie 1"));
-    expect(getByText("'Movie 1' will be removed")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Movie 1"));
+    expect(screen.getByText("'Movie 1' will be removed")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: "Cancel" }));
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
     expect(props.onRemoveMovie).not.toHaveBeenCalled();
-    expect(queryByText("'Movie 1' will be removed")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("'Movie 1' will be removed")
+    ).not.toBeInTheDocument();
   });
 });

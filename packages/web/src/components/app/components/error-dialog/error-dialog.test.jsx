@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ErrorDialog from "./error-dialog";
 import { vi } from "vitest";
 
@@ -12,20 +12,20 @@ describe("error-dialog", () => {
   });
 
   it("should display the content when open", ({ props }) => {
-    const { getByText } = render(<ErrorDialog {...props} />);
-    expect(getByText(props.content)).toBeInTheDocument();
+    render(<ErrorDialog {...props} />);
+    expect(screen.getByText(props.content)).toBeInTheDocument();
   });
 
   it("should not display the content when closed", ({ props }) => {
-    const { queryByText } = render(<ErrorDialog {...props} open={false} />);
-    expect(queryByText(props.content)).not.toBeInTheDocument();
+    render(<ErrorDialog {...props} open={false} />);
+    expect(screen.queryByText(props.content)).not.toBeInTheDocument();
   });
 
   it("should call onConfirm when the dialog Ok button is pressed", ({
     props,
   }) => {
-    const { getByRole } = render(<ErrorDialog {...props} />);
-    fireEvent.click(getByRole("button", { name: "Ok" }));
+    render(<ErrorDialog {...props} />);
+    fireEvent.click(screen.getByRole("button", { name: "Ok" }));
     expect(props.onConfirm).toHaveBeenCalled();
   });
 });

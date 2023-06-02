@@ -1,5 +1,5 @@
 import FullDetail from "./full-detail";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, screen } from "@testing-library/react";
 import { EDIT_MOVIE } from "../../../../graphql/mutations";
 import { sources } from "md4k-constants";
 import { vi, beforeEach } from "vitest";
@@ -179,33 +179,29 @@ describe("full-detail", () => {
   });
 
   it("should render the movie details", async ({ props }) => {
-    const { getByText, findByLabelText } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    expect(await findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
-    expect(getByText("1h 59m")).toBeInTheDocument();
-    expect(getByText("2002")).toBeInTheDocument();
-    expect(getByText("Action")).toBeInTheDocument();
-    expect(getByText("PG-13")).toBeInTheDocument();
-    expect(getByText("Wounded to the brink of death")).toBeInTheDocument();
+    expect(await screen.findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
+    expect(screen.getByText("1h 59m")).toBeInTheDocument();
+    expect(screen.getByText("2002")).toBeInTheDocument();
+    expect(screen.getByText("Action")).toBeInTheDocument();
+    expect(screen.getByText("PG-13")).toBeInTheDocument();
+    expect(
+      screen.getByText("Wounded to the brink of death")
+    ).toBeInTheDocument();
   });
 
   it("should search when the movie poster is clicked", async ({ props }) => {
     window.open = vi.fn();
 
-    const { getByLabelText, findByLabelText } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    expect(await findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
-    fireEvent.click(getByLabelText(/Bourne.*Poster/));
+    expect(await screen.findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/themoviedb.*Bourne/),
       "moviedb"
@@ -213,31 +209,30 @@ describe("full-detail", () => {
   });
 
   it("should show the close button", async ({ props }) => {
-    const { getByTestId } = renderWithProviders(
-      <FullDetail {...props} showCloseButton={true} />,
-      { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
-    );
+    renderWithProviders(<FullDetail {...props} showCloseButton={true} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    fireEvent.click(getByTestId("CloseThickIcon"));
+    fireEvent.click(screen.getByTestId("CloseThickIcon"));
     expect(props.onClose).toHaveBeenCalled();
   });
 
   it("should show the background saved to the DB if present", async ({
     props,
   }) => {
-    const { findByTestId } = renderWithProviders(<FullDetail {...props} />, {
+    renderWithProviders(<FullDetail {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(
-      await findByTestId("http://image.tmdb.org/t/1.jpg")
+      await screen.findByTestId("http://image.tmdb.org/t/1.jpg")
     ).toBeInTheDocument();
   });
 
   it("should show the first backdrop in the list if no background is in the DB", async ({
     props,
   }) => {
-    const { findByTestId } = renderWithProviders(
+    renderWithProviders(
       <FullDetail
         {...props}
         movie={{ ...props.movie, background: undefined }}
@@ -246,7 +241,7 @@ describe("full-detail", () => {
     );
 
     expect(
-      await findByTestId("http://image.tmdb.org/t/1.jpg")
+      await screen.findByTestId("http://image.tmdb.org/t/1.jpg")
     ).toBeInTheDocument();
   });
 
@@ -254,18 +249,15 @@ describe("full-detail", () => {
     props,
     user,
   }) => {
-    const { getByTestId, findByTestId } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [
-          GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
-          EDIT_MOVIE_MUTATION_PREV_BG,
-        ],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [
+        GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+        EDIT_MOVIE_MUTATION_PREV_BG,
+      ],
+    });
 
-    expect(await findByTestId("ChevronLeftIcon")).toBeInTheDocument();
-    await user.click(getByTestId("ChevronLeftIcon"));
+    expect(await screen.findByTestId("ChevronLeftIcon")).toBeInTheDocument();
+    await user.click(screen.getByTestId("ChevronLeftIcon"));
     await waitFor(() =>
       expect(EDIT_MOVIE_MUTATION_PREV_BG.newData).toHaveBeenCalled()
     );
@@ -275,67 +267,59 @@ describe("full-detail", () => {
     props,
     user,
   }) => {
-    const { getByTestId, findByTestId } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [
-          GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
-          EDIT_MOVIE_MUTATION_NEXT_BG,
-        ],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [
+        GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+        EDIT_MOVIE_MUTATION_NEXT_BG,
+      ],
+    });
 
-    expect(await findByTestId("ChevronRightIcon")).toBeInTheDocument();
-    await user.click(getByTestId("ChevronRightIcon"));
+    expect(await screen.findByTestId("ChevronRightIcon")).toBeInTheDocument();
+    await user.click(screen.getByTestId("ChevronRightIcon"));
     await waitFor(() =>
       expect(EDIT_MOVIE_MUTATION_NEXT_BG.newData).toHaveBeenCalled()
     );
   });
 
   it("should launch the trailer", async ({ props }) => {
-    const { findByRole, getByRole, getByLabelText, queryByLabelText } =
-      renderWithProviders(<FullDetail {...props} />, {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
     expect(
-      await findByRole("button", { name: "Watch Trailer" })
+      await screen.findByRole("button", { name: "Watch Trailer" })
     ).toBeInTheDocument();
-    expect(queryByLabelText("Trailer")).not.toBeInTheDocument();
-    fireEvent.click(getByRole("button", { name: "Watch Trailer" }));
-    expect(getByLabelText("Trailer")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Trailer")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Watch Trailer" }));
+    expect(screen.getByLabelText("Trailer")).toBeInTheDocument();
   });
 
   it("should launch the trailer as an overlay", async ({ props }) => {
     // Mock a 500 pixel width
     window.matchMedia = createMatchMedia(500);
 
-    const { findByRole, getByRole, getByLabelText, queryByLabelText } =
-      renderWithProviders(<FullDetail {...props} />, {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      });
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
     expect(
-      await findByRole("button", { name: "Watch Trailer" })
+      await screen.findByRole("button", { name: "Watch Trailer" })
     ).toBeInTheDocument();
-    expect(queryByLabelText("Trailer")).not.toBeInTheDocument();
-    fireEvent.click(getByRole("button", { name: "Watch Trailer" }));
-    const trailerElement = getByLabelText("Trailer");
+    expect(screen.queryByLabelText("Trailer")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Watch Trailer" }));
+    const trailerElement = screen.getByLabelText("Trailer");
     expect(document.body).toContainElement(trailerElement);
   });
 
   it("should show a logo for the source and stream the movie when clicked", async ({
     props,
   }) => {
-    const { findByAltText, getByAltText } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
-    expect(await findByAltText(sourceLabels[1])).toBeInTheDocument();
-    fireEvent.click(getByAltText(sourceLabels[1]));
+    expect(await screen.findByAltText(sourceLabels[1])).toBeInTheDocument();
+    fireEvent.click(screen.getByAltText(sourceLabels[1]));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/netflix.*Bourne/),
       "movieView"
@@ -343,18 +327,20 @@ describe("full-detail", () => {
   });
 
   it("should not stream when the source logo is DVD", async ({ props }) => {
-    const { findByAltText, getByAltText } = renderWithProviders(
+    renderWithProviders(
       <FullDetail {...props} movie={{ ...props.movie, source: sources.DVD }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
-    expect(await findByAltText(sourceLabels[sources.DVD])).toBeInTheDocument();
-    fireEvent.click(getByAltText(sourceLabels[sources.DVD]));
+    expect(
+      await screen.findByAltText(sourceLabels[sources.DVD])
+    ).toBeInTheDocument();
+    fireEvent.click(screen.getByAltText(sourceLabels[sources.DVD]));
     expect(window.open).not.toHaveBeenCalled();
   });
 
   it("should not stream when the source logo is None", async ({ props }) => {
-    const { findByAltText, getByAltText } = renderWithProviders(
+    renderWithProviders(
       <FullDetail
         {...props}
         movie={{ ...props.movie, source: sources.NONE }}
@@ -362,8 +348,10 @@ describe("full-detail", () => {
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
-    expect(await findByAltText(sourceLabels[sources.NONE])).toBeInTheDocument();
-    fireEvent.click(getByAltText(sourceLabels[sources.NONE]));
+    expect(
+      await screen.findByAltText(sourceLabels[sources.NONE])
+    ).toBeInTheDocument();
+    fireEvent.click(screen.getByAltText(sourceLabels[sources.NONE]));
     expect(window.open).not.toHaveBeenCalled();
   });
 
@@ -372,17 +360,14 @@ describe("full-detail", () => {
   }) => {
     window.open = vi.fn();
 
-    const { findByRole, getByRole } = renderWithProviders(
-      <FullDetail {...props} />,
-      {
-        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
-      }
-    );
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
 
     expect(
-      await findByRole("button", { name: "Stream Movie" })
+      await screen.findByRole("button", { name: "Stream Movie" })
     ).toBeInTheDocument();
-    fireEvent.click(getByRole("button", { name: "Stream Movie" }));
+    fireEvent.click(screen.getByRole("button", { name: "Stream Movie" }));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/netflix.*Bourne/),
       "movieView"
@@ -392,14 +377,14 @@ describe("full-detail", () => {
   it("should not show a stream option when the source is not streamable", async ({
     props,
   }) => {
-    const { queryByRole } = renderWithProviders(
+    renderWithProviders(
       <FullDetail {...props} movie={{ ...props.movie, source: sources.DVD }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
     await waitFor(() =>
       expect(
-        queryByRole("button", { name: "Stream Movie" })
+        screen.queryByRole("button", { name: "Stream Movie" })
       ).not.toBeInTheDocument()
     );
   });
@@ -409,7 +394,7 @@ describe("full-detail", () => {
   }) => {
     window.open = vi.fn();
 
-    const { findByRole, getByRole } = renderWithProviders(
+    renderWithProviders(
       <FullDetail
         {...props}
         movie={{ ...props.movie, source: sources.NONE }}
@@ -418,9 +403,9 @@ describe("full-detail", () => {
     );
 
     expect(
-      await findByRole("button", { name: "Torrent Search" })
+      await screen.findByRole("button", { name: "Torrent Search" })
     ).toBeInTheDocument();
-    fireEvent.click(getByRole("button", { name: "Torrent Search" }));
+    fireEvent.click(screen.getByRole("button", { name: "Torrent Search" }));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/1337x.to.*Bourne/),
       "movieView"
@@ -428,14 +413,14 @@ describe("full-detail", () => {
   });
 
   it("should render the footer buttons", async ({ props }) => {
-    const { findByAltText } = renderWithProviders(<FullDetail {...props} />, {
+    renderWithProviders(<FullDetail {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    expect(await findByAltText("Search TMDB")).toBeInTheDocument();
-    expect(await findByAltText("Search IMDB")).toBeInTheDocument();
+    expect(await screen.findByAltText("Search TMDB")).toBeInTheDocument();
+    expect(await screen.findByAltText("Search IMDB")).toBeInTheDocument();
     expect(
-      await findByAltText("Search Common Sense Media")
+      await screen.findByAltText("Search Common Sense Media")
     ).toBeInTheDocument();
   });
 });

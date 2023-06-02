@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { fireEvent, render, within, screen } from "@testing-library/react";
 import SortedRating from "./sorted-rating";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -85,7 +85,7 @@ describe("sorted-rating", () => {
   });
 
   it("should only render sections with movies", ({ props }) => {
-    const { getAllByLabelText } = render(
+    render(
       <SortedRating
         {...props}
         movies={props.movies.filter(
@@ -96,7 +96,7 @@ describe("sorted-rating", () => {
     );
 
     // Sorted Sections
-    const sections = getAllByLabelText(/Star/);
+    const sections = screen.getAllByLabelText(/Star/);
     expect(sections).toHaveLength(3);
     expect(sections[0]).toHaveAttribute("aria-label", "1 Star");
     expect(sections[1]).toHaveAttribute("aria-label", "2 Star");
@@ -104,12 +104,10 @@ describe("sorted-rating", () => {
   });
 
   it("should render correctly when the order is ASC", ({ props }) => {
-    const { getByLabelText, getAllByLabelText } = render(
-      <SortedRating {...props} />
-    );
+    render(<SortedRating {...props} />);
 
     // Sorted Sections
-    const sections = getAllByLabelText(/Star/);
+    const sections = screen.getAllByLabelText(/Star/);
     expect(sections[0]).toHaveAttribute("aria-label", "0 Star");
     expect(sections[1]).toHaveAttribute("aria-label", "1 Star");
     expect(sections[2]).toHaveAttribute("aria-label", "2 Star");
@@ -119,14 +117,14 @@ describe("sorted-rating", () => {
 
     // 0 Star Section
     const section0 = within(
-      getByLabelText("0 Star").childNodes[1]
+      screen.getByLabelText("0 Star").childNodes[1]
     ).getAllByText(/Movie 0/);
     expect(section0).toHaveLength(1);
     expect(section0[0]).toHaveAttribute("aria-label", "Movie 0");
 
     // 1 Star Section
     const section1 = within(
-      getByLabelText("1 Star").childNodes[1]
+      screen.getByLabelText("1 Star").childNodes[1]
     ).getAllByText(/Movie 1/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
@@ -134,7 +132,7 @@ describe("sorted-rating", () => {
 
     // 2 Star Section
     const section2 = within(
-      getByLabelText("2 Star").childNodes[1]
+      screen.getByLabelText("2 Star").childNodes[1]
     ).getAllByText(/Movie 2/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
@@ -142,7 +140,7 @@ describe("sorted-rating", () => {
 
     // 3 Star Section
     const section3 = within(
-      getByLabelText("3 Star").childNodes[1]
+      screen.getByLabelText("3 Star").childNodes[1]
     ).getAllByText(/Movie 3/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
@@ -150,7 +148,7 @@ describe("sorted-rating", () => {
 
     // 4 Star Section
     const section4 = within(
-      getByLabelText("4 Star").childNodes[1]
+      screen.getByLabelText("4 Star").childNodes[1]
     ).getAllByText(/Movie 4/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
@@ -158,7 +156,7 @@ describe("sorted-rating", () => {
 
     // 5 Star Section
     const section5 = within(
-      getByLabelText("5 Star").childNodes[1]
+      screen.getByLabelText("5 Star").childNodes[1]
     ).getAllByText(/Movie 5/);
     expect(section5).toHaveLength(2);
     expect(section5[0]).toHaveAttribute("aria-label", "Movie 5a");
@@ -169,12 +167,10 @@ describe("sorted-rating", () => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { getByLabelText, getAllByLabelText } = render(
-      <SortedRating {...props} />
-    );
+    render(<SortedRating {...props} />);
 
     // Sorted Sections
-    const sections = getAllByLabelText(/Star/);
+    const sections = screen.getAllByLabelText(/Star/);
     expect(sections[0]).toHaveAttribute("aria-label", "5 Star");
     expect(sections[1]).toHaveAttribute("aria-label", "4 Star");
     expect(sections[2]).toHaveAttribute("aria-label", "3 Star");
@@ -184,14 +180,14 @@ describe("sorted-rating", () => {
 
     // 0 Star Section
     const section0 = within(
-      getByLabelText("0 Star").childNodes[1]
+      screen.getByLabelText("0 Star").childNodes[1]
     ).getAllByText(/Movie 0/);
     expect(section0).toHaveLength(1);
     expect(section0[0]).toHaveAttribute("aria-label", "Movie 0");
 
     // 1 Star Section
     const section1 = within(
-      getByLabelText("1 Star").childNodes[1]
+      screen.getByLabelText("1 Star").childNodes[1]
     ).getAllByText(/Movie 1/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
@@ -199,7 +195,7 @@ describe("sorted-rating", () => {
 
     // 2 Star Section
     const section2 = within(
-      getByLabelText("2 Star").childNodes[1]
+      screen.getByLabelText("2 Star").childNodes[1]
     ).getAllByText(/Movie 2/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
@@ -207,7 +203,7 @@ describe("sorted-rating", () => {
 
     // 3 Star Section
     const section3 = within(
-      getByLabelText("3 Star").childNodes[1]
+      screen.getByLabelText("3 Star").childNodes[1]
     ).getAllByText(/Movie 3/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
@@ -215,7 +211,7 @@ describe("sorted-rating", () => {
 
     // 4 Star Section
     const section4 = within(
-      getByLabelText("4 Star").childNodes[1]
+      screen.getByLabelText("4 Star").childNodes[1]
     ).getAllByText(/Movie 4/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
@@ -223,7 +219,7 @@ describe("sorted-rating", () => {
 
     // 5 Star Section
     const section5 = within(
-      getByLabelText("5 Star").childNodes[1]
+      screen.getByLabelText("5 Star").childNodes[1]
     ).getAllByText(/Movie 5/);
     expect(section5).toHaveLength(2);
     expect(section5[0]).toHaveAttribute("aria-label", "Movie 5a");
@@ -231,9 +227,11 @@ describe("sorted-rating", () => {
   });
 
   it("should call the edit handler", ({ props }) => {
-    const { getByText } = render(<SortedRating {...props} />);
+    render(<SortedRating {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", { name: "Edit" })
+      within(screen.getByText("Movie 1a")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1a" })
@@ -241,9 +239,9 @@ describe("sorted-rating", () => {
   });
 
   it("should call the mark watched handler", ({ props }) => {
-    const { getByText } = render(<SortedRating {...props} />);
+    render(<SortedRating {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", {
+      within(screen.getByText("Movie 1a")).getByRole("button", {
         name: "Mark Watched",
       })
     );
@@ -253,9 +251,11 @@ describe("sorted-rating", () => {
   });
 
   it("should call the delete handler", ({ props }) => {
-    const { getByText } = render(<SortedRating {...props} />);
+    render(<SortedRating {...props} />);
     fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", { name: "Delete" })
+      within(screen.getByText("Movie 1a")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1a" })
