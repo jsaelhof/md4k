@@ -20,10 +20,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-added", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -72,7 +70,7 @@ describe("sorted-added", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", () => {
+  it("should render correctly when the order is ASC", ({ props }) => {
     const { getByTestId } = render(<SortedAdded {...props} />);
 
     expect(
@@ -116,7 +114,7 @@ describe("sorted-added", () => {
     expect(section4[1]).toHaveAttribute("aria-label", "Movie 1a");
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
@@ -163,7 +161,7 @@ describe("sorted-added", () => {
     expect(section4[1]).toHaveAttribute("aria-label", "Movie 4b");
   });
 
-  it("should call the edit handler", () => {
+  it("should call the edit handler", ({ props }) => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", { name: "Edit" })
@@ -173,7 +171,7 @@ describe("sorted-added", () => {
     );
   });
 
-  it("should call the mark watched handler", () => {
+  it("should call the mark watched handler", ({ props }) => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", {
@@ -185,7 +183,7 @@ describe("sorted-added", () => {
     );
   });
 
-  it("should call the delete handler", () => {
+  it("should call the delete handler", ({ props }) => {
     const { getByText } = render(<SortedAdded {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", { name: "Delete" })

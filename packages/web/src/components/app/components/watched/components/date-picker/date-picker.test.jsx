@@ -4,10 +4,8 @@ import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 
 describe("date-picker", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       defaultDate: new Date("2022-01-02T12:00:00"),
       onChange: vi.fn(),
       onCancel: vi.fn(),
@@ -16,7 +14,9 @@ describe("date-picker", () => {
     };
   });
 
-  it("should render the date picker without a drawer by default", async () => {
+  it("should render the date picker without a drawer by default", async ({
+    props,
+  }) => {
     const { getByTestId, queryByRole } = renderWithProviders(
       <DatePicker {...props} />
     );
@@ -25,7 +25,9 @@ describe("date-picker", () => {
     expect(getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should render the date picker in a drawer when useDrawer is true", async () => {
+  it("should render the date picker in a drawer when useDrawer is true", async ({
+    props,
+  }) => {
     const { getByTestId, queryByRole } = renderWithProviders(
       <DatePicker {...props} useDrawer />
     );
@@ -34,7 +36,7 @@ describe("date-picker", () => {
     expect(getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should ignore title when not in a drawer", async () => {
+  it("should ignore title when not in a drawer", async ({ props }) => {
     const { queryByText } = renderWithProviders(
       <DatePicker {...props} title="Test Title" />
     );
@@ -42,7 +44,7 @@ describe("date-picker", () => {
     expect(queryByText("Test Title")).not.toBeInTheDocument();
   });
 
-  it("should render the title when in a drawer", async () => {
+  it("should render the title when in a drawer", async ({ props }) => {
     const { queryByText } = renderWithProviders(
       <DatePicker {...props} useDrawer title="Test Title" />
     );
@@ -50,7 +52,7 @@ describe("date-picker", () => {
     expect(queryByText("Test Title")).toBeInTheDocument();
   });
 
-  it("should set the default date", async () => {
+  it("should set the default date", async ({ props }) => {
     const { getByText, getByRole } = renderWithProviders(
       <DatePicker {...props} />
     );
@@ -60,7 +62,7 @@ describe("date-picker", () => {
     );
   });
 
-  it("should call onChange when changing the date", async () => {
+  it("should call onChange when changing the date", async ({ props }) => {
     const { getByRole } = renderWithProviders(<DatePicker {...props} />);
 
     expect(getByRole("button", { name: "2nd January (Sunday)" })).toHaveClass(
@@ -80,21 +82,21 @@ describe("date-picker", () => {
     );
   });
 
-  it("should call onDelete", async () => {
+  it("should call onDelete", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<DatePicker {...props} />);
     expect(getByTestId("DeleteIcon")).toBeInTheDocument();
     fireEvent.click(getByTestId("DeleteIcon"));
     expect(props.onDelete).toHaveBeenCalled();
   });
 
-  it("should call onCancel", async () => {
+  it("should call onCancel", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<DatePicker {...props} />);
     expect(getByTestId("CloseIcon")).toBeInTheDocument();
     fireEvent.click(getByTestId("CloseIcon"));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onSave", async () => {
+  it("should call onSave", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<DatePicker {...props} />);
     expect(getByTestId("CalendarCheckIcon")).toBeInTheDocument();
     fireEvent.click(getByTestId("CalendarCheckIcon"));

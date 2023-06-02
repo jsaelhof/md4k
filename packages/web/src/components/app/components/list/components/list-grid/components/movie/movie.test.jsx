@@ -24,10 +24,8 @@ vi.mock("./components/expanded/expanded", () => ({
 }));
 
 describe("movie", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movie: {
         id: "8502fd8b-165e-4239-965f-b46f8d523829",
         title: "The Bourne Identity",
@@ -55,7 +53,7 @@ describe("movie", () => {
     };
   });
 
-  it("should render a movie list entry", async () => {
+  it("should render a movie list entry", async ({ props }) => {
     const {
       getByTestId,
       getByLabelText,
@@ -90,7 +88,7 @@ describe("movie", () => {
     expect(getByText("Expanded")).toHaveAttribute("data-open", "false");
   });
 
-  it("should render a movie list entry as locked", async () => {
+  it("should render a movie list entry as locked", async ({ props }) => {
     const { getByLabelText } = renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
@@ -98,7 +96,9 @@ describe("movie", () => {
     expect(getByLabelText("Unlock")).toBeInTheDocument();
   });
 
-  it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async () => {
+  it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
+    props,
+  }) => {
     const { getByTestId, getByText } = renderWithProviders(
       <Movie {...props} />
     );
@@ -116,7 +116,9 @@ describe("movie", () => {
     });
   });
 
-  it("should close the zoomed poster and open the expanded detail view when clicked", async () => {
+  it("should close the zoomed poster and open the expanded detail view when clicked", async ({
+    props,
+  }) => {
     const { getByTestId, getByText } = renderWithProviders(
       <Movie {...props} />
     );
@@ -133,7 +135,9 @@ describe("movie", () => {
     });
   });
 
-  it("should toggle the actions and ratings when mousing over the five star rating", async () => {
+  it("should toggle the actions and ratings when mousing over the five star rating", async ({
+    props,
+  }) => {
     const { getByTestId } = renderWithProviders(<Movie {...props} />);
 
     expect(getByTestId("actions")).toHaveStyle({
@@ -166,7 +170,9 @@ describe("movie", () => {
     });
   });
 
-  it("should toggle the actions and ratings when clicking the five star rating", async () => {
+  it("should toggle the actions and ratings when clicking the five star rating", async ({
+    props,
+  }) => {
     const { getByTestId } = renderWithProviders(<Movie {...props} />);
 
     expect(getByTestId("actions")).toHaveStyle({
@@ -199,7 +205,9 @@ describe("movie", () => {
     });
   });
 
-  it("should send the edit action and close the zoomed view", async () => {
+  it("should send the edit action and close the zoomed view", async ({
+    props,
+  }) => {
     const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
@@ -210,7 +218,9 @@ describe("movie", () => {
     );
   });
 
-  it("should send the mark watched action and close the zoomed view", async () => {
+  it("should send the mark watched action and close the zoomed view", async ({
+    props,
+  }) => {
     const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
@@ -221,7 +231,9 @@ describe("movie", () => {
     );
   });
 
-  it("should send the delete action and close the zoomed view", async () => {
+  it("should send the delete action and close the zoomed view", async ({
+    props,
+  }) => {
     const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
@@ -232,7 +244,9 @@ describe("movie", () => {
     );
   });
 
-  it("should send the edit action with locked:true and close the zoomed view", async () => {
+  it("should send the edit action with locked:true and close the zoomed view", async ({
+    props,
+  }) => {
     const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} />
     );
@@ -249,7 +263,9 @@ describe("movie", () => {
     );
   });
 
-  it("should send the edit action with locked:false and close the zoomed view", async () => {
+  it("should send the edit action with locked:false and close the zoomed view", async ({
+    props,
+  }) => {
     const { getByLabelText, getByTestId } = renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );

@@ -19,10 +19,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-title", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -47,7 +45,7 @@ describe("sorted-title", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", () => {
+  it("should render correctly when the order is ASC", ({ props }) => {
     const { queryAllByText } = render(<SortedTitle {...props} />);
 
     const movieNodes = queryAllByText(/Movie/);
@@ -59,7 +57,7 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 4")).toBeInTheDocument();
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
@@ -74,7 +72,7 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 1")).toBeInTheDocument();
   });
 
-  it("should call the edit handler", () => {
+  it("should call the edit handler", ({ props }) => {
     const { getByText } = render(<SortedTitle {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
@@ -84,7 +82,7 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the mark watched handler", () => {
+  it("should call the mark watched handler", ({ props }) => {
     const { getByText } = render(<SortedTitle {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
@@ -94,7 +92,7 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the delete handler", () => {
+  it("should call the delete handler", ({ props }) => {
     const { getByText } = render(<SortedTitle {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Delete" })

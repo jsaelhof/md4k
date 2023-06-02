@@ -1,5 +1,5 @@
 import { Watched } from "./watched";
-import { fireEvent, waitFor, within } from "@testing-library/react";
+import { fireEvent, within } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
@@ -53,12 +53,15 @@ const GET_MOVIES_MOCK = {
 
 describe("watched - error", () => {
   it("should show the error", async () => {
-    const { getByText, getByRole } = renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
-      mocks: [REMOVE_MOVIE_ERROR_MOCK],
-    });
+    const { getByText, findByText, getByRole } = renderWithProviders(
+      <Watched />,
+      {
+        moviesMock: GET_MOVIES_MOCK,
+        mocks: [REMOVE_MOVIE_ERROR_MOCK],
+      }
+    );
 
-    await waitFor(() => expect(getByText(/Bourne/)).toBeInTheDocument());
+    expect(await findByText(/Bourne/)).toBeInTheDocument();
 
     fireEvent.click(
       within(getByText(/Bourne/)).getByRole("button", { name: "DELETE" })
@@ -70,6 +73,6 @@ describe("watched - error", () => {
 
     fireEvent.click(within(dialog).getByText("Delete"));
 
-    await waitFor(() => expect(getByText(/Houston/)).toBeInTheDocument());
+    expect(await findByText(/Houston/)).toBeInTheDocument();
   });
 });

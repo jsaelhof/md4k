@@ -17,10 +17,8 @@ vi.mock("./components/movie/movie", () => ({
 
 // NOTE: Routes passed to render-with-providers within this file are relative to the sub-routes since I am only rendering the list-grid itself.
 describe("list-grid", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -31,35 +29,37 @@ describe("list-grid", () => {
     };
   });
 
-  it("should render the addedOn list", async () => {
+  it("should render the addedOn list", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/addedOn/asc",
     });
     expect(getByTestId("addedOn")).toBeInTheDocument();
   });
 
-  it("should render the title list", async () => {
+  it("should render the title list", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/title/asc",
     });
     expect(getByTestId("title")).toBeInTheDocument();
   });
 
-  it("should render the runtime list", async () => {
+  it("should render the runtime list", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/runtime/asc",
     });
     expect(getByTestId("runtime")).toBeInTheDocument();
   });
 
-  it("should render the genre list", async () => {
+  it("should render the genre list", async ({ props }) => {
     const { getByTestId } = renderWithProviders(<ListGrid {...props} />, {
       route: "/genre/asc",
     });
     expect(getByTestId("genre")).toBeInTheDocument();
   });
 
-  it("should render the empty list when there are no movies", async () => {
+  it("should render the empty list when there are no movies", async ({
+    props,
+  }) => {
     const { getByRole } = renderWithProviders(
       <ListGrid {...props} movies={[]} />,
       { route: "/addedOn/asc" }
@@ -67,7 +67,7 @@ describe("list-grid", () => {
     expect(getByRole("button", { name: "Add a Movie" })).toBeInTheDocument();
   });
 
-  it("should render null when movies is undefined", async () => {
+  it("should render null when movies is undefined", async ({ props }) => {
     const { queryByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} movies={undefined} />,
       { route: "/addedOn/asc" }
@@ -78,7 +78,9 @@ describe("list-grid", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async () => {
+  it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async ({
+    props,
+  }) => {
     const { getByText, getByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} />,
       {
@@ -94,7 +96,9 @@ describe("list-grid", () => {
     expect(queryByText("'Movie 1' will be removed")).not.toBeInTheDocument();
   });
 
-  it("should render the delete confirmation and cancel correctly when deleting a movie", async () => {
+  it("should render the delete confirmation and cancel correctly when deleting a movie", async ({
+    props,
+  }) => {
     const { getByText, getByRole, queryByText } = renderWithProviders(
       <ListGrid {...props} />,
       { route: "/addedOn/asc" }

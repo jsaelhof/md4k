@@ -19,10 +19,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-runtime", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -51,7 +49,7 @@ describe("sorted-runtime", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", () => {
+  it("should render correctly when the order is ASC", ({ props }) => {
     const { getByTestId } = render(<SortedRuntime {...props} />);
 
     expect(
@@ -83,7 +81,7 @@ describe("sorted-runtime", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
@@ -118,7 +116,7 @@ describe("sorted-runtime", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call the edit handler", () => {
+  it("should call the edit handler", ({ props }) => {
     const { getByText } = render(<SortedRuntime {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
@@ -128,7 +126,7 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the mark watched handler", () => {
+  it("should call the mark watched handler", ({ props }) => {
     const { getByText } = render(<SortedRuntime {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
@@ -138,7 +136,7 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the delete handler", () => {
+  it("should call the delete handler", ({ props }) => {
     const { getByText } = render(<SortedRuntime {...props} />);
     fireEvent.click(
       within(getByText("Movie 1")).getByRole("button", { name: "Delete" })

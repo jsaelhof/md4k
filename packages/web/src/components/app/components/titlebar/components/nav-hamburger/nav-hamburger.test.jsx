@@ -1,18 +1,23 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import NavHamburger from "./nav-hamburger";
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import { AppContext } from "../../../../../../context/app-context";
+import userEvent from "@testing-library/user-event";
 
 describe("nav-hamburger", () => {
-  it("should render the default nav options", async () => {
-    const { getByTestId, findByRole } = renderWithProviders(<NavHamburger />);
+  beforeEach((context) => {
+    context.user = userEvent.setup();
+  });
 
-    await waitFor(() => {
-      expect(getByTestId("MenuIcon")).toBeInTheDocument();
-    });
+  it("should render the default nav options", async ({ user }) => {
+    const { getByTestId, findByTestId, findByRole } = renderWithProviders(
+      <NavHamburger />
+    );
 
-    fireEvent.click(getByTestId("MenuIcon"));
+    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
+
+    await user.click(getByTestId("MenuIcon"));
 
     expect(
       await findByRole("menuitem", { name: "Watched" })
@@ -28,16 +33,17 @@ describe("nav-hamburger", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the 'watched' nav options", async () => {
-    const { getByTestId, findByRole } = renderWithProviders(<NavHamburger />, {
-      route: "/watched",
-    });
+  it("should render the 'watched' nav options", async ({ user }) => {
+    const { getByTestId, findByTestId, findByRole } = renderWithProviders(
+      <NavHamburger />,
+      {
+        route: "/watched",
+      }
+    );
 
-    await waitFor(() => {
-      expect(getByTestId("MenuIcon")).toBeInTheDocument();
-    });
+    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("MenuIcon"));
+    await user.click(getByTestId("MenuIcon"));
 
     expect(
       await findByRole("menuitem", { name: "Movies" })
@@ -53,13 +59,13 @@ describe("nav-hamburger", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the 'pick' nav options", async () => {
+  it("should render the 'pick' nav options", async ({ user }) => {
     const { getByTestId, getByRole, findByTestId, findByRole } =
       renderWithProviders(<NavHamburger />, { route: "/pick" });
 
     expect(await findByTestId("MenuIcon")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("MenuIcon"));
+    await user.click(getByTestId("MenuIcon"));
 
     expect(getByRole("menuitem", { name: "Pick again" })).toBeInTheDocument();
     expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
@@ -75,16 +81,17 @@ describe("nav-hamburger", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the default 'create' nav options", async () => {
-    const { getByTestId, getByRole } = renderWithProviders(<NavHamburger />, {
-      route: "/create",
-    });
+  it("should render the default 'create' nav options", async ({ user }) => {
+    const { getByTestId, findByTestId, getByRole } = renderWithProviders(
+      <NavHamburger />,
+      {
+        route: "/create",
+      }
+    );
 
-    await waitFor(() => {
-      expect(getByTestId("MenuIcon")).toBeInTheDocument();
-    });
+    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("MenuIcon"));
+    await user.click(getByTestId("MenuIcon"));
 
     expect(getByRole("menuitem", { name: "Movies" })).toBeInTheDocument();
   });
@@ -103,26 +110,17 @@ describe("nav-hamburger", () => {
     });
   });
 
-  it("should close when clicking outside", async () => {
-    const { getByTestId, getByRole, queryByRole } = renderWithProviders(
-      <NavHamburger />
-    );
+  it("should close when clicking outside", async ({ user }) => {
+    const { getByTestId, findByTestId, getByRole, queryByRole } =
+      renderWithProviders(<NavHamburger />);
 
-    await waitFor(() => {
-      expect(getByTestId("MenuIcon")).toBeInTheDocument();
-    });
+    expect(await findByTestId("MenuIcon")).toBeInTheDocument();
 
-    fireEvent.click(getByTestId("MenuIcon"));
+    await user.click(getByTestId("MenuIcon"));
 
     expect(getByRole("menuitem", { name: "Watched" })).toBeInTheDocument();
 
-    // Couldn't figure out a better way to make this work.
-    // There's some discussion here but seems the click away listener is not "armed" immediately due to a react bug.
-    // I've needed to use a wait here to make sure the click away is ready.
-    // https://github.com/mui/material-ui/issues/24783#issuecomment-774054038
-    await waitFor(() => new Promise((r) => setTimeout(r, 1)));
-
-    fireEvent.click(document);
+    await user.click(document.body);
 
     await waitFor(() =>
       expect(

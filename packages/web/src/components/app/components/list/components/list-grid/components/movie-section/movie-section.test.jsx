@@ -14,10 +14,8 @@ vi.mock("../movie/movie", () => ({
 }));
 
 describe("movie-section", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       title: "Test Title",
       subtitle: "My Subtitle",
       list: [
@@ -32,7 +30,7 @@ describe("movie-section", () => {
     };
   });
 
-  it("should render the section and assing handlers", () => {
+  it("should render the section and assing handlers", ({ props }) => {
     const { getByText, getByRole } = render(<MovieSection {...props} />);
 
     expect(getByText("Test Title")).toBeInTheDocument();
@@ -49,7 +47,9 @@ describe("movie-section", () => {
     expect(props.onDeleteMovie).toHaveBeenCalled();
   });
 
-  it("should not render the title and subtitle when the title is omitted", () => {
+  it("should not render the title and subtitle when the title is omitted", ({
+    props,
+  }) => {
     const { getByText, queryByText } = render(
       <MovieSection {...props} title={undefined} />
     );
@@ -59,7 +59,7 @@ describe("movie-section", () => {
     expect(getByText("Movie #1")).toBeInTheDocument();
   });
 
-  it("should not render the subtitle when omitted", () => {
+  it("should not render the subtitle when omitted", ({ props }) => {
     const { getByText, queryByText } = render(
       <MovieSection {...props} subtitle={undefined} />
     );

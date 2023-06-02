@@ -3,22 +3,20 @@ import { createMatchMedia } from "../../../../../../utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
 
 describe("star-rating-layout", () => {
-  let test;
-
-  beforeEach(() => {
-    test = {
-      ratings: {
-        id: "tt2463208",
-        IMDB: "67%",
-        ROTTEN_TOMATOES: "68%",
-        METACRITIC: "55%",
-      },
+  beforeEach((context) => {
+    context.ratings = {
+      id: "tt2463208",
+      IMDB: "67%",
+      ROTTEN_TOMATOES: "68%",
+      METACRITIC: "55%",
     };
   });
 
-  it("should render the five-star rating and ratings breakdown", () => {
+  it("should render the five-star rating and ratings breakdown", ({
+    ratings,
+  }) => {
     const { getAllByAltText, getByAltText, getByText } = render(
-      <StarRatingLayout ratings={test.ratings} />
+      <StarRatingLayout ratings={ratings} />
     );
     expect(getAllByAltText(/star-/)).toHaveLength(5);
     expect(getByAltText("IMDB")).toBeInTheDocument();
@@ -29,8 +27,10 @@ describe("star-rating-layout", () => {
     expect(getByText("55%")).toBeInTheDocument();
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async () => {
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async ({
+    ratings,
+  }) => {
+    const { getByTestId } = render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
@@ -61,8 +61,10 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when mobile", async () => {
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+  it("should toggle the ratings breakdown with click when mobile", async ({
+    ratings,
+  }) => {
+    const { getByTestId } = render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
@@ -93,11 +95,13 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async () => {
+  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async ({
+    ratings,
+  }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
 
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+    const { getByTestId } = render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
@@ -128,11 +132,13 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when above mobile", async () => {
+  it("should toggle the ratings breakdown with click when above mobile", async ({
+    ratings,
+  }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
 
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+    const { getByTestId } = render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;

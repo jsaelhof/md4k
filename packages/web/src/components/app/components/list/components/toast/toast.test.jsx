@@ -3,10 +3,8 @@ import Toast from "./toast";
 import { vi } from "vitest";
 
 describe("toast", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       open: true,
       onClose: vi.fn(),
       onUndo: vi.fn(),
@@ -14,7 +12,7 @@ describe("toast", () => {
     };
   });
 
-  it("should render the toast correctly", () => {
+  it("should render the toast correctly", ({ props }) => {
     const { getByText, getByRole, getByTestId } = render(<Toast {...props} />);
 
     expect(getByText("Test Message")).toBeInTheDocument();
@@ -22,7 +20,7 @@ describe("toast", () => {
     expect(getByTestId("CloseIcon")).toBeInTheDocument();
   });
 
-  it("should call undo", () => {
+  it("should call undo", ({ props }) => {
     const { getByRole } = render(<Toast {...props} />);
 
     expect(getByRole("button", { name: "UNDO" })).toBeInTheDocument();
@@ -30,7 +28,7 @@ describe("toast", () => {
     expect(props.onUndo).toHaveBeenCalled();
   });
 
-  it("should call close", () => {
+  it("should call close", ({ props }) => {
     const { getByTestId } = render(<Toast {...props} />);
 
     expect(getByTestId("CloseIcon")).toBeInTheDocument();

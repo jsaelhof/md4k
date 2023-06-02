@@ -11,10 +11,8 @@ vi.mock("./hooks/use-intersection-observer", () => ({
 }));
 
 describe("movie-poster", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movie: {
         id: "8502fd8b-165e-4239-965f-b46f8d523829",
         title: "The Bourne Identity",
@@ -40,7 +38,7 @@ describe("movie-poster", () => {
     };
   });
 
-  it("should render the correct height and width ratio", () => {
+  it("should render the correct height and width ratio", ({ props }) => {
     const { getByLabelText } = render(<MoviePoster {...props} height={1000} />);
     expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       width: "640px",
@@ -48,7 +46,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should render the poster when a url exists in the movie", () => {
+  it("should render the poster when a url exists in the movie", ({ props }) => {
     const { getByTestId, getByText } = render(<MoviePoster {...props} />);
     expect(getByTestId("poster")).toHaveStyle({
       "background-image": `url(${props.movie.poster})`,
@@ -56,7 +54,9 @@ describe("movie-poster", () => {
     expect(getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should render the placeholder when the poster is not intersecting the viewport", () => {
+  it("should render the placeholder when the poster is not intersecting the viewport", ({
+    props,
+  }) => {
     // eslint-disable-next-line no-import-assign
     useIntersectionObserverModule.useIntersectionObserver = vi
       .fn()
@@ -73,7 +73,7 @@ describe("movie-poster", () => {
     expect(getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should be active when an onClick handler is provided", () => {
+  it("should be active when an onClick handler is provided", ({ props }) => {
     const { getByTestId } = render(<MoviePoster {...props} />);
 
     expect(getByTestId("poster")).toHaveStyle({
@@ -81,7 +81,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not be active when an onClick handler is omitted", () => {
+  it("should not be active when an onClick handler is omitted", ({ props }) => {
     const { getByTestId } = render(
       <MoviePoster {...props} onClick={undefined} />
     );
@@ -91,13 +91,13 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should invoke the handler onClick when provided", () => {
+  it("should invoke the handler onClick when provided", ({ props }) => {
     const { getByLabelText } = render(<MoviePoster {...props} />);
     fireEvent.click(getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should not invoke the handler onClick when not provided", () => {
+  it("should not invoke the handler onClick when not provided", ({ props }) => {
     const { getByLabelText } = render(
       <MoviePoster {...props} onClick={undefined} />
     );
@@ -105,7 +105,7 @@ describe("movie-poster", () => {
     expect(props.onClick).not.toHaveBeenCalled();
   });
 
-  it("should dim the poster when locked", () => {
+  it("should dim the poster when locked", ({ props }) => {
     const { getByLabelText } = render(
       <MoviePoster {...props} movie={{ ...props.movie, locked: true }} />
     );
@@ -115,7 +115,9 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not dim the poster when locked but noLock is passed", () => {
+  it("should not dim the poster when locked but noLock is passed", ({
+    props,
+  }) => {
     const { getByLabelText } = render(
       <MoviePoster {...props} movie={{ ...props.movie, locked: true }} noLock />
     );
@@ -125,7 +127,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should be relatively positioned when noRel is false", () => {
+  it("should be relatively positioned when noRel is false", ({ props }) => {
     const { getByLabelText } = render(<MoviePoster {...props} />);
 
     expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
@@ -133,7 +135,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not be relatively positioned when noRel is true", () => {
+  it("should not be relatively positioned when noRel is true", ({ props }) => {
     const { getByLabelText } = render(<MoviePoster {...props} noRel />);
 
     expect(getByLabelText(/Bourne.*Poster/)).not.toHaveStyle({

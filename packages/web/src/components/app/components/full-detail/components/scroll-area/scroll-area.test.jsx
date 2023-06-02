@@ -18,13 +18,9 @@ const enableScrollScenario = (scrollTop, scrollHeight) => {
   });
 };
 
-const enableOverflowTop = () => enableScrollScenario(20, 0);
-const enableOverflowBottom = () => enableScrollScenario(0, 200);
-const enableOverflowBoth = () => enableScrollScenario(20, 200);
-
 describe("scroll-area", () => {
   it("should enable the scroll affordance on the top when overflowed above", async () => {
-    enableOverflowTop();
+    enableScrollScenario(20, 0);
 
     const { container } = render(
       <ScrollArea text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
@@ -44,7 +40,7 @@ describe("scroll-area", () => {
   });
 
   it("should enable the scroll affordance on the bottom when overflowed below", async () => {
-    enableOverflowBottom();
+    enableScrollScenario(0, 200);
 
     const { container } = render(
       <ScrollArea text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
@@ -64,7 +60,7 @@ describe("scroll-area", () => {
   });
 
   it("should enable the scroll affordance on both the top and bottom when overflowed in both directions", async () => {
-    enableOverflowBoth();
+    enableScrollScenario(20, 200);
 
     const { container } = render(
       <ScrollArea text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />

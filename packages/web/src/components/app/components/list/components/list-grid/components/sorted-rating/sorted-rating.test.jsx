@@ -19,10 +19,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-rating", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -86,7 +84,7 @@ describe("sorted-rating", () => {
     };
   });
 
-  it("should only render sections with movies", () => {
+  it("should only render sections with movies", ({ props }) => {
     const { getAllByLabelText } = render(
       <SortedRating
         {...props}
@@ -105,7 +103,7 @@ describe("sorted-rating", () => {
     expect(sections[2]).toHaveAttribute("aria-label", "4 Star");
   });
 
-  it("should render correctly when the order is ASC", () => {
+  it("should render correctly when the order is ASC", ({ props }) => {
     const { getByLabelText, getAllByLabelText } = render(
       <SortedRating {...props} />
     );
@@ -167,7 +165,7 @@ describe("sorted-rating", () => {
     expect(section5[1]).toHaveAttribute("aria-label", "Movie 5b");
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
@@ -232,7 +230,7 @@ describe("sorted-rating", () => {
     expect(section5[1]).toHaveAttribute("aria-label", "Movie 5b");
   });
 
-  it("should call the edit handler", () => {
+  it("should call the edit handler", ({ props }) => {
     const { getByText } = render(<SortedRating {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", { name: "Edit" })
@@ -242,7 +240,7 @@ describe("sorted-rating", () => {
     );
   });
 
-  it("should call the mark watched handler", () => {
+  it("should call the mark watched handler", ({ props }) => {
     const { getByText } = render(<SortedRating {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", {
@@ -254,7 +252,7 @@ describe("sorted-rating", () => {
     );
   });
 
-  it("should call the delete handler", () => {
+  it("should call the delete handler", ({ props }) => {
     const { getByText } = render(<SortedRating {...props} />);
     fireEvent.click(
       within(getByText("Movie 1a")).getByRole("button", { name: "Delete" })

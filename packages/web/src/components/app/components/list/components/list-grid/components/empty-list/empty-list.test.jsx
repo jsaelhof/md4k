@@ -3,15 +3,13 @@ import EmptyList from "./empty-list";
 import { vi } from "vitest";
 
 describe("empty-list", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       onAddMovie: vi.fn(),
     };
   });
 
-  it("should render the edit button", () => {
+  it("should render the edit button", ({ props }) => {
     const { getByRole } = render(<EmptyList {...props} />);
     const button = getByRole("button", { name: "Add a Movie" });
     expect(button).toBeInTheDocument();

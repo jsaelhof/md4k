@@ -3,16 +3,12 @@ import Footer from "./footer";
 import { vi } from "vitest";
 
 describe("full detail footer", () => {
-  let test;
-
   const { open } = window;
 
-  beforeEach(() => {
-    test = {
-      movie: {
-        id: 123,
-        title: "TheNameOfAFilm",
-      },
+  beforeEach((context) => {
+    context.movie = {
+      id: 123,
+      title: "TheNameOfAFilm",
     };
 
     // Delete the existing
@@ -25,26 +21,30 @@ describe("full detail footer", () => {
     window.open = open;
   });
 
-  it("should render the footer action images", () => {
-    const { getByAltText } = render(<Footer movie={test.movie} />);
+  it("should render the footer action images", ({ movie }) => {
+    const { getByAltText } = render(<Footer movie={movie} />);
     expect(getByAltText("Search IMDB")).toBeInTheDocument();
     expect(getByAltText("Search TMDB")).toBeInTheDocument();
     expect(getByAltText("Search Common Sense Media")).toBeInTheDocument();
   });
 
-  it("should open IMDB with title when clicked when no imdbID is provided", () => {
-    const { getByAltText } = render(<Footer movie={test.movie} />);
+  it("should open IMDB with title when clicked when no imdbID is provided", ({
+    movie,
+  }) => {
+    const { getByAltText } = render(<Footer movie={movie} />);
     fireEvent.click(getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
-      expect.stringMatching(new RegExp(`www.imdb.com.*${test.movie.title}`)),
+      expect.stringMatching(new RegExp(`www.imdb.com.*${movie.title}`)),
       "movieInfo"
     );
   });
 
-  it("should open IMDB with imdbID and ignore title when both are provided", () => {
+  it("should open IMDB with imdbID and ignore title when both are provided", ({
+    movie,
+  }) => {
     const { getByAltText } = render(
-      <Footer movie={{ ...test.movie, imdbID: "t12345" }} />
+      <Footer movie={{ ...movie, imdbID: "t12345" }} />
     );
     fireEvent.click(getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
@@ -54,25 +54,23 @@ describe("full detail footer", () => {
     );
   });
 
-  it("should open TMDB when clicked", () => {
-    const { getByAltText } = render(<Footer movie={test.movie} />);
+  it("should open TMDB when clicked", ({ movie }) => {
+    const { getByAltText } = render(<Footer movie={movie} />);
     fireEvent.click(getByAltText("Search TMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
-      expect.stringMatching(
-        new RegExp(`www.themoviedb.org.*${test.movie.title}`)
-      ),
+      expect.stringMatching(new RegExp(`www.themoviedb.org.*${movie.title}`)),
       "movieInfo"
     );
   });
 
-  it("should open Common Sense Media when clicked", () => {
-    const { getByAltText } = render(<Footer movie={test.movie} />);
+  it("should open Common Sense Media when clicked", ({ movie }) => {
+    const { getByAltText } = render(<Footer movie={movie} />);
     fireEvent.click(getByAltText("Search Common Sense Media"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
       expect.stringMatching(
-        new RegExp(`www.commonsensemedia.org.*${test.movie.title}`)
+        new RegExp(`www.commonsensemedia.org.*${movie.title}`)
       ),
       "movieInfo"
     );

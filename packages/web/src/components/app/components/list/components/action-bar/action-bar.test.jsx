@@ -10,26 +10,22 @@ vi.mock("@mui/material", async () => {
 });
 
 describe("action-bar", () => {
-  let test;
-
-  beforeEach(() => {
-    test = {
-      onAdd: vi.fn(),
-      onPick: vi.fn(),
-    };
+  beforeEach((context) => {
+    context.onAdd = vi.fn();
+    context.onPick = vi.fn();
   });
 
-  it("should not render the bar when disabled", async () => {
+  it("should not render the bar when disabled", async ({ onAdd, onPick }) => {
     const { queryByText } = renderWithProviders(
-      <ActionBar disabled={true} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={true} onAdd={onAdd} onPick={onPick} />
     );
 
     expect(queryByText("Added")).not.toBeInTheDocument();
   });
 
-  it("should not render the bar when enabled", async () => {
+  it("should not render the bar when enabled", async ({ onAdd, onPick }) => {
     const { getByText, getByLabelText } = renderWithProviders(
-      <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
     expect(getByText("Added")).toBeInTheDocument();
@@ -37,42 +33,54 @@ describe("action-bar", () => {
     expect(getByLabelText("Pick A Movie")).toBeInTheDocument();
   });
 
-  it("should render the Add Movie button with a label when space exists", async () => {
+  it("should render the Add Movie button with a label when space exists", async ({
+    onAdd,
+    onPick,
+  }) => {
     const { getByText, getByLabelText } = renderWithProviders(
-      <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
     expect(getByLabelText("Add Movie")).toBeInTheDocument();
     expect(getByText("Add Movie")).toBeInTheDocument();
   });
 
-  it("should render the Add Movie button without a label when space is limited", async () => {
+  it("should render the Add Movie button without a label when space is limited", async ({
+    onAdd,
+    onPick,
+  }) => {
     // eslint-disable-next-line no-import-assign
     mui.useMediaQuery = vi.fn().mockReturnValue(false);
 
     const { queryByText, getByLabelText } = renderWithProviders(
-      <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
     expect(getByLabelText("Add Movie")).toBeInTheDocument();
     expect(queryByText("Add Movie")).not.toBeInTheDocument();
   });
 
-  it("should call onAdd when Add Movie is pressed", async () => {
+  it("should call onAdd when Add Movie is pressed", async ({
+    onAdd,
+    onPick,
+  }) => {
     const { getByLabelText } = renderWithProviders(
-      <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
     fireEvent.click(getByLabelText("Add Movie"));
-    expect(test.onAdd).toBeCalled();
+    expect(onAdd).toBeCalled();
   });
 
-  it("should call onPick when Pick A Movie is pressed", async () => {
+  it("should call onPick when Pick A Movie is pressed", async ({
+    onAdd,
+    onPick,
+  }) => {
     const { getByRole } = renderWithProviders(
-      <ActionBar disabled={false} onAdd={test.onAdd} onPick={test.onPick} />
+      <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
     fireEvent.click(getByRole("button", { name: "Pick A Movie" }));
-    expect(test.onPick).toBeCalled();
+    expect(onPick).toBeCalled();
   });
 });

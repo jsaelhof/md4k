@@ -4,57 +4,53 @@ import Close from "@mui/icons-material/Close";
 import { vi } from "vitest";
 
 describe("action-button", () => {
-  let test;
-
-  beforeEach(() => {
-    test = {
-      onClick: vi.fn(),
-      tooltip: "test tooltip",
-      movie: {
-        id: 123,
-      },
+  beforeEach((context) => {
+    context.onClick = vi.fn();
+    context.tooltip = "test tooltip";
+    context.movie = {
+      id: 123,
     };
   });
 
-  it("should render the button", () => {
+  it("should render the button", ({ onClick, tooltip }) => {
     const { getByTestId, getByLabelText } = render(
-      <ActionButton
-        Icon={Close}
-        onClick={test.onClick}
-        tooltip={test.tooltip}
-      />
+      <ActionButton Icon={Close} onClick={onClick} tooltip={tooltip} />
     );
 
-    expect(getByLabelText(test.tooltip)).toBeInTheDocument();
+    expect(getByLabelText(tooltip)).toBeInTheDocument();
     expect(getByTestId("CloseIcon")).toBeInTheDocument();
   });
 
-  it("should return the movie data when clicked", () => {
+  it("should return the movie data when clicked", ({
+    onClick,
+    tooltip,
+    movie,
+  }) => {
     const { getByLabelText } = render(
       <ActionButton
         Icon={Close}
-        onClick={test.onClick}
-        tooltip={test.tooltip}
-        movie={test.movie}
+        onClick={onClick}
+        tooltip={tooltip}
+        movie={movie}
       />
     );
 
-    fireEvent.click(getByLabelText(test.tooltip));
-    expect(test.onClick).toHaveBeenCalledWith(test.movie);
+    fireEvent.click(getByLabelText(tooltip));
+    expect(onClick).toHaveBeenCalledWith(movie);
   });
 
-  it("should not fire onClick when disabled", () => {
+  it("should not fire onClick when disabled", ({ onClick, tooltip, movie }) => {
     const { getByLabelText } = render(
       <ActionButton
         Icon={Close}
-        onClick={test.onClick}
-        tooltip={test.tooltip}
-        movie={test.movie}
+        onClick={onClick}
+        tooltip={tooltip}
+        movie={movie}
         disabled
       />
     );
 
-    fireEvent.click(getByLabelText(test.tooltip));
-    expect(test.onClick).not.toHaveBeenCalled();
+    fireEvent.click(getByLabelText(tooltip));
+    expect(onClick).not.toHaveBeenCalled();
   });
 });

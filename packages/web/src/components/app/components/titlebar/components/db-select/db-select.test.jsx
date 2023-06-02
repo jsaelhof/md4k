@@ -1,5 +1,5 @@
 import DbSelect from "./db-select";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
 import {
   GET_MOVIES_MOCK_FAMILY,
@@ -14,21 +14,15 @@ vi.mock("react-router-dom", async () => {
 
 describe("db-select", () => {
   it("should render the list with the active list when closed", async () => {
-    const { getByLabelText } = renderWithProviders(<DbSelect />);
-
-    await waitFor(() =>
-      expect(getByLabelText("Choose a List")).toBeInTheDocument()
-    );
-
-    expect(getByLabelText(/Saturday/)).toBeInTheDocument();
+    const { findByLabelText } = renderWithProviders(<DbSelect />);
+    expect(await findByLabelText("Choose a List")).toBeInTheDocument();
+    expect(await findByLabelText(/Saturday/)).toBeInTheDocument();
   });
 
   it("should render the list with the available options and an option for making a new list", async () => {
-    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />);
+    const { getByRole, findByLabelText } = renderWithProviders(<DbSelect />);
 
-    await waitFor(() =>
-      expect(getByLabelText("Choose a List")).toBeInTheDocument()
-    );
+    expect(await findByLabelText("Choose a List")).toBeInTheDocument();
 
     fireEvent.mouseDown(
       getByRole("button", { name: "Saturday Night", expanded: false })
@@ -46,13 +40,14 @@ describe("db-select", () => {
   });
 
   it("should push to the home page and set a new list when clicking on an existing list", async () => {
-    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />, {
-      mocks: [GET_MOVIES_MOCK_FAMILY],
-    });
-
-    await waitFor(() =>
-      expect(getByLabelText("Choose a List")).toBeInTheDocument()
+    const { getByRole, getByLabelText, findByLabelText } = renderWithProviders(
+      <DbSelect />,
+      {
+        mocks: [GET_MOVIES_MOCK_FAMILY],
+      }
     );
+
+    expect(await findByLabelText("Choose a List")).toBeInTheDocument();
 
     fireEvent.mouseDown(
       getByRole("button", { name: /Saturday/, expanded: false })
@@ -64,11 +59,9 @@ describe("db-select", () => {
   });
 
   it("should push to the create page", async () => {
-    const { getByRole, getByLabelText } = renderWithProviders(<DbSelect />);
+    const { getByRole, findByLabelText } = renderWithProviders(<DbSelect />);
 
-    await waitFor(() =>
-      expect(getByLabelText("Choose a List")).toBeInTheDocument()
-    );
+    expect(await findByLabelText("Choose a List")).toBeInTheDocument();
 
     fireEvent.mouseDown(
       getByRole("button", { name: /Saturday/, expanded: false })
