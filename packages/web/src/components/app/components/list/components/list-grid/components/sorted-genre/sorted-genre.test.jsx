@@ -1,4 +1,4 @@
-import { fireEvent, render, within, screen } from "@testing-library/react";
+import { render, within, screen } from "@testing-library/react";
 import SortedGenre from "./sorted-genre";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -116,9 +116,9 @@ describe("sorted-genre", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call the edit handler", ({ props }) => {
+  it("should call the edit handler", async ({ props, user }) => {
     render(<SortedGenre {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Edit",
       })
@@ -128,9 +128,9 @@ describe("sorted-genre", () => {
     );
   });
 
-  it("should call the mark watched handler", ({ props }) => {
+  it("should call the mark watched handler", async ({ props, user }) => {
     render(<SortedGenre {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Mark Watched",
       })
@@ -140,9 +140,9 @@ describe("sorted-genre", () => {
     );
   });
 
-  it("should call the delete handler", ({ props }) => {
+  it("should call the delete handler", async ({ props, user }) => {
     render(<SortedGenre {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Delete",
       })

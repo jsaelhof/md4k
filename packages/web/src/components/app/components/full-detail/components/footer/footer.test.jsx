@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Footer from "./footer";
 import { vi } from "vitest";
 
@@ -30,11 +30,12 @@ describe("full detail footer", () => {
     ).toBeInTheDocument();
   });
 
-  it("should open IMDB with title when clicked when no imdbID is provided", ({
+  it("should open IMDB with title when clicked when no imdbID is provided", async ({
     movie,
+    user,
   }) => {
     render(<Footer movie={movie} />);
-    fireEvent.click(screen.getByAltText("Search IMDB"));
+    await user.click(screen.getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
       expect.stringMatching(new RegExp(`www.imdb.com.*${movie.title}`)),
@@ -42,11 +43,12 @@ describe("full detail footer", () => {
     );
   });
 
-  it("should open IMDB with imdbID and ignore title when both are provided", ({
+  it("should open IMDB with imdbID and ignore title when both are provided", async ({
     movie,
+    user,
   }) => {
     render(<Footer movie={{ ...movie, imdbID: "t12345" }} />);
-    fireEvent.click(screen.getByAltText("Search IMDB"));
+    await user.click(screen.getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
       expect.stringMatching(new RegExp(`www.imdb.com.*t12345`)),
@@ -54,9 +56,9 @@ describe("full detail footer", () => {
     );
   });
 
-  it("should open TMDB when clicked", ({ movie }) => {
+  it("should open TMDB when clicked", async ({ movie, user }) => {
     render(<Footer movie={movie} />);
-    fireEvent.click(screen.getByAltText("Search TMDB"));
+    await user.click(screen.getByAltText("Search TMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
       expect.stringMatching(new RegExp(`www.themoviedb.org.*${movie.title}`)),
@@ -64,9 +66,9 @@ describe("full detail footer", () => {
     );
   });
 
-  it("should open Common Sense Media when clicked", ({ movie }) => {
+  it("should open Common Sense Media when clicked", async ({ movie, user }) => {
     render(<Footer movie={movie} />);
-    fireEvent.click(screen.getByAltText("Search Common Sense Media"));
+    await user.click(screen.getByAltText("Search Common Sense Media"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
       expect.stringMatching(

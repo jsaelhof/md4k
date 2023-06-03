@@ -24,8 +24,8 @@ describe("create", () => {
     };
   });
 
-  it("should render the create list state", (context) => {
-    useAddList.mockReturnValueOnce(context.addListReturn);
+  it("should render the create list state", ({ addListReturn }) => {
+    useAddList.mockReturnValueOnce(addListReturn);
 
     renderWithProviders(<Create />);
 
@@ -33,8 +33,8 @@ describe("create", () => {
     expect(screen.getByText(/Create List/)).toBeInTheDocument();
   });
 
-  it("should render the error state", (context) => {
-    useAddList.mockReturnValueOnce({ ...context.addListReturn, error: true });
+  it("should render the error state", ({ addListReturn }) => {
+    useAddList.mockReturnValueOnce({ ...addListReturn, error: true });
 
     renderWithProviders(<Create />);
 
@@ -44,8 +44,8 @@ describe("create", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the loading state", (context) => {
-    useAddList.mockReturnValueOnce({ ...context.addListReturn, loading: true });
+  it("should render the loading state", ({ addListReturn }) => {
+    useAddList.mockReturnValueOnce({ ...addListReturn, loading: true });
     renderWithProviders(<Create />);
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });

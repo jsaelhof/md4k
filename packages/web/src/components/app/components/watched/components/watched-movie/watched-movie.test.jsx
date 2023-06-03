@@ -3,7 +3,7 @@ import { buildMovieMock } from "../../../../../../utils/build-movie-mock";
 import WatchedMovie from "./watched-movie";
 import { vi } from "vitest";
 import { buildThirdPartyMovieMock } from "../../../../../../utils/build-third-party-movie-mock";
-import { fireEvent, within, screen } from "@testing-library/react";
+import { within, screen } from "@testing-library/react";
 import * as mui from "@mui/material";
 import { Globals } from "@react-spring/web";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
@@ -132,12 +132,13 @@ describe("watched-movie", () => {
 
   it("should show the date picker inline at larger sizes", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
@@ -146,6 +147,7 @@ describe("watched-movie", () => {
 
   it("should show the date picker in a drawer at small size", async ({
     props,
+    user,
   }) => {
     // Mock "small"
     // eslint-disable-next-line no-import-assign
@@ -157,7 +159,7 @@ describe("watched-movie", () => {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(await screen.findByRole("presentation")).toBeInTheDocument();
 
@@ -166,18 +168,18 @@ describe("watched-movie", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call onSave with the new date", async ({ props }) => {
+  it("should call onSave with the new date", async ({ props, user }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(screen.getByTestId("CalendarCheckIcon"));
+    await user.click(screen.getByTestId("CalendarCheckIcon"));
 
     expect(props.onSave).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -188,46 +190,53 @@ describe("watched-movie", () => {
 
   it("should call onCancel when clicking the cancel button on the date picker", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(screen.getByTestId("CloseIcon"));
+    await user.click(screen.getByTestId("CloseIcon"));
 
     expect(props.onCancel).toHaveBeenCalled();
 
     // TODO: This should test that the date picker is removed after the animation complete.
   });
 
-  it("should call onCancel when clicking the backdrop", async ({ props }) => {
+  it("should call onCancel when clicking the backdrop", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<WatchedMovie {...props} isEditing />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onDelete with the correct movie data", async ({ props }) => {
+  it("should call onDelete with the correct movie data", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByLabelText("Test Movie"));
+    await user.click(screen.getByLabelText("Test Movie"));
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("button", { name: /10th/ }));
 
-    fireEvent.click(screen.getByTestId("DeleteIcon"));
+    await user.click(screen.getByTestId("DeleteIcon"));
 
     expect(props.onCancel).toHaveBeenCalled();
     expect(props.onDelete).toHaveBeenCalledWith(props.movie);

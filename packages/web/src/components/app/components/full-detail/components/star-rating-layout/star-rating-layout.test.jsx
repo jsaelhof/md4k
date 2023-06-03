@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import { createMatchMedia } from "../../../../../../utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
 
@@ -27,6 +27,7 @@ describe("star-rating-layout", () => {
 
   it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async ({
     ratings,
+    user,
   }) => {
     render(<StarRatingLayout ratings={ratings} />);
 
@@ -38,7 +39,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.mouseEnter(starRatingLayout);
+    await user.hover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -48,7 +49,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.mouseLeave(starRatingLayout);
+    await user.unhover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).not.toHaveStyle({
@@ -61,6 +62,7 @@ describe("star-rating-layout", () => {
 
   it("should toggle the ratings breakdown with click when mobile", async ({
     ratings,
+    user,
   }) => {
     render(<StarRatingLayout ratings={ratings} />);
 
@@ -72,7 +74,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -82,7 +84,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).not.toHaveStyle({
@@ -95,6 +97,7 @@ describe("star-rating-layout", () => {
 
   it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async ({
     ratings,
+    user,
   }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
@@ -109,7 +112,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.mouseEnter(starRatingLayout);
+    await user.hover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -119,7 +122,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.mouseLeave(starRatingLayout);
+    await user.unhover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -132,6 +135,7 @@ describe("star-rating-layout", () => {
 
   it("should toggle the ratings breakdown with click when above mobile", async ({
     ratings,
+    user,
   }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
@@ -146,7 +150,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -156,7 +160,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({

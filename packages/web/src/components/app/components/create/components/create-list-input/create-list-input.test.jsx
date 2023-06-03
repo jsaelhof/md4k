@@ -1,8 +1,7 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import CreateListInput from "./create-list-input";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
-import userEvent from "@testing-library/user-event";
 
 describe("create-list-input", () => {
   beforeEach((context) => {
@@ -11,21 +10,19 @@ describe("create-list-input", () => {
 
   it("should callback with the new list name on submit", async ({
     onSubmit,
+    user,
   }) => {
     renderWithProviders(<CreateListInput onSubmit={onSubmit} />);
-    fireEvent.change(screen.getByLabelText("New List Name"), {
-      target: { value: "My List" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Create List" }));
+    await user.type(screen.getByLabelText("New List Name"), "My List");
+    await user.click(screen.getByRole("button", { name: "Create List" }));
     expect(onSubmit).toHaveBeenCalledWith("My List");
   });
 
   it("should display an error if the list name already exists", async ({
     onSubmit,
+    user,
   }) => {
     renderWithProviders(<CreateListInput onSubmit={onSubmit} />);
-
-    const user = userEvent.setup();
 
     await user.type(
       screen.getByRole("textbox", { name: "New List Name" }),
@@ -42,10 +39,11 @@ describe("create-list-input", () => {
 
   it("should display an error if the list name is empty", async ({
     onSubmit,
+    user,
   }) => {
     renderWithProviders(<CreateListInput onSubmit={onSubmit} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Create List" }));
+    await user.click(screen.getByRole("button", { name: "Create List" }));
     expect(
       await screen.findByText("Please enter a name for your list")
     ).toBeInTheDocument();

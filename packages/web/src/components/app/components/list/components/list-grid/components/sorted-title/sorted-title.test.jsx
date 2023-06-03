@@ -1,4 +1,4 @@
-import { fireEvent, render, within, screen } from "@testing-library/react";
+import { render, within, screen } from "@testing-library/react";
 import SortedTitle from "./sorted-title";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -72,9 +72,9 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 1")).toBeInTheDocument();
   });
 
-  it("should call the edit handler", ({ props }) => {
+  it("should call the edit handler", async ({ props, user }) => {
     render(<SortedTitle {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Edit",
       })
@@ -84,9 +84,9 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the mark watched handler", ({ props }) => {
+  it("should call the mark watched handler", async ({ props, user }) => {
     render(<SortedTitle {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Mark Watched",
       })
@@ -96,9 +96,9 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the delete handler", ({ props }) => {
+  it("should call the delete handler", async ({ props, user }) => {
     render(<SortedTitle {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Delete",
       })

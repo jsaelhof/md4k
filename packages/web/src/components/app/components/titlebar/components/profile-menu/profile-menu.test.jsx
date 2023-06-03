@@ -1,13 +1,8 @@
 import { waitFor, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import ProfileMenu from "./profile-menu";
-import userEvent from "@testing-library/user-event";
 
 describe("profile-menu", () => {
-  beforeEach((context) => {
-    context.user = userEvent.setup();
-  });
-
   it("should render the menu button with the user image when closed", async () => {
     renderWithProviders(<ProfileMenu />);
     expect(screen.getByAltText("Test User")).toBeInTheDocument();

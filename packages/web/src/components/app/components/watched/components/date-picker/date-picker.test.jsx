@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import DatePicker from "./date-picker";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
@@ -52,14 +52,14 @@ describe("date-picker", () => {
     ).toHaveClass("rdp-day_selected");
   });
 
-  it("should call onChange when changing the date", async ({ props }) => {
+  it("should call onChange when changing the date", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
 
     expect(
       screen.getByRole("button", { name: "2nd January (Sunday)" })
     ).toHaveClass("rdp-day_selected");
 
-    fireEvent.click(
+    await user.click(
       screen.getByRole("button", { name: "1st January (Saturday)" })
     );
 
@@ -74,24 +74,24 @@ describe("date-picker", () => {
     ).toHaveClass("rdp-day_selected");
   });
 
-  it("should call onDelete", async ({ props }) => {
+  it("should call onDelete", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("DeleteIcon")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("DeleteIcon"));
+    await user.click(screen.getByTestId("DeleteIcon"));
     expect(props.onDelete).toHaveBeenCalled();
   });
 
-  it("should call onCancel", async ({ props }) => {
+  it("should call onCancel", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("CloseIcon")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("CloseIcon"));
+    await user.click(screen.getByTestId("CloseIcon"));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onSave", async ({ props }) => {
+  it("should call onSave", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("CalendarCheckIcon")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("CalendarCheckIcon"));
+    await user.click(screen.getByTestId("CalendarCheckIcon"));
     expect(props.onSave).toHaveBeenCalled();
   });
 });

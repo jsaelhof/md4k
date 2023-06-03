@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Trailer from "./trailer";
 import { vi } from "vitest";
 
@@ -15,10 +15,11 @@ describe("trailer", () => {
   it("should call onComplete when clicking on the trailer component and overlay mode is enabled", async ({
     trailerId,
     onComplete,
+    user,
   }) => {
     render(<Trailer overlay trailerId={trailerId} onComplete={onComplete} />);
 
-    fireEvent.click(screen.getByLabelText("Trailer"));
+    await user.click(screen.getByLabelText("Trailer"));
     expect(onComplete).toHaveBeenCalled();
   });
 });

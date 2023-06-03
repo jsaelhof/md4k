@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
 import * as useIntersectionObserverModule from "./hooks/use-intersection-observer";
@@ -89,15 +89,21 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should invoke the handler onClick when provided", ({ props }) => {
+  it("should invoke the handler onClick when provided", async ({
+    props,
+    user,
+  }) => {
     render(<MoviePoster {...props} />);
-    fireEvent.click(screen.getByLabelText(/Bourne.*Poster/));
+    await user.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should not invoke the handler onClick when not provided", ({ props }) => {
+  it("should not invoke the handler onClick when not provided", async ({
+    props,
+    user,
+  }) => {
     render(<MoviePoster {...props} onClick={undefined} />);
-    fireEvent.click(screen.getByLabelText(/Bourne.*Poster/));
+    await user.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).not.toHaveBeenCalled();
   });
 

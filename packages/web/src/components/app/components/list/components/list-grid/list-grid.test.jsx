@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import ListGrid from "./list-grid";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
@@ -80,15 +80,16 @@ describe("list-grid", () => {
 
   it("should render the delete confirmation and call onRemoveMovie when deleting a movie", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<ListGrid {...props} />, {
       route: "/addedOn/asc",
     });
 
-    fireEvent.click(screen.getByText("Movie 1"));
+    await user.click(screen.getByText("Movie 1"));
     expect(screen.getByText("'Movie 1' will be removed")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Delete" }));
+    await user.click(screen.getByRole("button", { name: "Delete" }));
     expect(props.onRemoveMovie).toHaveBeenCalledWith(props.movies[0]);
     expect(
       screen.queryByText("'Movie 1' will be removed")
@@ -97,13 +98,14 @@ describe("list-grid", () => {
 
   it("should render the delete confirmation and cancel correctly when deleting a movie", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<ListGrid {...props} />, { route: "/addedOn/asc" });
 
-    fireEvent.click(screen.getByText("Movie 1"));
+    await user.click(screen.getByText("Movie 1"));
     expect(screen.getByText("'Movie 1' will be removed")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(props.onRemoveMovie).not.toHaveBeenCalled();
     expect(
       screen.queryByText("'Movie 1' will be removed")

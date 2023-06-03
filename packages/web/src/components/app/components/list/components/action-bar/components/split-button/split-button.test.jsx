@@ -1,12 +1,10 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import SplitButton from "./split-button";
-import userEvent from "@testing-library/user-event";
 
 describe("split-button", () => {
   beforeEach((context) => {
     context.onPick = vi.fn();
-    context.user = userEvent.setup();
   });
 
   it("should render the split button", ({ onPick }) => {

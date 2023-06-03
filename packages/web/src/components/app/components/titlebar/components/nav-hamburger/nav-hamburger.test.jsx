@@ -3,13 +3,8 @@ import NavHamburger from "./nav-hamburger";
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import { AppContext } from "../../../../../../context/app-context";
-import userEvent from "@testing-library/user-event";
 
 describe("nav-hamburger", () => {
-  beforeEach((context) => {
-    context.user = userEvent.setup();
-  });
-
   it("should render the default nav options", async ({ user }) => {
     renderWithProviders(<NavHamburger />);
 

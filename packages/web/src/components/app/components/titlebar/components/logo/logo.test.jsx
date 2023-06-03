@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Logo from "./logo";
 import { vi } from "vitest";
 
@@ -9,9 +9,9 @@ vi.mock("react-router-dom", async () => {
 });
 
 describe("logo", () => {
-  it("should navigate to the root on click", () => {
+  it("should navigate to the root on click", async ({ user }) => {
     render(<Logo />);
-    fireEvent.click(screen.getByLabelText("Movie Decider 4000"));
+    await user.click(screen.getByLabelText("Movie Decider 4000"));
     expect(navigateMock).toBeCalledWith("/");
   });
 });

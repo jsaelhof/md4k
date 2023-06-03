@@ -1,5 +1,5 @@
 import FullDetail from "./full-detail";
-import { fireEvent, waitFor, screen } from "@testing-library/react";
+import { waitFor, screen } from "@testing-library/react";
 import { EDIT_MOVIE } from "../../../../graphql/mutations";
 import { sources } from "md4k-constants";
 import { vi, beforeEach } from "vitest";
@@ -8,7 +8,6 @@ import { createMatchMedia } from "../../../../utils/create-match-media";
 import { buildThirdPartyMovieMock } from "../../../../utils/build-third-party-movie-mock";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
 import { sourceLabels } from "../../../../constants/sources";
-import userEvent from "@testing-library/user-event";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",
@@ -174,8 +173,6 @@ describe("full-detail", () => {
       id: "saturday",
       label: "Saturday Night",
     };
-
-    context.user = userEvent.setup();
   });
 
   it("should render the movie details", async ({ props }) => {
@@ -193,7 +190,10 @@ describe("full-detail", () => {
     ).toBeInTheDocument();
   });
 
-  it("should search when the movie poster is clicked", async ({ props }) => {
+  it("should search when the movie poster is clicked", async ({
+    props,
+    user,
+  }) => {
     window.open = vi.fn();
 
     renderWithProviders(<FullDetail {...props} />, {
@@ -201,19 +201,22 @@ describe("full-detail", () => {
     });
 
     expect(await screen.findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
-    fireEvent.click(screen.getByLabelText(/Bourne.*Poster/));
+    await user.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/themoviedb.*Bourne/),
       "moviedb"
     );
   });
 
-  it("should show the close button", async ({ props }) => {
+  it("should show the close button", async ({ props, user }) => {
     renderWithProviders(<FullDetail {...props} showCloseButton={true} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
-    fireEvent.click(screen.getByTestId("CloseThickIcon"));
+    // Need to wait for loading to finish because there is a skeleton close button as well.
+    expect(await screen.findByLabelText(/Bourne.*Poster/)).toBeInTheDocument();
+
+    await user.click(screen.getByTestId("CloseThickIcon"));
     expect(props.onClose).toHaveBeenCalled();
   });
 
@@ -281,7 +284,7 @@ describe("full-detail", () => {
     );
   });
 
-  it("should launch the trailer", async ({ props }) => {
+  it("should launch the trailer", async ({ props, user }) => {
     renderWithProviders(<FullDetail {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -290,11 +293,11 @@ describe("full-detail", () => {
       await screen.findByRole("button", { name: "Watch Trailer" })
     ).toBeInTheDocument();
     expect(screen.queryByLabelText("Trailer")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Watch Trailer" }));
+    await user.click(screen.getByRole("button", { name: "Watch Trailer" }));
     expect(screen.getByLabelText("Trailer")).toBeInTheDocument();
   });
 
-  it("should launch the trailer as an overlay", async ({ props }) => {
+  it("should launch the trailer as an overlay", async ({ props, user }) => {
     // Mock a 500 pixel width
     window.matchMedia = createMatchMedia(500);
 
@@ -306,27 +309,31 @@ describe("full-detail", () => {
       await screen.findByRole("button", { name: "Watch Trailer" })
     ).toBeInTheDocument();
     expect(screen.queryByLabelText("Trailer")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Watch Trailer" }));
+    await user.click(screen.getByRole("button", { name: "Watch Trailer" }));
     const trailerElement = screen.getByLabelText("Trailer");
     expect(document.body).toContainElement(trailerElement);
   });
 
   it("should show a logo for the source and stream the movie when clicked", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<FullDetail {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(await screen.findByAltText(sourceLabels[1])).toBeInTheDocument();
-    fireEvent.click(screen.getByAltText(sourceLabels[1]));
+    await user.click(screen.getByAltText(sourceLabels[1]));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/netflix.*Bourne/),
       "movieView"
     );
   });
 
-  it("should not stream when the source logo is DVD", async ({ props }) => {
+  it("should not stream when the source logo is DVD", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(
       <FullDetail {...props} movie={{ ...props.movie, source: sources.DVD }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
@@ -335,11 +342,14 @@ describe("full-detail", () => {
     expect(
       await screen.findByAltText(sourceLabels[sources.DVD])
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByAltText(sourceLabels[sources.DVD]));
+    await user.click(screen.getByAltText(sourceLabels[sources.DVD]));
     expect(window.open).not.toHaveBeenCalled();
   });
 
-  it("should not stream when the source logo is None", async ({ props }) => {
+  it("should not stream when the source logo is None", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(
       <FullDetail
         {...props}
@@ -351,12 +361,13 @@ describe("full-detail", () => {
     expect(
       await screen.findByAltText(sourceLabels[sources.NONE])
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByAltText(sourceLabels[sources.NONE]));
+    await user.click(screen.getByAltText(sourceLabels[sources.NONE]));
     expect(window.open).not.toHaveBeenCalled();
   });
 
   it("should show a stream option when the source is streamable and open the stream site", async ({
     props,
+    user,
   }) => {
     window.open = vi.fn();
 
@@ -367,7 +378,7 @@ describe("full-detail", () => {
     expect(
       await screen.findByRole("button", { name: "Stream Movie" })
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Stream Movie" }));
+    await user.click(screen.getByRole("button", { name: "Stream Movie" }));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/netflix.*Bourne/),
       "movieView"
@@ -391,6 +402,7 @@ describe("full-detail", () => {
 
   it("should show a search torrent option when the source is NONE and open the torrent site", async ({
     props,
+    user,
   }) => {
     window.open = vi.fn();
 
@@ -405,7 +417,7 @@ describe("full-detail", () => {
     expect(
       await screen.findByRole("button", { name: "Torrent Search" })
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Torrent Search" }));
+    await user.click(screen.getByRole("button", { name: "Torrent Search" }));
     expect(window.open).toHaveBeenCalledWith(
       expect.stringMatching(/1337x.to.*Bourne/),
       "movieView"

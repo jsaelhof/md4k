@@ -1,4 +1,4 @@
-import { fireEvent, render, within, screen } from "@testing-library/react";
+import { render, within, screen } from "@testing-library/react";
 import SortedRuntime from "./sorted-runtime";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -120,9 +120,9 @@ describe("sorted-runtime", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call the edit handler", ({ props }) => {
+  it("should call the edit handler", async ({ props, user }) => {
     render(<SortedRuntime {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Edit",
       })
@@ -132,9 +132,9 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the mark watched handler", ({ props }) => {
+  it("should call the mark watched handler", async ({ props, user }) => {
     render(<SortedRuntime {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Mark Watched",
       })
@@ -144,9 +144,9 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the delete handler", ({ props }) => {
+  it("should call the delete handler", async ({ props, user }) => {
     render(<SortedRuntime {...props} />);
-    fireEvent.click(
+    await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
         name: "Delete",
       })

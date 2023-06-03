@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MovieSection from "./movie-section";
 import { vi } from "vitest";
 
@@ -30,20 +30,23 @@ describe("movie-section", () => {
     };
   });
 
-  it("should render the section and assing handlers", ({ props }) => {
+  it("should render the section and assing handlers", async ({
+    props,
+    user,
+  }) => {
     render(<MovieSection {...props} />);
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("My Subtitle")).toBeInTheDocument();
     expect(screen.getByText("Movie #1")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    await user.click(screen.getByRole("button", { name: "Edit" }));
     expect(props.onEditMovie).toHaveBeenCalled();
 
-    fireEvent.click(screen.getByRole("button", { name: "Mark Watched" }));
+    await user.click(screen.getByRole("button", { name: "Mark Watched" }));
     expect(props.onMarkWatched).toHaveBeenCalled();
 
-    fireEvent.click(screen.getByRole("button", { name: "Delete" }));
+    await user.click(screen.getByRole("button", { name: "Delete" }));
     expect(props.onDeleteMovie).toHaveBeenCalled();
   });
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Expanded from "./expanded";
 import { vi } from "vitest";
 
@@ -44,17 +44,19 @@ describe("expanded", () => {
     expect(screen.queryByTestId("backdrop")).not.toBeInTheDocument();
   });
 
-  it("should call onClose when clicking on the backdrop", async () => {
+  it("should call onClose when clicking on the backdrop", async ({ user }) => {
     render(<Expanded {...props} open={true} />);
     expect(screen.getByTestId("backdrop")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("backdrop"));
+    await user.click(screen.getByTestId("backdrop"));
     expect(props.onClose).toHaveBeenCalled();
   });
 
-  it("should call onClose when clicking on the full detail close button", async () => {
+  it("should call onClose when clicking on the full detail close button", async ({
+    user,
+  }) => {
     render(<Expanded {...props} open={true} />);
     expect(screen.getByLabelText("fullDetailMock")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Close" }));
+    await user.click(screen.getByRole("button", { name: "Close" }));
     expect(onCloseMock).toHaveBeenCalled();
   });
 });

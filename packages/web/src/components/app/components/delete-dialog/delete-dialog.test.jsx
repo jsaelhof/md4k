@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import DeleteDialog from "./delete-dialog";
 import { vi } from "vitest";
 
@@ -16,15 +16,15 @@ describe("delete-dialog", () => {
     expect(screen.getByText(props.content)).toBeInTheDocument();
   });
 
-  it("should call onConfirm", async ({ props }) => {
+  it("should call onConfirm", async ({ props, user }) => {
     render(<DeleteDialog open {...props} />);
-    fireEvent.click(screen.getByRole("button", { name: "Delete" }));
+    await user.click(screen.getByRole("button", { name: "Delete" }));
     expect(props.onConfirm).toHaveBeenCalled();
   });
 
-  it("should call onCancel", ({ props }) => {
+  it("should call onCancel", async ({ props, user }) => {
     render(<DeleteDialog open {...props} />);
-    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
@@ -35,9 +35,10 @@ describe("delete-dialog", () => {
 
   it("should call onCancel when the backdrop on the dialog is clicked", async ({
     props,
+    user,
   }) => {
     render(<DeleteDialog open {...props} />);
-    fireEvent.click(document.getElementsByClassName("MuiBackdrop-root")[0]);
+    await user.click(document.getElementsByClassName("MuiBackdrop-root")[0]);
     expect(props.onCancel).toHaveBeenCalled();
   });
 });

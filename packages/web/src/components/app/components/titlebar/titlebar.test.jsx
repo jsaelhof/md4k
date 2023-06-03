@@ -1,6 +1,6 @@
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import TitleBar from "./titlebar";
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { AppContext } from "../../../../context/app-context";
 import { createMatchMedia } from "../../../../utils/create-match-media";
 import { vi } from "vitest";
@@ -31,7 +31,9 @@ describe("titlebar", () => {
     expect(await screen.findByAltText("Test User")).toBeInTheDocument(); // Find the Profile Menu
   });
 
-  it("should render the titlebar for the pick screen on mobile", async () => {
+  it("should render the titlebar for the pick screen on mobile", async ({
+    user,
+  }) => {
     // Mock a 500 pixel width
     window.matchMedia = createMatchMedia(500);
 
@@ -53,7 +55,7 @@ describe("titlebar", () => {
       await screen.findByRole("button", { name: "Pick Again" })
     ).toBeInTheDocument(); // Find the Pick Again button
 
-    fireEvent.click(screen.getByRole("button", { name: "Pick Again" }));
+    await user.click(screen.getByRole("button", { name: "Pick Again" }));
 
     expect(clearPick).toHaveBeenCalled();
   });

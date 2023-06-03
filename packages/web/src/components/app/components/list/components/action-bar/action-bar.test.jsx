@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import ActionBar from "./action-bar";
@@ -63,24 +63,26 @@ describe("action-bar", () => {
   it("should call onAdd when Add Movie is pressed", async ({
     onAdd,
     onPick,
+    user,
   }) => {
     renderWithProviders(
       <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
-    fireEvent.click(screen.getByLabelText("Add Movie"));
+    await user.click(screen.getByLabelText("Add Movie"));
     expect(onAdd).toBeCalled();
   });
 
   it("should call onPick when Pick A Movie is pressed", async ({
     onAdd,
     onPick,
+    user,
   }) => {
     renderWithProviders(
       <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Pick A Movie" }));
+    await user.click(screen.getByRole("button", { name: "Pick A Movie" }));
     expect(onPick).toBeCalled();
   });
 });

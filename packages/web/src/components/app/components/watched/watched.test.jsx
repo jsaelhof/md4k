@@ -1,5 +1,5 @@
 import { Watched } from "./watched";
-import { fireEvent, waitFor, within, screen } from "@testing-library/react";
+import { waitFor, within, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
@@ -110,14 +110,16 @@ describe("watched", () => {
     });
   });
 
-  it("should show the delete dialog on delete action and do the 'cancel' action", async () => {
+  it("should show the delete dialog on delete action and do the 'cancel' action", async ({
+    user,
+  }) => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "DELETE" })
     );
 
@@ -125,20 +127,22 @@ describe("watched", () => {
     expect(dialog).toBeInTheDocument();
     expect(within(dialog).getByText(/Bourne.*removed/)).toBeInTheDocument();
 
-    fireEvent.click(within(dialog).getByText("Cancel"));
+    await user.click(within(dialog).getByText("Cancel"));
     await waitFor(() =>
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument()
     );
   });
 
-  it("should show the delete dialog on delete action and do the 'delete' action", async () => {
+  it("should show the delete dialog on delete action and do the 'delete' action", async ({
+    user,
+  }) => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "DELETE" })
     );
 
@@ -146,7 +150,7 @@ describe("watched", () => {
     expect(dialog).toBeInTheDocument();
     expect(within(dialog).getByText(/Bourne.*removed/)).toBeInTheDocument();
 
-    fireEvent.click(within(dialog).getByText("Delete"));
+    await user.click(within(dialog).getByText("Delete"));
     await waitFor(() =>
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument()
     );
@@ -165,14 +169,14 @@ describe("watched", () => {
     });
   });
 
-  it("should enable editing", async () => {
+  it("should enable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "EDIT" })
     );
 
@@ -181,14 +185,14 @@ describe("watched", () => {
     ).toBeInTheDocument();
   });
 
-  it("should save the movie and disable editing", async () => {
+  it("should save the movie and disable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "EDIT" })
     );
 
@@ -196,7 +200,7 @@ describe("watched", () => {
       within(screen.getByText(/Bourne/)).getByText("Editing: true")
     ).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "SAVE" })
     );
 
@@ -220,14 +224,14 @@ describe("watched", () => {
     });
   });
 
-  it("should cancel editing", async () => {
+  it("should cancel editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "EDIT" })
     );
 
@@ -235,7 +239,7 @@ describe("watched", () => {
       within(screen.getByText(/Bourne/)).getByText("Editing: true")
     ).toBeInTheDocument();
 
-    fireEvent.click(
+    await user.click(
       within(screen.getByText(/Bourne/)).getByRole("button", { name: "CANCEL" })
     );
 

@@ -8,6 +8,7 @@ export const ButtonContainer = styled("div")(
     margin: "auto",
     width: 24,
     height: 24,
+    pointerEvents: "auto",
     cursor: "pointer",
     color: palette.icon,
 

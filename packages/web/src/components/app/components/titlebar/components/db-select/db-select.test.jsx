@@ -1,5 +1,5 @@
 import DbSelect from "./db-select";
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { vi } from "vitest";
 import {
   GET_MOVIES_MOCK_FAMILY,
@@ -19,12 +19,14 @@ describe("db-select", () => {
     expect(await screen.findByLabelText(/Saturday/)).toBeInTheDocument();
   });
 
-  it("should render the list with the available options and an option for making a new list", async () => {
+  it("should render the list with the available options and an option for making a new list", async ({
+    user,
+  }) => {
     renderWithProviders(<DbSelect />);
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    fireEvent.mouseDown(
+    await user.click(
       screen.getByRole("button", { name: "Saturday Night", expanded: false })
     );
 
@@ -39,17 +41,19 @@ describe("db-select", () => {
     ).toBeInTheDocument();
   });
 
-  it("should push to the home page and set a new list when clicking on an existing list", async () => {
+  it("should push to the home page and set a new list when clicking on an existing list", async ({
+    user,
+  }) => {
     renderWithProviders(<DbSelect />, {
       mocks: [GET_MOVIES_MOCK_FAMILY],
     });
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    fireEvent.mouseDown(
+    await user.click(
       screen.getByRole("button", { name: /Saturday/, expanded: false })
     );
-    fireEvent.click(
+    await user.click(
       screen.getByRole("option", { name: /Family/, selected: false })
     );
 
@@ -57,15 +61,15 @@ describe("db-select", () => {
     expect(screen.getByLabelText(/Family/)).toBeInTheDocument();
   });
 
-  it("should push to the create page", async () => {
+  it("should push to the create page", async ({ user }) => {
     renderWithProviders(<DbSelect />);
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    fireEvent.mouseDown(
+    await user.click(
       screen.getByRole("button", { name: /Saturday/, expanded: false })
     );
-    fireEvent.click(
+    await user.click(
       screen.getByRole("option", { name: /New List/, selected: false })
     );
 

@@ -1,4 +1,4 @@
-import { fireEvent, waitFor, screen } from "@testing-library/react";
+import { waitFor, screen } from "@testing-library/react";
 import Movie from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
@@ -91,10 +91,11 @@ describe("movie", () => {
 
   it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
 
-    fireEvent.mouseOver(screen.getByTestId("listItem"));
+    await user.hover(screen.getByTestId("listItem"));
     await waitFor(() => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 });
       expect(screen.getByText("Expanded")).toHaveAttribute(
@@ -103,7 +104,7 @@ describe("movie", () => {
       );
     });
 
-    fireEvent.mouseOut(screen.getByTestId("listItem"));
+    await user.unhover(screen.getByTestId("listItem"));
     await waitFor(() => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
       expect(screen.getByText("Expanded")).toHaveAttribute(
@@ -115,15 +116,17 @@ describe("movie", () => {
 
   it("should close the zoomed poster and open the expanded detail view when clicked", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
 
-    fireEvent.mouseOver(screen.getByTestId("listItem"));
+    await user.hover(screen.getByTestId("listItem"));
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByTestId("positioner"));
+    await user.click(screen.getByTestId("positioner"));
+
     await waitFor(() => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
       expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "true");
@@ -132,6 +135,7 @@ describe("movie", () => {
 
   it("should toggle the actions and ratings when mousing over the five star rating", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
 
@@ -142,7 +146,7 @@ describe("movie", () => {
       transform: "translateX(0px)",
     });
 
-    fireEvent.mouseOver(screen.getByTestId("rating"));
+    await user.hover(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).not.toHaveStyle({
@@ -153,7 +157,7 @@ describe("movie", () => {
       });
     });
 
-    fireEvent.mouseOut(screen.getByTestId("rating"));
+    await user.unhover(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).toHaveStyle({
@@ -167,6 +171,7 @@ describe("movie", () => {
 
   it("should toggle the actions and ratings when clicking the five star rating", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
 
@@ -177,7 +182,7 @@ describe("movie", () => {
       transform: "translateX(0px)",
     });
 
-    fireEvent.click(screen.getByTestId("rating"));
+    await user.click(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).not.toHaveStyle({
@@ -188,7 +193,7 @@ describe("movie", () => {
       });
     });
 
-    fireEvent.click(screen.getByTestId("rating"));
+    await user.click(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).toHaveStyle({
@@ -202,9 +207,10 @@ describe("movie", () => {
 
   it("should send the edit action and close the zoomed view", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
-    fireEvent.click(screen.getByLabelText("Edit"));
+    await user.click(screen.getByLabelText("Edit"));
     expect(props.onEditMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -213,9 +219,10 @@ describe("movie", () => {
 
   it("should send the mark watched action and close the zoomed view", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
-    fireEvent.click(screen.getByLabelText("Mark as Watched"));
+    await user.click(screen.getByLabelText("Mark as Watched"));
     expect(props.onMarkWatched).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -224,9 +231,10 @@ describe("movie", () => {
 
   it("should send the delete action and close the zoomed view", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
-    fireEvent.click(screen.getByLabelText("Delete"));
+    await user.click(screen.getByLabelText("Delete"));
     expect(props.onDeleteMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -235,9 +243,10 @@ describe("movie", () => {
 
   it("should send the edit action with locked:true and close the zoomed view", async ({
     props,
+    user,
   }) => {
     renderWithProviders(<Movie {...props} />);
-    fireEvent.click(screen.getByLabelText("Lock"));
+    await user.click(screen.getByLabelText("Lock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,
@@ -252,11 +261,12 @@ describe("movie", () => {
 
   it("should send the edit action with locked:false and close the zoomed view", async ({
     props,
+    user,
   }) => {
     renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
-    fireEvent.click(screen.getByLabelText("Unlock"));
+    await user.click(screen.getByLabelText("Unlock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,

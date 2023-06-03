@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import NavButton from "./nav-button";
 import { vi } from "vitest";
 
@@ -13,27 +13,29 @@ describe("nav-button", () => {
     vi.clearAllMocks();
   });
 
-  it("should navigate to the provided href", () => {
+  it("should navigate to the provided href", async ({ user }) => {
     render(<NavButton href="/test">Test Button</NavButton>);
-    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
+    await user.click(screen.getByRole("button", { name: "Test Button" }));
     expect(navigateMock).toBeCalledWith("/test");
   });
 
-  it("should call the provided onClick", () => {
+  it("should call the provided onClick", async ({ user }) => {
     const onClick = vi.fn();
     render(<NavButton onClick={onClick}>Test Button</NavButton>);
-    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
+    await user.click(screen.getByRole("button", { name: "Test Button" }));
     expect(onClick).toHaveBeenCalled();
   });
 
-  it("should prefer onClick over the href if both are provided", () => {
+  it("should prefer onClick over the href if both are provided", async ({
+    user,
+  }) => {
     const onClick = vi.fn();
     render(
       <NavButton herf="/test" onClick={onClick}>
         Test Button
       </NavButton>
     );
-    fireEvent.click(screen.getByRole("button", { name: "Test Button" }));
+    await user.click(screen.getByRole("button", { name: "Test Button" }));
     expect(onClick).toHaveBeenCalled();
     expect(navigateMock).not.toHaveBeenCalled();
   });

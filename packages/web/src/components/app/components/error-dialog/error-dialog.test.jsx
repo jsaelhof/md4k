@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ErrorDialog from "./error-dialog";
 import { vi } from "vitest";
 
@@ -21,11 +21,12 @@ describe("error-dialog", () => {
     expect(screen.queryByText(props.content)).not.toBeInTheDocument();
   });
 
-  it("should call onConfirm when the dialog Ok button is pressed", ({
+  it("should call onConfirm when the dialog Ok button is pressed", async ({
     props,
+    user,
   }) => {
     render(<ErrorDialog {...props} />);
-    fireEvent.click(screen.getByRole("button", { name: "Ok" }));
+    await user.click(screen.getByRole("button", { name: "Ok" }));
     expect(props.onConfirm).toHaveBeenCalled();
   });
 });
