@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
