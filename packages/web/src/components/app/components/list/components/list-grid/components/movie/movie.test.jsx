@@ -53,7 +53,7 @@ describe("movie", () => {
     };
   });
 
-  it("should render a movie list entry", async ({ props }) => {
+  it("should render a movie list entry", ({ props }) => {
     renderWithProviders(<Movie {...props} />);
 
     // Should be two posters, the second is the larger overlaid one that is wrapped in an invisible div
@@ -81,7 +81,7 @@ describe("movie", () => {
     expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "false");
   });
 
-  it("should render a movie list entry as locked", async ({ props }) => {
+  it("should render a movie list entry as locked", ({ props }) => {
     renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );

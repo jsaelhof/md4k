@@ -48,7 +48,7 @@ describe("watched-movie", () => {
 
   afterEach(() => vi.clearAllMocks());
 
-  it("should render the title, date and poster", async ({ props }) => {
+  it("should render the title, date and poster", ({ props }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -66,7 +66,7 @@ describe("watched-movie", () => {
     expect(screen.getByLabelText("Test Movie Poster")).toBeInTheDocument();
   });
 
-  it("should render the poster followed by the info when left-aligned", async ({
+  it("should render the poster followed by the info when left-aligned", ({
     props,
   }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
@@ -80,7 +80,7 @@ describe("watched-movie", () => {
     );
   });
 
-  it("should render the info followed by the poster when right-aligned", async ({
+  it("should render the info followed by the poster when right-aligned", ({
     props,
   }) => {
     renderWithProviders(<WatchedMovie {...props} right />, {
@@ -94,7 +94,7 @@ describe("watched-movie", () => {
     );
   });
 
-  it("should render the date correctly when the breakpoint is small", async ({
+  it("should render the date correctly when the breakpoint is small", ({
     props,
   }) => {
     // Mock "small"
@@ -112,7 +112,7 @@ describe("watched-movie", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the date correctly when the breakpoint is xsmall", async ({
+  it("should render the date correctly when the breakpoint is xsmall", ({
     props,
   }) => {
     // Mock "xsmall"

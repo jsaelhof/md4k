@@ -14,7 +14,7 @@ describe("date-picker", () => {
     };
   });
 
-  it("should render the date picker without a drawer by default", async ({
+  it("should render the date picker without a drawer by default", ({
     props,
   }) => {
     renderWithProviders(<DatePicker {...props} />);
@@ -23,7 +23,7 @@ describe("date-picker", () => {
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should render the date picker in a drawer when useDrawer is true", async ({
+  it("should render the date picker in a drawer when useDrawer is true", ({
     props,
   }) => {
     renderWithProviders(<DatePicker {...props} useDrawer />);
@@ -32,19 +32,19 @@ describe("date-picker", () => {
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should ignore title when not in a drawer", async ({ props }) => {
+  it("should ignore title when not in a drawer", ({ props }) => {
     renderWithProviders(<DatePicker {...props} title="Test Title" />);
 
     expect(screen.queryByText("Test Title")).not.toBeInTheDocument();
   });
 
-  it("should render the title when in a drawer", async ({ props }) => {
+  it("should render the title when in a drawer", ({ props }) => {
     renderWithProviders(<DatePicker {...props} useDrawer title="Test Title" />);
 
     expect(screen.queryByText("Test Title")).toBeInTheDocument();
   });
 
-  it("should set the default date", async ({ props }) => {
+  it("should set the default date", ({ props }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByText("January 2022")).toBeInTheDocument();
     expect(

@@ -7,7 +7,7 @@ import {
 import SortNav from "./sort-nav";
 
 describe("sort-nav", () => {
-  it("should render all sort options", async () => {
+  it("should render all sort options", () => {
     renderWithProviders(<SortNav />);
 
     expect(screen.getByText("Added")).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Title")).toBeInTheDocument();
   });
 
-  it("should select added desc by default", async () => {
+  it("should select added desc by default", () => {
     renderWithProvidersAsRoute(<SortNav />, "/list/*", "/list/addedOn/desc");
 
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");

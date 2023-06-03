@@ -29,37 +29,35 @@ describe("list-grid", () => {
     };
   });
 
-  it("should render the addedOn list", async ({ props }) => {
+  it("should render the addedOn list", ({ props }) => {
     renderWithProviders(<ListGrid {...props} />, {
       route: "/addedOn/asc",
     });
     expect(screen.getByTestId("addedOn")).toBeInTheDocument();
   });
 
-  it("should render the title list", async ({ props }) => {
+  it("should render the title list", ({ props }) => {
     renderWithProviders(<ListGrid {...props} />, {
       route: "/title/asc",
     });
     expect(screen.getByTestId("title")).toBeInTheDocument();
   });
 
-  it("should render the runtime list", async ({ props }) => {
+  it("should render the runtime list", ({ props }) => {
     renderWithProviders(<ListGrid {...props} />, {
       route: "/runtime/asc",
     });
     expect(screen.getByTestId("runtime")).toBeInTheDocument();
   });
 
-  it("should render the genre list", async ({ props }) => {
+  it("should render the genre list", ({ props }) => {
     renderWithProviders(<ListGrid {...props} />, {
       route: "/genre/asc",
     });
     expect(screen.getByTestId("genre")).toBeInTheDocument();
   });
 
-  it("should render the empty list when there are no movies", async ({
-    props,
-  }) => {
+  it("should render the empty list when there are no movies", ({ props }) => {
     renderWithProviders(<ListGrid {...props} movies={[]} />, {
       route: "/addedOn/asc",
     });
@@ -68,7 +66,7 @@ describe("list-grid", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render null when movies is undefined", async ({ props }) => {
+  it("should render null when movies is undefined", ({ props }) => {
     renderWithProviders(<ListGrid {...props} movies={undefined} />, {
       route: "/addedOn/asc",
     });

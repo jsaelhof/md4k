@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import ScrollArea from "./scroll-area";
 
 const enableScrollScenario = (scrollTop, scrollHeight) => {

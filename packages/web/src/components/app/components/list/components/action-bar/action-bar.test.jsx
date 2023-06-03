@@ -15,7 +15,7 @@ describe("action-bar", () => {
     context.onPick = vi.fn();
   });
 
-  it("should not render the bar when disabled", async ({ onAdd, onPick }) => {
+  it("should not render the bar when disabled", ({ onAdd, onPick }) => {
     renderWithProviders(
       <ActionBar disabled={true} onAdd={onAdd} onPick={onPick} />
     );
@@ -23,7 +23,7 @@ describe("action-bar", () => {
     expect(screen.queryByText("Added")).not.toBeInTheDocument();
   });
 
-  it("should not render the bar when enabled", async ({ onAdd, onPick }) => {
+  it("should not render the bar when enabled", ({ onAdd, onPick }) => {
     renderWithProviders(
       <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />
     );
@@ -33,7 +33,7 @@ describe("action-bar", () => {
     expect(screen.getByLabelText("Pick A Movie")).toBeInTheDocument();
   });
 
-  it("should render the Add Movie button with a label when space exists", async ({
+  it("should render the Add Movie button with a label when space exists", ({
     onAdd,
     onPick,
   }) => {
@@ -45,7 +45,7 @@ describe("action-bar", () => {
     expect(screen.getByText("Add Movie")).toBeInTheDocument();
   });
 
-  it("should render the Add Movie button without a label when space is limited", async ({
+  it("should render the Add Movie button without a label when space is limited", ({
     onAdd,
     onPick,
   }) => {

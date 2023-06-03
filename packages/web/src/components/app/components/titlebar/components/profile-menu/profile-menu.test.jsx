@@ -3,7 +3,7 @@ import { renderWithProviders } from "../../../../../../utils/render-with-provide
 import ProfileMenu from "./profile-menu";
 
 describe("profile-menu", () => {
-  it("should render the menu button with the user image when closed", async () => {
+  it("should render the menu button with the user image when closed", () => {
     renderWithProviders(<ProfileMenu />);
     expect(screen.getByAltText("Test User")).toBeInTheDocument();
   });
