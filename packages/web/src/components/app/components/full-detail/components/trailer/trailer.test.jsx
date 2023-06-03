@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Trailer from "./trailer";
 import { vi } from "vitest";
 
@@ -7,25 +7,19 @@ vi.mock("react-youtube", () => ({
 }));
 
 describe("trailer", () => {
-  let test;
-
-  beforeEach(() => {
-    test = {
-      trailerId: "test123",
-      onComplete: vi.fn(),
-    };
+  beforeEach((context) => {
+    context.trailerId = "test123";
+    context.onComplete = vi.fn();
   });
 
-  it("should call onComplete when clicking on the trailer component and overlay mode is enabled", async () => {
-    const { getByLabelText } = render(
-      <Trailer
-        overlay
-        trailerId={test.trailerId}
-        onComplete={test.onComplete}
-      />
-    );
+  it("should call onComplete when clicking on the trailer component and overlay mode is enabled", async ({
+    trailerId,
+    onComplete,
+    user,
+  }) => {
+    render(<Trailer overlay trailerId={trailerId} onComplete={onComplete} />);
 
-    fireEvent.click(getByLabelText("Trailer"));
-    expect(test.onComplete).toHaveBeenCalled();
+    await user.click(screen.getByLabelText("Trailer"));
+    expect(onComplete).toHaveBeenCalled();
   });
 });

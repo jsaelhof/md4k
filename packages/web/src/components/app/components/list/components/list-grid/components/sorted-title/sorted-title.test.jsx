@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { render, within, screen } from "@testing-library/react";
 import SortedTitle from "./sorted-title";
 import { vi } from "vitest";
 import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
@@ -19,10 +19,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-title", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -47,10 +45,10 @@ describe("sorted-title", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", () => {
-    const { queryAllByText } = render(<SortedTitle {...props} />);
+  it("should render correctly when the order is ASC", ({ props }) => {
+    render(<SortedTitle {...props} />);
 
-    const movieNodes = queryAllByText(/Movie/);
+    const movieNodes = screen.queryAllByText(/Movie/);
 
     expect(movieNodes).toHaveLength(4);
     expect(within(movieNodes[0]).getByText("Movie 1")).toBeInTheDocument();
@@ -59,13 +57,13 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 4")).toBeInTheDocument();
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { queryAllByText } = render(<SortedTitle {...props} />);
+    render(<SortedTitle {...props} />);
 
-    const movieNodes = queryAllByText(/Movie/);
+    const movieNodes = screen.queryAllByText(/Movie/);
 
     expect(movieNodes).toHaveLength(4);
     expect(within(movieNodes[0]).getByText("Movie 4")).toBeInTheDocument();
@@ -74,30 +72,36 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 1")).toBeInTheDocument();
   });
 
-  it("should call the edit handler", () => {
-    const { getByText } = render(<SortedTitle {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Edit" })
+  it("should call the edit handler", async ({ props, user }) => {
+    render(<SortedTitle {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
     );
   });
 
-  it("should call the mark watched handler", () => {
-    const { getByText } = render(<SortedTitle {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Mark Watched" })
+  it("should call the mark watched handler", async ({ props, user }) => {
+    render(<SortedTitle {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Mark Watched",
+      })
     );
     expect(props.onMarkWatched).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
     );
   });
 
-  it("should call the delete handler", () => {
-    const { getByText } = render(<SortedTitle {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1")).getByRole("button", { name: "Delete" })
+  it("should call the delete handler", async ({ props, user }) => {
+    render(<SortedTitle {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })

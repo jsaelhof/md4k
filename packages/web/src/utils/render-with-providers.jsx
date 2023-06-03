@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
@@ -24,7 +24,7 @@ vi.mock("@auth0/auth0-react", () => ({
   }),
 }));
 
-export const renderWithProviders = async (children, options) => {
+export const renderWithProviders = (children, options) => {
   options = {
     ...{
       mocks: [],
@@ -53,9 +53,6 @@ export const renderWithProviders = async (children, options) => {
 
   const result = render(children, { wrapper: RenderWrapper, ...options });
 
-  // Await for one tick to make sure that the mock query responses are not in the loading state
-  await waitFor(() => new Promise((resolve) => setTimeout(resolve, 0)));
-
   return result;
 };
 
@@ -66,7 +63,7 @@ export const renderWithProviders = async (children, options) => {
  * @param route The full URL path to be matched against "routePath". For example, "list/1234" would match the routePath so that useParams will return id=1234.
  * @param options Options for renderWIthProviders. Note that if "route" is included it will be overriden by the route argument.
  */
-export const renderWithProvidersAsRoute = async (
+export const renderWithProvidersAsRoute = (
   children,
   routePath,
   route,

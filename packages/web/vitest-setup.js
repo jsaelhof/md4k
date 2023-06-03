@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
-import { beforeAll, vi } from "vitest";
+import { beforeAll, beforeEach, vi } from "vitest";
+import userEvent from "@testing-library/user-event";
 
 beforeAll(() => {
   // Define a mock for intersection observer.
@@ -8,4 +9,8 @@ beforeAll(() => {
     observe: vi.fn(),
     unobserve: vi.fn(),
   }));
+});
+
+beforeEach((context) => {
+  context.user = userEvent.setup();
 });

@@ -25,7 +25,7 @@ export const MovieDetailPositioner = styled("div")(() => ({
   bottom: 0,
   left: 0,
   right: 0,
-  pointerEvents: "none",
+  // pointerEvents: "none",
   opacity: 0,
 }));
 
@@ -89,6 +89,7 @@ export const InfoFooterLayout = styled(animated.div)`
 export const StarRatingLayout = styled("div")`
   grid-area: rating;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.5));
+  pointer-events: "auto";
 `;
 
 export const SourceLayout = styled("div")(({ theme: { spacing } }) => ({

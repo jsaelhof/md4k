@@ -1,13 +1,11 @@
-import { fireEvent } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import DatePicker from "./date-picker";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 
 describe("date-picker", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       defaultDate: new Date("2022-01-02T12:00:00"),
       onChange: vi.fn(),
       onCancel: vi.fn(),
@@ -16,94 +14,84 @@ describe("date-picker", () => {
     };
   });
 
-  it("should render the date picker without a drawer by default", async () => {
-    const { getByTestId, queryByRole } = await renderWithProviders(
-      <DatePicker {...props} />
-    );
+  it("should render the date picker without a drawer by default", ({
+    props,
+  }) => {
+    renderWithProviders(<DatePicker {...props} />);
 
-    expect(queryByRole("presentation")).not.toBeInTheDocument();
-    expect(getByTestId("datePicker")).toBeInTheDocument();
+    expect(screen.queryByRole("presentation")).not.toBeInTheDocument();
+    expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should render the date picker in a drawer when useDrawer is true", async () => {
-    const { getByTestId, queryByRole } = await renderWithProviders(
-      <DatePicker {...props} useDrawer />
-    );
+  it("should render the date picker in a drawer when useDrawer is true", ({
+    props,
+  }) => {
+    renderWithProviders(<DatePicker {...props} useDrawer />);
 
-    expect(queryByRole("presentation")).toBeInTheDocument();
-    expect(getByTestId("datePicker")).toBeInTheDocument();
+    expect(screen.queryByRole("presentation")).toBeInTheDocument();
+    expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should ignore title when not in a drawer", async () => {
-    const { queryByText } = await renderWithProviders(
-      <DatePicker {...props} title="Test Title" />
-    );
+  it("should ignore title when not in a drawer", ({ props }) => {
+    renderWithProviders(<DatePicker {...props} title="Test Title" />);
 
-    expect(queryByText("Test Title")).not.toBeInTheDocument();
+    expect(screen.queryByText("Test Title")).not.toBeInTheDocument();
   });
 
-  it("should render the title when in a drawer", async () => {
-    const { queryByText } = await renderWithProviders(
-      <DatePicker {...props} useDrawer title="Test Title" />
-    );
+  it("should render the title when in a drawer", ({ props }) => {
+    renderWithProviders(<DatePicker {...props} useDrawer title="Test Title" />);
 
-    expect(queryByText("Test Title")).toBeInTheDocument();
+    expect(screen.queryByText("Test Title")).toBeInTheDocument();
   });
 
-  it("should set the default date", async () => {
-    const { getByText, getByRole } = await renderWithProviders(
-      <DatePicker {...props} />
-    );
-    expect(getByText("January 2022")).toBeInTheDocument();
-    expect(getByRole("button", { name: "2nd January (Sunday)" })).toHaveClass(
-      "rdp-day_selected"
-    );
+  it("should set the default date", ({ props }) => {
+    renderWithProviders(<DatePicker {...props} />);
+    expect(screen.getByText("January 2022")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "2nd January (Sunday)" })
+    ).toHaveClass("rdp-day_selected");
   });
 
-  it("should call onChange when changing the date", async () => {
-    const { getByRole } = await renderWithProviders(<DatePicker {...props} />);
+  it("should call onChange when changing the date", async ({ props, user }) => {
+    renderWithProviders(<DatePicker {...props} />);
 
-    expect(getByRole("button", { name: "2nd January (Sunday)" })).toHaveClass(
-      "rdp-day_selected"
+    expect(
+      screen.getByRole("button", { name: "2nd January (Sunday)" })
+    ).toHaveClass("rdp-day_selected");
+
+    await user.click(
+      screen.getByRole("button", { name: "1st January (Saturday)" })
     );
-
-    fireEvent.click(getByRole("button", { name: "1st January (Saturday)" }));
 
     expect(props.onChange).toHaveBeenCalled();
 
     expect(
-      getByRole("button", { name: "2nd January (Sunday)" })
+      screen.getByRole("button", { name: "2nd January (Sunday)" })
     ).not.toHaveClass("rdp-day_selected");
 
-    expect(getByRole("button", { name: "1st January (Saturday)" })).toHaveClass(
-      "rdp-day_selected"
-    );
+    expect(
+      screen.getByRole("button", { name: "1st January (Saturday)" })
+    ).toHaveClass("rdp-day_selected");
   });
 
-  it("should call onDelete", async () => {
-    const { getByTestId } = await renderWithProviders(
-      <DatePicker {...props} />
-    );
-    expect(getByTestId("DeleteIcon")).toBeInTheDocument();
-    fireEvent.click(getByTestId("DeleteIcon"));
+  it("should call onDelete", async ({ props, user }) => {
+    renderWithProviders(<DatePicker {...props} />);
+    expect(screen.getByTestId("DeleteIcon")).toBeInTheDocument();
+    await user.click(screen.getByTestId("DeleteIcon"));
     expect(props.onDelete).toHaveBeenCalled();
   });
 
-  it("should call onCancel", async () => {
-    const { getByTestId } = await renderWithProviders(
-      <DatePicker {...props} />
-    );
-    expect(getByTestId("CloseIcon")).toBeInTheDocument();
-    fireEvent.click(getByTestId("CloseIcon"));
+  it("should call onCancel", async ({ props, user }) => {
+    renderWithProviders(<DatePicker {...props} />);
+    expect(screen.getByTestId("CloseIcon")).toBeInTheDocument();
+    await user.click(screen.getByTestId("CloseIcon"));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onSave", async () => {
-    const { getByTestId } = await renderWithProviders(
-      <DatePicker {...props} />
-    );
-    expect(getByTestId("CalendarCheckIcon")).toBeInTheDocument();
-    fireEvent.click(getByTestId("CalendarCheckIcon"));
+  it("should call onSave", async ({ props, user }) => {
+    renderWithProviders(<DatePicker {...props} />);
+    expect(screen.getByTestId("CalendarCheckIcon")).toBeInTheDocument();
+    await user.click(screen.getByTestId("CalendarCheckIcon"));
     expect(props.onSave).toHaveBeenCalled();
   });
 });

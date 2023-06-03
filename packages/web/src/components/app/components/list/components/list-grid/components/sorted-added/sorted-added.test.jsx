@@ -1,4 +1,4 @@
-import { fireEvent, render, within } from "@testing-library/react";
+import { render, within, screen } from "@testing-library/react";
 import SortedAdded from "./sorted-added";
 import { vi } from "vitest";
 import { formatISO, subDays, subMonths } from "date-fns";
@@ -20,10 +20,8 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
 }));
 
 describe("sorted-added", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movies: [
         {
           id: 0,
@@ -72,111 +70,113 @@ describe("sorted-added", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", () => {
-    const { getByTestId } = render(<SortedAdded {...props} />);
+  it("should render correctly when the order is ASC", ({ props }) => {
+    render(<SortedAdded {...props} />);
 
     expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText(/Long/)
+      within(screen.getByTestId("addedOn").childNodes[0]).getByText(/Long/)
     ).toBeInTheDocument();
-    const section1 = within(getByTestId("addedOn").childNodes[0]).getAllByText(
-      /Movie 4/
-    );
+    const section1 = within(
+      screen.getByTestId("addedOn").childNodes[0]
+    ).getAllByText(/Movie 4/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 4b");
     expect(section1[1]).toHaveAttribute("aria-label", "Movie 4a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText(/Year/)
+      within(screen.getByTestId("addedOn").childNodes[1]).getByText(/Year/)
     ).toBeInTheDocument();
-    const section2 = within(getByTestId("addedOn").childNodes[1]).getAllByText(
-      /Movie 3/
-    );
+    const section2 = within(
+      screen.getByTestId("addedOn").childNodes[1]
+    ).getAllByText(/Movie 3/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 3b");
     expect(section2[1]).toHaveAttribute("aria-label", "Movie 3a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText(/While/)
+      within(screen.getByTestId("addedOn").childNodes[2]).getByText(/While/)
     ).toBeInTheDocument();
-    const section3 = within(getByTestId("addedOn").childNodes[2]).getAllByText(
-      /Movie 2/
-    );
+    const section3 = within(
+      screen.getByTestId("addedOn").childNodes[2]
+    ).getAllByText(/Movie 2/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 2b");
     expect(section3[1]).toHaveAttribute("aria-label", "Movie 2a");
 
     expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText(/Recently/)
+      within(screen.getByTestId("addedOn").childNodes[3]).getByText(/Recently/)
     ).toBeInTheDocument();
-    const section4 = within(getByTestId("addedOn").childNodes[3]).getAllByText(
-      /Movie 1/
-    );
+    const section4 = within(
+      screen.getByTestId("addedOn").childNodes[3]
+    ).getAllByText(/Movie 1/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 1b");
     expect(section4[1]).toHaveAttribute("aria-label", "Movie 1a");
   });
 
-  it("should render correctly when the order is DESC", () => {
+  it("should render correctly when the order is DESC", ({ props }) => {
     // eslint-disable-next-line no-import-assign
     useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
 
-    const { getByTestId } = render(<SortedAdded {...props} />);
+    render(<SortedAdded {...props} />);
 
     expect(
-      within(getByTestId("addedOn").childNodes[0]).getByText(/Recently/)
+      within(screen.getByTestId("addedOn").childNodes[0]).getByText(/Recently/)
     ).toBeInTheDocument();
-    const section1 = within(getByTestId("addedOn").childNodes[0]).getAllByText(
-      /Movie 1/
-    );
+    const section1 = within(
+      screen.getByTestId("addedOn").childNodes[0]
+    ).getAllByText(/Movie 1/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
     expect(section1[1]).toHaveAttribute("aria-label", "Movie 1b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[1]).getByText(/While/)
+      within(screen.getByTestId("addedOn").childNodes[1]).getByText(/While/)
     ).toBeInTheDocument();
-    const section2 = within(getByTestId("addedOn").childNodes[1]).getAllByText(
-      /Movie 2/
-    );
+    const section2 = within(
+      screen.getByTestId("addedOn").childNodes[1]
+    ).getAllByText(/Movie 2/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
     expect(section2[1]).toHaveAttribute("aria-label", "Movie 2b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[2]).getByText(/Year/)
+      within(screen.getByTestId("addedOn").childNodes[2]).getByText(/Year/)
     ).toBeInTheDocument();
-    const section3 = within(getByTestId("addedOn").childNodes[2]).getAllByText(
-      /Movie 3/
-    );
+    const section3 = within(
+      screen.getByTestId("addedOn").childNodes[2]
+    ).getAllByText(/Movie 3/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
     expect(section3[1]).toHaveAttribute("aria-label", "Movie 3b");
 
     expect(
-      within(getByTestId("addedOn").childNodes[3]).getByText(/Long/)
+      within(screen.getByTestId("addedOn").childNodes[3]).getByText(/Long/)
     ).toBeInTheDocument();
-    const section4 = within(getByTestId("addedOn").childNodes[3]).getAllByText(
-      /Movie 4/
-    );
+    const section4 = within(
+      screen.getByTestId("addedOn").childNodes[3]
+    ).getAllByText(/Movie 4/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
     expect(section4[1]).toHaveAttribute("aria-label", "Movie 4b");
   });
 
-  it("should call the edit handler", () => {
-    const { getByText } = render(<SortedAdded {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", { name: "Edit" })
+  it("should call the edit handler", async ({ props, user }) => {
+    render(<SortedAdded {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1a")).getByRole("button", {
+        name: "Edit",
+      })
     );
     expect(props.onEditMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1a" })
     );
   });
 
-  it("should call the mark watched handler", () => {
-    const { getByText } = render(<SortedAdded {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", {
+  it("should call the mark watched handler", async ({ props, user }) => {
+    render(<SortedAdded {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1a")).getByRole("button", {
         name: "Mark Watched",
       })
     );
@@ -185,10 +185,12 @@ describe("sorted-added", () => {
     );
   });
 
-  it("should call the delete handler", () => {
-    const { getByText } = render(<SortedAdded {...props} />);
-    fireEvent.click(
-      within(getByText("Movie 1a")).getByRole("button", { name: "Delete" })
+  it("should call the delete handler", async ({ props, user }) => {
+    render(<SortedAdded {...props} />);
+    await user.click(
+      within(screen.getByText("Movie 1a")).getByRole("button", {
+        name: "Delete",
+      })
     );
     expect(props.onDeleteMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1a" })

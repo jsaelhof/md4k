@@ -16,30 +16,28 @@ export const Create = () => {
   });
 
   return (
-    <>
-      <EmptyState
-        imgSrc={"images/delorean.png"}
-        quote="&quot;Roads? Where we're going, we don't need roads.&quot;"
-        message={
-          <>
-            The future looks bright.
-            <br />
-            Let&apos;s get started by making a list.
-          </>
-        }
-        content={
-          error ? (
-            <CreateListError reset={reset} />
-          ) : (
-            <CreateListInput
-              onSubmit={(name) => {
-                addList(addListOptions(name));
-              }}
-            />
-          )
-        }
-        inProgress={loading}
-      />
-    </>
+    <EmptyState
+      imgSrc={"images/delorean.png"}
+      quote="&quot;Roads? Where we're going, we don't need roads.&quot;"
+      message={
+        <>
+          The future looks bright.
+          <br />
+          Let&apos;s get started by making a list.
+        </>
+      }
+      content={
+        error ? (
+          <CreateListError reset={reset} />
+        ) : (
+          <CreateListInput
+            onSubmit={(name) => {
+              addList(addListOptions(name));
+            }}
+          />
+        )
+      }
+      inProgress={loading}
+    />
   );
 };

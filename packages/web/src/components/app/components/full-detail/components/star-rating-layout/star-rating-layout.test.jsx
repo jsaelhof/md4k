@@ -1,38 +1,37 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 import { createMatchMedia } from "../../../../../../utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
 
 describe("star-rating-layout", () => {
-  let test;
-
-  beforeEach(() => {
-    test = {
-      ratings: {
-        id: "tt2463208",
-        IMDB: "67%",
-        ROTTEN_TOMATOES: "68%",
-        METACRITIC: "55%",
-      },
+  beforeEach((context) => {
+    context.ratings = {
+      id: "tt2463208",
+      IMDB: "67%",
+      ROTTEN_TOMATOES: "68%",
+      METACRITIC: "55%",
     };
   });
 
-  it("should render the five-star rating and ratings breakdown", () => {
-    const { getAllByAltText, getByAltText, getByText } = render(
-      <StarRatingLayout ratings={test.ratings} />
-    );
-    expect(getAllByAltText(/star-/)).toHaveLength(5);
-    expect(getByAltText("IMDB")).toBeInTheDocument();
-    expect(getByText("67%")).toBeInTheDocument();
-    expect(getByAltText("ROTTEN_TOMATOES")).toBeInTheDocument();
-    expect(getByText("68%")).toBeInTheDocument();
-    expect(getByAltText("METACRITIC")).toBeInTheDocument();
-    expect(getByText("55%")).toBeInTheDocument();
+  it("should render the five-star rating and ratings breakdown", ({
+    ratings,
+  }) => {
+    render(<StarRatingLayout ratings={ratings} />);
+    expect(screen.getAllByAltText(/star-/)).toHaveLength(5);
+    expect(screen.getByAltText("IMDB")).toBeInTheDocument();
+    expect(screen.getByText("67%")).toBeInTheDocument();
+    expect(screen.getByAltText("ROTTEN_TOMATOES")).toBeInTheDocument();
+    expect(screen.getByText("68%")).toBeInTheDocument();
+    expect(screen.getByAltText("METACRITIC")).toBeInTheDocument();
+    expect(screen.getByText("55%")).toBeInTheDocument();
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async () => {
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async ({
+    ratings,
+    user,
+  }) => {
+    render(<StarRatingLayout ratings={ratings} />);
 
-    const starRatingLayout = getByTestId("starRatingLayout");
+    const starRatingLayout = screen.getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
 
     expect(ratingsBreakdown).not.toHaveStyle({
@@ -40,7 +39,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.mouseEnter(starRatingLayout);
+    await user.hover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -50,7 +49,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.mouseLeave(starRatingLayout);
+    await user.unhover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).not.toHaveStyle({
@@ -61,10 +60,13 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when mobile", async () => {
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+  it("should toggle the ratings breakdown with click when mobile", async ({
+    ratings,
+    user,
+  }) => {
+    render(<StarRatingLayout ratings={ratings} />);
 
-    const starRatingLayout = getByTestId("starRatingLayout");
+    const starRatingLayout = screen.getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
 
     expect(ratingsBreakdown).not.toHaveStyle({
@@ -72,7 +74,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -82,7 +84,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).not.toHaveStyle({
@@ -93,13 +95,16 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async () => {
+  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async ({
+    ratings,
+    user,
+  }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
 
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+    render(<StarRatingLayout ratings={ratings} />);
 
-    const starRatingLayout = getByTestId("starRatingLayout");
+    const starRatingLayout = screen.getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
 
     expect(ratingsBreakdown).toHaveStyle({
@@ -107,7 +112,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.mouseEnter(starRatingLayout);
+    await user.hover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -117,7 +122,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.mouseLeave(starRatingLayout);
+    await user.unhover(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -128,13 +133,16 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when above mobile", async () => {
+  it("should toggle the ratings breakdown with click when above mobile", async ({
+    ratings,
+    user,
+  }) => {
     // Mock a 660 pixel width
     window.matchMedia = createMatchMedia(660);
 
-    const { getByTestId } = render(<StarRatingLayout ratings={test.ratings} />);
+    render(<StarRatingLayout ratings={ratings} />);
 
-    const starRatingLayout = getByTestId("starRatingLayout");
+    const starRatingLayout = screen.getByTestId("starRatingLayout");
     const ratingsBreakdown = starRatingLayout.lastChild;
 
     expect(ratingsBreakdown).toHaveStyle({
@@ -142,7 +150,7 @@ describe("star-rating-layout", () => {
       opacity: "-0.25",
     });
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({
@@ -152,7 +160,7 @@ describe("star-rating-layout", () => {
       { timeout: 5000 }
     );
 
-    fireEvent.click(starRatingLayout);
+    await user.click(starRatingLayout);
     await waitFor(
       () =>
         expect(ratingsBreakdown).toHaveStyle({

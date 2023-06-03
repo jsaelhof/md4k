@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MovieSection from "./movie-section";
 import { vi } from "vitest";
 
@@ -14,10 +14,8 @@ vi.mock("../movie/movie", () => ({
 }));
 
 describe("movie-section", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       title: "Test Title",
       subtitle: "My Subtitle",
       list: [
@@ -32,40 +30,41 @@ describe("movie-section", () => {
     };
   });
 
-  it("should render the section and assing handlers", () => {
-    const { getByText, getByRole } = render(<MovieSection {...props} />);
+  it("should render the section and assing handlers", async ({
+    props,
+    user,
+  }) => {
+    render(<MovieSection {...props} />);
 
-    expect(getByText("Test Title")).toBeInTheDocument();
-    expect(getByText("My Subtitle")).toBeInTheDocument();
-    expect(getByText("Movie #1")).toBeInTheDocument();
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("My Subtitle")).toBeInTheDocument();
+    expect(screen.getByText("Movie #1")).toBeInTheDocument();
 
-    fireEvent.click(getByRole("button", { name: "Edit" }));
+    await user.click(screen.getByRole("button", { name: "Edit" }));
     expect(props.onEditMovie).toHaveBeenCalled();
 
-    fireEvent.click(getByRole("button", { name: "Mark Watched" }));
+    await user.click(screen.getByRole("button", { name: "Mark Watched" }));
     expect(props.onMarkWatched).toHaveBeenCalled();
 
-    fireEvent.click(getByRole("button", { name: "Delete" }));
+    await user.click(screen.getByRole("button", { name: "Delete" }));
     expect(props.onDeleteMovie).toHaveBeenCalled();
   });
 
-  it("should not render the title and subtitle when the title is omitted", () => {
-    const { getByText, queryByText } = render(
-      <MovieSection {...props} title={undefined} />
-    );
+  it("should not render the title and subtitle when the title is omitted", ({
+    props,
+  }) => {
+    render(<MovieSection {...props} title={undefined} />);
 
-    expect(queryByText("Test Title")).not.toBeInTheDocument();
-    expect(queryByText("My Subtitle")).not.toBeInTheDocument();
-    expect(getByText("Movie #1")).toBeInTheDocument();
+    expect(screen.queryByText("Test Title")).not.toBeInTheDocument();
+    expect(screen.queryByText("My Subtitle")).not.toBeInTheDocument();
+    expect(screen.getByText("Movie #1")).toBeInTheDocument();
   });
 
-  it("should not render the subtitle when omitted", () => {
-    const { getByText, queryByText } = render(
-      <MovieSection {...props} subtitle={undefined} />
-    );
+  it("should not render the subtitle when omitted", ({ props }) => {
+    render(<MovieSection {...props} subtitle={undefined} />);
 
-    expect(getByText("Test Title")).toBeInTheDocument();
-    expect(queryByText("My Subtitle")).not.toBeInTheDocument();
-    expect(getByText("Movie #1")).toBeInTheDocument();
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.queryByText("My Subtitle")).not.toBeInTheDocument();
+    expect(screen.getByText("Movie #1")).toBeInTheDocument();
   });
 });

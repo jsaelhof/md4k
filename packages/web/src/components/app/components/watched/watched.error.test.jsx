@@ -1,5 +1,5 @@
 import { Watched } from "./watched";
-import { fireEvent, waitFor, within } from "@testing-library/react";
+import { within, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
@@ -52,24 +52,26 @@ const GET_MOVIES_MOCK = {
 };
 
 describe("watched - error", () => {
-  it("should show the error", async () => {
-    const { getByText, getByRole } = await renderWithProviders(<Watched />, {
+  it("should show the error", async ({ user }) => {
+    renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,
       mocks: [REMOVE_MOVIE_ERROR_MOCK],
     });
 
-    await waitFor(() => expect(getByText(/Bourne/)).toBeInTheDocument());
+    expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
-    fireEvent.click(
-      within(getByText(/Bourne/)).getByRole("button", { name: "DELETE" })
+    await user.click(
+      within(screen.getByText(/Bourne/)).getByRole("button", {
+        name: "DELETE",
+      })
     );
 
-    const dialog = getByRole("dialog");
+    const dialog = screen.getByRole("dialog");
     expect(dialog).toBeInTheDocument();
     expect(within(dialog).getByText(/Bourne.*removed/)).toBeInTheDocument();
 
-    fireEvent.click(within(dialog).getByText("Delete"));
+    await user.click(within(dialog).getByText("Delete"));
 
-    await waitFor(() => expect(getByText(/Houston/)).toBeInTheDocument());
+    expect(await screen.findByText(/Houston/)).toBeInTheDocument();
   });
 });

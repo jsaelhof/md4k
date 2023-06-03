@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
 import * as useIntersectionObserverModule from "./hooks/use-intersection-observer";
@@ -11,10 +11,8 @@ vi.mock("./hooks/use-intersection-observer", () => ({
 }));
 
 describe("movie-poster", () => {
-  let props;
-
-  beforeEach(() => {
-    props = {
+  beforeEach((context) => {
+    context.props = {
       movie: {
         id: "8502fd8b-165e-4239-965f-b46f8d523829",
         title: "The Bourne Identity",
@@ -40,23 +38,25 @@ describe("movie-poster", () => {
     };
   });
 
-  it("should render the correct height and width ratio", () => {
-    const { getByLabelText } = render(<MoviePoster {...props} height={1000} />);
-    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
+  it("should render the correct height and width ratio", ({ props }) => {
+    render(<MoviePoster {...props} height={1000} />);
+    expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       width: "640px",
       height: "1000px",
     });
   });
 
-  it("should render the poster when a url exists in the movie", () => {
-    const { getByTestId, getByText } = render(<MoviePoster {...props} />);
-    expect(getByTestId("poster")).toHaveStyle({
+  it("should render the poster when a url exists in the movie", ({ props }) => {
+    render(<MoviePoster {...props} />);
+    expect(screen.getByTestId("poster")).toHaveStyle({
       "background-image": `url(${props.movie.poster})`,
     });
-    expect(getByText(/Bourne/)).toBeInTheDocument();
+    expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should render the placeholder when the poster is not intersecting the viewport", () => {
+  it("should render the placeholder when the poster is not intersecting the viewport", ({
+    props,
+  }) => {
     // eslint-disable-next-line no-import-assign
     useIntersectionObserverModule.useIntersectionObserver = vi
       .fn()
@@ -65,78 +65,80 @@ describe("movie-poster", () => {
         visible: false,
       });
 
-    const { getByTestId, getByText } = render(<MoviePoster {...props} />);
+    render(<MoviePoster {...props} />);
 
-    expect(getByTestId("poster")).toHaveStyle({
+    expect(screen.getByTestId("poster")).toHaveStyle({
       "background-image": "",
     });
-    expect(getByText(/Bourne/)).toBeInTheDocument();
+    expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should be active when an onClick handler is provided", () => {
-    const { getByTestId } = render(<MoviePoster {...props} />);
+  it("should be active when an onClick handler is provided", ({ props }) => {
+    render(<MoviePoster {...props} />);
 
-    expect(getByTestId("poster")).toHaveStyle({
+    expect(screen.getByTestId("poster")).toHaveStyle({
       cursor: "pointer",
     });
   });
 
-  it("should not be active when an onClick handler is omitted", () => {
-    const { getByTestId } = render(
-      <MoviePoster {...props} onClick={undefined} />
-    );
+  it("should not be active when an onClick handler is omitted", ({ props }) => {
+    render(<MoviePoster {...props} onClick={undefined} />);
 
-    expect(getByTestId("poster")).not.toHaveStyle({
+    expect(screen.getByTestId("poster")).not.toHaveStyle({
       cursor: "pointer",
     });
   });
 
-  it("should invoke the handler onClick when provided", () => {
-    const { getByLabelText } = render(<MoviePoster {...props} />);
-    fireEvent.click(getByLabelText(/Bourne.*Poster/));
+  it("should invoke the handler onClick when provided", async ({
+    props,
+    user,
+  }) => {
+    render(<MoviePoster {...props} />);
+    await user.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should not invoke the handler onClick when not provided", () => {
-    const { getByLabelText } = render(
-      <MoviePoster {...props} onClick={undefined} />
-    );
-    fireEvent.click(getByLabelText(/Bourne.*Poster/));
+  it("should not invoke the handler onClick when not provided", async ({
+    props,
+    user,
+  }) => {
+    render(<MoviePoster {...props} onClick={undefined} />);
+    await user.click(screen.getByLabelText(/Bourne.*Poster/));
     expect(props.onClick).not.toHaveBeenCalled();
   });
 
-  it("should dim the poster when locked", () => {
-    const { getByLabelText } = render(
-      <MoviePoster {...props} movie={{ ...props.movie, locked: true }} />
-    );
+  it("should dim the poster when locked", ({ props }) => {
+    render(<MoviePoster {...props} movie={{ ...props.movie, locked: true }} />);
 
-    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
+    expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       opacity: "0.3",
     });
   });
 
-  it("should not dim the poster when locked but noLock is passed", () => {
-    const { getByLabelText } = render(
+  it("should not dim the poster when locked but noLock is passed", ({
+    props,
+  }) => {
+    render(
       <MoviePoster {...props} movie={{ ...props.movie, locked: true }} noLock />
     );
 
-    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
+    expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       opacity: "1",
     });
   });
 
-  it("should be relatively positioned when noRel is false", () => {
-    const { getByLabelText } = render(<MoviePoster {...props} />);
+  it("should be relatively positioned when noRel is false", ({ props }) => {
+    render(<MoviePoster {...props} />);
 
-    expect(getByLabelText(/Bourne.*Poster/)).toHaveStyle({
+    expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       position: "relative",
     });
   });
 
-  it("should not be relatively positioned when noRel is true", () => {
-    const { getByLabelText } = render(<MoviePoster {...props} noRel />);
+  it("should not be relatively positioned when noRel is true", ({ props }) => {
+    render(<MoviePoster {...props} noRel />);
 
-    expect(getByLabelText(/Bourne.*Poster/)).not.toHaveStyle({
+    expect(screen.getByLabelText(/Bourne.*Poster/)).not.toHaveStyle({
       position: "relative",
     });
   });

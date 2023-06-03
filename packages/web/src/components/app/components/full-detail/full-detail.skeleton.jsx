@@ -23,6 +23,7 @@ export const FullDetailSkeleton = ({ showCloseButton, small, onClose }) => (
 
     <BackdropWrapper>
       <Skeleton
+        data-testid="skeleton"
         variant="rectangular"
         width="100%"
         height="100%"
@@ -33,6 +34,7 @@ export const FullDetailSkeleton = ({ showCloseButton, small, onClose }) => (
     <MovieInfo>
       <Poster>
         <Skeleton
+          data-testid="skeleton"
           variant="rectangular"
           width={(small ? 300 : 400) * 0.64}
           height={small ? 300 : 400}
@@ -41,24 +43,78 @@ export const FullDetailSkeleton = ({ showCloseButton, small, onClose }) => (
       </Poster>
 
       <MovieTitle>
-        <Skeleton variant="text" width={300} height={60} animation="wave" />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={300}
+          height={60}
+          animation="wave"
+        />
       </MovieTitle>
 
       <MovieData>
-        <Skeleton variant="text" width={50} height={40} animation="wave" />
-        <Skeleton variant="text" width={50} height={40} animation="wave" />
-        <Skeleton variant="text" width={50} height={40} animation="wave" />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={50}
+          height={40}
+          animation="wave"
+        />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={50}
+          height={40}
+          animation="wave"
+        />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={50}
+          height={40}
+          animation="wave"
+        />
       </MovieData>
 
       <PlotLayout>
-        <Skeleton variant="text" width="100%" height={30} animation="wave" />
-        <Skeleton variant="text" width="100%" height={30} animation="wave" />
-        <Skeleton variant="text" width="100%" height={30} animation="wave" />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width="100%"
+          height={30}
+          animation="wave"
+        />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width="100%"
+          height={30}
+          animation="wave"
+        />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width="100%"
+          height={30}
+          animation="wave"
+        />
       </PlotLayout>
 
       <Actions>
-        <Skeleton variant="text" width={100} height={40} animation="wave" />
-        <Skeleton variant="text" width={100} height={40} animation="wave" />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={100}
+          height={40}
+          animation="wave"
+        />
+        <Skeleton
+          data-testid="skeleton"
+          variant="text"
+          width={100}
+          height={40}
+          animation="wave"
+        />
       </Actions>
     </MovieInfo>
   </FullDetailLayout>
