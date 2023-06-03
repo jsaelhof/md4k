@@ -1,3 +1,22 @@
+### PR #82 - #81: fix failing skeleton tests
+##### 2023-06-03
+
+Fixes the failing skeleton test which was caused by misunderstanding how the mocked provider works. I was trying to mock it as loading but the correct way to test loading is to render and write assertions without waiting. To test after loading, use await to wait for elements to appear in the DOM. 
+
+Fixing this required removing a hack I had built into my renderWithProviders util that created a short sleep to skip the loading state. I had been specifically hacking my way around being in the loading state instead of correct using await findByX to wait for loading to be completed. This realization caused me to rewrite many things related to tests:
+
+- Remove the sleep from renderWithProviders
+- Remove async from renderWithProviders
+- Update tests that were relying on that sleep to work without out using await findByX
+- Update tests to remove as much use of waitFor as possible in favor of await findByX
+- Update tests to use screen.<function> instead of destructuring off the return from render/renderWithProviders
+- Update tests to use userEvent instead of fireEvent
+- Update test setup to provide a setup user object to all tests through context
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/82)
+
+----
+
 ### PR #80 - #79: upgrade add movie
 ##### 2023-05-23
 
