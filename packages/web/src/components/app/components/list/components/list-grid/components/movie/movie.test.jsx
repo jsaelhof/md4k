@@ -15,7 +15,7 @@ vi.mock("uuid", () => ({
 // Mock the expanded view since it has it's own tests and inner working.
 // In this mock we just want assign the props that would be passed to it
 // and test that they are passed correctly when various interactions occur.
-vi.mock("./components/expanded/expanded", () => ({
+vi.mock("../../../../../full-detail-modal/full-detail-modal", () => ({
   default: ({ preload, open, onClose }) => (
     <div data-preload={preload} data-open={open} onClick={() => onClose()}>
       Expanded
@@ -89,7 +89,7 @@ describe("movie", () => {
     expect(screen.getByLabelText("Unlock")).toBeInTheDocument();
   });
 
-  it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
+  it("should open the zoomed poster and preload the full detail on rollover and close the zoomed poster on rollout", async ({
     props,
     user,
   }) => {
@@ -114,7 +114,7 @@ describe("movie", () => {
     });
   });
 
-  it("should close the zoomed poster and open the expanded detail view when clicked", async ({
+  it("should close the zoomed poster and open the full detail view when clicked", async ({
     props,
     user,
   }) => {

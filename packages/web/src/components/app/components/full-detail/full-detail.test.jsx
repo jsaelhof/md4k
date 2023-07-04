@@ -1,6 +1,5 @@
 import FullDetail from "./full-detail";
 import { waitFor, screen } from "@testing-library/react";
-import { EDIT_MOVIE } from "../../../../graphql/mutations";
 import { sources } from "md4k-constants";
 import { vi, beforeEach } from "vitest";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
@@ -31,115 +30,7 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   },
 };
 
-const EDIT_MOVIE_MUTATION_PREV_BG = {
-  request: {
-    query: EDIT_MOVIE,
-    variables: {
-      movie: {
-        id: "8502fd8b-165e-4239-965f-b46f8d523829",
-        title: "The Bourne Identity",
-        list: "saturday",
-        runtime: 7140,
-        source: 1,
-        genre: 3,
-        year: "2002",
-        poster: "https://m.media-amazon.com/images/M/SX300.jpg",
-        imdbID: "tt0258463",
-        locked: false,
-        addedOn: "2022-03-15T04:28:22.166Z",
-        watchedOn: null,
-        ratings: {
-          id: "8502fd8b-165e-4239-965f-b46f8d523829",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-        background: "http://image.tmdb.org/t/4.jpg",
-      },
-      list: "saturday",
-    },
-  },
-  newData: vi.fn(() => ({
-    data: {
-      editMovie: {
-        id: "8502fd8b-165e-4239-965f-b46f8d523829",
-        title: "The Bourne Identity",
-        list: "saturday",
-        runtime: 7140,
-        source: 1,
-        genre: 3,
-        year: "2002",
-        poster: "https://m.media-amazon.com/images/M/SX300.jpg",
-        imdbID: "tt0258463",
-        locked: false,
-        addedOn: "2022-03-15T04:28:22.166Z",
-        watchedOn: null,
-        ratings: {
-          id: "8502fd8b-165e-4239-965f-b46f8d523829",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-        background: "http://image.tmdb.org/t/4.jpg",
-      },
-    },
-  })),
-};
-
-const EDIT_MOVIE_MUTATION_NEXT_BG = {
-  request: {
-    query: EDIT_MOVIE,
-    variables: {
-      movie: {
-        id: "8502fd8b-165e-4239-965f-b46f8d523829",
-        title: "The Bourne Identity",
-        list: "saturday",
-        runtime: 7140,
-        source: 1,
-        genre: 3,
-        year: "2002",
-        poster: "https://m.media-amazon.com/images/M/SX300.jpg",
-        imdbID: "tt0258463",
-        locked: false,
-        addedOn: "2022-03-15T04:28:22.166Z",
-        watchedOn: null,
-        ratings: {
-          id: "8502fd8b-165e-4239-965f-b46f8d523829",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-        background: "http://image.tmdb.org/t/2.jpg",
-      },
-      list: "saturday",
-    },
-  },
-  newData: vi.fn(() => ({
-    data: {
-      editMovie: {
-        id: "8502fd8b-165e-4239-965f-b46f8d523829",
-        title: "The Bourne Identity",
-        list: "saturday",
-        runtime: 7140,
-        source: 1,
-        genre: 3,
-        year: "2002",
-        poster: "https://m.media-amazon.com/images/M/SX300.jpg",
-        imdbID: "tt0258463",
-        locked: false,
-        addedOn: "2022-03-15T04:28:22.166Z",
-        watchedOn: null,
-        ratings: {
-          id: "8502fd8b-165e-4239-965f-b46f8d523829",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-        background: "http://image.tmdb.org/t/2.jpg",
-      },
-    },
-  })),
-};
+const mockOnChangeBackdrop = vi.fn();
 
 describe("full-detail", () => {
   beforeEach((context) => {
@@ -167,6 +58,8 @@ describe("full-detail", () => {
       },
       showCloseButton: false,
       onClose: vi.fn(),
+      onAddMovie: vi.fn(),
+      onChangeBackdrop: mockOnChangeBackdrop,
     };
 
     context.list = {
@@ -253,16 +146,13 @@ describe("full-detail", () => {
     user,
   }) => {
     renderWithProviders(<FullDetail {...props} />, {
-      mocks: [
-        GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
-        EDIT_MOVIE_MUTATION_PREV_BG,
-      ],
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(await screen.findByTestId("ChevronLeftIcon")).toBeInTheDocument();
     await user.click(screen.getByTestId("ChevronLeftIcon"));
-    await waitFor(() =>
-      expect(EDIT_MOVIE_MUTATION_PREV_BG.newData).toHaveBeenCalled()
+    expect(mockOnChangeBackdrop).toHaveBeenCalledWith(
+      "http://image.tmdb.org/t/4.jpg"
     );
   });
 
@@ -271,16 +161,13 @@ describe("full-detail", () => {
     user,
   }) => {
     renderWithProviders(<FullDetail {...props} />, {
-      mocks: [
-        GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
-        EDIT_MOVIE_MUTATION_NEXT_BG,
-      ],
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
 
     expect(await screen.findByTestId("ChevronRightIcon")).toBeInTheDocument();
     await user.click(screen.getByTestId("ChevronRightIcon"));
-    await waitFor(() =>
-      expect(EDIT_MOVIE_MUTATION_NEXT_BG.newData).toHaveBeenCalled()
+    expect(mockOnChangeBackdrop).toHaveBeenCalledWith(
+      "http://image.tmdb.org/t/2.jpg"
     );
   });
 
@@ -433,6 +320,32 @@ describe("full-detail", () => {
     expect(await screen.findByAltText("Search IMDB")).toBeInTheDocument();
     expect(
       await screen.findByAltText("Search Common Sense Media")
+    ).toBeInTheDocument();
+  });
+
+  it("should render the view actions", async ({ props }) => {
+    renderWithProviders(<FullDetail {...props} actionSet="viewMovie" />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
+
+    expect(
+      await screen.findByRole("button", { name: "Watch Trailer" })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("button", { name: "Stream Movie" })
+    ).toBeInTheDocument();
+  });
+
+  it("should render the view actions", async ({ props }) => {
+    renderWithProviders(<FullDetail {...props} actionSet="addMovie" />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
+
+    expect(
+      await screen.findByRole("button", { name: "Watch Trailer" })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("button", { name: "Add Movie" })
     ).toBeInTheDocument();
   });
 });

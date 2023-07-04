@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import { AppLayout, OutletLayout } from "./app.styles";
 import TitleBar from "./components/titlebar/titlebar";
 import Footer from "./components/footer/footer";
+import Toast from "./components/toast/toast";
 
 export const App = () => {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0();
@@ -29,6 +30,7 @@ export const App = () => {
                 <Outlet />
               </OutletLayout>
               <Footer />
+              <Toast />
             </AppLayout>
           </AppProvider>
         </ThemeProvider>

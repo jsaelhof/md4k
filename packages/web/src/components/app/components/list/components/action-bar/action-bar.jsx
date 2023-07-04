@@ -8,9 +8,12 @@ import {
   AddToQueueIcon,
   SecondaryActions,
 } from "./action-bar.styles";
+import { useNavigate } from "react-router-dom";
 
-const ActionBar = ({ disabled, onAdd, onPick }) => {
+const ActionBar = ({ disabled, onPick }) => {
   const includeLabel = useMediaQuery("(min-width: 790px)");
+
+  const navigate = useNavigate();
 
   return (
     <ActionBarContainer>
@@ -24,7 +27,7 @@ const ActionBar = ({ disabled, onAdd, onPick }) => {
                 aria-label="Add Movie"
                 variant="outlined"
                 color="primary"
-                onClick={onAdd}
+                onClick={() => navigate("/add")}
               >
                 <AddToQueueIcon />
                 {includeLabel && "Add Movie"}

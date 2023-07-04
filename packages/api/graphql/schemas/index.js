@@ -64,6 +64,16 @@ export const typeDefs = gql`
     poster: String
   }
 
+  type PageInfo {
+    pages: Int
+    page: Int
+  }
+
+  type SearchResults {
+    results: [SearchResult]
+    pageInfo: PageInfo
+  }
+
   type ThirdPartyMovie {
     imdbID: ID!
     title: String
@@ -98,7 +108,7 @@ export const typeDefs = gql`
     lists: [List]
     movies(list: String!): [Movie]
     watchedMovies(list: String!): [Movie]
-    searchByTitle(title: String!, year: String, page: Int): [SearchResult]
+    searchByTitle(title: String!, year: String, page: Int): SearchResults
     thirdPartyMovie(imdbID: ID!): ThirdPartyMovie
   }
 

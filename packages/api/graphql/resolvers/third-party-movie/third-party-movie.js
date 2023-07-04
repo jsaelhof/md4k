@@ -21,7 +21,7 @@ export const thirdPartyMovie = async (parent, { imdbID }, { dataSources }) => {
     // Runtime includes " min" like "113 min".
     // ParseInt strips out the text portion.
     const runtime =
-      Runtime && Runtime !== "N/A" ? parseInt(Runtime).toString() : null;
+      Runtime && Runtime !== "N/A" ? (parseInt(Runtime) * 60).toString() : null;
 
     // Genre is a delimited string of genres.
     // Search my list and see if a match is found.

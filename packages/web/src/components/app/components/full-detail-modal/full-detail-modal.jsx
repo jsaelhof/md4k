@@ -1,10 +1,16 @@
 import { useSpring } from "react-spring";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import FullDetail from "../../../../../../../full-detail/full-detail";
-import { ExpandedBackdrop, ExpandedContent } from "./expanded.styles";
+import FullDetail from "../full-detail/full-detail";
+import { ModalBackdrop, ModalContent } from "./full-detail-modal.styles";
 
-const Expanded = ({ movie, preload, open, centerPoint, onClose }) => {
+const FullDetailModal = ({
+  preload,
+  open,
+  centerPoint,
+  onClose,
+  ...passThroughProps
+}) => {
   const [isClosing, setIsClosing] = useState(false);
 
   const close = useCallback(() => {
@@ -14,16 +20,27 @@ const Expanded = ({ movie, preload, open, centerPoint, onClose }) => {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
 
   const expandedBackdropSpring = useSpring({
-    opacity: open ? 1 : 0,
+    from: { opacity: 0 },
+    to: { opacity: open ? 1 : 0 },
   });
 
   const expandedSpring = useSpring({
-    transformOrigin: centerPoint && `${centerPoint.x}px ${centerPoint.y}px`,
-    transform: open ? "scale3d(1,1,1)" : "scale3d(0,0,0)",
-    opacity: open ? 1 : 0,
+    from: {
+      transform: "scale3d(0,0,0)",
+      opacity: 0,
+    },
+    to: {
+      transform: open ? "scale3d(1,1,1)" : "scale3d(0,0,0)",
+      opacity: open ? 1 : 0,
+      transformOrigin: centerPoint && `${centerPoint.x}px ${centerPoint.y}px`,
+    },
     onRest: () => {
       if (isClosing) {
         setIsClosing(false);
@@ -34,7 +51,7 @@ const Expanded = ({ movie, preload, open, centerPoint, onClose }) => {
   return (
     <>
       {(open || isClosing) && (
-        <ExpandedBackdrop
+        <ModalBackdrop
           data-testid="backdrop"
           style={expandedBackdropSpring}
           onClick={close}
@@ -47,16 +64,16 @@ const Expanded = ({ movie, preload, open, centerPoint, onClose }) => {
       */}
       {(preload || open || isClosing) &&
         createPortal(
-          <ExpandedContent
+          <ModalContent
             style={expandedSpring}
             onClick={(e) => e.stopPropagation()}
           >
-            <FullDetail movie={movie} showCloseButton onClose={close} />
-          </ExpandedContent>,
+            <FullDetail showCloseButton onClose={close} {...passThroughProps} />
+          </ModalContent>,
           document.body
         )}
     </>
   );
 };
 
-export default Expanded;
+export default FullDetailModal;

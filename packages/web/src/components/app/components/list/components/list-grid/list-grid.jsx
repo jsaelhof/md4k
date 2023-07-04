@@ -11,13 +11,7 @@ import SortedGenre from "./components/sorted-genre/sorted-genre";
 import { sort } from "../../../../../../constants/sorts";
 import SortedRating from "./components/sorted-rating/sorted-rating";
 
-const ListGrid = ({
-  movies,
-  onRemoveMovie,
-  onMarkWatched,
-  onEditMovie,
-  onAddMovie,
-}) => {
+const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
   const [deleteMovie, setDeleteMovie] = useState(null);
 
   if (!movies) return null;
@@ -89,7 +83,7 @@ const ListGrid = ({
           </Routes>
         </>
       ) : (
-        <EmptyList onAddMovie={onAddMovie} />
+        <EmptyList />
       )}
 
       <DeleteDialog

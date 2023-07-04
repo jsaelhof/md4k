@@ -9,6 +9,12 @@ vi.mock("@mui/material", async () => {
   return { ...actual, useMediaQuery: vi.fn().mockReturnValue(true) };
 });
 
+const navigateMock = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual("react-router-dom");
+  return { ...actual, useNavigate: () => navigateMock };
+});
+
 describe("action-bar", () => {
   beforeEach((context) => {
     context.onAdd = vi.fn();
@@ -70,7 +76,7 @@ describe("action-bar", () => {
     );
 
     await user.click(screen.getByLabelText("Add Movie"));
-    expect(onAdd).toBeCalled();
+    expect(navigateMock).toHaveBeenCalledWith("/add");
   });
 
   it("should call onPick when Pick A Movie is pressed", async ({

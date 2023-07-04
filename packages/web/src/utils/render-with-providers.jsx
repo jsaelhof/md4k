@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, renderHook } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
@@ -52,6 +52,41 @@ export const renderWithProviders = (children, options) => {
   );
 
   const result = render(children, { wrapper: RenderWrapper, ...options });
+
+  return result;
+};
+
+export const renderHookWithProviders = (hookWrapper, options) => {
+  options = {
+    ...{
+      mocks: [],
+      moviesMock: null,
+      route: "/",
+    },
+    ...options,
+  };
+
+  const RenderWrapper = ({ children }) => (
+    <MockedProvider
+      mocks={[
+        GET_LISTS_MOCK,
+        options.moviesMock || GET_MOVIES_MOCK,
+        ...options.mocks,
+      ]}
+      addTypename={false}
+    >
+      <MemoryRouter initialEntries={[options.route]}>
+        <ThemeProvider theme={theme}>
+          <AppProvider>{children}</AppProvider>
+        </ThemeProvider>
+      </MemoryRouter>
+    </MockedProvider>
+  );
+
+  const result = renderHook(hookWrapper, {
+    wrapper: RenderWrapper,
+    ...options,
+  });
 
   return result;
 };

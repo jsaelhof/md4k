@@ -1,21 +1,29 @@
 import { Button, IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useAppContext } from "../../../../context/app-context";
+import { useCallback } from "react";
 
-const Toast = ({ open, onClose, onUndo, duration = 5000, message }) => {
+const Toast = () => {
+  const { toast, setToast } = useAppContext();
+
+  const onClose = useCallback(() => {
+    setToast(null);
+  }, [setToast]);
+
   return (
     <Snackbar
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "right",
       }}
-      open={open}
-      autoHideDuration={duration}
+      open={!!toast}
+      autoHideDuration={5000}
       onClose={onClose}
-      message={message}
+      message={toast?.message}
       action={
         <>
-          {onUndo && (
-            <Button color="secondary" size="small" onClick={onUndo}>
+          {toast?.onUndo && (
+            <Button color="secondary" size="small" onClick={toast.onUndo}>
               UNDO
             </Button>
           )}

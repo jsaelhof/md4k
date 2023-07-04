@@ -7,9 +7,13 @@ const ListSelect = ({
   values,
   onChange,
   hideLabelForSelection,
+  label,
   ...props
 }) => (
   <Select
+    id={label}
+    labelId={label}
+    data-testid={label}
     variant="outlined"
     value={value || 0}
     onChange={({ target }) => {

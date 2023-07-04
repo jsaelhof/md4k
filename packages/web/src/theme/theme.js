@@ -34,6 +34,7 @@ export const theme = createTheme({
 
   zIndex: {
     actionBar: 100,
+    stickyBar: 150,
     movieHover: 200,
     titleBar: 300,
     expandedBackdrop: 400,

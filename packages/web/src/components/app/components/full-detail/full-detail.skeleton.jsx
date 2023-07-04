@@ -2,7 +2,6 @@ import { Skeleton } from "@mui/material";
 import CloseThick from "mdi-material-ui/CloseThick";
 
 import {
-  Actions,
   BackdropWrapper,
   CloseButton,
   FullDetailLayout,
@@ -99,23 +98,6 @@ export const FullDetailSkeleton = ({ showCloseButton, small, onClose }) => (
           animation="wave"
         />
       </PlotLayout>
-
-      <Actions>
-        <Skeleton
-          data-testid="skeleton"
-          variant="text"
-          width={100}
-          height={40}
-          animation="wave"
-        />
-        <Skeleton
-          data-testid="skeleton"
-          variant="text"
-          width={100}
-          height={40}
-          animation="wave"
-        />
-      </Actions>
     </MovieInfo>
   </FullDetailLayout>
 );

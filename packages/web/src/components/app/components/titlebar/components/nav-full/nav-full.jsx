@@ -37,7 +37,7 @@ const NavFull = () => {
             !pathname.startsWith("/list") &&
             returnToMoviesNavButton}
 
-          {pathname !== "/watched" && (
+          {!["/watched", "/add"].includes(pathname) && (
             <NavButton href="/watched">Watched</NavButton>
           )}
 

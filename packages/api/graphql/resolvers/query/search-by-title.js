@@ -3,18 +3,24 @@ export const searchByTitle = async (
   { title, year, page },
   { dataSources }
 ) => {
-  const { Search, Response } = await dataSources.OMDB.searchByTitle(
-    title,
-    year,
-    page
-  );
+  const { Search, Response, totalResults } =
+    await dataSources.OMDB.searchByTitle(title, year, page);
 
-  return Response === "True"
-    ? Search.map(({ Title, Year, imdbID, Poster }) => ({
-        title: Title,
-        year: Year,
-        imdbID,
-        poster: Poster && Poster !== "N/A" ? Poster : null,
-      }))
-    : [];
+  const results =
+    Response === "True"
+      ? Search.map(({ Title, Year, imdbID, Poster }) => ({
+          title: Title,
+          year: Year,
+          imdbID,
+          poster: Poster && Poster !== "N/A" ? Poster : null,
+        }))
+      : [];
+
+  return {
+    results,
+    pageInfo: {
+      pages: totalResults ? Math.ceil(totalResults / 10) : 1,
+      page,
+    },
+  };
 };

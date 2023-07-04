@@ -83,7 +83,7 @@ const NavHamburger = () => {
 
             {pathname !== "/create" && (
               <>
-                {pathname !== "/watched" && (
+                {!["/watched", "/add"].includes(pathname) && (
                   <MenuItem
                     onClick={() => {
                       navigate("/watched");
