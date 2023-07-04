@@ -76,6 +76,27 @@ describe("nav-hamburger", () => {
     ).toBeInTheDocument();
   });
 
+  it("should render the 'add' nav options", async ({ user }) => {
+    renderWithProviders(<NavHamburger />, { route: "/add" });
+
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
+
+    await user.click(screen.getByTestId("MenuIcon"));
+
+    expect(
+      screen.getByRole("menuitem", { name: "Movies" })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /New List/ })
+    ).toBeInTheDocument();
+  });
+
   it("should render the default 'create' nav options", async ({ user }) => {
     renderWithProviders(<NavHamburger />, {
       route: "/create",

@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import {
-  addMovieOptions,
   editMovieOptions,
   markWatchedOptions,
   removeMovieOptions,
   undoMarkWatchedOptions,
-  useAddMovie,
   useEditMovie,
   useMarkWatched,
   useRemoveMovie,
@@ -17,7 +15,6 @@ import { animated, useSpring, useTransition } from "react-spring";
 import { Countdown } from "./components/countdown/countdown";
 import ActionBar from "./components/action-bar/action-bar";
 import ListGrid from "./components/list-grid/list-grid";
-import Toast from "./components/toast/toast";
 import ErrorDialog from "../error-dialog/error-dialog";
 import AddMovieDialog from "./components/add-movie-dialog/add-movie-dialog";
 import { errorMessage } from "../../../../constants/error-messages";
@@ -25,15 +22,13 @@ import map from "lodash/map";
 
 export const List = () => {
   const navigate = useNavigate();
-  const { list, movies, lists } = useAppContext();
-  const [enableAddMovie, setEnableAddMovie] = useState(false);
+  const { list, movies, lists, setToast } = useAppContext();
   const [enableEditMovie, setEnableEditMovie] = useState(null);
-  const [toastProps, setToastProps] = useState(null);
   const [error, setError] = useState(null);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
-      setToastProps({
+      setToast({
         message: `Moved '${movie.title}' back to movies list`,
       });
     },
@@ -41,21 +36,12 @@ export const List = () => {
 
   const [markWatchedMutation] = useMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
-      setToastProps({
+      setToast({
         message: `Moved '${movie.title}' to watched list`,
         onUndo: () => {
           undoMarkWatchedMutation(undoMarkWatchedOptions(movie, list));
         },
       });
-    },
-  });
-
-  const [addMovieMutation] = useAddMovie({
-    onCompleted: ({ addMovie: movie }) => {
-      setToastProps({ message: `Added '${movie.title}'` });
-    },
-    onError: ({ message }) => {
-      setError(message);
     },
   });
 
@@ -70,14 +56,6 @@ export const List = () => {
     },
     [navigate]
   );
-
-  const onEnableAddMovie = useCallback(() => {
-    setEnableAddMovie(true);
-  }, []);
-
-  const onCancelAddMovie = useCallback(() => {
-    setEnableAddMovie(false);
-  }, []);
 
   const onEnableEditMovie = useCallback(
     (movie, useEditor = true) =>
@@ -98,16 +76,6 @@ export const List = () => {
       markWatchedMutation(markWatchedOptions(movie, watchedOn, list));
     },
     [list, markWatchedMutation]
-  );
-
-  const onCloseToast = useCallback(() => setToastProps(null), []);
-
-  const onAddMovie = useCallback(
-    (movie) => {
-      addMovieMutation(addMovieOptions(movie, list));
-      setEnableAddMovie(false);
-    },
-    [addMovieMutation, list]
   );
 
   const onEditMovie = useCallback(
@@ -154,14 +122,12 @@ export const List = () => {
           <>
             <ActionBar
               disabled={!movies || movies?.length === 0}
-              onAdd={onEnableAddMovie}
               onPick={onPick}
             />
 
             <animated.div style={moviesSpring}>
               <ListGrid
                 movies={movies}
-                onAddMovie={onEnableAddMovie}
                 onEditMovie={onEnableEditMovie}
                 onRemoveMovie={onRemoveMovie}
                 onMarkWatched={onMarkWatched}
@@ -171,12 +137,6 @@ export const List = () => {
         )}
       </div>
 
-      <Toast
-        open={toastProps !== null}
-        onClose={onCloseToast}
-        {...toastProps}
-      />
-
       <ErrorDialog
         open={!!error}
         content={
@@ -184,10 +144,6 @@ export const List = () => {
         }
         onConfirm={() => setError(null)}
       />
-
-      {enableAddMovie && (
-        <AddMovieDialog onAddMovie={onAddMovie} onCancel={onCancelAddMovie} />
-      )}
 
       {enableEditMovie && (
         <AddMovieDialog

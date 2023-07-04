@@ -22,9 +22,10 @@ import MoviePoster from "../../../../../movie-poster/movie-poster";
 import Ratings from "../../../ratings/ratings";
 import FiveStarRating from "../../../../../five-star-rating/five-star-rating";
 import Source from "./components/source/source";
-import Expanded from "./components/expanded/expanded";
+import FullDetailModal from "../../../../../full-detail-modal/full-detail-modal";
 import { useResponsive } from "../../../../../../../../hooks/use-responsive";
 import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update-movie";
+import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
 
 const getCenterPoint = (rect) => {
   if (!rect) return undefined;
@@ -68,7 +69,8 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
       infoState === "ratings" ? "translateX(0px)" : "translateX(-240px)",
   });
 
-  const closeExpanded = () => setExpanded(false);
+  const onCloseExpanded = () => setExpanded(false);
+  const onChangeBackdrop = useChangeBackdrop(movie);
 
   useUpdateMovie(movie, focused);
 
@@ -163,12 +165,14 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
         </MovieDetailPositioner>
       </MovieContainer>
 
-      <Expanded
+      <FullDetailModal
         movie={movie}
         preload={focused}
         open={expanded}
         centerPoint={centerPoint}
-        onClose={closeExpanded}
+        onClose={onCloseExpanded}
+        onChangeBackdrop={onChangeBackdrop}
+        actionSet="viewMovie"
       />
     </>
   );

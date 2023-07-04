@@ -1,26 +1,16 @@
 import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { Button, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
-import PlayArrow from "@mui/icons-material/PlayArrow";
 import { useSpring } from "react-spring";
-import Search from "@mui/icons-material/Search";
-import TelevisionPlay from "mdi-material-ui/TelevisionPlay";
 import CloseThick from "mdi-material-ui/CloseThick";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
-import {
-  searchStreaming,
-  searchTMDB,
-  searchTorrent,
-} from "../../../../utils/search";
+import { searchStreaming, searchTMDB } from "../../../../utils/search";
 import { genreLabels, sources } from "md4k-constants";
 import { useGetThirdPartyFullDetails } from "../../../../graphql/queries";
-import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
-import { useAppContext } from "../../../../context/app-context";
 import {
-  Actions,
   Backdrop,
   BackdropWrapper,
   CloseButton,
@@ -46,16 +36,24 @@ import ScrollArea from "./components/scroll-area/scroll-area";
 import Footer from "./components/footer/footer";
 import { StarRatingLayout } from "./components/star-rating-layout/star-rating-layout";
 import { sourceLabels, sourceLogosLarge } from "../../../../constants/sources";
+import pick from "lodash/pick";
+import { ActionsAdd } from "./components/actions-add/actions-add";
+import { ActionsView } from "./components/actions-view/actions-view";
 
-const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
-  const { list } = useAppContext();
+const FullDetail = ({
+  movie,
+  showCloseButton = false,
+  onClose,
+  actionSet = "viewMovie",
+  onAddMovie,
+  onChangeBackdrop,
+}) => {
   const small = useMediaQuery("(max-width: 750px)");
   const noPlotScroll = useMediaQuery("(max-width: 660px), (max-height: 414px)");
   const trailerOverlay = useMediaQuery(
     "(max-width: 500px), (max-height: 414px)"
   );
 
-  const [editMovieMutation] = useEditMovie();
   const { data, loading } = useGetThirdPartyFullDetails(movie);
 
   const [trailer, setTrailer] = useState(null);
@@ -76,7 +74,8 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
     window.open(searchTMDB(movie.title), "moviedb");
   }, [movie]);
 
-  const canStream = ![sources.DVD, sources.NONE].includes(movie.source);
+  const source = movie.source || data.source || sources.NONE;
+  const canStream = ![sources.DVD, sources.NONE].includes(source);
 
   const backdrop = useMemo(
     () => movie.background || data.backdrops?.[0],
@@ -113,15 +112,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
         <PrevBackgroundButton
           onClick={() => {
             if (data.backdrops) {
-              editMovieMutation(
-                editMovieOptions(
-                  {
-                    ...movie,
-                    background: getNeighbor(data.backdrops, backdrop, false),
-                  },
-                  list
-                )
-              );
+              onChangeBackdrop(getNeighbor(data.backdrops, backdrop, false));
             }
           }}
         >
@@ -131,15 +122,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
         <NextBackgroundButton
           onClick={() => {
             if (data.backdrops) {
-              editMovieMutation(
-                editMovieOptions(
-                  {
-                    ...movie,
-                    background: getNeighbor(data.backdrops, backdrop),
-                  },
-                  list
-                )
-              );
+              onChangeBackdrop(getNeighbor(data.backdrops, backdrop));
             }
           }}
         >
@@ -189,7 +172,7 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
         </MovieTitle>
 
         <MovieData>
-          <div>{formatRuntime(movie.runtime)}</div>
+          <div>{formatRuntime(data.runtime)}</div>
           <div>{movie.year}</div>
           <div>{genreLabels[movie.genre]}</div>
           <Rated rated={data.rated} />
@@ -197,11 +180,11 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
 
         <Source
           sx={[canStream && streamable]}
-          src={sourceLogosLarge[movie.source]}
-          alt={sourceLabels[movie.source]}
+          src={sourceLogosLarge[source]}
+          alt={sourceLabels[source]}
           onClick={() =>
             canStream &&
-            window.open(searchStreaming(movie.title, movie.source), "movieView")
+            window.open(searchStreaming(movie.title, source), "movieView")
           }
         />
 
@@ -209,44 +192,32 @@ const FullDetail = ({ movie, showCloseButton = false, onClose }) => {
           <ScrollArea text={data.plot} noScroll={noPlotScroll} />
         </PlotLayout>
 
-        <Actions>
-          {data.trailer?.site === "YouTube" && (
-            <Button
-              color="primary"
-              startIcon={<TelevisionPlay />}
-              onClick={() => setTrailer(data.trailer.key)}
-            >
-              Watch Trailer
-            </Button>
-          )}
+        {actionSet === "addMovie" && (
+          <ActionsAdd
+            hasTrailer={data.trailer?.site === "YouTube"}
+            onPlayTrailer={() => {
+              setTrailer(data.trailer.key);
+            }}
+            onAddMovie={() => {
+              onAddMovie({
+                ...pick(movie, ["imdbID", "title", "poster", "year"]),
+                ...pick(data, ["source", "ratings", "genre", "runtime"]),
+                ...(data.backdrop && { background: backdrop }),
+              });
+            }}
+          />
+        )}
 
-          {canStream && (
-            <Button
-              color="primary"
-              startIcon={<PlayArrow />}
-              onClick={() => {
-                window.open(
-                  searchStreaming(movie.title, movie.source),
-                  "movieView"
-                );
-              }}
-            >
-              Stream Movie
-            </Button>
-          )}
-
-          {movie.source === sources.NONE && (
-            <Button
-              color="primary"
-              startIcon={<Search />}
-              onClick={() => {
-                window.open(searchTorrent(movie.title), "movieView");
-              }}
-            >
-              Torrent Search
-            </Button>
-          )}
-        </Actions>
+        {actionSet === "viewMovie" && (
+          <ActionsView
+            hasTrailer={data.trailer?.site === "YouTube"}
+            onPlayTrailer={() => {
+              setTrailer(data.trailer.key);
+            }}
+            title={movie.title}
+            source={source}
+          />
+        )}
       </MovieInfo>
 
       <Footer movie={movie} />

@@ -1,6 +1,6 @@
 import { DialogActions, styled, TextField } from "@mui/material";
 
-import ListSelect from "./components/list-select/list-select";
+import ListSelect from "../../../add/components/tab-panel-manual/components/list-select/list-select";
 
 export const Input = styled("div")(({ theme: { breakpoints, spacing } }) => ({
   margin: `${spacing(2)} 0 ${spacing(8)}`,

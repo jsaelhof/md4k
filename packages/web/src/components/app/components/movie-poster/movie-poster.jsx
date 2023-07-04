@@ -8,7 +8,7 @@ import {
   PosterLayout,
   shadowStyles,
 } from "./movie-poster.styles";
-import { useIntersectionObserver } from "./hooks/use-intersection-observer";
+import { useIntersectionObserver } from "../../../../hooks/use-intersection-observer";
 
 const MoviePoster = ({
   movie,

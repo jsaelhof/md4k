@@ -31,4 +31,24 @@ describe("nav-full", () => {
       await screen.findByRole("button", { name: "Return to Movies" })
     ).toBeInTheDocument();
   });
+
+  it("should render the 'watched' nav options", async () => {
+    renderWithProviders(<NavFull />, {
+      route: "/watched",
+    });
+
+    expect(
+      await screen.findByRole("button", { name: "Return to Movies" })
+    ).toBeInTheDocument();
+  });
+
+  it("should render the 'add' nav options", async () => {
+    renderWithProviders(<NavFull />, {
+      route: "/add",
+    });
+
+    expect(
+      await screen.findByRole("button", { name: "Return to Movies" })
+    ).toBeInTheDocument();
+  });
 });

@@ -7,6 +7,7 @@ export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
       title
       rated
       actors
+      runtime
       ratings {
         id
         IMDB
@@ -21,6 +22,8 @@ export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
         key
       }
       plot
+      source
+      genre
     }
   }
 `;

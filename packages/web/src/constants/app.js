@@ -2,4 +2,5 @@ export const app = {
   TITLE_BAR_HEIGHT: 64,
   FOOTER_HEIGHT: 64,
   LIST_MARGIN: 44,
+  LIST_MARGIN_MOBILE: 16,
 };

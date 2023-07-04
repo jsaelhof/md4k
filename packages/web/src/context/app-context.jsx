@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
   const [list, _setList] = useState();
   const { lists } = useGetLists({ onCompleted: _setList });
   const { movies, moviesById, watchedMovies } = useGetMovies(list);
+  const [toast, setToast] = useState(null);
   const [pick, setPick] = useState(null);
 
   // Expose a list change function so that we can clear any state from the old list while changing to a new one
@@ -149,6 +150,8 @@ const AppProvider = ({ children }) => {
     pick,
     setPick,
     clearPick,
+    toast,
+    setToast,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

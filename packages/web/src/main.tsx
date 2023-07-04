@@ -72,6 +72,15 @@ const router = createBrowserRouter([
           };
         },
       },
+      {
+        path: "/add",
+        async lazy() {
+          const { Add } = await import("./components/app/components/add/add");
+          return {
+            Component: Add,
+          };
+        },
+      },
     ],
   },
 ]);

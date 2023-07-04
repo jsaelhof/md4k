@@ -10,7 +10,7 @@ export const SectionLayout = styled("div")(({ theme: { spacing } }) => ({
   padding: `0 ${app.LIST_MARGIN}px`,
 
   "@media (max-width: 500px)": {
-    padding: `0 ${spacing(2)}`,
+    padding: `0 ${app.LIST_MARGIN_MOBILE}px`,
   },
 }));
 

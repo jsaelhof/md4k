@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export const useIntersectionObserver = () => {
+export const useIntersectionObserver = ({ rootMargin = 0 } = {}) => {
   const ref = useRef();
   const [visible, setVisible] = useState(false);
 
@@ -13,7 +13,7 @@ export const useIntersectionObserver = () => {
 
     const observer = new IntersectionObserver(callback, {
       root: null,
-      rootMargin: "0px",
+      rootMargin: `${rootMargin}px`,
       threshold: 0,
     });
 
@@ -22,7 +22,7 @@ export const useIntersectionObserver = () => {
     return () => {
       observable && observer.unobserve(observable);
     };
-  }, [callback]);
+  }, [callback, rootMargin]);
 
   return {
     ref,

@@ -1,13 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
-import * as useIntersectionObserverModule from "./hooks/use-intersection-observer";
 
-vi.mock("./hooks/use-intersection-observer", () => ({
-  useIntersectionObserver: vi.fn().mockReturnValue({
+const { MOCK_OBSERVER } = vi.hoisted(() => ({
+  MOCK_OBSERVER: vi.fn().mockReturnValue({
     ref: null,
     visible: true,
   }),
+}));
+
+vi.mock("../../../../hooks/use-intersection-observer", () => ({
+  useIntersectionObserver: MOCK_OBSERVER,
 }));
 
 describe("movie-poster", () => {
@@ -57,13 +60,10 @@ describe("movie-poster", () => {
   it("should render the placeholder when the poster is not intersecting the viewport", ({
     props,
   }) => {
-    // eslint-disable-next-line no-import-assign
-    useIntersectionObserverModule.useIntersectionObserver = vi
-      .fn()
-      .mockReturnValue({
-        ref: null,
-        visible: false,
-      });
+    MOCK_OBSERVER.mockReturnValueOnce({
+      ref: null,
+      visible: false,
+    });
 
     render(<MoviePoster {...props} />);
 
