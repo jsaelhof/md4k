@@ -7,8 +7,13 @@ describe("rated", () => {
     expect(screen.getByText("PG-13")).toBeInTheDocument();
   });
 
-  it("should not render anything whne rated is null", () => {
+  it("should not render anything when rated is null", () => {
     render(<Rated rated={null} />);
+    expect(screen.queryByTestId("rated")).not.toBeInTheDocument();
+  });
+
+  it("should not render anything when rated is 'Not Rated'", () => {
+    render(<Rated rated="Not Rated" />);
     expect(screen.queryByTestId("rated")).not.toBeInTheDocument();
   });
 });
