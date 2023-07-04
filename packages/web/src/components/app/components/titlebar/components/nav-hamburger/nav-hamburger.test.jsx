@@ -76,7 +76,7 @@ describe("nav-hamburger", () => {
     ).toBeInTheDocument();
   });
 
-  it.only("should render the 'add' nav options", async ({ user }) => {
+  it("should render the 'add' nav options", async ({ user }) => {
     renderWithProviders(<NavHamburger />, { route: "/add" });
 
     expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
