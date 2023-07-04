@@ -1,3 +1,15 @@
+### PR #89 - #83: Rated doesn't fit
+##### 2023-07-04
+
+- Add ellipsis for Rated
+- Add margin between movie info and source image
+- hide rated when "Not Rated"
+- update tests
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/89)
+
+----
+
 ### PR #88 - 31: redesign add movie dialog
 ##### 2023-07-04
 
