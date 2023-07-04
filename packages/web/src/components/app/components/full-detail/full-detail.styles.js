@@ -183,6 +183,7 @@ export const MovieData = styled("div")`
   align-items: center;
   grid-area: info;
   color: ${({ theme }) => theme.palette.grey[900]};
+  margin-right: ${({ theme }) => theme.spacing(1)};
 
   @media (max-width: 750px) {
     column-gap: 20px;
