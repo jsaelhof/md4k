@@ -1,3 +1,12 @@
+### PR #88 - 31: redesign add movie dialog
+##### 2023-07-04
+
+Complete redesign of the Add Movie function as a new route with a clear separation of searching for a movie and manually creating one.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/88)
+
+----
+
 ### PR #82 - #81: fix failing skeleton tests
 ##### 2023-06-03
 
