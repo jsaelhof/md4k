@@ -14,7 +14,8 @@ const darkGrey = {
   800: "#131313",
 };
 
-const accent = "cornflowerblue";
+const foundation = "#f5f5f5";
+const accent = "#6495ED"; //cornflowerblue;
 const icon = grey[400];
 
 export const theme = createTheme({
@@ -25,11 +26,15 @@ export const theme = createTheme({
     secondary: {
       main: darkGrey[50],
     },
+    tertiary: {
+      main: accent,
+    },
     darkBlue,
     darkGrey,
     grey,
     accent,
     icon,
+    foundation,
   },
 
   zIndex: {
