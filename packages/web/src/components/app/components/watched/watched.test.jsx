@@ -89,6 +89,36 @@ const GET_MOVIES_MOCK = {
 };
 
 describe("watched", () => {
+  it("should render the toolbar", async () => {
+    renderWithProviders(<Watched />);
+    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
+  });
+
+  it("should search from the toolbar", async ({ user }) => {
+    renderWithProviders(<Watched />);
+    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Search"), "Always");
+    expect(
+      await screen.findByText("Showing 1 of 2 movies watched")
+    ).toBeInTheDocument();
+    expect(await screen.findByText(/Always/)).toBeInTheDocument();
+    expect(screen.queryByText(/Tower Heist/)).not.toBeInTheDocument();
+  });
+
+  it("should display the empty state when no movies are found by a search", async ({
+    user,
+  }) => {
+    renderWithProviders(<Watched />);
+    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Search"), "Bourne");
+    expect(
+      await screen.findByText("Showing 0 of 2 movies watched")
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/Always/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Tower Heist/)).not.toBeInTheDocument();
+    expect(screen.getByText(/No movies found/)).toBeInTheDocument();
+  });
+
   it("should render the movies as watched movie items in reverse chronological order", async () => {
     renderWithProviders(<Watched />, {
       moviesMock: GET_MOVIES_MOCK,

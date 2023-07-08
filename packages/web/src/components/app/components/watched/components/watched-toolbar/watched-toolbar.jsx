@@ -2,65 +2,61 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
+  useMediaQuery,
 } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
-import { Layout } from "./watched-toolbar.styles";
-import FormatListText from "mdi-material-ui/FormatListText";
-import ViewModule from "@mui/icons-material/ViewModule";
+import { Layout, Status } from "./watched-toolbar.styles";
 
-const WatchedToolbar = ({
-  compactView,
-  onSetCompactView,
-  searchTerm,
-  onSearch,
-}) => (
-  <Layout>
-    <TextField
-      value={searchTerm}
-      placeholder="Search"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <Search />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              size="small"
-              sx={{
-                mr: "-8px",
-                visibility: searchTerm.length ? "visible" : "hidden",
-              }}
-              onClick={() => onSearch("")}
-            >
-              <Close />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-      size="small"
-      onChange={({ target }) => onSearch(target.value)}
-    />
+const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
+  const small = useMediaQuery("(max-width: 550px)");
 
-    <ToggleButtonGroup
-      value={compactView ? "compact" : "full"}
-      exclusive
-      onChange={(event, value) => onSetCompactView(value === "compact")}
-      aria-label="List View"
-      color="tertiary"
-    >
-      <ToggleButton value="full" aria-label="full" size="small">
-        <FormatListText />
-      </ToggleButton>
-      <ToggleButton value="compact" aria-label="compact" size="small">
-        <ViewModule />
-      </ToggleButton>
-    </ToggleButtonGroup>
-  </Layout>
-);
+  return (
+    <Layout>
+      <Status>
+        {visibleCount < count ? (
+          <div>
+            {small
+              ? `${visibleCount} of ${count} movies`
+              : `Showing ${visibleCount} of ${count} movies watched`}
+          </div>
+        ) : (
+          <div>{small ? `${count} movies` : `${count} movies watched`}</div>
+        )}
+      </Status>
+
+      <TextField
+        value={searchTerm}
+        placeholder="Search"
+        inputProps={{
+          "aria-label": "Search",
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                sx={{
+                  mr: "-8px",
+                  visibility: searchTerm.length ? "visible" : "hidden",
+                }}
+                onClick={() => onSearch("")}
+              >
+                <Close />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        size="small"
+        onChange={({ target }) => onSearch(target.value)}
+      />
+    </Layout>
+  );
+};
 
 export default WatchedToolbar;

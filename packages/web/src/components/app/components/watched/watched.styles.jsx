@@ -7,10 +7,6 @@ export const StackedContainer = styled("div")(() => ({
   gridTemplateColumns: "1fr",
 }));
 
-export const PosterGridContainer = styled("div")(({ theme: { spacing } }) => ({
-  margin: spacing(3),
-}));
-
 export const NoMoviesFound = styled("div")(
   ({ theme: { palette, spacing } }) => ({
     color: palette.grey[700],
