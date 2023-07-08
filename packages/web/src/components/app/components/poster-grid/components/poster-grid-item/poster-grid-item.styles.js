@@ -21,7 +21,7 @@ export const Title = styled("div")`
   text-align: center;
 `;
 
-export const Year = styled("div")(({ theme: { palette } }) => ({
+export const Info = styled("div")(({ theme: { palette } }) => ({
   color: palette.grey[600],
   fontSize: "0.8em",
 }));

@@ -2,28 +2,30 @@ import { styled } from "@mui/material";
 import { app } from "../../../../../../constants/app";
 import { keyframes } from "@emotion/react";
 
-export const SearchLayout = styled("div")(({ theme: { zIndex }, $shadow }) => ({
-  display: "flex",
-  justifyContent: "center",
-  position: "sticky",
-  top: app.TITLE_BAR_HEIGHT,
-  backgroundColor: "#f5f5f5",
-  zIndex: zIndex.stickyBar,
-  ...($shadow && {
-    boxShadow:
-      "rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px",
-  }),
+export const SearchLayout = styled("div")(
+  ({ theme: { zIndex, palette }, $shadow }) => ({
+    display: "flex",
+    justifyContent: "center",
+    position: "sticky",
+    top: app.TITLE_BAR_HEIGHT,
+    backgroundColor: palette.foundation,
+    zIndex: zIndex.stickyBar,
+    ...($shadow && {
+      boxShadow:
+        "rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px",
+    }),
 
-  // The negative margins here allow the scroll shadow to stretch to the edges of the screen.
-  // The padding replicates the spacing of the page layout inside the container
-  margin: `0 -${app.LIST_MARGIN}px`,
-  padding: `0 ${app.LIST_MARGIN}px`,
+    // The negative margins here allow the scroll shadow to stretch to the edges of the screen.
+    // The padding replicates the spacing of the page layout inside the container
+    margin: `0 -${app.LIST_MARGIN}px`,
+    padding: `0 ${app.LIST_MARGIN}px`,
 
-  "@media (max-width: 500px)": {
-    margin: `0 -${app.LIST_MARGIN_MOBILE}px`,
-    padding: `0 ${app.LIST_MARGIN_MOBILE}px`,
-  },
-}));
+    "@media (max-width: 500px)": {
+      margin: `0 -${app.LIST_MARGIN_MOBILE}px`,
+      padding: `0 ${app.LIST_MARGIN_MOBILE}px`,
+    },
+  })
+);
 
 export const SearchInput = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",
@@ -32,18 +34,6 @@ export const SearchInput = styled("div")(({ theme: { spacing } }) => ({
   alignItems: "center",
   paddingTop: spacing(4),
   paddingBottom: spacing(6),
-}));
-
-export const SearchResults = styled("div")(({ theme: { spacing } }) => ({
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, 160px)",
-  justifyContent: "space-between",
-  columnGap: spacing(2),
-  rowGap: spacing(3),
-
-  "@media (max-width: 600px)": {
-    justifyContent: "space-around",
-  },
 }));
 
 export const SearchStatus = styled("div")(({ theme: { spacing } }) => ({

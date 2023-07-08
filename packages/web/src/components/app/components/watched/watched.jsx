@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import isNil from "lodash/isNil";
 
-import { Container } from "./watched.styles";
+import {
+  StackedContainer,
+  NoMoviesFound,
+  PosterGridContainer,
+} from "./watched.styles";
 import { errorMessage } from "../../../../constants/error-messages";
 import DeleteDialog from "../delete-dialog/delete-dialog";
 import ErrorDialog from "../error-dialog/error-dialog";
@@ -15,6 +19,9 @@ import {
   useRemoveWatchedMovie,
 } from "../../../../graphql/mutations";
 import { sortDirection } from "../../../../constants/sorts";
+import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
+import MovieRemove from "mdi-material-ui/MovieRemove";
+import PosterGrid from "../poster-grid/poster-grid";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
@@ -27,9 +34,17 @@ export const Watched = () => {
     INFINITE_LOAD_CHUNK_SIZE
   );
 
+  const [compactView, setCompactView] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const sortedMovies = useMemo(
-    () => orderBy(watchedMovies, "watchedOn", [sortDirection.DESC]),
-    [watchedMovies]
+    () =>
+      orderBy(watchedMovies, "watchedOn", [sortDirection.DESC]).filter(
+        ({ title }) =>
+          searchTerm.length === 0 ||
+          title.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    [searchTerm, watchedMovies]
   );
 
   useEffect(() => {
@@ -74,23 +89,44 @@ export const Watched = () => {
 
   return watchedMovies ? (
     <>
-      <Container>
-        {sortedMovies.map(
-          (movie, i) =>
-            i < infiniteLoadPointer && (
-              <WatchedMovie
-                key={movie.id}
-                movie={editingMovie?.id === movie.id ? editingMovie : movie}
-                right={i % 2}
-                isEditing={editingMovie?.id === movie.id}
-                onEditMovie={setEditingMovie}
-                onSave={onSaveMovie}
-                onCancel={onCancelEdit}
-                onDelete={onDeleteMovie}
-              />
-            )
-        )}
-      </Container>
+      <WatchedToolbar
+        compactView={compactView}
+        onSetCompactView={setCompactView}
+        searchTerm={searchTerm}
+        onSearch={setSearchTerm}
+      />
+
+      {sortedMovies.length ? (
+        compactView ? (
+          <PosterGridContainer>
+            <PosterGrid movies={sortedMovies} info="watchedOn" />
+          </PosterGridContainer>
+        ) : (
+          <StackedContainer $compactView={compactView}>
+            {sortedMovies.map(
+              (movie, i) =>
+                i < infiniteLoadPointer && (
+                  <WatchedMovie
+                    key={movie.id}
+                    movie={editingMovie?.id === movie.id ? editingMovie : movie}
+                    right={i % 2}
+                    isEditing={editingMovie?.id === movie.id}
+                    onEditMovie={setEditingMovie}
+                    onSave={onSaveMovie}
+                    onCancel={onCancelEdit}
+                    onDelete={onDeleteMovie}
+                  />
+                )
+            )}
+          </StackedContainer>
+        )
+      ) : searchTerm ? (
+        <NoMoviesFound>
+          <MovieRemove />
+          <div>No movies found.</div>
+          <div>Please try a different search.</div>
+        </NoMoviesFound>
+      ) : null}
 
       <DeleteDialog
         open={!isNil(deleteMovie)}

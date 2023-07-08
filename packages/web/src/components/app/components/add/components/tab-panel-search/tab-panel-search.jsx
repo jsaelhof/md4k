@@ -7,19 +7,18 @@ import TabPanel from "../tab-panel/tab-panel";
 import { useCallback, useRef, useState } from "react";
 import debounce from "lodash/debounce";
 import FullDetailModal from "../../../full-detail-modal/full-detail-modal";
-import SearchResult from "./components/search-result/search-result";
 import { useSearchByTitle } from "../../../../../../graphql/queries";
 import {
   NoMoviesFound,
   SearchInput,
   SearchLayout,
-  SearchResults,
   SearchStatus,
   Searching,
 } from "./tab-panel-search.styles";
 import { useIntersectionObserver } from "../../../../../../hooks/use-intersection-observer";
 import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
+import PosterGrid from "../../../poster-grid/poster-grid";
 
 const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
   const [titleSearch, setTitleSearch] = useState("");
@@ -162,18 +161,11 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         <div ref={ref} />
 
         {movies && (
-          <SearchResults aria-label="Search Results">
-            {movies.map((movie, i) => (
-              <SearchResult
-                key={movie.title}
-                height={250}
-                movie={movie}
-                onClick={onSearchResultClick}
-                // This applies a delay factor to the last 10 movies (which are the newest 10 to be loaded)
-                delay={Math.max(0, i - (movies.length - 10))}
-              />
-            ))}
-          </SearchResults>
+          <PosterGrid
+            movies={movies}
+            onSearchResultClick={onSearchResultClick}
+            info="year"
+          />
         )}
 
         <SearchStatus>
