@@ -1,3 +1,12 @@
+### PR #94 - #90: replace use of import assign with vi.hoisted pattern
+##### 2023-07-08
+
+Replaces the old pattern in several files
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/94)
+
+----
+
 ### PR #93 - #91: Remove use of query selector and fix search field labels
 ##### 2023-07-08
 
