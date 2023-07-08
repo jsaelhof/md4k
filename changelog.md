@@ -1,3 +1,12 @@
+### PR #92 - #84: watched toolbar with search
+##### 2023-07-08
+
+Adds a toolbar to the watched screen with a search feature. Also displays the counts of movies displayed.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/92)
+
+----
+
 ### PR #89 - #83: Rated doesn't fit
 ##### 2023-07-04
 
