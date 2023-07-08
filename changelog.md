@@ -1,3 +1,12 @@
+### PR #93 - #91: Remove use of query selector and fix search field labels
+##### 2023-07-08
+
+When the new add screen was built, I used a query selector to get to the input fields because I couldn't figure out how to assign a label to an MUI textfield without also overwriting the placeholder and displaying the label above the field. I figured out how to do this later. In the same feature, but on the search screen, I used labels on the fields which worked for the tests but I didn't notice how they affected the UI. This PR also fixes that up using the same solution.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/93)
+
+----
+
 ### PR #92 - #84: watched toolbar with search
 ##### 2023-07-08
 
