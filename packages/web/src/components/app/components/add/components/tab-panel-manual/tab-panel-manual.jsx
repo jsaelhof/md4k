@@ -33,7 +33,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="Title">Title</Label>
           <TextField
             id="Title"
-            data-testid="Title"
+            inputProps={{ "aria-label": "Title" }}
             fullWidth
             size="small"
             variant="outlined"
@@ -51,7 +51,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="Poster">Poster URL</Label>
           <TextField
             id="Poster"
-            data-testid="Poster"
+            inputProps={{ "aria-label": "Poster" }}
             fullWidth
             size="small"
             variant="outlined"
@@ -70,7 +70,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="Background">Background URL</Label>
           <TextField
             id="Background"
-            data-testid="Background"
+            inputProps={{ "aria-label": "Background" }}
             fullWidth
             size="small"
             variant="outlined"
@@ -89,7 +89,6 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="Year">Year</Label>
           <TextField
             id="Year"
-            data-testid="Year"
             fullWidth
             size="small"
             variant="outlined"
@@ -105,6 +104,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
               }
             }}
             inputProps={{
+              "aria-label": "Year",
               maxLength: 4,
             }}
             error={userErrors.includes("Year")}
@@ -116,7 +116,6 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="Runtime">Runtime</Label>
           <TextField
             id="Runtime"
-            data-testid="Runtime"
             fullWidth
             size="small"
             variant="outlined"
@@ -133,6 +132,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
               }
             }}
             inputProps={{
+              "aria-label": "Runtime",
               maxLength: 4,
             }}
             error={userErrors.includes("Runtime")}
@@ -147,7 +147,7 @@ const TabPanelManual = ({ tabId, hidden, onAddMovie }) => {
           <Label htmlFor="IMDBId">IMDB Id</Label>
           <TextField
             id="IMDBId"
-            data-testid="IMDBId"
+            inputProps={{ "aria-label": "IMDBId" }}
             fullWidth
             size="small"
             variant="outlined"
