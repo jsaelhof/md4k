@@ -4,13 +4,16 @@ import WatchedMovie from "./watched-movie";
 import { vi } from "vitest";
 import { buildThirdPartyMovieMock } from "../../../../../../utils/build-third-party-movie-mock";
 import { within, screen } from "@testing-library/react";
-import * as mui from "@mui/material";
 import { Globals } from "@react-spring/web";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
 
+const { MOCK_USE_MEDIA_QUERY } = vi.hoisted(() => ({
+  MOCK_USE_MEDIA_QUERY: vi.fn().mockReturnValue(false),
+}));
+
 vi.mock("@mui/material", async () => {
   const actual = await vi.importActual("@mui/material");
-  return { ...actual, useMediaQuery: vi.fn().mockReturnValue(false) };
+  return { ...actual, useMediaQuery: MOCK_USE_MEDIA_QUERY };
 });
 
 const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
@@ -98,10 +101,9 @@ describe("watched-movie", () => {
     props,
   }) => {
     // Mock "small"
-    // eslint-disable-next-line no-import-assign
-    mui.useMediaQuery = vi
-      .fn()
-      .mockImplementation((query) => query === "(max-width: 550px)");
+    MOCK_USE_MEDIA_QUERY.mockImplementation(
+      (query) => query === "(max-width: 550px)"
+    );
 
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -116,10 +118,9 @@ describe("watched-movie", () => {
     props,
   }) => {
     // Mock "xsmall"
-    // eslint-disable-next-line no-import-assign
-    mui.useMediaQuery = vi
-      .fn()
-      .mockImplementation((query) => query === "(max-width: 430px)");
+    MOCK_USE_MEDIA_QUERY.mockImplementation(
+      (query) => query === "(max-width: 430px)"
+    );
 
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
@@ -150,10 +151,9 @@ describe("watched-movie", () => {
     user,
   }) => {
     // Mock "small"
-    // eslint-disable-next-line no-import-assign
-    mui.useMediaQuery = vi
-      .fn()
-      .mockImplementation((query) => query === "(max-width: 550px)");
+    MOCK_USE_MEDIA_QUERY.mockImplementation(
+      (query) => query === "(max-width: 550px)"
+    );
 
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],

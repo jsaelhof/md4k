@@ -2,11 +2,14 @@ import { screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
 import ActionBar from "./action-bar";
-import * as mui from "@mui/material";
+
+const { MOCK_USE_MEDIA_QUERY } = vi.hoisted(() => ({
+  MOCK_USE_MEDIA_QUERY: vi.fn().mockReturnValue(true),
+}));
 
 vi.mock("@mui/material", async () => {
   const actual = await vi.importActual("@mui/material");
-  return { ...actual, useMediaQuery: vi.fn().mockReturnValue(true) };
+  return { ...actual, useMediaQuery: MOCK_USE_MEDIA_QUERY };
 });
 
 const navigateMock = vi.fn();
@@ -55,8 +58,7 @@ describe("action-bar", () => {
     onAdd,
     onPick,
   }) => {
-    // eslint-disable-next-line no-import-assign
-    mui.useMediaQuery = vi.fn().mockReturnValue(false);
+    MOCK_USE_MEDIA_QUERY.mockReturnValue(false);
 
     renderWithProviders(
       <ActionBar disabled={false} onAdd={onAdd} onPick={onPick} />

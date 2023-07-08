@@ -1,7 +1,10 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedTitle from "./sorted-title";
 import { vi } from "vitest";
-import * as useSortDirectionModule from "../../../../../../../../hooks/use-sort-direction";
+
+const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
+  MOCK_USE_SORT_DIRECTION: vi.fn().mockReturnValue("asc"),
+}));
 
 vi.mock("../movie/movie", () => ({
   default: ({ onEditMovie, onMarkWatched, onDeleteMovie, movie }) => (
@@ -15,7 +18,7 @@ vi.mock("../movie/movie", () => ({
 }));
 
 vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
-  useSortDirection: vi.fn().mockReturnValue("asc"),
+  useSortDirection: MOCK_USE_SORT_DIRECTION,
 }));
 
 describe("sorted-title", () => {
@@ -58,8 +61,7 @@ describe("sorted-title", () => {
   });
 
   it("should render correctly when the order is DESC", ({ props }) => {
-    // eslint-disable-next-line no-import-assign
-    useSortDirectionModule.useSortDirection = vi.fn().mockReturnValue("desc");
+    MOCK_USE_SORT_DIRECTION.mockReturnValue("desc");
 
     render(<SortedTitle {...props} />);
 
