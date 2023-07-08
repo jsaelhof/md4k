@@ -107,7 +107,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         <SearchLayout $shadow={!visible}>
           <SearchInput>
             <TextField
-              label="Search"
+              inputProps={{ "aria-label": "Search" }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -139,7 +139,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
             />
 
             <TextField
-              label="Year"
+              inputProps={{ "aria-label": "Year" }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

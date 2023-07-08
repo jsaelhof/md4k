@@ -4,8 +4,6 @@ import { vi } from "vitest";
 import { sources } from "md4k-constants";
 import { genres } from "md4k-constants";
 
-// NOTE: I had to use data-testid with querySelector here because I cannot figure out how to get MUI
-// to allow a label that propogates down to the input without creating its own field label and overwriting the placeholder.
 describe("tab-panel-manual", () => {
   beforeEach((context) => {
     context.props = {
@@ -21,17 +19,14 @@ describe("tab-panel-manual", () => {
     render(<TabPanelManual {...props} />);
 
     // Title
-    expect(screen.getByTestId("Title")).toBeInTheDocument();
-    await user.type(
-      screen.getByTestId("Title").querySelector("input"),
-      "Batman"
-    );
+    expect(screen.getByLabelText("Title")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Title"), "Batman");
     expect(screen.getByDisplayValue("Batman")).toBeInTheDocument();
 
     // Poster
-    expect(screen.getByTestId("Poster")).toBeInTheDocument();
+    expect(screen.getByLabelText("Poster")).toBeInTheDocument();
     await user.type(
-      screen.getByTestId("Poster").querySelector("input"),
+      screen.getByLabelText("Poster"),
       "https://www.test.com/poster.jpg"
     );
     expect(
@@ -39,9 +34,9 @@ describe("tab-panel-manual", () => {
     ).toBeInTheDocument();
 
     // Background
-    expect(screen.getByTestId("Background")).toBeInTheDocument();
+    expect(screen.getByLabelText("Background")).toBeInTheDocument();
     await user.type(
-      screen.getByTestId("Background").querySelector("input"),
+      screen.getByLabelText("Background"),
       "https://www.test.com/background.jpg"
     );
     expect(
@@ -49,24 +44,18 @@ describe("tab-panel-manual", () => {
     ).toBeInTheDocument();
 
     // Year
-    expect(screen.getByTestId("Year")).toBeInTheDocument();
-    await user.type(screen.getByTestId("Year").querySelector("input"), "2005");
+    expect(screen.getByLabelText("Year")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Year"), "2005");
     expect(screen.getByDisplayValue("2005")).toBeInTheDocument();
 
     // Runtime
-    expect(screen.getByTestId("Runtime")).toBeInTheDocument();
-    await user.type(
-      screen.getByTestId("Runtime").querySelector("input"),
-      "120"
-    );
+    expect(screen.getByLabelText("Runtime")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Runtime"), "120");
     expect(screen.getByDisplayValue("120")).toBeInTheDocument();
 
     // IMDB ID
-    expect(screen.getByTestId("IMDBId")).toBeInTheDocument();
-    await user.type(
-      screen.getByTestId("IMDBId").querySelector("input"),
-      "tt1234567"
-    );
+    expect(screen.getByLabelText("IMDBId")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("IMDBId"), "tt1234567");
     expect(screen.getByDisplayValue("tt1234567")).toBeInTheDocument();
 
     // Genre
@@ -111,11 +100,8 @@ describe("tab-panel-manual", () => {
   it("should handle runtime input as minutes", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(
-      screen.getByTestId("Runtime").querySelector("input"),
-      "120"
-    );
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("Runtime"), "120");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).toHaveBeenCalledWith(
@@ -128,11 +114,8 @@ describe("tab-panel-manual", () => {
   it("should handle runtime input as hh:mm", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(
-      screen.getByTestId("Runtime").querySelector("input"),
-      "2:00"
-    );
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("Runtime"), "2:00");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).toHaveBeenCalledWith(
@@ -153,11 +136,8 @@ describe("tab-panel-manual", () => {
   it("should validate poster", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(
-      screen.getByTestId("Poster").querySelector("input"),
-      "something invalid"
-    );
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("Poster"), "something invalid");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
@@ -167,11 +147,8 @@ describe("tab-panel-manual", () => {
   it("should validate background", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(
-      screen.getByTestId("Background").querySelector("input"),
-      "something invalid"
-    );
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("Background"), "something invalid");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
@@ -181,8 +158,8 @@ describe("tab-panel-manual", () => {
   it("should validate year", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(screen.getByTestId("Year").querySelector("input"), "100");
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("Year"), "100");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
@@ -192,28 +169,25 @@ describe("tab-panel-manual", () => {
   it("should validate runtime", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
+    await user.type(screen.getByLabelText("Title"), "Test");
 
     // Incorrect colon
-    await user.type(screen.getByTestId("Runtime").querySelector("input"), ":0");
+    await user.type(screen.getByLabelText("Runtime"), ":0");
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
     expect(screen.getByText(/Runtime must be/)).toBeInTheDocument();
 
     // Incorrect digits (too long)
-    await user.clear(screen.getByTestId("Runtime").querySelector("input"));
-    await user.type(
-      screen.getByTestId("Runtime").querySelector("input"),
-      "1000"
-    );
+    await user.clear(screen.getByLabelText("Runtime"));
+    await user.type(screen.getByLabelText("Runtime"), "1000");
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
     expect(screen.getByText(/Runtime must be/)).toBeInTheDocument();
 
     // Incorrect digits (too short)
-    await user.clear(screen.getByTestId("Runtime").querySelector("input"));
-    await user.type(screen.getByTestId("Runtime").querySelector("input"), "1");
-    console.log(screen.getByTestId("Runtime").querySelector("input"));
+    await user.clear(screen.getByLabelText("Runtime"));
+    await user.type(screen.getByLabelText("Runtime"), "1");
+    console.log(screen.getByLabelText("Runtime"));
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();
     expect(screen.getByText(/Runtime must be/)).toBeInTheDocument();
@@ -222,11 +196,8 @@ describe("tab-panel-manual", () => {
   it("should validate imdb id", async ({ props, user }) => {
     render(<TabPanelManual {...props} />);
 
-    await user.type(screen.getByTestId("Title").querySelector("input"), "Test");
-    await user.type(
-      screen.getByTestId("IMDBId").querySelector("input"),
-      "12345"
-    );
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("IMDBId"), "12345");
 
     await user.click(screen.getByRole("button", { name: "Add Movie" }));
     expect(props.onAddMovie).not.toHaveBeenCalled();

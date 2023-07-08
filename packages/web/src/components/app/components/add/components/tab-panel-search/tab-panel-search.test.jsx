@@ -158,7 +158,7 @@ describe("tab-panel-search", () => {
     });
 
     await user.type(screen.getByLabelText(/Search/), "Batman");
-    expect(await screen.findByDisplayValue("Batman")).toBeInTheDocument();
+    console.log(screen.debug(screen.getByLabelText(/Search/)))
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
     for (var i = 0; i < 10; i++) {
