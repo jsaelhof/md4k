@@ -89,7 +89,7 @@ describe("movie", () => {
     expect(screen.getByLabelText("Unlock")).toBeInTheDocument();
   });
 
-  it("should open the zoomed poster and preload the full detail on rollover and close the zoomed poster on rollout", async ({
+  it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
     props,
     user,
   }) => {
@@ -114,9 +114,10 @@ describe("movie", () => {
     });
   });
 
-  it("should close the zoomed poster and open the full detail view when clicked", async ({
+  it("should close the zoomed poster and open the expanded detail view when clicked", async ({
     props,
     user,
+    userNoPointerCheck,
   }) => {
     renderWithProviders(<Movie {...props} />);
 
@@ -125,12 +126,19 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    await user.click(screen.getByTestId("positioner"));
+    // The positioner has pointer-events: none to prevent being able to capture hover events.
+    // This also disables clicking but by adding an onClick handler, it can still be clicked.
+    // UserEvent doesn't think this should work because pointer events are disabled so I'm
+    // using a specially configured userEvent object that does not check pointer events.
+    await userNoPointerCheck.click(screen.getByTestId("positioner"));
 
-    await waitFor(() => {
-      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
-      expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "true");
-    });
+    await waitFor(() =>
+      expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
+    );
+    expect(await screen.findByText("Expanded")).toHaveAttribute(
+      "data-open",
+      "true"
+    );
   });
 
   it("should toggle the actions and ratings when mousing over the five star rating", async ({

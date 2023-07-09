@@ -25,7 +25,7 @@ export const MovieDetailPositioner = styled("div")(() => ({
   bottom: 0,
   left: 0,
   right: 0,
-  // pointerEvents: "none",
+  pointerEvents: "none",
   opacity: 0,
 }));
 
