@@ -13,4 +13,8 @@ beforeAll(() => {
 
 beforeEach((context) => {
   context.user = userEvent.setup();
+
+  // This is a separate user object configured without pointer event checks enabled
+  // for use with tests that have trouble due to elements iwth pointer-events: none.
+  context.userNoPointerCheck = userEvent.setup({ pointerEventsCheck: 0 });
 });
