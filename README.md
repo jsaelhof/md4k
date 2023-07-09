@@ -8,23 +8,23 @@ During the lockdowns in 2020, our family was watching more movies but we could n
 
 Displays the movie that was selected, including synopis, ratings, streaming source, trailers and more. Movies can be randomly chosen from the entire list or from a smaller set limited by runtime.
 
-![image](https://user-images.githubusercontent.com/7939225/190296239-2389190e-13c5-4299-b39f-2278ec2000f6.png)
+<img width="1191" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/e203741f-87ee-48c5-83fe-9a45ffe6bb0d">
 
 ##
 
 ### Main List
 
-Displays the list of movies we want to watch.
+Displays the list of movies we want to watch. Movies can be sorted and grouped by various criteria such as Rating, Genre, or Runtime.
 
-![image](https://user-images.githubusercontent.com/7939225/190295808-33e363ed-05e6-47ff-8016-b832a275f63e.png)
+<img width="1800" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/0b7b6641-1997-4a3f-89be-0e8962b277f3">
 
 ##
 
 ### Movie Detail
 
-Movies can be hovered to show the most important information (streaming source, ratings, runtime), and quick actions (edit, mark watched, lock, delete)
+Movies can be hovered to show the most important information (streaming source, ratings, runtime), and quick actions (edit, mark watched, lock, delete).
 
-![image](https://user-images.githubusercontent.com/7939225/191169481-24e58f5b-5e8a-430e-bebf-8bfa902d1e1b.png)
+<img width="788" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/3808067d-62bb-4a8e-a64e-6aacf517e97f">
 
 ##
 
@@ -32,7 +32,7 @@ Movies can be hovered to show the most important information (streaming source, 
 
 Between movie nights, we'll often hear about new ones we would like to see. It quickly became important to have the ability to pull out my phone and add it to the list on the go.
 
-![image](https://user-images.githubusercontent.com/7939225/191165858-e019830f-fa8d-483c-9393-465a53039d53.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ![image](https://user-images.githubusercontent.com/7939225/191167099-2dddb8af-c6dc-4e17-af09-433b0e8cfb3b.png)
+<img width="370" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/c9365fde-0ed6-464b-8580-8dba2fe89a97"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img width="369" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/7b83ae48-60fa-41ac-b5ee-d8fe5a45e144">
 
 ##
 
@@ -40,7 +40,7 @@ Between movie nights, we'll often hear about new ones we would like to see. It q
 
 A historical view of the movies we have watched.
 
-![image](https://user-images.githubusercontent.com/7939225/191163364-0790725c-4069-4077-9717-87758b2c6c04.png)
+<img width="1192" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/0de7affa-7dbd-4404-ac9e-ed4ff5f3b85b">
 
 ##
 
@@ -48,12 +48,13 @@ A historical view of the movies we have watched.
 
 When a movie is marked as "watched", the date is automatically set to the current day. If I forget to mark it for a day or two, I can adjust the date manually.
 
-![image](https://user-images.githubusercontent.com/7939225/191164423-ed7b91c6-ec77-44f3-b74f-77eb95ead433.png)
+<img width="1192" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/cacc91a9-b68b-4164-be7b-1d5d6f91627b">
 
 ##
 
 ### Add Movie with OMDB Integration
 
-Adding movies is much simpler now. Just search the name and a list of matching movies is displayed. Clicking the poster will auto-fill all the details for the movie and even check where it is currently streaming.
+Adding movies is much simpler now. Just search the name and a list of matching movies is displayed. Selecting one will auto-fill all the details for the movie and even check where it is currently streaming.
 
-![image](https://user-images.githubusercontent.com/7939225/190296813-fa9928e5-cc43-4980-8303-311b3d1c88a5.png)
+<img width="1193" alt="image" src="https://github.com/jsaelhof/md4k/assets/7939225/4b780453-72b1-40e7-843a-aaeb69ae9972">
+
