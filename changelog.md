@@ -1,3 +1,12 @@
+### PR #98 - #97: Fix hover issue on positioner
+##### 2023-07-09
+
+Fix hover issue by re-adding pointer-events: none and testing with a user event object that has no pointer checks
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/98)
+
+----
+
 ### PR #95 - #85: Update readme
 ##### 2023-07-09
 
