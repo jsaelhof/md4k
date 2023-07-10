@@ -29,7 +29,7 @@ const SortedRating = ({ movies, ...handlers }) => {
       ([stars, list]) => ({
         title: <FiveStarRating stars={stars} />,
         list,
-        stars,
+        ariaLabel: `${stars} Star`,
       })
     );
 
