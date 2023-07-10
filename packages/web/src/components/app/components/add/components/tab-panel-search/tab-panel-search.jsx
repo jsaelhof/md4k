@@ -15,10 +15,10 @@ import {
   SearchStatus,
   Searching,
 } from "./tab-panel-search.styles";
-import { useIntersectionObserver } from "../../../../../../hooks/use-intersection-observer";
 import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "../../../poster-grid/poster-grid";
+import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 
 const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
   const [titleSearch, setTitleSearch] = useState("");
@@ -99,7 +99,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
   }, []);
 
   // Checks if a 0-height div is within view and displays
-  const { ref, visible } = useIntersectionObserver({ rootMargin: -184 });
+  const [ref, visible] = useInViewRef(undefined, { rootMargin: "-184px" });
 
   return (
     <>

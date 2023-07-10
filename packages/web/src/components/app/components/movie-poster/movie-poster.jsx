@@ -8,7 +8,7 @@ import {
   PosterLayout,
   shadowStyles,
 } from "./movie-poster.styles";
-import { useIntersectionObserver } from "../../../../hooks/use-intersection-observer";
+import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 
 const MoviePoster = ({
   movie,
@@ -19,7 +19,7 @@ const MoviePoster = ({
   variant,
   shadow,
 }) => {
-  const { ref, visible } = useIntersectionObserver();
+  const [ref, visible] = useInViewRef();
 
   return (
     <PosterLayout

@@ -2,15 +2,12 @@ import { render, screen } from "@testing-library/react";
 import MoviePoster from "./movie-poster";
 import { vi } from "vitest";
 
-const { MOCK_OBSERVER } = vi.hoisted(() => ({
-  MOCK_OBSERVER: vi.fn().mockReturnValue({
-    ref: null,
-    visible: true,
-  }),
+const { MOCK_USE_IN_VIEW_REF } = vi.hoisted(() => ({
+  MOCK_USE_IN_VIEW_REF: vi.fn().mockReturnValue([null, true]),
 }));
 
-vi.mock("../../../../hooks/use-intersection-observer", () => ({
-  useIntersectionObserver: MOCK_OBSERVER,
+vi.mock("rooks/dist/esm/hooks/useInViewRef", () => ({
+  useInViewRef: MOCK_USE_IN_VIEW_REF,
 }));
 
 describe("movie-poster", () => {
@@ -60,10 +57,7 @@ describe("movie-poster", () => {
   it("should render the placeholder when the poster is not intersecting the viewport", ({
     props,
   }) => {
-    MOCK_OBSERVER.mockReturnValueOnce({
-      ref: null,
-      visible: false,
-    });
+    MOCK_USE_IN_VIEW_REF.mockReturnValueOnce([null, false]);
 
     render(<MoviePoster {...props} />);
 

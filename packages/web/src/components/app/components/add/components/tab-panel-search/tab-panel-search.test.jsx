@@ -98,17 +98,6 @@ const SEARCH_WITH_YEAR_MOCK = {
 };
 
 describe("tab-panel-search", () => {
-  const { MOCK_OBSERVER } = vi.hoisted(() => ({
-    MOCK_OBSERVER: vi.fn().mockReturnValue({
-      ref: null,
-      visible: true,
-    }),
-  }));
-
-  vi.mock("../../../../hooks/use-intersection-observer", () => ({
-    useIntersectionObserver: MOCK_OBSERVER,
-  }));
-
   beforeEach((context) => {
     context.props = {
       tabId: 0,
@@ -158,7 +147,6 @@ describe("tab-panel-search", () => {
     });
 
     await user.type(screen.getByLabelText(/Search/), "Batman");
-    console.log(screen.debug(screen.getByLabelText(/Search/)))
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
     for (var i = 0; i < 10; i++) {
