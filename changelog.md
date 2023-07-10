@@ -1,3 +1,12 @@
+### PR #99 - #96: intersection observer poster bug
+##### 2023-07-10
+
+There was some weird rendering issues with my useIntersectionObserver hook. I think it was a race condition that would sometimes report false for "intersecting" when it should be true because the hook was checking before the component had rendered into the DOM. Just a guess based on some reading but I also noticed that the bug went away when I removed their "key" prop, forcing them to remount/rerender. I ended up trying Rooks' useInViewRef hook to see if it would fix the bug and it did. While I don't want to use Rooks too much, this feature is really important for lighthouse scores and app loading. At some point I could copy Rooks implementation if needed.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/99)
+
+----
+
 ### PR #98 - #97: Fix hover issue on positioner
 ##### 2023-07-09
 
