@@ -33,7 +33,7 @@
     "react-router-dom": "6.10.0",
     "react-slick": "^0.29.0",
     "react-spring": "^9.5.2",
-    "react-youtube": "^7.14.0",
+    "react-youtube": "10.1.0",
     "rooks": "^5.11.0",
     "slick-carousel": "^1.8.1",
     "uuid": "^8.3.2"
