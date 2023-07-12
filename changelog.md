@@ -1,3 +1,12 @@
+### PR #101 - #18: Update React Youtube
+##### 2023-07-12
+
+update react youtube player to v10.1.0 and update how the size is applied
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/101)
+
+----
+
 ### PR #100 - #15: Update react-day-picker version
 ##### 2023-07-12
 
