@@ -19,7 +19,7 @@ describe("date-picker", () => {
   }) => {
     renderWithProviders(<DatePicker {...props} />);
 
-    expect(screen.queryByRole("presentation")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("datePickerDrawer")).not.toBeInTheDocument();
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
@@ -28,7 +28,7 @@ describe("date-picker", () => {
   }) => {
     renderWithProviders(<DatePicker {...props} useDrawer />);
 
-    expect(screen.queryByRole("presentation")).toBeInTheDocument();
+    expect(screen.queryByTestId("datePickerDrawer")).toBeInTheDocument();
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
@@ -47,31 +47,29 @@ describe("date-picker", () => {
   it("should set the default date", ({ props }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByText("January 2022")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "2nd January (Sunday)" })
-    ).toHaveClass("rdp-day_selected");
+    expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
+      "rdp-day_selected"
+    );
   });
 
   it("should call onChange when changing the date", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
 
-    expect(
-      screen.getByRole("button", { name: "2nd January (Sunday)" })
-    ).toHaveClass("rdp-day_selected");
-
-    await user.click(
-      screen.getByRole("button", { name: "1st January (Saturday)" })
+    expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
+      "rdp-day_selected"
     );
+
+    await user.click(screen.getByRole("gridcell", { name: "1" }));
 
     expect(props.onChange).toHaveBeenCalled();
 
-    expect(
-      screen.getByRole("button", { name: "2nd January (Sunday)" })
-    ).not.toHaveClass("rdp-day_selected");
+    expect(screen.getByRole("gridcell", { name: "2" })).not.toHaveClass(
+      "rdp-day_selected"
+    );
 
-    expect(
-      screen.getByRole("button", { name: "1st January (Saturday)" })
-    ).toHaveClass("rdp-day_selected");
+    expect(screen.getByRole("gridcell", { name: "1" })).toHaveClass(
+      "rdp-day_selected"
+    );
   });
 
   it("should call onDelete", async ({ props, user }) => {
