@@ -1,4 +1,4 @@
-import "react-day-picker/style.css";
+import "react-day-picker/dist/style.css";
 
 import { useState } from "react";
 import { Drawer } from "@mui/material";
@@ -50,6 +50,7 @@ const DatePicker = ({
         }}
         defaultMonth={defaultDate}
         defaultSelected={defaultDate}
+        selected={day}
         disabled={{
           after: new Date(),
         }}
@@ -83,6 +84,7 @@ const DatePicker = ({
       open={true}
       ModalProps={{ hideBackdrop: true }}
       PaperProps={{ sx: [DrawerPaper] }}
+      data-testid="datePickerDrawer"
     >
       <Title>{title}</Title>
       {picker}

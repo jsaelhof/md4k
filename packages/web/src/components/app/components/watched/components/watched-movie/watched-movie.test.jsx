@@ -143,7 +143,7 @@ describe("watched-movie", () => {
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    expect(screen.queryByRole("presentation")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("datePickerDrawer")).not.toBeInTheDocument();
   });
 
   it("should show the date picker in a drawer at small size", async ({
@@ -161,10 +161,10 @@ describe("watched-movie", () => {
 
     await user.click(screen.getByLabelText("Test Movie"));
 
-    expect(await screen.findByRole("presentation")).toBeInTheDocument();
+    expect(await screen.findByTestId("datePickerDrawer")).toBeInTheDocument();
 
     expect(
-      within(screen.getByRole("presentation")).getByTestId("datePicker")
+      within(screen.getByTestId("datePickerDrawer")).getByTestId("datePicker")
     ).toBeInTheDocument();
   });
 
@@ -177,7 +177,7 @@ describe("watched-movie", () => {
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("gridcell", { name: "10" }));
 
     await user.click(screen.getByTestId("CalendarCheckIcon"));
 
@@ -200,7 +200,7 @@ describe("watched-movie", () => {
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("gridcell", { name: "10" }));
 
     await user.click(screen.getByTestId("CloseIcon"));
 
@@ -234,7 +234,7 @@ describe("watched-movie", () => {
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: /10th/ }));
+    await user.click(screen.getByRole("gridcell", { name: "10" }));
 
     await user.click(screen.getByTestId("DeleteIcon"));
 
