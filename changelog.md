@@ -1,3 +1,12 @@
+### PR #100 - #15: Update react-day-picker version
+##### 2023-07-12
+
+Update react day picker version to 8.8.0. Migrate api and tests accordingly.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/100)
+
+----
+
 ### PR #99 - #96: intersection observer poster bug
 ##### 2023-07-10
 
