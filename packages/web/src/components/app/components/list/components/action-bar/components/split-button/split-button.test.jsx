@@ -1,6 +1,15 @@
-import { render, waitFor, screen } from "@testing-library/react";
+import { waitFor, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import SplitButton from "./split-button";
+import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+
+const { MOCK_FILTER_MOVIES } = vi.hoisted(() => ({
+  MOCK_FILTER_MOVIES: vi.fn().mockImplementation((movies) => movies),
+}));
+
+vi.mock("../../../../../../../../utils/filter-movies", () => ({
+  filterMovies: MOCK_FILTER_MOVIES,
+}));
 
 describe("split-button", () => {
   beforeEach((context) => {
@@ -8,7 +17,7 @@ describe("split-button", () => {
   });
 
   it("should render the split button", ({ onPick }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     expect(
       screen.getByRole("button", { name: "Pick A Movie" })
     ).toBeInTheDocument();
@@ -19,7 +28,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     await user.click(screen.getByRole("button", { name: "Pick A Movie" }));
     expect(onPick).toHaveBeenCalled();
   });
@@ -28,7 +37,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
 
     await user.click(screen.getByLabelText("Pick Menu"));
     expect(await screen.findByText(/short/i)).toBeInTheDocument();
@@ -43,7 +52,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
 
     await user.click(screen.getByLabelText("Pick Menu"));
     expect(await screen.findByText(/short/i)).toBeInTheDocument();
@@ -58,7 +67,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -73,7 +82,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -88,7 +97,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -103,7 +112,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -118,7 +127,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -133,7 +142,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -148,7 +157,7 @@ describe("split-button", () => {
     onPick,
     user,
   }) => {
-    render(<SplitButton onPick={onPick} />);
+    renderWithProviders(<SplitButton onPick={onPick} />);
     const menuButton = screen.getByLabelText("Pick Menu");
     expect(menuButton).toBeInTheDocument();
     await user.click(menuButton);
@@ -157,5 +166,45 @@ describe("split-button", () => {
     expect(longButton).toBeInTheDocument();
     await user.click(longButton);
     expect(onPick).toBeCalledWith({ minAdded: 365 });
+  });
+
+  it("should disable options when filterMovies returns 0 movies", async ({
+    onPick,
+    user,
+  }) => {
+    MOCK_FILTER_MOVIES.mockReturnValue([]);
+
+    renderWithProviders(<SplitButton onPick={onPick} />);
+    const menuButton = screen.getByLabelText("Pick Menu");
+    expect(menuButton).toBeInTheDocument();
+    await user.click(menuButton);
+
+    expect(
+      screen.getByRole("menuitem", { name: /short movie/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /regular movie/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /long movie/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /added this month/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /added within 90 days/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /added within a year/i })
+    ).toHaveAttribute("aria-disabled", "true");
+
+    expect(
+      screen.getByRole("menuitem", { name: /added long ago/i })
+    ).toHaveAttribute("aria-disabled", "true");
   });
 });

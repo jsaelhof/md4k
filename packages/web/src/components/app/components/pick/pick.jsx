@@ -2,57 +2,38 @@ import { useEffect, useState } from "react";
 
 import { useAppContext } from "../../../../context/app-context";
 import { errorCodes } from "md4k-constants";
-import { errorMessage } from "../../../../constants/error-messages";
-import ErrorDialog from "../error-dialog/error-dialog";
 import FullDetail from "../full-detail/full-detail";
-import filter from "lodash/filter";
-import conforms from "lodash/conforms";
 import sample from "lodash/sample";
 import size from "lodash/size";
 import reject from "lodash/reject";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { isBefore, parseISO, subDays } from "date-fns";
+import EmptyState from "../empty-state/empty-state";
+import { Button } from "@mui/material";
+import { filterMovies } from "../../../../utils/filter-movies";
 
 const useRandomPick = () => {
   const { movies, pick, setPick, clearPick } = useAppContext();
   const [searchParams] = useSearchParams();
-  const minRuntime = searchParams.get("minRuntime");
-  const maxRuntime = searchParams.get("maxRuntime");
-  const maxAdded = searchParams.get("maxAdded");
-  const minAdded = searchParams.get("minAdded");
 
   const [history, setHistory] = useState([]);
   const [error, setError] = useState();
 
   useEffect(() => {
     if (movies && !pick) {
-      const filters = {
-        locked: (locked) => !locked,
-      };
+      const minRuntime = searchParams.get("minRuntime");
+      const maxRuntime = searchParams.get("maxRuntime");
+      const maxAdded = searchParams.get("maxAdded");
+      const minAdded = searchParams.get("minAdded");
 
-      if (minRuntime || maxRuntime) {
-        filters.runtime = (runtime) =>
-          runtime >= (minRuntime || 0) && runtime <= (maxRuntime || Infinity);
-      }
-
-      // maxAdded is an integer of days (ex: 30)
-      // Find only movies that were added no more than N days ago
-      if (maxAdded) {
-        filters.addedOn = (addedOn) =>
-          !isBefore(parseISO(addedOn), subDays(new Date(), maxAdded));
-      }
-
-      // minAded is an integer of days (ex: 30)
-      // Find only movies that were added at least N days ago
-      if (minAdded) {
-        filters.addedOn = (addedOn) =>
-          isBefore(parseISO(addedOn), subDays(new Date(), minAdded));
-      }
-
-      const list = filter(movies, conforms(filters));
+      const list = filterMovies(movies, {
+        minRuntime,
+        maxRuntime,
+        maxAdded,
+        minAdded,
+      });
 
       if (size(list) === 0) {
-        setError(errorCodes.PICKING);
+        setError(errorCodes.PICK_EMPTY);
       } else if (size(list) === 1) {
         setPick(list[0].id);
       } else {
@@ -71,17 +52,7 @@ const useRandomPick = () => {
         }
       }
     }
-  }, [
-    clearPick,
-    history,
-    maxAdded,
-    maxRuntime,
-    minAdded,
-    minRuntime,
-    movies,
-    pick,
-    setPick,
-  ]);
+  }, [clearPick, history, movies, pick, searchParams, setPick]);
 
   if (error) {
     return { pick: null, error };
@@ -106,15 +77,17 @@ export const Pick = () => {
     <>
       {pick && <FullDetail movie={moviesById[pick]} />}
 
+      {/* Currently the only error case is no movies being available within the given criteria. */}
       {error && (
-        <ErrorDialog
-          open={!!error}
+        <EmptyState
+          imgSrc="/images/rocket.png"
+          quote="&quot;There's one more thing we need to complete the plan. That guy's eye...&quot;"
+          message="There aren't any movies here to choose from. Head back to the list and try again."
           content={
-            errorMessage[error] || errorMessage.UNKNOWN.replace("%%", error)
+            <Button variant="contained" onClick={() => navigate("/")}>
+              Back to Movies
+            </Button>
           }
-          // FIXME: Can't clear the error easily because it's in the hook. Navigate home for now.
-          // The only cause of an error right now is 0 movies matching the criteria so maybe build an empty state for that.
-          onConfirm={() => navigate("/")}
         />
       )}
     </>
