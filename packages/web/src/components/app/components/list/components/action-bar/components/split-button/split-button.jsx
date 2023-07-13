@@ -16,6 +16,8 @@ import {
   SplitButtonContainer,
   SplitMenu,
 } from "./split-button.styles";
+import { filterMovies } from "../../../../../../../../utils/filter-movies";
+import { useAppContext } from "../../../../../../../../context/app-context";
 
 const splitButtonItems = [
   {
@@ -63,6 +65,7 @@ const splitButtonItems = [
 ];
 
 const SplitButton = ({ onPick }) => {
+  const { movies } = useAppContext();
   const [openSplitButton, setOpenSplitButton] = useState(false);
 
   return (
@@ -85,7 +88,11 @@ const SplitButton = ({ onPick }) => {
           <ClickAwayListener onClickAway={() => setOpenSplitButton(false)}>
             <MenuList id="split-button-menu">
               {splitButtonItems.map(({ value, label, Icon, options }) => (
-                <MenuItem key={value} onClick={() => onPick(options)}>
+                <MenuItem
+                  key={value}
+                  onClick={() => onPick(options)}
+                  disabled={filterMovies(movies, options).length === 0}
+                >
                   {<MenuIcon as={Icon} />}
                   {label}
                 </MenuItem>
