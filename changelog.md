@@ -1,3 +1,12 @@
+### PR #102 - #25: Add Empty Pick State
+##### 2023-07-13
+
+add empty pick state, refactor the filtering out into a util so it can be used in the split button.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/102)
+
+----
+
 ### PR #101 - #18: Update React Youtube
 ##### 2023-07-12
 
