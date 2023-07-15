@@ -71,8 +71,8 @@ const Trailer = ({ trailerId, overlay, onComplete }) => {
       <YouTubePlayer
         videoId={trailerId}
         opts={{
-          width: size.width,
-          height: size.height,
+          width: overlay ? "100%" : size.width,
+          height: overlay ? "100%" : size.height,
           playerVars: {
             autoplay: 1,
             iv_load_policy: 3,
