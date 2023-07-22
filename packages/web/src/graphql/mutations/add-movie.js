@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { GET_MOVIES } from "../queries";
 import { omitTypename } from "../../utils/omit-typename";
 
-const ADD_MOVIE = gql`
+export const ADD_MOVIE = gql`
   mutation AddMovie($movie: MovieInput!, $list: String!) {
     addMovie(movie: $movie, list: $list) {
       id

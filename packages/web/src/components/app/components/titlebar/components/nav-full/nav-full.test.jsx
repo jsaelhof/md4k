@@ -50,5 +50,21 @@ describe("nav-full", () => {
     expect(
       await screen.findByRole("button", { name: "Return to Movies" })
     ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Watched" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("should render the 'edit' nav options", async () => {
+    renderWithProviders(<NavFull />, {
+      route: "/edit/12345",
+    });
+
+    expect(
+      await screen.findByRole("button", { name: "Return to Movies" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Watched" })
+    ).not.toBeInTheDocument();
   });
 });

@@ -83,16 +83,17 @@ const NavHamburger = () => {
 
             {pathname !== "/create" && (
               <>
-                {!["/watched", "/add"].includes(pathname) && (
-                  <MenuItem
-                    onClick={() => {
-                      navigate("/watched");
-                      handleClose();
-                    }}
-                  >
-                    <EyeIcon /> Watched
-                  </MenuItem>
-                )}
+                {!["/watched", "/add"].includes(pathname) &&
+                  !pathname.startsWith("/edit/") && (
+                    <MenuItem
+                      onClick={() => {
+                        navigate("/watched");
+                        handleClose();
+                      }}
+                    >
+                      <EyeIcon /> Watched
+                    </MenuItem>
+                  )}
 
                 <MenuDivider variant="middle" />
 
