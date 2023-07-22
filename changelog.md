@@ -1,3 +1,12 @@
+### PR #103 - #87: Rebuild edit screen
+##### 2023-07-22
+
+Rewrite the edit screen to use the same form as the add manual screen. The manual entry form has been extracted up to a shared component and now has image previews. Removed the old add movie dialog that edit was still using and removed dependencies on slick-carousel and react-slick.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/103)
+
+----
+
 ### PR #102 - #25: Add Empty Pick State
 ##### 2023-07-13
 
