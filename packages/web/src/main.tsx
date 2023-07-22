@@ -81,6 +81,17 @@ const router = createBrowserRouter([
           };
         },
       },
+      {
+        path: "/edit/:movieId",
+        async lazy() {
+          const { Edit } = await import(
+            "./components/app/components/edit/edit"
+          );
+          return {
+            Component: Edit,
+          };
+        },
+      },
     ],
   },
 ]);

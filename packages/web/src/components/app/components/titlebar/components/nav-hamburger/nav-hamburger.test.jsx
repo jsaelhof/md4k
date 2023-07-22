@@ -95,6 +95,33 @@ describe("nav-hamburger", () => {
     expect(
       await screen.findByRole("menuitem", { name: /New List/ })
     ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("menuitem", { name: "Watched" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("should render the 'edit' nav options", async ({ user }) => {
+    renderWithProviders(<NavHamburger />, { route: "/edit/12345" });
+
+    expect(await screen.findByTestId("MenuIcon")).toBeInTheDocument();
+
+    await user.click(screen.getByTestId("MenuIcon"));
+
+    expect(
+      screen.getByRole("menuitem", { name: "Movies" })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Saturday/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /Family/ })
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole("menuitem", { name: /New List/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("menuitem", { name: "Watched" })
+    ).not.toBeInTheDocument();
   });
 
   it("should render the default 'create' nav options", async ({ user }) => {

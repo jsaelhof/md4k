@@ -34,11 +34,43 @@ export const SmallField = styled("div")(() => ({
 }));
 
 export const Actions = styled("div")(({ theme: { spacing } }) => ({
-  width: 200,
+  display: "grid",
+  gridAutoFlow: "column",
+  gap: spacing(2),
   marginTop: spacing(4),
   justifySelf: "center",
 
   "@media (max-width: 500px)": {
     marginTop: spacing(2),
+  },
+
+  "> button": {
+    minWidth: 150,
+  },
+}));
+
+export const Preview = styled("div")(() => ({
+  width: "100%",
+  height: "100%",
+  backgroundColor: "#eee",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  border: "1px solid lightgrey",
+  borderRadius: 8,
+}));
+
+export const BackgroundPreview = styled(Preview)`
+  background-size: cover;
+`;
+
+export const PreviewLayout = styled("div")(({ theme: { spacing } }) => ({
+  display: "grid",
+  gridTemplateColumns: "1fr 160px",
+  gap: spacing(3),
+
+  "@media (max-width: 414px)": {
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "auto 150px",
   },
 }));

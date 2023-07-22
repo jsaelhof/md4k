@@ -32,8 +32,8 @@ export const EDIT_MOVIE = gql`
   }
 `;
 
-export const useEditMovie = () => {
-  const [editMovie, status] = useMutation(EDIT_MOVIE);
+export const useEditMovie = ({ onCompleted, onError } = {}) => {
+  const [editMovie, status] = useMutation(EDIT_MOVIE, { onCompleted, onError });
   return [editMovie, status];
 };
 

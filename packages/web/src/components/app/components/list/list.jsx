@@ -16,14 +16,12 @@ import { Countdown } from "./components/countdown/countdown";
 import ActionBar from "./components/action-bar/action-bar";
 import ListGrid from "./components/list-grid/list-grid";
 import ErrorDialog from "../error-dialog/error-dialog";
-import AddMovieDialog from "./components/add-movie-dialog/add-movie-dialog";
 import { errorMessage } from "../../../../constants/error-messages";
 import map from "lodash/map";
 
 export const List = () => {
   const navigate = useNavigate();
   const { list, movies, lists, setToast } = useAppContext();
-  const [enableEditMovie, setEnableEditMovie] = useState(null);
   const [error, setError] = useState(null);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
@@ -60,9 +58,9 @@ export const List = () => {
   const onEnableEditMovie = useCallback(
     (movie, useEditor = true) =>
       useEditor
-        ? setEnableEditMovie(movie)
+        ? navigate(`/edit/${movie.id}`)
         : editMovieMutation(editMovieOptions(movie, list)),
-    [editMovieMutation, list]
+    [editMovieMutation, list, navigate]
   );
 
   const onRemoveMovie = useCallback(
@@ -77,18 +75,6 @@ export const List = () => {
     },
     [list, markWatchedMutation]
   );
-
-  const onEditMovie = useCallback(
-    (movie) => {
-      editMovieMutation(editMovieOptions(movie, list));
-      setEnableEditMovie(false);
-    },
-    [editMovieMutation, list]
-  );
-
-  const onCancelEditMovie = useCallback(() => {
-    setEnableEditMovie(false);
-  }, []);
 
   // Controls the fade-out and unmount of the countdown animation.
   // Transition is used so it unmounts after the animation completes.
@@ -144,14 +130,6 @@ export const List = () => {
         }
         onConfirm={() => setError(null)}
       />
-
-      {enableEditMovie && (
-        <AddMovieDialog
-          movie={enableEditMovie}
-          onAddMovie={onEditMovie}
-          onCancel={onCancelEditMovie}
-        />
-      )}
     </>
   );
 };

@@ -1,10 +1,8 @@
 import { Item } from "./list-select-item.styles";
 
-const getImage = (src) => <img src={src} width="30" height="30" />;
-
 const ListSelectItem = ({ images, labels, value, hideLabelForSelection }) => (
   <Item value={value}>
-    {images && getImage(images[value])}
+    {images && <img src={images[value]} width="30" height="30" />}
     {!hideLabelForSelection && <span>{labels[value]}</span>}
   </Item>
 );
