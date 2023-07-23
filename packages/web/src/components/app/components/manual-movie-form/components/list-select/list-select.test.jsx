@@ -22,7 +22,9 @@ describe("list-select", () => {
   }) => {
     render(<ListSelect {...props} />);
 
-    expect(screen.getByRole("button", { name: sourceLabels[sources.NETFLIX] }));
+    expect(
+      screen.getByRole("button", { name: sourceLabels[sources.NETFLIX] })
+    ).toBeInTheDocument();
 
     await user.click(
       screen.getByRole("button", { name: sourceLabels[sources.NETFLIX] })

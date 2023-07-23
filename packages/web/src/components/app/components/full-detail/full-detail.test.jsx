@@ -323,7 +323,7 @@ describe("full-detail", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the view actions", async ({ props }) => {
+  it("should render the view actions for viewMovie", async ({ props }) => {
     renderWithProviders(<FullDetail {...props} actionSet="viewMovie" />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -336,7 +336,7 @@ describe("full-detail", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the view actions", async ({ props }) => {
+  it("should render the view actions for addMovie", async ({ props }) => {
     renderWithProviders(<FullDetail {...props} actionSet="addMovie" />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });

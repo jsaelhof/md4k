@@ -38,9 +38,9 @@ describe("profile-menu", () => {
 
     await waitFor(() => {
       expect(screen.queryAllByAltText("Test User")).toHaveLength(1); // Main button avatar
-      expect(
-        screen.queryByRole("button", { name: "Logout" })
-      ).not.toBeInTheDocument();
     });
+    expect(
+      screen.queryByRole("button", { name: "Logout" })
+    ).not.toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../utils/render-with-providers";
 import Footer from "./footer";
 

@@ -51,9 +51,9 @@ export const renderWithProviders = (children, options) => {
     </MockedProvider>
   );
 
-  const result = render(children, { wrapper: RenderWrapper, ...options });
+  const utils = render(children, { wrapper: RenderWrapper, ...options });
 
-  return result;
+  return utils;
 };
 
 export const renderHookWithProviders = (hookWrapper, options) => {
@@ -83,12 +83,12 @@ export const renderHookWithProviders = (hookWrapper, options) => {
     </MockedProvider>
   );
 
-  const result = renderHook(hookWrapper, {
+  const utils = renderHook(hookWrapper, {
     wrapper: RenderWrapper,
     ...options,
   });
 
-  return result;
+  return utils;
 };
 
 /**

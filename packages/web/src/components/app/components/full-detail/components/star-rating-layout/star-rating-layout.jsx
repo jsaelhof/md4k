@@ -33,7 +33,7 @@ export const StarRatingLayout = ({ ratings, stars }) => {
       data-testid="starRatingLayout"
     >
       <FiveStarRating stars={stars} />
-      <animated.div style={ratingsSpring}>
+      <animated.div style={ratingsSpring} data-testid="ratingsBreakdown">
         <Ratings ratings={ratings} size="small" dense />
       </animated.div>
     </RatingContainer>

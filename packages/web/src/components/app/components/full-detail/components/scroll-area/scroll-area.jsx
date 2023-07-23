@@ -58,8 +58,12 @@ const ScrollArea = ({ text, noScroll }) => {
       >
         {text}
       </TextArea>
-      <Shade align="top" style={plotShadeTopSpring} />
-      <Shade align="bottom" style={plotShadeBottomSpring} />
+      <Shade align="top" style={plotShadeTopSpring} data-testid="top" />
+      <Shade
+        align="bottom"
+        style={plotShadeBottomSpring}
+        data-testid="bottom"
+      />
     </Layout>
   );
 };
