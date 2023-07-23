@@ -28,7 +28,7 @@ describe("date-picker", () => {
   }) => {
     renderWithProviders(<DatePicker {...props} useDrawer />);
 
-    expect(screen.queryByTestId("datePickerDrawer")).toBeInTheDocument();
+    expect(screen.getByTestId("datePickerDrawer")).toBeInTheDocument();
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe("date-picker", () => {
   it("should render the title when in a drawer", ({ props }) => {
     renderWithProviders(<DatePicker {...props} useDrawer title="Test Title" />);
 
-    expect(screen.queryByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
   });
 
   it("should set the default date", ({ props }) => {

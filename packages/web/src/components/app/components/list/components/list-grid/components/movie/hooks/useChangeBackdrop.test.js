@@ -2,7 +2,7 @@ import { vi } from "vitest";
 import { useChangeBackdrop } from "./useChangeBackdrop";
 import { renderHookWithProviders } from "../../../../../../../../../utils/render-with-providers";
 import { EDIT_MOVIE } from "../../../../../../../../../graphql/mutations";
-import { waitFor } from "@testing-library/dom";
+import { waitFor } from "@testing-library/react";
 
 const MOVIE_MOCK = {
   id: "8502fd8b-165e-4239-965f-b46f8d523829",

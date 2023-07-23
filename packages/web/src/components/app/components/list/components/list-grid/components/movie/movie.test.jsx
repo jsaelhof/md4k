@@ -98,20 +98,20 @@ describe("movie", () => {
     await user.hover(screen.getByTestId("listItem"));
     await waitFor(() => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 });
-      expect(screen.getByText("Expanded")).toHaveAttribute(
-        "data-preload",
-        "true"
-      );
     });
+    expect(screen.getByText("Expanded")).toHaveAttribute(
+      "data-preload",
+      "true"
+    );
 
     await user.unhover(screen.getByTestId("listItem"));
     await waitFor(() => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
-      expect(screen.getByText("Expanded")).toHaveAttribute(
-        "data-preload",
-        "false"
-      );
     });
+    expect(screen.getByText("Expanded")).toHaveAttribute(
+      "data-preload",
+      "false"
+    );
   });
 
   it("should close the zoomed poster and open the expanded detail view when clicked", async ({
@@ -160,9 +160,9 @@ describe("movie", () => {
       expect(screen.getByTestId("actions")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(screen.getByTestId("ratings")).toHaveStyle({
-        transform: "translateX(0px)",
-      });
+    });
+    expect(screen.getByTestId("ratings")).toHaveStyle({
+      transform: "translateX(0px)",
     });
 
     await user.unhover(screen.getByTestId("rating"));
@@ -171,9 +171,9 @@ describe("movie", () => {
       expect(screen.getByTestId("actions")).toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(screen.getByTestId("ratings")).not.toHaveStyle({
-        transform: "translateX(0px)",
-      });
+    });
+    expect(screen.getByTestId("ratings")).not.toHaveStyle({
+      transform: "translateX(0px)",
     });
   });
 
@@ -196,9 +196,9 @@ describe("movie", () => {
       expect(screen.getByTestId("actions")).not.toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(screen.getByTestId("ratings")).toHaveStyle({
-        transform: "translateX(0px)",
-      });
+    });
+    expect(screen.getByTestId("ratings")).toHaveStyle({
+      transform: "translateX(0px)",
     });
 
     await user.click(screen.getByTestId("rating"));
@@ -207,9 +207,9 @@ describe("movie", () => {
       expect(screen.getByTestId("actions")).toHaveStyle({
         transform: "translateX(0px)",
       });
-      expect(screen.getByTestId("ratings")).not.toHaveStyle({
-        transform: "translateX(0px)",
-      });
+    });
+    expect(screen.getByTestId("ratings")).not.toHaveStyle({
+      transform: "translateX(0px)",
     });
   });
 

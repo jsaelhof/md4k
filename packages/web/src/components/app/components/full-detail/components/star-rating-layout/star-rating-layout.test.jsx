@@ -32,7 +32,7 @@ describe("star-rating-layout", () => {
     render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = screen.getByTestId("starRatingLayout");
-    const ratingsBreakdown = starRatingLayout.lastChild;
+    const ratingsBreakdown = screen.getByTestId("ratingsBreakdown");
 
     expect(ratingsBreakdown).not.toHaveStyle({
       marginLeft: "0px",
@@ -67,7 +67,7 @@ describe("star-rating-layout", () => {
     render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = screen.getByTestId("starRatingLayout");
-    const ratingsBreakdown = starRatingLayout.lastChild;
+    const ratingsBreakdown = screen.getByTestId("ratingsBreakdown");
 
     expect(ratingsBreakdown).not.toHaveStyle({
       marginLeft: "0px",
@@ -105,7 +105,7 @@ describe("star-rating-layout", () => {
     render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = screen.getByTestId("starRatingLayout");
-    const ratingsBreakdown = starRatingLayout.lastChild;
+    const ratingsBreakdown = screen.getByTestId("ratingsBreakdown");
 
     expect(ratingsBreakdown).toHaveStyle({
       marginTop: "-16px",
@@ -143,7 +143,7 @@ describe("star-rating-layout", () => {
     render(<StarRatingLayout ratings={ratings} />);
 
     const starRatingLayout = screen.getByTestId("starRatingLayout");
-    const ratingsBreakdown = starRatingLayout.lastChild;
+    const ratingsBreakdown = screen.getByTestId("ratingsBreakdown");
 
     expect(ratingsBreakdown).toHaveStyle({
       marginTop: "-16px",

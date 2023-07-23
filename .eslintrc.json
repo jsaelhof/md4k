@@ -5,9 +5,10 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:vitest/recommended"
+    "plugin:vitest/recommended",
+    "plugin:testing-library/react"
   ],
-  "plugins": ["@typescript-eslint", "vitest"],
+  "plugins": ["@typescript-eslint", "vitest", "testing-library"],
   "rules": {
     "no-unused-vars": "error",
     "require-await": "error",

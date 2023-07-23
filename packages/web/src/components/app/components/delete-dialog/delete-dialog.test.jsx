@@ -38,6 +38,8 @@ describe("delete-dialog", () => {
     user,
   }) => {
     render(<DeleteDialog open {...props} />);
+    // Can't find a better way to click on the backdrop.
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(document.getElementsByClassName("MuiBackdrop-root")[0]);
     expect(props.onCancel).toHaveBeenCalled();
   });

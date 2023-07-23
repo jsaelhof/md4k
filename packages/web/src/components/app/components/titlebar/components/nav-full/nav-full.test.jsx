@@ -1,6 +1,6 @@
 import NavFull from "./nav-full";
 import { renderWithProviders } from "../../../../../../utils/render-with-providers";
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
 
 describe("nav-full", () => {
   it("should render the default nav options and list select component", async () => {

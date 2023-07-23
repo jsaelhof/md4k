@@ -126,6 +126,8 @@ describe("watched", () => {
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
 
+    // Need to check by data-attribute
+    // eslint-disable-next-line testing-library/no-node-access
     const items = document.querySelectorAll("[data-right]");
 
     expect(items).toHaveLength(5);
