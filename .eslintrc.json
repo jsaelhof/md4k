@@ -10,7 +10,13 @@
   "plugins": ["@typescript-eslint", "vitest"],
   "rules": {
     "no-unused-vars": "error",
-    "require-await": "error"
+    "require-await": "error",
+    "vitest/no-focused-tests": "error",
+    "vitest/no-disabled-tests": "error",
+    "vitest/no-duplicate-hooks": "error",
+    "vitest/consistent-test-filename": "error",
+    "vitest/consistent-test-it": "error",
+    "vitest/prefer-comparison-matcher": "error"
   },
   "env": {
     "node": true,
