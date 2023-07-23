@@ -1,3 +1,12 @@
+### PR #106 - #105: update eslint testing rules
+##### 2023-07-23
+
+Added vitest and react-testing-library plugins and configured rules, fixed errors
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/106)
+
+----
+
 ### PR #103 - #87: Rebuild edit screen
 ##### 2023-07-22
 
