@@ -23,7 +23,9 @@ describe("tab-panel-manual", () => {
   it("should render the form", ({ props }) => {
     render(<TabPanelManual {...props} />);
     expect(screen.getByLabelText("Title")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Add Movie" }));
+    expect(
+      screen.getByRole("button", { name: "Add Movie" })
+    ).toBeInTheDocument();
   });
 
   it("should call onAddMovie", async ({ props, user }) => {
