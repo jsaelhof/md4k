@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import { Add } from "./add";
-import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
 import TabPanel from "./components/tab-panel/tab-panel";
 import { ADD_MOVIE, addMovieOptions } from "../../../../graphql/mutations";

@@ -1,5 +1,5 @@
 import { render, waitFor, screen } from "@testing-library/react";
-import { createMatchMedia } from "../../../../../../utils/create-match-media";
+import { createMatchMedia } from "../../../../../../test-utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
 
 describe("star-rating-layout", () => {

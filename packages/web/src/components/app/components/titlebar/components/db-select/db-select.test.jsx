@@ -4,7 +4,7 @@ import { vi } from "vitest";
 import {
   GET_MOVIES_MOCK_FAMILY,
   renderWithProviders,
-} from "../../../../../../utils/render-with-providers";
+} from "../../../../../../test-utils/render-with-providers";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {

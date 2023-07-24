@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import { useChangeBackdrop } from "./useChangeBackdrop";
-import { renderHookWithProviders } from "../../../../../../../../../utils/render-with-providers";
+import { renderHookWithProviders } from "../../../../../../../../../test-utils/render-with-providers";
 import { EDIT_MOVIE } from "../../../../../../../../../graphql/mutations";
 import { waitFor } from "@testing-library/react";
 

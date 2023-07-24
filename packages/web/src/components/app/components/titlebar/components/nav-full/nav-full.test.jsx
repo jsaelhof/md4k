@@ -1,5 +1,5 @@
 import NavFull from "./nav-full";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { screen } from "@testing-library/react";
 
 describe("nav-full", () => {

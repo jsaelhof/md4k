@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import WatchedToolbar from "./watched-toolbar";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
 const { MOCK_USE_MEDIA_QUERY } = vi.hoisted(() => ({
   MOCK_USE_MEDIA_QUERY: vi.fn().mockReturnValue(false),

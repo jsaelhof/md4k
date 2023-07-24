@@ -1,8 +1,8 @@
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
-import { buildMovieMock } from "../../../../../../utils/build-movie-mock";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
+import { buildMovieMock } from "../../../../../../test-utils/build-movie-mock";
 import WatchedMovie from "./watched-movie";
 import { vi } from "vitest";
-import { buildThirdPartyMovieMock } from "../../../../../../utils/build-third-party-movie-mock";
+import { buildThirdPartyMovieMock } from "../../../../../../test-utils/build-third-party-movie-mock";
 import { within, screen } from "@testing-library/react";
 import { Globals } from "@react-spring/web";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";

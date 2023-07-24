@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 import { screen } from "@testing-library/react";
 import EmptyList from "./empty-list";
-import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {

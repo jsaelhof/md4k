@@ -1,9 +1,9 @@
 import { Watched } from "./watched";
 import { waitFor, within, screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
 import { GET_MOVIES } from "../../../../graphql/queries";
-import { buildMovieMock } from "../../../../utils/build-movie-mock";
+import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
   default: ({
