@@ -1,7 +1,7 @@
 import { waitFor, screen } from "@testing-library/react";
 import Movie from "./movie";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 import { Globals } from "react-spring";
 
 Globals.assign({

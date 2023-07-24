@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { Create } from "./create";
 import { vi } from "vitest";
 

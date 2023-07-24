@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithProvidersAsRoute } from "../../../../utils/render-with-providers";
+import { renderWithProvidersAsRoute } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
 import { Edit } from "./edit";
 import { EDIT_MOVIE } from "../../../../graphql/mutations";

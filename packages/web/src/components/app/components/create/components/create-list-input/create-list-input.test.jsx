@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import CreateListInput from "./create-list-input";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
 describe("create-list-input", () => {
   beforeEach((context) => {

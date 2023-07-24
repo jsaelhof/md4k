@@ -3,7 +3,7 @@ import { sortDirection } from "../../../../../../../../constants/sorts";
 import {
   renderWithProviders,
   renderWithProvidersAsRoute,
-} from "../../../../../../../../utils/render-with-providers";
+} from "../../../../../../../../test-utils/render-with-providers";
 import SortNav from "./sort-nav";
 
 describe("sort-nav", () => {

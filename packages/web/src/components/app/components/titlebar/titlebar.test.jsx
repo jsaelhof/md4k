@@ -1,8 +1,8 @@
-import { renderWithProviders } from "../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import TitleBar from "./titlebar";
 import { screen } from "@testing-library/react";
 import { AppContext } from "../../../../context/app-context";
-import { createMatchMedia } from "../../../../utils/create-match-media";
+import { createMatchMedia } from "../../../../test-utils/create-match-media";
 import { vi } from "vitest";
 
 describe("titlebar", () => {

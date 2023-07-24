@@ -1,7 +1,7 @@
 import { waitFor, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import SplitButton from "./split-button";
-import { renderWithProviders } from "../../../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 
 const { MOCK_FILTER_MOVIES } = vi.hoisted(() => ({
   MOCK_FILTER_MOVIES: vi.fn().mockImplementation((movies) => movies),

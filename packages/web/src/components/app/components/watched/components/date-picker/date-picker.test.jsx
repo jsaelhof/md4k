@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import DatePicker from "./date-picker";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
 describe("date-picker", () => {
   beforeEach((context) => {

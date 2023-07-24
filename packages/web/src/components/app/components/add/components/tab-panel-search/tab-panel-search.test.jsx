@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import TabPanelSearch from "./tab-panel-search";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { screen } from "@testing-library/react";
 import { SEARCH_BY_TITLE } from "../../../../../../graphql/queries";
 

@@ -1,7 +1,7 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import NavHamburger from "./nav-hamburger";
 import { MemoryRouter } from "react-router-dom";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { AppContext } from "../../../../../../context/app-context";
 
 describe("nav-hamburger", () => {

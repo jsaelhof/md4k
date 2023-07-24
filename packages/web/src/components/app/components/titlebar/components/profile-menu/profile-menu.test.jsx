@@ -1,5 +1,5 @@
 import { waitFor, screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../../../../utils/render-with-providers";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import ProfileMenu from "./profile-menu";
 
 describe("profile-menu", () => {
