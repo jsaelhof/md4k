@@ -1,3 +1,12 @@
+### PR #108 - #107: hooks and utils tests
+##### 2023-07-24
+
+Add tests for the utils and hooks. I decided to split up the test-utils from the production utils which generated a lot of import changes.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/108)
+
+----
+
 ### PR #106 - #105: update eslint testing rules
 ##### 2023-07-23
 
