@@ -28,6 +28,7 @@ export const renderWithProviders = (children, options) => {
   options = {
     ...{
       mocks: [],
+      listsMock: null,
       moviesMock: null,
       route: "/",
     },
@@ -37,7 +38,7 @@ export const renderWithProviders = (children, options) => {
   const RenderWrapper = ({ children }) => (
     <MockedProvider
       mocks={[
-        GET_LISTS_MOCK,
+        options.listsMock || GET_LISTS_MOCK,
         options.moviesMock || GET_MOVIES_MOCK,
         ...options.mocks,
       ]}

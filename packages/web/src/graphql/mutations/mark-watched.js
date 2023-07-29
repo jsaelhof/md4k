@@ -3,7 +3,7 @@ import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
 import { GET_MOVIES } from "../queries";
 
-const GQL = gql`
+export const MARK_WATCHED = gql`
   mutation MarkWatched($movie: MovieInput!, $list: String!) {
     editMovie(movie: $movie, list: $list) {
       id
@@ -30,7 +30,7 @@ const GQL = gql`
 `;
 
 export const useMarkWatched = ({ onCompleted }) => {
-  const [markWatchedMutation, status] = useMutation(GQL, {
+  const [markWatchedMutation, status] = useMutation(MARK_WATCHED, {
     onCompleted,
     update(cache, { data: { editMovie } }) {
       cache.updateQuery(
