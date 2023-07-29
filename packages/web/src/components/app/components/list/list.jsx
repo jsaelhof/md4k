@@ -55,7 +55,7 @@ export const List = () => {
     [navigate]
   );
 
-  const onEnableEditMovie = useCallback(
+  const onEditMovie = useCallback(
     (movie, useEditor = true) =>
       useEditor
         ? navigate(`/edit/${movie.id}`)
@@ -114,7 +114,7 @@ export const List = () => {
             <animated.div style={moviesSpring}>
               <ListGrid
                 movies={movies}
-                onEditMovie={onEnableEditMovie}
+                onEditMovie={onEditMovie}
                 onRemoveMovie={onRemoveMovie}
                 onMarkWatched={onMarkWatched}
               />
