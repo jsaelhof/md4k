@@ -1,3 +1,12 @@
+### PR #110 - #33: list tests
+##### 2023-07-29
+
+Add tests for the list component. Also update the c8 coverage dep.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/110)
+
+----
+
 ### PR #108 - #107: hooks and utils tests
 ##### 2023-07-24
 
