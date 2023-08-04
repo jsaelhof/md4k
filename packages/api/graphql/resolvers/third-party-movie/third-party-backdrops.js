@@ -1,7 +1,4 @@
-const TMDB_IMAGE_URL = "http://image.tmdb.org/t/p/%size%%path%";
-
-const toTMDBImageUrl = (path, size = "original") =>
-  TMDB_IMAGE_URL.replace("%size%", size).replace("%path%", path);
+import { toTMDBImageUrl } from "./utils/to-tmdb-image-url.js";
 
 export const thirdPartyBackdrops = async ({ imdbID }, _, { dataSources }) => {
   // Find the data by imdbid. This includes the TMDB id so we can look up the actual data.
