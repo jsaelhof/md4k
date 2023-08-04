@@ -81,7 +81,8 @@ export const typeDefs = gql`
     runtime: Int
     genre: Int
     rated: String
-    actors: [String]
+    cast: [ThirdPartyCastMember]
+    director: [ThirdPartyDirector]
     ratings: ThirdPartyRatings
     fiveStarRating: Float
     poster: String
@@ -102,6 +103,19 @@ export const typeDefs = gql`
   type ThirdPartyTrailer {
     site: String
     key: ID!
+  }
+
+  type ThirdPartyCastMember {
+    id: ID!
+    name: String
+    character: String
+    image: String
+  }
+
+  type ThirdPartyDirector {
+    id: ID!
+    name: String
+    image: String
   }
 
   type Query {

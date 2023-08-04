@@ -15,6 +15,8 @@ import {
   thirdPartyProvider,
   thirdPartyTrailer,
 } from "./third-party-movie/index.js";
+import { thirdPartyCast } from "./third-party-movie/third-party-cast.js";
+import { thirdPartyDirector } from "./third-party-movie/third-party-director.js";
 
 export const resolvers = {
   Query: {
@@ -28,6 +30,8 @@ export const resolvers = {
   ThirdPartyMovie: {
     backdrop: thirdPartyBackdrop,
     backdrops: thirdPartyBackdrops,
+    cast: thirdPartyCast,
+    director: thirdPartyDirector,
     trailer: thirdPartyTrailer,
     plot: thirdPartyPlot,
     source: thirdPartyProvider,
