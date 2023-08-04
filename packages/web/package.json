@@ -25,6 +25,7 @@
     "graphql": "^16.5.0",
     "lodash": "^4.17.21",
     "md4k-constants": "*",
+    "md4k-design-system": "*",
     "mdi-material-ui": "^7.6.0",
     "omit-deep-lodash": "^1.1.7",
     "react": "^18.2.0",

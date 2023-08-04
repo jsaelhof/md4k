@@ -9,6 +9,7 @@ import { AppLayout, OutletLayout } from "./app.styles";
 import TitleBar from "./components/titlebar/titlebar";
 import Footer from "./components/footer/footer";
 import Toast from "./components/toast/toast";
+import { ThemeProvider as DSThemeProvider } from "md4k-design-system";
 
 export const App = () => {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0();
@@ -22,18 +23,20 @@ export const App = () => {
   return isAuthenticated ? (
     <AuthenticatedApolloProvider>
       <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <AppProvider>
-            <AppLayout>
-              <TitleBar />
-              <OutletLayout>
-                <Outlet />
-              </OutletLayout>
-              <Footer />
-              <Toast />
-            </AppLayout>
-          </AppProvider>
-        </ThemeProvider>
+        <DSThemeProvider>
+          <ThemeProvider theme={theme}>
+            <AppProvider>
+              <AppLayout>
+                <TitleBar />
+                <OutletLayout>
+                  <Outlet />
+                </OutletLayout>
+                <Footer />
+                <Toast />
+              </AppLayout>
+            </AppProvider>
+          </ThemeProvider>
+        </DSThemeProvider>
       </StyledEngineProvider>
     </AuthenticatedApolloProvider>
   ) : null;
