@@ -15,7 +15,7 @@ export const thirdPartyCast = async ({ imdbID }, _, { dataSources }) => {
     credits: { cast },
   } = await dataSources.TMDB.getMovie(findResults[0].id);
 
-  return cast.map(({ id, name, profile_path, character }) => ({
+  return cast.slice(0, 5).map(({ id, name, profile_path, character }) => ({
     id,
     name,
     character,
