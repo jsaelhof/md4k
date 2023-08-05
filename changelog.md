@@ -1,3 +1,12 @@
+### PR #113 - #111: cast and director
+##### 2023-08-05
+
+Adds the cast and director information to the API and to the full detail screen in the UI.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/113)
+
+----
+
 ### PR #110 - #33: list tests
 ##### 2023-07-29
 
