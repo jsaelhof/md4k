@@ -5,7 +5,7 @@ export const RatingContainer = styled("div")(({ theme: { spacing } }) => ({
   columnGap: spacing(2),
   alignItems: "center",
 
-  "@media (max-width: 660px)": {
+  "@media (max-width: 750px)": {
     alignItems: "center",
     flexDirection: "column",
     columnGap: "unset",

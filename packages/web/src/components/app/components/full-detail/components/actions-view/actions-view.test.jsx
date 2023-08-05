@@ -11,8 +11,6 @@ describe("actions-view", () => {
 
   beforeEach((context) => {
     context.props = {
-      hasTrailer: true,
-      onPlayTrailer: vi.fn(),
       title: "Test Movie",
       source: sources.NETFLIX,
     };
@@ -20,36 +18,6 @@ describe("actions-view", () => {
 
   afterEach(() => {
     window.open = originalWindowOpen;
-  });
-
-  it("should render the watch trailer button when available", ({ props }) => {
-    render(<ActionsView {...props} />);
-
-    expect(
-      screen.getByRole("button", { name: "Watch Trailer" })
-    ).toBeInTheDocument();
-  });
-
-  it("should call the play trailer callback", async ({ props, user }) => {
-    render(<ActionsView {...props} />);
-
-    await user.click(screen.getByRole("button", { name: "Watch Trailer" }));
-    expect(props.onPlayTrailer).toHaveBeenCalled();
-  });
-
-  it("should not render the trailer button when no trailer is available", ({
-    props,
-  }) => {
-    render(<ActionsView {...props} hasTrailer={false} />);
-
-    expect(
-      screen.queryByRole("button", { name: "Watch Trailer" })
-    ).not.toBeInTheDocument();
-
-    expect(
-      screen.getByRole("button", { name: "No Trailer" })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "No Trailer" })).toBeDisabled();
   });
 
   it("should render the stream button when available", ({ props }) => {

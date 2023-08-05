@@ -59,12 +59,8 @@ export const BackdropWrapper = styled("div")`
   height: 60vh;
   width: 100%;
 
-  @media (max-width: 2000px) {
-    height: 65vh;
-  }
-
-  @media (max-width: 1200px) {
-    height: 60vh;
+  @media (min-width: 2000px) {
+    height: 63vh;
   }
 
   @media (max-width: 750px) {
@@ -93,7 +89,7 @@ export const MovieInfo = styled("div")`
     "poster info source"
     "poster plot plot"
     "poster actions actions";
-  grid-template-rows: 130px 40px auto 45px;
+  grid-template-rows: 130px 40px 197px 33px;
   grid-template-columns: max-content 1fr max-content;
   width: calc(
     100% - 64px
@@ -101,29 +97,18 @@ export const MovieInfo = styled("div")`
   max-width: 960px;
   min-height: 400px;
   z-index: 10;
-
-  @media (max-width: 2000px) {
-    margin-top: -200px;
-  }
-
-  @media (max-width: 1200px) {
-    margin-top: -180px;
-  }
+  margin-top: -200px;
 
   @media (max-width: 750px) {
-    margin-top: -120px;
-    grid-template-rows: 100px 40px max-content 45px;
-  }
-
-  @media (max-width: 660px) {
     margin-top: -150px;
     grid-template-areas:
       "poster poster"
       "title title"
       "info source"
       "plot plot"
-      "actions actions";
-    grid-template-rows: 300px auto 40px max-content auto;
+      "actions actions"
+      "people people";
+    grid-template-rows: 300px auto 40px max-content auto auto;
     grid-template-columns: 1fr;
     min-height: 300px;
   }
@@ -136,7 +121,7 @@ export const Poster = styled(animated.div)`
   box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.1),
     0px 5px 15px 0px rgba(0, 0, 0, 0.1), 0px 1px 20px 0px rgba(0, 0, 0, 0.12);
 
-  @media (max-width: 660px) {
+  @media (max-width: 750px) {
     margin-right: 0;
     justify-self: center;
   }
@@ -153,7 +138,7 @@ export const MovieTitle = styled("div")`
   text-shadow: 0 0 3px white;
   margin-bottom: 8px;
 
-  @media (max-width: 660px) {
+  @media (max-width: 750px) {
     font-size: 32px;
     align-items: center;
     text-align: center;
@@ -186,10 +171,6 @@ export const MovieData = styled("div")`
   margin-right: ${({ theme }) => theme.spacing(1)};
 
   @media (max-width: 750px) {
-    column-gap: 20px;
-  }
-
-  @media (max-width: 660px) {
     column-gap: ${({ theme }) => theme.spacing(2)};
   }
 `;
@@ -209,4 +190,18 @@ export const PlotLayout = styled("div")(({ theme: { spacing } }) => ({
   gridArea: "plot",
   marginTop: spacing(2),
   marginBottom: spacing(3),
+}));
+
+export const CastLayout = styled("div")(({ theme: { spacing } }) => ({
+  gridArea: "people",
+  display: "grid",
+  gridTemplateColumns: "repeat(4, auto)",
+  justifyContent: "space-between",
+  margin: `${spacing(2)} ${spacing(4)}`,
+
+  "@media (max-width: 700px)": {
+    rowGap: spacing(3),
+    gridTemplateColumns: "repeat(2, auto)",
+    margin: spacing(4),
+  },
 }));

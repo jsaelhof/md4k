@@ -13,6 +13,7 @@ import { useGetThirdPartyFullDetails } from "../../../../graphql/queries";
 import {
   Backdrop,
   BackdropWrapper,
+  CastLayout,
   CloseButton,
   FullDetailLayout,
   MovieData,
@@ -39,6 +40,8 @@ import { sourceLabels, sourceLogosLarge } from "../../../../constants/sources";
 import pick from "lodash/pick";
 import { ActionsAdd } from "./components/actions-add/actions-add";
 import { ActionsView } from "./components/actions-view/actions-view";
+import Cast from "./components/cast/cast";
+import { Actions } from "./components/actions/actions";
 
 const FullDetail = ({
   movie,
@@ -192,33 +195,43 @@ const FullDetail = ({
           <ScrollArea text={data.plot} noScroll={noPlotScroll} />
         </PlotLayout>
 
-        {actionSet === "addMovie" && (
-          <ActionsAdd
-            hasTrailer={data.trailer?.site === "YouTube"}
-            onPlayTrailer={() => {
-              setTrailer(data.trailer.key);
-            }}
-            onAddMovie={() => {
-              onAddMovie({
-                ...pick(movie, ["imdbID", "title", "poster", "year"]),
-                ...pick(data, ["source", "ratings", "genre", "runtime"]),
-                ...(data.backdrop && { background: backdrop }),
-              });
-            }}
-          />
-        )}
+        <Actions
+          actionSet={actionSet}
+          hasTrailer={data.trailer?.site === "YouTube"}
+          onPlayTrailer={() => {
+            setTrailer(data.trailer.key);
+          }}
+        >
+          {actionSet === "addMovie" && (
+            <ActionsAdd
+              onAddMovie={() => {
+                onAddMovie({
+                  ...pick(movie, ["imdbID", "title", "poster", "year"]),
+                  ...pick(data, ["source", "ratings", "genre", "runtime"]),
+                  ...(data.backdrop && { background: backdrop }),
+                });
+              }}
+            />
+          )}
 
-        {actionSet === "viewMovie" && (
-          <ActionsView
-            hasTrailer={data.trailer?.site === "YouTube"}
-            onPlayTrailer={() => {
-              setTrailer(data.trailer.key);
-            }}
-            title={movie.title}
-            source={source}
-          />
-        )}
+          {actionSet === "viewMovie" && (
+            <ActionsView title={movie.title} source={source} />
+          )}
+        </Actions>
       </MovieInfo>
+
+      {(data.cast?.length || data.director?.length) && (
+        <CastLayout>
+          <>
+            {(data.cast || []).slice(0, 3).map((castMember) => (
+              <Cast key={castMember.id} {...castMember} />
+            ))}
+            {(data.director || []).slice(0, 1).map((director) => (
+              <Cast key={director.id} {...director} character="Director" />
+            ))}
+          </>
+        </CastLayout>
+      )}
 
       <Footer movie={movie} />
     </FullDetailLayout>
