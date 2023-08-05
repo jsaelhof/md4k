@@ -6,7 +6,17 @@ export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
       imdbID
       title
       rated
-      actors
+      cast {
+        id
+        name
+        character
+        image
+      }
+      director {
+        id
+        name
+        image
+      }
       runtime
       ratings {
         id

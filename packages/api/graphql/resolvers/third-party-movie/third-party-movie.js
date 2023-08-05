@@ -5,17 +5,8 @@ import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 const { findKey } = lodash;
 
 export const thirdPartyMovie = async (parent, { imdbID }, { dataSources }) => {
-  const {
-    Response,
-    Title,
-    Year,
-    Ratings,
-    Runtime,
-    Genre,
-    Poster,
-    Rated,
-    Actors,
-  } = await dataSources.OMDB.getMovie(imdbID);
+  const { Response, Title, Year, Ratings, Runtime, Genre, Poster, Rated } =
+    await dataSources.OMDB.getMovie(imdbID);
 
   if (Response === "True") {
     // Runtime includes " min" like "113 min".
@@ -35,7 +26,6 @@ export const thirdPartyMovie = async (parent, { imdbID }, { dataSources }) => {
       title: Title,
       year: Year,
       rated: Rated,
-      actors: Actors.split(", "),
       runtime,
       ...(genre && { genre: parseInt(genre) }),
       ratings: {

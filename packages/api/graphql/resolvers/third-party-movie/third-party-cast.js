@@ -1,6 +1,6 @@
 import { toTMDBImageUrl } from "./utils/to-tmdb-image-url.js";
 
-export const thirdPartyBackdrops = async ({ imdbID }, _, { dataSources }) => {
+export const thirdPartyCast = async ({ imdbID }, _, { dataSources }) => {
   // Find the data by imdbid. This includes the TMDB id so we can look up the actual data.
   const findResults = await dataSources.TMDB.find(imdbID);
 
@@ -11,7 +11,14 @@ export const thirdPartyBackdrops = async ({ imdbID }, _, { dataSources }) => {
   }
 
   // Look up the TMDB data using the movie id from the first request.
-  const { images } = await dataSources.TMDB.getMovie(findResults[0].id);
+  const {
+    credits: { cast },
+  } = await dataSources.TMDB.getMovie(findResults[0].id);
 
-  return images?.backdrops.map(({ file_path }) => toTMDBImageUrl(file_path));
+  return cast.slice(0, 5).map(({ id, name, profile_path, character }) => ({
+    id,
+    name,
+    character,
+    image: toTMDBImageUrl(profile_path, "w185"),
+  }));
 };

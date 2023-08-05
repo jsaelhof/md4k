@@ -39,7 +39,7 @@ export class TMDBDataSource extends RESTDataSource {
   async getMovie(imdbID) {
     try {
       const data = await this.get(`movie/${imdbID}`, {
-        append_to_response: "videos,images",
+        append_to_response: "videos,images,credits",
         include_image_language: "en",
       });
       return data;
