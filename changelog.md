@@ -1,3 +1,12 @@
+### PR #116 - #112: add auto-updating of source, including tests.
+##### 2023-08-08
+
+Adds more functionality to the updateMovie mutation to include determining if the source needs to be changed. Started writing some tests in the API in this PR. The client has been updated to restrict checking more than once a day based on a local storage value per movie.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/116)
+
+----
+
 ### PR #113 - #111: cast and director
 ##### 2023-08-05
 
