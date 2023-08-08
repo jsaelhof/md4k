@@ -1,4 +1,6 @@
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
+import { shouldUpdateSource } from "./utils/should-update-source.js";
+import { toSubscribedSources } from "../utils/to-subscribed-sources.js";
 
 export const updateMovie = async (
   parent,
@@ -11,17 +13,29 @@ export const updateMovie = async (
   let update = null;
 
   // If it has an imdbID, update it. If not, just pass back the input movie data
-  if (movie.imdbId) {
+  if (movie.imdbID) {
     // fetch the latest ratings
     const { Response, Ratings } = await dataSources.OMDB.getMovie(movie.imdbID);
+    const shouldUpdateRatings = Response === "True";
 
-    if (Response === "True") {
+    // fetch the latest provider info
+    const providerData = await dataSources.TMDB.getProvider(movie.imdbID);
+    const updatedSource = shouldUpdateSource(
+      movie.source,
+      toSubscribedSources(providerData)
+    );
+
+    // If either should update, build an update object
+    if (shouldUpdateRatings || updatedSource) {
       // Build an update for my DB with the latest ratings and an updated editedOn value
       update = {
-        ratings: {
-          id: movie.id,
-          ...(Ratings && convertOmdbRatings(Ratings)),
-        },
+        ...(shouldUpdateRatings && {
+          ratings: {
+            id: movie.id,
+            ...(Ratings && convertOmdbRatings(Ratings)),
+          },
+        }),
+        ...(updatedSource && { source: updatedSource }),
         editedOn: new Date().toISOString(),
       };
     }
