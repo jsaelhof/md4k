@@ -2,28 +2,17 @@ import { gql, useMutation } from "@apollo/client";
 import { isToday, isValid, parseISO } from "date-fns";
 import { useEffect } from "react";
 
-const UPDATE_MOVIE = gql`
+export const UPDATE_MOVIE = gql`
   mutation UpdateMovie($movieId: ID!, $list: String!) {
     updateMovie(movieId: $movieId, list: $list) {
       id
-      title
-      list
-      runtime
       source
-      genre
-      year
-      poster
-      imdbID
-      locked
-      addedOn
-      watchedOn
       ratings {
         id
         IMDB
         ROTTEN_TOMATOES
         METACRITIC
       }
-      background
     }
   }
 `;
