@@ -3,6 +3,7 @@ import Movie from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 import { Globals } from "react-spring";
+import { UPDATE_MOVIE } from "../../../../../../../../graphql/mutations/update-movie";
 
 Globals.assign({
   skipAnimation: true,
@@ -22,6 +23,30 @@ vi.mock("../../../../../full-detail-modal/full-detail-modal", () => ({
     </div>
   ),
 }));
+
+const UPDATE_MOVIE_MOCK = {
+  request: {
+    query: UPDATE_MOVIE,
+    variables: {
+      movieId: "8502fd8b-165e-4239-965f-b46f8d523829",
+      list: "saturday",
+    },
+  },
+  newData: vi.fn(() => ({
+    data: {
+      updateMovie: {
+        id: "8502fd8b-165e-4239-965f-b46f8d523829",
+        source: 1,
+        ratings: {
+          id: "8502fd8b-165e-4239-965f-b46f8d523829",
+          IMDB: "79%",
+          ROTTEN_TOMATOES: "84%",
+          METACRITIC: "68%",
+        },
+      },
+    },
+  })),
+};
 
 describe("movie", () => {
   beforeEach((context) => {
@@ -93,7 +118,7 @@ describe("movie", () => {
     props,
     user,
   }) => {
-    renderWithProviders(<Movie {...props} />);
+    renderWithProviders(<Movie {...props} />, { mocks: [UPDATE_MOVIE_MOCK] });
 
     await user.hover(screen.getByTestId("listItem"));
     await waitFor(() => {

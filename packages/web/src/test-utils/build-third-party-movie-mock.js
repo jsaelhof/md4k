@@ -2,7 +2,6 @@ export const buildThirdPartyMovieMock = (mockData = {}) => ({
   imdbID: "tt0258463",
   title: "The Bourne Identity",
   rated: "PG-13",
-  actors: ["Franka Potente", "Matt Damon", "Chris Cooper"],
   runtime: "7140",
   ratings: {
     id: "tt0258463",

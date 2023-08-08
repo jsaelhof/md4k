@@ -1,49 +1,35 @@
 import { gql, useMutation } from "@apollo/client";
-import { getYear } from "date-fns";
-import { useEffect, useState } from "react";
+import { isToday, isValid, parseISO } from "date-fns";
+import { useEffect } from "react";
 
-const UPDATE_MOVIE = gql`
+export const UPDATE_MOVIE = gql`
   mutation UpdateMovie($movieId: ID!, $list: String!) {
     updateMovie(movieId: $movieId, list: $list) {
       id
-      title
-      list
-      runtime
       source
-      genre
-      year
-      poster
-      imdbID
-      locked
-      addedOn
-      watchedOn
       ratings {
         id
         IMDB
         ROTTEN_TOMATOES
         METACRITIC
       }
-      background
     }
   }
 `;
 
 export const useUpdateMovie = (movie, focused) => {
   const [updateMovie, status] = useMutation(UPDATE_MOVIE);
-  const [hasUpdated, setHasUpdated] = useState(false);
+  const lastUpdated = parseISO(localStorage.getItem(`lastUpdated_${movie.id}`));
 
   useEffect(() => {
     // A movie must have an imdbID to pull ratings.
-    // I only really care about updating ratings on newer movies as they actually change on platforms like
-    // rotten tomatoes and metacritic as more reviews come in.
-    // Ideally i'd only check on movies that are less than 6 months old but with only whole years, the best i can do
-    // is this year or last year (in case it is early in the current year).
+    // I only want to update each movie once a day to keep from spamming the 3rd party API's.
+    // If a movie has no local storage item (new, cleared storage), then the date is invalid.
+    // If it's an invalid date, let it go through.
     if (
-      !hasUpdated &&
-      focused &&
       movie.imdbID &&
-      movie.year &&
-      getYear(new Date()) - parseInt(movie.year) <= 1
+      (!isToday(lastUpdated) || !isValid(lastUpdated)) &&
+      focused
     ) {
       updateMovie({
         variables: {
@@ -57,9 +43,13 @@ export const useUpdateMovie = (movie, focused) => {
           },
         },
       });
-      setHasUpdated(true);
+
+      // Set this because we've sent a request.
+      // Regardless of whether it ends up updating or not, we don't want to keep spamming
+      // because the result is not going to change.
+      localStorage.setItem(`lastUpdated_${movie.id}`, new Date().toISOString());
     }
-  }, [focused, hasUpdated, movie, updateMovie]);
+  }, [focused, lastUpdated, movie, updateMovie]);
 
   return status;
 };
