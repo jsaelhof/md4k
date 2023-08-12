@@ -1,3 +1,12 @@
+### PR #118 - #114: Add Tubi as a source
+##### 2023-08-12
+
+Add Tubi as a source, refactor auto source updating to consider ad supported streaming services and clarify the logic.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/118)
+
+----
+
 ### PR #116 - #112: add auto-updating of source, including tests.
 ##### 2023-08-08
 
