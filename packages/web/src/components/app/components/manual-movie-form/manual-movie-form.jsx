@@ -11,9 +11,8 @@ import {
   Source,
 } from "./manual-movie-form.styles";
 import { useState } from "react";
-import { genreLabels, genres } from "md4k-constants";
+import { genreLabels, genres, sources } from "md4k-constants";
 import { sourceLabels, sourceLogos } from "../../../../constants/sources";
-import { sources } from "md4k-constants";
 import { parseRuntime } from "../../../../utils/parse-runtime";
 import Clear from "@mui/icons-material/Clear";
 

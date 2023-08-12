@@ -22,4 +22,5 @@ export const searchStreaming = (title, source) =>
     [sources.PLEX]: `http://192.168.1.5:32400/web/index.html#!/search?query=%s`,
     [sources.APPLE_TV]: "https://tv.apple.com/ca",
     [sources.DISNEY_PLUS]: "https://disneyplus.com",
+    [sources.TUBI_TV]: `https://tubitv.com/search/%s`,
   }[source].replace("%s", encodeURI(title)));

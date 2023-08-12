@@ -8,6 +8,7 @@ export const sourceLabels = {
   [sources.PLEX]: "Plex",
   [sources.DVD]: "DVD",
   [sources.DISNEY_PLUS]: "Disney+",
+  [sources.TUBI_TV]: "Tubi",
 };
 
 const sourceLogoBase = "/images/source/";
@@ -20,6 +21,7 @@ export const sourceLogos = {
   [sources.PLEX]: `${sourceLogoBase}plex.png`,
   [sources.DVD]: `${sourceLogoBase}dvd.png`,
   [sources.DISNEY_PLUS]: `${sourceLogoBase}disney+.png`,
+  [sources.TUBI_TV]: `${sourceLogoBase}tubitv.png`,
 };
 
 const sourceLogoLargeBase = "/images/source_large/";
@@ -32,4 +34,5 @@ export const sourceLogosLarge = {
   [sources.PLEX]: `${sourceLogoLargeBase}plex.png`,
   [sources.DVD]: `${sourceLogoLargeBase}dvd.png`,
   [sources.DISNEY_PLUS]: `${sourceLogoLargeBase}disney+.png`,
+  [sources.TUBI_TV]: `${sourceLogoLargeBase}tubitv.png`,
 };
