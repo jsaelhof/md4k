@@ -438,5 +438,5 @@ describe("manual-movie-form", () => {
     await user.click(screen.getByRole("option", { name: "Horror" }));
     await user.click(saveBtn);
     expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ genre: 10 }));
-  }, 30000)
+  })
 });
