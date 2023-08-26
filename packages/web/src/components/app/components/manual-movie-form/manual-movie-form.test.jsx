@@ -211,6 +211,17 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/tt0000000/)).toBeInTheDocument();
   });
 
+  it("should allow longer imdb ids", async ({ props, user }) => {
+    render(<ManualMovieForm {...props} />);
+
+    await user.type(screen.getByLabelText("Title"), "Test");
+    await user.type(screen.getByLabelText("IMDBId"), "tt123456789");
+
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(props.onChange).toHaveBeenCalled();
+    expect(screen.queryByText(/tt0000000/)).not.toBeInTheDocument();
+  });
+
   it("should call onCancel", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
     await user.click(screen.getByRole("button", { name: "Cancel" }));
