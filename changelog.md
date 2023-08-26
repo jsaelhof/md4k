@@ -1,3 +1,12 @@
+### PR #122 - #121: IMDB Id length
+##### 2023-08-26
+
+Allow IMDB id's to be minimum, instead of exactly, 7 digits 
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/122)
+
+----
+
 ### PR #120 - #115: Fix editing bug
 ##### 2023-08-26
 
