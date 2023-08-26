@@ -1,3 +1,12 @@
+### PR #120 - #115: Fix editing bug
+##### 2023-08-26
+
+This bug uncovered some pretty big issues with how the manual movie form was handling state. This refactors the form to create a diff of edits. I've also updated the tests to better cover the use cases.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/120)
+
+----
+
 ### PR #118 - #114: Add Tubi as a source
 ##### 2023-08-12
 
