@@ -15,6 +15,8 @@ import { genreLabels, genres, sources } from "md4k-constants";
 import { sourceLabels, sourceLogos } from "../../../../constants/sources";
 import { parseRuntime } from "../../../../utils/parse-runtime";
 import Clear from "@mui/icons-material/Clear";
+import isNil from "lodash/isNil";
+import {formatRuntime} from "../../../../utils/format-runtime.js";
 
 export const ManualMovieForm = ({
   actionLabel,
@@ -23,15 +25,27 @@ export const ManualMovieForm = ({
   onChange,
   onCancel,
 }) => {
-  const [title, setTitle] = useState(initialState?.title ?? "");
-  const [poster, setPoster] = useState(initialState?.poster ?? "");
-  const [background, setBackground] = useState(initialState?.background ?? "");
-  const [year, setYear] = useState(initialState?.year ?? "");
-  const [runtime, setRuntime] = useState(initialState?.runtime ?? "");
-  const [genre, setGenre] = useState(initialState?.genre ?? null);
-  const [source, setSource] = useState(initialState?.source ?? null);
-  const [imdbID, setImdbID] = useState(initialState?.imdbID ?? "");
+  // data is the collected form data state.
+  // It will be used to determine a diff between the form state and the current movie state in order to determine what to write to the DB.
+  const [data, setData] = useState({
+    // Set the defaults
+    title: null,
+    poster: null,
+    background: null,
+    year: null,
+    runtime: null,
+    genre: 0,
+    source: 0,
+    imdbID: null,
+    // Overlay the initial state provided to initialize when editing.
+    ...initialState,
+    // Special case, runtime needs to be formatted from seconds to H:MM format for the form field.
+    ...(initialState?.runtime && { runtime: formatRuntime(initialState.runtime, true) })
+  });
+
   const [userErrors, setUserErrors] = useState([]);
+
+  const onStringValueChange = (key, value) => setData({ ...data, [key]: isNil(value) ? null : value });
 
   return (
     <Layout>
@@ -44,8 +58,8 @@ export const ManualMovieForm = ({
           size="small"
           variant="outlined"
           placeholder="Title"
-          value={title}
-          onChange={({ target }) => setTitle(target.value)}
+          value={data.title ?? ""}
+          onChange={({ target }) => onStringValueChange("title", target.value)}
           error={userErrors.includes("Title")}
           helperText={userErrors.includes("Title") && "Title is required"}
           required
@@ -65,8 +79,10 @@ export const ManualMovieForm = ({
             size="small"
             variant="outlined"
             placeholder="Poster URL"
-            value={poster}
-            onChange={({ target }) => setPoster(target.value)}
+            value={data.poster ?? ""}
+            onChange={({ target }) =>
+              onStringValueChange("poster", target.value)
+            }
             error={userErrors.includes("Poster")}
             helperText={
               userErrors.includes("Poster") &&
@@ -77,7 +93,7 @@ export const ManualMovieForm = ({
 
         <Preview
           data-testid="Preview"
-          sx={{ backgroundImage: `url(${poster})` }}
+          sx={{ backgroundImage: `url(${data.poster})` }}
         />
       </PreviewLayout>
 
@@ -93,8 +109,10 @@ export const ManualMovieForm = ({
             size="small"
             variant="outlined"
             placeholder="Background URL"
-            value={background}
-            onChange={({ target }) => setBackground(target.value)}
+            value={data.background ?? ""}
+            onChange={({ target }) =>
+              onStringValueChange("background", target.value)
+            }
             error={userErrors.includes("Background")}
             helperText={
               userErrors.includes("Background") &&
@@ -105,7 +123,7 @@ export const ManualMovieForm = ({
 
         <BackgroundPreview
           data-testid="BackgroundPreview"
-          sx={{ backgroundImage: `url(${background})` }}
+          sx={{ backgroundImage: `url(${data.background})` }}
         />
       </PreviewLayout>
 
@@ -117,14 +135,14 @@ export const ManualMovieForm = ({
           size="small"
           variant="outlined"
           placeholder="Year"
-          value={year}
+          value={data.year ?? ""}
           onChange={({ target }) => {
             // Restrict to only digits or an empty string
             if (
               target.value.length === 0 ||
               target.value.split().every((v) => /\d/.test(v))
             ) {
-              setYear(target.value);
+              onStringValueChange("year", target.value)
             }
           }}
           inputProps={{
@@ -143,7 +161,7 @@ export const ManualMovieForm = ({
           fullWidth
           size="small"
           variant="outlined"
-          value={runtime}
+          value={data.runtime ?? ""}
           placeholder="Mins or H:MM"
           onChange={({ target }) => {
             // Restrict to only digits, : or an empty string
@@ -152,7 +170,7 @@ export const ManualMovieForm = ({
               target.value.length === 0 ||
               target.value.split().every((v) => /[\d:]/.test(v))
             ) {
-              setRuntime(target.value);
+              onStringValueChange("runtime", target.value)
             }
           }}
           inputProps={{
@@ -176,8 +194,8 @@ export const ManualMovieForm = ({
           size="small"
           variant="outlined"
           placeholder="IMDB Id"
-          value={imdbID}
-          onChange={({ target }) => setImdbID(target.value)}
+          value={data.imdbID ?? ""}
+          onChange={({ target }) => onStringValueChange("imdbID", target.value)}
           error={userErrors.includes("IMDBId")}
           helperText={
             userErrors.includes("IMDBId") &&
@@ -191,8 +209,8 @@ export const ManualMovieForm = ({
         <Genre
           label="Genre"
           fullWidth
-          onChange={setGenre}
-          value={genre}
+          onChange={(genre) => setData({ ...data, genre })}
+          value={data.genre}
           values={genres}
           labels={genreLabels}
           hideLabelForSelection={false}
@@ -204,8 +222,8 @@ export const ManualMovieForm = ({
         <Source
           label="Source"
           fullWidth
-          onChange={setSource}
-          value={source}
+          onChange={(source) => setData({ ...data, source })}
+          value={data.source}
           values={sources}
           labels={sourceLabels}
           images={sourceLogos}
@@ -224,44 +242,80 @@ export const ManualMovieForm = ({
           startIcon={<ActionIcon />}
           onClick={() => {
             const errors = [];
-            if (!title || title.trim().length === 0) {
+            if (!data.title || data.title?.trim().length === 0) {
               errors.push("Title");
             }
 
-            if (poster && !/^https?:\/\//i.test(poster)) {
+            if (
+              data.poster?.trim().length > 0 &&
+              !/^https?:\/\//i.test(data.poster)
+            ) {
               errors.push("Poster");
             }
 
-            if (background && !/^https?:\/\//i.test(background)) {
+            if (
+              data.background?.trim().length > 0 &&
+              !/^https?:\/\//i.test(data.background)
+            ) {
               errors.push("Background");
             }
 
-            if (year && !/^\d{4}$/.test(year)) {
+            if (data.year?.trim().length > 0 && !/^\d{4}$/.test(data.year)) {
               errors.push("Year");
             }
 
-            if (imdbID && !/^tt\d{7}$/.test(imdbID)) {
+            if (
+              data.imdbID?.trim().length > 0 &&
+              !/^tt\d{7}$/.test(data.imdbID)
+            ) {
               errors.push("IMDBId");
             }
 
             if (
-              runtime &&
-              !(/^\d{1}:\d{2}$/.test(runtime) || /^\d{2,3}$/.test(runtime))
+              data.runtime?.trim().length > 0 &&
+              !(
+                /^\d{1}:\d{2}$/.test(data.runtime) ||
+                /^\d{2,3}$/.test(data.runtime)
+              )
             ) {
               errors.push("Runtime");
             }
 
             if (errors.length === 0) {
-              onChange({
-                ...(imdbID && { imdbID: imdbID?.trim() }),
-                ...(title && { title: title?.trim() }),
-                ...(poster && { poster: poster?.trim() }),
-                ...(year && { year: year?.trim() }),
-                ...(background && { background: background?.trim() }),
-                ...(source && { source }),
-                ...(genre && { genre }),
-                ...(runtime && { runtime: parseRuntime(runtime) }),
-              });
+              const diff = ["imdbID", "title", "poster", "background", "year", "runtime", "genre", "source"].reduce((diff, key) => {
+                // Diff the string fields.
+                // If they have a non-null value with a trimmed length greater than 0
+                // AND that value is different than the initial value, then a change was made.
+                if (
+                  !["genre", "source", "runtime"].includes(key) &&
+                  !isNil(data[key]) &&
+                  initialState?.[key] !== data[key]?.trim()
+                ) {
+                  diff[key] = data[key] ? data[key].trim() : null;
+                }
+
+                // Do the same for runtime, but it needs to be parsed first.
+                if (
+                  key === "runtime" &&
+                  !isNil(data[key]) &&
+                  initialState?.[key] !== parseRuntime(data[key]?.trim())
+                  ) {
+                  diff[key] = data[key] ? parseRuntime(data[key].trim()) : null;
+                }
+
+                // These fields don't get trimmed since they are just integers all the time.
+                if (
+                  ["genre", "source"].includes(key) &&
+                  !isNil(data[key]) &&
+                  initialState?.[key] !== data[key]
+                ) {
+                  diff[key] = data[key];
+                }
+
+                return diff;
+              }, {});
+
+              onChange(diff);
             } else {
               setUserErrors(errors);
             }

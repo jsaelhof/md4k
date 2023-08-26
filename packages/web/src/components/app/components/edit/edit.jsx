@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorDialog from "../error-dialog/error-dialog";
-import { formatRuntime } from "../../../../utils/format-runtime";
 import { ManualMovieForm } from "../manual-movie-form/manual-movie-form";
 import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
@@ -21,10 +20,7 @@ export const Edit = () => {
       const movieToEdit = movies.find(({ id }) => id === params.movieId);
 
       if (movieToEdit) {
-        setMovie({
-          ...movieToEdit,
-          runtime: formatRuntime(movieToEdit.runtime, true),
-        });
+        setMovie(movieToEdit);
       } else {
         setMovie(null);
       }

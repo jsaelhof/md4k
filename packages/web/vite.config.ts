@@ -12,5 +12,6 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "vitest-setup.js",
     clearMocks: true,
+    testTimeout: 20000
   },
 });
