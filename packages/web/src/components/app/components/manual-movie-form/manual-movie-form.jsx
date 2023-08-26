@@ -266,7 +266,7 @@ export const ManualMovieForm = ({
 
             if (
               data.imdbID?.trim().length > 0 &&
-              !/^tt\d{7}$/.test(data.imdbID)
+              !/^tt\d{7,}$/.test(data.imdbID)
             ) {
               errors.push("IMDBId");
             }
