@@ -17,11 +17,13 @@ import {
 import { sortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
+import {useGetWatchedMovies} from "../../../../graphql/queries/get-watched-movies.js";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
 export const Watched = () => {
-  const { list, watchedMovies } = useAppContext();
+  const { list } = useAppContext();
+  const { watchedMovies } = useGetWatchedMovies(list);
   const [error, setError] = useState(null);
   const [deleteMovie, setDeleteMovie] = useState(null);
   const [editingMovie, setEditingMovie] = useState(null);
@@ -43,6 +45,7 @@ export const Watched = () => {
   useEffect(() => {
     const onScroll = ({ target: { documentElement } }) => {
       if (
+        watchedMovies?.length > 0 &&
         documentElement.scrollHeight - documentElement.scrollTop ===
         documentElement.clientHeight
       ) {

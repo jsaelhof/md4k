@@ -2,7 +2,7 @@ import { Watched } from "./watched";
 import { within, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
-import { GET_MOVIES } from "../../../../graphql/queries";
+import {GET_WATCHED_MOVIES} from "../../../../graphql/queries/get-watched-movies.js";
 import { REMOVE_MOVIE } from "../../../../graphql/mutations";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
 
@@ -30,9 +30,9 @@ const REMOVE_MOVIE_ERROR_MOCK = {
   },
 };
 
-const GET_MOVIES_MOCK = {
+const GET_WATCHED_MOVIES_MOCK = {
   request: {
-    query: GET_MOVIES,
+    query: GET_WATCHED_MOVIES,
     variables: {
       list: "saturday",
     },
@@ -54,8 +54,7 @@ const GET_MOVIES_MOCK = {
 describe("watched - error", () => {
   it("should show the error", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
-      mocks: [REMOVE_MOVIE_ERROR_MOCK],
+      mocks: [GET_WATCHED_MOVIES_MOCK, REMOVE_MOVIE_ERROR_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
