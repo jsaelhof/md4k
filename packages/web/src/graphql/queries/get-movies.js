@@ -24,15 +24,6 @@ export const GET_MOVIES = gql`
       fiveStarRating
       background
     }
-    watchedMovies(list: $list) {
-      id
-      title
-      list
-      poster
-      imdbID
-      watchedOn
-      background
-    }
   }
 `;
 

@@ -2,7 +2,7 @@ import { Watched } from "./watched";
 import { waitFor, within, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
-import { GET_MOVIES } from "../../../../graphql/queries";
+import {GET_WATCHED_MOVIES} from "../../../../graphql/queries/get-watched-movies.js";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
@@ -42,9 +42,9 @@ vi.mock("../../../../graphql/mutations", async () => {
   };
 });
 
-const GET_MOVIES_MOCK = {
+const GET_WATCHED_MOVIES_MOCK = {
   request: {
-    query: GET_MOVIES,
+    query: GET_WATCHED_MOVIES,
     variables: {
       list: "saturday",
     },
@@ -83,45 +83,44 @@ const GET_MOVIES_MOCK = {
           watchedOn: "2001-06-08T02:11:33.166Z",
         }),
       ],
-      movies: [],
     },
   },
 };
 
 describe("watched", () => {
   it("should render the toolbar", async () => {
-    renderWithProviders(<Watched />);
-    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
+    renderWithProviders(<Watched />, { mocks: [GET_WATCHED_MOVIES_MOCK] });
+    expect(await screen.findByText("6 movies watched")).toBeInTheDocument();
   });
 
   it("should search from the toolbar", async ({ user }) => {
-    renderWithProviders(<Watched />);
-    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
-    await user.type(screen.getByLabelText("Search"), "Always");
+    renderWithProviders(<Watched />, { mocks: [GET_WATCHED_MOVIES_MOCK] });
+    expect(await screen.findByText("6 movies watched")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Search"), "Iron");
     expect(
-      await screen.findByText("Showing 1 of 2 movies watched")
+      await screen.findByText("Showing 1 of 6 movies watched")
     ).toBeInTheDocument();
-    expect(await screen.findByText(/Always/)).toBeInTheDocument();
-    expect(screen.queryByText(/Tower Heist/)).not.toBeInTheDocument();
+    expect(await screen.findByText(/Iron Man/)).toBeInTheDocument();
+    expect(screen.queryByText(/Fight Club/)).not.toBeInTheDocument();
   });
 
   it("should display the empty state when no movies are found by a search", async ({
     user,
   }) => {
-    renderWithProviders(<Watched />);
-    expect(await screen.findByText("2 movies watched")).toBeInTheDocument();
-    await user.type(screen.getByLabelText("Search"), "Bourne");
+    renderWithProviders(<Watched />, { mocks: [GET_WATCHED_MOVIES_MOCK] });
+    expect(await screen.findByText("6 movies watched")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Search"), "Apocalypse");
     expect(
-      await screen.findByText("Showing 0 of 2 movies watched")
+      await screen.findByText("Showing 0 of 6 movies watched")
     ).toBeInTheDocument();
-    expect(screen.queryByText(/Always/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Tower Heist/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Iron Man/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Fight Club/)).not.toBeInTheDocument();
     expect(screen.getByText(/No movies found/)).toBeInTheDocument();
   });
 
   it("should render the movies as watched movie items in reverse chronological order", async () => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -146,7 +145,7 @@ describe("watched", () => {
     user,
   }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -169,7 +168,7 @@ describe("watched", () => {
     user,
   }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -203,7 +202,7 @@ describe("watched", () => {
 
   it("should enable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -219,7 +218,7 @@ describe("watched", () => {
 
   it("should save the movie and disable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -258,7 +257,7 @@ describe("watched", () => {
 
   it("should cancel editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_MOVIES_MOCK,
+      moviesMock: GET_WATCHED_MOVIES_MOCK,
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();

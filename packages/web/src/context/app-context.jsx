@@ -7,7 +7,7 @@ const AppContext = createContext({});
 const AppProvider = ({ children }) => {
   const [list, _setList] = useState();
   const { lists } = useGetLists({ onCompleted: _setList });
-  const { movies, moviesById, watchedMovies } = useGetMovies(list);
+  const { movies, moviesById } = useGetMovies(list);
   const [toast, setToast] = useState(null);
   const [pick, setPick] = useState(null);
 
@@ -146,7 +146,6 @@ const AppProvider = ({ children }) => {
     setList,
     movies,
     moviesById,
-    watchedMovies,
     pick,
     setPick,
     clearPick,

@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
 import { GET_MOVIES } from "../queries";
+import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies.js";
 
 export const MARK_WATCHED = gql`
   mutation MarkWatched($movie: MovieInput!, $list: String!) {
@@ -38,10 +39,23 @@ export const useMarkWatched = ({ onCompleted }) => {
           query: GET_MOVIES,
           variables: { list: editMovie.list },
         },
-        ({ movies, watchedMovies }) => ({
+        ({ movies }) => ({
           movies: movies.filter(({ id }) => id !== editMovie.id),
-          watchedMovies: [...watchedMovies, editMovie],
         })
+      );
+      cache.updateQuery(
+        {
+          query: GET_WATCHED_MOVIES,
+          variables: { list: editMovie.list },
+        },
+
+        // Only update the cache for watched movies if its been called at least once before.
+        // It will return null for the cache read response if it has not been called.
+        (response) => {
+          if (response?.watchedMovies) {
+            return { watchedMovies: [...response.watchedMovies, editMovie] };
+          }
+        }
       );
     },
   });
