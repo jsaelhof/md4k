@@ -1,3 +1,12 @@
+### PR #123 - #68: Split watched movies from getMovies query
+##### 2023-08-30
+
+Removes fetching of the watched movies from the initial query for all movies and also removes watched movies from the context. The watched movies are now only fetched when you go that screen.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/123)
+
+----
+
 ### PR #122 - #121: IMDB Id length
 ##### 2023-08-26
 
