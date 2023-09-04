@@ -10,14 +10,6 @@ export const Layout = styled("div")(({ theme: { spacing } }) => ({
   "@media (max-width: 750px)": {
     justifyContent: "center",
   },
-
-  "@media (max-width: 450px)": {
-    span: {
-      justifyItems: "center",
-      marginLeft: 0,
-      marginRight: 0,
-    },
-  },
 }));
 
 export const DetailButton = styled(Button)(() => ({
