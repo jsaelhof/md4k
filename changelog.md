@@ -1,3 +1,12 @@
+### PR #125 - #124: convert form to react-hook-form
+##### 2023-09-09
+
+Re-write the manual movie add/edit for musing react-hook-form
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/125)
+
+----
+
 ### PR #123 - #68: Split watched movies from getMovies query
 ##### 2023-08-30
 
