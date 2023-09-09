@@ -70,8 +70,18 @@ export const addMovieOptions = (movie, list) => {
       addMovie: {
         addedOn: new Date().toISOString(), // This is actually set on the server
         watchedOn: null,
+        poster: null,
         background: null,
+        imdbID: null,
+        runtime: null,
+        year: null,
         fiveStarRating: null,
+        ratings: {
+          IMDB: null,
+          ROTTEN_TOMATOES: null,
+          METACRITIC: null,
+          ...movieWithId.ratings
+        },
         ...movieWithId,
       },
     },
