@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import ListSelect from "./components/list-select/list-select";
 
-export const Layout = styled("div")(({ theme: { spacing } }) => ({
+export const MovieForm = styled("form")(({ theme: { spacing } }) => ({
   maxWidth: 600,
   margin: `${spacing(3)} auto 0`,
   display: "grid",
