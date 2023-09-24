@@ -1,4 +1,4 @@
-import {screen, waitFor} from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { renderWithProvidersAsRoute } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
 import { Edit } from "./edit";
@@ -88,7 +88,7 @@ describe("edit", () => {
     await waitFor(() => expect(navigateMock).toHaveBeenCalledWith("/"));
   });
 
-  it("should show the error dialog when an error occurs in the mmutation", async ({
+  it("should show the error dialog when an error occurs in the mutation", async ({
     user,
   }) => {
     renderWithProvidersAsRoute(

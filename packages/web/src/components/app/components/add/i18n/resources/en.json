@@ -1,6 +1,6 @@
 {
-    "confirm_added": "Added {title}",
-    "add_by_search": "Add By Search",
-    "add_manually": "Add Manually",
-    "error_adding": "We were not able to add the movie to the list."
+  "confirm_added": "Added ''{title}''",
+  "add_by_search": "Add By Search",
+  "add_manually": "Add Manually",
+  "error_adding": "We were not able to add the movie to the list."
 }
