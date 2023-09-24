@@ -7,8 +7,11 @@ import {
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
 import { Layout, Status } from "./watched-toolbar.styles";
+import { useI18n } from "../../../../../../hooks/use-i18n";
+import watchedStrings from "../../i18n/i18n";
 
 const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
+  const { t } = useI18n(watchedStrings);
   const small = useMediaQuery("(max-width: 550px)");
 
   return (
@@ -16,20 +19,26 @@ const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
       <Status>
         {visibleCount < count ? (
           <div>
-            {small
-              ? `${visibleCount} of ${count} movies`
-              : `Showing ${visibleCount} of ${count} movies watched`}
+            {t(`watched:toolbar.showing_${small ? "small" : "large"}`, {
+              visibleCount,
+              count,
+            })}
           </div>
         ) : (
-          <div>{small ? `${count} movies` : `${count} movies watched`}</div>
+          <div>
+            {t(`watched:toolbar.count_${small ? "small" : "large"}`, {
+              visibleCount,
+              count,
+            })}
+          </div>
         )}
       </Status>
 
       <TextField
         value={searchTerm}
-        placeholder="Search"
+        placeholder={t("watched:toolbar.search_placeholder")}
         inputProps={{
-          "aria-label": "Search",
+          "aria-label": t("watched:toolbar.search_label"),
         }}
         InputProps={{
           startAdornment: (

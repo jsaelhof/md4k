@@ -19,8 +19,12 @@ import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "../../../poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
+import {useI18n} from "../../../../../../hooks/use-i18n.js";
+import searchStrings from "./i18n/i18n";
 
 const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
+  const {t} = useI18n(searchStrings);
+
   const [titleSearch, setTitleSearch] = useState("");
   const [yearSearch, setYearSearch] = useState("");
   const [movies, setMovies] = useState(null);
@@ -107,7 +111,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         <SearchLayout $shadow={!visible}>
           <SearchInput>
             <TextField
-              inputProps={{ "aria-label": "Search" }}
+              inputProps={{ "aria-label": t("tabPanelSearch:search") }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -132,14 +136,14 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
               size="small"
               fullWidth
               variant="outlined"
-              placeholder="Search for a movie"
+              placeholder={t("tabPanelSearch:search_placeholder")}
               value={titleSearch}
               onChange={onTitleChange}
               autoFocus
             />
 
             <TextField
-              inputProps={{ "aria-label": "Year" }}
+              inputProps={{ "aria-label": t("tabPanelSearch:year") }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -150,7 +154,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
               size="small"
               fullWidth
               variant="outlined"
-              placeholder="Year"
+              placeholder={t("tabPanelSearch:year")}
               value={yearSearch}
               onChange={onYearChange}
             />
@@ -171,18 +175,18 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         <SearchStatus>
           {pageInfo && pageInfo.page < pageInfo.pages && !searching ? (
             <Button variant="contained" onClick={onLoadMore}>
-              Load More
+              {t("tabPanelSearch:load_more")}
             </Button>
           ) : searching ? (
             <Searching>
               <Refresh />
-              <div>Searching...</div>
+              <div>{t("tabPanelSearch:searching")}</div>
             </Searching>
           ) : movies && movies.length === 0 ? (
             <NoMoviesFound>
               <MovieRemove />
-              <div>No movies found.</div>
-              <div>Please try a different search.</div>
+              <div>{t("tabPanelSearch:no_movies_found.title")}</div>
+              <div>{t("tabPanelSearch:no_movies_found.subtitle")}</div>
             </NoMoviesFound>
           ) : (
             !movies && <MovieQuote />

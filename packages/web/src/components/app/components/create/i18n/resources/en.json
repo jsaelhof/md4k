@@ -1,0 +1,15 @@
+{
+  "quote": "\"Roads? Where we're going, we don't need roads.\"",
+  "message_1": "The future looks bright.",
+  "message_2": "Let's get started by making a list.",
+  "error": {
+    "message": "Sorry, we couldn't create the list.",
+    "action": "Try Again"
+  },
+  "input": {
+    "action": "Create List",
+    "label": "New List Name",
+    "no_list_name": "Please enter a name for your list",
+    "duplicate_list_name": "There is already a list with this name"
+  }
+}

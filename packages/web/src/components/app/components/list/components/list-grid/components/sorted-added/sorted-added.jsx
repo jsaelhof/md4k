@@ -5,6 +5,8 @@ import { useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
+import listGridStrings from "../../i18n/i18n";
 
 const partitionMovies = (direction) =>
   flow(
@@ -27,6 +29,7 @@ const partitionMovies = (direction) =>
   );
 
 const SortedAdded = ({ movies, ...handlers }) => {
+  const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 
   const { month, quarter, year, beyond } = useMemo(
@@ -38,23 +41,23 @@ const SortedAdded = ({ movies, ...handlers }) => {
     const sectionDescriptors = [
       {
         list: month,
-        title: "Added Recently",
-        subtitle: "Less than 30 days on the list",
+        title: t("list_grid:sorted_added:month.title"),
+        subtitle: t("list_grid:sorted_added:month.subtitle"),
       },
       {
         list: quarter,
-        title: "Added A While Ago",
-        subtitle: "Less than 90 days on the list",
+        title: t("list_grid:sorted_added:quarter.title"),
+        subtitle: t("list_grid:sorted_added:quarter.subtitle"),
       },
       {
         list: year,
-        title: "Added Within A Year",
-        subtitle: "Less than 365 days on the list",
+        title: t("list_grid:sorted_added:year.title"),
+        subtitle: t("list_grid:sorted_added:year.subtitle"),
       },
       {
         list: beyond,
-        title: "A Long Time Ago",
-        subtitle: "More than 365 days on the list",
+        title: t("list_grid:sorted_added:beyond.title"),
+        subtitle: t("list_grid:sorted_added:beyond.subtitle"),
       },
     ];
 
@@ -63,7 +66,7 @@ const SortedAdded = ({ movies, ...handlers }) => {
         ? sectionDescriptors.reverse()
         : sectionDescriptors),
     ];
-  }, [beyond, direction, month, quarter, year]);
+  }, [beyond, direction, month, quarter, t, year]);
 
   return (
     <span data-testid={sort.ADDED}>

@@ -7,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 import TabPanelSearch from "./components/tab-panel-search/tab-panel-search";
 import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
+import { useI18n } from "../../../../hooks/use-i18n.js";
+import addStrings from "./i18n/i18n";
 
 export const Add = () => {
+  const { t } = useI18n(addStrings);
+
   const [activeTab, setActiveTab] = useState(0);
 
   const onTabChange = useCallback((event, index) => setActiveTab(index), []);
@@ -20,7 +24,7 @@ export const Add = () => {
 
   const [addMovieMutation] = useAddMovie({
     onCompleted: ({ addMovie: movie }) => {
-      setToast({ message: `Added '${movie.title}'` });
+      setToast({ message: t("add:confirm_added", { title: movie.title }) });
       navigate("/");
     },
     onError: ({ message }) => {
@@ -48,13 +52,13 @@ export const Add = () => {
         >
           <Tab
             sx={tabStyles}
-            label="Add By Search"
+            label={t("add:add_by_search")}
             id="tab-0"
             aria-controls="tabpanel-0"
           />
           <Tab
             sx={tabStyles}
-            label="Add Manually"
+            label={t("add:add_manually")}
             id="tab-1"
             aria-controls="tabpanel-1"
           />
@@ -76,7 +80,8 @@ export const Add = () => {
       {error && (
         <ErrorDialog
           open={!!error}
-          content="We were not able to add the movie to the list."
+          content={t("add:error_adding")}
+          debug={error}
           onConfirm={() => setError(null)}
         />
       )}

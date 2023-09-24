@@ -13,8 +13,11 @@ import {
   pickScreenToolbarStyles,
   toolbarStyles,
 } from "./titlebar.styles";
+import { useI18n } from "../../../../hooks/use-i18n";
+import titlebarStrings from "./i18n/i18n";
 
 const TitleBar = () => {
+  const { t } = useI18n(titlebarStrings);
   const { movies, clearPick } = useAppContext();
   const mobileNav = useMediaQuery("(max-width: 580px)");
   const { pathname } = useLocation();
@@ -31,7 +34,7 @@ const TitleBar = () => {
           {/* In the small view, keep a pick again button in the main nav area. It's also in the hamburger menu */}
           {movies && mobileNav && isPickScreen && (
             <PickAgainButton startIcon={<Refresh />} onClick={clearPick}>
-              Pick Again
+              {t("titlebar:pick_again")}
             </PickAgainButton>
           )}
           <ProfileMenu />

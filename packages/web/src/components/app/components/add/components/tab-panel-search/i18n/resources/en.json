@@ -1,0 +1,99 @@
+{
+    "search": "Search",
+    "search_placeholder": "Search for a movie",
+    "year": "Year",
+    "searching": "Searching...",
+    "no_movies_found": {
+        "title": "No movies found.",
+        "subtitle": "Please try a different search."
+    },
+    "load_more": "Load More",
+    "quotes": {
+        "quote0": {
+            "quote": "Gentlemen, you can't fight in here! This is the war room!",
+            "speaker": "President Merkin Muffley",
+            "movie": "Dr. Strangelove"
+        },
+        "quote1": {
+            "quote": "Search your feelings. You know it to be true.",
+            "speaker": "Darth Vader",
+            "movie": "Star Wars: The Empire Strikes Back"
+        },
+        "quote2": {
+            "quote": "Do or do not. There is no try.",
+            "speaker": "Yoda",
+            "movie": "Star Wars: The Empire Strikes Back"
+        },
+        "quote3": {
+            "quote": "Say hello to my little friend!",
+            "speaker": "Tony Montana",
+            "movie": "Scarface"
+        },
+        "quote4": {
+            "quote": "Snakes. Why'd it have to be snakes?",
+            "speaker": "Indiana Jones",
+            "movie": "Raiders of the Lost Ark"
+        },
+        "quote5": {
+            "quote": "I feel the need...the need for speed!",
+            "speaker": "Maverick",
+            "movie": "Top Gun"
+        },
+        "quote6": {
+            "quote": "It's not the years, honey, it's the mileage.",
+            "speaker": "Indiana Jones",
+            "movie": "Raiders of the Lost Ark"
+        },
+        "quote7": {
+            "quote": "Human sacrifice. Dogs and cats living together. Mass hysteria.",
+            "speaker": "Peter Venkman",
+            "movie": "Ghostbusters"
+        },
+        "quote8": {
+            "quote": "Let off some steam, Bennett.",
+            "speaker": "John Matrix",
+            "movie": "Commando"
+        },
+        "quote9": {
+            "quote": "Get to the choppa!",
+            "speaker": "Dutch",
+            "movie": "Predator"
+        },
+        "quote10": {
+            "quote": "Fear leads to anger, anger leads to hate, hate leads to suffering.",
+            "speaker": "Yoda",
+            "movie": "Star Wars: The Phantom Menace"
+        },
+        "quote11": {
+            "quote": "Quiet! And there's a fresh one if you mouth off again.",
+            "speaker": "K-2SO",
+            "movie": "Rogue One"
+        },
+        "quote12": {
+            "quote": "Talk to me Goose",
+            "speaker": "Maverick",
+            "movie": "Top Gun"
+        },
+        "quote13": {
+            "quote":
+            "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it.",
+            "speaker": "Ferris Bueller",
+            "movie": "Ferris Bueller's Day Off"
+        },
+        "quote14": {
+            "quote": "I'm sorry, Dave. I'm afraid I can't do that.",
+            "speaker": "HAL",
+            "movie": "2001: A Space Odyssey"
+        },
+        "quote15": {
+            "quote": "I love the smell of napalm in the morning.",
+            "speaker": "Lt. Col. Bill Kilgore",
+            "movie": "Apocalypse Now"
+        },
+        "quote16": {
+            "quote": "I'm having an old friend for dinner.",
+            "speaker": "Hannibal Lecter",
+            "movie": "The Silence of the Lambs"
+        }
+    }
+}

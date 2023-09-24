@@ -13,12 +13,14 @@ import {
 import { Button } from "@mui/material";
 import { useMemo } from "react";
 import { formatRuntime } from "../../../../utils/format-runtime.js";
-import { genreLabels, genres, sources } from "md4k-constants";
-import { sourceLabels, sourceLogos } from "../../../../constants/sources";
+import { genres, sources } from "md4k-constants";
+import { sourceLogos } from "../../../../constants/sources";
 import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
 import { parseRuntime } from "../../../../utils/parse-runtime";
 import TextInput from "./components/text-input/text-input.jsx";
+import { useI18n } from "../../../../hooks/use-i18n";
+import manualMovieFormStrings from "./i18n/i18n";
 
 export const ManualMovieForm = ({
   actionLabel,
@@ -27,6 +29,26 @@ export const ManualMovieForm = ({
   onChange,
   onCancel,
 }) => {
+  const { t } = useI18n(manualMovieFormStrings);
+
+  const sourceLabels = useMemo(
+    () =>
+      Object.values(sources).reduce((acc, source) => {
+        acc[source] = t(`common:sources.${source}`);
+        return acc;
+      }, {}),
+    [t]
+  );
+
+  const genreLabels = useMemo(
+    () =>
+      Object.values(genres).reduce((acc, genre) => {
+        acc[genre] = t(`common:genres.${genre}`);
+        return acc;
+      }, {}),
+    [t]
+  );
+
   const defaultValues = useMemo(
     () => ({
       title: null,
@@ -104,11 +126,12 @@ export const ManualMovieForm = ({
     <MovieForm onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         label="title"
-        formattedLabel="Title"
+        formattedLabel={t("manual_movie_form:title.label")}
         control={control}
         rules={{
-          required: "Title is required",
-          validate: (val) => !!val.trim() || "Title is required",
+          required: t("manual_movie_form:title.validation"),
+          validate: (val) =>
+            !!val.trim() || t("manual_movie_form:title.validation"),
         }}
         autoFocus
       />
@@ -116,13 +139,13 @@ export const ManualMovieForm = ({
       <PreviewLayout>
         <TextInput
           label="poster"
-          formattedLabel="Poster URL"
+          formattedLabel={t("manual_movie_form:poster.label")}
           multiline={true}
           control={control}
           rules={{
             pattern: {
               value: /^https?:\/\//i,
-              message: "Poster must start with http(s)://",
+              message: t("manual_movie_form:poster.validation"),
             },
           }}
         />
@@ -136,13 +159,13 @@ export const ManualMovieForm = ({
       <PreviewLayout>
         <TextInput
           label="background"
-          formattedLabel="Background URL"
+          formattedLabel={t("manual_movie_form:background.label")}
           multiline={true}
           control={control}
           rules={{
             pattern: {
               value: /^https?:\/\//i,
-              message: "Background must start with http(s)://",
+              message: t("manual_movie_form:background.validation"),
             },
           }}
         />
@@ -156,14 +179,20 @@ export const ManualMovieForm = ({
       <SmallField>
         <TextInput
           label="year"
-          formattedLabel="Year"
+          formattedLabel={t("manual_movie_form:year.label")}
           control={control}
           rules={{
-            minLength: { value: 4, message: "Year must be 4 digits" },
-            maxLength: { value: 4, message: "Year must be 4 digits" },
+            minLength: {
+              value: 4,
+              message: t("manual_movie_form:year.validation_length"),
+            },
+            maxLength: {
+              value: 4,
+              message: t("manual_movie_form:year.validation_length"),
+            },
             pattern: {
               value: /^[12][90]\d{2}$/,
-              message: "Year must be 19xx or 20xx format",
+              message: t("manual_movie_form:year.validation_value"),
             },
           }}
         />
@@ -172,13 +201,13 @@ export const ManualMovieForm = ({
       <SmallField>
         <TextInput
           label="runtime"
-          formattedLabel="Runtime"
+          formattedLabel={t("manual_movie_form:runtime.label")}
           control={control}
-          placeholder="Mins or H:MM"
+          placeholder={t("manual_movie_form:runtime.placeholder")}
           rules={{
             pattern: {
               value: /^(\d:\d{2}|\d{2,3})$/,
-              message: "Runtime must be in minutes or h:mm format",
+              message: t("manual_movie_form:runtime.validation"),
             },
           }}
         />
@@ -187,19 +216,19 @@ export const ManualMovieForm = ({
       <SmallField>
         <TextInput
           label="imdbID"
-          formattedLabel="IMDB ID"
+          formattedLabel={t("manual_movie_form:imdbID.label")}
           control={control}
           rules={{
             pattern: {
               value: /^tt\d{7,}$/,
-              message: "IMDB Id must be 'tt0000000' format",
+              message: t("manual_movie_form:imdbID.validation"),
             },
           }}
         />
       </SmallField>
 
       <SmallField>
-        <Label htmlFor="genre">Genre</Label>
+        <Label htmlFor="genre">{t("manual_movie_form:genre.label")}</Label>
         <Controller
           name="genre"
           control={control}
@@ -218,7 +247,7 @@ export const ManualMovieForm = ({
       </SmallField>
 
       <SmallField>
-        <Label htmlFor="source">Source</Label>
+        <Label htmlFor="source">{t("manual_movie_form:source.label")}</Label>
         <Controller
           name="source"
           control={control}
@@ -238,7 +267,7 @@ export const ManualMovieForm = ({
 
       <Actions>
         <Button variant="outlined" startIcon={<Clear />} onClick={onCancel}>
-          Cancel
+          {t("manual_movie_form:action.cancel")}
         </Button>
 
         <Button

@@ -1,0 +1,26 @@
+{
+  "moved_back_to_movie_list": "Moved ''{movieTitle}'' back to movies list",
+  "moved_to_watched_list": "Moved ''{movieTitle}'' to watched list",
+  "action_bar": {
+    "add_movie": "Add Movie"
+  },
+  "sort": {
+    "addedOn": "Added",
+    "title": "Title",
+    "runtime": "Runtime",
+    "genre": "Genre",
+    "rating": "Rating"
+  },
+  "pick": {
+    "title": "Pick A Movie",
+    "label": "Pick Menu",
+    "short": "Pick a Short Movie",
+    "regular": "Pick a Regular Movie",
+    "long": "Pick a Long Movie",
+    "month": "Added This Month",
+    "three_month": "Added Within 90 Days",
+    "year": "Added Within A Year",
+    "long_ago": "Added Long Ago"
+  },
+  "error_removing": "We were unable to remove that movie."
+}

@@ -4,8 +4,10 @@ import CreateListInput from "./components/create-list-input/create-list-input";
 import CreateListError from "./components/create-list-error/create-list-error";
 import { addListOptions, useAddList } from "../../../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
-
+import { useI18n } from "../../../../hooks/use-i18n.js";
+import createStrings from "./i18n/i18n";
 export const Create = () => {
+  const { t } = useI18n(createStrings);
   const { setList } = useAppContext();
   const navigate = useNavigate();
   const { addList, loading, error, reset } = useAddList({
@@ -18,12 +20,12 @@ export const Create = () => {
   return (
     <EmptyState
       imgSrc={"images/delorean.png"}
-      quote="&quot;Roads? Where we're going, we don't need roads.&quot;"
+      quote={t("create:quote")}
       message={
         <>
-          The future looks bright.
+          {t("create:message_1")}
           <br />
-          Let&apos;s get started by making a list.
+          {t("create:message_2")}
         </>
       }
       content={

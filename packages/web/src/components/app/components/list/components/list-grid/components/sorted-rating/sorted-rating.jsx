@@ -5,6 +5,8 @@ import { useSortDirection } from "../../../../../../../../hooks/use-sort-directi
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import FiveStarRating from "../../../../../five-star-rating/five-star-rating";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
+import listGridStrings from "../../i18n/i18n";
 
 const partitionMovies = flow(
   groupBy(({ fiveStarRating }) =>
@@ -20,6 +22,7 @@ const partitionMovies = flow(
 );
 
 const SortedRating = ({ movies, ...handlers }) => {
+  const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 
   const byRating = useMemo(() => partitionMovies(movies), [movies]);
@@ -29,14 +32,14 @@ const SortedRating = ({ movies, ...handlers }) => {
       ([stars, list]) => ({
         title: <FiveStarRating stars={stars} />,
         list,
-        ariaLabel: `${stars} Star`,
+        ariaLabel: t("list_grid:sorted_rating.stars", { stars }),
       })
     );
 
     return direction === sortDirection.ASC
       ? sectionDescriptors
       : sectionDescriptors.reverse();
-  }, [direction, byRating]);
+  }, [direction, byRating, t]);
 
   return (
     <span data-testid={sort.RATING}>

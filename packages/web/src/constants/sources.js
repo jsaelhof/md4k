@@ -1,5 +1,6 @@
 import { sources } from "md4k-constants";
 
+// This map is inserted into the common i18n namespace.
 export const sourceLabels = {
   [sources.NONE]: "None",
   [sources.NETFLIX]: "Netflix",

@@ -1,8 +1,12 @@
+import { useI18n } from "../../../../hooks/use-i18n";
 import SearchResult from "./components/poster-grid-item/poster-grid-item";
 import { Layout } from "./poster-grid.styles";
+import posterGridStrings from "./i18n/i18n";
 
-const PosterGrid = ({ movies, onSearchResultClick, info }) => (
-  <Layout aria-label="Search Results">
+const PosterGrid = ({ movies, onSearchResultClick, info }) => {
+  const { t } = useI18n(posterGridStrings);
+
+  <Layout aria-label={t("poster_grid:label")}>
     {movies.map((movie, i) => (
       <SearchResult
         key={movie.title}
@@ -14,7 +18,7 @@ const PosterGrid = ({ movies, onSearchResultClick, info }) => (
         info={info}
       />
     ))}
-  </Layout>
-);
+  </Layout>;
+};
 
 export default PosterGrid;

@@ -1,0 +1,37 @@
+{
+  "title": {
+    "label": "Title",
+    "validation": "Title is required"
+  },
+  "poster": {
+    "label": "Poster URL",
+    "validation": "Poster must start with http(s)://"
+  },
+  "background": {
+    "label": "Background URL",
+    "validation": "Background must start with http(s)://"
+  },
+  "year": {
+    "label": "Year",
+    "validation_length": "Year must be 4 digits",
+    "validation_value": "Year must be 19xx or 20xx format"
+  },
+  "runtime": {
+    "label": "Runtime",
+    "placeholder": "Mins or H:MM",
+    "validation": "Runtime must be in minutes or h:mm format"
+  },
+  "imdbID": {
+    "label": "IMDB ID",
+    "validation": "IMDB Id must be 'tt0000000' format"
+  },
+  "genre": {
+    "label": "Genre"
+  },
+  "source": {
+    "label": "Source"
+  },
+  "action": {
+    "cancel": "Cancel"
+  }
+}

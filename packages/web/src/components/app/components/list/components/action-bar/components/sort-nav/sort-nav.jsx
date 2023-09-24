@@ -8,13 +8,12 @@ import {
 } from "./sort-nav.styles";
 import { useNavigate } from "react-router-dom";
 import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-and-direction";
-import {
-  sort,
-  sortDirection,
-  sortLabels,
-} from "../../../../../../../../constants/sorts";
+import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
+import listStrings from "../../../../i18n/i18n";
 
 const SortNav = () => {
+  const { t } = useI18n(listStrings);
   const navigate = useNavigate();
   const { order, direction } = useOrderAndDirection();
 
@@ -50,7 +49,7 @@ const SortNav = () => {
             navigate(`/list/${resolveOrder(key).join("/")}`);
           }}
         >
-          {sortLabels[key]}
+          {t(`list:sort.${key}`)}
           {key === order && (
             <SortOrderIcon fontSize="small" style={sortOrderIcon} />
           )}

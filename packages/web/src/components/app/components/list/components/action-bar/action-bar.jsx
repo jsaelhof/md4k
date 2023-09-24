@@ -9,8 +9,11 @@ import {
   SecondaryActions,
 } from "./action-bar.styles";
 import { useNavigate } from "react-router-dom";
+import { useI18n } from "../../../../../../hooks/use-i18n";
+import listStrings from "../../i18n/i18n";
 
 const ActionBar = ({ disabled, onPick }) => {
+  const { t } = useI18n(listStrings);
   const includeLabel = useMediaQuery("(min-width: 790px)");
 
   const navigate = useNavigate();
@@ -24,13 +27,13 @@ const ActionBar = ({ disabled, onPick }) => {
 
             <SecondaryActions>
               <Button
-                aria-label="Add Movie"
+                aria-label={t("list:action_bar.add_movie")}
                 variant="outlined"
                 color="primary"
                 onClick={() => navigate("/add")}
               >
                 <AddToQueueIcon />
-                {includeLabel && "Add Movie"}
+                {includeLabel && t("list:action_bar.add_movie")}
               </Button>
               <SplitButton onPick={onPick} />
             </SecondaryActions>

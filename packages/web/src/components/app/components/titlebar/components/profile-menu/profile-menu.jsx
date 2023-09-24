@@ -12,8 +12,11 @@ import {
   ProfileName,
   ProfilePaper,
 } from "./profile-menu.styles";
+import { useI18n } from "../../../../../../hooks/use-i18n";
+import titlebarStrings from "../../i18n/i18n";
 
 const ProfileMenu = () => {
+  const { t } = useI18n(titlebarStrings);
   const anchorRef = useRef(null);
   const { user, logout } = useAuth0();
   const [open, setOpen] = useState(false);
@@ -56,7 +59,7 @@ const ProfileMenu = () => {
                 }}
                 variant="outlined"
               >
-                Logout
+                {t("titlebar:profile.logout")}
               </Button>
             </ProfileActions>
           </ProfilePaper>
