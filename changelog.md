@@ -1,3 +1,12 @@
+### PR #126 - #119: i18n
+##### 2023-09-28
+
+Implement localization in the app
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/126)
+
+----
+
 ### PR #125 - #124: convert form to react-hook-form
 ##### 2023-09-09
 
