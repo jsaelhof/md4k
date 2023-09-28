@@ -10,6 +10,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { sort, sortDirection } from "./constants/sorts";
+import { I18nextProvider } from "react-i18next";
+import i18n from "i18next";
+import { i18nextConfig } from "./i18next/i18next-config";
+
+// Setup the i18next instance
+i18nextConfig();
 
 const router = createBrowserRouter([
   {
@@ -105,7 +111,9 @@ ReactDOM.render(
       redirectUri={window.location.origin}
       audience={import.meta.env.VITE_AUTH0_AUDIENCE} // This is the audience of the API on Auth0, without this the token return will not be valid to access the API
     >
-      <RouterProvider router={router} />
+      <I18nextProvider i18n={i18n}>
+        <RouterProvider router={router} />
+      </I18nextProvider>
     </Auth0Provider>
   </ErrorBoundary>,
   document.getElementById("root")

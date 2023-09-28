@@ -10,6 +10,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import EmptyState from "../empty-state/empty-state";
 import { Button } from "@mui/material";
 import { filterMovies } from "../../../../utils/filter-movies";
+import { useI18n } from "../../../../hooks/use-i18n";
+import pickStrings from "./i18n/i18n";
 
 const useRandomPick = () => {
   const { movies, pick, setPick, clearPick } = useAppContext();
@@ -62,6 +64,7 @@ const useRandomPick = () => {
 };
 
 export const Pick = () => {
+  const { t } = useI18n(pickStrings);
   const { moviesById, clearPick } = useAppContext();
   const navigate = useNavigate();
 
@@ -81,11 +84,11 @@ export const Pick = () => {
       {error && (
         <EmptyState
           imgSrc="/images/rocket.png"
-          quote="&quot;There's one more thing we need to complete the plan. That guy's eye...&quot;"
-          message="There aren't any movies here to choose from. Head back to the list and try again."
+          quote={t("pick:quote")}
+          message={t("pick:message")}
           content={
             <Button variant="contained" onClick={() => navigate("/")}>
-              Back to Movies
+              {t("pick:action")}
             </Button>
           }
         />

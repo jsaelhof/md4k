@@ -1,3 +1,4 @@
+import { useI18n } from "../../../../hooks/use-i18n";
 import {
   active,
   Lock,
@@ -9,6 +10,7 @@ import {
   shadowStyles,
 } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
+import moviePosterStrings from "./i18n/i18n";
 
 const MoviePoster = ({
   movie,
@@ -19,6 +21,7 @@ const MoviePoster = ({
   variant,
   shadow,
 }) => {
+  const { t } = useI18n(moviePosterStrings);
   const [ref, visible] = useInViewRef();
 
   return (
@@ -31,7 +34,7 @@ const MoviePoster = ({
           height,
         },
       ]}
-      aria-label={`${movie.title} Poster`}
+      aria-label={t("movie_poster:label", { title: movie.title })}
       onClick={onClick}
       ref={ref}
     >
@@ -40,7 +43,9 @@ const MoviePoster = ({
         data-testid="fallback"
         sx={[variant === "zoom" && noPosterZoom, shadow && shadowStyles]}
       >
-        <div>{movie.title.length ? movie.title : "No Title"}</div>
+        <div>
+          {movie.title.length ? movie.title : t("movie_poster:no_title")}
+        </div>
       </NoPoster>
 
       <Poster

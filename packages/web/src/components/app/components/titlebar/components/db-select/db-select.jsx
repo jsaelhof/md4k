@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../../../../../../context/app-context";
 import { Select } from "./db-select.styles";
+import { useI18n } from "../../../../../../hooks/use-i18n";
+import titlebarStrings from "../../i18n/i18n";
 
 const NEW_LIST = "NEW_LIST";
 
 const DbSelect = () => {
+  const { t } = useI18n(titlebarStrings);
   const { lists, list, setList } = useAppContext();
   const navigate = useNavigate();
 
@@ -30,7 +33,7 @@ const DbSelect = () => {
               {list.label}
             </Button>
           )}
-          aria-label="Choose a List"
+          aria-label={t("titlebar:db_select.label")}
         >
           {lists.map((list) => (
             <MenuItem key={list.id} value={list.id}>
@@ -39,7 +42,7 @@ const DbSelect = () => {
           ))}
           <Divider variant="middle" />
           <MenuItem value={NEW_LIST} sx={{ fontStyle: "italic" }}>
-            + New List
+            {t("titlebar:db_select.new_list")}
           </MenuItem>
         </Select>
       )}

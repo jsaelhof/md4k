@@ -1,0 +1,16 @@
+{
+  "director": "Director",
+  "actions": {
+    "watch_trailer": "Watch Trailer",
+    "no_trailer": "No Trailer",
+    "add_movie": "Add Movie",
+    "stream_movie": "Stream Movie",
+    "torrent_search": "Torrent Search"
+  },
+  "footer": {
+    "tmdb": "TMDB",
+    "imdb": "IMDB",
+    "common_sense": "Common Sense Media",
+    "search": "Search {site}"
+  }
+}

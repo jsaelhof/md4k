@@ -1,0 +1,52 @@
+{
+  "empty": {
+    "quote": "\"These aren't the droids we're looking for.\"",
+    "message_1": "There are no movies on this list yet.",
+    "message_2": "Let's add one now!",
+    "action": "Add a Movie"
+  },
+  "detail_actions": {
+    "mark_watched": "Mark as Watched",
+    "unlock": "Unlock",
+    "lock": "Lock",
+    "delete": "Delete"
+  },
+  "sorted_added": {
+    "month": {
+      "title": "Added Recently",
+      "subtitle": "Less than 30 days on the list"
+    },
+    "quarter": {
+      "title": "Added A While Ago",
+      "subtitle": "Less than 90 days on the list"
+    },
+    "year": {
+      "title": "Added Within A Year",
+      "subtitle": "Less than 365 days on the list"
+    },
+    "beyond": {
+      "title": "A Long Time Ago",
+      "subtitle": "More than 365 days on the list"
+    }
+  },
+  "sorted_rating": {
+    "stars": "{stars} Star"
+  },
+  "sorted_runtime": {
+    "short": {
+      "title": "Short Movies",
+      "subtitle": "About an hour and a half"
+    },
+    "regular": {
+      "title": "Regular Movies",
+      "subtitle": "About two hours"
+    },
+    "long": {
+      "title": "Long Movies",
+      "subtitle": "More than two hours"
+    },
+    "unknown": {
+      "title": "No Runtime"
+    }
+  }
+}

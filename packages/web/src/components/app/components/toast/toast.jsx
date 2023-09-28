@@ -2,8 +2,11 @@ import { Button, IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppContext } from "../../../../context/app-context";
 import { useCallback } from "react";
+import { useI18n } from "../../../../hooks/use-i18n";
+import toastStrings from "./i18n/i18n";
 
 const Toast = () => {
+  const { t } = useI18n(toastStrings);
   const { toast, setToast } = useAppContext();
 
   const onClose = useCallback(() => {
@@ -24,7 +27,7 @@ const Toast = () => {
         <>
           {toast?.onUndo && (
             <Button color="secondary" size="small" onClick={toast.onUndo}>
-              UNDO
+              {t("toast:undo").toUpperCase()}
             </Button>
           )}
           <IconButton size="small" color="inherit" onClick={onClose}>

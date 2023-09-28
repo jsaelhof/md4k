@@ -4,6 +4,8 @@ import { useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
+import listGridStrings from "../../i18n/i18n";
 
 const partitionMovies = flow(
   groupBy((movie) => {
@@ -21,6 +23,7 @@ const partitionMovies = flow(
 );
 
 const SortedRuntime = ({ movies, ...handlers }) => {
+  const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 
   const { unknown, short, regular, long } = useMemo(
@@ -32,18 +35,18 @@ const SortedRuntime = ({ movies, ...handlers }) => {
     const sectionDescriptors = [
       {
         list: short,
-        title: "Short Movies",
-        subtitle: "About an hour and a half",
+        title: t("list_grid:sorted_runtime.short.title"),
+        subtitle: t("list_grid:sorted_runtime.short.subtitle"),
       },
       {
         list: regular,
-        title: "Regular Movies",
-        subtitle: "About two hours",
+        title: t("list_grid:sorted_runtime.regular.title"),
+        subtitle: t("list_grid:sorted_runtime.regular.subtitle"),
       },
       {
         list: long,
-        title: "Long Movies",
-        subtitle: "More than two hours",
+        title: t("list_grid:sorted_runtime.long.title"),
+        subtitle: t("list_grid:sorted_runtime.long.subtitle"),
       },
     ];
 
@@ -51,9 +54,9 @@ const SortedRuntime = ({ movies, ...handlers }) => {
       ...(direction === sortDirection.ASC
         ? sectionDescriptors
         : sectionDescriptors.reverse()),
-      { list: unknown, title: "No Runtime" },
+      { list: unknown, title: t("list_grid:sorted_runtime.unknown.title") },
     ];
-  }, [direction, long, regular, short, unknown]);
+  }, [direction, long, regular, short, t, unknown]);
 
   return (
     <span data-testid={sort.RUNTIME}>

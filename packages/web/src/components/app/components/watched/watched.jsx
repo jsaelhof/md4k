@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import isNil from "lodash/isNil";
 
 import { StackedContainer, NoMoviesFound } from "./watched.styles";
-import { errorMessage } from "../../../../constants/error-messages";
 import DeleteDialog from "../delete-dialog/delete-dialog";
 import ErrorDialog from "../error-dialog/error-dialog";
 import WatchedMovie from "./components/watched-movie/watched-movie";
@@ -17,11 +16,14 @@ import {
 import { sortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
-import {useGetWatchedMovies} from "../../../../graphql/queries/get-watched-movies.js";
+import { useGetWatchedMovies } from "../../../../graphql/queries/get-watched-movies.js";
+import { useI18n } from "../../../../hooks/use-i18n";
+import watchedStrings from "./i18n/i18n";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
 export const Watched = () => {
+  const { t } = useI18n(watchedStrings);
   const { list } = useAppContext();
   const { watchedMovies } = useGetWatchedMovies(list);
   const [error, setError] = useState(null);
@@ -47,7 +49,7 @@ export const Watched = () => {
       if (
         watchedMovies?.length > 0 &&
         documentElement.scrollHeight - documentElement.scrollTop ===
-        documentElement.clientHeight
+          documentElement.clientHeight
       ) {
         setInfiniteLoadPointer(
           Math.min(
@@ -113,14 +115,14 @@ export const Watched = () => {
       ) : searchTerm ? (
         <NoMoviesFound>
           <MovieRemove />
-          <div>No movies found.</div>
-          <div>Please try a different search.</div>
+          <div>{t("watched:not_found.message_1")}</div>
+          <div>{t("watched:not_found.message_2")}</div>
         </NoMoviesFound>
       ) : null}
 
       <DeleteDialog
         open={!isNil(deleteMovie)}
-        content={`'${deleteMovie?.title}' will be removed from the Watched Movies list`}
+        content={t("watched:delete.will_remove", { title: deleteMovie?.title })}
         onCancel={() => setDeleteMovie(null)}
         onConfirm={() => {
           removeMovieMutation(removeMovieOptions(deleteMovie));
@@ -130,9 +132,8 @@ export const Watched = () => {
 
       <ErrorDialog
         open={!!error}
-        content={
-          errorMessage[error] || errorMessage.UNKNOWN.replace("%%", error)
-        }
+        content={t("watched:error_removing")}
+        debug={error}
         onConfirm={() => setError(null)}
       />
     </>

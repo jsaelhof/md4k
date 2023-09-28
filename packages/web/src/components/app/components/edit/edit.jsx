@@ -7,6 +7,8 @@ import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
+import { useI18n } from "../../../../hooks/use-i18n.js";
+import editStrings from "./i18n/i18n";
 
 export const Edit = () => {
   const params = useParams();
@@ -14,6 +16,7 @@ export const Edit = () => {
   const [movie, setMovie] = useState();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const { t } = useI18n(editStrings);
 
   useEffect(() => {
     if (movies) {
@@ -29,7 +32,7 @@ export const Edit = () => {
 
   const [editMovieMutation] = useEditMovie({
     onCompleted: ({ editMovie: movie }) => {
-      setToast({ message: `Updated '${movie.title}'` });
+      setToast({ message: t("edit:confirm_edit", { title: movie.title }) });
       navigate("/");
     },
     onError: ({ message }) => {
@@ -69,7 +72,7 @@ export const Edit = () => {
 
         {movie ? (
           <ManualMovieForm
-            actionLabel="Save"
+            actionLabel={t("edit:action_save")}
             ActionIcon={Check}
             initialState={movie}
             onChange={onEditMovie}
@@ -77,7 +80,7 @@ export const Edit = () => {
           />
         ) : (
           <NotFoundLayout>
-            Unable to find a movie with id {params.movieId}
+            {t("edit:missing_id", { movieId: params.movieId })}
           </NotFoundLayout>
         )}
       </Layout>
@@ -85,7 +88,8 @@ export const Edit = () => {
       {error && (
         <ErrorDialog
           open={!!error}
-          content="We were not able to add the movie to the list."
+          content={t("edit:error_adding")}
+          debug={error}
           onConfirm={() => setError(null)}
         />
       )}

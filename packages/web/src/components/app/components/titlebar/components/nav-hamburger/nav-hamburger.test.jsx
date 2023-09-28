@@ -57,7 +57,7 @@ describe("nav-hamburger", () => {
     await user.click(screen.getByTestId("MenuIcon"));
 
     expect(
-      screen.getByRole("menuitem", { name: "Pick again" })
+      screen.getByRole("menuitem", { name: "Pick Again" })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("menuitem", { name: "Movies" })

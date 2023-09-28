@@ -16,18 +16,22 @@ import { Countdown } from "./components/countdown/countdown";
 import ActionBar from "./components/action-bar/action-bar";
 import ListGrid from "./components/list-grid/list-grid";
 import ErrorDialog from "../error-dialog/error-dialog";
-import { errorMessage } from "../../../../constants/error-messages";
 import map from "lodash/map";
+import { useI18n } from "../../../../hooks/use-i18n";
+import listStrings from "./i18n/i18n";
 
 export const List = () => {
   const navigate = useNavigate();
   const { list, movies, lists, setToast } = useAppContext();
   const [error, setError] = useState(null);
+  const { t } = useI18n(listStrings);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
       setToast({
-        message: `Moved '${movie.title}' back to movies list`,
+        message: t("list:moved_back_to_movie_list", {
+          movieTitle: movie.title,
+        }),
       });
     },
   });
@@ -35,7 +39,7 @@ export const List = () => {
   const [markWatchedMutation] = useMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
       setToast({
-        message: `Moved '${movie.title}' to watched list`,
+        message: t("list:moved_to_watched_list", { movieTitle: movie.title }),
         onUndo: () => {
           undoMarkWatchedMutation(undoMarkWatchedOptions(movie, list));
         },
@@ -125,9 +129,8 @@ export const List = () => {
 
       <ErrorDialog
         open={!!error}
-        content={
-          errorMessage[error] || errorMessage.UNKNOWN.replace("%%", error)
-        }
+        content={t("list:error_removing")}
+        debug={error}
         onConfirm={() => setError(null)}
       />
     </>

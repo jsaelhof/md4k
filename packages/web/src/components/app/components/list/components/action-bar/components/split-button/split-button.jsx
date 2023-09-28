@@ -18,64 +18,60 @@ import {
 } from "./split-button.styles";
 import { filterMovies } from "../../../../../../../../utils/filter-movies";
 import { useAppContext } from "../../../../../../../../context/app-context";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
+import listStrings from "../../../../i18n/i18n";
 
 const splitButtonItems = [
   {
-    value: 0,
-    label: "Pick a Short Movie",
+    value: "short",
     options: { maxRuntime: 6000 },
     Icon: ClockFastIcon,
   },
   {
-    value: 1,
-    label: "Pick a Regular Movie",
+    value: "regular",
     options: { minRuntime: 6001, maxRuntime: 7800 },
     Icon: ClockIcon,
   },
   {
-    value: 2,
-    label: "Pick a Long Movie",
+    value: "long",
     options: { minRuntime: 7801 },
     Icon: TimerSandIcon,
   },
   {
-    value: 3,
-    label: "Added This Month",
+    value: "month",
     options: { maxAdded: 30 },
     Icon: CalendarWeek,
   },
   {
-    value: 4,
-    label: "Added Within 90 Days",
+    value: "three_month",
     options: { maxAdded: 90 },
     Icon: CalendarText,
   },
   {
-    value: 5,
-    label: "Added Within A Year",
+    value: "year",
     options: { maxAdded: 365 },
     Icon: CalendarMonth,
   },
   {
-    value: 6,
-    label: "Added Long Ago",
+    value: "long_ago",
     options: { minAdded: 365 },
     Icon: CalendarClock,
   },
 ];
 
 const SplitButton = ({ onPick }) => {
+  const { t } = useI18n(listStrings);
   const { movies } = useAppContext();
   const [openSplitButton, setOpenSplitButton] = useState(false);
 
   return (
-    <SplitButtonContainer aria-label="Pick A Movie">
+    <SplitButtonContainer aria-label={t("list:pick.title")}>
       <MainButton variant="contained" onClick={() => onPick()}>
         <RandomIcon src="/images/random.png" width="20px" height="18px" />
-        Pick A Movie
+        {t("list:pick.title")}
       </MainButton>
       <Button
-        aria-label="Pick Menu"
+        aria-label={t("list:pick.label")}
         variant="contained"
         size="small"
         onClick={() => setOpenSplitButton(true)}
@@ -87,14 +83,14 @@ const SplitButton = ({ onPick }) => {
         <SplitMenu>
           <ClickAwayListener onClickAway={() => setOpenSplitButton(false)}>
             <MenuList id="split-button-menu">
-              {splitButtonItems.map(({ value, label, Icon, options }) => (
+              {splitButtonItems.map(({ value, Icon, options }) => (
                 <MenuItem
                   key={value}
                   onClick={() => onPick(options)}
                   disabled={filterMovies(movies, options).length === 0}
                 >
                   {<MenuIcon as={Icon} />}
-                  {label}
+                  {t(`list:pick.${value}`)}
                 </MenuItem>
               ))}
             </MenuList>

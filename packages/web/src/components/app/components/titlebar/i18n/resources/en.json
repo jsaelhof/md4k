@@ -1,0 +1,20 @@
+{
+  "pick_again": "Pick Again",
+  "db_select": {
+    "new_list": "+ New List",
+    "label": "Choose a List"
+  },
+  "logo": {
+    "label": "Movie Decider 4000"
+  },
+  "nav": {
+    "action_return_movies": "Return to Movies",
+    "action_pick_again": "Pick Again",
+    "action_watched": "Watched",
+    "action_movies": "Movies",
+    "action_new_list": "New List"
+  },
+  "profile": {
+    "logout": "Logout"
+  }
+}

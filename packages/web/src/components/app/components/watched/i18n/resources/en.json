@@ -1,0 +1,18 @@
+{
+  "not_found": {
+    "message_1": "No movies found.",
+    "message_2": "Please try a different search."
+  },
+  "delete": {
+    "will_remove": "{title} will be removed from the Watched Movies list"
+  },
+  "toolbar": {
+    "showing_small": "{visibleCount} of {count} movies",
+    "showing_large": "Showing {visibleCount} of {count} movies watched",
+    "count_small": "{count} movies",
+    "count_large": "{count} movies watched",
+    "search_placeholder": "Search",
+    "search_label": "Search"
+  },
+  "error_removing": "We were unable to remove that movie."
+}

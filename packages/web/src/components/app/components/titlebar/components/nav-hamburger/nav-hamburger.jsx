@@ -13,6 +13,8 @@ import {
   NavMenu,
   RefreshIcon,
 } from "./nav-hamburger.styles";
+import { useI18n } from "../../../../../../hooks/use-i18n";
+import titlebarStrings from "../../i18n/i18n";
 
 // The MUI Clickaway Listener component passes props like autoFocus and tabIndex through which causes
 // console log errors and excess output in unit test logs. I couldn't find a workaround even though it has
@@ -30,6 +32,7 @@ export const MuiClickAwayListenerWrapper = ({
 }) => <ClickAwayListener {...props}>{children}</ClickAwayListener>;
 
 const NavHamburger = () => {
+  const { t } = useI18n(titlebarStrings);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { lists, setList, clearPick, list } = useAppContext();
@@ -63,7 +66,7 @@ const NavHamburger = () => {
                     handleClose();
                   }}
                 >
-                  <RefreshIcon /> Pick again
+                  <RefreshIcon /> {t("titlebar:nav.action_pick_again")}
                 </MenuItem>
 
                 <MenuDivider variant="middle" />
@@ -77,7 +80,7 @@ const NavHamburger = () => {
                   handleClose();
                 }}
               >
-                <MovieIcon /> Movies
+                <MovieIcon /> {t("titlebar:nav.action_movies")}
               </MenuItem>
             )}
 
@@ -91,7 +94,7 @@ const NavHamburger = () => {
                         handleClose();
                       }}
                     >
-                      <EyeIcon /> Watched
+                      <EyeIcon /> {t("titlebar:nav.action_watched")}
                     </MenuItem>
                   )}
 
@@ -116,7 +119,7 @@ const NavHamburger = () => {
                     handleClose();
                   }}
                 >
-                  <AddListIcon /> New List
+                  <AddListIcon /> {t("titlebar:nav.action_new_list")}
                 </MenuItem>
               </>
             )}

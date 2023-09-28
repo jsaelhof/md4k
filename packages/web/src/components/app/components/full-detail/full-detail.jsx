@@ -8,7 +8,7 @@ import CloseThick from "mdi-material-ui/CloseThick";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
 import { searchStreaming, searchTMDB } from "../../../../utils/search";
-import { genreLabels, sources } from "md4k-constants";
+import { sources } from "md4k-constants";
 import { useGetThirdPartyFullDetails } from "../../../../graphql/queries";
 import {
   Backdrop,
@@ -36,12 +36,14 @@ import Trailer from "./components/trailer/trailer";
 import ScrollArea from "./components/scroll-area/scroll-area";
 import Footer from "./components/footer/footer";
 import { StarRatingLayout } from "./components/star-rating-layout/star-rating-layout";
-import { sourceLabels, sourceLogosLarge } from "../../../../constants/sources";
+import { sourceLogosLarge } from "../../../../constants/sources";
 import pick from "lodash/pick";
 import { ActionsAdd } from "./components/actions-add/actions-add";
 import { ActionsView } from "./components/actions-view/actions-view";
 import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
+import { useI18n } from "../../../../hooks/use-i18n.js";
+import fullDetailStrings from "./i18n/i18n";
 
 const FullDetail = ({
   movie,
@@ -51,6 +53,7 @@ const FullDetail = ({
   onAddMovie,
   onChangeBackdrop,
 }) => {
+  const { t } = useI18n(fullDetailStrings);
   const small = useMediaQuery("(max-width: 750px)");
   const noPlotScroll = useMediaQuery("(max-width: 660px), (max-height: 414px)");
   const trailerOverlay = useMediaQuery(
@@ -177,14 +180,14 @@ const FullDetail = ({
         <MovieData>
           <div>{formatRuntime(data.runtime)}</div>
           <div>{movie.year}</div>
-          <div>{genreLabels[movie.genre]}</div>
+          <div>{t(`common:genres.${movie.genre}`)}</div>
           <Rated rated={data.rated} />
         </MovieData>
 
         <Source
           sx={[canStream && streamable]}
           src={sourceLogosLarge[source]}
-          alt={sourceLabels[source]}
+          alt={t(`common:sources.${source}`)}
           onClick={() =>
             canStream &&
             window.open(searchStreaming(movie.title, source), "movieView")
@@ -227,7 +230,11 @@ const FullDetail = ({
               <Cast key={castMember.id} {...castMember} />
             ))}
             {(data.director || []).slice(0, 1).map((director) => (
-              <Cast key={director.id} {...director} character="Director" />
+              <Cast
+                key={director.id}
+                {...director}
+                character={t("full_detail:director")}
+              />
             ))}
           </>
         </CastLayout>

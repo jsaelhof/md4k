@@ -1,0 +1,6 @@
+{
+  "confirm_edit": "Updated {title}",
+  "action_save": "Save",
+  "missing_id": "Unable to find a movie with id {movieId}",
+  "error_adding": "We were not able to add the movie to the list."
+}
