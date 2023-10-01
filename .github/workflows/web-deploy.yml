@@ -1,6 +1,9 @@
 name: web-deploy
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - 127-aws-deploy
   
 jobs:
   build:
