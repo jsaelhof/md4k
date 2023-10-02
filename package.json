@@ -15,7 +15,8 @@
     "test": "yarn workspaces foreach -vpi run vitest",
     "test:api": "cd packages/api && run vitest",
     "test:web": "cd packages/web && run vitest",
-    "coverage": "yarn workspaces foreach -vpi run coverage"
+    "coverage": "yarn workspaces foreach -vpi run coverage",
+    "build:web": "yarn workspace web build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.0",
