@@ -23,8 +23,8 @@ jobs:
       - name: Build web
         run: yarn build:web
  
-      - run: ls -al
-      - run: ls -al ./dist
+      - name: Log build
+        run: ls -al ./packages/web/dist
           
       #- name: Upload production-ready build files
       #  uses: actions/upload-artifact@v3
