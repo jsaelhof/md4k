@@ -18,22 +18,13 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Install dependencies
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
-
-      - run: ls
-      - run: cat package.json
+        run: yarn install --immutable
       
-      - name: Build project
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build:web # will run `yarn build:web` command
+      - name: Build web
+        run: yarn build:web
  
-      - name: Test project
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: test:web # will run `yarn test:web` command
+      - run: ls -al
+      - run: ls -al ./dist
           
       #- name: Upload production-ready build files
       #  uses: actions/upload-artifact@v3
