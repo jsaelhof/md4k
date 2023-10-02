@@ -13,10 +13,10 @@
     "prepare": "husky install",
     "lintstaged": "yarn workspaces foreach -vp run lint-staged",
     "test": "yarn workspaces foreach -vpi run vitest",
-    "test:api": "cd packages/api && run vitest",
-    "test:web": "cd packages/web && run vitest",
+    "test:api": "yarn workspace md4k-api test",
+    "test:web": "yarn workspace md4k-web test",
     "coverage": "yarn workspaces foreach -vpi run coverage",
-    "build:web": "yarn workspace web build"
+    "build:web": "yarn workspace md4k-web build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.0",
