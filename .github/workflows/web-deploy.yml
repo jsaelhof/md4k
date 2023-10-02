@@ -25,12 +25,12 @@ jobs:
       - name: Build project
         uses: borales/actions-yarn@v4
         with:
-          cmd: build # will run `yarn build` command
+          cmd: build:web # will run `yarn build:web` command
  
       - name: Test project
         uses: borales/actions-yarn@v4
         with:
-          cmd: test # will run `yarn test` command
+          cmd: test:web # will run `yarn test:web` command
           
       #- name: Upload production-ready build files
       #  uses: actions/upload-artifact@v3
