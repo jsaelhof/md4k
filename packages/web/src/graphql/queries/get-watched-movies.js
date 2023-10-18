@@ -17,7 +17,8 @@ export const GET_WATCHED_MOVIES = gql`
 export const useGetWatchedMovies = (list) => {
   const { data, ...rest } = useQuery(GET_WATCHED_MOVIES, {
     skip: !list,
-    variables: { list: list?.id }
+    variables: { list: list?.id },
+    fetchPolicy: "cache-and-network",
   });
 
   return {

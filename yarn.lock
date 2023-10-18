@@ -3660,6 +3660,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apollo3-cache-persist@npm:^0.14.1":
+  version: 0.14.1
+  resolution: "apollo3-cache-persist@npm:0.14.1"
+  peerDependencies:
+    "@apollo/client": ^3.2.5
+  checksum: 9f286707c9ecc628c0a44117e5ed67ccdb2a5befe28029aba69724595c2ddacfe47c43271d7607a4046cb5167f25da5f81c27579413c95254dfdb91039e9fc1c
+  languageName: node
+  linkType: hard
+
 "aproba@npm:^1.0.3 || ^2.0.0":
   version: 2.0.0
   resolution: "aproba@npm:2.0.0"
@@ -7342,6 +7351,7 @@ __metadata:
     "@vitejs/plugin-react": ^2.0.0
     "@vitest/coverage-c8": ^0.33.0
     "@vitest/ui": ^0.22.1
+    apollo3-cache-persist: ^0.14.1
     css-mediaquery: ^0.1.2
     date-fns: ^2.29.2
     eslint-plugin-jsx-a11y: ^6.6.1

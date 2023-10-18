@@ -3,7 +3,7 @@ import MoviePoster from "../../../movie-poster/movie-poster";
 import { Layout, Title, Info } from "./poster-grid-item.styles";
 import { format, parseISO } from "date-fns";
 
-const SearchResult = ({ height, movie, delay, onClick, info }) => {
+const PosterGridItem = ({ height, movie, delay, onClick, info }) => {
   const mountSpring = useSpring({
     from: {
       opacity: 0,
@@ -31,4 +31,4 @@ const SearchResult = ({ height, movie, delay, onClick, info }) => {
   );
 };
 
-export default SearchResult;
+export default PosterGridItem;

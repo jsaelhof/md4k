@@ -7,7 +7,10 @@ const AppContext = createContext({});
 const AppProvider = ({ children }) => {
   const [list, _setList] = useState();
   const { lists } = useGetLists({ onCompleted: _setList });
-  const { movies, moviesById } = useGetMovies(list);
+
+  // Initialize using the list but if it's undefined and "lists" has data (from the persisted cache) use that avoid waiting for useGetLists to complete.
+  // It complets after the network part of cache-and-network is done so its late if there is cached data available. We want to take advantage of that to load really fast.
+  const { movies, moviesById } = useGetMovies(list ?? lists?.[0]);
   const [toast, setToast] = useState(null);
   const [pick, setPick] = useState(null);
 

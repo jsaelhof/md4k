@@ -31,6 +31,7 @@ export const useGetThirdPartySummaryDetails = (
     onCompleted: ({ thirdPartyMovie }) => {
       onCompleted(thirdPartyMovie);
     },
+    fetchPolicy: "cache-and-network",
   });
 
   return {
