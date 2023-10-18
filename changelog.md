@@ -1,3 +1,12 @@
+### PR #129 - #128: persist cache to local storage
+##### 2023-10-18
+
+Add a persisted cache (saved to local storage) that dramatically speeds up loading on subsequent visits to the site.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/129)
+
+----
+
 ### PR #126 - #119: i18n
 ##### 2023-09-28
 
