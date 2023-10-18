@@ -45,6 +45,7 @@ export const useGetThirdPartyFullDetails = (movie) => {
     variables: {
       imdbID: movie.imdbID,
     },
+    fetchPolicy: "cache-and-network",
   });
 
   return {

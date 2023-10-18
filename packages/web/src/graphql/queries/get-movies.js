@@ -31,6 +31,7 @@ export const useGetMovies = (list) => {
   const { data, ...rest } = useQuery(GET_MOVIES, {
     skip: !list,
     variables: { list: list?.id },
+    fetchPolicy: "cache-and-network",
   });
 
   return {

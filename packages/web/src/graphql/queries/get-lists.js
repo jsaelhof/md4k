@@ -14,6 +14,7 @@ export const useGetLists = ({ onCompleted }) => {
     onCompleted: ({ lists }) => {
       onCompleted(lists[0]);
     },
+    fetchPolicy: "cache-and-network",
   });
 
   return { ...data, ...rest };

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -10,62 +10,60 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { useAuth0 } from "@auth0/auth0-react";
+import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
 export const AuthenticatedApolloProvider = ({
   children,
 }: PropsWithChildren) => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-        switch (extensions.code) {
-          case "UNAUTHORIZED":
-            console.log(
-              `[GraphQL UNAUTHORIZED error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            );
-            break;
-          default:
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            );
-            break;
-        }
+  const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
+
+  useEffect(() => {
+    async function init() {
+      const errorLink = onError(({ graphQLErrors, networkError }) => {
+        if (graphQLErrors)
+          graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+            switch (extensions.code) {
+              case "UNAUTHORIZED":
+                console.log(
+                  `[GraphQL UNAUTHORIZED error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                );
+                break;
+              default:
+                console.log(
+                  `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                );
+                break;
+            }
+          });
+        if (networkError) console.log(`[Network error]: ${networkError}`);
       });
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-  });
 
-  const httpLink = new HttpLink({
-    uri: import.meta.env.VITE_GRAPHQL_URL,
-  });
+      const httpLink = new HttpLink({
+        uri: import.meta.env.VITE_GRAPHQL_URL,
+      });
 
-  const authLink = setContext(async (_, { headers, ...rest }) => {
-    let token;
-    try {
-      token = await getAccessTokenSilently();
-    } catch (error) {
-      console.log(error);
-    }
+      const authLink = setContext(async (_, { headers, ...rest }) => {
+        let token;
+        try {
+          token = await getAccessTokenSilently();
+        } catch (error) {
+          console.log(error);
+        }
 
-    if (!token) return { headers, ...rest };
+        if (!token) return { headers, ...rest };
 
-    return {
-      ...rest,
-      headers: {
-        ...headers,
-        authorization: `Bearer ${token}`,
-      },
-    };
-  });
+        return {
+          ...rest,
+          headers: {
+            ...headers,
+            authorization: `Bearer ${token}`,
+          },
+        };
+      });
 
-  const client = React.useRef<
-    ApolloClient<NormalizedCacheObject> | undefined
-  >();
-
-  if (!client.current) {
-    client.current = new ApolloClient({
-      link: from([errorLink, authLink, httpLink]),
-      cache: new InMemoryCache({
+      const cache = new InMemoryCache({
         // This whole typePolicies object is required to prevent an warning when deleting a movie.
         // The warning comes from updating the cache with one less movie.
         // returning false for the merge function just tells it to just always use the new data (incoming).
@@ -94,9 +92,27 @@ export const AuthenticatedApolloProvider = ({
             keyFields: ["imdbID"],
           },
         },
-      }),
-    });
-  }
+      });
 
-  return <ApolloProvider client={client.current}>{children}</ApolloProvider>;
+      await persistCache({
+        cache,
+        storage: new LocalStorageWrapper(window.localStorage),
+        debug: true,
+      });
+
+      setClient(
+        new ApolloClient({
+          link: from([errorLink, authLink, httpLink]),
+          cache,
+        })
+      );
+    }
+
+    init().catch(console.error);
+  }, [getAccessTokenSilently]);
+
+  // Note: While client is undefined, I can return some default HTML like <H2>Loading...</H2>.
+  return !client ? null : (
+    <ApolloProvider client={client}>{children}</ApolloProvider>
+  );
 };

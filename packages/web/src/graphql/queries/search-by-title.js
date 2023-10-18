@@ -20,6 +20,7 @@ export const SEARCH_BY_TITLE = gql`
 export const useSearchByTitle = ({ onCompleted }) => {
   const [search] = useLazyQuery(SEARCH_BY_TITLE, {
     onCompleted: ({ searchByTitle }) => onCompleted(searchByTitle),
+    fetchPolicy: "cache-and-network",
   });
   return (title, year, page) => search({ variables: { title, year, page } });
 };

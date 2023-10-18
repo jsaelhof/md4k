@@ -21,6 +21,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
     "@mui/styles": "^5.10.2",
+    "apollo3-cache-persist": "^0.14.1",
     "date-fns": "^2.29.2",
     "graphql": "^16.5.0",
     "i18next": "^23.5.1",
