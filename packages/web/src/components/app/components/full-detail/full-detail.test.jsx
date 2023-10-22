@@ -83,6 +83,28 @@ describe("full-detail", () => {
     ).toBeInTheDocument();
   });
 
+  it("should render the None when genre is undefined", async ({ props }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, genre: undefined }} />,
+      {
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+      }
+    );
+
+    expect(await screen.findByText("None")).toBeInTheDocument();
+  });
+
+  it("should render the None when genre is null", async ({ props }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, genre: null }} />,
+      {
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+      }
+    );
+
+    expect(await screen.findByText("None")).toBeInTheDocument();
+  });
+
   it("should search when the movie poster is clicked", async ({
     props,
     user,
