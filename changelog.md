@@ -1,3 +1,12 @@
+### PR #131 - #130: fix localization token
+##### 2023-10-22
+
+Fix the display case when the genre is undefined or null and add additional tests
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/131)
+
+----
+
 ### PR #129 - #128: persist cache to local storage
 ##### 2023-10-18
 
