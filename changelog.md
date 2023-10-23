@@ -1,3 +1,12 @@
+### PR #133 - #132: update display of no genre
+##### 2023-10-23
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/133)
+
+----
+
 ### PR #131 - #130: fix localization token
 ##### 2023-10-22
 
