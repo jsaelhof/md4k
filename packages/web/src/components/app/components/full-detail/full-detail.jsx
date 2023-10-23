@@ -5,7 +5,6 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import { useSpring } from "react-spring";
 import CloseThick from "mdi-material-ui/CloseThick";
-import { genres } from "md4k-constants";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
 import { searchStreaming, searchTMDB } from "../../../../utils/search";
@@ -181,7 +180,11 @@ const FullDetail = ({
         <MovieData>
           <div>{formatRuntime(data.runtime)}</div>
           <div>{movie.year}</div>
-          <div>{t(`common:genres.${movie.genre ?? genres.NONE}`)}</div>
+          <div>
+            {movie.genre
+              ? t(`common:genres.${movie.genre}`)
+              : t("full_detail:no_genre")}
+          </div>
           <Rated rated={data.rated} />
         </MovieData>
 

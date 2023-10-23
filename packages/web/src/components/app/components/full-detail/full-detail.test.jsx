@@ -91,7 +91,7 @@ describe("full-detail", () => {
       }
     );
 
-    expect(await screen.findByText("None")).toBeInTheDocument();
+    expect(await screen.findByText("No Genre")).toBeInTheDocument();
   });
 
   it("should render the None when genre is null", async ({ props }) => {
@@ -102,7 +102,7 @@ describe("full-detail", () => {
       }
     );
 
-    expect(await screen.findByText("None")).toBeInTheDocument();
+    expect(await screen.findByText("No Genre")).toBeInTheDocument();
   });
 
   it("should search when the movie poster is clicked", async ({
