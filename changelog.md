@@ -1,3 +1,12 @@
+### PR #135 - #134: Load images using requestIdleCallback when out of view
+##### 2023-11-10
+
+Adds an opt-in flag that loads the poster image during an idle callback if offscreen
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/135)
+
+----
+
 ### PR #133 - #132: update display of no genre
 ##### 2023-10-23
 
