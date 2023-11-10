@@ -11,6 +11,9 @@ import {
 } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import moviePosterStrings from "./i18n/i18n";
+import { useCallback, useState } from "react";
+
+const IDLE_TIMEOUT = 10000;
 
 const MoviePoster = ({
   movie,
@@ -20,9 +23,31 @@ const MoviePoster = ({
   noRel = false,
   variant,
   shadow,
+  delayLoadingWhenNotInView = false,
 }) => {
   const { t } = useI18n(moviePosterStrings);
-  const [ref, visible] = useInViewRef();
+
+  // Tracks if the poster is in view
+  const [ref, inView] = useInViewRef();
+
+  // Tracks when the poster image should load
+  const [visible, setVisible] = useState(inView || !delayLoadingWhenNotInView);
+
+  // If the poster image doesn't load immediately, wait for some idle time and the nstart loading it even if it hasn't come into view yet.
+  const onIdle = useCallback(
+    (deadline) => {
+      if (!visible) {
+        if (deadline.didTimeout || deadline.timeRemaining() > 30) {
+          setVisible(true);
+        } else {
+          requestIdleCallback(onIdle, { timeout: IDLE_TIMEOUT });
+        }
+      }
+    },
+    [visible]
+  );
+
+  requestIdleCallback(onIdle, { timeout: IDLE_TIMEOUT });
 
   return (
     <PosterLayout
@@ -52,7 +77,9 @@ const MoviePoster = ({
         data-testid="poster"
         sx={[
           {
-            ...(visible && { backgroundImage: `url(${movie.poster})` }),
+            ...((inView || visible) && {
+              backgroundImage: `url(${movie.poster})`,
+            }),
           },
           onClick && active,
         ]}

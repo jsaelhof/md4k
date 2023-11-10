@@ -30,6 +30,9 @@ beforeAll(() => {
   vi.mock("rooks/dist/esm/hooks/useInViewRef", () => ({
     useInViewRef: vi.fn().mockReturnValue([null, true]),
   }));
+
+  // Stub the requestIdleCallback
+  vi.stubGlobal("requestIdleCallback", vi.fn());
 });
 
 beforeEach((context) => {

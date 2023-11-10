@@ -86,7 +86,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
         data-testid={"listItem"}
       >
         <MoviePosterContainer>
-          <MoviePoster movie={movie} />
+          <MoviePoster movie={movie} delayLoadingWhenNotInView />
         </MoviePosterContainer>
 
         <MovieDetailPositioner
@@ -99,7 +99,12 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
         >
           <MovieDetail style={posterSpring}>
             <OverflowWrapper>
-              <MoviePoster movie={movie} height={375} variant="zoom" />
+              <MoviePoster
+                movie={movie}
+                height={375}
+                variant="zoom"
+                delayLoadingWhenNotInView
+              />
 
               <InfoLayout>
                 <StarRatingLayout
