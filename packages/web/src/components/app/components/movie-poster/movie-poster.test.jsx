@@ -34,6 +34,7 @@ describe("movie-poster", () => {
         },
         background: "http://image.tmdb.org/t/2.jpg",
       },
+      delayLoadingWhenNotInView: true,
       onClick: vi.fn(),
     };
   });
@@ -63,6 +64,14 @@ describe("movie-poster", () => {
 
     expect(screen.getByTestId("poster")).toHaveStyle({
       "background-image": "",
+    });
+    expect(screen.getByText(/Bourne/)).toBeInTheDocument();
+  });
+
+  it("should render the poster when not delayed", ({ props }) => {
+    render(<MoviePoster {...props} delayLoadingWhenNotInView={false} />);
+    expect(screen.getByTestId("poster")).toHaveStyle({
+      "background-image": `url(${props.movie.poster})`,
     });
     expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
