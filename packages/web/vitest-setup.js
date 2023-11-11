@@ -5,7 +5,7 @@ import i18n from "i18next";
 import { globSync } from "glob";
 import { i18nextConfig } from "./src/i18next/i18next-config.js";
 
-// Setup the i18next instance
+// Setup the i18next instance.
 i18nextConfig();
 
 // Find all and load i18n.js bundles for the test environment.
