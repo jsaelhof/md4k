@@ -1,3 +1,12 @@
+### PR #137 - #136: revert requestIdleCallback use
+##### 2023-11-11
+
+making a dummy commit because the actual revert went straight to main but I need to make a pull request for it anyway.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/137)
+
+----
+
 ### PR #135 - #134: Load images using requestIdleCallback when out of view
 ##### 2023-11-10
 
