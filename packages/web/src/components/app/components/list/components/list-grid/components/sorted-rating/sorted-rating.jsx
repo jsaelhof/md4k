@@ -33,6 +33,7 @@ const SortedRating = ({ movies, ...handlers }) => {
         title: <FiveStarRating stars={stars} />,
         list,
         ariaLabel: t("list_grid:sorted_rating.stars", { stars }),
+        stars,
       })
     );
 

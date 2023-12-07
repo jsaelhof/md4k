@@ -4,6 +4,7 @@ export const sort = {
   RUNTIME: "runtime",
   GENRE: "genre",
   RATING: "rating",
+  SOURCE: "source",
 };
 
 export const sortDirection = {

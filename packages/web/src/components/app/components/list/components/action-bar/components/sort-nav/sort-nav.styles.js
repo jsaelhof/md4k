@@ -31,10 +31,17 @@ export const SortNavListItem = styled("li")(
   })
 );
 
-export const sortNavSelectedItem = ({ palette }) => ({
+export const sortNavSelectedItem = ({ breakpoints, palette }) => ({
   fontSize: "1rem",
   color: "initial",
   borderBottom: `1px solid ${palette.accent}`,
+
+  // In the current nav, there is a tiny issue with the runtime item (because its the the longest).
+  // When active, it takes up just a bit too much room at 375px and causes the direction arrow to line break.
+  // This just fixes that and maybe be able to be removed in the future if the nav items change.
+  [breakpoints.down(414)]: {
+    fontSize: "0.95rem",
+  },
 });
 
 export const sortOrderIcon = {

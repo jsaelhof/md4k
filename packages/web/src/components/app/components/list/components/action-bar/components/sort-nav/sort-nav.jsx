@@ -39,22 +39,26 @@ const SortNav = () => {
 
   return (
     <SortNavList>
-      {Object.values(sort).map((key) => (
-        <SortNavListItem
-          key={key}
-          data-active={key === order}
-          data-sort={key === order ? direction : undefined}
-          sx={[key === order && sortNavSelectedItem]}
-          onClick={() => {
-            navigate(`/list/${resolveOrder(key).join("/")}`);
-          }}
-        >
-          {t(`list:sort.${key}`)}
-          {key === order && (
-            <SortOrderIcon fontSize="small" style={sortOrderIcon} />
-          )}
-        </SortNavListItem>
-      ))}
+      {Object.values(sort)
+        // For the time being, remove the genre sort.
+        // There are too many sorts to fit at mobile size.
+        .filter((key) => key !== sort.GENRE)
+        .map((key) => (
+          <SortNavListItem
+            key={key}
+            data-active={key === order}
+            data-sort={key === order ? direction : undefined}
+            sx={[key === order && sortNavSelectedItem]}
+            onClick={() => {
+              navigate(`/list/${resolveOrder(key).join("/")}`);
+            }}
+          >
+            {t(`list:sort.${key}`)}
+            {key === order && (
+              <SortOrderIcon fontSize="small" style={sortOrderIcon} />
+            )}
+          </SortNavListItem>
+        ))}
     </SortNavList>
   );
 };
