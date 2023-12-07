@@ -1,3 +1,12 @@
+### PR #139 - #138: Add sorting by Source value
+##### 2023-12-07
+
+Adds a new sort for Source type. The new sort means there are now too many to fit at a couple of breakpoints, particularly mobile size. Rather than try to build an alternative nav presentation at that size, I decided to just hide the Genre sort for now since it is the least used. I may revisit adding it back in the future. I also cleaned up a couple of small bugs here.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/139)
+
+----
+
 ### PR #137 - #136: revert requestIdleCallback use
 ##### 2023-11-11
 
