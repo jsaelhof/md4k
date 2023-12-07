@@ -9,7 +9,8 @@
     "title": "Title",
     "runtime": "Runtime",
     "genre": "Genre",
-    "rating": "Rating"
+    "rating": "Rating",
+    "source": "Source"
   },
   "pick": {
     "title": "Pick A Movie",

@@ -5,6 +5,7 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import { useSpring } from "react-spring";
 import CloseThick from "mdi-material-ui/CloseThick";
+import isNil from "lodash/isNil";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
 import { searchStreaming, searchTMDB } from "../../../../utils/search";
@@ -80,7 +81,12 @@ const FullDetail = ({
     window.open(searchTMDB(movie.title), "moviedb");
   }, [movie]);
 
-  const source = movie.source || data.source || sources.NONE;
+  const source = !isNil(movie.source)
+    ? movie.source
+    : !isNil(data.source)
+    ? data.source
+    : sources.NONE;
+
   const canStream = ![sources.DVD, sources.NONE].includes(source);
 
   const backdrop = useMemo(

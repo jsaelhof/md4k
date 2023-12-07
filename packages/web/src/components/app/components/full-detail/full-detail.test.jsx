@@ -25,7 +25,7 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   },
   result: {
     data: {
-      thirdPartyMovie: buildThirdPartyMovieMock(),
+      thirdPartyMovie: buildThirdPartyMovieMock({ source: 7 }),
     },
   },
 };
@@ -66,6 +66,8 @@ describe("full-detail", () => {
       id: "saturday",
       label: "Saturday Night",
     };
+
+    window.open = vi.fn();
   });
 
   it("should render the movie details", async ({ props }) => {
@@ -109,8 +111,6 @@ describe("full-detail", () => {
     props,
     user,
   }) => {
-    window.open = vi.fn();
-
     renderWithProviders(<FullDetail {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -237,6 +237,76 @@ describe("full-detail", () => {
       expect.stringMatching(/netflix.*Bourne/),
       "movieView"
     );
+  });
+
+  it("should use the movie source when available", async ({ props }) => {
+    renderWithProviders(<FullDetail {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
+
+    expect(await screen.findByAltText(sourceLabels[1])).toBeInTheDocument();
+  });
+
+  it("should use the movie source when available and 0 (falsy)", async ({
+    props,
+  }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, source: 0 }} />,
+      {
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+      }
+    );
+
+    expect(await screen.findByAltText(sourceLabels[0])).toBeInTheDocument();
+  });
+
+  it("should use the third party data source when available and movie source is not", async ({
+    props,
+  }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, source: undefined }} />,
+      {
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+      }
+    );
+
+    expect(await screen.findByAltText(sourceLabels[7])).toBeInTheDocument();
+  });
+
+  it("should use the third party data source when it is 0 and movie source is not", async ({
+    props,
+  }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, source: undefined }} />,
+      {
+        mocks: [
+          {
+            ...GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+            result: { data: buildThirdPartyMovieMock({ source: 0 }) },
+          },
+        ],
+      }
+    );
+
+    expect(await screen.findByAltText(sourceLabels[0])).toBeInTheDocument();
+  });
+
+  it("should use source.NONE when both the movie and the third party data have no source", async ({
+    props,
+  }) => {
+    renderWithProviders(
+      <FullDetail {...props} movie={{ ...props.movie, source: undefined }} />,
+      {
+        mocks: [
+          {
+            ...GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK,
+            result: { data: buildThirdPartyMovieMock({ source: undefined }) },
+          },
+        ],
+      }
+    );
+
+    expect(await screen.findByAltText(sourceLabels[0])).toBeInTheDocument();
   });
 
   it("should not stream when the source logo is DVD", async ({

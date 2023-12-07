@@ -50,11 +50,11 @@ describe("list-grid", () => {
     expect(screen.getByTestId("runtime")).toBeInTheDocument();
   });
 
-  it("should render the genre list", ({ props }) => {
+  it("should render the source list", ({ props }) => {
     renderWithProviders(<ListGrid {...props} />, {
-      route: "/genre/asc",
+      route: "/source/asc",
     });
-    expect(screen.getByTestId("genre")).toBeInTheDocument();
+    expect(screen.getByTestId("source")).toBeInTheDocument();
   });
 
   it("should render the empty list when there are no movies", ({ props }) => {
