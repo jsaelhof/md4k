@@ -1,3 +1,12 @@
+### PR #141 - #140: add 5-star rating to update movie response
+##### 2023-12-09
+
+Adds the missing 5-star rating to the update movie response which was causing the 5-star rating to become out of sync with the ratings.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/141)
+
+----
+
 ### PR #139 - #138: Add sorting by Source value
 ##### 2023-12-07
 
