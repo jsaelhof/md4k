@@ -1,3 +1,12 @@
+### PR #145 - #143: Backdrop control fixes
+##### 2023-12-09
+
+Hide the controls when background can't be changed and fix the close button color to work better on iOS.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/145)
+
+----
+
 ### PR #141 - #140: add 5-star rating to update movie response
 ##### 2023-12-09
 
