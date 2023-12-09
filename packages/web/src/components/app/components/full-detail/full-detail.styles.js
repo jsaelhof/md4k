@@ -8,15 +8,19 @@ export const FullDetailLayout = styled("div")`
   position: relative;
 `;
 
-export const CloseButton = styled("div")`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 100;
-  color: white;
-  cursor: pointer;
-  mix-blend-mode: exclusion;
-`;
+export const CloseButton = styled("div")(({ $useColorBlend }) => ({
+  position: "absolute",
+  top: "8px",
+  right: "8px",
+  zIndex: 100,
+  cursor: "pointer",
+  color: "hotpink",
+
+  ...($useColorBlend && {
+    color: "white",
+    mixBlendMode: "exclusion",
+  }),
+}));
 
 const ChangeBackgroundButton = styled("div")`
   grid-area: main;

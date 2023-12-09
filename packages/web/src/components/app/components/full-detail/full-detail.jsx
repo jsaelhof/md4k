@@ -103,7 +103,7 @@ const FullDetail = ({
   ) : (
     <FullDetailLayout>
       {showCloseButton && (
-        <CloseButton onClick={onClose}>
+        <CloseButton $useColorBlend={!!backdrop} onClick={onClose}>
           <CloseThick />
         </CloseButton>
       )}
@@ -121,25 +121,29 @@ const FullDetail = ({
           }}
         />
 
-        <PrevBackgroundButton
-          onClick={() => {
-            if (data.backdrops) {
-              onChangeBackdrop(getNeighbor(data.backdrops, backdrop, false));
-            }
-          }}
-        >
-          <ChevronLeft />
-        </PrevBackgroundButton>
+        {data.backdrops?.length > 1 && (
+          <PrevBackgroundButton
+            onClick={() => {
+              if (data.backdrops) {
+                onChangeBackdrop(getNeighbor(data.backdrops, backdrop, false));
+              }
+            }}
+          >
+            <ChevronLeft />
+          </PrevBackgroundButton>
+        )}
 
-        <NextBackgroundButton
-          onClick={() => {
-            if (data.backdrops) {
-              onChangeBackdrop(getNeighbor(data.backdrops, backdrop));
-            }
-          }}
-        >
-          <ChevronRight />
-        </NextBackgroundButton>
+        {data.backdrops?.length > 1 && (
+          <NextBackgroundButton
+            onClick={() => {
+              if (data.backdrops) {
+                onChangeBackdrop(getNeighbor(data.backdrops, backdrop));
+              }
+            }}
+          >
+            <ChevronRight />
+          </NextBackgroundButton>
+        )}
 
         {trailer && !trailerOverlay && (
           <TrailerLayout>
