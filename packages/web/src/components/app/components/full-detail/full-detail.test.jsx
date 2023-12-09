@@ -25,7 +25,9 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   },
   result: {
     data: {
-      thirdPartyMovie: buildThirdPartyMovieMock({ source: 7 }),
+      thirdPartyMovie: buildThirdPartyMovieMock({
+        source: 7,
+      }),
     },
   },
 };
