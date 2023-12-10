@@ -14,7 +14,7 @@ export const CloseButton = styled("div")(({ $useColorBlend }) => ({
   right: "8px",
   zIndex: 100,
   cursor: "pointer",
-  color: "hotpink",
+  color: "black",
 
   ...($useColorBlend && {
     color: "white",
