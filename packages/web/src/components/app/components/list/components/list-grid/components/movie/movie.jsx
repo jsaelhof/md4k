@@ -45,10 +45,17 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
   const [expanded, setExpanded] = useState(false);
 
   const switchToRatings = debounce(() => setInfoState("ratings"), 250);
-  const focus = debounce(() => setFocused(true), 250);
+  const focus = debounce(() => {
+    setFocused(true);
+  }, 500);
   const unfocus = () => {
     focus.cancel();
     setFocused(false);
+    // This is ugly. Occasionally, posters get stuck in the focused state because they unfocus and then trigger a very fast
+    // focus. Its a weird timing issue with the events, the debounce and the poster spring.
+    // I don't want to lift the focus state up (two levels)... I want each poster to manage its own state.
+    // This extra unfocus, as ugly as it is, cancels it when it occurs.
+    setTimeout(() => setFocused(false), 100);
   };
 
   const posterSpring = useSpring({
