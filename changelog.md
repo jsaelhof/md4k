@@ -1,3 +1,12 @@
+### PR #149 - #147: Remove delay on touchscreen interfaces
+##### 2023-12-10
+
+Sets the debounce delay to 0 on devices that have a touchscreen interface (i.e. mobile).
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/149)
+
+----
+
 ### PR #146 - #142: Attempt to fix the poster focus issue
 ##### 2023-12-10
 
