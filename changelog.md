@@ -1,3 +1,12 @@
+### PR #146 - #142: Attempt to fix the poster focus issue
+##### 2023-12-10
+
+Trying a small hack to see if it will fix the poster focus issue before going to the next step of lifting the state.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/146)
+
+----
+
 ### PR #145 - #143: Backdrop control fixes
 ##### 2023-12-09
 
