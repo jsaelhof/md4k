@@ -27,6 +27,8 @@ import { useResponsive } from "../../../../../../../../hooks/use-responsive";
 import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update-movie";
 import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
 
+const isTouchInterface = "ontouchstart" in window;
+
 const getCenterPoint = (rect) => {
   if (!rect) return undefined;
 
@@ -45,9 +47,12 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
   const [expanded, setExpanded] = useState(false);
 
   const switchToRatings = debounce(() => setInfoState("ratings"), 250);
-  const focus = debounce(() => {
-    setFocused(true);
-  }, 500);
+  const focus = debounce(
+    () => {
+      setFocused(true);
+    },
+    isTouchInterface ? 0 : 500
+  );
   const unfocus = () => {
     focus.cancel();
     setFocused(false);
