@@ -30,7 +30,9 @@ const MovieSection = ({
   useOnWindowResize(updateTitleOffset);
 
   return list ? (
-    <SectionLayout {...(ariaLabel && { "aria-label": ariaLabel })}>
+    <SectionLayout
+      {...(ariaLabel && { "aria-label": ariaLabel, "data-testid": ariaLabel })}
+    >
       {title && (
         <MovieSectionTitle style={{ marginLeft: titleOffset }}>
           <div>{title}</div>
