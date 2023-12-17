@@ -7,12 +7,19 @@ import { MongoClient } from "mongodb";
 import http from "http";
 import express from "express";
 import cors from "cors";
-import { typeDefs } from "../graphql/schemas/index.js";
 import { resolvers } from "../graphql/resolvers/index.js";
 import dotenv from "dotenv";
 import { isTokenValid } from "../auth/validate.js";
 import { OMDBDataSource } from "../graphql/datasources/omdb-datasource.js";
 import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
+import { readFileSync } from "fs";
+
+// Note: this uses a path relative to the project's
+// root directory, which is the current working directory
+// if the server is executed using `npm run`.
+const typeDefs = readFileSync("./graphql/schemas/schema.graphql", {
+  encoding: "utf-8",
+});
 
 dotenv.config();
 
