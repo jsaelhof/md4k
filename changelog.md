@@ -1,3 +1,12 @@
+### PR #151 - #144 - Sort by preferred source order
+##### 2023-12-17
+
+Sort using my preferred source order, update the tests
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/151)
+
+----
+
 ### PR #149 - #147: Remove delay on touchscreen interfaces
 ##### 2023-12-10
 
