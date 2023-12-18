@@ -1,5 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import { GetThirdPartyMovieFullDetailsQuery } from "../../__generated__/graphql";
+import {
+  GetThirdPartyMovieFullDetailsQuery,
+  Movie,
+} from "../../__generated__/graphql";
 
 export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
   query GetThirdPartyMovieFullDetails($imdbID: ID!) {
@@ -39,11 +42,7 @@ export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
   }
 `;
 
-export const useGetThirdPartyFullDetails = ({
-  imdbID,
-}: {
-  imdbID?: string;
-}) => {
+export const useGetThirdPartyFullDetails = ({ imdbID }: Movie) => {
   const { data, ...rest } = useQuery<GetThirdPartyMovieFullDetailsQuery>(
     GET_THIRD_PARTY_MOVIE_FULL_DETAILS,
     {
