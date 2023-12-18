@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import { useGetLists, useGetMovies } from "../graphql/queries";
 import { GetListsItem, GetMovieItem } from "../graphql/types";
 import { Maybe } from "graphql/jsutils/Maybe";
-import { Toast } from "../types";
+import { ToastProps } from "../types";
 
 export type AppContextType = {
   lists?: Maybe<GetListsItem[]>;
@@ -14,8 +14,8 @@ export type AppContextType = {
   pick?: any;
   setPick?: (v: any) => void;
   clearPick?: () => void;
-  toast: Maybe<Toast>;
-  setToast: (toast: Toast) => void;
+  toast: Maybe<ToastProps>;
+  setToast: (toast: ToastProps) => void;
 };
 
 const AppContext = createContext<AppContextType>({
@@ -33,7 +33,7 @@ const AppProvider = ({ children }: PropsWithChildren) => {
   // Initialize using the list but if it's undefined and "lists" has data (from the persisted cache) use that to avoid waiting for useGetLists to complete.
   // It complets after the network part of cache-and-network is done so its late if there is cached data available. We want to take advantage of that to load really fast.
   const { movies, moviesById } = useGetMovies(list ?? lists?.[0]);
-  const [toast, setToast] = useState<Toast | null>(null);
+  const [toast, setToast] = useState<ToastProps | null>(null);
   const [pick, setPick] = useState(null);
 
   // Expose a list change function so that we can clear any state from the old list while changing to a new one

@@ -33,7 +33,7 @@ export const GET_MOVIES = gql`
 export const useGetMovies = (
   list: GetListsItem
 ): { movies: GetMovieItem[]; moviesById: { [key: string]: GetMovieItem } } => {
-  const { data } = useQuery<GetMoviesQuery>(GET_MOVIES, {
+  const { data, ...rest } = useQuery<GetMoviesQuery>(GET_MOVIES, {
     skip: !list,
     variables: { list: list?.id },
     fetchPolicy: "cache-and-network",
@@ -47,5 +47,6 @@ export const useGetMovies = (
       if (movie) acc[movie.id] = movie;
       return acc;
     }, {}),
+    ...rest,
   };
 };

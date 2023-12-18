@@ -1,1 +1,1 @@
-export type Toast = { message: string; onUndo?: () => void };
+export type ToastProps = { message: string; onUndo?: () => void };
