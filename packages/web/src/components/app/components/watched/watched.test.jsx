@@ -2,7 +2,7 @@ import { Watched } from "./watched";
 import { waitFor, within, screen } from "@testing-library/react";
 import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { vi } from "vitest";
-import {GET_WATCHED_MOVIES} from "../../../../graphql/queries/get-watched-movies.js";
+import { GET_WATCHED_MOVIES } from "../../../../graphql/queries/get-watched-movies";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({

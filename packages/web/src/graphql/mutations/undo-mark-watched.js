@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
-import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies.js";
+import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 
 const GQL = gql`
   mutation UndoMarkWatched(
