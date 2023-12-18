@@ -61,11 +61,11 @@ describe("edit", () => {
       "/edit/7614bdcb-d21a-40d8-880d-aae8cbfccb56"
     );
 
-    expect(await screen.findByText("Update Movie")).toBeInTheDocument();
-
     // This isn't going to test all fields... the form component has full tests.
     // This is just a smoke test to be sure that the the right movie is being passed to it.
-    expect(screen.getByDisplayValue("Blade Runner")).toBeInTheDocument();
+    expect(
+      await screen.findByDisplayValue("Blade Runner", {})
+    ).toBeInTheDocument();
   });
 
   it("should call the edit mutation with new data", async ({ user }) => {
@@ -78,7 +78,9 @@ describe("edit", () => {
       }
     );
 
-    expect(await screen.findByText("Update Movie")).toBeInTheDocument();
+    expect(
+      await screen.findByDisplayValue("Blade Runner", {})
+    ).toBeInTheDocument();
 
     await user.type(screen.getByDisplayValue("Blade Runner"), " 2049");
     expect(screen.getByDisplayValue("Blade Runner 2049")).toBeInTheDocument();
@@ -107,7 +109,10 @@ describe("edit", () => {
       }
     );
 
-    expect(await screen.findByText("Update Movie")).toBeInTheDocument();
+    expect(
+      await screen.findByDisplayValue("Blade Runner", {})
+    ).toBeInTheDocument();
+
     await user.type(screen.getByDisplayValue("Blade Runner"), " 2049");
     expect(screen.getByDisplayValue("Blade Runner 2049")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Save" }));

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorDialog from "../error-dialog/error-dialog";
@@ -13,22 +13,13 @@ import editStrings from "./i18n/i18n";
 export const Edit = () => {
   const params = useParams();
   const { movies, list, setToast } = useAppContext();
-  const [movie, setMovie] = useState();
+  const movie = useMemo(
+    () => movies.find(({ id }) => id === params.movieId) ?? null,
+    [movies, params.movieId]
+  );
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const { t } = useI18n(editStrings);
-
-  useEffect(() => {
-    if (movies) {
-      const movieToEdit = movies.find(({ id }) => id === params.movieId);
-
-      if (movieToEdit) {
-        setMovie(movieToEdit);
-      } else {
-        setMovie(null);
-      }
-    }
-  }, [movies, params.movieId]);
 
   const [editMovieMutation] = useEditMovie({
     onCompleted: ({ editMovie: movie }) => {
@@ -49,8 +40,6 @@ export const Edit = () => {
   const onCancel = useCallback(() => {
     navigate("/");
   }, [navigate]);
-
-  if (movie === undefined) return null;
 
   return (
     <>
