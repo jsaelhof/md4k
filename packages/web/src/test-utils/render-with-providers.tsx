@@ -10,6 +10,12 @@ import { buildMovieMock } from "./build-movie-mock";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
 import { ReactElement } from "react";
+import {
+  GetListsQuery,
+  GetListsQueryVariables,
+  GetMoviesQuery,
+  GetMoviesQueryVariables,
+} from "../__generated__/graphql";
 
 vi.mock("@auth0/auth0-react", () => ({
   useAuth0: () => ({
@@ -120,10 +126,10 @@ export const renderHookWithProviders = (
  * @param options Options for renderWIthProviders. Note that if "route" is included it will be overriden by the route argument.
  */
 export const renderWithProvidersAsRoute = (
-  children,
-  routePath,
-  route,
-  options
+  children: ReactElement,
+  routePath: string,
+  route: string,
+  options: Parameters<typeof renderWithProviders>[1]
 ) =>
   renderWithProviders(
     <Routes>
@@ -135,7 +141,7 @@ export const renderWithProvidersAsRoute = (
     }
   );
 
-const GET_LISTS_MOCK = {
+const GET_LISTS_MOCK: MockedResponse<GetListsQuery, GetListsQueryVariables> = {
   request: {
     query: GET_LISTS,
   },
@@ -155,121 +161,83 @@ const GET_LISTS_MOCK = {
   },
 };
 
-const GET_MOVIES_MOCK = {
-  request: {
-    query: GET_MOVIES,
-    variables: {
-      list: "saturday",
+const GET_MOVIES_MOCK: MockedResponse<GetMoviesQuery, GetMoviesQueryVariables> =
+  {
+    request: {
+      query: GET_MOVIES,
+      variables: {
+        list: "saturday",
+      },
     },
-  },
-  result: {
-    data: {
-      movies: [
-        buildMovieMock({
-          id: "7614bdcb-d21a-40d8-880d-aae8cbfccb56",
-          title: "Blade Runner",
-          runtime: 7020,
-          source: 1,
-          genre: 3,
-          year: "1982",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
-          imdbID: "tt0083658",
-          addedOn: "2021-01-16T06:39:48.002Z",
-          ratings: {
+    result: {
+      data: {
+        movies: [
+          buildMovieMock({
             id: "7614bdcb-d21a-40d8-880d-aae8cbfccb56",
-            IMDB: "81%",
-            ROTTEN_TOMATOES: "89%",
-            METACRITIC: "84%",
-            __typename: "Ratings",
-          },
-        }),
-        buildMovieMock({
-          id: "f8b5063e-8904-49f1-a5c3-5b12e7c57699",
-          title: "Glory",
-          runtime: 7320,
-          source: 1,
-          genre: 2,
-          year: "1989",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BODhlNjA5MDEtZDVhNS00ZmM3LTg1YzAtZGRjNjhjNTAzNzVkXkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_SX300.jpg",
-          imdbID: "tt0097441",
-          addedOn: "2021-01-15T00:00:25.000Z",
-          ratings: {
+            title: "Blade Runner",
+            runtime: 7020,
+            source: 1,
+            genre: 3,
+            year: "1982",
+            poster:
+              "https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+            imdbID: "tt0083658",
+            addedOn: "2021-01-16T06:39:48.002Z",
+            ratings: {
+              id: "7614bdcb-d21a-40d8-880d-aae8cbfccb56",
+              IMDB: "81%",
+              ROTTEN_TOMATOES: "89%",
+              METACRITIC: "84%",
+              __typename: "Ratings",
+            },
+          }),
+          buildMovieMock({
             id: "f8b5063e-8904-49f1-a5c3-5b12e7c57699",
-            IMDB: "78%",
-            ROTTEN_TOMATOES: "93%",
-            METACRITIC: "78%",
-            __typename: "Ratings",
-          },
-        }),
-        buildMovieMock({
-          id: "ea8d443b-a4a2-4e0d-9417-e54be3907354",
-          title: "Roman J. Israel, Esq.",
-          runtime: 7320,
-          source: 0,
-          genre: 2,
-          year: "2017",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BMjMyNjkxMTg2NV5BMl5BanBnXkFtZTgwNjkyNTk0MzI@._V1_SX300.jpg",
-          imdbID: "tt6000478",
-          addedOn: "2021-01-15T00:00:25.000Z",
-          ratings: {
+            title: "Glory",
+            runtime: 7320,
+            source: 1,
+            genre: 2,
+            year: "1989",
+            poster:
+              "https://m.media-amazon.com/images/M/MV5BODhlNjA5MDEtZDVhNS00ZmM3LTg1YzAtZGRjNjhjNTAzNzVkXkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_SX300.jpg",
+            imdbID: "tt0097441",
+            addedOn: "2021-01-15T00:00:25.000Z",
+            ratings: {
+              id: "f8b5063e-8904-49f1-a5c3-5b12e7c57699",
+              IMDB: "78%",
+              ROTTEN_TOMATOES: "93%",
+              METACRITIC: "78%",
+              __typename: "Ratings",
+            },
+          }),
+          buildMovieMock({
             id: "ea8d443b-a4a2-4e0d-9417-e54be3907354",
-            IMDB: "65%",
-            ROTTEN_TOMATOES: "54%",
-            METACRITIC: "58%",
-            __typename: "Ratings",
-          },
-        }),
-      ],
-      watchedMovies: [
-        buildMovieMock({
-          id: "fb96baa5-b22c-4306-9dec-163bec4b1faa",
-          title: "Tower Heist",
-          runtime: 6240,
-          source: 1,
-          genre: 1,
-          year: "2011",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BMTY1NDQxMTcwOV5BMl5BanBnXkFtZTcwNzMzNTExNg@@._V1_SX300.jpg",
-          imdbID: "tt0471042",
-          addedOn: "2021-05-09T03:37:42.974Z",
-          watchedOn: "2021-09-26T04:11:43.269Z",
-          ratings: {
-            id: "fb96baa5-b22c-4306-9dec-163bec4b1faa",
-            IMDB: "62%",
-            ROTTEN_TOMATOES: "68%",
-            METACRITIC: "59%",
-            __typename: "Ratings",
-          },
-        }),
-        buildMovieMock({
-          id: "0e916dfd-7302-41f4-913f-72b2ea3ba2c0",
-          title: "Always Be My Maybe",
-          runtime: 6060,
-          source: 1,
-          genre: 1,
-          year: "2019",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BMGM2NWFjYTctZjFiYy00YzIxLThhY2QtY2UxZTNmNjdjZTU0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
-          imdbID: "tt7374948",
-          addedOn: "2021-05-02T16:21:08.696Z",
-          watchedOn: "2022-01-14T07:00:00.000Z",
-          ratings: {
-            id: "0e916dfd-7302-41f4-913f-72b2ea3ba2c0",
-            IMDB: "68%",
-            ROTTEN_TOMATOES: "90%",
-            METACRITIC: "64%",
-            __typename: "Ratings",
-          },
-        }),
-      ],
+            title: "Roman J. Israel, Esq.",
+            runtime: 7320,
+            source: 0,
+            genre: 2,
+            year: "2017",
+            poster:
+              "https://m.media-amazon.com/images/M/MV5BMjMyNjkxMTg2NV5BMl5BanBnXkFtZTgwNjkyNTk0MzI@._V1_SX300.jpg",
+            imdbID: "tt6000478",
+            addedOn: "2021-01-15T00:00:25.000Z",
+            ratings: {
+              id: "ea8d443b-a4a2-4e0d-9417-e54be3907354",
+              IMDB: "65%",
+              ROTTEN_TOMATOES: "54%",
+              METACRITIC: "58%",
+              __typename: "Ratings",
+            },
+          }),
+        ],
+      },
     },
-  },
-};
+  };
 
-export const GET_MOVIES_MOCK_FAMILY = {
+export const GET_MOVIES_MOCK_FAMILY: MockedResponse<
+  GetMoviesQuery,
+  GetMoviesQueryVariables
+> = {
   request: {
     query: GET_MOVIES,
     variables: {
@@ -297,31 +265,6 @@ export const GET_MOVIES_MOCK_FAMILY = {
           },
           year: "1989",
           list: "family",
-        }),
-      ],
-      watchedMovies: [
-        buildMovieMock({
-          id: "04432771-235d-4789-b2d0-c81e81cacfd9",
-          addedOn: "2021-02-21T04:41:37.796Z",
-          title: "Bill & Ted's Excellent Adventure",
-          source: 0,
-          locked: false,
-          genre: 1,
-          runtime: 5400,
-          imdbID: "tt0096928",
-          poster:
-            "https://m.media-amazon.com/images/M/MV5BMTk3Mjk5MzI3OF5BMl5BanBnXkFtZTcwMTY4MzcyNA@@._V1_SX300.jpg",
-          ratings: {
-            id: "04432771-235d-4789-b2d0-c81e81cacfd9",
-            IMDB: "70%",
-            ROTTEN_TOMATOES: "81%",
-            METACRITIC: "50%",
-          },
-          year: "1989",
-          list: "family",
-          background:
-            "http://image.tmdb.org/t/p/original/ynYdEr7WskeM9dy6oNAQUGldAtE.jpg",
-          watchedOn: "2022-07-31T05:11:47.162Z",
         }),
       ],
     },
