@@ -38,7 +38,6 @@ const AppProvider = ({ children }: PropsWithChildren) => {
   const [toast, setToast] = useState<ToastProps | null>(null);
   const [pick, setPick] = useState<string | null>(null);
 
-  console.log({ pick });
   // Expose a list change function so that we can clear any state from the old list while changing to a new one
   const setList = useCallback((list: GetListsItem) => {
     setPick(null);
