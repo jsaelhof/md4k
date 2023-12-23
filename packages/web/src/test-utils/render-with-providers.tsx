@@ -1,5 +1,5 @@
-import { render, renderHook } from "@testing-library/react";
-import { MockedProvider } from "@apollo/client/testing";
+import { RenderOptions, render, renderHook } from "@testing-library/react";
+import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
 import { ThemeProvider } from "@mui/material";
@@ -7,8 +7,9 @@ import { theme } from "../theme/theme";
 import { vi } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { buildMovieMock } from "./build-movie-mock";
-import {I18nextProvider} from "react-i18next";
+import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
+import { ReactElement } from "react";
 
 vi.mock("@auth0/auth0-react", () => ({
   useAuth0: () => ({
@@ -26,7 +27,15 @@ vi.mock("@auth0/auth0-react", () => ({
   }),
 }));
 
-export const renderWithProviders = (children, options) => {
+export const renderWithProviders = (
+  children: ReactElement,
+  options: RenderOptions & {
+    mocks: MockedResponse[];
+    listsMock: MockedResponse | null;
+    moviesMock: MockedResponse | null;
+    route: string;
+  }
+) => {
   options = {
     ...{
       mocks: [],
@@ -37,7 +46,7 @@ export const renderWithProviders = (children, options) => {
     ...options,
   };
 
-  const RenderWrapper = ({ children }) => (
+  const RenderWrapper = ({ children }: { children: ReactElement }) => (
     <MockedProvider
       mocks={[
         options.listsMock || GET_LISTS_MOCK,
@@ -61,7 +70,14 @@ export const renderWithProviders = (children, options) => {
   return utils;
 };
 
-export const renderHookWithProviders = (hookWrapper, options) => {
+export const renderHookWithProviders = (
+  hookWrapper: Parameters<typeof renderHook>[0],
+  options: Parameters<typeof renderHook>[1] & {
+    mocks: MockedResponse[];
+    moviesMock: MockedResponse;
+    route: string;
+  }
+) => {
   options = {
     ...{
       mocks: [],
@@ -71,7 +87,7 @@ export const renderHookWithProviders = (hookWrapper, options) => {
     ...options,
   };
 
-  const RenderWrapper = ({ children }) => (
+  const RenderWrapper = ({ children }: { children: ReactElement }) => (
     <MockedProvider
       mocks={[
         GET_LISTS_MOCK,

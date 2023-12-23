@@ -3,7 +3,7 @@ import mediaQuery from "css-mediaquery";
 
 // Mocks a window.matchMedia call using the given width.
 // Uses a third-party dependency (css-mediaquery).
-export const createMatchMedia = (width) => (query) => ({
+export const createMatchMedia = (width: number) => (query: string) => ({
   matches: mediaQuery.match(query, {
     width,
   }),
