@@ -1,4 +1,9 @@
-export const buildMovieMock = (mockData = {}) => ({
+import { Movie } from "../__generated__/graphql";
+import { GetMovieItem } from "../graphql/types";
+
+export const buildMovieMock = (
+  mockData: Partial<Movie> = {}
+): GetMovieItem => ({
   __typename: "Movie",
   id: "0e916dfd-7302-41f4-913f-72b2ea3ba2c0",
   title: "Test Movie",

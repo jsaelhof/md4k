@@ -1,8 +1,12 @@
-export const buildThirdPartyMovieMock = (mockData = {}) => ({
+import { ThirdPartyMovie } from "../__generated__/graphql";
+
+export const buildThirdPartyMovieMock = (
+  mockData: Partial<ThirdPartyMovie> = {}
+): ThirdPartyMovie => ({
   imdbID: "tt0258463",
   title: "The Bourne Identity",
   rated: "PG-13",
-  runtime: "7140",
+  runtime: 7140,
   ratings: {
     id: "tt0258463",
     IMDB: "79%",
