@@ -11,7 +11,13 @@ vi.mock("./components/watched-movie/watched-movie", () => ({
     <div>
       {movie.title}
       <div>
-        <button onClick={() => onDelete(movie)}>DELETE</button>
+        <button
+          onClick={() => {
+            onDelete(movie);
+          }}
+        >
+          DELETE
+        </button>
       </div>
     </div>
   ),
@@ -25,9 +31,7 @@ const REMOVE_MOVIE_ERROR_MOCK = {
       list: "saturday",
     },
   },
-  result: {
-    error: "Test Error",
-  },
+  error: new Error("Test Error"),
 };
 
 const GET_WATCHED_MOVIES_MOCK = {
@@ -46,7 +50,6 @@ const GET_WATCHED_MOVIES_MOCK = {
           watchedOn: "2022-04-08T02:11:33.166Z",
         }),
       ],
-      movies: [],
     },
   },
 };

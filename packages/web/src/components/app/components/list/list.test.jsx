@@ -31,9 +31,7 @@ const REMOVE_MOVIE_ERROR_MOCK = {
       list: "saturday",
     },
   },
-  result: {
-    error: "Test Error",
-  },
+  error: "Test Error",
 };
 
 const REMOVE_MOVIE_MOCK = {
@@ -236,27 +234,22 @@ describe("list", () => {
     expect(await screen.findByText(/Blade/)).toBeInTheDocument();
   });
 
-  it.todo(
-    "should render the error dialog",
-    async ({ user, userNoPointerCheck }) => {
-      // TODO: I Can't get this test to work.
-      // I'm getting errors destructing {removeMovie} when I try to simulate the error
-      renderWithProvidersAsRoute(
-        <List />,
-        `/list/*`,
-        `/list/${sort.ADDED}/${sortDirection.DESC}`,
-        {
-          mocks: [REMOVE_MOVIE_ERROR_MOCK],
-        }
-      );
+  it("should render the error dialog", async ({ user }) => {
+    // TODO: I Can't get this test to work.
+    // I'm getting errors destructing {removeMovie} when I try to simulate the error
+    renderWithProvidersAsRoute(
+      <List />,
+      `/list/*`,
+      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      {
+        mocks: [REMOVE_MOVIE_ERROR_MOCK],
+      }
+    );
 
-      expect((await screen.findAllByText(/Blade/)).length).toBeGreaterThan(0);
-      const firstMovie = screen.getAllByTestId("positioner")[0];
-      await userNoPointerCheck.hover(firstMovie);
-      await user.click(within(firstMovie).getByLabelText("Delete"));
-      await user.click(screen.getByRole("button", { name: "Delete" }));
-    }
-  );
+    expect(await screen.findByText(/Blade/)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "MOCK DELETE" }));
+    expect(await screen.findByText(/Houston/)).toBeInTheDocument();
+  });
 
   it("should call mark watched", async ({ user, appContextSpy }) => {
     renderWithProvidersAsRoute(

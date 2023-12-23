@@ -16,7 +16,7 @@ import {
 import { sortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
-import { useGetWatchedMovies } from "../../../../graphql/queries/get-watched-movies";
+import { useGetWatchedMovies } from "../../../../graphql/queries";
 import { useI18n } from "../../../../hooks/use-i18n";
 import watchedStrings from "./i18n/i18n";
 

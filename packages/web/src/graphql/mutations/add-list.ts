@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { BaseMutationOptions, gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GET_LISTS } from "../queries";
 import {
@@ -15,14 +15,19 @@ const ADD_LIST = gql`
   }
 `;
 
-export const addListOptions = (name: string) => ({
+type AddListMutationOptions = BaseMutationOptions<
+  AddListMutation,
+  AddListMutationVariables
+>;
+
+export const addListOptions = (name: string): AddListMutationOptions => ({
   variables: { name },
 });
 
 export const useAddList = ({
   onCompleted,
 }: {
-  onComplete: (data: AddListMutation) => void;
+  onComplete: AddListMutationOptions["onCompleted"];
 }) => {
   const [addList, { loading, error, reset }] = useMutation<
     AddListMutation,

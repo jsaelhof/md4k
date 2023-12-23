@@ -1,6 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
 import { isToday, isValid, parseISO } from "date-fns";
 import { useEffect } from "react";
+import {
+  Movie,
+  UpdateMovieMutation,
+  UpdateMovieMutationVariables,
+} from "../../__generated__/graphql";
 
 export const UPDATE_MOVIE = gql`
   mutation UpdateMovie($movieId: ID!, $list: String!) {
@@ -18,9 +23,14 @@ export const UPDATE_MOVIE = gql`
   }
 `;
 
-export const useUpdateMovie = (movie, focused) => {
-  const [updateMovie, status] = useMutation(UPDATE_MOVIE);
-  const lastUpdated = parseISO(localStorage.getItem(`lastUpdated_${movie.id}`));
+export const useUpdateMovie = (movie: Movie, focused: boolean) => {
+  const [updateMovie, status] = useMutation<
+    UpdateMovieMutation,
+    UpdateMovieMutationVariables
+  >(UPDATE_MOVIE);
+
+  const lastUpdatedString = localStorage.getItem(`lastUpdated_${movie.id}`);
+  const lastUpdated = lastUpdatedString ? parseISO(lastUpdatedString) : null;
 
   useEffect(() => {
     // A movie must have an imdbID to pull ratings.
@@ -29,6 +39,8 @@ export const useUpdateMovie = (movie, focused) => {
     // If it's an invalid date, let it go through.
     if (
       movie.imdbID &&
+      movie.list &&
+      lastUpdated &&
       (!isToday(lastUpdated) || !isValid(lastUpdated)) &&
       focused
     ) {

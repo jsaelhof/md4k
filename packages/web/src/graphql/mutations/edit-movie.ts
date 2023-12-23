@@ -1,6 +1,12 @@
-import { gql, useMutation } from "@apollo/client";
+import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
 import omit from "lodash/omit";
 import { omitTypename } from "../../utils/omit-typename";
+import {
+  EditMovieMutation,
+  EditMovieMutationVariables,
+  List,
+  MovieInput,
+} from "../../__generated__/graphql";
 
 export const EDIT_MOVIE = gql`
   mutation EditMovie(
@@ -32,12 +38,29 @@ export const EDIT_MOVIE = gql`
   }
 `;
 
-export const useEditMovie = ({ onCompleted, onError } = {}) => {
-  const [editMovie, status] = useMutation(EDIT_MOVIE, { onCompleted, onError });
+type EditMovieMutationOptions = BaseMutationOptions<
+  EditMovieMutation,
+  EditMovieMutationVariables
+>;
+
+export const useEditMovie = ({
+  onCompleted,
+  onError,
+}: {
+  onCompleted?: EditMovieMutationOptions["onCompleted"];
+  onError?: EditMovieMutationOptions["onError"];
+} = {}) => {
+  const [editMovie, status] = useMutation<
+    EditMovieMutation,
+    EditMovieMutationVariables
+  >(EDIT_MOVIE, { onCompleted, onError });
   return [editMovie, status];
 };
 
-export const editMovieOptions = (movie, list) => {
+export const editMovieOptions = (
+  movie: MovieInput,
+  list: List
+): EditMovieMutationOptions => {
   const movieInput = omit(movie, ["fiveStarRating"]);
   return {
     variables: {

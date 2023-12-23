@@ -1,8 +1,14 @@
-import { gql, useMutation } from "@apollo/client";
+import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { GET_MOVIES } from "../queries";
 import { omitTypename } from "../../utils/omit-typename";
+import {
+  AddMovieMutation,
+  AddMovieMutationVariables,
+  List,
+  MovieInput,
+} from "../../__generated__/graphql";
 
 export const ADD_MOVIE = gql`
   mutation AddMovie($movie: MovieInput!, $list: String!) {
@@ -31,36 +37,55 @@ export const ADD_MOVIE = gql`
   }
 `;
 
-export const useAddMovie = ({ onCompleted, onError }) => {
-  const [addMovieMutation, status] = useMutation(ADD_MOVIE, {
+type AddMovieMutationOptions = BaseMutationOptions<
+  AddMovieMutation,
+  AddMovieMutationVariables
+>;
+
+export const useAddMovie = ({
+  onCompleted,
+  onError,
+}: {
+  onCompleted: AddMovieMutationOptions["onCompleted"];
+  onError: AddMovieMutationOptions["onError"];
+}) => {
+  const [addMovieMutation, status] = useMutation<
+    AddMovieMutation,
+    AddMovieMutationVariables
+  >(ADD_MOVIE, {
     onCompleted,
     onError,
-    update(cache, { data: { addMovie } }) {
-      cache.updateQuery(
-        {
-          query: GET_MOVIES,
-          variables: { list: addMovie.list },
-        },
-        ({ movies, watchedMovies }) => ({
-          movies: [...movies, addMovie],
-          watchedMovies,
-        })
-      );
+    update(cache, { data }) {
+      data?.addMovie &&
+        cache.updateQuery(
+          {
+            query: GET_MOVIES,
+            variables: { list: data.addMovie.list },
+          },
+          ({ movies, watchedMovies }) => ({
+            movies: [...movies, data.addMovie],
+            watchedMovies,
+          })
+        );
     },
   });
   return [addMovieMutation, status];
 };
 
-export const addMovieOptions = (movie, list) => {
+export const addMovieOptions = (
+  movie: Omit<MovieInput, "id">,
+  list: List
+): AddMovieMutationOptions => {
   const id = uuidv4();
+  const ratingsId = uuidv4();
 
-  const movieWithId = omitTypename({
+  const movieWithId: MovieInput = omitTypename({
     id,
     list: list.id,
     ...movie,
     ratings: {
       ...movie.ratings,
-      id,
+      id: ratingsId,
     },
   });
 
@@ -77,10 +102,11 @@ export const addMovieOptions = (movie, list) => {
         year: null,
         fiveStarRating: null,
         ratings: {
+          id: ratingsId,
           IMDB: null,
           ROTTEN_TOMATOES: null,
           METACRITIC: null,
-          ...movieWithId.ratings
+          ...movieWithId.ratings,
         },
         ...movieWithId,
       },

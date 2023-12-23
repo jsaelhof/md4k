@@ -40,7 +40,7 @@ type Movie {
 input MovieInput {
   id: ID!
   imdbID: String
-  title: String
+  title: String!
   list: String
   runtime: Int
   source: Int
