@@ -7,7 +7,7 @@ import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
-import { useI18n } from "../../../../hooks/use-i18n.js";
+import { useI18n } from "../../../../hooks/use-i18n";
 import editStrings from "./i18n/i18n";
 
 export const Edit = () => {

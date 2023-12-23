@@ -43,7 +43,7 @@ import { ActionsAdd } from "./components/actions-add/actions-add";
 import { ActionsView } from "./components/actions-view/actions-view";
 import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
-import { useI18n } from "../../../../hooks/use-i18n.js";
+import { useI18n } from "../../../../hooks/use-i18n";
 import fullDetailStrings from "./i18n/i18n";
 
 const FullDetail = ({

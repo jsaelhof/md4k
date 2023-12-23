@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import TabPanelSearch from "./components/tab-panel-search/tab-panel-search";
 import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
-import { useI18n } from "../../../../hooks/use-i18n.js";
+import { useI18n } from "../../../../hooks/use-i18n";
 import addStrings from "./i18n/i18n";
 
 export const Add = () => {

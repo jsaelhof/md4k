@@ -19,11 +19,11 @@ import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "../../../poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
-import {useI18n} from "../../../../../../hooks/use-i18n.js";
+import { useI18n } from "../../../../../../hooks/use-i18n";
 import searchStrings from "./i18n/i18n";
 
 const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
-  const {t} = useI18n(searchStrings);
+  const { t } = useI18n(searchStrings);
 
   const [titleSearch, setTitleSearch] = useState("");
   const [yearSearch, setYearSearch] = useState("");

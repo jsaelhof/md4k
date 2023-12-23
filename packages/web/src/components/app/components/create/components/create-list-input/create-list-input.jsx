@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { useAppContext } from "../../../../../../context/app-context";
 import { Container, ListInput } from "./create-list-input.styles";
 import createStrings from "../../i18n/i18n";
-import {useI18n} from "../../../../../../hooks/use-i18n.js";
+import { useI18n } from "../../../../../../hooks/use-i18n";
 
 const CreateListInput = ({ onSubmit }) => {
-  const {t} = useI18n(createStrings);
+  const { t } = useI18n(createStrings);
   const [input, setInput] = useState("");
   const [error, setError] = useState(null);
   const { lists } = useAppContext();
