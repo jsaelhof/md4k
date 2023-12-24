@@ -1,5 +1,34 @@
-import { createTheme } from "@mui/material";
+import { PaletteColorOptions, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
+
+// Module Augmentation: Extend the interfaces used in the theme
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    tertiary?: PaletteColorOptions;
+    darkBlue?: PaletteColorOptions;
+    darkGrey?: PaletteColorOptions;
+    accent?: string;
+    icon?: string;
+    foundation?: string;
+  }
+
+  interface ZIndex {
+    actionBar?: number;
+    stickyBar: number;
+    movieHover: number;
+    titleBar: number;
+    expandedBackdrop: number;
+    expandedContent: number;
+    trailer: number;
+  }
+}
+
+// Module Augmentation: Extend the variants used in Button
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    nav: true;
+  }
+}
 
 const darkBlue = {
   50: "#b4b5de",
