@@ -1,4 +1,4 @@
-export const parseRuntime = (runtimeInput) => {
+export const parseRuntime = (runtimeInput?: string | number) => {
   runtimeInput = runtimeInput?.toString();
   let runtime;
 
@@ -7,8 +7,8 @@ export const parseRuntime = (runtimeInput) => {
     runtime = null;
   } else {
     const [hours, minutes] = runtimeInput.includes(":")
-      ? runtimeInput.split(":")
-      : [0, runtimeInput];
+      ? runtimeInput.split(":").map((s) => parseInt(s))
+      : [0, parseInt(runtimeInput)];
 
     runtime = (hours ? hours * 3600 : 0) + (minutes ? minutes * 60 : 0);
   }

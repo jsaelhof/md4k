@@ -1,21 +1,23 @@
 import { sources } from "md4k-constants";
 
-export const searchIMDB = (imdbId) => `https://www.imdb.com/title/${imdbId}`;
+export const searchIMDB = (imdbId: string): string =>
+  `https://www.imdb.com/title/${imdbId}`;
 
-export const searchIMDBTitle = (title) =>
+export const searchIMDBTitle = (title: string): string =>
   `https://www.imdb.com/find?q=${encodeURIComponent(title)}`;
 
-export const searchTMDB = (title) =>
+export const searchTMDB = (title: string): string =>
   `https://www.themoviedb.org/search?query=${title.replaceAll(" ", "+")}`;
 
-export const searchCommonSense = (title) =>
+export const searchCommonSense = (title: string): string =>
   `https://www.commonsensemedia.org/movie-reviews/${title
     .replaceAll(" ", "-")
     .replaceAll(":", "")}`;
 
-export const searchTorrent = (title) => `http://1337x.to/search/${title}/1/`;
+export const searchTorrent = (title: string) =>
+  `http://1337x.to/search/${title}/1/`;
 
-export const searchStreaming = (title, source) =>
+export const searchStreaming = (title: string, source: number): string =>
   ({
     [sources.NETFLIX]: `http://netflix.com/search?q=%s`, // FIXME: Doesn't like commas in the search...possibly other special chars. Other sites maybe the same?
     [sources.PRIME_VIDEO]: `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=%s&ie=UTF8`,

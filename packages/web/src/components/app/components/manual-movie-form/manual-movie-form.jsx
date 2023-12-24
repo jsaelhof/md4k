@@ -12,7 +12,7 @@ import {
 } from "./manual-movie-form.styles";
 import { Button } from "@mui/material";
 import { useMemo } from "react";
-import { formatRuntime } from "../../../../utils/format-runtime.js";
+import { formatRuntime } from "../../../../utils/format-runtime";
 import { genres, sources } from "md4k-constants";
 import { sourceLogos } from "../../../../constants/sources";
 import Clear from "@mui/icons-material/Clear";
