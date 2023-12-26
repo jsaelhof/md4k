@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -14,7 +14,7 @@ import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
 export const AuthenticatedApolloProvider = ({
   children,
-}: PropsWithChildren) => {
+}: PropsWithChildren): ReactElement | null => {
   const { getAccessTokenSilently } = useAuth0();
 
   const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
