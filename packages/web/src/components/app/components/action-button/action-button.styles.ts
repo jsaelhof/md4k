@@ -1,6 +1,10 @@
 import { styled } from "@mui/material";
 
-export const ButtonContainer = styled("div")(
+interface ButtonContainerProps {
+  $critical: boolean;
+}
+
+export const ButtonContainer = styled("div")<ButtonContainerProps>(
   ({ $critical, theme: { palette } }) => ({
     display: "flex",
     alignItems: "center",
@@ -17,12 +21,3 @@ export const ButtonContainer = styled("div")(
     },
   })
 );
-
-export const buttonContainerDisabled = ({ palette }) => ({
-  opacity: 0.2,
-  cursor: "not-allowed",
-
-  "& :hover": {
-    color: palette.icon,
-  },
-});

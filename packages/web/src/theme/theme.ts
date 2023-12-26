@@ -3,6 +3,15 @@ import { grey } from "@mui/material/colors";
 
 // Module Augmentation: Extend the interfaces used in the theme
 declare module "@mui/material/styles" {
+  interface Palette {
+    tertiary?: PaletteColorOptions;
+    darkBlue?: PaletteColorOptions;
+    darkGrey?: PaletteColorOptions;
+    accent?: string;
+    icon?: string;
+    foundation?: string;
+  }
+
   interface PaletteOptions {
     tertiary?: PaletteColorOptions;
     darkBlue?: PaletteColorOptions;
@@ -13,6 +22,16 @@ declare module "@mui/material/styles" {
   }
 
   interface ZIndex {
+    actionBar?: number;
+    stickyBar: number;
+    movieHover: number;
+    titleBar: number;
+    expandedBackdrop: number;
+    expandedContent: number;
+    trailer: number;
+  }
+
+  interface ZIndexOptions {
     actionBar?: number;
     stickyBar: number;
     movieHover: number;
