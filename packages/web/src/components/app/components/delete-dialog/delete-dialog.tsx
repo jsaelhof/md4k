@@ -6,11 +6,23 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import React from "react";
+import React, { ReactElement } from "react";
 import { useI18n } from "../../../../hooks/use-i18n";
 import deleteDialogStrings from "./i18n/i18n";
 
-const DeleteDialog = ({ open, content, onCancel, onConfirm }) => {
+export type DeleteDialogProps = {
+  open: boolean;
+  content: ReactElement;
+  onCancel: () => void;
+  onConfirm: () => void;
+};
+
+const DeleteDialog = ({
+  open,
+  content,
+  onCancel,
+  onConfirm,
+}: DeleteDialogProps): ReactElement => {
   const { t } = useI18n(deleteDialogStrings);
 
   return (
