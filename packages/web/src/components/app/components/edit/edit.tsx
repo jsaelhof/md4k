@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { ReactElement, useCallback, useMemo, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorDialog from "../error-dialog/error-dialog";
@@ -9,8 +9,9 @@ import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
 import { useI18n } from "../../../../hooks/use-i18n";
 import editStrings from "./i18n/i18n";
+import { Movie } from "../../../../__generated__/graphql";
 
-export const Edit = () => {
+export const Edit = (): ReactElement => {
   const params = useParams();
   const { movies, list, setToast } = useAppContext();
   const movie = useMemo(
@@ -18,12 +19,13 @@ export const Edit = () => {
     [movies, params.movieId]
   );
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | string>(null);
   const { t } = useI18n(editStrings);
 
   const [editMovieMutation] = useEditMovie({
     onCompleted: ({ editMovie: movie }) => {
-      setToast({ message: t("edit:confirm_edit", { title: movie.title }) });
+      movie &&
+        setToast({ message: t("edit:confirm_edit", { title: movie.title }) });
       navigate("/");
     },
     onError: ({ message }) => {
@@ -32,7 +34,8 @@ export const Edit = () => {
   });
 
   const onEditMovie = useCallback(
-    (movieData) =>
+    (movieData: Movie) =>
+      list &&
       editMovieMutation(editMovieOptions({ ...movie, ...movieData }, list)),
     [editMovieMutation, list, movie]
   );
@@ -79,7 +82,7 @@ export const Edit = () => {
           open={!!error}
           content={t("edit:error_adding")}
           debug={error}
-          onConfirm={() => setError(null)}
+          onConfirm={(): void => setError(null)}
         />
       )}
     </>

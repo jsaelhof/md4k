@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { SxProps, Theme, styled } from "@mui/material";
 import { app } from "../../../../constants/app";
 
 export const Layout = styled("div")(({ theme: { spacing } }) => ({
@@ -11,7 +11,7 @@ export const Layout = styled("div")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const tabStyles = ({ spacing, palette }) => ({
+export const tabStyles = ({ spacing, palette }: Theme): SxProps<Theme> => ({
   paddingLeft: 0,
   paddingRight: 0,
   minWidth: 0,
@@ -23,7 +23,7 @@ export const tabStyles = ({ spacing, palette }) => ({
   },
 });
 
-export const tabsStyles = () => ({
+export const tabsStyles = (): SxProps<Theme> => ({
   borderBottom: "1px solid #ddd",
 });
 

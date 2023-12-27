@@ -31,7 +31,7 @@ export const GET_MOVIES = gql`
 `;
 
 export const useGetMovies = (
-  list: GetListsItem
+  list: GetListsItem | undefined | null
 ): { movies: GetMovieItem[]; moviesById: { [key: string]: GetMovieItem } } => {
   const { data, ...rest } = useQuery<GetMoviesQuery>(GET_MOVIES, {
     skip: !list,
