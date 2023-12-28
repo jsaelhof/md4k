@@ -1,11 +1,9 @@
 import { Tooltip } from "@mui/material";
 
-import {
-  ButtonContainer,
-  buttonContainerDisabled,
-} from "./action-button.styles";
+import { ButtonContainer } from "./action-button.styles";
 import { Movie } from "../../../../__generated__/graphql";
 import { SvgIconComponent } from "@mui/icons-material";
+import { ReactElement } from "react";
 
 export type ActionButtonProps = {
   Icon: SvgIconComponent;
@@ -25,7 +23,7 @@ const ActionButton = ({
   critical,
   disabled,
   onClick,
-}: ActionButtonProps) => (
+}: ActionButtonProps): ReactElement => (
   <Tooltip
     title={tooltip}
     disableHoverListener={disabled}
@@ -36,7 +34,7 @@ const ActionButton = ({
     <ButtonContainer
       $critical={critical}
       sx={[{ fontSize }]}
-      onClick={(e) => {
+      onClick={(e): void => {
         e.stopPropagation();
         !disabled && onClick(movie);
       }}

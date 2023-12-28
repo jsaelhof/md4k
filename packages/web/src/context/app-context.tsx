@@ -6,7 +6,7 @@ import { Maybe } from "graphql/jsutils/Maybe";
 import { ToastProps } from "../types";
 
 export type AppContextType = {
-  lists?: Maybe<GetListsItem[]>;
+  lists?: Maybe<Maybe<GetListsItem>[]>;
   list: GetListsItem | null;
   setList?: (list: GetListsItem) => void;
   movies: GetMovieItem[];

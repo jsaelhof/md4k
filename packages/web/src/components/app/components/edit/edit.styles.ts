@@ -1,4 +1,4 @@
-import { SxProps, Theme, styled } from "@mui/material";
+import { Theme, styled } from "@mui/material";
 import { app } from "../../../../constants/app";
 
 export const Layout = styled("div")(({ theme: { spacing } }) => ({
@@ -11,21 +11,23 @@ export const Layout = styled("div")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const tabStyles = ({ spacing, palette }: Theme): SxProps<Theme> => ({
-  paddingLeft: 0,
-  paddingRight: 0,
-  minWidth: 0,
-  marginRight: spacing(6),
-  color: palette.grey[500],
+export const tabStyles = ({ spacing, palette }: Theme) =>
+  ({
+    paddingLeft: 0,
+    paddingRight: 0,
+    minWidth: 0,
+    marginRight: spacing(6),
+    color: palette.grey[500],
 
-  "&:last-of-type": {
-    marginRight: 0,
-  },
-});
+    "&:last-of-type": {
+      marginRight: 0,
+    },
+  } as const);
 
-export const tabsStyles = (): SxProps<Theme> => ({
-  borderBottom: "1px solid #ddd",
-});
+export const tabsStyles = () =>
+  ({
+    borderBottom: "1px solid #ddd",
+  } as const);
 
 export const NotFoundLayout = styled("div")(({ theme: { spacing } }) => ({
   marginTop: spacing(3),

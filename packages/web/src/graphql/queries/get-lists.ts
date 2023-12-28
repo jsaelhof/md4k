@@ -18,7 +18,7 @@ export type useGetListsArgs = {
 export const useGetLists = ({ onCompleted }: useGetListsArgs) => {
   const { data, ...rest } = useQuery<GetListsQuery>(GET_LISTS, {
     onCompleted: ({ lists }) => {
-      onCompleted(lists?.[0]);
+      lists && onCompleted(lists?.[0]);
     },
     fetchPolicy: "cache-and-network",
   });
