@@ -1,6 +1,4 @@
 import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
-import omit from "lodash/omit";
-import { omitTypename } from "../../utils/omit-typename";
 import { GET_MOVIES } from "../queries";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
@@ -8,7 +6,6 @@ import {
   MarkWatchedMutation,
   MarkWatchedMutationVariables,
   Movie,
-  MovieInput,
 } from "../../__generated__/graphql";
 
 export const MARK_WATCHED = gql`
@@ -89,15 +86,18 @@ export const useMarkWatched = ({
 };
 
 export const markWatchedOptions = (
-  movie: MovieInput,
+  movie: Movie,
   watchedOn: string,
   list: List
 ): MarkWatchedMutationOptions => {
-  const movieInput = omit(movie, ["fiveStarRating"]);
+  // Omit using spread.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { fiveStarRating, ...movieInput } = movie;
+
   return {
     variables: {
       movie: {
-        ...omitTypename(movieInput),
+        ...movieInput,
         watchedOn,
       },
       list: list.id,

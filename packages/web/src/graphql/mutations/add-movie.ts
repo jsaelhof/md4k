@@ -2,7 +2,6 @@ import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { GET_MOVIES } from "../queries";
-import { omitTypename } from "../../utils/omit-typename";
 import {
   AddMovieMutation,
   AddMovieMutationVariables,
@@ -79,7 +78,7 @@ export const addMovieOptions = (
   const id = uuidv4();
   const ratingsId = uuidv4();
 
-  const movieWithId: MovieInput = omitTypename({
+  const movieWithId: MovieInput = {
     id,
     list: list.id,
     ...movie,
@@ -87,7 +86,7 @@ export const addMovieOptions = (
       ...movie.ratings,
       id: ratingsId,
     },
-  });
+  };
 
   return {
     variables: { movie: movieWithId, list: list.id },

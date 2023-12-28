@@ -64,7 +64,7 @@ export const editMovieOptions = (
 ): EditMovieMutationOptions => {
   // Omit using spread.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { fiveStarRating, __typename, ...movieInput } = movie;
+  const { fiveStarRating, ...movieInput } = movie;
 
   return {
     variables: {

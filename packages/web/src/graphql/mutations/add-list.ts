@@ -27,7 +27,7 @@ export const addListOptions = (name: string): AddListMutationOptions => ({
 export const useAddList = ({
   onCompleted,
 }: {
-  onComplete: AddListMutationOptions["onCompleted"];
+  onCompleted: AddListMutationOptions["onCompleted"];
 }) => {
   const [addList, { loading, error, reset }] = useMutation<
     AddListMutation,
