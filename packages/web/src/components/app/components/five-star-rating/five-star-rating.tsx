@@ -1,10 +1,15 @@
 import times from "lodash/times";
 import { Star, StarRatingContainer } from "./five-star-rating.styles";
+import { ReactElement } from "react";
 
 const heights = [16, 18, 20, 18, 16];
 const margins = [0, 1, 1.5, 1, 0];
 
-const FiveStarRating = ({ stars }) => {
+export type FiveStarRatingProps = {
+  stars: number;
+};
+
+const FiveStarRating = ({ stars }: FiveStarRatingProps): ReactElement => {
   return (
     <StarRatingContainer>
       {times(5, (i) => (
