@@ -80,7 +80,7 @@ type ThirdPartyMovie {
   rated: String
   cast: [ThirdPartyCastMember]
   director: [ThirdPartyDirector]
-  ratings: ThirdPartyRatings
+  ratings: Ratings
   fiveStarRating: Float
   poster: String
   backdrop: String
@@ -88,13 +88,6 @@ type ThirdPartyMovie {
   trailer: ThirdPartyTrailer
   plot: String
   source: Int
-}
-
-type ThirdPartyRatings {
-  id: ID!
-  IMDB: String
-  ROTTEN_TOMATOES: String
-  METACRITIC: String
 }
 
 type ThirdPartyTrailer {
