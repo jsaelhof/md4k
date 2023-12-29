@@ -11,8 +11,19 @@
     "react/prop-types": 0,
     "react/no-unknown-property": 2,
     "jsx-a11y/alt-text": 0,
-    "react/display-name": 0
+    "react/display-name": 0,
+    "@typescript-eslint/explicit-function-return-type": 0
   },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "excludedFiles": ["*.test.ts", "*.test.tsx", "**/graphql/**"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": 2
+      }
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"
