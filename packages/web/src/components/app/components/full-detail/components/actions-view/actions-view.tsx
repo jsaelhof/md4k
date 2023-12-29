@@ -5,10 +5,22 @@ import { sources } from "md4k-constants";
 import { searchStreaming, searchTorrent } from "../../../../../../utils/search";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import fullDetailStrings from "../../i18n/i18n";
+import { ReactElement } from "react";
+import { SourceValue } from "../../../../../../types";
 
-export const ActionsView = ({ title, source }) => {
+export type ActionsViewProps = {
+  title: string;
+  source: SourceValue;
+};
+
+export const ActionsView = ({
+  title,
+  source,
+}: ActionsViewProps): ReactElement => {
   const { t } = useI18n(fullDetailStrings);
-  const canStream = ![sources.DVD, sources.NONE].includes(source);
+  const canStream = !([sources.DVD, sources.NONE] as SourceValue[]).includes(
+    source
+  );
 
   return (
     <>
@@ -16,7 +28,7 @@ export const ActionsView = ({ title, source }) => {
         <DetailButton
           color="primary"
           startIcon={<PlayArrow />}
-          onClick={() => {
+          onClick={(): void => {
             window.open(searchStreaming(title, source), "movieView");
           }}
         >
@@ -28,7 +40,7 @@ export const ActionsView = ({ title, source }) => {
         <DetailButton
           color="primary"
           startIcon={<Search />}
-          onClick={() => {
+          onClick={(): void => {
             window.open(searchTorrent(title), "movieView");
           }}
         >

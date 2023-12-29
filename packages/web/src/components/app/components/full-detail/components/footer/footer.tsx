@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import {
   searchCommonSense,
@@ -9,8 +9,13 @@ import {
 import { ActionImage, Container } from "./footer.styles";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import fullDetailStrings from "../../i18n/i18n";
+import { Movie } from "../../../../../../__generated__/graphql";
 
-const Footer = ({ movie }) => {
+export type FooterProps = {
+  movie: Movie;
+};
+
+const Footer = ({ movie }: FooterProps): ReactElement => {
   const { t } = useI18n(fullDetailStrings);
   const { title } = movie;
 
@@ -43,9 +48,7 @@ const Footer = ({ movie }) => {
           key={label}
           alt={t("full_detail:footer.search", { site: label })}
           src={src}
-          onClick={() => {
-            action(movie);
-          }}
+          onClick={action}
         />
       ))}
     </Container>

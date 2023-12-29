@@ -1,26 +1,32 @@
 import { useSpring } from "react-spring";
-import { useCallback, useState } from "react";
+import { ReactElement, UIEvent, useCallback, useState } from "react";
 import { useOnWindowResize } from "rooks";
 
 import { Layout, Shade, TextArea } from "./scroll-area.styles";
+import { Maybe } from "../../../../../../__generated__/graphql";
 
-const ScrollArea = ({ text, noScroll }) => {
-  const [topOverflow, setTopOverflow] = useState(null);
-  const [bottomOverflow, setBottomOverflow] = useState(null);
+export type ScrollAreaProps = {
+  text?: Maybe<string>;
+  noScroll: boolean;
+};
 
-  const [textNode, setTextNode] = useState(null);
+const ScrollArea = ({ text, noScroll }: ScrollAreaProps): ReactElement => {
+  const [topOverflow, setTopOverflow] = useState<boolean | null>(null);
+  const [bottomOverflow, setBottomOverflow] = useState<boolean | null>(null);
 
-  const updateOverflows = useCallback(
-    ({ scrollTop, scrollHeight, clientHeight }) => {
+  const [textNode, setTextNode] = useState<HTMLDivElement | null>(null);
+
+  const updateOverflows = useCallback((element: HTMLDivElement | null) => {
+    if (element) {
+      const { scrollTop, scrollHeight, clientHeight } = element;
       setTopOverflow(scrollTop > 0);
       setBottomOverflow(scrollHeight - clientHeight - scrollTop > 0);
-    },
-    []
-  );
+    }
+  }, []);
 
   // Callback ref: https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
   const onPlotRefChange = useCallback(
-    (node) => {
+    (node: HTMLDivElement | null) => {
       // Set the node ref recieved.
       setTextNode(node);
 
@@ -31,8 +37,8 @@ const ScrollArea = ({ text, noScroll }) => {
   );
 
   const onPlotScroll = useCallback(
-    ({ target }) => {
-      updateOverflows(target);
+    ({ target }: UIEvent<HTMLDivElement>) => {
+      updateOverflows(target as HTMLDivElement);
     },
     [updateOverflows]
   );

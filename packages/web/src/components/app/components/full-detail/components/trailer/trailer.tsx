@@ -1,7 +1,7 @@
 import { useOnWindowResize } from "rooks";
 
 import { useSpring } from "react-spring";
-import { useCallback, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import {
   TrailerInline,
   TrailerOverlay,
@@ -16,8 +16,18 @@ const youTubeIframe = {
   height: 360,
 };
 
-const Trailer = ({ trailerId, overlay, onComplete }) => {
-  const [trailerActive, setTrailerActive] = useState(null);
+export type TrailerProps = {
+  trailerId: string;
+  overlay?: boolean;
+  onComplete: () => void;
+};
+
+const Trailer = ({
+  trailerId,
+  overlay = false,
+  onComplete,
+}: TrailerProps): ReactElement => {
+  const [trailerActive, setTrailerActive] = useState<boolean | null>(null);
 
   const trailerSpring = useSpring({
     opacity: trailerActive ? 1 : 0,
@@ -28,13 +38,13 @@ const Trailer = ({ trailerId, overlay, onComplete }) => {
     },
   });
 
-  const [trailerNode, setTrailerNode] = useState();
+  const [trailerNode, setTrailerNode] = useState<HTMLElement | null>(null);
   const [size, setSize] = useState({
     width: 0,
     height: 0,
   });
 
-  const updateSize = (node) => {
+  const updateSize = (node: HTMLElement | null): void => {
     if (!node) return;
 
     const ratio = Math.max(
@@ -49,13 +59,13 @@ const Trailer = ({ trailerId, overlay, onComplete }) => {
   };
 
   // Callback Ref
-  const trailerRef = useCallback((node) => {
+  const trailerRef = useCallback((node: HTMLElement | null) => {
     setTrailerNode(node);
     updateSize(node);
   }, []);
 
   useOnWindowResize(() => {
-    updateSize(trailerNode);
+    trailerNode && updateSize(trailerNode);
   });
 
   const TrailerLayout = overlay ? TrailerOverlay : TrailerInline;
@@ -65,7 +75,9 @@ const Trailer = ({ trailerId, overlay, onComplete }) => {
     <TrailerLayout
       style={trailerSpring}
       ref={trailerRef}
-      onClick={() => overlay && onComplete()}
+      onClick={(): void => {
+        overlay && onComplete();
+      }}
       aria-label="Trailer"
     >
       <YouTubePlayer
@@ -80,8 +92,8 @@ const Trailer = ({ trailerId, overlay, onComplete }) => {
             controls: 0,
           },
         }}
-        onReady={() => setTrailerActive(true)}
-        onEnd={() => setTrailerActive(false)}
+        onReady={(): void => setTrailerActive(true)}
+        onEnd={(): void => setTrailerActive(false)}
       />
     </TrailerLayout>
   );

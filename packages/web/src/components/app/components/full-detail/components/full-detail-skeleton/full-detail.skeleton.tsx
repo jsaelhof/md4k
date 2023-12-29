@@ -10,9 +10,20 @@ import {
   MovieTitle,
   PlotLayout,
   Poster,
-} from "./full-detail.styles";
+} from "../../full-detail.styles";
+import { ReactElement } from "react";
 
-export const FullDetailSkeleton = ({ showCloseButton, small, onClose }) => (
+export type FullDetailSkeletonProps = {
+  showCloseButton?: boolean;
+  small?: boolean;
+  onClose: () => void;
+};
+
+export const FullDetailSkeleton = ({
+  showCloseButton,
+  small,
+  onClose,
+}: FullDetailSkeletonProps): ReactElement => (
   <FullDetailLayout>
     {showCloseButton && (
       <CloseButton onClick={onClose}>

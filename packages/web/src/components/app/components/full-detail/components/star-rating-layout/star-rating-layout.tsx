@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import debounce from "lodash/debounce";
 import { useMediaQuery } from "@mui/material";
@@ -6,8 +6,20 @@ import { useMediaQuery } from "@mui/material";
 import { RatingContainer } from "./star-rating-layout.styles";
 import FiveStarRating from "../../../five-star-rating/five-star-rating";
 import Ratings from "../../../list/components/ratings/ratings";
+import {
+  Maybe,
+  Ratings as RatingsGQLType,
+} from "../../../../../../__generated__/graphql";
 
-export const StarRatingLayout = ({ ratings, stars }) => {
+export type StarRatingLayoutProps = {
+  ratings?: Maybe<RatingsGQLType>;
+  stars?: Maybe<number>;
+};
+
+export const StarRatingLayout = ({
+  ratings,
+  stars,
+}: StarRatingLayoutProps): ReactElement => {
   const centered = useMediaQuery("(max-width: 660px)");
   const [showRatings, setShowRatings] = useState(false);
 
@@ -21,11 +33,11 @@ export const StarRatingLayout = ({ ratings, stars }) => {
   return (
     <RatingContainer
       onMouseEnter={displayRatings}
-      onMouseLeave={() => {
+      onMouseLeave={(): void => {
         displayRatings.cancel();
         setShowRatings(false);
       }}
-      onClick={() => {
+      onClick={(): void => {
         // OnClick, toggle the state.
         // Works for desktop and mobile but mainly here for mobile.
         setShowRatings(!showRatings);

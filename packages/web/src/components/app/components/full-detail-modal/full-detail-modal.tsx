@@ -1,16 +1,24 @@
 import { useSpring } from "react-spring";
-import { useCallback, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import FullDetail from "../full-detail/full-detail";
+import FullDetail, { FullDetailProps } from "../full-detail/full-detail";
 import { ModalBackdrop, ModalContent } from "./full-detail-modal.styles";
+
+export type FullDetailModalProps = {
+  preload: boolean;
+  open: boolean;
+  centerPoint: { x: number; y: number };
+  onClose: () => void;
+  fullDetailProps: FullDetailProps;
+};
 
 const FullDetailModal = ({
   preload,
   open,
   centerPoint,
   onClose,
-  ...passThroughProps
-}) => {
+  fullDetailProps,
+}: FullDetailModalProps): ReactElement => {
   const [isClosing, setIsClosing] = useState(false);
 
   const close = useCallback(() => {
@@ -66,9 +74,9 @@ const FullDetailModal = ({
         createPortal(
           <ModalContent
             style={expandedSpring}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e): void => e.stopPropagation()}
           >
-            <FullDetail showCloseButton onClose={close} {...passThroughProps} />
+            <FullDetail showCloseButton {...fullDetailProps} onClose={close} />
           </ModalContent>,
           document.body
         )}

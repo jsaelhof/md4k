@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { ReactElement, useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useMediaQuery } from "@mui/material";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
@@ -30,7 +30,7 @@ import {
   streamable,
   TrailerLayout,
 } from "./full-detail.styles";
-import { FullDetailSkeleton } from "./full-detail.skeleton";
+import { FullDetailSkeleton } from "./components/full-detail-skeleton/full-detail.skeleton";
 import MoviePoster from "../movie-poster/movie-poster";
 import Rated from "./components/rated/rated";
 import Trailer from "./components/trailer/trailer";
@@ -45,6 +45,18 @@ import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
 import { useI18n } from "../../../../hooks/use-i18n";
 import fullDetailStrings from "./i18n/i18n";
+import { Movie } from "../../../../__generated__/graphql";
+import { SourceValue } from "../../../../types";
+import { notEmpty } from "../../../../utils/not-empty";
+
+export type FullDetailProps = {
+  movie: Movie;
+  showCloseButton?: boolean;
+  onClose: () => void;
+  actionSet?: "addMovie" | "viewMovie";
+  onAddMovie: (movie: Omit<Movie, "id">) => void;
+  onChangeBackdrop: (url: string) => void;
+};
 
 const FullDetail = ({
   movie,
@@ -53,7 +65,7 @@ const FullDetail = ({
   actionSet = "viewMovie",
   onAddMovie,
   onChangeBackdrop,
-}) => {
+}: FullDetailProps): ReactElement => {
   const { t } = useI18n(fullDetailStrings);
   const small = useMediaQuery("(max-width: 750px)");
   const noPlotScroll = useMediaQuery("(max-width: 660px), (max-height: 414px)");
@@ -63,7 +75,7 @@ const FullDetail = ({
 
   const { data, loading } = useGetThirdPartyFullDetails(movie);
 
-  const [trailer, setTrailer] = useState(null);
+  const [trailer, setTrailer] = useState<string | null>(null);
 
   const fadeSpring = useSpring({
     opacity: data ? 1 : 0,
@@ -81,13 +93,17 @@ const FullDetail = ({
     window.open(searchTMDB(movie.title), "moviedb");
   }, [movie]);
 
-  const source = !isNil(movie.source)
-    ? movie.source
-    : !isNil(data.source)
-    ? data.source
-    : sources.NONE;
+  const source = (
+    !isNil(movie.source)
+      ? movie.source
+      : !isNil(data.source)
+      ? data.source
+      : sources.NONE
+  ) as SourceValue;
 
-  const canStream = ![sources.DVD, sources.NONE].includes(source);
+  const canStream = !([sources.DVD, sources.NONE] as SourceValue[]).includes(
+    source
+  );
 
   const backdrop = useMemo(
     () => movie.background || data.backdrops?.[0],
@@ -121,11 +137,13 @@ const FullDetail = ({
           }}
         />
 
-        {data.backdrops?.length > 1 && (
+        {(data.backdrops ?? []).length > 1 && (
           <PrevBackgroundButton
-            onClick={() => {
+            onClick={(): void => {
               if (data.backdrops) {
-                onChangeBackdrop(getNeighbor(data.backdrops, backdrop, false));
+                onChangeBackdrop(
+                  getNeighbor(data.backdrops.filter(notEmpty), backdrop, false)
+                );
               }
             }}
           >
@@ -133,11 +151,13 @@ const FullDetail = ({
           </PrevBackgroundButton>
         )}
 
-        {data.backdrops?.length > 1 && (
+        {(data.backdrops ?? []).length > 1 && (
           <NextBackgroundButton
-            onClick={() => {
+            onClick={(): void => {
               if (data.backdrops) {
-                onChangeBackdrop(getNeighbor(data.backdrops, backdrop));
+                onChangeBackdrop(
+                  getNeighbor(data.backdrops.filter(notEmpty), backdrop)
+                );
               }
             }}
           >
@@ -147,7 +167,10 @@ const FullDetail = ({
 
         {trailer && !trailerOverlay && (
           <TrailerLayout>
-            <Trailer trailerId={trailer} onComplete={() => setTrailer(null)} />
+            <Trailer
+              trailerId={trailer}
+              onComplete={(): void => setTrailer(null)}
+            />
           </TrailerLayout>
         )}
       </BackdropWrapper>
@@ -158,7 +181,7 @@ const FullDetail = ({
           <Trailer
             overlay
             trailerId={trailer}
-            onComplete={() => setTrailer(null)}
+            onComplete={(): void => setTrailer(null)}
           />,
           document.body
         )}
@@ -202,10 +225,10 @@ const FullDetail = ({
           sx={[canStream && streamable]}
           src={sourceLogosLarge[source]}
           alt={t(`common:sources.${source}`)}
-          onClick={() =>
+          onClick={(): void => {
             canStream &&
-            window.open(searchStreaming(movie.title, source), "movieView")
-          }
+              window.open(searchStreaming(movie.title, source), "movieView");
+          }}
         />
 
         <PlotLayout>
@@ -213,15 +236,14 @@ const FullDetail = ({
         </PlotLayout>
 
         <Actions
-          actionSet={actionSet}
           hasTrailer={data.trailer?.site === "YouTube"}
-          onPlayTrailer={() => {
-            setTrailer(data.trailer.key);
+          onPlayTrailer={(): void => {
+            data.trailer?.key && setTrailer(data.trailer.key);
           }}
         >
           {actionSet === "addMovie" && (
             <ActionsAdd
-              onAddMovie={() => {
+              onAddMovie={(): void => {
                 onAddMovie({
                   ...pick(movie, ["imdbID", "title", "poster", "year"]),
                   ...pick(data, ["source", "ratings", "genre", "runtime"]),
@@ -241,11 +263,11 @@ const FullDetail = ({
         <CastLayout>
           <>
             {(data.cast || []).slice(0, 3).map((castMember) => (
-              <Cast key={castMember.id} {...castMember} />
+              <Cast key={castMember?.id} {...castMember} />
             ))}
             {(data.director || []).slice(0, 1).map((director) => (
               <Cast
-                key={director.id}
+                key={director?.id}
                 {...director}
                 character={t("full_detail:director")}
               />
@@ -259,9 +281,13 @@ const FullDetail = ({
   );
 };
 
-const getNeighbor = (arr, item, forward = true) => {
+const getNeighbor = (
+  arr: string[],
+  item: string | null | undefined,
+  ahead = true
+): string => {
   const currentIndex = arr.findIndex((val) => val === item);
-  const index = (currentIndex + (forward ? 1 : arr.length - 1)) % arr.length;
+  const index = (currentIndex + (ahead ? 1 : arr.length - 1)) % arr.length;
   return arr[index];
 };
 

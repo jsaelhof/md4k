@@ -1,7 +1,15 @@
 import { Tooltip } from "@mui/material";
 import { Character, Headshot, Layout, Name } from "./cast.styles";
+import { ReactElement } from "react";
+import { Maybe } from "../../../../../../__generated__/graphql";
 
-const Cast = ({ name, character, image }) => (
+export type CastProps = {
+  name?: Maybe<string>;
+  character?: Maybe<string>;
+  image?: Maybe<string>;
+};
+
+const Cast = ({ name, character, image }: CastProps): ReactElement => (
   <Layout>
     <Headshot
       data-testid="headshot"
@@ -12,7 +20,7 @@ const Cast = ({ name, character, image }) => (
       <Name>{name}</Name>
     </Tooltip>
     <Tooltip title={character} placement="top" enterDelay={1000}>
-      <Character>{character.replace(/\(voice\)/i, "").trim()}</Character>
+      <Character>{character?.replace(/\(voice\)/i, "").trim()}</Character>
     </Tooltip>
   </Layout>
 );

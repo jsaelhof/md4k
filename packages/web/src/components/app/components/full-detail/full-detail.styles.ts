@@ -8,19 +8,25 @@ export const FullDetailLayout = styled("div")`
   position: relative;
 `;
 
-export const CloseButton = styled("div")(({ $useColorBlend }) => ({
-  position: "absolute",
-  top: "8px",
-  right: "8px",
-  zIndex: 100,
-  cursor: "pointer",
-  color: "black",
+interface CloseButtonProps {
+  $useColorBlend?: boolean;
+}
 
-  ...($useColorBlend && {
-    color: "white",
-    mixBlendMode: "exclusion",
-  }),
-}));
+export const CloseButton = styled("div")<CloseButtonProps>(
+  ({ $useColorBlend }) => ({
+    position: "absolute",
+    top: "8px",
+    right: "8px",
+    zIndex: 100,
+    cursor: "pointer",
+    color: "black",
+
+    ...($useColorBlend && {
+      color: "white",
+      mixBlendMode: "exclusion",
+    }),
+  })
+);
 
 const ChangeBackgroundButton = styled("div")`
   grid-area: main;
@@ -131,28 +137,25 @@ export const Poster = styled(animated.div)`
   }
 `;
 
-export const MovieTitle = styled("div")`
-  grid-area: title;
-  font-size: 48px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.palette.grey[900]};
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  text-shadow: 0 0 3px white;
-  margin-bottom: 8px;
+export const MovieTitle = styled("div")(({ theme: { palette, spacing } }) => ({
+  gridArea: "title",
+  fontSize: 48,
+  fontWeight: "bold",
+  color: palette.grey[900],
+  display: "flex",
+  justifyContent: "flex-end",
+  flexDirection: "column",
+  textShadow: "0 0 3px white",
+  marginBottom: 8,
 
-  @media (max-width: 750px) {
-    font-size: 32px;
-    align-items: center;
-    text-align: center;
-
-    ${({ theme: { spacing } }) => ({
-      paddingTop: spacing(3),
-      marginBottom: spacing(2),
-    })}
-  }
-`;
+  "@media (max-width: 750px)": {
+    fontSize: 32,
+    alignItems: "center",
+    textAlign: "center",
+    paddingTop: spacing(3),
+    marginBottom: spacing(2),
+  },
+}));
 
 export const smallMovieTitle = {
   fontSize: 32,
@@ -162,22 +165,22 @@ export const RatingsArea = styled("div")`
   grid-area: ratings;
 `;
 
-export const MovieData = styled("div")`
-  padding: 0;
-  display: grid;
-  column-gap: ${({ theme }) => theme.spacing(3)};
-  grid-auto-flow: column;
-  grid-template-columns: repeat(3, max-content) 1fr;
-  font-size: 14px;
-  align-items: center;
-  grid-area: info;
-  color: ${({ theme }) => theme.palette.grey[900]};
-  margin-right: ${({ theme }) => theme.spacing(1)};
+export const MovieData = styled("div")(({ theme: { palette, spacing } }) => ({
+  padding: 0,
+  display: "grid",
+  columnGap: spacing(3),
+  gridAutoFlow: "column",
+  gridTemplateColumns: "repeat(3, max-content) 1fr",
+  fontSize: 14,
+  alignItems: "center",
+  gridArea: "info",
+  color: palette.grey[900],
+  marginRight: spacing(1),
 
-  @media (max-width: 750px) {
-    column-gap: ${({ theme }) => theme.spacing(2)};
-  }
-`;
+  "@media (max-width: 750px)": {
+    columnGap: spacing(2),
+  },
+}));
 
 export const Source = styled("img")`
   grid-area: source;

@@ -8,7 +8,12 @@ export const Layout = styled("div")(() => ({
   margin: "0 8px",
 }));
 
-export const Headshot = styled("div")(({ $image, $y }) => ({
+interface HeadshotProps {
+  $image: string;
+  $y: number;
+}
+
+export const Headshot = styled("div")<HeadshotProps>(({ $image, $y }) => ({
   backgroundImage: `url(${$image})`,
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",

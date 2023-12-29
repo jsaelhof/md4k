@@ -22,13 +22,11 @@ export const TrailerOverlay = styled(animated.div)(
 `
 );
 
-export const YouTubePlayerInline = styled(YouTube)(({ width, height }) => ({
+export const YouTubePlayerInline = styled(YouTube)(() => ({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%,-50%)",
-  width,
-  height,
 }));
 
 export const YouTubePlayerOverlay = styled(YouTube)(() => ({

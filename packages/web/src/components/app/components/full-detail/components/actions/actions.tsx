@@ -3,8 +3,18 @@ import TelevisionPlay from "mdi-material-ui/TelevisionPlay";
 import TelevisionOff from "mdi-material-ui/TelevisionOff";
 import fullDetailStrings from "../../i18n/i18n";
 import { useI18n } from "../../../../../../hooks/use-i18n";
+import { PropsWithChildren, ReactElement } from "react";
 
-export const Actions = ({ hasTrailer, onPlayTrailer, children }) => {
+export type ActionsProps = PropsWithChildren<{
+  hasTrailer: boolean;
+  onPlayTrailer: () => void;
+}>;
+
+export const Actions = ({
+  hasTrailer,
+  onPlayTrailer,
+  children,
+}: ActionsProps): ReactElement => {
   const { t } = useI18n(fullDetailStrings);
 
   return (

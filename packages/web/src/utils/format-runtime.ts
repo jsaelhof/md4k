@@ -1,9 +1,9 @@
 import isNil from "lodash/isNil";
 
 export const formatRuntime = (
-  seconds: number | undefined,
+  seconds: number | undefined | null,
   editingFormat = false
-) => {
+): string => {
   if (isNil(seconds)) return "";
 
   const [hours, minutes] = new Date(1000 * seconds)

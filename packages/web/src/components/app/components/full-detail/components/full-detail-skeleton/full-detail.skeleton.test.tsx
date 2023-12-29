@@ -1,8 +1,8 @@
-import FullDetail from "./full-detail";
+import FullDetail from "../../full-detail";
 import { vi } from "vitest";
-import { renderWithProviders } from "../../../../test-utils/render-with-providers";
-import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
-import { buildThirdPartyMovieMock } from "../../../../test-utils/build-third-party-movie-mock";
+import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
+import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../../../graphql/queries";
+import { buildThirdPartyMovieMock } from "../../../../../../test-utils/build-third-party-movie-mock";
 import { screen } from "@testing-library/react";
 
 vi.mock("uuid", () => ({

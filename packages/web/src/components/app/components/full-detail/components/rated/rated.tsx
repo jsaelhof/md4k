@@ -1,9 +1,13 @@
 import isNil from "lodash/isNil";
-import React from "react";
-
+import React, { ReactElement } from "react";
 import { RatedContainer } from "./rated.styles";
+import { Maybe } from "../../../../../../__generated__/graphql";
 
-const Rated = ({ rated }) =>
+export type RatedProps = {
+  rated?: Maybe<string>;
+};
+
+const Rated = ({ rated }: RatedProps): ReactElement | null =>
   isNil(rated) || rated === "Not Rated" ? null : (
     <RatedContainer data-testid="rated">{rated}</RatedContainer>
   );

@@ -5,20 +5,28 @@ export const Layout = styled("div")(() => ({
   position: "relative",
 }));
 
-export const TextArea = styled("div")`
-  line-height: 1.7;
-  max-height: 160px;
-  overflow-y: scroll;
-  ${({ noScroll, theme: { palette } }) => ({
+interface TextAreaProps {
+  noScroll: boolean;
+}
+
+export const TextArea = styled("div")<TextAreaProps>(
+  ({ noScroll, theme: { palette } }) => ({
+    lineHeight: 1.7,
+    maxHeight: 160,
+    overflowY: "scroll",
     color: palette.grey[900],
     ...(noScroll && {
       maxHeight: "unset",
       overflowY: "initial",
     }),
-  })}
-`;
+  })
+);
 
-export const Shade = styled(animated.div)(({ align }) => {
+interface ShadeProps {
+  align: "top" | "bottom";
+}
+
+export const Shade = styled(animated.div)<ShadeProps>(({ align }) => {
   const alignedProps = {
     top: { gradientAngle: "to bottom", styles: { top: 0 } },
     bottom: { gradientAngle: "to top", styles: { bottom: 0 } },
