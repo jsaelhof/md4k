@@ -5,7 +5,7 @@ import FullDetail, { FullDetailProps } from "../full-detail/full-detail";
 import { ModalBackdrop, ModalContent } from "./full-detail-modal.styles";
 
 export type FullDetailModalProps = {
-  preload: boolean;
+  preload?: boolean;
   open: boolean;
   centerPoint: { x: number; y: number };
   onClose: () => void;
@@ -13,7 +13,7 @@ export type FullDetailModalProps = {
 };
 
 const FullDetailModal = ({
-  preload,
+  preload = false,
   open,
   centerPoint,
   onClose,

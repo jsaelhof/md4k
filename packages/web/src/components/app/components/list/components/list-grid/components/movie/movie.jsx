@@ -178,13 +178,15 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
       </MovieContainer>
 
       <FullDetailModal
-        movie={movie}
         preload={focused}
         open={expanded}
         centerPoint={centerPoint}
         onClose={onCloseExpanded}
-        onChangeBackdrop={onChangeBackdrop}
-        actionSet="viewMovie"
+        fullDetailProps={{
+          movie,
+          onChangeBackdrop,
+          actionSet: "viewMovie",
+        }}
       />
     </>
   );

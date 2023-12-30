@@ -196,23 +196,25 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
 
       {selectedMovie && (
         <FullDetailModal
-          movie={selectedMovie}
           open={true}
           centerPoint={centerPoint}
           onClose={() => {
             setCenterPoint(null);
             setSelectedMovie(null);
           }}
-          onAddMovie={onAddMovie}
-          onChangeBackdrop={(url) => {
-            // This will lose the selected backdrop if the user change movies.
-            // I could find the movie by id in the movies returned and update it there, which _should_ propogate to the selected movie.
-            setSelectedMovie({
-              ...selectedMovie,
-              background: url,
-            });
+          fullDetailProps={{
+            movie: selectedMovie,
+            onAddMovie,
+            onChangeBackdrop: (url) => {
+              // This will lose the selected backdrop if the user change movies.
+              // I could find the movie by id in the movies returned and update it there, which _should_ propogate to the selected movie.
+              setSelectedMovie({
+                ...selectedMovie,
+                background: url,
+              });
+            },
+            actionSet: "addMovie",
           }}
-          actionSet="addMovie"
         />
       )}
     </>
