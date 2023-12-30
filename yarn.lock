@@ -2819,7 +2819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.10.2":
+"@mui/icons-material@npm:5.15.2":
   version: 5.15.2
   resolution: "@mui/icons-material@npm:5.15.2"
   dependencies:
@@ -2835,7 +2835,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:^5.10.2":
+"@mui/material@npm:5.15.2":
   version: 5.15.2
   resolution: "@mui/material@npm:5.15.2"
   dependencies:
@@ -2906,7 +2906,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/styles@npm:^5.10.2":
+"@mui/styles@npm:5.15.2":
   version: 5.15.2
   resolution: "@mui/styles@npm:5.15.2"
   dependencies:
@@ -9459,9 +9459,9 @@ __metadata:
     "@graphql-codegen/client-preset": 4.1.0
     "@graphql-codegen/typescript": ^4.0.1
     "@graphql-codegen/typescript-resolvers": ^4.0.1
-    "@mui/icons-material": ^5.10.2
-    "@mui/material": ^5.10.2
-    "@mui/styles": ^5.10.2
+    "@mui/icons-material": 5.15.2
+    "@mui/material": 5.15.2
+    "@mui/styles": 5.15.2
     "@testing-library/dom": ^8.17.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.3.0

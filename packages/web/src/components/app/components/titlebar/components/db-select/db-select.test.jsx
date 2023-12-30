@@ -26,9 +26,7 @@ describe("db-select", () => {
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    await user.click(
-      screen.getByRole("button", { name: "Saturday Night", expanded: false })
-    );
+    await user.click(screen.getByRole("button", { name: /Saturday/ }));
 
     expect(
       screen.getByRole("option", { name: /Saturday/, selected: true })
@@ -50,9 +48,7 @@ describe("db-select", () => {
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    await user.click(
-      screen.getByRole("button", { name: /Saturday/, expanded: false })
-    );
+    await user.click(screen.getByRole("button", { name: /Saturday/ }));
     await user.click(
       screen.getByRole("option", { name: /Family/, selected: false })
     );
@@ -66,9 +62,7 @@ describe("db-select", () => {
 
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
 
-    await user.click(
-      screen.getByRole("button", { name: /Saturday/, expanded: false })
-    );
+    await user.click(screen.getByRole("button", { name: /Saturday/ }));
     await user.click(
       screen.getByRole("option", { name: /New List/, selected: false })
     );

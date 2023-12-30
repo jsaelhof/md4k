@@ -70,9 +70,7 @@ describe("manual-movie-form", () => {
 
     // Genre
     expect(screen.getByTestId("genre")).toBeInTheDocument();
-    await user.click(
-      within(screen.getByTestId("genre")).getByRole("button", { hidden: true })
-    );
+    await user.click(within(screen.getByTestId("genre")).getByRole("combobox"));
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: "Horror" }));
     expect(
@@ -82,7 +80,7 @@ describe("manual-movie-form", () => {
     // Source
     expect(screen.getByTestId("source")).toBeInTheDocument();
     await user.click(
-      within(screen.getByTestId("source")).getByRole("button", { hidden: true })
+      within(screen.getByTestId("source")).getByRole("combobox")
     );
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: "Netflix" }));
@@ -156,7 +154,10 @@ describe("manual-movie-form", () => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
-    await user.type(screen.getByLabelText("Background URL"), "something invalid");
+    await user.type(
+      screen.getByLabelText("Background URL"),
+      "something invalid"
+    );
 
     await user.click(screen.getByRole("button", { name: "Save" }));
     expect(props.onChange).not.toHaveBeenCalled();
@@ -259,7 +260,10 @@ describe("manual-movie-form", () => {
     expect(screen.getByText("Netflix")).toBeInTheDocument();
   });
 
-  it("should return a diff from a populated initial state", async ({ props, user }) => {
+  it("should return a diff from a populated initial state", async ({
+    props,
+    user,
+  }) => {
     render(
       <ManualMovieForm
         {...props}
@@ -274,7 +278,7 @@ describe("manual-movie-form", () => {
           imdbID: "tt1234567",
         }}
       />
-      );
+    );
 
     const saveBtn = screen.getByRole("button", { name: "Save" });
 
@@ -285,86 +289,110 @@ describe("manual-movie-form", () => {
     // Change title
     await user.type(screen.getByLabelText("Title"), " Edit");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ title: "Test Movie Edit" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ title: "Test Movie Edit" })
+    );
 
     // Can't remove title...clearing will trigger form validation since title is not nullable.
 
     // Change poster
     await user.type(screen.getByLabelText("Poster URL"), "/edit");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ poster: "https://test.com/poster.jpg/edit" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ poster: "https://test.com/poster.jpg/edit" })
+    );
 
     // Clear poster
     await user.clear(screen.getByLabelText("Poster URL"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ poster: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ poster: null })
+    );
 
     // Change background
     await user.type(screen.getByLabelText("Background URL"), "/edit");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ background: "https://test.com/background.jpg/edit" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        background: "https://test.com/background.jpg/edit",
+      })
+    );
 
     // Clear background
     await user.clear(screen.getByLabelText("Background URL"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ background: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ background: null })
+    );
 
     // Change year
     await user.type(screen.getByLabelText("Year"), "{Backspace}6");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ year: "1996" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ year: "1996" })
+    );
 
     // Clear year
     await user.clear(screen.getByLabelText("Year"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ year: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ year: null })
+    );
 
     // Change runtime
     await user.type(screen.getByLabelText("Runtime"), "{Backspace}0");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ runtime: 5400 }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ runtime: 5400 })
+    );
 
     // Clear runtime
     await user.clear(screen.getByLabelText("Runtime"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ runtime: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ runtime: null })
+    );
 
     // Change imdbID
     await user.type(screen.getByLabelText("IMDB ID"), "{Backspace}9");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ imdbID: "tt1234569" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ imdbID: "tt1234569" })
+    );
 
     // Clear imdbID
     await user.clear(screen.getByLabelText("IMDB ID"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ imdbID: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ imdbID: null })
+    );
 
     // Change source
     await user.click(
-      within(screen.getByTestId("source")).getByRole("button", { hidden: true })
-      );
+      within(screen.getByTestId("source")).getByRole("combobox")
+    );
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: /Disney/ }));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ source: 6 }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ source: 6 })
+    );
 
     // Change genre
-    await user.click(
-      within(screen.getByTestId("genre")).getByRole("button", { hidden: true })
-      );
+    await user.click(within(screen.getByTestId("genre")).getByRole("combobox"));
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: "Horror" }));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ genre: 10 }));
-  })
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ genre: 10 })
+    );
+  });
 
-  it("should return a diff from a default initial state", async ({ props, user }) => {
-    render(
-      <ManualMovieForm
-        {...props}
-        initialState={undefined}
-      />
-      );
+  it("should return a diff from a default initial state", async ({
+    props,
+    user,
+  }) => {
+    render(<ManualMovieForm {...props} initialState={undefined} />);
 
     const saveBtn = screen.getByRole("button", { name: "Save" });
 
@@ -373,81 +401,115 @@ describe("manual-movie-form", () => {
 
     // No changes from initial state yet
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith({ title: "Test Movie", genre: 0, source: 0 });
+    expect(props.onChange).toHaveBeenLastCalledWith({
+      title: "Test Movie",
+      genre: 0,
+      source: 0,
+    });
 
     // Change title
     await user.type(screen.getByLabelText("Title"), " Edit");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ title: "Test Movie Edit" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ title: "Test Movie Edit" })
+    );
 
     // Can't remove title...clearing will trigger form validation since title is not nullable.
 
     // Change poster
-    await user.type(screen.getByLabelText("Poster URL"), "https://test.com/poster.jpg");
+    await user.type(
+      screen.getByLabelText("Poster URL"),
+      "https://test.com/poster.jpg"
+    );
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ poster: "https://test.com/poster.jpg" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ poster: "https://test.com/poster.jpg" })
+    );
 
     // Clear poster
     await user.clear(screen.getByLabelText("Poster URL"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ poster: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ poster: null })
+    );
 
     // Change background
-    await user.type(screen.getByLabelText("Background URL"), "https://test.com/background.jpg");
+    await user.type(
+      screen.getByLabelText("Background URL"),
+      "https://test.com/background.jpg"
+    );
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ background: "https://test.com/background.jpg" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ background: "https://test.com/background.jpg" })
+    );
 
     // Clear background
     await user.clear(screen.getByLabelText("Background URL"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ background: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ background: null })
+    );
 
     // Change year
     await user.type(screen.getByLabelText("Year"), "1996");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ year: "1996" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ year: "1996" })
+    );
 
     // Clear year
     await user.clear(screen.getByLabelText("Year"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ year: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ year: null })
+    );
 
     // Change runtime
     await user.type(screen.getByLabelText("Runtime"), "1:30");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ runtime: 5400 }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ runtime: 5400 })
+    );
 
     // Clear runtime
     await user.clear(screen.getByLabelText("Runtime"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ runtime: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ runtime: null })
+    );
 
     // Change imdbID
     await user.type(screen.getByLabelText("IMDB ID"), "tt9876543");
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ imdbID: "tt9876543" }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ imdbID: "tt9876543" })
+    );
 
     // Clear imdbID
     await user.clear(screen.getByLabelText("IMDB ID"));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ imdbID: null }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ imdbID: null })
+    );
 
     // Change source
     await user.click(
-      within(screen.getByTestId("source")).getByRole("button", { hidden: true })
-      );
+      within(screen.getByTestId("source")).getByRole("combobox")
+    );
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: /Disney/ }));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ source: 6 }));
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ source: 6 })
+    );
 
     // Change genre
-    await user.click(
-      within(screen.getByTestId("genre")).getByRole("button", { hidden: true })
-      );
+    await user.click(within(screen.getByTestId("genre")).getByRole("combobox"));
     await user.click(screen.getByRole("listbox"));
     await user.click(screen.getByRole("option", { name: "Horror" }));
     await user.click(saveBtn);
-    expect(props.onChange).toHaveBeenLastCalledWith(expect.objectContaining({ genre: 10 }));
-  })
+    expect(props.onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ genre: 10 })
+    );
+  });
 });

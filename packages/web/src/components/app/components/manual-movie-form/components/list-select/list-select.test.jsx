@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import ListSelect from "./list-select";
 import { sourceLabels, sourceLogos } from "../../../../../../constants/sources";
 import { sources } from "md4k-constants";
@@ -22,13 +22,14 @@ describe("list-select", () => {
   }) => {
     render(<ListSelect {...props} />);
 
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: sourceLabels[sources.NETFLIX] })
+      within(screen.getByRole("combobox")).getByText(
+        sourceLabels[sources.NETFLIX]
+      )
     ).toBeInTheDocument();
 
-    await user.click(
-      screen.getByRole("button", { name: sourceLabels[sources.NETFLIX] })
-    );
+    await user.click(screen.getByRole("combobox"));
 
     Object.values(sources).forEach((source) => {
       expect(
