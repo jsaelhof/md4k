@@ -1,9 +1,9 @@
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { Attribution, Layout, Quote } from "./movie-quote.styles";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import tabPanelSearchStrings from "../../i18n/i18n";
 
-export const MovieQuote = () => {
+export const MovieQuote = (): ReactElement => {
   const { t } = useI18n(tabPanelSearchStrings);
 
   const { quote, speaker, movie } = useMemo(() => {

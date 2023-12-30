@@ -149,7 +149,7 @@ describe("tab-panel-search", () => {
     await user.type(screen.getByLabelText(/Search/), "Batman");
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       expect(screen.getByLabelText(`Batman ${i} Poster`)).toBeInTheDocument();
     }
   });
@@ -178,7 +178,7 @@ describe("tab-panel-search", () => {
     expect(
       await screen.findByLabelText(`Batman 10 Poster`)
     ).toBeInTheDocument();
-    for (var i = 0; i < 15; i++) {
+    for (let i = 0; i < 15; i++) {
       expect(screen.getByLabelText(`Batman ${i} Poster`)).toBeInTheDocument();
     }
 
@@ -244,7 +244,7 @@ describe("tab-panel-search", () => {
     expect(await screen.findByDisplayValue("2005")).toBeInTheDocument();
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
-    for (var i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) {
       expect(screen.getByLabelText(`Batman ${i} Poster`)).toBeInTheDocument();
       expect(screen.getAllByText("2005")).toHaveLength(4);
     }

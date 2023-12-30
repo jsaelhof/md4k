@@ -2,7 +2,11 @@ import { styled } from "@mui/material";
 import { app } from "../../../../../../constants/app";
 import { keyframes } from "@emotion/react";
 
-export const SearchLayout = styled("div")(
+interface SearchLayoutProps {
+  $shadow: boolean;
+}
+
+export const SearchLayout = styled("div")<SearchLayoutProps>(
   ({ theme: { zIndex, palette }, $shadow }) => ({
     display: "flex",
     justifyContent: "center",

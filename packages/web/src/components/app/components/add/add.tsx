@@ -1,5 +1,5 @@
-import { Tab, Tabs } from "@mui/material";
-import { useCallback, useState } from "react";
+import { Tab, Tabs, TabsOwnProps } from "@mui/material";
+import { ReactElement, useCallback, useState } from "react";
 import { Layout, tabStyles, tabsStyles } from "./add.styles";
 import { addMovieOptions, useAddMovie } from "../../../../graphql/mutations";
 import { useAppContext } from "../../../../context/app-context";
@@ -9,32 +9,37 @@ import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
 import { useI18n } from "../../../../hooks/use-i18n";
 import addStrings from "./i18n/i18n";
+import { Movie } from "../../../../__generated__/graphql";
 
-export const Add = () => {
+export const Add = (): ReactElement => {
   const { t } = useI18n(addStrings);
 
   const [activeTab, setActiveTab] = useState(0);
 
-  const onTabChange = useCallback((event, index) => setActiveTab(index), []);
+  const onTabChange = useCallback<NonNullable<TabsOwnProps["onChange"]>>(
+    (event, index) => setActiveTab(index),
+    []
+  );
 
   const { list, setToast } = useAppContext();
   const navigate = useNavigate();
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const [addMovieMutation] = useAddMovie({
     onCompleted: ({ addMovie: movie }) => {
-      setToast({ message: t("add:confirm_added", { title: movie.title }) });
+      movie &&
+        setToast({ message: t("add:confirm_added", { title: movie.title }) });
       navigate("/");
     },
     onError: ({ message }) => {
-      console.log(message);
       setError(message);
     },
   });
 
-  const onAddMovie = useCallback(
+  const onAddMovie = useCallback<(movie: Omit<Movie, "id">) => void>(
     (movie) =>
+      list &&
       addMovieMutation(addMovieOptions({ ...movie, locked: false }, list)),
     [addMovieMutation, list]
   );
@@ -65,13 +70,13 @@ export const Add = () => {
         </Tabs>
 
         <TabPanelSearch
-          tabId={0}
+          tabId="0"
           hidden={activeTab !== 0}
           onAddMovie={onAddMovie}
         />
 
         <TabPanelManual
-          tabId={1}
+          tabId="1"
           hidden={activeTab !== 1}
           onAddMovie={onAddMovie}
         />
@@ -82,7 +87,7 @@ export const Add = () => {
           open={!!error}
           content={t("add:error_adding")}
           debug={error}
-          onConfirm={() => setError(null)}
+          onConfirm={(): void => setError(null)}
         />
       )}
     </>

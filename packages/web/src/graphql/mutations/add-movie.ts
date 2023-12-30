@@ -1,13 +1,18 @@
-import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
+import {
+  BaseMutationOptions,
+  MutationTuple,
+  gql,
+  useMutation,
+} from "@apollo/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { GET_MOVIES } from "../queries";
 import {
   AddMovieMutation,
   AddMovieMutationVariables,
-  List,
   MovieInput,
 } from "../../__generated__/graphql";
+import { GetListsItem } from "../types";
 
 export const ADD_MOVIE = gql`
   mutation AddMovie($movie: MovieInput!, $list: String!) {
@@ -47,7 +52,7 @@ export const useAddMovie = ({
 }: {
   onCompleted: AddMovieMutationOptions["onCompleted"];
   onError: AddMovieMutationOptions["onError"];
-}) => {
+}): MutationTuple<AddMovieMutation, AddMovieMutationVariables> => {
   const [addMovieMutation, status] = useMutation<
     AddMovieMutation,
     AddMovieMutationVariables
@@ -73,7 +78,7 @@ export const useAddMovie = ({
 
 export const addMovieOptions = (
   movie: Omit<MovieInput, "id">,
-  list: List
+  list: GetListsItem
 ): AddMovieMutationOptions => {
   const id = uuidv4();
   const ratingsId = uuidv4();

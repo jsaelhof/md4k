@@ -2,13 +2,26 @@ import TabPanel from "../tab-panel/tab-panel";
 import { ManualMovieForm } from "../../../manual-movie-form/manual-movie-form";
 import LibraryAdd from "@mui/icons-material/LibraryAdd";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
-import {useI18n} from "../../../../../../hooks/use-i18n.js";
+import { ReactElement, useCallback } from "react";
+import { useI18n } from "../../../../../../hooks/use-i18n.js";
 import tabPanelManualStrings from "./i18n/i18n";
+import { Movie } from "../../../../../../__generated__/graphql";
 
-const TabPanelManual = ({ tabId, hidden, onAddMovie, initialState }) => {
+export type TabPanelManualProps = {
+  tabId: string;
+  hidden: boolean;
+  onAddMovie: (movie: Movie) => void;
+  initialState?: Omit<Movie, "id">;
+};
+
+const TabPanelManual = ({
+  tabId,
+  hidden,
+  onAddMovie,
+  initialState,
+}: TabPanelManualProps): ReactElement => {
   const navigate = useNavigate();
-  const {t} = useI18n(tabPanelManualStrings)
+  const { t } = useI18n(tabPanelManualStrings);
 
   const onCancel = useCallback(() => {
     navigate("/");

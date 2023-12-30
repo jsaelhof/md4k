@@ -4,7 +4,13 @@ import Close from "@mui/icons-material/Close";
 import Refresh from "@mui/icons-material/Refresh";
 import Search from "@mui/icons-material/Search";
 import TabPanel from "../tab-panel/tab-panel";
-import { useCallback, useRef, useState } from "react";
+import {
+  ChangeEventHandler,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import debounce from "lodash/debounce";
 import FullDetailModal from "../../../full-detail-modal/full-detail-modal";
 import { useSearchByTitle } from "../../../../../../graphql/queries";
@@ -21,29 +27,56 @@ import PosterGrid from "../../../poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import searchStrings from "./i18n/i18n";
+import {
+  Movie,
+  PageInfo,
+  SearchByTitleQuery,
+  SearchResult,
+} from "../../../../../../__generated__/graphql";
+import { Maybe } from "graphql/jsutils/Maybe";
+import { notEmpty } from "../../../../../../utils/not-empty";
 
-const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
+export type TabPanelSearchProps = {
+  tabId: string;
+  hidden: boolean;
+  onAddMovie: (movie: Omit<Movie, "id">) => void;
+};
+
+const TabPanelSearch = ({
+  tabId,
+  hidden,
+  onAddMovie,
+}: TabPanelSearchProps): ReactElement => {
   const { t } = useI18n(searchStrings);
 
   const [titleSearch, setTitleSearch] = useState("");
   const [yearSearch, setYearSearch] = useState("");
-  const [movies, setMovies] = useState(null);
-  const [pageInfo, setPageInfo] = useState(null);
-  const [centerPoint, setCenterPoint] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [movies, setMovies] = useState<SearchResult[] | null>(null);
+  const [pageInfo, setPageInfo] = useState<Maybe<PageInfo>>(null);
+  const [centerPoint, setCenterPoint] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [searching, setSearching] = useState(false);
 
-  const resetSearchResults = () => {
+  const resetSearchResults = (): void => {
     setPageInfo(null);
     setSelectedMovie(null);
     setMovies(null);
   };
 
   const searchQuery = useSearchByTitle({
-    onCompleted: ({ results, pageInfo }) => {
-      setPageInfo(pageInfo);
-      setMovies(pageInfo?.page > 1 ? [...movies, ...results] : results);
-      setSearching(false);
+    onCompleted: (response: SearchByTitleQuery["searchByTitle"]) => {
+      if (response) {
+        const { results, pageInfo } = response;
+        const updatedMovies = (
+          results ? [...(movies ?? []), ...results] : []
+        ).filter(notEmpty);
+        setPageInfo(pageInfo);
+        setMovies(updatedMovies);
+        setSearching(false);
+      }
     },
   });
 
@@ -61,7 +94,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
     }, 750)
   ).current;
 
-  const onTitleChange = useCallback(
+  const onTitleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ target }) => {
       setTitleSearch(target.value);
       if (target.value.trim().length) {
@@ -75,7 +108,7 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
     [onQueryChange, yearSearch]
   );
 
-  const onYearChange = useCallback(
+  const onYearChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ({ target }) => {
       setYearSearch(target.value);
       onQueryChange(titleSearch, target.value, 1);
@@ -88,11 +121,11 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
     searchQuery(
       titleSearch,
       yearSearch.trim().length > 0 ? yearSearch : undefined,
-      pageInfo.page + 1
+      (pageInfo?.page ?? 0) + 1
     );
   }, [pageInfo?.page, searchQuery, titleSearch, yearSearch]);
 
-  const onSearchResultClick = useCallback((movie, event) => {
+  const onSearchResultClick = useCallback((movie: Movie, event: MouseEvent) => {
     setCenterPoint({ x: event.screenX, y: event.screenY });
     setSelectedMovie(movie);
   }, []);
@@ -173,7 +206,10 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         )}
 
         <SearchStatus>
-          {pageInfo && pageInfo.page < pageInfo.pages && !searching ? (
+          {pageInfo?.page &&
+          pageInfo?.pages &&
+          pageInfo.page < pageInfo.pages &&
+          !searching ? (
             <Button variant="contained" onClick={onLoadMore}>
               {t("tabPanelSearch:load_more")}
             </Button>
@@ -198,14 +234,14 @@ const TabPanelSearch = ({ tabId, hidden, onAddMovie }) => {
         <FullDetailModal
           open={true}
           centerPoint={centerPoint}
-          onClose={() => {
+          onClose={(): void => {
             setCenterPoint(null);
             setSelectedMovie(null);
           }}
           fullDetailProps={{
             movie: selectedMovie,
             onAddMovie,
-            onChangeBackdrop: (url) => {
+            onChangeBackdrop: (url): void => {
               // This will lose the selected backdrop if the user change movies.
               // I could find the movie by id in the movies returned and update it there, which _should_ propogate to the selected movie.
               setSelectedMovie({
