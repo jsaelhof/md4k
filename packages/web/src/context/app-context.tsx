@@ -8,7 +8,7 @@ import { ToastProps } from "../types";
 export type AppContextType = {
   lists?: Maybe<Maybe<GetListsItem>[]>;
   list: GetListsItem | null;
-  setList?: (list: GetListsItem) => void;
+  setList: (list: GetListsItem) => void;
   movies: GetMovieItem[];
   moviesById: { [key: string]: GetMovieItem };
   pick: string | null;
@@ -20,6 +20,8 @@ export type AppContextType = {
 
 const AppContext = createContext<AppContextType>({
   list: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setList: () => {},
   movies: [],
   moviesById: {},
   toast: null,

@@ -5,7 +5,7 @@ import { ReactElement, ReactNode } from "react";
 export type EmptyStateProps = {
   imgSrc: string;
   quote: string;
-  message: string;
+  message: string | ReactNode;
   content: ReactNode;
   inProgress: boolean;
 };

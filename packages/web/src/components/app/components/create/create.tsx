@@ -6,13 +6,15 @@ import { addListOptions, useAddList } from "../../../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../../hooks/use-i18n";
 import createStrings from "./i18n/i18n";
-export const Create = () => {
+import { ReactElement } from "react";
+
+export const Create = (): ReactElement => {
   const { t } = useI18n(createStrings);
   const { setList } = useAppContext();
   const navigate = useNavigate();
   const { addList, loading, error, reset } = useAddList({
     onCompleted: ({ addList }) => {
-      setList(addList);
+      addList && setList(addList);
       navigate("/");
     },
   });
@@ -33,7 +35,7 @@ export const Create = () => {
           <CreateListError reset={reset} />
         ) : (
           <CreateListInput
-            onSubmit={(name) => {
+            onSubmit={(name: string): void => {
               addList(addListOptions(name));
             }}
           />
