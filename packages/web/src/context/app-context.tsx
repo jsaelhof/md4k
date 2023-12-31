@@ -15,7 +15,7 @@ export type AppContextType = {
   setPick?: (value: string | null) => void;
   clearPick?: () => void;
   toast: Maybe<ToastProps>;
-  setToast: (toast: ToastProps) => void;
+  setToast: (toast: ToastProps | null) => void;
 };
 
 const AppContext = createContext<AppContextType>({

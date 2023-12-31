@@ -1,11 +1,11 @@
 import { Button, IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppContext } from "../../../../context/app-context";
-import { useCallback } from "react";
+import { ReactElement, useCallback } from "react";
 import { useI18n } from "../../../../hooks/use-i18n";
 import toastStrings from "./i18n/i18n";
 
-const Toast = () => {
+const Toast = (): ReactElement => {
   const { t } = useI18n(toastStrings);
   const { toast, setToast } = useAppContext();
 
