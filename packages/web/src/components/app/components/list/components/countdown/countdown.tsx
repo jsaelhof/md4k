@@ -9,8 +9,9 @@ import {
   Number,
   VerticalLine,
 } from "./countdown.styles";
+import { ReactElement } from "react";
 
-export const Countdown = () => {
+export const Countdown = (): ReactElement => {
   return (
     <Container>
       <Frame>

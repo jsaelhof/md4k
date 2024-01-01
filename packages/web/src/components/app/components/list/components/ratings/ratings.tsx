@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { ratingsSource } from "md4k-constants";
 import { ratingsSourceImage } from "../../../../../../constants/ratings";
@@ -10,18 +10,29 @@ import {
   ratingsSourceIconSmall,
   RatingsSourceIcon,
 } from "./ratings.styles";
+import { Ratings } from "../../../../../../__generated__/graphql";
 
-const Ratings = ({ ratings, size = "medium", dense }) => {
+export type RatingsProps = {
+  ratings: Ratings;
+  size: "small" | "medium";
+  dense: boolean;
+};
+
+const Ratings = ({
+  ratings,
+  size = "medium",
+  dense,
+}: RatingsProps): ReactElement | null => {
   if (!ratings) return null;
 
   return (
     <RatingsList sx={[dense && denseMargins, size === "small" && small]}>
       {Object.entries(ratings).map(([source, rating]) =>
-        ratingsSource[source] && rating ? (
+        ratingsSource[source as keyof typeof ratingsSource] && rating ? (
           <RatingsListItem key={source}>
             <RatingsSourceIcon
               sx={[size === "small" && ratingsSourceIconSmall]}
-              src={`/images/ratings/${ratingsSourceImage[source]}`}
+              src={`/images/ratings/${ratingsSourceImage[parseInt(source)]}`}
               alt={source}
             />
             {rating}

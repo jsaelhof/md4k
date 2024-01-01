@@ -14,11 +14,11 @@ export const MainButton = styled(Button)`
   }
 `;
 
-export const RandomIcon = styled("img")`
-  width: 20px;
-  margin-right: ${({ theme: { spacing } }) => spacing(2)};
-  filter: invert(1);
-`;
+export const RandomIcon = styled("img")(({ theme: { spacing } }) => ({
+  width: 20,
+  marginRight: spacing(2),
+  filter: "invert(1)",
+}));
 
 export const SplitMenu = styled(Paper)`
   position: absolute;
@@ -30,6 +30,6 @@ export const SplitMenu = styled(Paper)`
   z-index: 5;
 `;
 
-export const MenuIcon = styled("div")`
-  margin-right: ${({ theme: { spacing } }) => spacing(1)};
-`;
+export const MenuIcon = styled("div")(({ theme: { spacing } }) => ({
+  marginRight: spacing(1),
+}));

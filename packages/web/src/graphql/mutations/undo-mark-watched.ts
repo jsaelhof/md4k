@@ -1,4 +1,9 @@
-import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
+import {
+  BaseMutationOptions,
+  MutationTuple,
+  gql,
+  useMutation,
+} from "@apollo/client";
 import omit from "lodash/omit";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
@@ -7,6 +12,7 @@ import {
   UndoMarkWatchedMutation,
   UndoMarkWatchedMutationVariables,
 } from "../../__generated__/graphql";
+import { GetListsItem } from "../types";
 
 const UNDO_MARK_WATCHED = gql`
   mutation UndoMarkWatched(
@@ -47,7 +53,10 @@ export const useUndoMarkWatched = ({
   onCompleted,
 }: {
   onCompleted: UndoMarkWatchedMovieMutationOptions["onCompleted"];
-}) => {
+}): MutationTuple<
+  UndoMarkWatchedMutation,
+  UndoMarkWatchedMutationVariables
+> => {
   const [undoMarkWatchedMutation, status] = useMutation<
     UndoMarkWatchedMutation,
     UndoMarkWatchedMutationVariables
@@ -95,17 +104,26 @@ export const useUndoMarkWatched = ({
   return [undoMarkWatchedMutation, status];
 };
 
-export const undoMarkWatchedOptions = (movie: Movie, list: List) => ({
-  variables: {
-    movie: omit(movie, "watchedOn"),
-    list: list.id,
-    removeKeys: ["watchedOn"],
-  },
-  optimisticResponse: {
-    editMovie: {
-      ...movie,
-      watchedOn: null,
-      __typename: "Movie",
+export const undoMarkWatchedOptions = (
+  movie: Movie,
+  list: GetListsItem
+): UndoMarkWatchedMovieMutationOptions => {
+  // Omit using spread.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { watchedOn, ...movieInput } = movie;
+
+  return {
+    variables: {
+      movie: movieInput,
+      list: list.id,
+      removeKeys: ["watchedOn"],
     },
-  },
-});
+    optimisticResponse: {
+      editMovie: {
+        ...movie,
+        watchedOn: null,
+        __typename: "Movie",
+      },
+    },
+  };
+};

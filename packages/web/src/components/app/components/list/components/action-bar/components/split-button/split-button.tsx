@@ -1,5 +1,11 @@
-import { Button, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
-import { useState } from "react";
+import {
+  Button,
+  ClickAwayListener,
+  MenuItem,
+  MenuList,
+  SvgIcon,
+} from "@mui/material";
+import { ReactElement, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClockIcon from "mdi-material-ui/ClockOutline";
 import ClockFastIcon from "mdi-material-ui/ClockFast";
@@ -20,8 +26,13 @@ import { filterMovies } from "../../../../../../../../utils/filter-movies";
 import { useAppContext } from "../../../../../../../../context/app-context";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listStrings from "../../../../i18n/i18n";
+import { PickOption } from "../../../../../../../../types";
 
-const splitButtonItems = [
+const splitButtonItems: {
+  value: string;
+  options: PickOption;
+  Icon: typeof SvgIcon;
+}[] = [
   {
     value: "short",
     options: { maxRuntime: 6000 },
@@ -59,14 +70,18 @@ const splitButtonItems = [
   },
 ];
 
-const SplitButton = ({ onPick }) => {
+export type SplitButtonProps = {
+  onPick: (options?: PickOption) => void;
+};
+
+const SplitButton = ({ onPick }: SplitButtonProps): ReactElement => {
   const { t } = useI18n(listStrings);
   const { movies } = useAppContext();
   const [openSplitButton, setOpenSplitButton] = useState(false);
 
   return (
     <SplitButtonContainer aria-label={t("list:pick.title")}>
-      <MainButton variant="contained" onClick={() => onPick()}>
+      <MainButton variant="contained" onClick={(): void => onPick()}>
         <RandomIcon src="/images/random.png" width="20px" height="18px" />
         {t("list:pick.title")}
       </MainButton>
@@ -74,19 +89,21 @@ const SplitButton = ({ onPick }) => {
         aria-label={t("list:pick.label")}
         variant="contained"
         size="small"
-        onClick={() => setOpenSplitButton(true)}
+        onClick={(): void => setOpenSplitButton(true)}
       >
         <ArrowDropDownIcon />
       </Button>
 
       {openSplitButton && (
         <SplitMenu>
-          <ClickAwayListener onClickAway={() => setOpenSplitButton(false)}>
+          <ClickAwayListener
+            onClickAway={(): void => setOpenSplitButton(false)}
+          >
             <MenuList id="split-button-menu">
               {splitButtonItems.map(({ value, Icon, options }) => (
                 <MenuItem
                   key={value}
-                  onClick={() => onPick(options)}
+                  onClick={(): void => onPick(options)}
                   disabled={filterMovies(movies, options).length === 0}
                 >
                   {<MenuIcon as={Icon} />}

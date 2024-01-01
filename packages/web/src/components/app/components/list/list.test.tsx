@@ -235,8 +235,6 @@ describe("list", () => {
   });
 
   it("should render the error dialog", async ({ user }) => {
-    // TODO: I Can't get this test to work.
-    // I'm getting errors destructing {removeMovie} when I try to simulate the error
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,

@@ -125,7 +125,7 @@ export const Watched = () => {
         content={t("watched:delete.will_remove", { title: deleteMovie?.title })}
         onCancel={() => setDeleteMovie(null)}
         onConfirm={() => {
-          removeMovieMutation(removeMovieOptions(deleteMovie));
+          removeMovieMutation(removeMovieOptions(deleteMovie.id, list.id));
           setDeleteMovie(null);
         }}
       />

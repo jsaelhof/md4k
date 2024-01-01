@@ -1,4 +1,9 @@
-import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
+import {
+  BaseMutationOptions,
+  MutationTuple,
+  gql,
+  useMutation,
+} from "@apollo/client";
 import { GET_MOVIES, GET_WATCHED_MOVIES } from "../queries";
 import {
   Movie,
@@ -22,7 +27,7 @@ type RemoveMovieMutationOptions = BaseMutationOptions<
 
 export const useRemoveMovie = (
   onError: RemoveMovieMutationOptions["onError"]
-) => {
+): MutationTuple<RemoveMovieMutation, RemoveMovieMutationVariables> => {
   const [removeMovie, status] = useMutation<
     RemoveMovieMutation,
     RemoveMovieMutationVariables
@@ -77,13 +82,10 @@ export const useRemoveWatchedMovie = ({
   return [removeWatchedMovie, status];
 };
 
-export const removeMovieOptions = ({
-  id,
-  list,
-}: {
-  id: string;
-  list: string;
-}): RemoveMovieMutationOptions => ({
+export const removeMovieOptions = (
+  id: string,
+  list: string
+): RemoveMovieMutationOptions => ({
   variables: {
     movieId: id,
     list,

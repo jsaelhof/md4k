@@ -74,7 +74,11 @@ export const Needle = styled("div")(() => ({
   transformOrigin: "left",
 }));
 
-export const Circle = styled("div")(({ $size }) => ({
+interface CircleProps {
+  $size: number;
+}
+
+export const Circle = styled("div")<CircleProps>(({ $size }) => ({
   position: "absolute",
   border: "5px solid white",
   width: $size,

@@ -1,12 +1,17 @@
-import { BaseMutationOptions, gql, useMutation } from "@apollo/client";
+import {
+  BaseMutationOptions,
+  MutationTuple,
+  gql,
+  useMutation,
+} from "@apollo/client";
 import { GET_MOVIES } from "../queries";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
-  List,
   MarkWatchedMutation,
   MarkWatchedMutationVariables,
   Movie,
 } from "../../__generated__/graphql";
+import { GetListsItem } from "../types";
 
 export const MARK_WATCHED = gql`
   mutation MarkWatched($movie: MovieInput!, $list: String!) {
@@ -43,7 +48,7 @@ export const useMarkWatched = ({
   onCompleted,
 }: {
   onCompleted: MarkWatchedMutationOptions["onCompleted"];
-}) => {
+}): MutationTuple<MarkWatchedMutation, MarkWatchedMutationVariables> => {
   const [markWatchedMutation, status] = useMutation<
     MarkWatchedMutation,
     MarkWatchedMutationVariables
@@ -88,7 +93,7 @@ export const useMarkWatched = ({
 export const markWatchedOptions = (
   movie: Movie,
   watchedOn: string,
-  list: List
+  list: GetListsItem
 ): MarkWatchedMutationOptions => {
   // Omit using spread.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

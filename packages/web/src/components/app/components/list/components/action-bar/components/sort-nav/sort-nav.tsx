@@ -11,8 +11,9 @@ import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-an
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listStrings from "../../../../i18n/i18n";
+import { ReactElement } from "react";
 
-const SortNav = () => {
+const SortNav = (): ReactElement => {
   const { t } = useI18n(listStrings);
   const navigate = useNavigate();
   const { order, direction } = useOrderAndDirection();
@@ -26,7 +27,7 @@ const SortNav = () => {
       ? KeyboardArrowDown
       : KeyboardArrowUp;
 
-  const resolveOrder = (key) => [
+  const resolveOrder = (key: string): [string, string] => [
     key,
     key !== order
       ? [sort.ADDED, sort.RATING].includes(key)
@@ -49,7 +50,7 @@ const SortNav = () => {
             data-active={key === order}
             data-sort={key === order ? direction : undefined}
             sx={[key === order && sortNavSelectedItem]}
-            onClick={() => {
+            onClick={(): void => {
               navigate(`/list/${resolveOrder(key).join("/")}`);
             }}
           >

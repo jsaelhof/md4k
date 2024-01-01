@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import {
   editMovieOptions,
@@ -19,31 +19,37 @@ import ErrorDialog from "../error-dialog/error-dialog";
 import map from "lodash/map";
 import { useI18n } from "../../../../hooks/use-i18n";
 import listStrings from "./i18n/i18n";
+import { Movie } from "../../../../__generated__/graphql";
+import { PickOption } from "../../../../types";
 
-export const List = () => {
+export const List = (): ReactElement => {
   const navigate = useNavigate();
   const { list, movies, lists, setToast } = useAppContext();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { t } = useI18n(listStrings);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
-      setToast({
-        message: t("list:moved_back_to_movie_list", {
-          movieTitle: movie.title,
-        }),
-      });
+      movie &&
+        setToast({
+          message: t("list:moved_back_to_movie_list", {
+            movieTitle: movie.title,
+          }),
+        });
     },
   });
 
   const [markWatchedMutation] = useMarkWatched({
     onCompleted: ({ editMovie: movie }) => {
-      setToast({
-        message: t("list:moved_to_watched_list", { movieTitle: movie.title }),
-        onUndo: () => {
-          undoMarkWatchedMutation(undoMarkWatchedOptions(movie, list));
-        },
-      });
+      movie &&
+        setToast({
+          message: t("list:moved_to_watched_list", { movieTitle: movie.title }),
+          onUndo: () => {
+            if (list) {
+              undoMarkWatchedMutation(undoMarkWatchedOptions(movie, list));
+            }
+          },
+        });
     },
   });
 
@@ -53,29 +59,38 @@ export const List = () => {
   });
 
   const onPick = useCallback(
-    (options) => {
+    (options?: PickOption) => {
       navigate(`/pick?${map(options, (v, k) => `${k}=${v}`).join("&")}`);
     },
     [navigate]
   );
 
   const onEditMovie = useCallback(
-    (movie, useEditor = true) =>
-      useEditor
-        ? navigate(`/edit/${movie.id}`)
-        : editMovieMutation(editMovieOptions(movie, list)),
+    (movie: Movie, useEditor = true) => {
+      if (useEditor) {
+        navigate(`/edit/${movie.id}`);
+      } else if (list) {
+        editMovieMutation(editMovieOptions(movie, list));
+      }
+    },
     [editMovieMutation, list, navigate]
   );
 
   const onRemoveMovie = useCallback(
-    (movie) => removeMovieMutation(removeMovieOptions(movie)),
-    [removeMovieMutation]
+    (movie: Movie) => {
+      if (list) {
+        removeMovieMutation(removeMovieOptions(movie.id, list.id));
+      }
+    },
+    [list, removeMovieMutation]
   );
 
   const onMarkWatched = useCallback(
-    (movie) => {
-      const watchedOn = new Date().toISOString();
-      markWatchedMutation(markWatchedOptions(movie, watchedOn, list));
+    (movie: Movie) => {
+      if (list) {
+        const watchedOn = new Date().toISOString();
+        markWatchedMutation(markWatchedOptions(movie, watchedOn, list));
+      }
     },
     [list, markWatchedMutation]
   );
@@ -127,12 +142,14 @@ export const List = () => {
         )}
       </div>
 
-      <ErrorDialog
-        open={!!error}
-        content={t("list:error_removing")}
-        debug={error}
-        onConfirm={() => setError(null)}
-      />
+      {error && (
+        <ErrorDialog
+          open={true}
+          content={t("list:error_removing")}
+          debug={error}
+          onConfirm={(): void => setError(null)}
+        />
+      )}
     </>
   );
 };

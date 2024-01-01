@@ -11,8 +11,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import listStrings from "../../i18n/i18n";
+import { ReactElement } from "react";
+import { PickOption } from "../../../../../../types";
 
-const ActionBar = ({ disabled, onPick }) => {
+export type ActionBarProps = {
+  disabled: boolean;
+  onPick: (options?: PickOption) => void;
+};
+
+const ActionBar = ({ disabled, onPick }: ActionBarProps): ReactElement => {
   const { t } = useI18n(listStrings);
   const includeLabel = useMediaQuery("(min-width: 790px)");
 
@@ -30,7 +37,7 @@ const ActionBar = ({ disabled, onPick }) => {
                 aria-label={t("list:action_bar.add_movie")}
                 variant="outlined"
                 color="primary"
-                onClick={() => navigate("/add")}
+                onClick={(): void => navigate("/add")}
               >
                 <AddToQueueIcon />
                 {includeLabel && t("list:action_bar.add_movie")}
