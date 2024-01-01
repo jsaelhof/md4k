@@ -4,7 +4,7 @@ import groupBy from "lodash/fp/groupBy";
 import mapValues from "lodash/fp/mapValues";
 import toPairs from "lodash/fp/toPairs";
 import reduce from "lodash/fp/reduce";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
@@ -15,8 +15,11 @@ import {
   sourceLogosLarge,
 } from "../../../../../../../../constants/sources";
 import { sources } from "md4k-constants";
+import { ListGridProps } from "../../types";
+import { Movie } from "../../../../../../../../__generated__/graphql";
+import { notEmpty } from "../../../../../../../../utils/not-empty";
 
-const preferredSourceOrder = [
+const preferredSourceOrder: number[] = [
   sources.PLEX,
   sources.NETFLIX,
   sources.PRIME_VIDEO,
@@ -27,19 +30,27 @@ const preferredSourceOrder = [
   sources.NONE,
 ];
 
-const SortedSource = ({ movies, ...handlers }) => {
+const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 
   const bySource = useMemo(() => {
-    const partitionMovies = flow(
-      groupBy((movie) => movie.source ?? 0),
-      mapValues((movies) => orderBy(movies, [sort.TITLE], [sortDirection.ASC])),
+    const partitionMovies: (movies: Movie[]) => [number, Movie[]][] = flow(
+      groupBy<NonNullable<Movie>>((movie) => movie.source ?? 0),
+      mapValues<Movie[], Movie[]>((movies) =>
+        orderBy(movies, [sort.TITLE], [sortDirection.ASC])
+      ),
       toPairs,
-      reduce((acc, [source, movies]) => {
-        acc[preferredSourceOrder.indexOf(parseInt(source))] = [source, movies];
-        return acc;
-      }, Array(preferredSourceOrder.length).fill(null))
+      reduce<[string, Movie[]], [number, Movie[]][]>(
+        (acc, [source, movies]) => {
+          acc[preferredSourceOrder.indexOf(parseInt(source))] = [
+            parseInt(source),
+            movies,
+          ];
+          return acc;
+        },
+        Array(preferredSourceOrder.length).fill(null)
+      )
     );
 
     return partitionMovies(movies);
@@ -47,7 +58,7 @@ const SortedSource = ({ movies, ...handlers }) => {
 
   const sections = useMemo(() => {
     const sectionDescriptors = bySource
-      .filter((data) => data !== null)
+      .filter(notEmpty)
       .map(([source, list]) => ({
         title: (
           <img

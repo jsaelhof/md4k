@@ -36,7 +36,7 @@ const getCenterPoint = (rect) => {
   return { x: x + width / 2, y: y + height / 2 };
 };
 
-const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
+const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
   const { mobile } = useResponsive();
 
   const ref = useRef();
@@ -159,7 +159,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onDeleteMovie }) => {
                     }}
                     onDelete={() => {
                       setFocused(false);
-                      onDeleteMovie(movie);
+                      onRemoveMovie(movie);
                     }}
                   />
                 </InfoFooterLayout>

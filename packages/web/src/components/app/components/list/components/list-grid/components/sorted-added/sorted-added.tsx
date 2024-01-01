@@ -1,18 +1,23 @@
 import { differenceInDays, parseISO } from "date-fns";
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listGridStrings from "../../i18n/i18n";
+import { ListGridProps } from "../../types";
+import { Movie } from "../../../../../../../../__generated__/graphql";
+import { Dictionary, List } from "lodash";
 
-const partitionMovies = (direction) =>
+const partitionMovies = (
+  direction: "asc" | "desc"
+): ((collection: List<Movie>) => Dictionary<Movie[]>) =>
   flow(
-    groupBy((movie) => {
+    groupBy<NonNullable<Movie>>((movie) => {
       const now = new Date();
-      const movieDate = parseISO(movie.addedOn);
+      const movieDate = movie.addedOn ? parseISO(movie.addedOn) : new Date(0); // Date shouldn't be undefined but if it is, we'll treat it the unix epoch so it falls into the beyond category.
       const diff = differenceInDays(now, movieDate);
 
       if (diff <= 30) {
@@ -28,7 +33,7 @@ const partitionMovies = (direction) =>
     mapValues((movies) => orderBy(movies, [sort.ADDED], [direction]))
   );
 
-const SortedAdded = ({ movies, ...handlers }) => {
+const SortedAdded = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 

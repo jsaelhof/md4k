@@ -1,15 +1,17 @@
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import FiveStarRating from "../../../../../five-star-rating/five-star-rating";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listGridStrings from "../../i18n/i18n";
+import { Movie } from "../../../../../../../../__generated__/graphql";
+import { ListGridProps } from "../../types";
 
 const partitionMovies = flow(
-  groupBy(({ fiveStarRating }) =>
+  groupBy<NonNullable<Movie>>(({ fiveStarRating }) =>
     fiveStarRating ? Math.ceil(fiveStarRating) : 0
   ),
   mapValues((movies) =>
@@ -21,7 +23,7 @@ const partitionMovies = flow(
   )
 );
 
-const SortedRating = ({ movies, ...handlers }) => {
+const SortedRating = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 
@@ -30,7 +32,7 @@ const SortedRating = ({ movies, ...handlers }) => {
   const sections = useMemo(() => {
     const sectionDescriptors = Object.entries(byRating).map(
       ([stars, list]) => ({
-        title: <FiveStarRating stars={stars} />,
+        title: <FiveStarRating stars={parseInt(stars)} />,
         list,
         ariaLabel: t("list_grid:sorted_rating.stars", { stars }),
         stars,

@@ -4,11 +4,11 @@ import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
 vi.mock("./components/movie/movie", () => ({
-  default: ({ onDeleteMovie, movie }) => (
+  default: ({ onRemoveMovie, movie }) => (
     <div
       aria-label="movieMock"
       data-title={movie.title}
-      onClick={() => onDeleteMovie(movie)}
+      onClick={() => onRemoveMovie(movie)}
     >
       {movie.title}
     </div>

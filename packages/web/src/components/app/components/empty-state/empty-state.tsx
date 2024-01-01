@@ -7,7 +7,7 @@ export type EmptyStateProps = {
   quote: string;
   message: string | ReactNode;
   content: ReactNode;
-  inProgress: boolean;
+  inProgress?: boolean;
 };
 
 const EmptyState = ({

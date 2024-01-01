@@ -10,10 +10,13 @@ import {
   ratingsSourceIconSmall,
   RatingsSourceIcon,
 } from "./ratings.styles";
-import { Ratings } from "../../../../../../__generated__/graphql";
+import {
+  Maybe,
+  Ratings as RatingsType,
+} from "../../../../../../__generated__/graphql";
 
 export type RatingsProps = {
-  ratings: Ratings;
+  ratings?: Maybe<RatingsType>;
   size: "small" | "medium";
   dense: boolean;
 };

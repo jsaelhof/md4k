@@ -3,12 +3,12 @@ import MovieSection from "./movie-section";
 import { vi } from "vitest";
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onDeleteMovie, movie }) => (
+  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
     <div aria-label="movieMock" data-title={movie.title}>
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
       <button onClick={() => onMarkWatched(movie)}>Mark Watched</button>
-      <button onClick={() => onDeleteMovie(movie)}>Delete</button>
+      <button onClick={() => onRemoveMovie(movie)}>Delete</button>
     </div>
   ),
 }));
@@ -26,7 +26,7 @@ describe("movie-section", () => {
       ],
       onEditMovie: vi.fn(),
       onMarkWatched: vi.fn(),
-      onDeleteMovie: vi.fn(),
+      onRemoveMovie: vi.fn(),
     };
   });
 
@@ -47,7 +47,7 @@ describe("movie-section", () => {
     expect(props.onMarkWatched).toHaveBeenCalled();
 
     await user.click(screen.getByRole("button", { name: "Delete" }));
-    expect(props.onDeleteMovie).toHaveBeenCalled();
+    expect(props.onRemoveMovie).toHaveBeenCalled();
   });
 
   it("should not render the title and subtitle when the title is omitted", ({

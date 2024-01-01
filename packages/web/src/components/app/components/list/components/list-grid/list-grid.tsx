@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import isNil from "lodash/isNil";
 
 import DeleteDialog from "../../../delete-dialog/delete-dialog";
@@ -11,9 +11,16 @@ import SortedGenre from "./components/sorted-genre/sorted-genre";
 import { sort } from "../../../../../../constants/sorts";
 import SortedRating from "./components/sorted-rating/sorted-rating";
 import SortedSource from "./components/sorted-source/sorted-source";
+import { Movie } from "../../../../../../__generated__/graphql";
+import { ListGridProps } from "./types";
 
-const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
-  const [deleteMovie, setDeleteMovie] = useState(null);
+const ListGrid = ({
+  movies,
+  onRemoveMovie,
+  onMarkWatched,
+  onEditMovie,
+}: ListGridProps): ReactElement | null => {
+  const [deleteMovie, setDeleteMovie] = useState<Movie | null>(null);
 
   if (!movies) return null;
 
@@ -29,7 +36,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -41,7 +48,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -53,7 +60,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -65,7 +72,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -77,7 +84,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -89,7 +96,7 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
                   movies={movies}
                   onEditMovie={onEditMovie}
                   onMarkWatched={onMarkWatched}
-                  onDeleteMovie={setDeleteMovie}
+                  onRemoveMovie={setDeleteMovie}
                 />
               }
             />
@@ -102,9 +109,9 @@ const ListGrid = ({ movies, onRemoveMovie, onMarkWatched, onEditMovie }) => {
       <DeleteDialog
         open={!isNil(deleteMovie)}
         content={`'${deleteMovie?.title}' will be removed`}
-        onCancel={() => setDeleteMovie(null)}
-        onConfirm={() => {
-          onRemoveMovie(deleteMovie);
+        onCancel={(): void => setDeleteMovie(null)}
+        onConfirm={(): void => {
+          deleteMovie && onRemoveMovie(deleteMovie);
           setDeleteMovie(null);
         }}
       />

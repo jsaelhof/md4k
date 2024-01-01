@@ -74,7 +74,7 @@ describe("movie", () => {
       },
       onEditMovie: vi.fn(),
       onMarkWatched: vi.fn(),
-      onDeleteMovie: vi.fn(),
+      onRemoveMovie: vi.fn(),
     };
   });
 
@@ -268,7 +268,7 @@ describe("movie", () => {
   }) => {
     renderWithProviders(<Movie {...props} />);
     await user.click(screen.getByLabelText("Delete"));
-    expect(props.onDeleteMovie).toHaveBeenCalledWith(props.movie);
+    expect(props.onRemoveMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
     );

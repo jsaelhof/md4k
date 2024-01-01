@@ -4,8 +4,24 @@ import {
   MovieSectionTitle,
 } from "./movie-section.styles";
 import Movie from "../movie/movie";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useOnWindowResize } from "rooks";
+import { Movie as MovieType } from "../../../../../../../../__generated__/graphql";
+import { ListGridHandlers } from "../../types";
+
+export type MovieSectionProps = ListGridHandlers & {
+  ariaLabel?: string;
+  title?: ReactNode;
+  subtitle?: string;
+  list: MovieType[];
+};
 
 const MovieSection = ({
   ariaLabel,
@@ -14,15 +30,15 @@ const MovieSection = ({
   list,
   onEditMovie,
   onMarkWatched,
-  onDeleteMovie,
-}) => {
-  const ref = useRef();
+  onRemoveMovie,
+}: MovieSectionProps): ReactElement | null => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const [titleOffset, setTitleOffset] = useState(0);
 
   const updateTitleOffset = useCallback(() => {
     setTitleOffset(
-      ref.current?.childNodes[0]?.getBoundingClientRect().x -
-        ref.current?.getBoundingClientRect().x
+      (ref.current?.childNodes[0] as HTMLDivElement)?.getBoundingClientRect()
+        .x - (ref.current?.getBoundingClientRect().x ?? 0)
     );
   }, []);
 
@@ -46,7 +62,7 @@ const MovieSection = ({
             movie={movie}
             onEditMovie={onEditMovie}
             onMarkWatched={onMarkWatched}
-            onDeleteMovie={onDeleteMovie}
+            onRemoveMovie={onRemoveMovie}
           />
         ))}
       </MovieList>

@@ -1,14 +1,16 @@
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listGridStrings from "../../i18n/i18n";
+import { Movie } from "../../../../../../../../__generated__/graphql";
+import { ListGridProps } from "../../types";
 
 const partitionMovies = flow(
-  groupBy((movie) => {
+  groupBy<NonNullable<Movie>>((movie) => {
     if (!movie.runtime) {
       return "unknown";
     } else if (movie.runtime <= 6000) {
@@ -22,7 +24,10 @@ const partitionMovies = flow(
   mapValues((movies) => orderBy(movies, [sort.RUNTIME], [sortDirection.ASC]))
 );
 
-const SortedRuntime = ({ movies, ...handlers }) => {
+const SortedRuntime = ({
+  movies,
+  ...handlers
+}: ListGridProps): ReactElement => {
   const { t } = useI18n(listGridStrings);
   const direction = useSortDirection();
 

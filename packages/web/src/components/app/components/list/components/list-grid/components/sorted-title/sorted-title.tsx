@@ -1,10 +1,11 @@
 import orderBy from "lodash/orderBy";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { sort } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
+import { ListGridProps } from "../../types";
 
-const SortedTitle = ({ movies, ...handlers }) => {
+const SortedTitle = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const direction = useSortDirection();
 
   const alphabeticallySorted = useMemo(

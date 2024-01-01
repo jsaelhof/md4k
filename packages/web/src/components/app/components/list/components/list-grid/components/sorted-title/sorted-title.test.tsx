@@ -7,12 +7,12 @@ const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
 }));
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onDeleteMovie, movie }) => (
+  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
     <div aria-label="movieMock">
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
       <button onClick={() => onMarkWatched(movie)}>Mark Watched</button>
-      <button onClick={() => onDeleteMovie(movie)}>Delete</button>
+      <button onClick={() => onRemoveMovie(movie)}>Delete</button>
     </div>
   ),
 }));
@@ -44,7 +44,7 @@ describe("sorted-title", () => {
       ],
       onEditMovie: vi.fn(),
       onMarkWatched: vi.fn(),
-      onDeleteMovie: vi.fn(),
+      onRemoveMovie: vi.fn(),
     };
   });
 
@@ -105,7 +105,7 @@ describe("sorted-title", () => {
         name: "Delete",
       })
     );
-    expect(props.onDeleteMovie).toHaveBeenCalledWith(
+    expect(props.onRemoveMovie).toHaveBeenCalledWith(
       expect.objectContaining({ title: "Movie 1" })
     );
   });
