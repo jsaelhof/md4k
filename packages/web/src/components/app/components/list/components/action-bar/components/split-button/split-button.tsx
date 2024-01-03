@@ -1,10 +1,4 @@
-import {
-  Button,
-  ClickAwayListener,
-  MenuItem,
-  MenuList,
-  SvgIcon,
-} from "@mui/material";
+import { Button, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
 import { ReactElement, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClockIcon from "mdi-material-ui/ClockOutline";
@@ -27,11 +21,12 @@ import { useAppContext } from "../../../../../../../../context/app-context";
 import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import listStrings from "../../../../i18n/i18n";
 import { PickOption } from "../../../../../../../../types";
+import { SvgIconComponent } from "@mui/icons-material";
 
 const splitButtonItems: {
   value: string;
   options: PickOption;
-  Icon: typeof SvgIcon;
+  Icon: SvgIconComponent;
 }[] = [
   {
     value: "short",

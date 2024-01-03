@@ -10,7 +10,7 @@ import { Movie } from "../../../../../../__generated__/graphql";
 export type TabPanelManualProps = {
   tabId: string;
   hidden: boolean;
-  onAddMovie: (movie: Movie) => void;
+  onAddMovie: (movie: Omit<Movie, "id">) => void;
   initialState?: Omit<Movie, "id">;
 };
 

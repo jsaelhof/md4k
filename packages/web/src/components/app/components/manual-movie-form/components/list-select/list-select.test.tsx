@@ -7,12 +7,14 @@ import { vi } from "vitest";
 describe("list-select", () => {
   beforeEach((context) => {
     context.props = {
-      images: sourceLogos,
-      labels: sourceLabels,
       value: sources.NETFLIX,
       values: sources,
       hideLabelForSelection: false,
       onChange: vi.fn(),
+      listSelectItemProps: {
+        images: sourceLogos,
+        labels: sourceLabels,
+      },
     };
   });
 

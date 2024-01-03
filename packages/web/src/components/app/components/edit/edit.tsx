@@ -34,9 +34,11 @@ export const Edit = (): ReactElement => {
   });
 
   const onEditMovie = useCallback(
-    (movieData: Movie) =>
+    (movieData: Omit<Movie, "id">) =>
       list &&
-      editMovieMutation(editMovieOptions({ ...movie, ...movieData }, list)),
+      editMovieMutation(
+        editMovieOptions({ ...movie, ...movieData } as Movie, list)
+      ),
     [editMovieMutation, list, movie]
   );
 

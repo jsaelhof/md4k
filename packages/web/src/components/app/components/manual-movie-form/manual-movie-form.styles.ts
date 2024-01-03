@@ -1,5 +1,4 @@
-import { styled } from "@mui/material";
-import ListSelect from "./components/list-select/list-select";
+import { InputLabel, styled } from "@mui/material";
 
 export const MovieForm = styled("form")(({ theme: { spacing } }) => ({
   maxWidth: 600,
@@ -12,19 +11,7 @@ export const MovieForm = styled("form")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const Genre = styled(ListSelect)(() => ({
-  "& > div": {
-    padding: "8.5px 14px",
-  },
-}));
-
-export const Source = styled(ListSelect)(() => ({
-  "& > div": {
-    padding: "5px 14px",
-  },
-}));
-
-export const Label = styled("div")(({ theme: { spacing } }) => ({
+export const Label = styled(InputLabel)(({ theme: { spacing } }) => ({
   fontSize: "0.8em",
   marginBottom: spacing(0.5),
 }));
