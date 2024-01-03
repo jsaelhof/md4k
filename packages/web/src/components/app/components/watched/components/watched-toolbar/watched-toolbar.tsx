@@ -9,8 +9,21 @@ import Search from "@mui/icons-material/Search";
 import { Layout, Status } from "./watched-toolbar.styles";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import watchedStrings from "../../i18n/i18n";
+import { ReactElement } from "react";
 
-const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
+export type WatchedToolbarProps = {
+  count: number;
+  visibleCount: number;
+  searchTerm: string;
+  onSearch: (searchTerm: string) => void;
+};
+
+const WatchedToolbar = ({
+  count,
+  visibleCount,
+  searchTerm,
+  onSearch,
+}: WatchedToolbarProps): ReactElement => {
   const { t } = useI18n(watchedStrings);
   const small = useMediaQuery("(max-width: 550px)");
 
@@ -54,7 +67,7 @@ const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
                   mr: "-8px",
                   visibility: searchTerm.length ? "visible" : "hidden",
                 }}
-                onClick={() => onSearch("")}
+                onClick={(): void => onSearch("")}
               >
                 <Close />
               </IconButton>
@@ -62,7 +75,7 @@ const WatchedToolbar = ({ count, visibleCount, searchTerm, onSearch }) => {
           ),
         }}
         size="small"
-        onChange={({ target }) => onSearch(target.value)}
+        onChange={({ target }): void => onSearch(target.value)}
       />
     </Layout>
   );

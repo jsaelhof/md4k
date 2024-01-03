@@ -1,24 +1,29 @@
-import { PaletteColorOptions, createTheme } from "@mui/material";
+import {
+  Color,
+  PaletteColor,
+  PaletteColorOptions,
+  createTheme,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 // Module Augmentation: Extend the interfaces used in the theme
 declare module "@mui/material/styles" {
   interface Palette {
-    tertiary?: PaletteColorOptions;
-    darkBlue?: PaletteColorOptions;
-    darkGrey?: PaletteColorOptions;
-    accent?: string;
-    icon?: string;
-    foundation?: string;
+    tertiary: PaletteColorOptions;
+    darkBlue: Partial<Color>;
+    darkGrey: Partial<Color>;
+    accent: string;
+    icon: string;
+    foundation: string;
   }
 
   interface PaletteOptions {
-    tertiary?: PaletteColorOptions;
-    darkBlue?: PaletteColorOptions;
-    darkGrey?: PaletteColorOptions;
-    accent?: string;
-    icon?: string;
-    foundation?: string;
+    tertiary: PaletteColorOptions;
+    darkBlue: Partial<Color>;
+    darkGrey: Partial<Color>;
+    accent: string;
+    icon: string;
+    foundation: string;
   }
 
   interface ZIndex {

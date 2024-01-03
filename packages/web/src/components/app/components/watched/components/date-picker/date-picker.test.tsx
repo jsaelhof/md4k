@@ -7,7 +7,6 @@ describe("date-picker", () => {
   beforeEach((context) => {
     context.props = {
       defaultDate: new Date("2022-01-02T12:00:00"),
-      onChange: vi.fn(),
       onCancel: vi.fn(),
       onSave: vi.fn(),
       onDelete: vi.fn(),
@@ -52,7 +51,7 @@ describe("date-picker", () => {
     );
   });
 
-  it("should call onChange when changing the date", async ({ props, user }) => {
+  it("should change the date", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
 
     expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
@@ -60,8 +59,6 @@ describe("date-picker", () => {
     );
 
     await user.click(screen.getByRole("gridcell", { name: "1" }));
-
-    expect(props.onChange).toHaveBeenCalled();
 
     expect(screen.getByRole("gridcell", { name: "2" })).not.toHaveClass(
       "rdp-day_selected"

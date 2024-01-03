@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import isNil from "lodash/isNil";
 
 import { StackedContainer, NoMoviesFound } from "./watched.styles";
@@ -19,16 +19,17 @@ import MovieRemove from "mdi-material-ui/MovieRemove";
 import { useGetWatchedMovies } from "../../../../graphql/queries";
 import { useI18n } from "../../../../hooks/use-i18n";
 import watchedStrings from "./i18n/i18n";
+import { Movie } from "../../../../__generated__/graphql";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
-export const Watched = () => {
+export const Watched = (): ReactElement | null => {
   const { t } = useI18n(watchedStrings);
   const { list } = useAppContext();
   const { watchedMovies } = useGetWatchedMovies(list);
-  const [error, setError] = useState(null);
-  const [deleteMovie, setDeleteMovie] = useState(null);
-  const [editingMovie, setEditingMovie] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [deleteMovie, setDeleteMovie] = useState<Movie | null>(null);
+  const [editingMovie, setEditingMovie] = useState<Movie | null>(null);
   const [infiniteLoadPointer, setInfiniteLoadPointer] = useState(
     INFINITE_LOAD_CHUNK_SIZE
   );
@@ -45,9 +46,13 @@ export const Watched = () => {
   );
 
   useEffect(() => {
-    const onScroll = ({ target: { documentElement } }) => {
+    const onScroll = ({ target }: Event): void => {
+      if (!(target instanceof Document)) return;
+
+      const documentElement = target.documentElement;
+
       if (
-        watchedMovies?.length > 0 &&
+        (watchedMovies?.length ?? 0) > 0 &&
         documentElement.scrollHeight - documentElement.scrollTop ===
           documentElement.clientHeight
       ) {
@@ -72,8 +77,8 @@ export const Watched = () => {
   });
 
   const onSaveMovie = useCallback(
-    (movie) => {
-      editMovieMutation(editMovieOptions(movie, list));
+    (movie: Movie) => {
+      list && editMovieMutation(editMovieOptions(movie, list));
       setEditingMovie(null);
     },
     [editMovieMutation, list]
@@ -81,7 +86,7 @@ export const Watched = () => {
 
   const onCancelEdit = useCallback(() => setEditingMovie(null), []);
 
-  const onDeleteMovie = useCallback((movie) => {
+  const onDeleteMovie = useCallback((movie: Movie) => {
     setDeleteMovie(movie);
   }, []);
 
@@ -102,7 +107,7 @@ export const Watched = () => {
                 <WatchedMovie
                   key={movie.id}
                   movie={editingMovie?.id === movie.id ? editingMovie : movie}
-                  right={i % 2}
+                  right={Boolean(i % 2)}
                   isEditing={editingMovie?.id === movie.id}
                   onEditMovie={setEditingMovie}
                   onSave={onSaveMovie}
@@ -123,18 +128,21 @@ export const Watched = () => {
       <DeleteDialog
         open={!isNil(deleteMovie)}
         content={t("watched:delete.will_remove", { title: deleteMovie?.title })}
-        onCancel={() => setDeleteMovie(null)}
-        onConfirm={() => {
-          removeMovieMutation(removeMovieOptions(deleteMovie.id, list.id));
-          setDeleteMovie(null);
+        onCancel={(): void => setDeleteMovie(null)}
+        onConfirm={(): void => {
+          if (deleteMovie) {
+            list &&
+              removeMovieMutation(removeMovieOptions(deleteMovie.id, list.id));
+            setDeleteMovie(null);
+          }
         }}
       />
 
       <ErrorDialog
         open={!!error}
         content={t("watched:error_removing")}
-        debug={error}
-        onConfirm={() => setError(null)}
+        debug={error ?? ""}
+        onConfirm={(): void => setError(null)}
       />
     </>
   ) : null;

@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { useState, useMemo } from "react";
+import { useState, useMemo, ReactElement } from "react";
 import { useGetThirdPartyFullDetails } from "../../../../../../graphql/queries";
 import DatePicker from "../date-picker/date-picker";
 import MoviePoster from "../../../movie-poster/movie-poster";
@@ -14,7 +14,18 @@ import {
   Content,
 } from "./watched-movie.styles";
 import { useMediaQuery } from "@mui/material";
-import { useSpring } from "react-spring";
+import { SpringValues, useSpring } from "react-spring";
+import { Movie } from "../../../../../../__generated__/graphql";
+
+export type WatchedMovieProps = {
+  movie: Movie;
+  right?: boolean;
+  isEditing: boolean;
+  onEditMovie: (movie: Movie) => void;
+  onSave: (movie: Movie) => void;
+  onCancel: () => void;
+  onDelete: (movie: Movie) => void;
+};
 
 const WatchedMovie = ({
   movie,
@@ -24,14 +35,16 @@ const WatchedMovie = ({
   onSave,
   onCancel,
   onDelete,
-}) => {
+}: WatchedMovieProps): ReactElement => {
   const { data } = useGetThirdPartyFullDetails(movie.imdbID);
 
   const small = useMediaQuery("(max-width: 550px)");
   const xsmall = useMediaQuery("(max-width: 430px)");
-  const [datePickerMounted, setDatePickerMounted] = useState(null);
+  const [datePickerMounted, setDatePickerMounted] = useState<boolean | null>(
+    null
+  );
 
-  const calendarSpring = useSpring({
+  const calendarSpring: SpringValues<{ mounted: number }> = useSpring({
     mounted: isEditing ? 1 : 0,
     transform: isEditing
       ? "translateX(0px)"
@@ -43,7 +56,7 @@ const WatchedMovie = ({
   });
 
   const watchedDate = useMemo(
-    () => new Date(movie.watchedOn),
+    () => new Date(movie.watchedOn ?? 0),
     [movie.watchedOn]
   );
 
@@ -55,7 +68,7 @@ const WatchedMovie = ({
       <InfoTitle>{movie.title}</InfoTitle>
       <InfoDate>
         {format(
-          parseISO(movie.watchedOn),
+          parseISO(movie.watchedOn ?? "0"),
           (xsmall && "EEE, MMM do, yyyy") ||
             (small && "EEEE, MMM do, yyyy") ||
             "EEEE, MMMM do, yyyy"
@@ -69,7 +82,7 @@ const WatchedMovie = ({
       aria-label={movie.title}
       data-id={movie.id}
       key={movie.id}
-      onClick={() => {
+      onClick={(): void => {
         if (isEditing) {
           onCancel();
         } else {
@@ -95,16 +108,16 @@ const WatchedMovie = ({
             title={movie.title}
             right={right}
             defaultDate={watchedDate}
-            onSave={(day) => {
+            onSave={(day): void => {
               onSave({
                 ...movie,
                 watchedOn: day.toISOString(),
               });
             }}
-            onCancel={() => {
+            onCancel={(): void => {
               onCancel();
             }}
-            onDelete={() => {
+            onDelete={(): void => {
               onCancel();
               onDelete(movie);
             }}

@@ -1,6 +1,6 @@
 import "react-day-picker/dist/style.css";
 
-import { useState } from "react";
+import { MouseEventHandler, ReactElement, useState } from "react";
 import { Drawer } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Delete from "@mui/icons-material/Delete";
@@ -18,26 +18,37 @@ import {
   dayPickerSmallStyles,
 } from "./date-picker.styles";
 import ActionButton from "../../../action-button/action-button";
+import { SpringValues } from "react-spring";
 
-const preventBubbling = (e) => e.stopPropagation();
+const preventBubbling: MouseEventHandler = (e) => e.stopPropagation();
+
+export type DatePickerProps = {
+  useDrawer?: boolean;
+  right?: boolean;
+  title: string;
+  defaultDate: Date;
+  onCancel: () => void;
+  onSave: (date: Date) => void;
+  onDelete: () => void;
+  spring: SpringValues<{ mounted: number }>;
+};
 
 const DatePicker = ({
   useDrawer = false,
   right = false,
   title,
   defaultDate,
-  onChange,
   onCancel,
   onSave,
   onDelete,
   spring,
-}) => {
+}: DatePickerProps): ReactElement => {
   const actionSize = useDrawer ? 28 : 24;
-  const [day, setDay] = useState(defaultDate);
+  const [day, setDay] = useState<Date>(defaultDate);
   const picker = (
     <Picker
       sx={[useDrawer && DrawerPicker, right && RightAlignedPicker]}
-      style={!useDrawer ? spring : undefined}
+      style={!useDrawer ? (spring as SpringValues) : undefined}
       onClick={preventBubbling}
       data-testid="datePicker"
     >
@@ -49,15 +60,15 @@ const DatePicker = ({
           },
         }}
         defaultMonth={defaultDate}
-        defaultSelected={defaultDate}
         selected={day}
         disabled={{
           after: new Date(),
         }}
         mode="single"
-        onSelect={(day) => {
-          setDay(day);
-          onChange && onChange(day);
+        onSelect={(day): void => {
+          if (day) {
+            setDay(day);
+          }
         }}
       />
       <ButtonGroup>
@@ -71,7 +82,7 @@ const DatePicker = ({
         <ActionButton Icon={Close} onClick={onCancel} fontSize={actionSize} />
         <ActionButton
           Icon={CalendarCheck}
-          onClick={() => onSave(day)}
+          onClick={(): void => onSave(day)}
           fontSize={actionSize}
         />
       </ButtonGroup>

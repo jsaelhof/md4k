@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { GetListsItem } from "../types";
-import { GetWatchedMoviesQuery } from "../../__generated__/graphql";
+import { GetWatchedMoviesQuery, Maybe } from "../../__generated__/graphql";
 import { notEmpty } from "../../utils/not-empty";
 
 export const GET_WATCHED_MOVIES = gql`
@@ -17,7 +17,7 @@ export const GET_WATCHED_MOVIES = gql`
   }
 `;
 
-export const useGetWatchedMovies = (list: GetListsItem) => {
+export const useGetWatchedMovies = (list?: Maybe<GetListsItem>) => {
   const { data, ...rest } = useQuery<GetWatchedMoviesQuery>(
     GET_WATCHED_MOVIES,
     {

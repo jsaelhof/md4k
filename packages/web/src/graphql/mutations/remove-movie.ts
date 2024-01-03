@@ -56,13 +56,12 @@ export const useRemoveWatchedMovie = ({
   onError,
 }: {
   onError: RemoveMovieMutationOptions["onError"];
-}) => {
+}): MutationTuple<RemoveMovieMutation, RemoveMovieMutationVariables> => {
   const [removeWatchedMovie, status] = useMutation<
     RemoveMovieMutation,
     RemoveMovieMutationVariables
   >(REMOVE_MOVIE, {
     update(cache, { data }) {
-      console.log("DATA", data);
       data?.removeMovie &&
         cache.updateQuery(
           {

@@ -1,27 +1,24 @@
 import { Tooltip } from "@mui/material";
 
 import { ButtonContainer } from "./action-button.styles";
-import { Movie } from "../../../../__generated__/graphql";
 import { SvgIconComponent } from "@mui/icons-material";
 import { ReactElement } from "react";
 
 export type ActionButtonProps = {
   Icon: SvgIconComponent;
   tooltip?: string;
-  movie: Movie;
-  fontSize: number;
-  critical: boolean;
-  disabled: boolean;
-  onClick: (movie: Movie) => void;
+  fontSize?: number;
+  critical?: boolean;
+  disabled?: boolean;
+  onClick: () => void;
 };
 
 const ActionButton = ({
   Icon,
   tooltip = "",
-  movie,
   fontSize = 20,
-  critical,
-  disabled,
+  critical = false,
+  disabled = false,
   onClick,
 }: ActionButtonProps): ReactElement => (
   <Tooltip
@@ -36,7 +33,7 @@ const ActionButton = ({
       sx={[{ fontSize }]}
       onClick={(e): void => {
         e.stopPropagation();
-        !disabled && onClick(movie);
+        !disabled && onClick();
       }}
     >
       <Icon fontSize="inherit" />

@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Theme, styled } from "@mui/material";
 import { animated } from "react-spring";
 
 export const Picker = styled(animated.div)(({ theme: { palette } }) => ({
@@ -31,9 +31,10 @@ export const DrawerPicker = {
   paddingBottom: "1em",
 };
 
-export const DrawerPaper = ({ palette }) => ({
-  background: `${palette.darkGrey[800]}EE`,
-});
+export const DrawerPaper = ({ palette }: Theme) =>
+  ({
+    background: `${palette.darkGrey[800]}EE`,
+  } as const);
 
 export const ButtonGroup = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",
