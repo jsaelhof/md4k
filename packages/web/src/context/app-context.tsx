@@ -12,8 +12,8 @@ export type AppContextType = {
   movies: GetMovieItem[];
   moviesById: { [key: string]: GetMovieItem };
   pick: string | null;
-  setPick?: (value: string | null) => void;
-  clearPick?: () => void;
+  setPick: (value: string | null) => void;
+  clearPick: () => void;
   toast: Maybe<ToastProps>;
   setToast: (toast: ToastProps | null) => void;
 };
@@ -28,6 +28,10 @@ const AppContext = createContext<AppContextType>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setToast: () => {},
   pick: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setPick: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  clearPick: () => {},
 });
 
 const AppProvider = ({ children }: PropsWithChildren): ReactElement => {

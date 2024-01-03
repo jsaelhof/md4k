@@ -52,10 +52,10 @@ import { notEmpty } from "../../../../utils/not-empty";
 export type FullDetailProps = {
   movie: Movie;
   showCloseButton?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   actionSet?: "addMovie" | "viewMovie";
-  onAddMovie: (movie: Omit<Movie, "id">) => void;
-  onChangeBackdrop: (url: string) => void;
+  onAddMovie?: (movie: Omit<Movie, "id">) => void;
+  onChangeBackdrop?: (url: string) => void;
 };
 
 const FullDetail = ({
@@ -113,8 +113,8 @@ const FullDetail = ({
   return loading ? (
     <FullDetailSkeleton
       showCloseButton={showCloseButton}
-      onClose={onClose}
       small={small}
+      {...(onClose && { onClose })}
     />
   ) : (
     <FullDetailLayout>
@@ -140,7 +140,7 @@ const FullDetail = ({
         {(data.backdrops ?? []).length > 1 && (
           <PrevBackgroundButton
             onClick={(): void => {
-              if (data.backdrops) {
+              if (data.backdrops && onChangeBackdrop) {
                 onChangeBackdrop(
                   getNeighbor(data.backdrops.filter(notEmpty), backdrop, false)
                 );
@@ -154,7 +154,7 @@ const FullDetail = ({
         {(data.backdrops ?? []).length > 1 && (
           <NextBackgroundButton
             onClick={(): void => {
-              if (data.backdrops) {
+              if (data.backdrops && onChangeBackdrop) {
                 onChangeBackdrop(
                   getNeighbor(data.backdrops.filter(notEmpty), backdrop)
                 );
@@ -241,7 +241,7 @@ const FullDetail = ({
             data.trailer?.key && setTrailer(data.trailer.key);
           }}
         >
-          {actionSet === "addMovie" && (
+          {actionSet === "addMovie" && onAddMovie && (
             <ActionsAdd
               onAddMovie={(): void => {
                 onAddMovie({

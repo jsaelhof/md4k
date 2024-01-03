@@ -16,7 +16,7 @@ import { ReactElement } from "react";
 export type FullDetailSkeletonProps = {
   showCloseButton?: boolean;
   small?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 export const FullDetailSkeleton = ({
