@@ -11,6 +11,18 @@ import {
 } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import moviePosterStrings from "./i18n/i18n";
+import { ReactElement } from "react";
+import { Movie } from "../../../../__generated__/graphql";
+
+export type MoviePosterProps = {
+  movie: Movie;
+  height: number;
+  onClick?: () => void;
+  noLock?: boolean;
+  noRel?: boolean;
+  variant?: "default" | "zoom";
+  shadow?: boolean;
+};
 
 const MoviePoster = ({
   movie,
@@ -18,9 +30,9 @@ const MoviePoster = ({
   onClick,
   noLock = false,
   noRel = false,
-  variant,
-  shadow,
-}) => {
+  variant = "default",
+  shadow = false,
+}: MoviePosterProps): ReactElement => {
   const { t } = useI18n(moviePosterStrings);
   const [ref, visible] = useInViewRef();
 
@@ -28,7 +40,7 @@ const MoviePoster = ({
     <PosterLayout
       sx={[
         !noRel && { position: "relative" },
-        movie.locked && !noLock && locked,
+        !!movie.locked && !noLock && locked,
         {
           width: height * 0.64,
           height,
@@ -54,7 +66,7 @@ const MoviePoster = ({
           {
             ...(visible && { backgroundImage: `url(${movie.poster})` }),
           },
-          onClick && active,
+          !!onClick && active,
         ]}
       />
 
