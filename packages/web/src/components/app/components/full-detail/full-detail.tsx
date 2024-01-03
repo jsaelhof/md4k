@@ -50,7 +50,7 @@ import { SourceValue } from "../../../../types";
 import { notEmpty } from "../../../../utils/not-empty";
 
 export type FullDetailProps = {
-  movie: Movie;
+  movie: Omit<Movie, "id">; // This needs to omit id because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial.
   showCloseButton?: boolean;
   onClose?: () => void;
   actionSet?: "addMovie" | "viewMovie";
@@ -73,7 +73,7 @@ const FullDetail = ({
     "(max-width: 500px), (max-height: 414px)"
   );
 
-  const { data, loading } = useGetThirdPartyFullDetails(movie);
+  const { data, loading } = useGetThirdPartyFullDetails(movie.imdbID);
 
   const [trailer, setTrailer] = useState<string | null>(null);
 
@@ -276,7 +276,7 @@ const FullDetail = ({
         </CastLayout>
       )}
 
-      <Footer movie={movie} />
+      <Footer title={movie.title} imdbID={movie.imdbID} />
     </FullDetailLayout>
   );
 };

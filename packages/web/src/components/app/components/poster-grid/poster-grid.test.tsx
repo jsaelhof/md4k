@@ -5,7 +5,7 @@ import { vi } from "vitest";
 describe("poster-grid", () => {
   beforeEach((context) => {
     context.props = {
-      movies: Array(10)
+      searchResults: Array(10)
         .fill()
         .map((e, i) => ({
           title: `Batman ${i}`,
@@ -14,30 +14,17 @@ describe("poster-grid", () => {
           poster: `https://poster/batman${i}.jpg`,
           watchedOn: `200${i}-08-02T12:00:00Z`,
         })),
-      info: "year",
-      onSearchResultClick: vi.fn(),
+      onClick: vi.fn(),
     };
   });
 
-  it("should display search results with info as year", async ({ props }) => {
+  it("should display search results", async ({ props }) => {
     render(<PosterGrid {...props} />);
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       expect(screen.getByLabelText(`Batman ${i} Poster`)).toBeInTheDocument();
       expect(screen.getByText(`200${i}`)).toBeInTheDocument();
-    }
-  });
-
-  it("should display search results with info as watchedOn", async ({
-    props,
-  }) => {
-    render(<PosterGrid {...props} info="watchedOn" />);
-
-    expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
-    for (var i = 0; i < 10; i++) {
-      expect(screen.getByLabelText(`Batman ${i} Poster`)).toBeInTheDocument();
-      expect(screen.getByText(`Aug 2nd, 200${i}`)).toBeInTheDocument();
     }
   });
 
@@ -49,17 +36,17 @@ describe("poster-grid", () => {
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
     await user.click(screen.getByLabelText("Batman 0 Poster"));
-    expect(props.onSearchResultClick).toHaveBeenCalled();
+    expect(props.onClick).toHaveBeenCalled();
   });
 
   it("should not call the onClick handler when not provided", async ({
     props,
     user,
   }) => {
-    render(<PosterGrid {...props} onSearchResultClick={undefined} />);
+    render(<PosterGrid {...props} onClick={undefined} />);
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
     await user.click(screen.getByLabelText("Batman 0 Poster"));
-    expect(props.onSearchResultClick).not.toHaveBeenCalled();
+    expect(props.onClick).not.toHaveBeenCalled();
   });
 });

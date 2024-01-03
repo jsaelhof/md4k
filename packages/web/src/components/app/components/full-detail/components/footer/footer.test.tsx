@@ -6,10 +6,8 @@ describe("full detail footer", () => {
   const { open } = window;
 
   beforeEach((context) => {
-    context.movie = {
-      id: 123,
-      title: "TheNameOfAFilm",
-    };
+    context.title = "TheNameOfAFilm";
+    context.imdbID = "t12345";
 
     // Delete the existing
     delete window.open;
@@ -21,8 +19,8 @@ describe("full detail footer", () => {
     window.open = open;
   });
 
-  it("should render the footer action images", ({ movie }) => {
-    render(<Footer movie={movie} />);
+  it("should render the footer action images", ({ title }) => {
+    render(<Footer title={title} />);
     expect(screen.getByAltText("Search IMDB")).toBeInTheDocument();
     expect(screen.getByAltText("Search TMDB")).toBeInTheDocument();
     expect(
@@ -31,23 +29,24 @@ describe("full detail footer", () => {
   });
 
   it("should open IMDB with title when clicked when no imdbID is provided", async ({
-    movie,
+    title,
     user,
   }) => {
-    render(<Footer movie={movie} />);
+    render(<Footer title={title} />);
     await user.click(screen.getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
-      expect.stringMatching(new RegExp(`www.imdb.com.*${movie.title}`)),
+      expect.stringMatching(new RegExp(`www.imdb.com.*${title}`)),
       "movieInfo"
     );
   });
 
   it("should open IMDB with imdbID and ignore title when both are provided", async ({
-    movie,
+    title,
+    imdbID,
     user,
   }) => {
-    render(<Footer movie={{ ...movie, imdbID: "t12345" }} />);
+    render(<Footer title={title} imdbID={imdbID} />);
     await user.click(screen.getByAltText("Search IMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
@@ -56,24 +55,22 @@ describe("full detail footer", () => {
     );
   });
 
-  it("should open TMDB when clicked", async ({ movie, user }) => {
-    render(<Footer movie={movie} />);
+  it("should open TMDB when clicked", async ({ title, user }) => {
+    render(<Footer title={title} />);
     await user.click(screen.getByAltText("Search TMDB"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
-      expect.stringMatching(new RegExp(`www.themoviedb.org.*${movie.title}`)),
+      expect.stringMatching(new RegExp(`www.themoviedb.org.*${title}`)),
       "movieInfo"
     );
   });
 
-  it("should open Common Sense Media when clicked", async ({ movie, user }) => {
-    render(<Footer movie={movie} />);
+  it("should open Common Sense Media when clicked", async ({ title, user }) => {
+    render(<Footer title={title} />);
     await user.click(screen.getByAltText("Search Common Sense Media"));
     expect(window.open).toHaveBeenCalledWith(
       // Without replicating the entire URL, this should ensure the URL has the right domain and the movie title
-      expect.stringMatching(
-        new RegExp(`www.commonsensemedia.org.*${movie.title}`)
-      ),
+      expect.stringMatching(new RegExp(`www.commonsensemedia.org.*${title}`)),
       "movieInfo"
     );
   });

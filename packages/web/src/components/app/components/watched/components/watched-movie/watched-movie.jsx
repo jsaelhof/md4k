@@ -25,7 +25,7 @@ const WatchedMovie = ({
   onCancel,
   onDelete,
 }) => {
-  const { data } = useGetThirdPartyFullDetails(movie);
+  const { data } = useGetThirdPartyFullDetails(movie.imdbID);
 
   const small = useMediaQuery("(max-width: 550px)");
   const xsmall = useMediaQuery("(max-width: 430px)");

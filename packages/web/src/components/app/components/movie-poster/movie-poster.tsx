@@ -12,10 +12,15 @@ import {
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import moviePosterStrings from "./i18n/i18n";
 import { ReactElement } from "react";
-import { Movie } from "../../../../__generated__/graphql";
+import { Maybe } from "../../../../__generated__/graphql";
 
 export type MoviePosterProps = {
-  movie: Movie;
+  // This only requires a few key props of a movie which allows other types like SearchResult to be used.
+  movie: {
+    title?: Maybe<string>;
+    poster?: Maybe<string>;
+    locked?: Maybe<boolean>;
+  };
   height: number;
   onClick?: () => void;
   noLock?: boolean;
@@ -36,17 +41,21 @@ const MoviePoster = ({
   const { t } = useI18n(moviePosterStrings);
   const [ref, visible] = useInViewRef();
 
+  const isLocked = movie.locked ?? false;
+
   return (
     <PosterLayout
       sx={[
         !noRel && { position: "relative" },
-        !!movie.locked && !noLock && locked,
+        isLocked && !noLock && locked,
         {
           width: height * 0.64,
           height,
         },
       ]}
-      aria-label={t("movie_poster:label", { title: movie.title })}
+      aria-label={t("movie_poster:label", {
+        title: movie.title ?? t("movie_poster:no_title"),
+      })}
       onClick={onClick}
       ref={ref}
     >
@@ -55,9 +64,7 @@ const MoviePoster = ({
         data-testid="fallback"
         sx={[variant === "zoom" && noPosterZoom, shadow && shadowStyles]}
       >
-        <div>
-          {movie.title.length ? movie.title : t("movie_poster:no_title")}
-        </div>
+        <div>{movie.title ? movie.title : t("movie_poster:no_title")}</div>
       </NoPoster>
 
       <Poster
@@ -70,7 +77,7 @@ const MoviePoster = ({
         ]}
       />
 
-      {movie.locked && !noLock && <Lock />}
+      {isLocked && !noLock && <Lock />}
     </PosterLayout>
   );
 };

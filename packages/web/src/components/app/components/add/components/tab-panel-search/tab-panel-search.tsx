@@ -51,30 +51,38 @@ const TabPanelSearch = ({
 
   const [titleSearch, setTitleSearch] = useState("");
   const [yearSearch, setYearSearch] = useState("");
-  const [movies, setMovies] = useState<SearchResult[] | null>(null);
+  const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
+    null
+  );
   const [pageInfo, setPageInfo] = useState<Maybe<PageInfo>>(null);
   const [centerPoint, setCenterPoint] = useState<{
     x: number;
     y: number;
   } | null>(null);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+
+  // The type here appends an optional background that is used to save any user-selected background chosen
+  // while the full detail modal is open.
+  const [selectedMovie, setSelectedMovie] = useState<
+    (SearchResult & { background?: string }) | null
+  >(null);
+
   const [searching, setSearching] = useState(false);
 
   const resetSearchResults = (): void => {
     setPageInfo(null);
     setSelectedMovie(null);
-    setMovies(null);
+    setSearchResults(null);
   };
 
   const searchQuery = useSearchByTitle({
     onCompleted: (response: SearchByTitleQuery["searchByTitle"]) => {
       if (response) {
         const { results, pageInfo } = response;
-        const updatedMovies = (
-          results ? [...(movies ?? []), ...results] : []
+        const updatedSearchResults = (
+          results ? [...(searchResults ?? []), ...results] : []
         ).filter(notEmpty);
         setPageInfo(pageInfo);
-        setMovies(updatedMovies);
+        setSearchResults(updatedSearchResults);
         setSearching(false);
       }
     },
@@ -125,10 +133,13 @@ const TabPanelSearch = ({
     );
   }, [pageInfo?.page, searchQuery, titleSearch, yearSearch]);
 
-  const onSearchResultClick = useCallback((movie: Movie, event: MouseEvent) => {
-    setCenterPoint({ x: event.screenX, y: event.screenY });
-    setSelectedMovie(movie);
-  }, []);
+  const onSearchResultClick = useCallback(
+    (searchResult: SearchResult, event: React.MouseEvent<HTMLDivElement>) => {
+      setCenterPoint({ x: event.screenX, y: event.screenY });
+      setSelectedMovie(searchResult);
+    },
+    []
+  );
 
   const onResetSearch = useCallback(() => {
     setTitleSearch("");
@@ -197,11 +208,10 @@ const TabPanelSearch = ({
         {/* This div sits at the top of the search results and used by the intersection observer to determine if scrolling has occured */}
         <div ref={ref} />
 
-        {movies && (
+        {searchResults && (
           <PosterGrid
-            movies={movies}
-            onSearchResultClick={onSearchResultClick}
-            info="year"
+            searchResults={searchResults}
+            onClick={onSearchResultClick}
           />
         )}
 
@@ -218,14 +228,14 @@ const TabPanelSearch = ({
               <Refresh />
               <div>{t("tabPanelSearch:searching")}</div>
             </Searching>
-          ) : movies && movies.length === 0 ? (
+          ) : searchResults && searchResults.length === 0 ? (
             <NoMoviesFound>
               <MovieRemove />
               <div>{t("tabPanelSearch:no_movies_found.title")}</div>
               <div>{t("tabPanelSearch:no_movies_found.subtitle")}</div>
             </NoMoviesFound>
           ) : (
-            !movies && <MovieQuote />
+            !searchResults && <MovieQuote />
           )}
         </SearchStatus>
       </TabPanel>
@@ -239,7 +249,11 @@ const TabPanelSearch = ({
             setSelectedMovie(null);
           }}
           fullDetailProps={{
-            movie: selectedMovie,
+            movie: {
+              title: selectedMovie.title ?? "",
+              poster: selectedMovie.poster,
+              background: selectedMovie.background,
+            },
             onAddMovie,
             onChangeBackdrop: (url): void => {
               // This will lose the selected backdrop if the user change movies.

@@ -9,15 +9,15 @@ import {
 import { ActionImage, Container } from "./footer.styles";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import fullDetailStrings from "../../i18n/i18n";
-import { Movie } from "../../../../../../__generated__/graphql";
+import { Maybe } from "../../../../../../__generated__/graphql";
 
 export type FooterProps = {
-  movie: Movie;
+  title: string;
+  imdbID?: Maybe<string>;
 };
 
-const Footer = ({ movie }: FooterProps): ReactElement => {
+const Footer = ({ title, imdbID }: FooterProps): ReactElement => {
   const { t } = useI18n(fullDetailStrings);
-  const { title } = movie;
 
   const actions = [
     {
@@ -30,7 +30,7 @@ const Footer = ({ movie }: FooterProps): ReactElement => {
       src: "/images/third_party/imdb.png",
       action: () =>
         window.open(
-          movie.imdbID ? searchIMDB(movie.imdbID) : searchIMDBTitle(title),
+          imdbID ? searchIMDB(imdbID) : searchIMDBTitle(title),
           "movieInfo"
         ),
     },
