@@ -23,7 +23,7 @@ import {
 } from "./tab-panel-search.styles";
 import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
-import PosterGrid from "../../../poster-grid/poster-grid";
+import PosterGrid from "./components/poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import searchStrings from "./i18n/i18n";

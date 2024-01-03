@@ -1,8 +1,8 @@
-import { useI18n } from "../../../../hooks/use-i18n";
+import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import PosterGridItem from "./components/poster-grid-item/poster-grid-item";
 import { Layout } from "./poster-grid.styles";
 import posterGridStrings from "./i18n/i18n";
-import { SearchResult } from "../../../../__generated__/graphql";
+import { SearchResult } from "../../../../../../../../__generated__/graphql";
 import { ReactElement } from "react";
 
 export type PosterGridProps = {
