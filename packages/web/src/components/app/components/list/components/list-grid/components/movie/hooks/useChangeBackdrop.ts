@@ -4,21 +4,25 @@ import {
   editMovieOptions,
   useEditMovie,
 } from "../../../../../../../../../graphql/mutations";
+import { Movie } from "../../../../../../../../../__generated__/graphql";
 
-export const useChangeBackdrop = (movie) => {
+export const useChangeBackdrop = (
+  movie: Movie
+): ((background: string) => void) => {
   const { list } = useAppContext();
   const [editMovieMutation] = useEditMovie();
   const onChangeBackdrop = useCallback(
-    (background) => {
-      editMovieMutation(
-        editMovieOptions(
-          {
-            ...movie,
-            background,
-          },
-          list
-        )
-      );
+    (background: string) => {
+      list &&
+        editMovieMutation(
+          editMovieOptions(
+            {
+              ...movie,
+              background,
+            },
+            list
+          )
+        );
     },
     [editMovieMutation, list, movie]
   );

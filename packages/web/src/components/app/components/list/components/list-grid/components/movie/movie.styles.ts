@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Theme, styled } from "@mui/material";
 import { animated } from "react-spring";
 
 export const MovieContainer = styled(animated.div)(() => ({
@@ -6,9 +6,10 @@ export const MovieContainer = styled(animated.div)(() => ({
   borderRadius: 4,
 }));
 
-export const movieContainerFocused = ({ zIndex }) => ({
-  zIndex: zIndex.movieHover,
-});
+export const movieContainerFocused = ({ zIndex }: Theme) =>
+  ({
+    zIndex: zIndex.movieHover,
+  } as const);
 
 export const MoviePosterContainer = styled("div")`
   border-radius: 4px;

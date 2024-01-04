@@ -8,6 +8,16 @@ import { Actions } from "./detail-actions.styles";
 import ActionButton from "../../../../../../../action-button/action-button";
 import { useI18n } from "../../../../../../../../../../hooks/use-i18n";
 import listGridStrings from "../../../../i18n/i18n";
+import { Movie } from "../../../../../../../../../../__generated__/graphql";
+import { ReactElement } from "react";
+
+export type DetailActionsProps = {
+  movie: Movie;
+  onEdit: () => void;
+  onMarkWatched: () => void;
+  onToggleLock: (locked: boolean) => void;
+  onDelete: () => void;
+};
 
 const DetailActions = ({
   movie,
@@ -15,7 +25,7 @@ const DetailActions = ({
   onMarkWatched,
   onToggleLock,
   onDelete,
-}) => {
+}: DetailActionsProps): ReactElement => {
   const { t } = useI18n(listGridStrings);
 
   return (
@@ -30,13 +40,13 @@ const DetailActions = ({
         <ActionButton
           Icon={UnlockIcon}
           tooltip={t("list_grid:detail_actions:unlock")}
-          onClick={() => onToggleLock(false)}
+          onClick={(): void => onToggleLock(false)}
         />
       ) : (
         <ActionButton
           Icon={LockIcon}
           tooltip={t("list_grid:detail_actions:lock")}
-          onClick={() => onToggleLock(true)}
+          onClick={(): void => onToggleLock(true)}
         />
       )}
       <ActionButton

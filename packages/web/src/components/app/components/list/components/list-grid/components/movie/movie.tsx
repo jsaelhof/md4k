@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { ReactElement, useRef, useState } from "react";
 import { useSpring } from "react-spring";
 import debounce from "lodash/debounce";
 
@@ -26,20 +26,33 @@ import FullDetailModal from "../../../../../full-detail-modal/full-detail-modal"
 import { useResponsive } from "../../../../../../../../hooks/use-responsive";
 import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update-movie";
 import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
+import { Movie } from "../../../../../../../../__generated__/graphql";
+import { ListGridHandlers } from "../../types";
 
 const isTouchInterface = "ontouchstart" in window;
 
-const getCenterPoint = (rect) => {
+const getCenterPoint = (
+  rect?: DOMRect
+): { x: number; y: number } | undefined => {
   if (!rect) return undefined;
 
   const { x, y, width, height } = rect;
   return { x: x + width / 2, y: y + height / 2 };
 };
 
-const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
+export type MovieProps = ListGridHandlers & {
+  movie: Movie;
+};
+
+const Movie = ({
+  movie,
+  onEditMovie,
+  onMarkWatched,
+  onRemoveMovie,
+}: MovieProps): ReactElement => {
   const { mobile } = useResponsive();
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement | null>(null);
   const centerPoint = getCenterPoint(ref.current?.getBoundingClientRect());
 
   const [infoState, setInfoState] = useState("actions");
@@ -53,7 +66,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
     },
     isTouchInterface ? 0 : 500
   );
-  const unfocus = () => {
+  const unfocus = (): void => {
     focus.cancel();
     setFocused(false);
     // This is ugly. Occasionally, posters get stuck in the focused state because they unfocus and then trigger a very fast
@@ -81,7 +94,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
       infoState === "ratings" ? "translateX(0px)" : "translateX(-240px)",
   });
 
-  const onCloseExpanded = () => setExpanded(false);
+  const onCloseExpanded = (): void => setExpanded(false);
   const onChangeBackdrop = useChangeBackdrop(movie);
 
   useUpdateMovie(movie, focused);
@@ -103,7 +116,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
 
         <MovieDetailPositioner
           sx={[focused && movieDetailPositionerFocused]}
-          onClick={() => {
+          onClick={(): void => {
             unfocus();
             setExpanded(true);
           }}
@@ -116,11 +129,11 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
               <InfoLayout>
                 <StarRatingLayout
                   onMouseEnter={switchToRatings}
-                  onMouseLeave={() => {
+                  onMouseLeave={(): void => {
                     switchToRatings.cancel();
                     setInfoState("actions");
                   }}
-                  onClick={(e) => {
+                  onClick={(e): void => {
                     // OnClick, toggle the state.
                     // Works for desktop and mobile but mainly here for mobile.
                     setInfoState(
@@ -131,7 +144,7 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
                     // display the ratings breakdown.
                     if (
                       "ontouchstart" in window ||
-                      navigator.msMaxTouchPoints > 0
+                      navigator.maxTouchPoints > 0
                     ) {
                       e.stopPropagation();
                     }
@@ -146,18 +159,18 @@ const Movie = ({ movie, onEditMovie, onMarkWatched, onRemoveMovie }) => {
                 <InfoFooterLayout style={actionsSpring} data-testid="actions">
                   <DetailActions
                     movie={movie}
-                    onEdit={() => {
+                    onEdit={(): void => {
                       setFocused(false);
                       onEditMovie(movie);
                     }}
-                    onMarkWatched={() => {
+                    onMarkWatched={(): void => {
                       setFocused(false);
                       onMarkWatched(movie);
                     }}
-                    onToggleLock={(locked) => {
+                    onToggleLock={(locked: boolean): void => {
                       onEditMovie({ ...movie, locked }, false);
                     }}
-                    onDelete={() => {
+                    onDelete={(): void => {
                       setFocused(false);
                       onRemoveMovie(movie);
                     }}

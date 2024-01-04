@@ -21,7 +21,7 @@ export type MoviePosterProps = {
     poster?: Maybe<string>;
     locked?: Maybe<boolean>;
   };
-  height: number;
+  height?: number;
   onClick?: () => void;
   noLock?: boolean;
   noRel?: boolean;
