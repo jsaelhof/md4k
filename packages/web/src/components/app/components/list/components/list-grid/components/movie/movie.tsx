@@ -26,7 +26,7 @@ import FullDetailModal from "../../../../../full-detail-modal/full-detail-modal"
 import { useResponsive } from "../../../../../../../../hooks/use-responsive";
 import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update-movie";
 import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
-import { Movie } from "../../../../../../../../__generated__/graphql";
+import { Movie as MovieType } from "../../../../../../../../__generated__/graphql";
 import { ListGridHandlers } from "../../types";
 
 const isTouchInterface = "ontouchstart" in window;
@@ -41,7 +41,7 @@ const getCenterPoint = (
 };
 
 export type MovieProps = ListGridHandlers & {
-  movie: Movie;
+  movie: MovieType;
 };
 
 const Movie = ({
