@@ -1,9 +1,15 @@
 import "@testing-library/jest-dom";
 import { beforeAll, beforeEach, vi } from "vitest";
-import userEvent from "@testing-library/user-event";
-import i18n from "i18next";
+import userEvent, { UserEvent } from "@testing-library/user-event";
+import i18n, { TFunction } from "i18next";
 import { globSync } from "glob";
 import { i18nextConfig } from "./src/i18next/i18next-config";
+
+interface LocalTestContext {
+  user: UserEvent;
+  userNoPointerCheck: UserEvent;
+  t: TFunction; // TODO: Is it possible to find all the namespaces and provide them here to the TFunction<> generic?
+}
 
 // Setup the i18next instance.
 i18nextConfig();
@@ -32,7 +38,7 @@ beforeAll(() => {
   }));
 });
 
-beforeEach((context) => {
+beforeEach<LocalTestContext>((context) => {
   context.user = userEvent.setup();
 
   // This is a separate user object configured without pointer event checks enabled
