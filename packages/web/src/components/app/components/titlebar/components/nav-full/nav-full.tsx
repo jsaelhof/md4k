@@ -8,8 +8,9 @@ import DbSelect from "../db-select/db-select";
 import NavButton from "../nav-button/nav-button";
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import titlebarStrings from "../../i18n/i18n";
+import { ReactElement } from "react";
 
-const NavFull = () => {
+const NavFull = (): ReactElement => {
   const { t } = useI18n(titlebarStrings);
   const { pathname } = useLocation();
   const { list, clearPick } = useAppContext();

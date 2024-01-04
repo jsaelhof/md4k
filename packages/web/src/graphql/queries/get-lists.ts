@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { GetListsQuery } from "../../__generated__/graphql";
 import { GetListsItem } from "../types";
+import { notEmpty } from "../../utils/not-empty";
 
 export const GET_LISTS = gql`
   query GetLists {
@@ -23,5 +24,5 @@ export const useGetLists = ({ onCompleted }: useGetListsArgs) => {
     fetchPolicy: "cache-and-network",
   });
 
-  return { ...data, ...rest };
+  return { lists: data?.lists?.filter(notEmpty) ?? [], ...rest };
 };

@@ -1,4 +1,4 @@
-import { styled, Divider } from "@mui/material";
+import { styled, Divider, Theme } from "@mui/material";
 import Refresh from "@mui/icons-material/Refresh";
 import Eye from "mdi-material-ui/Eye";
 import Movie from "mdi-material-ui/Movie";
@@ -10,10 +10,11 @@ export const NavMenu = styled("div")(({ theme: { spacing } }) => ({
   marginRight: spacing(2),
 }));
 
-export const icon = ({ theme: { palette, spacing } }) => ({
-  marginRight: spacing(2),
-  color: palette.grey[600],
-});
+const icon = ({ theme: { palette, spacing } }: { theme: Theme }) =>
+  ({
+    marginRight: spacing(2),
+    color: palette.grey[600],
+  } as const);
 
 export const RefreshIcon = styled(Refresh)(icon);
 export const ListIcon = styled(List)(icon);

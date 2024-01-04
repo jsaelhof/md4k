@@ -34,12 +34,7 @@ const CreateListInput = ({ onSubmit }: CreateListInputProps): ReactElement => {
           onClick={(): void => {
             if (input?.length === 0) {
               setError(t("create:input.no_list_name"));
-            } else if (
-              lists
-                ?.filter(notEmpty)
-                .map(({ label }) => label)
-                .includes(input)
-            ) {
+            } else if (lists.map(({ label }) => label).includes(input)) {
               setError(t("create:input.duplicate_list_name"));
             } else {
               setError(null);

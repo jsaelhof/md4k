@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 import { ClickAwayListener, Popover, Button } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -15,13 +15,13 @@ import {
 import { useI18n } from "../../../../../../hooks/use-i18n";
 import titlebarStrings from "../../i18n/i18n";
 
-const ProfileMenu = () => {
+const ProfileMenu = (): ReactElement | null => {
   const { t } = useI18n(titlebarStrings);
   const anchorRef = useRef(null);
   const { user, logout } = useAuth0();
   const [open, setOpen] = useState(false);
-  const onOpenMenu = () => setOpen(true);
-  const onCloseMenu = () => setOpen(false);
+  const onOpenMenu = (): void => setOpen(true);
+  const onCloseMenu = (): void => setOpen(false);
 
   return user ? (
     <Profile>
@@ -53,7 +53,7 @@ const ProfileMenu = () => {
 
             <ProfileActions>
               <Button
-                onClick={() => {
+                onClick={(): void => {
                   onCloseMenu();
                   logout({ returnTo: window.location.origin });
                 }}

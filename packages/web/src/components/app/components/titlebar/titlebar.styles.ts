@@ -1,13 +1,15 @@
 import { styled } from "@mui/system";
 import { app } from "../../../../constants/app";
 import NavButton from "./components/nav-button/nav-button";
+import { Theme } from "@mui/material";
 
-export const appBarContainerStyles = ({ palette, zIndex }) => ({
-  position: "fixed",
-  width: "100%",
-  zIndex: zIndex.titleBar,
-  background: `linear-gradient(75deg, ${palette.darkGrey[600]}, ${palette.darkGrey[800]} 80%)`,
-});
+export const appBarContainerStyles = ({ palette, zIndex }: Theme) =>
+  ({
+    position: "fixed",
+    width: "100%",
+    zIndex: zIndex.titleBar,
+    background: `linear-gradient(75deg, ${palette.darkGrey[600]}, ${palette.darkGrey[800]} 80%)`,
+  } as const);
 
 export const toolbarStyles = {
   display: "grid",

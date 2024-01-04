@@ -6,7 +6,7 @@ import { Maybe } from "graphql/jsutils/Maybe";
 import { ToastProps } from "../types";
 
 export type AppContextType = {
-  lists?: Maybe<Maybe<GetListsItem>[]>;
+  lists: GetListsItem[];
   list: GetListsItem | null;
   setList: (list: GetListsItem) => void;
   movies: GetMovieItem[];
@@ -19,6 +19,7 @@ export type AppContextType = {
 };
 
 const AppContext = createContext<AppContextType>({
+  lists: [],
   list: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setList: () => {},

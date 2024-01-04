@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import NavButton from "./nav-button";
 import { vi } from "vitest";
+import { Keyboard } from "@mui/icons-material";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -31,7 +32,7 @@ describe("nav-button", () => {
   }) => {
     const onClick = vi.fn();
     render(
-      <NavButton herf="/test" onClick={onClick}>
+      <NavButton href="/test" onClick={onClick}>
         Test Button
       </NavButton>
     );
@@ -42,19 +43,20 @@ describe("nav-button", () => {
 
   it("should render the provided children", () => {
     render(
-      <NavButton herf="/test">
+      <NavButton href="/test">
         <div>Content</div>
       </NavButton>
     );
     expect(screen.getByText("Content")).toBeInTheDocument();
   });
 
-  it("should pass through props to the button", () => {
+  it("should render the icon", () => {
     render(
-      <NavButton herf="/test" aria-label="testButton">
-        Test Button
+      <NavButton href="/test" startIcon={<Keyboard />}>
+        <div>Content</div>
       </NavButton>
     );
-    expect(screen.getByLabelText("testButton")).toBeInTheDocument();
+
+    expect(screen.getByTestId("KeyboardIcon")).toBeInTheDocument();
   });
 });

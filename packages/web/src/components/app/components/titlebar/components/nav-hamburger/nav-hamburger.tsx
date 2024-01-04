@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { MouseEventHandler, ReactElement, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ClickAwayListener, IconButton, Menu, MenuItem } from "@mui/material";
+import {
+  ClickAwayListener,
+  ClickAwayListenerProps,
+  IconButton,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { useAppContext } from "../../../../../../context/app-context";
@@ -29,21 +35,26 @@ export const MuiClickAwayListenerWrapper = ({
   tabIndex,
   children,
   ...props
-}) => <ClickAwayListener {...props}>{children}</ClickAwayListener>;
+}: ClickAwayListenerProps & {
+  autoFocus?: boolean;
+  tabIndex?: number;
+}): ReactElement | null => (
+  <ClickAwayListener {...props}>{children}</ClickAwayListener>
+);
 
-const NavHamburger = () => {
+const NavHamburger = (): ReactElement | null => {
   const { t } = useI18n(titlebarStrings);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { lists, setList, clearPick, list } = useAppContext();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (event): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null);
   };
 
@@ -61,7 +72,7 @@ const NavHamburger = () => {
             {pathname === "/pick" && (
               <>
                 <MenuItem
-                  onClick={() => {
+                  onClick={(): void => {
                     clearPick();
                     handleClose();
                   }}
@@ -75,7 +86,7 @@ const NavHamburger = () => {
 
             {pathname !== "/" && (
               <MenuItem
-                onClick={() => {
+                onClick={(): void => {
                   navigate("/");
                   handleClose();
                 }}
@@ -89,7 +100,7 @@ const NavHamburger = () => {
                 {!["/watched", "/add"].includes(pathname) &&
                   !pathname.startsWith("/edit/") && (
                     <MenuItem
-                      onClick={() => {
+                      onClick={(): void => {
                         navigate("/watched");
                         handleClose();
                       }}
@@ -103,7 +114,7 @@ const NavHamburger = () => {
                 {lists?.map((list) => (
                   <MenuItem
                     key={list.id}
-                    onClick={() => {
+                    onClick={(): void => {
                       setList(list);
                       handleClose();
                     }}
@@ -114,7 +125,7 @@ const NavHamburger = () => {
 
                 <MenuItem
                   sx={{ fontStyle: "italic" }}
-                  onClick={() => {
+                  onClick={(): void => {
                     navigate("/create");
                     handleClose();
                   }}
