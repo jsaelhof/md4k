@@ -1,12 +1,11 @@
 import { Button } from "@mui/material";
 import EmptyState from "../../../../../empty-state/empty-state";
 import { useNavigate } from "react-router-dom";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const EmptyList = (): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid"]);
   const navigate = useNavigate();
 
   return (

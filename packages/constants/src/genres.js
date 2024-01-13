@@ -12,7 +12,7 @@ export const genres = Object.freeze({
   HORROR: 10,
 });
 
-// This map is inserted into the common i18n namespace.
+// TODO: This is not used by the frontend. Movie to API.
 // The backend uses the english genre labels when reverse-mapping the third-party API genre to my genre id's
 export const genreLabels = Object.freeze({
   [genres.NONE]: "None",

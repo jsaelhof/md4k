@@ -17,12 +17,11 @@ import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
 import { parseRuntime } from "../../../../utils/parse-runtime";
 import TextInput from "./components/text-input/text-input.jsx";
-import { useI18n } from "../../../../hooks/use-i18n";
-import manualMovieFormStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
 import { SvgIconComponent } from "@mui/icons-material";
 import { MovieFormFields } from "./types";
 import ListSelect from "./components/list-select/list-select";
+import { useTranslation } from "react-i18next";
 
 export type ManualMovieFormProps = {
   actionLabel: string;
@@ -39,28 +38,7 @@ export const ManualMovieForm = ({
   onChange,
   onCancel,
 }: ManualMovieFormProps): ReactElement => {
-  const { t } = useI18n(manualMovieFormStrings);
-
-  const sourceLabels = useMemo(
-    () =>
-      Object.values(sources).reduce<{ [key: number]: string }>(
-        (acc, source) => {
-          acc[source] = t(`common:sources.${source}`);
-          return acc;
-        },
-        {}
-      ),
-    [t]
-  );
-
-  const genreLabels = useMemo(
-    () =>
-      Object.values(genres).reduce<{ [key: number]: string }>((acc, genre) => {
-        acc[genre] = t(`common:genres.${genre}`);
-        return acc;
-      }, {}),
-    [t]
-  );
+  const { t } = useTranslation(["manual_movie_form", "common"]);
 
   const defaultValues = useMemo(
     () => ({
@@ -262,7 +240,7 @@ export const ManualMovieForm = ({
               label="genre"
               values={genres}
               listSelectItemProps={{
-                labels: genreLabels,
+                variant: "genres",
               }}
               selectProps={{
                 inputRef: ref,
@@ -284,7 +262,7 @@ export const ManualMovieForm = ({
               label="source"
               values={sources}
               listSelectItemProps={{
-                labels: sourceLabels,
+                variant: "sources",
                 images: sourceLogos,
               }}
               selectProps={{

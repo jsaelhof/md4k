@@ -4,10 +4,8 @@ import {
   gql,
   useMutation,
 } from "@apollo/client";
-import omit from "lodash/omit";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
-  List,
   Movie,
   UndoMarkWatchedMutation,
   UndoMarkWatchedMutationVariables,

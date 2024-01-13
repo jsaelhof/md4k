@@ -6,10 +6,9 @@ import UnlockIcon from "mdi-material-ui/LockOpenVariant";
 
 import { Actions } from "./detail-actions.styles";
 import ActionButton from "../../../../../../../action-button/action-button";
-import { useI18n } from "../../../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../../../i18n/i18n";
 import { Movie } from "../../../../../../../../../../__generated__/graphql";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 export type DetailActionsProps = {
   movie: Movie;
@@ -26,32 +25,32 @@ const DetailActions = ({
   onToggleLock,
   onDelete,
 }: DetailActionsProps): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid"]);
 
   return (
     <Actions>
       <ActionButton Icon={EditIcon} tooltip="Edit" onClick={onEdit} />
       <ActionButton
         Icon={EyeCheckIcon}
-        tooltip={t("list_grid:detail_actions:mark_watched")}
+        tooltip={t("list_grid:detail_actions.mark_watched")}
         onClick={onMarkWatched}
       />
       {movie.locked ? (
         <ActionButton
           Icon={UnlockIcon}
-          tooltip={t("list_grid:detail_actions:unlock")}
+          tooltip={t("list_grid:detail_actions.unlock")}
           onClick={(): void => onToggleLock(false)}
         />
       ) : (
         <ActionButton
           Icon={LockIcon}
-          tooltip={t("list_grid:detail_actions:lock")}
+          tooltip={t("list_grid:detail_actions.lock")}
           onClick={(): void => onToggleLock(true)}
         />
       )}
       <ActionButton
         Icon={DeleteIcon}
-        tooltip={t("list_grid:detail_actions:delete")}
+        tooltip={t("list_grid:detail_actions.delete")}
         onClick={onDelete}
       />
     </Actions>

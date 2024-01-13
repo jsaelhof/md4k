@@ -17,14 +17,13 @@ import { sortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import { useGetWatchedMovies } from "../../../../graphql/queries";
-import { useI18n } from "../../../../hooks/use-i18n";
-import watchedStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;
 
 export const Watched = (): ReactElement | null => {
-  const { t } = useI18n(watchedStrings);
+  const { t } = useTranslation(["watched"]);
   const { list } = useAppContext();
   const { watchedMovies } = useGetWatchedMovies(list);
   const [error, setError] = useState<string | null>(null);

@@ -1,17 +1,5 @@
 import { sources } from "md4k-constants";
 
-// This map is inserted into the common i18n namespace.
-export const sourceLabels = {
-  [sources.NONE]: "None",
-  [sources.NETFLIX]: "Netflix",
-  [sources.PRIME_VIDEO]: "Prime Video",
-  [sources.APPLE_TV]: "AppleTV+",
-  [sources.PLEX]: "Plex",
-  [sources.DVD]: "DVD",
-  [sources.DISNEY_PLUS]: "Disney+",
-  [sources.TUBI_TV]: "Tubi",
-};
-
 const sourceLogoBase = "/images/source/";
 
 export const sourceLogos = {

@@ -5,11 +5,10 @@ import { ReactElement, useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../i18n/i18n";
 import { ListGridProps } from "../../types";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { Dictionary, List } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const partitionMovies = (
   direction: "asc" | "desc"
@@ -34,7 +33,7 @@ const partitionMovies = (
   );
 
 const SortedAdded = ({ movies, ...handlers }: ListGridProps): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid"]);
   const direction = useSortDirection();
 
   const { month, quarter, year, beyond } = useMemo(
@@ -46,23 +45,23 @@ const SortedAdded = ({ movies, ...handlers }: ListGridProps): ReactElement => {
     const sectionDescriptors = [
       {
         list: month,
-        title: t("list_grid:sorted_added:month.title"),
-        subtitle: t("list_grid:sorted_added:month.subtitle"),
+        title: t("list_grid:sorted_added.month.title"),
+        subtitle: t("list_grid:sorted_added.month.subtitle"),
       },
       {
         list: quarter,
-        title: t("list_grid:sorted_added:quarter.title"),
-        subtitle: t("list_grid:sorted_added:quarter.subtitle"),
+        title: t("list_grid:sorted_added.quarter.title"),
+        subtitle: t("list_grid:sorted_added.quarter.subtitle"),
       },
       {
         list: year,
-        title: t("list_grid:sorted_added:year.title"),
-        subtitle: t("list_grid:sorted_added:year.subtitle"),
+        title: t("list_grid:sorted_added.year.title"),
+        subtitle: t("list_grid:sorted_added.year.subtitle"),
       },
       {
         list: beyond,
-        title: t("list_grid:sorted_added:beyond.title"),
-        subtitle: t("list_grid:sorted_added:beyond.subtitle"),
+        title: t("list_grid:sorted_added.beyond.title"),
+        subtitle: t("list_grid:sorted_added.beyond.subtitle"),
       },
     ];
 

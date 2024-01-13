@@ -7,9 +7,8 @@ import {
   searchTMDB,
 } from "../../../../../../utils/search";
 import { ActionImage, Container } from "./footer.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import fullDetailStrings from "../../i18n/i18n";
 import { Maybe } from "../../../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 export type FooterProps = {
   title: string;
@@ -17,7 +16,7 @@ export type FooterProps = {
 };
 
 const Footer = ({ title, imdbID }: FooterProps): ReactElement => {
-  const { t } = useI18n(fullDetailStrings);
+  const { t } = useTranslation(["full_detail"]);
 
   const actions = [
     {

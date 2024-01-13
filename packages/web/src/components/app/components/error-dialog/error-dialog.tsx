@@ -6,9 +6,8 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useI18n } from "../../../../hooks/use-i18n";
-import errorDialogStrings from "./i18n/i18n";
 import { ReactElement, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 export type ErrorDialogProps = {
   open: boolean;
@@ -23,7 +22,7 @@ const ErrorDialog = ({
   debug,
   onConfirm,
 }: ErrorDialogProps): ReactElement => {
-  const { t } = useI18n(errorDialogStrings);
+  const { t } = useTranslation(["error_dialog"]);
 
   if (debug) console.error(debug);
 

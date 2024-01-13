@@ -18,10 +18,10 @@ import {
 } from "./split-button.styles";
 import { filterMovies } from "../../../../../../../../utils/filter-movies";
 import { useAppContext } from "../../../../../../../../context/app-context";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listStrings from "../../../../i18n/i18n";
 import { PickOption } from "../../../../../../../../types";
 import { SvgIconComponent } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import resources from "../../../../../../../../__generated__/resources";
 
 const splitButtonItems: {
   value: string;
@@ -70,7 +70,7 @@ export type SplitButtonProps = {
 };
 
 const SplitButton = ({ onPick }: SplitButtonProps): ReactElement => {
-  const { t } = useI18n(listStrings);
+  const { t } = useTranslation(["list"]);
   const { movies } = useAppContext();
   const [openSplitButton, setOpenSplitButton] = useState(false);
 
@@ -102,7 +102,7 @@ const SplitButton = ({ onPick }: SplitButtonProps): ReactElement => {
                   disabled={filterMovies(movies, options).length === 0}
                 >
                   {<MenuIcon as={Icon} />}
-                  {t(`list:pick.${value}`)}
+                  {t(`list:pick.${value as keyof typeof resources.list.pick}`)}
                 </MenuItem>
               ))}
             </MenuList>

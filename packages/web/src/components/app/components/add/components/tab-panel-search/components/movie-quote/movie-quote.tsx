@@ -1,18 +1,20 @@
 import { ReactElement, useMemo } from "react";
 import { Attribution, Layout, Quote } from "./movie-quote.styles";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import tabPanelSearchStrings from "../../i18n/i18n";
+import { useTranslation } from "react-i18next";
+import resources from "../../../../../../../../__generated__/resources";
 
 export const MovieQuote = (): ReactElement => {
-  const { t } = useI18n(tabPanelSearchStrings);
+  const { t } = useTranslation(["tab_panel_search"]);
 
   const { quote, speaker, movie } = useMemo(() => {
-    const quotes = Object.keys(tabPanelSearchStrings.en.tabPanelSearch.quotes);
+    const quotes = Object.keys(resources.tab_panel_search.quotes);
     const i = Math.floor(Math.random() * quotes.length);
+    const quoteKey =
+      `quote${i}` as keyof typeof resources.tab_panel_search.quotes;
     return {
-      quote: t(`tabPanelSearch:quotes.quote${i}.quote`),
-      speaker: t(`tabPanelSearch:quotes.quote${i}.speaker`),
-      movie: t(`tabPanelSearch:quotes.quote${i}.movie`),
+      quote: t(`tab_panel_search:quotes.${quoteKey}.quote`),
+      speaker: t(`tab_panel_search:quotes.${quoteKey}.speaker`),
+      movie: t(`tab_panel_search:quotes.${quoteKey}.movie`),
     };
   }, [t]);
 

@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../../../../../../context/app-context";
 import { Select } from "./db-select.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import titlebarStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const NEW_LIST = "NEW_LIST";
 
 const DbSelect = (): ReactElement | null => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const { lists, list, setList } = useAppContext();
   const navigate = useNavigate();
 

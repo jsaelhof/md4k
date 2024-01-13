@@ -1,11 +1,10 @@
 import { FooterLayout } from "./footer.styles";
 import { Link } from "react-router-dom";
-import footerStrings from "./i18n/i18n";
-import { useI18n } from "../../../../hooks/use-i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = (): ReactElement => {
-  const { t } = useI18n(footerStrings);
+  const { t } = useTranslation(["footer"]);
   return (
     <FooterLayout>
       <Link to="/">{t("footer:movies")}</Link>

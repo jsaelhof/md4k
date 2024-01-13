@@ -1,4 +1,4 @@
-export const parseRuntime = (runtimeInput?: string | number) => {
+export const parseRuntime = (runtimeInput?: string | number): number | null => {
   runtimeInput = runtimeInput?.toString();
   let runtime;
 

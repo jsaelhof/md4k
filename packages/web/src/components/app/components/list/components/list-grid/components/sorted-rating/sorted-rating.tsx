@@ -5,10 +5,9 @@ import { useSortDirection } from "../../../../../../../../hooks/use-sort-directi
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import FiveStarRating from "../../../../../five-star-rating/five-star-rating";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../i18n/i18n";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { ListGridProps } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const partitionMovies = flow(
   groupBy<NonNullable<Movie>>(({ fiveStarRating }) =>
@@ -24,7 +23,7 @@ const partitionMovies = flow(
 );
 
 const SortedRating = ({ movies, ...handlers }: ListGridProps): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid"]);
   const direction = useSortDirection();
 
   const byRating = useMemo(() => partitionMovies(movies), [movies]);

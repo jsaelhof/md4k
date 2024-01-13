@@ -9,10 +9,9 @@ import {
   SecondaryActions,
 } from "./action-bar.styles";
 import { useNavigate } from "react-router-dom";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import listStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
 import { PickOption } from "../../../../../../types";
+import { useTranslation } from "react-i18next";
 
 export type ActionBarProps = {
   disabled: boolean;
@@ -20,7 +19,7 @@ export type ActionBarProps = {
 };
 
 const ActionBar = ({ disabled, onPick }: ActionBarProps): ReactElement => {
-  const { t } = useI18n(listStrings);
+  const { t } = useTranslation(["list"]);
   const includeLabel = useMediaQuery("(min-width: 790px)");
 
   const navigate = useNavigate();

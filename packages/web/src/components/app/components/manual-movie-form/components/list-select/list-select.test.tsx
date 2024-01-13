@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import ListSelect from "./list-select";
-import { sourceLabels, sourceLogos } from "../../../../../../constants/sources";
+import { sourceLogos } from "../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 import { vi } from "vitest";
 
@@ -12,8 +12,8 @@ describe("list-select", () => {
       hideLabelForSelection: false,
       onChange: vi.fn(),
       listSelectItemProps: {
+        variant: "sources",
         images: sourceLogos,
-        labels: sourceLabels,
       },
     };
   });

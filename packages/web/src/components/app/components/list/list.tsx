@@ -17,16 +17,15 @@ import ActionBar from "./components/action-bar/action-bar";
 import ListGrid from "./components/list-grid/list-grid";
 import ErrorDialog from "../error-dialog/error-dialog";
 import map from "lodash/map";
-import { useI18n } from "../../../../hooks/use-i18n";
-import listStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
 import { PickOption } from "../../../../types";
+import { useTranslation } from "react-i18next";
 
 export const List = (): ReactElement => {
   const navigate = useNavigate();
   const { list, movies, lists, setToast } = useAppContext();
   const [error, setError] = useState<string | null>(null);
-  const { t } = useI18n(listStrings);
+  const { t } = useTranslation(["list"]);
 
   const [undoMarkWatchedMutation] = useUndoMarkWatched({
     onCompleted: ({ editMovie: movie }) => {

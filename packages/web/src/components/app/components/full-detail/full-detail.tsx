@@ -43,11 +43,11 @@ import { ActionsAdd } from "./components/actions-add/actions-add";
 import { ActionsView } from "./components/actions-view/actions-view";
 import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
-import { useI18n } from "../../../../hooks/use-i18n";
-import fullDetailStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
 import { SourceValue } from "../../../../types";
 import { notEmpty } from "../../../../utils/not-empty";
+import { useTranslation } from "react-i18next";
+import resources from "../../../../__generated__/resources";
 
 export type FullDetailProps = {
   movie: Omit<Movie, "id">; // This needs to omit id because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial.
@@ -66,7 +66,7 @@ const FullDetail = ({
   onAddMovie,
   onChangeBackdrop,
 }: FullDetailProps): ReactElement => {
-  const { t } = useI18n(fullDetailStrings);
+  const { t } = useTranslation(["full_detail", "common"]);
   const small = useMediaQuery("(max-width: 750px)");
   const noPlotScroll = useMediaQuery("(max-width: 660px), (max-height: 414px)");
   const trailerOverlay = useMediaQuery(
@@ -215,7 +215,11 @@ const FullDetail = ({
           <div>{movie.year}</div>
           <div>
             {movie.genre
-              ? t(`common:genres.${movie.genre}`)
+              ? t(
+                  `common:genres.${
+                    movie.genre.toString() as keyof typeof resources.common.genres
+                  }`
+                )
               : t("full_detail:no_genre")}
           </div>
           <Rated rated={data.rated} />

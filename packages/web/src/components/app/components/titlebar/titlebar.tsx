@@ -13,12 +13,11 @@ import {
   pickScreenToolbarStyles,
   toolbarStyles,
 } from "./titlebar.styles";
-import { useI18n } from "../../../../hooks/use-i18n";
-import titlebarStrings from "./i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const TitleBar = (): ReactElement => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const { movies, clearPick } = useAppContext();
   const mobileNav = useMediaQuery("(max-width: 580px)");
   const { pathname } = useLocation();

@@ -1,9 +1,8 @@
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
 import PosterGridItem from "./components/poster-grid-item/poster-grid-item";
 import { Layout } from "./poster-grid.styles";
-import posterGridStrings from "./i18n/i18n";
 import { SearchResult } from "../../../../../../../../__generated__/graphql";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 export type PosterGridProps = {
   searchResults: SearchResult[];
@@ -17,7 +16,7 @@ const PosterGrid = ({
   searchResults,
   onClick,
 }: PosterGridProps): ReactElement => {
-  const { t } = useI18n(posterGridStrings);
+  const { t } = useTranslation(["poster_grid"]);
 
   return (
     <Layout aria-label={t("poster_grid:label")}>

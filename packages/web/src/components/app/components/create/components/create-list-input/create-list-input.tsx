@@ -2,16 +2,14 @@ import { Button, FormHelperText } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 import { useAppContext } from "../../../../../../context/app-context";
 import { Container, ListInput } from "./create-list-input.styles";
-import createStrings from "../../i18n/i18n";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import { notEmpty } from "../../../../../../utils/not-empty";
+import { useTranslation } from "react-i18next";
 
 export type CreateListInputProps = {
   onSubmit: (input: string) => void;
 };
 
 const CreateListInput = ({ onSubmit }: CreateListInputProps): ReactElement => {
-  const { t } = useI18n(createStrings);
+  const { t } = useTranslation(["create"]);
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const { lists } = useAppContext();

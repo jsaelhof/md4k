@@ -1,9 +1,8 @@
 import { DetailButton, Layout } from "./actions.styles";
 import TelevisionPlay from "mdi-material-ui/TelevisionPlay";
 import TelevisionOff from "mdi-material-ui/TelevisionOff";
-import fullDetailStrings from "../../i18n/i18n";
-import { useI18n } from "../../../../../../hooks/use-i18n";
 import { PropsWithChildren, ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 export type ActionsProps = PropsWithChildren<{
   hasTrailer: boolean;
@@ -15,7 +14,7 @@ export const Actions = ({
   onPlayTrailer,
   children,
 }: ActionsProps): ReactElement => {
-  const { t } = useI18n(fullDetailStrings);
+  const { t } = useTranslation(["full_detail"]);
 
   return (
     <Layout>

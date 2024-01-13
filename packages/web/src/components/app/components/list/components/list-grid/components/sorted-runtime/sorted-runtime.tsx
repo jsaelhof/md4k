@@ -4,10 +4,9 @@ import { ReactElement, useMemo } from "react";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../i18n/i18n";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { ListGridProps } from "../../types";
+import { useTranslation } from "react-i18next";
 
 const partitionMovies = flow(
   groupBy<NonNullable<Movie>>((movie) => {
@@ -28,7 +27,7 @@ const SortedRuntime = ({
   movies,
   ...handlers
 }: ListGridProps): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid"]);
   const direction = useSortDirection();
 
   const { unknown, short, regular, long } = useMemo(

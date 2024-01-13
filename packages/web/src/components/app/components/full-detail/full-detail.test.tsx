@@ -6,7 +6,6 @@ import { renderWithProviders } from "../../../../test-utils/render-with-provider
 import { createMatchMedia } from "../../../../test-utils/create-match-media";
 import { buildThirdPartyMovieMock } from "../../../../test-utils/build-third-party-movie-mock";
 import { GET_THIRD_PARTY_MOVIE_FULL_DETAILS } from "../../../../graphql/queries";
-import { sourceLabels } from "../../../../constants/sources";
 
 vi.mock("uuid", () => ({
   v4: () => "111-222-333",

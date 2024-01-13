@@ -8,16 +8,13 @@ import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
-import { useI18n } from "../../../../../../../../hooks/use-i18n";
-import listGridStrings from "../../i18n/i18n";
-import {
-  sourceLabels,
-  sourceLogosLarge,
-} from "../../../../../../../../constants/sources";
+import { sourceLogosLarge } from "../../../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 import { ListGridProps } from "../../types";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { notEmpty } from "../../../../../../../../utils/not-empty";
+import { useTranslation } from "react-i18next";
+import resources from "../../../../../../../../__generated__/resources";
 
 const preferredSourceOrder: number[] = [
   sources.PLEX,
@@ -31,7 +28,7 @@ const preferredSourceOrder: number[] = [
 ];
 
 const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
-  const { t } = useI18n(listGridStrings);
+  const { t } = useTranslation(["list_grid", "common"]);
   const direction = useSortDirection();
 
   const bySource = useMemo(() => {
@@ -62,13 +59,21 @@ const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
       .map(([source, list]) => ({
         title: (
           <img
-            src={sourceLogosLarge[source]}
+            src={sourceLogosLarge[source as keyof typeof sourceLogosLarge]}
             width="120px"
-            alt={sourceLabels[source]}
+            alt={t(
+              `common:sources.${
+                source.toString() as keyof typeof resources.common.sources
+              }`
+            )}
           />
         ),
         list,
-        ariaLabel: t(`common:sources.${source ?? 0}`),
+        ariaLabel: t(
+          `common:sources.${
+            source.toString() as keyof typeof resources.common.sources
+          }`
+        ) as string, // TODO: Can't figure out why the t function is returning unknown here.
         source,
       }));
 

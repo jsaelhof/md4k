@@ -3,9 +3,8 @@ import { ManualMovieForm } from "../../../manual-movie-form/manual-movie-form";
 import LibraryAdd from "@mui/icons-material/LibraryAdd";
 import { useNavigate } from "react-router-dom";
 import { ReactElement, useCallback } from "react";
-import { useI18n } from "../../../../../../hooks/use-i18n.js";
-import tabPanelManualStrings from "./i18n/i18n";
 import { Movie } from "../../../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 export type TabPanelManualProps = {
   tabId: string;
@@ -21,7 +20,7 @@ const TabPanelManual = ({
   initialState,
 }: TabPanelManualProps): ReactElement => {
   const navigate = useNavigate();
-  const { t } = useI18n(tabPanelManualStrings);
+  const { t } = useTranslation(["tab_panel_manual"]);
 
   const onCancel = useCallback(() => {
     navigate("/");
@@ -30,7 +29,7 @@ const TabPanelManual = ({
   return (
     <TabPanel tabId={tabId} hidden={hidden}>
       <ManualMovieForm
-        actionLabel={t("tabPanelManual:add_movie")}
+        actionLabel={t("tab_panel_manual:add_movie")}
         ActionIcon={LibraryAdd}
         onChange={onAddMovie}
         onCancel={onCancel}

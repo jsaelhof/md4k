@@ -1,4 +1,3 @@
-import { useI18n } from "../../../../hooks/use-i18n";
 import {
   active,
   Lock,
@@ -10,9 +9,9 @@ import {
   shadowStyles,
 } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
-import moviePosterStrings from "./i18n/i18n";
 import { ReactElement } from "react";
 import { Maybe } from "../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 export type MoviePosterProps = {
   // This only requires a few key props of a movie which allows other types like SearchResult to be used.
@@ -38,7 +37,7 @@ const MoviePoster = ({
   variant = "default",
   shadow = false,
 }: MoviePosterProps): ReactElement => {
-  const { t } = useI18n(moviePosterStrings);
+  const { t } = useTranslation(["movie_poster"]);
   const [ref, visible] = useInViewRef();
 
   const isLocked = movie.locked ?? false;

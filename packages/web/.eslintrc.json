@@ -31,5 +31,6 @@
   },
   "env": {
     "browser": true
-  }
+  },
+  "ignorePatterns": ["src/__generated__/**"]
 }

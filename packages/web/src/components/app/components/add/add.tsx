@@ -7,12 +7,11 @@ import { useNavigate } from "react-router-dom";
 import TabPanelSearch from "./components/tab-panel-search/tab-panel-search";
 import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
-import { useI18n } from "../../../../hooks/use-i18n";
-import addStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 export const Add = (): ReactElement => {
-  const { t } = useI18n(addStrings);
+  const { t } = useTranslation(["add", "common"]);
 
   const [activeTab, setActiveTab] = useState(0);
 

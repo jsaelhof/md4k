@@ -1,4 +1,10 @@
-import { RenderOptions, render, renderHook } from "@testing-library/react";
+import {
+  RenderHookResult,
+  RenderOptions,
+  RenderResult,
+  render,
+  renderHook,
+} from "@testing-library/react";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
@@ -16,9 +22,10 @@ import {
   GetMoviesQuery,
   GetMoviesQueryVariables,
 } from "../__generated__/graphql";
+import type { User } from "@auth0/auth0-react";
 
 vi.mock("@auth0/auth0-react", () => ({
-  useAuth0: () => ({
+  useAuth0: (): User => ({
     user: {
       email: "test@gmail.com",
       email_verified: true,
@@ -41,7 +48,7 @@ export const renderWithProviders = (
     moviesMock: MockedResponse | null;
     route: string;
   }
-) => {
+): RenderResult => {
   options = {
     ...{
       mocks: [],
@@ -52,7 +59,11 @@ export const renderWithProviders = (
     ...options,
   };
 
-  const RenderWrapper = ({ children }: { children: ReactElement }) => (
+  const RenderWrapper = ({
+    children,
+  }: {
+    children: ReactElement;
+  }): ReactElement => (
     <MockedProvider
       mocks={[
         options.listsMock || GET_LISTS_MOCK,
@@ -83,7 +94,7 @@ export const renderHookWithProviders = (
     moviesMock: MockedResponse;
     route: string;
   }
-) => {
+): RenderHookResult<unknown, unknown> => {
   options = {
     ...{
       mocks: [],
@@ -93,7 +104,11 @@ export const renderHookWithProviders = (
     ...options,
   };
 
-  const RenderWrapper = ({ children }: { children: ReactElement }) => (
+  const RenderWrapper = ({
+    children,
+  }: {
+    children: ReactElement;
+  }): ReactElement => (
     <MockedProvider
       mocks={[
         GET_LISTS_MOCK,
@@ -130,7 +145,7 @@ export const renderWithProvidersAsRoute = (
   routePath: string,
   route: string,
   options: Parameters<typeof renderWithProviders>[1]
-) =>
+): RenderResult =>
   renderWithProviders(
     <Routes>
       <Route path={routePath} element={children} />

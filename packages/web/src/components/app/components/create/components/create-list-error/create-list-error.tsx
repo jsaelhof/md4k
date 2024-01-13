@@ -1,15 +1,14 @@
 import { Button } from "@mui/material";
 import React, { ReactElement } from "react";
 import { Container } from "./create-list-error.styles";
-import createStrings from "../../i18n/i18n";
-import { useI18n } from "../../../../../../hooks/use-i18n";
+import { useTranslation } from "react-i18next";
 
 export type CreateListErrorProps = {
   reset: () => void;
 };
 
 const CreateListError = ({ reset }: CreateListErrorProps): ReactElement => {
-  const { t } = useI18n(createStrings);
+  const { t } = useTranslation(["create"]);
   return (
     <Container>
       <div>{t("create:error.message")}</div>

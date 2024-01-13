@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
 import { LogoContainer } from "./logo.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import titlebarStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const Logo = (): ReactElement => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const navigate = useNavigate();
 
   return (

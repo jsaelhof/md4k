@@ -15,8 +15,8 @@ export type ListSelectProps = {
   hideLabelForSelection?: boolean;
   label: string;
   listSelectItemProps: {
+    variant: "sources" | "genres";
     images?: { [key: number]: string };
-    labels: { [key: number]: string };
   };
   selectProps: {
     inputRef: SelectProps<number>["inputRef"];
@@ -49,9 +49,9 @@ const ListSelect = ({
     }}
     renderValue={(val: number): ReactElement => (
       <ListSelectItem
+        variant={listSelectItemProps.variant}
         hideLabelForSelection={hideLabelForSelection}
         value={val}
-        labels={listSelectItemProps.labels}
         images={listSelectItemProps.images}
       />
     )}
@@ -61,7 +61,7 @@ const ListSelect = ({
       <MenuItem key={value} value={value}>
         <ListSelectItem
           value={value}
-          labels={listSelectItemProps.labels}
+          variant={listSelectItemProps.variant}
           images={listSelectItemProps.images}
         />
       </MenuItem>

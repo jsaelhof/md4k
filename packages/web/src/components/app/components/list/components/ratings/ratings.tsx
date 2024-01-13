@@ -35,7 +35,9 @@ const Ratings = ({
           <RatingsListItem key={source}>
             <RatingsSourceIcon
               sx={[size === "small" && ratingsSourceIconSmall]}
-              src={`/images/ratings/${ratingsSourceImage[parseInt(source)]}`}
+              src={`/images/ratings/${
+                ratingsSourceImage[source as keyof typeof ratingsSource]
+              }`}
               alt={source}
             />
             {rating}

@@ -12,11 +12,10 @@ import {
   ProfileName,
   ProfilePaper,
 } from "./profile-menu.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import titlebarStrings from "../../i18n/i18n";
+import { useTranslation } from "react-i18next";
 
 const ProfileMenu = (): ReactElement | null => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const anchorRef = useRef(null);
   const { user, logout } = useAuth0();
   const [open, setOpen] = useState(false);

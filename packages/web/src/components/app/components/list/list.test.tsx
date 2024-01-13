@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { renderWithProvidersAsRoute } from "../../../../test-utils/render-with-providers";
 import { List } from "./list";
 import { vi } from "vitest";

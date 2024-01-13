@@ -10,9 +10,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import EmptyState from "../empty-state/empty-state";
 import { Button } from "@mui/material";
 import { filterMovies } from "../../../../utils/filter-movies";
-import { useI18n } from "../../../../hooks/use-i18n";
-import pickStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 const getSearchParam = (
   key: string,
@@ -68,7 +67,7 @@ const useRandomPick = (): { pick: string | null; error: string | null } => {
 };
 
 export const Pick = (): ReactElement => {
-  const { t } = useI18n(pickStrings);
+  const { t } = useTranslation(["pick"]);
   const { moviesById, clearPick } = useAppContext();
   const navigate = useNavigate();
 

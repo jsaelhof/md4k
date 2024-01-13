@@ -7,9 +7,8 @@ import {
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
 import { Layout, Status } from "./watched-toolbar.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import watchedStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 export type WatchedToolbarProps = {
   count: number;
@@ -24,7 +23,7 @@ const WatchedToolbar = ({
   searchTerm,
   onSearch,
 }: WatchedToolbarProps): ReactElement => {
-  const { t } = useI18n(watchedStrings);
+  const { t } = useTranslation(["watched"]);
   const small = useMediaQuery("(max-width: 550px)");
 
   return (

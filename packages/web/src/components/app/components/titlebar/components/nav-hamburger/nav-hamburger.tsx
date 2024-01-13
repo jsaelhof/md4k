@@ -19,8 +19,7 @@ import {
   NavMenu,
   RefreshIcon,
 } from "./nav-hamburger.styles";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import titlebarStrings from "../../i18n/i18n";
+import { useTranslation } from "react-i18next";
 
 // The MUI Clickaway Listener component passes props like autoFocus and tabIndex through which causes
 // console log errors and excess output in unit test logs. I couldn't find a workaround even though it has
@@ -43,7 +42,7 @@ export const MuiClickAwayListenerWrapper = ({
 );
 
 const NavHamburger = (): ReactElement | null => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { lists, setList, clearPick, list } = useAppContext();

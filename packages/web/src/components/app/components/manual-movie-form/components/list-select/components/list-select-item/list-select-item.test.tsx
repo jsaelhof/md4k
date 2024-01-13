@@ -1,16 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import ListSelectItem from "./list-select-item";
-import {
-  sourceLabels,
-  sourceLogos,
-} from "../../../../../../../../constants/sources";
+import { sourceLogos } from "../../../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 
 describe("list-select-item", () => {
   beforeEach((context) => {
     context.props = {
+      variant: "sources",
       images: sourceLogos,
-      labels: sourceLabels,
       value: sources.NETFLIX,
       hideLabelForSelection: false,
     };

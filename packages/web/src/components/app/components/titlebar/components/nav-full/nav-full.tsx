@@ -6,12 +6,11 @@ import { Nav } from "./nav-full.styles";
 import { useAppContext } from "../../../../../../context/app-context";
 import DbSelect from "../db-select/db-select";
 import NavButton from "../nav-button/nav-button";
-import { useI18n } from "../../../../../../hooks/use-i18n";
-import titlebarStrings from "../../i18n/i18n";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 
 const NavFull = (): ReactElement => {
-  const { t } = useI18n(titlebarStrings);
+  const { t } = useTranslation(["titlebar"]);
   const { pathname } = useLocation();
   const { list, clearPick } = useAppContext();
 

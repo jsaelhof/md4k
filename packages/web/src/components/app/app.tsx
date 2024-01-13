@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material";
 import { theme } from "../../theme/theme";
 import { AppProvider } from "../../context/app-context";
@@ -10,7 +10,7 @@ import TitleBar from "./components/titlebar/titlebar";
 import Footer from "./components/footer/footer";
 import Toast from "./components/toast/toast";
 
-export const App = () => {
+export const App = (): ReactElement | null => {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0();
 
   useEffect(() => {

@@ -7,9 +7,8 @@ import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
-import { useI18n } from "../../../../hooks/use-i18n";
-import editStrings from "./i18n/i18n";
 import { Movie } from "../../../../__generated__/graphql";
+import { useTranslation } from "react-i18next";
 
 export const Edit = (): ReactElement => {
   const params = useParams();
@@ -20,7 +19,7 @@ export const Edit = (): ReactElement => {
   );
   const navigate = useNavigate();
   const [error, setError] = useState<null | string>(null);
-  const { t } = useI18n(editStrings);
+  const { t } = useTranslation(["edit"]);
 
   const [editMovieMutation] = useEditMovie({
     onCompleted: ({ editMovie: movie }) => {
