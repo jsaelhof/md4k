@@ -17,5 +17,4 @@ export const i18nextConfig = (): Promise<TFunction> =>
       resources: {
         en: resources,
       },
-      debug: true,
     });

@@ -1,18 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import Trailer from "./trailer";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 
 vi.mock("react-youtube", () => ({
   default: () => <div data-testid="youtube" />,
 }));
 
+interface LocalTestContext {
+  trailerId: string;
+  onComplete: Mock;
+}
+
 describe("trailer", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.trailerId = "test123";
     context.onComplete = vi.fn();
   });
 
-  it("should call onComplete when clicking on the trailer component and overlay mode is enabled", async ({
+  it<LocalTestContext>("should call onComplete when clicking on the trailer component and overlay mode is enabled", async ({
     trailerId,
     onComplete,
     user,

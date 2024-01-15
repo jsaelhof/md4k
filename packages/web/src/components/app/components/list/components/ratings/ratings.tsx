@@ -17,14 +17,14 @@ import {
 
 export type RatingsProps = {
   ratings?: Maybe<RatingsType>;
-  size: "small" | "medium";
-  dense: boolean;
+  size?: "small" | "medium";
+  dense?: boolean;
 };
 
 const Ratings = ({
   ratings,
   size = "medium",
-  dense,
+  dense = false,
 }: RatingsProps): ReactElement | null => {
   if (!ratings) return null;
 

@@ -2,7 +2,7 @@ import { vi } from "vitest";
 import { useChangeBackdrop } from "./useChangeBackdrop";
 import { renderHookWithProviders } from "../../../../../../../../../test-utils/render-with-providers";
 import { EDIT_MOVIE } from "../../../../../../../../../graphql/mutations";
-import { waitFor } from "@testing-library/react";
+import { RenderHookResult, waitFor } from "@testing-library/react";
 
 const MOVIE_MOCK = {
   id: "8502fd8b-165e-4239-965f-b46f8d523829",
@@ -32,7 +32,7 @@ const EDITED_MOVIE_MOCK = {
 };
 
 vi.mock("../../../../../../../../../context/app-context", async () => {
-  const actual = await vi.importActual(
+  const actual: any = await vi.importActual(
     "../../../../../../../../../context/app-context"
   );
 
@@ -70,7 +70,7 @@ describe("useChangeBackdrop", () => {
       {
         mocks: [EDIT_MOVIE_MUTATION],
       }
-    );
+    ) as RenderHookResult<ReturnType<typeof useChangeBackdrop>, null>;
 
     // Call the returned function with the new backdrop URL.
     result.current("http://image.tmdb.org/t/4.jpg");

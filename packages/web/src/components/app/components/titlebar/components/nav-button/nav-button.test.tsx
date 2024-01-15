@@ -5,15 +5,11 @@ import { Keyboard } from "@mui/icons-material";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual("react-router-dom");
+  const actual: any = await vi.importActual("react-router-dom");
   return { ...actual, useNavigate: () => navigateMock };
 });
 
 describe("nav-button", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it("should navigate to the provided href", async ({ user }) => {
     render(<NavButton href="/test">Test Button</NavButton>);
     await user.click(screen.getByRole("button", { name: "Test Button" }));

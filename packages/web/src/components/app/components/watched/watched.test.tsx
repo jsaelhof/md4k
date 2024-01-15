@@ -4,6 +4,12 @@ import { renderWithProviders } from "../../../../test-utils/render-with-provider
 import { vi } from "vitest";
 import { GET_WATCHED_MOVIES } from "../../../../graphql/queries/get-watched-movies";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
+import { WatchedMovieProps } from "./components/watched-movie/watched-movie";
+import { MockedResponse } from "@apollo/client/testing";
+import {
+  GetWatchedMoviesQuery,
+  GetWatchedMoviesQueryVariables,
+} from "../../../../__generated__/graphql";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
   default: ({
@@ -14,7 +20,7 @@ vi.mock("./components/watched-movie/watched-movie", () => ({
     onSave,
     onCancel,
     onDelete,
-  }) => (
+  }: WatchedMovieProps) => (
     <div data-right={!!right}>
       {movie.title}
       <div>
@@ -31,7 +37,7 @@ vi.mock("./components/watched-movie/watched-movie", () => ({
 const removeMovieMock = vi.fn();
 const editMovieMock = vi.fn();
 vi.mock("../../../../graphql/mutations", async () => {
-  const removeMovieModule = await vi.importActual(
+  const removeMovieModule: any = await vi.importActual(
     "../../../../graphql/mutations"
   );
 
@@ -42,7 +48,10 @@ vi.mock("../../../../graphql/mutations", async () => {
   };
 });
 
-const GET_WATCHED_MOVIES_MOCK = {
+const GET_WATCHED_MOVIES_MOCK: MockedResponse<
+  GetWatchedMoviesQuery,
+  GetWatchedMoviesQueryVariables
+> = {
   request: {
     query: GET_WATCHED_MOVIES,
     variables: {

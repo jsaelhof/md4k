@@ -42,11 +42,11 @@ vi.mock("@auth0/auth0-react", () => ({
 
 export const renderWithProviders = (
   children: ReactElement,
-  options: RenderOptions & {
-    mocks: MockedResponse[];
-    listsMock: MockedResponse | null;
-    moviesMock: MockedResponse | null;
-    route: string;
+  options?: RenderOptions & {
+    mocks?: MockedResponse[];
+    listsMock?: MockedResponse | null;
+    moviesMock?: MockedResponse | null;
+    route?: string;
   }
 ): RenderResult => {
   options = {
@@ -66,13 +66,13 @@ export const renderWithProviders = (
   }): ReactElement => (
     <MockedProvider
       mocks={[
-        options.listsMock || GET_LISTS_MOCK,
-        options.moviesMock || GET_MOVIES_MOCK,
-        ...options.mocks,
+        options?.listsMock || GET_LISTS_MOCK,
+        options?.moviesMock || GET_MOVIES_MOCK,
+        ...(options?.mocks ?? []),
       ]}
       addTypename={false}
     >
-      <MemoryRouter initialEntries={[options.route]}>
+      <MemoryRouter initialEntries={options?.route ? [options?.route] : []}>
         <ThemeProvider theme={theme}>
           <I18nextProvider i18n={i18n}>
             <AppProvider>{children}</AppProvider>
@@ -89,10 +89,10 @@ export const renderWithProviders = (
 
 export const renderHookWithProviders = (
   hookWrapper: Parameters<typeof renderHook>[0],
-  options: Parameters<typeof renderHook>[1] & {
-    mocks: MockedResponse[];
-    moviesMock: MockedResponse;
-    route: string;
+  options?: Parameters<typeof renderHook>[1] & {
+    mocks?: MockedResponse[];
+    moviesMock?: MockedResponse | null;
+    route?: string;
   }
 ): RenderHookResult<unknown, unknown> => {
   options = {
@@ -112,12 +112,12 @@ export const renderHookWithProviders = (
     <MockedProvider
       mocks={[
         GET_LISTS_MOCK,
-        options.moviesMock || GET_MOVIES_MOCK,
-        ...options.mocks,
+        options?.moviesMock || GET_MOVIES_MOCK,
+        ...(options?.mocks ?? []),
       ]}
       addTypename={false}
     >
-      <MemoryRouter initialEntries={[options.route]}>
+      <MemoryRouter initialEntries={options?.route ? [options?.route] : []}>
         <ThemeProvider theme={theme}>
           <AppProvider>{children}</AppProvider>
         </ThemeProvider>
@@ -144,7 +144,7 @@ export const renderWithProvidersAsRoute = (
   children: ReactElement,
   routePath: string,
   route: string,
-  options: Parameters<typeof renderWithProviders>[1]
+  options?: Parameters<typeof renderWithProviders>[1]
 ): RenderResult =>
   renderWithProviders(
     <Routes>

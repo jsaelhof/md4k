@@ -1,6 +1,6 @@
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { buildMovieMock } from "../../../../../../test-utils/build-movie-mock";
-import WatchedMovie from "./watched-movie";
+import WatchedMovie, { WatchedMovieProps } from "./watched-movie";
 import { vi } from "vitest";
 import { buildThirdPartyMovieMock } from "../../../../../../test-utils/build-third-party-movie-mock";
 import { within, screen } from "@testing-library/react";
@@ -12,7 +12,7 @@ const { MOCK_USE_MEDIA_QUERY } = vi.hoisted(() => ({
 }));
 
 vi.mock("@mui/material", async () => {
-  const actual = await vi.importActual("@mui/material");
+  const actual: any = await vi.importActual("@mui/material");
   return { ...actual, useMediaQuery: MOCK_USE_MEDIA_QUERY };
 });
 
@@ -30,6 +30,10 @@ const GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK = {
   },
 };
 
+interface LocalTestContext {
+  props: WatchedMovieProps;
+}
+
 describe("watched-movie", () => {
   beforeAll(() => {
     Globals.assign({
@@ -37,7 +41,7 @@ describe("watched-movie", () => {
     });
   });
 
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movie: buildMovieMock({ watchedOn: "2021-09-04T14:00:00.000Z" }),
       right: false,
@@ -49,9 +53,9 @@ describe("watched-movie", () => {
     };
   });
 
-  afterEach(() => vi.clearAllMocks());
-
-  it("should render the title, date and poster", ({ props }) => {
+  it<LocalTestContext>("should render the title, date and poster", ({
+    props,
+  }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -69,7 +73,7 @@ describe("watched-movie", () => {
     expect(screen.getByLabelText("Test Movie Poster")).toBeInTheDocument();
   });
 
-  it("should render the poster followed by the info when left-aligned", ({
+  it<LocalTestContext>("should render the poster followed by the info when left-aligned", ({
     props,
   }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
@@ -83,7 +87,7 @@ describe("watched-movie", () => {
     );
   });
 
-  it("should render the info followed by the poster when right-aligned", ({
+  it<LocalTestContext>("should render the info followed by the poster when right-aligned", ({
     props,
   }) => {
     renderWithProviders(<WatchedMovie {...props} right />, {
@@ -97,7 +101,7 @@ describe("watched-movie", () => {
     );
   });
 
-  it("should render the date correctly when the breakpoint is small", ({
+  it<LocalTestContext>("should render the date correctly when the breakpoint is small", ({
     props,
   }) => {
     // Mock "small"
@@ -114,7 +118,7 @@ describe("watched-movie", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the date correctly when the breakpoint is xsmall", ({
+  it<LocalTestContext>("should render the date correctly when the breakpoint is xsmall", ({
     props,
   }) => {
     // Mock "xsmall"
@@ -131,7 +135,7 @@ describe("watched-movie", () => {
     ).toBeInTheDocument();
   });
 
-  it("should show the date picker inline at larger sizes", async ({
+  it<LocalTestContext>("should show the date picker inline at larger sizes", async ({
     props,
     user,
   }) => {
@@ -146,7 +150,7 @@ describe("watched-movie", () => {
     expect(screen.queryByTestId("datePickerDrawer")).not.toBeInTheDocument();
   });
 
-  it("should show the date picker in a drawer at small size", async ({
+  it<LocalTestContext>("should show the date picker in a drawer at small size", async ({
     props,
     user,
   }) => {
@@ -168,7 +172,10 @@ describe("watched-movie", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call onSave with the new date", async ({ props, user }) => {
+  it<LocalTestContext>("should call onSave with the new date", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<WatchedMovie {...props} />, {
       mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
     });
@@ -188,7 +195,7 @@ describe("watched-movie", () => {
     );
   });
 
-  it("should call onCancel when clicking the cancel button on the date picker", async ({
+  it<LocalTestContext>("should call onCancel when clicking the cancel button on the date picker", async ({
     props,
     user,
   }) => {
@@ -209,7 +216,7 @@ describe("watched-movie", () => {
     // TODO: This should test that the date picker is removed after the animation complete.
   });
 
-  it("should call onCancel when clicking the backdrop", async ({
+  it<LocalTestContext>("should call onCancel when clicking the backdrop", async ({
     props,
     user,
   }) => {
@@ -222,7 +229,7 @@ describe("watched-movie", () => {
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onDelete with the correct movie data", async ({
+  it<LocalTestContext>("should call onDelete with the correct movie data", async ({
     props,
     user,
   }) => {

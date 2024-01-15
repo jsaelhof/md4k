@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { ActionsView } from "./actions-view";
+import { ActionsView, ActionsViewProps } from "./actions-view";
 import { sources } from "md4k-constants";
+
+interface LocalTestContext {
+  props: ActionsViewProps;
+}
 
 describe("actions-view", () => {
   // Mock global window.open
@@ -9,7 +13,7 @@ describe("actions-view", () => {
   const originalWindowOpen = window.open;
   vi.spyOn(window, "open");
 
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       title: "Test Movie",
       source: sources.NETFLIX,
@@ -20,14 +24,19 @@ describe("actions-view", () => {
     window.open = originalWindowOpen;
   });
 
-  it("should render the stream button when available", ({ props }) => {
+  it<LocalTestContext>("should render the stream button when available", ({
+    props,
+  }) => {
     render(<ActionsView {...props} />);
     expect(
       screen.getByRole("button", { name: "Stream Movie" })
     ).toBeInTheDocument();
   });
 
-  it("should open the stream window when clicked", async ({ props, user }) => {
+  it<LocalTestContext>("should open the stream window when clicked", async ({
+    props,
+    user,
+  }) => {
     render(<ActionsView {...props} />);
 
     await user.click(screen.getByRole("button", { name: "Stream Movie" }));
@@ -37,7 +46,7 @@ describe("actions-view", () => {
     );
   });
 
-  it("should not render the stream button when the source is DVD", ({
+  it<LocalTestContext>("should not render the stream button when the source is DVD", ({
     props,
   }) => {
     render(<ActionsView {...props} source={sources.DVD} />);
@@ -46,7 +55,7 @@ describe("actions-view", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("should not render the stream button and should render the torrent search when the source is NONE", ({
+  it<LocalTestContext>("should not render the stream button and should render the torrent search when the source is NONE", ({
     props,
   }) => {
     render(<ActionsView {...props} source={sources.NONE} />);
@@ -58,7 +67,10 @@ describe("actions-view", () => {
     ).toBeInTheDocument();
   });
 
-  it("should open the torrent search when clicked", async ({ props, user }) => {
+  it<LocalTestContext>("should open the torrent search when clicked", async ({
+    props,
+    user,
+  }) => {
     render(<ActionsView {...props} source={sources.NONE} />);
 
     await user.click(screen.getByRole("button", { name: "Torrent Search" }));

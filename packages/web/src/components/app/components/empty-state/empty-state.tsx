@@ -4,9 +4,9 @@ import { ReactElement, ReactNode } from "react";
 
 export type EmptyStateProps = {
   imgSrc: string;
-  quote: string;
+  quote?: string;
   message: string | ReactNode;
-  content: ReactNode;
+  content?: ReactNode;
   inProgress?: boolean;
 };
 

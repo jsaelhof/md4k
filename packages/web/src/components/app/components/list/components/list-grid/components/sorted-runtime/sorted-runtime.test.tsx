@@ -1,13 +1,20 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedRuntime from "./sorted-runtime";
 import { vi } from "vitest";
+import { MovieProps } from "../movie/movie";
+import { ListGridProps } from "../../types";
 
 const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
   MOCK_USE_SORT_DIRECTION: vi.fn().mockReturnValue("asc"),
 }));
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
+  default: ({
+    onEditMovie,
+    onMarkWatched,
+    onRemoveMovie,
+    movie,
+  }: MovieProps) => (
     <div aria-label="movieMock">
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
@@ -21,27 +28,31 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
   useSortDirection: MOCK_USE_SORT_DIRECTION,
 }));
 
+interface LocalTestContext {
+  props: ListGridProps;
+}
+
 describe("sorted-runtime", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movies: [
         {
-          id: 0,
+          id: "0",
           title: "Movie 1",
           runtime: 5400,
         },
         {
-          id: 1,
+          id: "1",
           title: "Movie 2",
           runtime: 6600,
         },
         {
-          id: 2,
+          id: "2",
           title: "Movie 3",
           runtime: 9000,
         },
         {
-          id: 3,
+          id: "3",
           title: "Movie 4",
           // Mising Runtime
         },
@@ -52,77 +63,112 @@ describe("sorted-runtime", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is ASC", ({
+    props,
+  }) => {
     render(<SortedRuntime {...props} />);
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[0]).getByText(/Short/)
+      within(
+        screen.getByTestId("runtime").childNodes[0] as HTMLElement
+      ).getByText(/Short/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[0]).getByText("Movie 1")
-    ).toBeInTheDocument();
-
-    expect(
-      within(screen.getByTestId("runtime").childNodes[1]).getByText(/Regular/)
-    ).toBeInTheDocument();
-    expect(
-      within(screen.getByTestId("runtime").childNodes[1]).getByText("Movie 2")
+      within(
+        screen.getByTestId("runtime").childNodes[0] as HTMLElement
+      ).getByText("Movie 1")
     ).toBeInTheDocument();
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[2]).getByText(/Long/)
+      within(
+        screen.getByTestId("runtime").childNodes[1] as HTMLElement
+      ).getByText(/Regular/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[2]).getByText("Movie 3")
+      within(
+        screen.getByTestId("runtime").childNodes[1] as HTMLElement
+      ).getByText("Movie 2")
     ).toBeInTheDocument();
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[3]).getByText(
-        /No Runtime/
-      )
+      within(
+        screen.getByTestId("runtime").childNodes[2] as HTMLElement
+      ).getByText(/Long/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[3]).getByText("Movie 4")
+      within(
+        screen.getByTestId("runtime").childNodes[2] as HTMLElement
+      ).getByText("Movie 3")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("runtime").childNodes[3] as HTMLElement
+      ).getByText(/No Runtime/)
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("runtime").childNodes[3] as HTMLElement
+      ).getByText("Movie 4")
     ).toBeInTheDocument();
   });
 
-  it("should render correctly when the order is DESC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is DESC", ({
+    props,
+  }) => {
     MOCK_USE_SORT_DIRECTION.mockReturnValue("desc");
 
     render(<SortedRuntime {...props} />);
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[0]).getByText(/Long/)
+      within(
+        screen.getByTestId("runtime").childNodes[0] as HTMLElement
+      ).getByText(/Long/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[0]).getByText("Movie 3")
-    ).toBeInTheDocument();
-
-    expect(
-      within(screen.getByTestId("runtime").childNodes[1]).getByText(/Regular/)
-    ).toBeInTheDocument();
-    expect(
-      within(screen.getByTestId("runtime").childNodes[1]).getByText("Movie 2")
+      within(
+        screen.getByTestId("runtime").childNodes[0] as HTMLElement
+      ).getByText("Movie 3")
     ).toBeInTheDocument();
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[2]).getByText(/Short/)
+      within(
+        screen.getByTestId("runtime").childNodes[1] as HTMLElement
+      ).getByText(/Regular/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[2]).getByText("Movie 1")
+      within(
+        screen.getByTestId("runtime").childNodes[1] as HTMLElement
+      ).getByText("Movie 2")
     ).toBeInTheDocument();
 
     expect(
-      within(screen.getByTestId("runtime").childNodes[3]).getByText(
-        /No Runtime/
-      )
+      within(
+        screen.getByTestId("runtime").childNodes[2] as HTMLElement
+      ).getByText(/Short/)
     ).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("runtime").childNodes[3]).getByText("Movie 4")
+      within(
+        screen.getByTestId("runtime").childNodes[2] as HTMLElement
+      ).getByText("Movie 1")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("runtime").childNodes[3] as HTMLElement
+      ).getByText(/No Runtime/)
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("runtime").childNodes[3] as HTMLElement
+      ).getByText("Movie 4")
     ).toBeInTheDocument();
   });
 
-  it("should call the edit handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the edit handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRuntime {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
@@ -134,7 +180,10 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the mark watched handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the mark watched handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRuntime {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
@@ -146,7 +195,10 @@ describe("sorted-runtime", () => {
     );
   });
 
-  it("should call the delete handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the delete handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRuntime {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {

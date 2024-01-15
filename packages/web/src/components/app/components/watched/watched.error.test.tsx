@@ -5,9 +5,17 @@ import { vi } from "vitest";
 import { GET_WATCHED_MOVIES } from "../../../../graphql/queries/get-watched-movies";
 import { REMOVE_MOVIE } from "../../../../graphql/mutations";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
+import { WatchedMovieProps } from "./components/watched-movie/watched-movie";
+import { MockedResponse } from "@apollo/client/testing";
+import {
+  GetWatchedMoviesQuery,
+  GetWatchedMoviesQueryVariables,
+  RemoveMovieMutation,
+  RemoveMovieMutationVariables,
+} from "../../../../__generated__/graphql";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({
-  default: ({ movie, onDelete }) => (
+  default: ({ movie, onDelete }: WatchedMovieProps) => (
     <div>
       {movie.title}
       <div>
@@ -23,7 +31,10 @@ vi.mock("./components/watched-movie/watched-movie", () => ({
   ),
 }));
 
-const REMOVE_MOVIE_ERROR_MOCK = {
+const REMOVE_MOVIE_ERROR_MOCK: MockedResponse<
+  RemoveMovieMutation,
+  RemoveMovieMutationVariables
+> = {
   request: {
     query: REMOVE_MOVIE,
     variables: {
@@ -34,7 +45,10 @@ const REMOVE_MOVIE_ERROR_MOCK = {
   error: new Error("Test Error"),
 };
 
-const GET_WATCHED_MOVIES_MOCK = {
+const GET_WATCHED_MOVIES_MOCK: MockedResponse<
+  GetWatchedMoviesQuery,
+  GetWatchedMoviesQueryVariables
+> = {
   request: {
     query: GET_WATCHED_MOVIES,
     variables: {

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import MoviePoster from "./movie-poster";
+import MoviePoster, { MoviePosterProps } from "./movie-poster";
 import { vi } from "vitest";
 
 const { MOCK_USE_IN_VIEW_REF } = vi.hoisted(() => ({
@@ -10,35 +10,25 @@ vi.mock("rooks/dist/esm/hooks/useInViewRef", () => ({
   useInViewRef: MOCK_USE_IN_VIEW_REF,
 }));
 
+interface LocalTestContext {
+  props: MoviePosterProps;
+}
+
 describe("movie-poster", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movie: {
-        id: "8502fd8b-165e-4239-965f-b46f8d523829",
         title: "The Bourne Identity",
-        list: "saturday",
-        runtime: 7140,
-        source: 1,
-        genre: 3,
-        year: "2002",
         poster: "https://m.media-amazon.com/images/M/SX300.jpg",
-        imdbID: "tt0258463",
         locked: false,
-        addedOn: "2022-03-15T04:28:22.166Z",
-        watchedOn: null,
-        ratings: {
-          id: "8502fd8b-165e-4239-965f-b46f8d523829",
-          IMDB: "79%",
-          ROTTEN_TOMATOES: "84%",
-          METACRITIC: "68%",
-        },
-        background: "http://image.tmdb.org/t/2.jpg",
       },
       onClick: vi.fn(),
     };
   });
 
-  it("should render the correct height and width ratio", ({ props }) => {
+  it<LocalTestContext>("should render the correct height and width ratio", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} height={1000} />);
     expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
       width: "640px",
@@ -46,7 +36,9 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should render the poster when a url exists in the movie", ({ props }) => {
+  it<LocalTestContext>("should render the poster when a url exists in the movie", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} />);
     expect(screen.getByTestId("poster")).toHaveStyle({
       "background-image": `url(${props.movie.poster})`,
@@ -54,7 +46,7 @@ describe("movie-poster", () => {
     expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should render the placeholder when the poster is not intersecting the viewport", ({
+  it<LocalTestContext>("should render the placeholder when the poster is not intersecting the viewport", ({
     props,
   }) => {
     MOCK_USE_IN_VIEW_REF.mockReturnValueOnce([null, false]);
@@ -67,7 +59,9 @@ describe("movie-poster", () => {
     expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it("should be active when an onClick handler is provided", ({ props }) => {
+  it<LocalTestContext>("should be active when an onClick handler is provided", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} />);
 
     expect(screen.getByTestId("poster")).toHaveStyle({
@@ -75,7 +69,9 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not be active when an onClick handler is omitted", ({ props }) => {
+  it<LocalTestContext>("should not be active when an onClick handler is omitted", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} onClick={undefined} />);
 
     expect(screen.getByTestId("poster")).not.toHaveStyle({
@@ -83,7 +79,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should invoke the handler onClick when provided", async ({
+  it<LocalTestContext>("should invoke the handler onClick when provided", async ({
     props,
     user,
   }) => {
@@ -92,7 +88,7 @@ describe("movie-poster", () => {
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should not invoke the handler onClick when not provided", async ({
+  it<LocalTestContext>("should not invoke the handler onClick when not provided", async ({
     props,
     user,
   }) => {
@@ -101,7 +97,7 @@ describe("movie-poster", () => {
     expect(props.onClick).not.toHaveBeenCalled();
   });
 
-  it("should dim the poster when locked", ({ props }) => {
+  it<LocalTestContext>("should dim the poster when locked", ({ props }) => {
     render(<MoviePoster {...props} movie={{ ...props.movie, locked: true }} />);
 
     expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
@@ -109,7 +105,7 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not dim the poster when locked but noLock is passed", ({
+  it<LocalTestContext>("should not dim the poster when locked but noLock is passed", ({
     props,
   }) => {
     render(
@@ -121,7 +117,9 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should be relatively positioned when noRel is false", ({ props }) => {
+  it<LocalTestContext>("should be relatively positioned when noRel is false", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} />);
 
     expect(screen.getByLabelText(/Bourne.*Poster/)).toHaveStyle({
@@ -129,7 +127,9 @@ describe("movie-poster", () => {
     });
   });
 
-  it("should not be relatively positioned when noRel is true", ({ props }) => {
+  it<LocalTestContext>("should not be relatively positioned when noRel is true", ({
+    props,
+  }) => {
     render(<MoviePoster {...props} noRel />);
 
     expect(screen.getByLabelText(/Bourne.*Poster/)).not.toHaveStyle({

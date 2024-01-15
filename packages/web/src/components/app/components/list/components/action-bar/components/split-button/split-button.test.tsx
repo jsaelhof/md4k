@@ -1,5 +1,5 @@
 import { waitFor, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import SplitButton from "./split-button";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 
@@ -11,12 +11,16 @@ vi.mock("../../../../../../../../utils/filter-movies", () => ({
   filterMovies: MOCK_FILTER_MOVIES,
 }));
 
+interface LocalTestContext {
+  onPick: Mock;
+}
+
 describe("split-button", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.onPick = vi.fn();
   });
 
-  it("should render the split button", ({ onPick }) => {
+  it<LocalTestContext>("should render the split button", ({ onPick }) => {
     renderWithProviders(<SplitButton onPick={onPick} />);
     expect(
       screen.getByRole("button", { name: "Pick A Movie" })
@@ -24,7 +28,7 @@ describe("split-button", () => {
     expect(screen.getByLabelText("Pick Menu")).toBeInTheDocument();
   });
 
-  it("should call onPick when the main button is pressed", async ({
+  it<LocalTestContext>("should call onPick when the main button is pressed", async ({
     onPick,
     user,
   }) => {
@@ -33,7 +37,7 @@ describe("split-button", () => {
     expect(onPick).toHaveBeenCalled();
   });
 
-  it("should open and close the menu when the menu button is pressed", async ({
+  it<LocalTestContext>("should open and close the menu when the menu button is pressed", async ({
     onPick,
     user,
   }) => {
@@ -48,7 +52,7 @@ describe("split-button", () => {
     });
   });
 
-  it("should close the menu when clicking outside", async ({
+  it<LocalTestContext>("should close the menu when clicking outside", async ({
     onPick,
     user,
   }) => {
@@ -63,7 +67,7 @@ describe("split-button", () => {
     });
   });
 
-  it("should call onPick with correct options when a short movie is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a short movie is requested", async ({
     onPick,
     user,
   }) => {
@@ -78,7 +82,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ maxRuntime: 6000 });
   });
 
-  it("should call onPick with correct options when a regular movie is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a regular movie is requested", async ({
     onPick,
     user,
   }) => {
@@ -93,7 +97,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ minRuntime: 6001, maxRuntime: 7800 });
   });
 
-  it("should call onPick with correct options when a long movie is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a long movie is requested", async ({
     onPick,
     user,
   }) => {
@@ -108,7 +112,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ minRuntime: 7801 });
   });
 
-  it("should call onPick with correct options when a movie added this month is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a movie added this month is requested", async ({
     onPick,
     user,
   }) => {
@@ -123,7 +127,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ maxAdded: 30 });
   });
 
-  it("should call onPick with correct options when a movie added within 90 days is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a movie added within 90 days is requested", async ({
     onPick,
     user,
   }) => {
@@ -138,7 +142,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ maxAdded: 90 });
   });
 
-  it("should call onPick with correct options when a movie added within a year is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a movie added within a year is requested", async ({
     onPick,
     user,
   }) => {
@@ -153,7 +157,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ maxAdded: 365 });
   });
 
-  it("should call onPick with correct options when a movie added long ago is requested", async ({
+  it<LocalTestContext>("should call onPick with correct options when a movie added long ago is requested", async ({
     onPick,
     user,
   }) => {
@@ -168,7 +172,7 @@ describe("split-button", () => {
     expect(onPick).toBeCalledWith({ minAdded: 365 });
   });
 
-  it("should disable options when filterMovies returns 0 movies", async ({
+  it<LocalTestContext>("should disable options when filterMovies returns 0 movies", async ({
     onPick,
     user,
   }) => {

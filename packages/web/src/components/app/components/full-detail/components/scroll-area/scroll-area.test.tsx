@@ -1,7 +1,7 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import ScrollArea from "./scroll-area";
 
-const enableScrollScenario = (scrollTop, scrollHeight) => {
+const enableScrollScenario = (scrollTop: number, scrollHeight: number) => {
   Object.defineProperty(HTMLElement.prototype, "clientHeight", {
     configurable: true,
     value: 100,

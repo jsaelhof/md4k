@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 export type ErrorDialogProps = {
   open: boolean;
   content?: ReactNode;
-  debug: string;
+  debug?: string;
   onConfirm: () => void;
 };
 

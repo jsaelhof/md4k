@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import TabPanelSearch from "./tab-panel-search";
+import TabPanelSearch, { TabPanelSearchProps } from "./tab-panel-search";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { screen } from "@testing-library/react";
 import { SEARCH_BY_TITLE } from "../../../../../../graphql/queries";
@@ -31,7 +31,7 @@ const SEARCH_MOCK_PAGE_1 = {
     data: {
       searchByTitle: {
         results: Array(10)
-          .fill()
+          .fill(undefined)
           .map((e, i) => ({
             title: `Batman ${i}`,
             year: `200${i}`,
@@ -56,7 +56,7 @@ const SEARCH_MOCK_PAGE_2 = {
     data: {
       searchByTitle: {
         results: Array(5)
-          .fill()
+          .fill(undefined)
           .map((e, i) => ({
             title: `Batman ${i + 10}`,
             year: `200${i}`,
@@ -81,7 +81,7 @@ const SEARCH_WITH_YEAR_MOCK = {
     data: {
       searchByTitle: {
         results: Array(4)
-          .fill()
+          .fill(undefined)
           .map((e, i) => ({
             title: `Batman ${i}`,
             year: "2005",
@@ -97,27 +97,33 @@ const SEARCH_WITH_YEAR_MOCK = {
   },
 };
 
+interface LocalTestContext {
+  props: TabPanelSearchProps;
+}
+
 describe("tab-panel-search", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
-      tabId: 0,
+      tabId: "0",
       hidden: false,
       onAddMovie: vi.fn(),
     };
   });
 
-  it("should render a quote when the results are null", ({ props }) => {
+  it<LocalTestContext>("should render a quote when the results are null", ({
+    props,
+  }) => {
     renderWithProviders(<TabPanelSearch {...props} />);
     expect(screen.getByTestId("quote")).toBeInTheDocument();
   });
 
-  it("should render the search form", ({ props }) => {
+  it<LocalTestContext>("should render the search form", ({ props }) => {
     renderWithProviders(<TabPanelSearch {...props} />);
     expect(screen.getByLabelText(/Search/)).toBeInTheDocument();
     expect(screen.getByLabelText("Year")).toBeInTheDocument();
   });
 
-  it("should show searching while query is executed", async ({
+  it<LocalTestContext>("should show searching while query is executed", async ({
     props,
     user,
   }) => {
@@ -129,7 +135,7 @@ describe("tab-panel-search", () => {
     expect(await screen.findByText("Searching...")).toBeInTheDocument();
   });
 
-  it("should show the empty state when no results are found", async ({
+  it<LocalTestContext>("should show the empty state when no results are found", async ({
     props,
     user,
   }) => {
@@ -141,7 +147,10 @@ describe("tab-panel-search", () => {
     expect(await screen.findByText("No movies found.")).toBeInTheDocument();
   });
 
-  it("should display search results", async ({ props, user }) => {
+  it<LocalTestContext>("should display search results", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<TabPanelSearch {...props} />, {
       mocks: [SEARCH_MOCK_PAGE_1],
     });
@@ -154,7 +163,7 @@ describe("tab-panel-search", () => {
     }
   });
 
-  it("should display load more and fetch additional pages when multiple pages exist", async ({
+  it<LocalTestContext>("should display load more and fetch additional pages when multiple pages exist", async ({
     props,
     user,
   }) => {
@@ -188,7 +197,10 @@ describe("tab-panel-search", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("should reset the search results", async ({ props, user }) => {
+  it<LocalTestContext>("should reset the search results", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<TabPanelSearch {...props} />, {
       mocks: [SEARCH_MOCK_PAGE_1],
     });
@@ -206,7 +218,7 @@ describe("tab-panel-search", () => {
     expect(screen.getByTestId("quote")).toBeInTheDocument();
   });
 
-  it("should open the detail view when a result is clicked", async ({
+  it<LocalTestContext>("should open the detail view when a result is clicked", async ({
     props,
     user,
   }) => {
@@ -233,7 +245,10 @@ describe("tab-panel-search", () => {
     );
   });
 
-  it("should search by title and year", async ({ props, user }) => {
+  it<LocalTestContext>("should search by title and year", async ({
+    props,
+    user,
+  }) => {
     renderWithProviders(<TabPanelSearch {...props} />, {
       mocks: [SEARCH_WITH_YEAR_MOCK],
     });

@@ -1,16 +1,20 @@
 import { render, screen } from "@testing-library/react";
-import PosterGrid from "./poster-grid";
+import PosterGrid, { PosterGridProps } from "./poster-grid";
 import { vi } from "vitest";
 
+interface LocalTestContext {
+  props: PosterGridProps;
+}
+
 describe("poster-grid", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       searchResults: Array(10)
-        .fill()
+        .fill(undefined)
         .map((e, i) => ({
           title: `Batman ${i}`,
           year: `200${i}`,
-          imdbID: i,
+          imdbID: i.toString(),
           poster: `https://poster/batman${i}.jpg`,
           watchedOn: `200${i}-08-02T12:00:00Z`,
         })),
@@ -18,7 +22,7 @@ describe("poster-grid", () => {
     };
   });
 
-  it("should display search results", async ({ props }) => {
+  it<LocalTestContext>("should display search results", async ({ props }) => {
     render(<PosterGrid {...props} />);
 
     expect(await screen.findByLabelText("Search Results")).toBeInTheDocument();
@@ -28,7 +32,7 @@ describe("poster-grid", () => {
     }
   });
 
-  it("should call the onClick handler when provided", async ({
+  it<LocalTestContext>("should call the onClick handler when provided", async ({
     props,
     user,
   }) => {
@@ -39,7 +43,7 @@ describe("poster-grid", () => {
     expect(props.onClick).toHaveBeenCalled();
   });
 
-  it("should not call the onClick handler when not provided", async ({
+  it<LocalTestContext>("should not call the onClick handler when not provided", async ({
     props,
     user,
   }) => {

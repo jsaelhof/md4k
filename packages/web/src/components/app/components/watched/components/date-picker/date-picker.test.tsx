@@ -1,19 +1,26 @@
 import { screen } from "@testing-library/react";
-import DatePicker from "./date-picker";
+import DatePicker, { DatePickerProps } from "./date-picker";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
+import { SpringValues } from "react-spring";
+
+interface LocalTestContext {
+  props: DatePickerProps;
+}
 
 describe("date-picker", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       defaultDate: new Date("2022-01-02T12:00:00"),
       onCancel: vi.fn(),
       onSave: vi.fn(),
       onDelete: vi.fn(),
+      title: "Test Title",
+      spring: {} as SpringValues<{ mounted: number }>,
     };
   });
 
-  it("should render the date picker without a drawer by default", ({
+  it<LocalTestContext>("should render the date picker without a drawer by default", ({
     props,
   }) => {
     renderWithProviders(<DatePicker {...props} />);
@@ -22,7 +29,7 @@ describe("date-picker", () => {
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should render the date picker in a drawer when useDrawer is true", ({
+  it<LocalTestContext>("should render the date picker in a drawer when useDrawer is true", ({
     props,
   }) => {
     renderWithProviders(<DatePicker {...props} useDrawer />);
@@ -31,19 +38,23 @@ describe("date-picker", () => {
     expect(screen.getByTestId("datePicker")).toBeInTheDocument();
   });
 
-  it("should ignore title when not in a drawer", ({ props }) => {
+  it<LocalTestContext>("should ignore title when not in a drawer", ({
+    props,
+  }) => {
     renderWithProviders(<DatePicker {...props} title="Test Title" />);
 
     expect(screen.queryByText("Test Title")).not.toBeInTheDocument();
   });
 
-  it("should render the title when in a drawer", ({ props }) => {
+  it<LocalTestContext>("should render the title when in a drawer", ({
+    props,
+  }) => {
     renderWithProviders(<DatePicker {...props} useDrawer title="Test Title" />);
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
   });
 
-  it("should set the default date", ({ props }) => {
+  it<LocalTestContext>("should set the default date", ({ props }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByText("January 2022")).toBeInTheDocument();
     expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
@@ -51,7 +62,7 @@ describe("date-picker", () => {
     );
   });
 
-  it("should change the date", async ({ props, user }) => {
+  it<LocalTestContext>("should change the date", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
 
     expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
@@ -69,21 +80,21 @@ describe("date-picker", () => {
     );
   });
 
-  it("should call onDelete", async ({ props, user }) => {
+  it<LocalTestContext>("should call onDelete", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("DeleteIcon")).toBeInTheDocument();
     await user.click(screen.getByTestId("DeleteIcon"));
     expect(props.onDelete).toHaveBeenCalled();
   });
 
-  it("should call onCancel", async ({ props, user }) => {
+  it<LocalTestContext>("should call onCancel", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("CloseIcon")).toBeInTheDocument();
     await user.click(screen.getByTestId("CloseIcon"));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should call onSave", async ({ props, user }) => {
+  it<LocalTestContext>("should call onSave", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByTestId("CalendarCheckIcon")).toBeInTheDocument();
     await user.click(screen.getByTestId("CalendarCheckIcon"));

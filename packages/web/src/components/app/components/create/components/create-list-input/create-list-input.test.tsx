@@ -1,14 +1,18 @@
 import { screen } from "@testing-library/react";
 import CreateListInput from "./create-list-input";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
+interface LocalTestContext {
+  onSubmit: Mock;
+}
+
 describe("create-list-input", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.onSubmit = vi.fn();
   });
 
-  it("should callback with the new list name on submit", async ({
+  it<LocalTestContext>("should callback with the new list name on submit", async ({
     onSubmit,
     user,
   }) => {
@@ -18,7 +22,7 @@ describe("create-list-input", () => {
     expect(onSubmit).toHaveBeenCalledWith("My List");
   });
 
-  it("should display an error if the list name already exists", async ({
+  it<LocalTestContext>("should display an error if the list name already exists", async ({
     onSubmit,
     user,
   }) => {
@@ -37,7 +41,7 @@ describe("create-list-input", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it("should display an error if the list name is empty", async ({
+  it<LocalTestContext>("should display an error if the list name is empty", async ({
     onSubmit,
     user,
   }) => {

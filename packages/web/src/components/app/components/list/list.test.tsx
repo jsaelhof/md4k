@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import { renderWithProvidersAsRoute } from "../../../../test-utils/render-with-providers";
 import { List } from "./list";
-import { vi } from "vitest";
+import { SpyInstance, vi } from "vitest";
 import * as appContext from "../../../../context/app-context";
 
 import { Globals } from "react-spring";
@@ -12,6 +12,17 @@ import {
   REMOVE_MOVIE,
 } from "../../../../graphql/mutations";
 import { GET_LISTS } from "../../../../graphql/queries";
+import { ListGridProps } from "./components/list-grid/types";
+import {
+  EditMovieMutation,
+  EditMovieMutationVariables,
+  MarkWatchedMutation,
+  MarkWatchedMutationVariables,
+  Movie,
+  RemoveMovieMutation,
+  RemoveMovieMutationVariables,
+} from "../../../../__generated__/graphql";
+import { MockedResponse } from "@apollo/client/testing";
 
 Globals.assign({
   skipAnimation: true,
@@ -19,11 +30,14 @@ Globals.assign({
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual("react-router-dom");
+  const actual: any = await vi.importActual("react-router-dom");
   return { ...actual, useNavigate: () => navigateMock };
 });
 
-const REMOVE_MOVIE_ERROR_MOCK = {
+const REMOVE_MOVIE_ERROR_MOCK: MockedResponse<
+  RemoveMovieMutation,
+  RemoveMovieMutationVariables
+> = {
   request: {
     query: REMOVE_MOVIE,
     variables: {
@@ -31,10 +45,13 @@ const REMOVE_MOVIE_ERROR_MOCK = {
       list: "saturday",
     },
   },
-  error: "Test Error",
+  error: new Error("Test Error"),
 };
 
-const REMOVE_MOVIE_MOCK = {
+const REMOVE_MOVIE_MOCK: MockedResponse<
+  RemoveMovieMutation,
+  RemoveMovieMutationVariables
+> = {
   request: {
     query: REMOVE_MOVIE,
     variables: {
@@ -52,7 +69,10 @@ const REMOVE_MOVIE_MOCK = {
   },
 };
 
-const MARK_WATCHED_MOCK = {
+const MARK_WATCHED_MOCK: MockedResponse<
+  MarkWatchedMutation,
+  MarkWatchedMutationVariables
+> = {
   request: {
     query: MARK_WATCHED,
     variables: {
@@ -105,12 +125,14 @@ const MARK_WATCHED_MOCK = {
         },
         background: null,
       },
-      list: "saturday",
     },
   },
 };
 
-const EDIT_MOVIE_MOCK = {
+const EDIT_MOVIE_MOCK: MockedResponse<
+  EditMovieMutation,
+  EditMovieMutationVariables
+> = {
   request: {
     query: EDIT_MOVIE,
     variables: {
@@ -163,14 +185,18 @@ const EDIT_MOVIE_MOCK = {
         },
         background: null,
       },
-      list: "saturday",
     },
   },
 };
 
 // Mocks the complex list grid of movies with stub buttons that can be clicked to simulate actions on movie cards
 vi.mock("./components/list-grid/list-grid", () => ({
-  default: ({ movies, onMarkWatched, onEditMovie, onRemoveMovie }) => (
+  default: ({
+    movies,
+    onMarkWatched,
+    onEditMovie,
+    onRemoveMovie,
+  }: Omit<ListGridProps, "movies"> & { movies: Movie[] }) => (
     <>
       <div>
         {movies.map(({ title }) => (
@@ -193,8 +219,12 @@ vi.mock("./components/list-grid/list-grid", () => ({
   ),
 }));
 
+interface LocalTestContext {
+  appContextSpy: SpyInstance;
+}
+
 describe("list", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     // tell vitest we use mocked time
     // https://github.com/nock/nock/issues/2200#issuecomment-1487029921 is used here to keep the suite from hanging.
     vi.useFakeTimers({
@@ -213,7 +243,7 @@ describe("list", () => {
     vi.clearAllMocks();
   });
 
-  it("should render the action bar", async () => {
+  it<LocalTestContext>("should render the action bar", async () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
@@ -223,7 +253,7 @@ describe("list", () => {
     expect(await screen.findByText(/Pick/)).toBeInTheDocument();
   });
 
-  it("should render the list", async () => {
+  it<LocalTestContext>("should render the list", async () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
@@ -234,7 +264,7 @@ describe("list", () => {
     expect(await screen.findByText(/Blade/)).toBeInTheDocument();
   });
 
-  it("should render the error dialog", async ({ user }) => {
+  it<LocalTestContext>("should render the error dialog", async ({ user }) => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
@@ -249,7 +279,10 @@ describe("list", () => {
     expect(await screen.findByText(/Houston/)).toBeInTheDocument();
   });
 
-  it("should call mark watched", async ({ user, appContextSpy }) => {
+  it<LocalTestContext>("should call mark watched", async ({
+    user,
+    appContextSpy,
+  }) => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
@@ -275,7 +308,7 @@ describe("list", () => {
     );
   });
 
-  it("should call edit and immediately send mutation when useEditor is false", async ({
+  it<LocalTestContext>("should call edit and immediately send mutation when useEditor is false", async ({
     user,
   }) => {
     renderWithProvidersAsRoute(
@@ -296,7 +329,7 @@ describe("list", () => {
     // Test passes if it doesn't fail to call the mock
   });
 
-  it("should forward to the editor page when useEditor is true", async ({
+  it<LocalTestContext>("should forward to the editor page when useEditor is true", async ({
     user,
   }) => {
     renderWithProvidersAsRoute(
@@ -316,7 +349,9 @@ describe("list", () => {
     );
   });
 
-  it("should call the remove movie mutation", async ({ user }) => {
+  it<LocalTestContext>("should call the remove movie mutation", async ({
+    user,
+  }) => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
@@ -333,7 +368,7 @@ describe("list", () => {
     await user.click(screen.getByRole("button", { name: "MOCK DELETE" }));
   });
 
-  it("should navigate to the create list route when no lists exist", async () => {
+  it<LocalTestContext>("should navigate to the create list route when no lists exist", async () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,

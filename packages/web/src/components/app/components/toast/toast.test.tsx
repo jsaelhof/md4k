@@ -11,7 +11,7 @@ const { MOCK_TOAST, MOCK_SET_TOAST } = vi.hoisted(() => ({
 }));
 
 vi.mock("../../../../context/app-context", async () => {
-  const actual = await vi.importActual("../../../../context/app-context");
+  const actual: any = await vi.importActual("../../../../context/app-context");
   return {
     ...actual,
     useAppContext: vi.fn().mockReturnValue({

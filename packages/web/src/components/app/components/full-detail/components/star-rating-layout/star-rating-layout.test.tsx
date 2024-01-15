@@ -1,9 +1,14 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import { createMatchMedia } from "../../../../../../test-utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
+import { Ratings } from "../../../../../../__generated__/graphql";
+
+interface LocalTestContext {
+  ratings: Ratings;
+}
 
 describe("star-rating-layout", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.ratings = {
       id: "tt2463208",
       IMDB: "67%",
@@ -12,7 +17,7 @@ describe("star-rating-layout", () => {
     };
   });
 
-  it("should render the five-star rating and ratings breakdown", ({
+  it<LocalTestContext>("should render the five-star rating and ratings breakdown", ({
     ratings,
   }) => {
     render(<StarRatingLayout ratings={ratings} />);
@@ -25,7 +30,7 @@ describe("star-rating-layout", () => {
     expect(screen.getByText("55%")).toBeInTheDocument();
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async ({
+  it<LocalTestContext>("should toggle the ratings breakdown with mouseEnter and mouseLeave when mobile", async ({
     ratings,
     user,
   }) => {
@@ -60,7 +65,7 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when mobile", async ({
+  it<LocalTestContext>("should toggle the ratings breakdown with click when mobile", async ({
     ratings,
     user,
   }) => {
@@ -95,7 +100,7 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async ({
+  it<LocalTestContext>("should toggle the ratings breakdown with mouseEnter and mouseLeave when above mobile", async ({
     ratings,
     user,
   }) => {
@@ -133,7 +138,7 @@ describe("star-rating-layout", () => {
     );
   });
 
-  it("should toggle the ratings breakdown with click when above mobile", async ({
+  it<LocalTestContext>("should toggle the ratings breakdown with click when above mobile", async ({
     ratings,
     user,
   }) => {

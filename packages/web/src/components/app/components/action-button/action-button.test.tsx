@@ -1,22 +1,27 @@
 import { render, screen } from "@testing-library/react";
 import ActionButton from "./action-button";
 import Close from "@mui/icons-material/Close";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
+
+interface LocalTestContext {
+  onClick: Mock;
+  tooltip: string;
+}
 
 describe("action-button", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.onClick = vi.fn();
     context.tooltip = "test tooltip";
   });
 
-  it("should render the button", ({ onClick, tooltip }) => {
+  it<LocalTestContext>("should render the button", ({ onClick, tooltip }) => {
     render(<ActionButton Icon={Close} onClick={onClick} tooltip={tooltip} />);
 
     expect(screen.getByLabelText(tooltip)).toBeInTheDocument();
     expect(screen.getByTestId("CloseIcon")).toBeInTheDocument();
   });
 
-  it("should invoke the onClick handler", async ({
+  it<LocalTestContext>("should invoke the onClick handler", async ({
     onClick,
     tooltip,
     user,
@@ -27,7 +32,7 @@ describe("action-button", () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it("should not fire onClick when disabled", async ({
+  it<LocalTestContext>("should not fire onClick when disabled", async ({
     onClick,
     tooltip,
     user,

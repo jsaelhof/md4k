@@ -15,17 +15,8 @@ vi.mock("../../../../graphql/mutations", (actual) => {
 });
 
 describe("create", () => {
-  beforeEach((context) => {
-    context.addListReturn = {
-      addList: vi.fn(),
-      loading: false,
-      error: false,
-      reset: vi.fn(),
-    };
-  });
-
-  it("should render the create list state", ({ addListReturn }) => {
-    useAddList.mockReturnValueOnce(addListReturn);
+  it("should render the create list state", () => {
+    useAddList.mockReturnValueOnce([vi.fn(), {}]);
 
     renderWithProviders(<Create />);
 
@@ -33,8 +24,11 @@ describe("create", () => {
     expect(screen.getByText(/Create List/)).toBeInTheDocument();
   });
 
-  it("should render the error state", ({ addListReturn }) => {
-    useAddList.mockReturnValueOnce({ ...addListReturn, error: true });
+  it("should render the error state", () => {
+    useAddList.mockReturnValueOnce([
+      vi.fn(),
+      { error: new Error("Test Error") },
+    ]);
 
     renderWithProviders(<Create />);
 
@@ -44,8 +38,8 @@ describe("create", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the loading state", ({ addListReturn }) => {
-    useAddList.mockReturnValueOnce({ ...addListReturn, loading: true });
+  it("should render the loading state", () => {
+    useAddList.mockReturnValueOnce([vi.fn(), { loading: true }]);
     renderWithProviders(<Create />);
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });

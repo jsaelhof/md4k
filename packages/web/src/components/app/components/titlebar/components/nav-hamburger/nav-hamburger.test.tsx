@@ -140,7 +140,8 @@ describe("nav-hamburger", () => {
 
   it("should not render the menu on the 'create' screen when there are no lists created yet", async () => {
     render(
-      <AppContext.Provider value={{ list: undefined }}>
+      // @ts-expect-error Only need a partial context here
+      <AppContext.Provider value={{ lists: [], list: null }}>
         <MemoryRouter initialEntries={["/create"]}>
           <NavHamburger />
         </MemoryRouter>

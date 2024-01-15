@@ -2,11 +2,15 @@ import { render, screen, within } from "@testing-library/react";
 import { vi } from "vitest";
 import { sources } from "md4k-constants";
 import { genres } from "md4k-constants";
-import { ManualMovieForm } from "./manual-movie-form";
+import { ManualMovieForm, ManualMovieFormProps } from "./manual-movie-form";
 import Clear from "@mui/icons-material/Clear";
 
+interface LocalTestContext {
+  props: ManualMovieFormProps;
+}
+
 describe("manual-movie-form", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       actionLabel: "Save",
       ActionIcon: Clear,
@@ -16,7 +20,7 @@ describe("manual-movie-form", () => {
     };
   });
 
-  it("should render the form and return the data on sumbit", async ({
+  it<LocalTestContext>("should render the form and return the data on sumbit", async ({
     props,
     user,
   }) => {
@@ -103,7 +107,10 @@ describe("manual-movie-form", () => {
     });
   });
 
-  it("should handle runtime input as minutes", async ({ props, user }) => {
+  it<LocalTestContext>("should handle runtime input as minutes", async ({
+    props,
+    user,
+  }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -117,7 +124,10 @@ describe("manual-movie-form", () => {
     );
   });
 
-  it("should handle runtime input as hh:mm", async ({ props, user }) => {
+  it<LocalTestContext>("should handle runtime input as hh:mm", async ({
+    props,
+    user,
+  }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -131,7 +141,7 @@ describe("manual-movie-form", () => {
     );
   });
 
-  it("should validate title", async ({ props, user }) => {
+  it<LocalTestContext>("should validate title", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.click(screen.getByRole("button", { name: "Save" }));
@@ -139,7 +149,7 @@ describe("manual-movie-form", () => {
     expect(screen.getByText("Title is required")).toBeInTheDocument();
   });
 
-  it("should validate poster", async ({ props, user }) => {
+  it<LocalTestContext>("should validate poster", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -150,7 +160,10 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/must start with/)).toBeInTheDocument();
   });
 
-  it("should validate background", async ({ props, user }) => {
+  it<LocalTestContext>("should validate background", async ({
+    props,
+    user,
+  }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -164,7 +177,7 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/must start with/)).toBeInTheDocument();
   });
 
-  it("should validate year", async ({ props, user }) => {
+  it<LocalTestContext>("should validate year", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -175,7 +188,7 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/4 digits/)).toBeInTheDocument();
   });
 
-  it("should validate runtime", async ({ props, user }) => {
+  it<LocalTestContext>("should validate runtime", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -201,7 +214,7 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/Runtime must be/)).toBeInTheDocument();
   });
 
-  it("should validate imdb id", async ({ props, user }) => {
+  it<LocalTestContext>("should validate imdb id", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -212,7 +225,10 @@ describe("manual-movie-form", () => {
     expect(screen.getByText(/tt0000000/)).toBeInTheDocument();
   });
 
-  it("should allow longer imdb ids", async ({ props, user }) => {
+  it<LocalTestContext>("should allow longer imdb ids", async ({
+    props,
+    user,
+  }) => {
     render(<ManualMovieForm {...props} />);
 
     await user.type(screen.getByLabelText("Title"), "Test");
@@ -223,13 +239,15 @@ describe("manual-movie-form", () => {
     expect(screen.queryByText(/tt0000000/)).not.toBeInTheDocument();
   });
 
-  it("should call onCancel", async ({ props, user }) => {
+  it<LocalTestContext>("should call onCancel", async ({ props, user }) => {
     render(<ManualMovieForm {...props} />);
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(props.onCancel).toHaveBeenCalled();
   });
 
-  it("should render an initial state when provided", ({ props }) => {
+  it<LocalTestContext>("should render an initial state when provided", ({
+    props,
+  }) => {
     render(
       <ManualMovieForm
         {...props}
@@ -260,7 +278,7 @@ describe("manual-movie-form", () => {
     expect(screen.getByText("Netflix")).toBeInTheDocument();
   });
 
-  it("should return a diff from a populated initial state", async ({
+  it<LocalTestContext>("should return a diff from a populated initial state", async ({
     props,
     user,
   }) => {
@@ -388,7 +406,7 @@ describe("manual-movie-form", () => {
     );
   });
 
-  it("should return a diff from a default initial state", async ({
+  it<LocalTestContext>("should return a diff from a default initial state", async ({
     props,
     user,
   }) => {

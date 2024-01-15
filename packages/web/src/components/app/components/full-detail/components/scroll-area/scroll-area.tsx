@@ -7,10 +7,13 @@ import { Maybe } from "../../../../../../__generated__/graphql";
 
 export type ScrollAreaProps = {
   text?: Maybe<string>;
-  noScroll: boolean;
+  noScroll?: boolean;
 };
 
-const ScrollArea = ({ text, noScroll }: ScrollAreaProps): ReactElement => {
+const ScrollArea = ({
+  text,
+  noScroll = false,
+}: ScrollAreaProps): ReactElement => {
   const [topOverflow, setTopOverflow] = useState<boolean | null>(null);
   const [bottomOverflow, setBottomOverflow] = useState<boolean | null>(null);
 

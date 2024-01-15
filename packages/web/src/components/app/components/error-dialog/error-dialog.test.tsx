@@ -1,9 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import ErrorDialog from "./error-dialog";
+import ErrorDialog, { ErrorDialogProps } from "./error-dialog";
 import { vi } from "vitest";
 
+interface LocalTestContext {
+  props: ErrorDialogProps;
+}
+
 describe("error-dialog", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       open: true,
       content: "This is the error content",
@@ -11,17 +15,19 @@ describe("error-dialog", () => {
     };
   });
 
-  it("should display the content when open", ({ props }) => {
+  it<LocalTestContext>("should display the content when open", ({ props }) => {
     render(<ErrorDialog {...props} />);
-    expect(screen.getByText(props.content)).toBeInTheDocument();
+    expect(screen.getByText(props.content as string)).toBeInTheDocument();
   });
 
-  it("should not display the content when closed", ({ props }) => {
+  it<LocalTestContext>("should not display the content when closed", ({
+    props,
+  }) => {
     render(<ErrorDialog {...props} open={false} />);
-    expect(screen.queryByText(props.content)).not.toBeInTheDocument();
+    expect(screen.queryByText(props.content as string)).not.toBeInTheDocument();
   });
 
-  it("should call onConfirm when the dialog Ok button is pressed", async ({
+  it<LocalTestContext>("should call onConfirm when the dialog Ok button is pressed", async ({
     props,
     user,
   }) => {

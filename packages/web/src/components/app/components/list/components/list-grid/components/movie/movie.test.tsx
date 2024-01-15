@@ -1,9 +1,10 @@
 import { waitFor, screen } from "@testing-library/react";
-import Movie from "./movie";
+import Movie, { MovieProps } from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 import { Globals } from "react-spring";
 import { UPDATE_MOVIE } from "../../../../../../../../graphql/mutations/update-movie";
+import { FullDetailModalProps } from "../../../../../full-detail-modal/full-detail-modal";
 
 Globals.assign({
   skipAnimation: true,
@@ -17,7 +18,7 @@ vi.mock("uuid", () => ({
 // In this mock we just want assign the props that would be passed to it
 // and test that they are passed correctly when various interactions occur.
 vi.mock("../../../../../full-detail-modal/full-detail-modal", () => ({
-  default: ({ preload, open, onClose }) => (
+  default: ({ preload, open, onClose }: FullDetailModalProps) => (
     <div data-preload={preload} data-open={open} onClick={() => onClose()}>
       Expanded
     </div>
@@ -48,8 +49,12 @@ const UPDATE_MOVIE_MOCK = {
   })),
 };
 
+interface LocalTestContext {
+  props: MovieProps;
+}
+
 describe("movie", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movie: {
         id: "8502fd8b-165e-4239-965f-b46f8d523829",
@@ -78,7 +83,7 @@ describe("movie", () => {
     };
   });
 
-  it("should render a movie list entry", ({ props }) => {
+  it<LocalTestContext>("should render a movie list entry", ({ props }) => {
     renderWithProviders(<Movie {...props} />);
 
     // Should be two posters, the second is the larger overlaid one that is wrapped in an invisible div
@@ -106,7 +111,9 @@ describe("movie", () => {
     expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "false");
   });
 
-  it("should render a movie list entry as locked", ({ props }) => {
+  it<LocalTestContext>("should render a movie list entry as locked", ({
+    props,
+  }) => {
     renderWithProviders(
       <Movie {...props} movie={{ ...props.movie, locked: true }} />
     );
@@ -114,7 +121,7 @@ describe("movie", () => {
     expect(screen.getByLabelText("Unlock")).toBeInTheDocument();
   });
 
-  it("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
+  it<LocalTestContext>("should open the zoomed poster and preload the expanded detail on rollover and close the zoomed poster on rollout", async ({
     props,
     user,
   }) => {
@@ -139,7 +146,7 @@ describe("movie", () => {
     );
   });
 
-  it("should close the zoomed poster and open the expanded detail view when clicked", async ({
+  it<LocalTestContext>("should close the zoomed poster and open the expanded detail view when clicked", async ({
     props,
     user,
     userNoPointerCheck,
@@ -166,7 +173,7 @@ describe("movie", () => {
     );
   });
 
-  it("should toggle the actions and ratings when mousing over the five star rating", async ({
+  it<LocalTestContext>("should toggle the actions and ratings when mousing over the five star rating", async ({
     props,
     user,
   }) => {
@@ -202,7 +209,7 @@ describe("movie", () => {
     });
   });
 
-  it("should toggle the actions and ratings when clicking the five star rating", async ({
+  it<LocalTestContext>("should toggle the actions and ratings when clicking the five star rating", async ({
     props,
     user,
   }) => {
@@ -238,7 +245,7 @@ describe("movie", () => {
     });
   });
 
-  it("should send the edit action and close the zoomed view", async ({
+  it<LocalTestContext>("should send the edit action and close the zoomed view", async ({
     props,
     user,
   }) => {
@@ -250,7 +257,7 @@ describe("movie", () => {
     );
   });
 
-  it("should send the mark watched action and close the zoomed view", async ({
+  it<LocalTestContext>("should send the mark watched action and close the zoomed view", async ({
     props,
     user,
   }) => {
@@ -262,7 +269,7 @@ describe("movie", () => {
     );
   });
 
-  it("should send the delete action and close the zoomed view", async ({
+  it<LocalTestContext>("should send the delete action and close the zoomed view", async ({
     props,
     user,
   }) => {
@@ -274,7 +281,7 @@ describe("movie", () => {
     );
   });
 
-  it("should send the edit action with locked:true and close the zoomed view", async ({
+  it<LocalTestContext>("should send the edit action with locked:true and close the zoomed view", async ({
     props,
     user,
   }) => {
@@ -292,7 +299,7 @@ describe("movie", () => {
     );
   });
 
-  it("should send the edit action with locked:false and close the zoomed view", async ({
+  it<LocalTestContext>("should send the edit action with locked:false and close the zoomed view", async ({
     props,
     user,
   }) => {

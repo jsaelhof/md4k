@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import CreateListError from "./create-list-error";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
+
+interface LocalTestContext {
+  reset: Mock;
+}
 
 describe("create-list-error", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.reset = vi.fn();
   });
 
-  it("should run the reset callback when Try Again is pressed", async ({
+  it<LocalTestContext>("should run the reset callback when Try Again is pressed", async ({
     reset,
     user,
   }) => {

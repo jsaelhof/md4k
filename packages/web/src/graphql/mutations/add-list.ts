@@ -1,4 +1,4 @@
-import { BaseMutationOptions, gql } from "@apollo/client";
+import { BaseMutationOptions, MutationTuple, gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GET_LISTS } from "../queries";
 import {
@@ -28,11 +28,8 @@ export const useAddList = ({
   onCompleted,
 }: {
   onCompleted: AddListMutationOptions["onCompleted"];
-}) => {
-  const [addList, { loading, error, reset }] = useMutation<
-    AddListMutation,
-    AddListMutationVariables
-  >(ADD_LIST, {
+}): MutationTuple<AddListMutation, AddListMutationVariables> =>
+  useMutation<AddListMutation, AddListMutationVariables>(ADD_LIST, {
     onCompleted,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onError: () => {}, // Required to prevent throwing an uncaught exception.
@@ -44,11 +41,8 @@ export const useAddList = ({
             variables: { name: data.addList.label },
           },
           ({ lists }) => ({
-            lists: [...lists, addList],
+            lists: [...lists, data.addList],
           })
         );
     },
   });
-
-  return { addList, loading, error, reset };
-};

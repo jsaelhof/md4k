@@ -1,9 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { Actions } from "./actions";
+import { Actions, ActionsProps } from "./actions";
+
+interface LocalTestContext {
+  props: ActionsProps;
+}
 
 describe("actions", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       hasTrailer: true,
       onPlayTrailer: vi.fn(),
@@ -11,7 +15,9 @@ describe("actions", () => {
     };
   });
 
-  it("should render the Watch Trailer button", ({ props }) => {
+  it<LocalTestContext>("should render the Watch Trailer button", ({
+    props,
+  }) => {
     render(<Actions {...props} />);
 
     expect(
@@ -19,7 +25,9 @@ describe("actions", () => {
     ).toBeInTheDocument();
   });
 
-  it("should not render the trailer button when no trailer", ({ props }) => {
+  it<LocalTestContext>("should not render the trailer button when no trailer", ({
+    props,
+  }) => {
     render(<Actions {...props} hasTrailer={false} />);
 
     expect(
@@ -33,7 +41,7 @@ describe("actions", () => {
     expect(screen.getByRole("button", { name: "No Trailer" })).toBeDisabled();
   });
 
-  it("should call the play trailer callback when clicked", async ({
+  it<LocalTestContext>("should call the play trailer callback when clicked", async ({
     props,
     user,
   }) => {
@@ -43,7 +51,7 @@ describe("actions", () => {
     expect(props.onPlayTrailer).toHaveBeenCalled();
   });
 
-  it("should render children", ({ props }) => {
+  it<LocalTestContext>("should render children", ({ props }) => {
     render(<Actions {...props} />);
 
     expect(screen.getByText("CHILD CONTENT")).toBeInTheDocument();

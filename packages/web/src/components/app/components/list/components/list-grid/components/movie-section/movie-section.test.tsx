@@ -1,9 +1,15 @@
 import { render, screen } from "@testing-library/react";
-import MovieSection from "./movie-section";
+import MovieSection, { MovieSectionProps } from "./movie-section";
 import { vi } from "vitest";
+import { MovieProps } from "../movie/movie";
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
+  default: ({
+    onEditMovie,
+    onMarkWatched,
+    onRemoveMovie,
+    movie,
+  }: MovieProps) => (
     <div aria-label="movieMock" data-title={movie.title}>
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
@@ -13,14 +19,18 @@ vi.mock("../movie/movie", () => ({
   ),
 }));
 
+interface LocalTestContext {
+  props: MovieSectionProps;
+}
+
 describe("movie-section", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       title: "Test Title",
       subtitle: "My Subtitle",
       list: [
         {
-          id: 1,
+          id: "1",
           title: "Movie #1",
         },
       ],
@@ -30,7 +40,7 @@ describe("movie-section", () => {
     };
   });
 
-  it("should render the section and assing handlers", async ({
+  it<LocalTestContext>("should render the section and assing handlers", async ({
     props,
     user,
   }) => {
@@ -50,7 +60,7 @@ describe("movie-section", () => {
     expect(props.onRemoveMovie).toHaveBeenCalled();
   });
 
-  it("should not render the title and subtitle when the title is omitted", ({
+  it<LocalTestContext>("should not render the title and subtitle when the title is omitted", ({
     props,
   }) => {
     render(<MovieSection {...props} title={undefined} />);
@@ -60,7 +70,9 @@ describe("movie-section", () => {
     expect(screen.getByText("Movie #1")).toBeInTheDocument();
   });
 
-  it("should not render the subtitle when omitted", ({ props }) => {
+  it<LocalTestContext>("should not render the subtitle when omitted", ({
+    props,
+  }) => {
     render(<MovieSection {...props} subtitle={undefined} />);
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();

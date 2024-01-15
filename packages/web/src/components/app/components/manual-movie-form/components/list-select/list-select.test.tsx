@@ -1,14 +1,19 @@
 import { render, screen, within } from "@testing-library/react";
-import ListSelect from "./list-select";
+import ListSelect, { ListSelectProps } from "./list-select";
 import { sourceLogos } from "../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 import { vi } from "vitest";
 
+interface LocalTestContext {
+  props: ListSelectProps;
+}
+
 describe("list-select", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       value: sources.NETFLIX,
       values: sources,
+      label: "Netflix",
       hideLabelForSelection: false,
       onChange: vi.fn(),
       listSelectItemProps: {
@@ -18,29 +23,28 @@ describe("list-select", () => {
     };
   });
 
-  it("should open the select and display the options", async ({
+  it<LocalTestContext>("should open the select and display the options", async ({
     props,
     user,
+    t,
   }) => {
     render(<ListSelect {...props} />);
 
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     expect(
-      within(screen.getByRole("combobox")).getByText(
-        sourceLabels[sources.NETFLIX]
-      )
+      within(screen.getByRole("combobox")).getByText(t("common:sources.1"))
     ).toBeInTheDocument();
 
     await user.click(screen.getByRole("combobox"));
 
     Object.values(sources).forEach((source) => {
       expect(
-        screen.getByRole("option", { name: sourceLabels[source] })
+        screen.getByRole("option", { name: t(`common:sources.${source}`) })
       ).toBeInTheDocument();
     });
 
     await user.click(
-      screen.getByRole("option", { name: sourceLabels[sources.DISNEY_PLUS] })
+      screen.getByRole("option", { name: t("common:sources.6") })
     );
 
     expect(props.onChange).toHaveBeenCalledWith(sources.DISNEY_PLUS);

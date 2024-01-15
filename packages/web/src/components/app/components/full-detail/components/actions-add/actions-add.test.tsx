@@ -1,15 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { ActionsAdd } from "./actions-add";
+import { ActionsAdd, ActionsAddProps } from "./actions-add";
+
+interface LocalTestContext {
+  props: ActionsAddProps;
+}
 
 describe("actions-add", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       onAddMovie: vi.fn(),
     };
   });
 
-  it("should render the Add Movie button", ({ props }) => {
+  it<LocalTestContext>("should render the Add Movie button", ({ props }) => {
     render(<ActionsAdd {...props} />);
 
     expect(
@@ -17,7 +21,7 @@ describe("actions-add", () => {
     ).toBeInTheDocument();
   });
 
-  it("should call the add movie callback when clicked", async ({
+  it<LocalTestContext>("should call the add movie callback when clicked", async ({
     props,
     user,
   }) => {

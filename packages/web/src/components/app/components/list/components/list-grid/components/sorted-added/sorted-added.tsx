@@ -37,7 +37,7 @@ const SortedAdded = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const direction = useSortDirection();
 
   const { month, quarter, year, beyond } = useMemo(
-    () => partitionMovies(direction)(movies),
+    () => partitionMovies(direction)(movies ?? []),
     [direction, movies]
   );
 

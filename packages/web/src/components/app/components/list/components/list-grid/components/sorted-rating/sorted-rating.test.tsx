@@ -1,13 +1,20 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedRating from "./sorted-rating";
 import { vi } from "vitest";
+import { MovieProps } from "../movie/movie";
+import { ListGridProps } from "../../types";
 
 const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
   MOCK_USE_SORT_DIRECTION: vi.fn().mockReturnValue("asc"),
 }));
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
+  default: ({
+    onEditMovie,
+    onMarkWatched,
+    onRemoveMovie,
+    movie,
+  }: MovieProps) => (
     <div aria-label={movie.title}>
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
@@ -21,62 +28,66 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
   useSortDirection: MOCK_USE_SORT_DIRECTION,
 }));
 
+interface LocalTestContext {
+  props: ListGridProps;
+}
+
 describe("sorted-rating", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movies: [
         {
-          id: 0,
+          id: "0",
           title: "Movie 0",
           fiveStarRating: 0,
         },
         {
-          id: 1,
+          id: "1",
           title: "Movie 1a",
           fiveStarRating: 0.5,
         },
         {
-          id: 2,
+          id: "2",
           title: "Movie 1b",
           fiveStarRating: 1,
         },
         {
-          id: 3,
+          id: "3",
           title: "Movie 2a",
           fiveStarRating: 1.5,
         },
         {
-          id: 4,
+          id: "4",
           title: "Movie 2b",
           fiveStarRating: 2,
         },
         {
-          id: 5,
+          id: "5",
           title: "Movie 3a",
           fiveStarRating: 2.5,
         },
         {
-          id: 6,
+          id: "6",
           title: "Movie 3b",
           fiveStarRating: 3,
         },
         {
-          id: 7,
+          id: "7",
           title: "Movie 4a",
           fiveStarRating: 3.5,
         },
         {
-          id: 8,
+          id: "8",
           title: "Movie 4b",
           fiveStarRating: 4,
         },
         {
-          id: 9,
+          id: "9",
           title: "Movie 5a",
           fiveStarRating: 4.5,
         },
         {
-          id: 10,
+          id: "10",
           title: "Movie 5b",
           fiveStarRating: 5,
         },
@@ -87,11 +98,13 @@ describe("sorted-rating", () => {
     };
   });
 
-  it("should only render sections with movies", ({ props }) => {
+  it<LocalTestContext>("should only render sections with movies", ({
+    props,
+  }) => {
     render(
       <SortedRating
         {...props}
-        movies={props.movies.filter(
+        movies={(props.movies ?? []).filter(
           ({ fiveStarRating }) =>
             fiveStarRating === 1 || fiveStarRating === 2 || fiveStarRating === 4
         )}
@@ -106,7 +119,9 @@ describe("sorted-rating", () => {
     expect(sections[2]).toHaveAttribute("aria-label", "4 Star");
   });
 
-  it("should render correctly when the order is ASC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is ASC", ({
+    props,
+  }) => {
     render(<SortedRating {...props} />);
 
     // Sorted Sections
@@ -120,14 +135,14 @@ describe("sorted-rating", () => {
 
     // 0 Star Section
     const section0 = within(
-      screen.getByLabelText("0 Star").childNodes[1]
+      screen.getByLabelText("0 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 0/);
     expect(section0).toHaveLength(1);
     expect(section0[0]).toHaveAttribute("aria-label", "Movie 0");
 
     // 1 Star Section
     const section1 = within(
-      screen.getByLabelText("1 Star").childNodes[1]
+      screen.getByLabelText("1 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 1/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
@@ -135,7 +150,7 @@ describe("sorted-rating", () => {
 
     // 2 Star Section
     const section2 = within(
-      screen.getByLabelText("2 Star").childNodes[1]
+      screen.getByLabelText("2 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 2/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
@@ -143,7 +158,7 @@ describe("sorted-rating", () => {
 
     // 3 Star Section
     const section3 = within(
-      screen.getByLabelText("3 Star").childNodes[1]
+      screen.getByLabelText("3 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 3/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
@@ -151,7 +166,7 @@ describe("sorted-rating", () => {
 
     // 4 Star Section
     const section4 = within(
-      screen.getByLabelText("4 Star").childNodes[1]
+      screen.getByLabelText("4 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 4/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
@@ -159,14 +174,16 @@ describe("sorted-rating", () => {
 
     // 5 Star Section
     const section5 = within(
-      screen.getByLabelText("5 Star").childNodes[1]
+      screen.getByLabelText("5 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 5/);
     expect(section5).toHaveLength(2);
     expect(section5[0]).toHaveAttribute("aria-label", "Movie 5a");
     expect(section5[1]).toHaveAttribute("aria-label", "Movie 5b");
   });
 
-  it("should render correctly when the order is DESC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is DESC", ({
+    props,
+  }) => {
     MOCK_USE_SORT_DIRECTION.mockReturnValue("desc");
 
     render(<SortedRating {...props} />);
@@ -182,14 +199,14 @@ describe("sorted-rating", () => {
 
     // 0 Star Section
     const section0 = within(
-      screen.getByLabelText("0 Star").childNodes[1]
+      screen.getByLabelText("0 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 0/);
     expect(section0).toHaveLength(1);
     expect(section0[0]).toHaveAttribute("aria-label", "Movie 0");
 
     // 1 Star Section
     const section1 = within(
-      screen.getByLabelText("1 Star").childNodes[1]
+      screen.getByLabelText("1 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 1/);
     expect(section1).toHaveLength(2);
     expect(section1[0]).toHaveAttribute("aria-label", "Movie 1a");
@@ -197,7 +214,7 @@ describe("sorted-rating", () => {
 
     // 2 Star Section
     const section2 = within(
-      screen.getByLabelText("2 Star").childNodes[1]
+      screen.getByLabelText("2 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 2/);
     expect(section2).toHaveLength(2);
     expect(section2[0]).toHaveAttribute("aria-label", "Movie 2a");
@@ -205,7 +222,7 @@ describe("sorted-rating", () => {
 
     // 3 Star Section
     const section3 = within(
-      screen.getByLabelText("3 Star").childNodes[1]
+      screen.getByLabelText("3 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 3/);
     expect(section3).toHaveLength(2);
     expect(section3[0]).toHaveAttribute("aria-label", "Movie 3a");
@@ -213,7 +230,7 @@ describe("sorted-rating", () => {
 
     // 4 Star Section
     const section4 = within(
-      screen.getByLabelText("4 Star").childNodes[1]
+      screen.getByLabelText("4 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 4/);
     expect(section4).toHaveLength(2);
     expect(section4[0]).toHaveAttribute("aria-label", "Movie 4a");
@@ -221,14 +238,17 @@ describe("sorted-rating", () => {
 
     // 5 Star Section
     const section5 = within(
-      screen.getByLabelText("5 Star").childNodes[1]
+      screen.getByLabelText("5 Star").childNodes[1] as HTMLElement
     ).getAllByText(/Movie 5/);
     expect(section5).toHaveLength(2);
     expect(section5[0]).toHaveAttribute("aria-label", "Movie 5a");
     expect(section5[1]).toHaveAttribute("aria-label", "Movie 5b");
   });
 
-  it("should call the edit handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the edit handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRating {...props} />);
     await user.click(
       within(screen.getByText("Movie 1a")).getByRole("button", {
@@ -240,7 +260,10 @@ describe("sorted-rating", () => {
     );
   });
 
-  it("should call the mark watched handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the mark watched handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRating {...props} />);
     await user.click(
       within(screen.getByText("Movie 1a")).getByRole("button", {
@@ -252,7 +275,10 @@ describe("sorted-rating", () => {
     );
   });
 
-  it("should call the delete handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the delete handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedRating {...props} />);
     await user.click(
       within(screen.getByText("Movie 1a")).getByRole("button", {

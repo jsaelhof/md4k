@@ -1,10 +1,19 @@
 import { subDays } from "date-fns";
 import { filterMovies } from "./filter-movies";
+import { Movie } from "../__generated__/graphql";
+
+interface LocalTestContext {
+  movie1: Movie;
+  movie2: Movie;
+  movie3: Movie;
+  movie4: Movie;
+  movies: Movie[];
+}
 
 describe("filter-movies", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.movie1 = {
-      id: 0,
+      id: "0",
       title: "Movie 1",
       runtime: 5400,
       locked: false,
@@ -12,7 +21,7 @@ describe("filter-movies", () => {
     };
 
     context.movie2 = {
-      id: 1,
+      id: "1",
       title: "Movie 2",
       runtime: 6600,
       locked: false,
@@ -20,7 +29,7 @@ describe("filter-movies", () => {
     };
 
     context.movie3 = {
-      id: 2,
+      id: "2",
       title: "Movie 3",
       runtime: 9000,
       locked: false,
@@ -28,7 +37,7 @@ describe("filter-movies", () => {
     };
 
     context.movie4 = {
-      id: 3,
+      id: "3",
       title: "Movie 4",
       locked: false,
       // Mising Runtime
@@ -43,12 +52,14 @@ describe("filter-movies", () => {
     ];
   });
 
-  it("should return all movies when no options are provided", ({ movies }) => {
+  it<LocalTestContext>("should return all movies when no options are provided", ({
+    movies,
+  }) => {
     const result = filterMovies(movies);
     expect(result).toHaveLength(4);
   });
 
-  it("should remove movies below a given minRuntime", ({
+  it<LocalTestContext>("should remove movies below a given minRuntime", ({
     movies,
     movie2,
     movie3,
@@ -58,7 +69,7 @@ describe("filter-movies", () => {
     expect(result).toEqual(expect.arrayContaining([movie2, movie3]));
   });
 
-  it("should remove movies above a given maxRuntime", ({
+  it<LocalTestContext>("should remove movies above a given maxRuntime", ({
     movies,
     movie2,
     movie1,
@@ -68,7 +79,7 @@ describe("filter-movies", () => {
     expect(result).toEqual(expect.arrayContaining([movie1, movie2]));
   });
 
-  it("should remove movies outside a given minRuntime and maxRuntime", ({
+  it<LocalTestContext>("should remove movies outside a given minRuntime and maxRuntime", ({
     movies,
     movie2,
   }) => {
@@ -80,7 +91,7 @@ describe("filter-movies", () => {
     expect(result).toEqual(expect.arrayContaining([movie2]));
   });
 
-  it("should remove movies after a given number of days ago", ({
+  it<LocalTestContext>("should remove movies after a given number of days ago", ({
     movies,
     movie3,
     movie4,
@@ -92,7 +103,7 @@ describe("filter-movies", () => {
     expect(result).toEqual(expect.arrayContaining([movie3, movie4]));
   });
 
-  it("should remove movies before a given number of days ago", ({
+  it<LocalTestContext>("should remove movies before a given number of days ago", ({
     movies,
     movie1,
     movie2,

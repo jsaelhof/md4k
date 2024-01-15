@@ -8,7 +8,7 @@ export type PosterGridItemProps = {
   height: number;
   searchResult: SearchResult;
   delay: number;
-  onClick: (
+  onClick?: (
     searchResult: SearchResult,
     event: React.MouseEvent<HTMLDivElement>
   ) => void;

@@ -1,10 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import ListSelectItem from "./list-select-item";
+import ListSelectItem, { ListSelectItemProps } from "./list-select-item";
 import { sourceLogos } from "../../../../../../../../constants/sources";
 import { sources } from "md4k-constants";
 
+interface LocalTestContext {
+  props: ListSelectItemProps;
+}
+
 describe("list-select-item", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       variant: "sources",
       images: sourceLogos,
@@ -13,25 +17,24 @@ describe("list-select-item", () => {
     };
   });
 
-  it("should render the list item", ({ props }) => {
+  it<LocalTestContext>("should render the list item", ({ props, t }) => {
     render(<ListSelectItem {...props} />);
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      props.images[sources.NETFLIX]
+      props.images?.[sources.NETFLIX]
     );
-    expect(screen.getByText(props.labels[sources.NETFLIX])).toBeInTheDocument();
+    expect(screen.getByText(t("common:sources.1"))).toBeInTheDocument();
   });
 
-  it("should omit the label when hideLabelForSelection is true", ({
+  it<LocalTestContext>("should omit the label when hideLabelForSelection is true", ({
     props,
+    t,
   }) => {
     render(<ListSelectItem {...props} hideLabelForSelection={true} />);
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      props.images[sources.NETFLIX]
+      props.images?.[sources.NETFLIX]
     );
-    expect(
-      screen.queryByText(props.labels[sources.NETFLIX])
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(t("common:sources.1"))).not.toBeInTheDocument();
   });
 });

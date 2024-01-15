@@ -1,13 +1,20 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedTitle from "./sorted-title";
 import { vi } from "vitest";
+import { MovieProps } from "../movie/movie";
+import { ListGridProps } from "../../types";
 
 const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
   MOCK_USE_SORT_DIRECTION: vi.fn().mockReturnValue("asc"),
 }));
 
 vi.mock("../movie/movie", () => ({
-  default: ({ onEditMovie, onMarkWatched, onRemoveMovie, movie }) => (
+  default: ({
+    onEditMovie,
+    onMarkWatched,
+    onRemoveMovie,
+    movie,
+  }: MovieProps) => (
     <div aria-label="movieMock">
       {movie.title}
       <button onClick={() => onEditMovie(movie)}>Edit</button>
@@ -21,24 +28,28 @@ vi.mock("../../../../../../../../hooks/use-sort-direction", () => ({
   useSortDirection: MOCK_USE_SORT_DIRECTION,
 }));
 
+interface LocalTestContext {
+  props: ListGridProps;
+}
+
 describe("sorted-title", () => {
-  beforeEach((context) => {
+  beforeEach<LocalTestContext>((context) => {
     context.props = {
       movies: [
         {
-          id: 0,
+          id: "0",
           title: "Movie 1",
         },
         {
-          id: 1,
+          id: "1",
           title: "Movie 2",
         },
         {
-          id: 2,
+          id: "2",
           title: "Movie 3",
         },
         {
-          id: 3,
+          id: "3",
           title: "Movie 4",
         },
       ],
@@ -48,7 +59,9 @@ describe("sorted-title", () => {
     };
   });
 
-  it("should render correctly when the order is ASC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is ASC", ({
+    props,
+  }) => {
     render(<SortedTitle {...props} />);
 
     const movieNodes = screen.queryAllByText(/Movie/);
@@ -60,7 +73,9 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 4")).toBeInTheDocument();
   });
 
-  it("should render correctly when the order is DESC", ({ props }) => {
+  it<LocalTestContext>("should render correctly when the order is DESC", ({
+    props,
+  }) => {
     MOCK_USE_SORT_DIRECTION.mockReturnValue("desc");
 
     render(<SortedTitle {...props} />);
@@ -74,7 +89,10 @@ describe("sorted-title", () => {
     expect(within(movieNodes[3]).getByText("Movie 1")).toBeInTheDocument();
   });
 
-  it("should call the edit handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the edit handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedTitle {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
@@ -86,7 +104,10 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the mark watched handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the mark watched handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedTitle {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {
@@ -98,7 +119,10 @@ describe("sorted-title", () => {
     );
   });
 
-  it("should call the delete handler", async ({ props, user }) => {
+  it<LocalTestContext>("should call the delete handler", async ({
+    props,
+    user,
+  }) => {
     render(<SortedTitle {...props} />);
     await user.click(
       within(screen.getByText("Movie 1")).getByRole("button", {

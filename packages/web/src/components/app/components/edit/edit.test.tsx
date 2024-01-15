@@ -7,7 +7,7 @@ import { GraphQLError } from "graphql";
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual("react-router-dom");
+  const actual: any = await vi.importActual("react-router-dom");
   return { ...actual, useNavigate: () => navigateMock };
 });
 
@@ -50,10 +50,6 @@ const MOCK_EDIT_MOVIE_MUTATION = {
 };
 
 describe("edit", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it("should render the edit screen with fields populated", async () => {
     renderWithProvidersAsRoute(
       <Edit />,

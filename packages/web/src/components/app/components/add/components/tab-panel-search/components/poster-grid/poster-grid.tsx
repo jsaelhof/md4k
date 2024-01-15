@@ -1,15 +1,13 @@
-import PosterGridItem from "./components/poster-grid-item/poster-grid-item";
+import PosterGridItem, {
+  PosterGridItemProps,
+} from "./components/poster-grid-item/poster-grid-item";
 import { Layout } from "./poster-grid.styles";
 import { SearchResult } from "../../../../../../../../__generated__/graphql";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
-export type PosterGridProps = {
+export type PosterGridProps = Pick<PosterGridItemProps, "onClick"> & {
   searchResults: SearchResult[];
-  onClick: (
-    searchResult: SearchResult,
-    event: React.MouseEvent<HTMLDivElement>
-  ) => void;
 };
 
 const PosterGrid = ({

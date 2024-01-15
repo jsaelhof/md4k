@@ -11,7 +11,7 @@ export const Create = (): ReactElement => {
   const { t } = useTranslation(["create"]);
   const { setList } = useAppContext();
   const navigate = useNavigate();
-  const { addList, loading, error, reset } = useAddList({
+  const [addList, { loading, error, reset }] = useAddList({
     onCompleted: ({ addList }) => {
       addList && setList(addList);
       navigate("/");

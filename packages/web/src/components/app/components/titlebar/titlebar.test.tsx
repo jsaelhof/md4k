@@ -40,6 +40,7 @@ describe("titlebar", () => {
     const clearPick = vi.fn();
 
     renderWithProviders(
+      // @ts-expect-error Only need a partial context here
       <AppContext.Provider value={{ movies: [], clearPick }}>
         <TitleBar />
       </AppContext.Provider>,

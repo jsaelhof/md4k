@@ -18,9 +18,9 @@ export type ListSelectProps = {
     variant: "sources" | "genres";
     images?: { [key: number]: string };
   };
-  selectProps: {
-    inputRef: SelectProps<number>["inputRef"];
-    fullWidth: SelectProps<number>["fullWidth"];
+  selectProps?: {
+    inputRef?: SelectProps<number>["inputRef"];
+    fullWidth?: SelectProps<number>["fullWidth"];
   };
 };
 

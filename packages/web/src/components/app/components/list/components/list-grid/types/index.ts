@@ -1,7 +1,7 @@
 import { Movie } from "../../../../../../../__generated__/graphql";
 
 export type ListGridProps = ListGridHandlers & {
-  movies: Movie[];
+  movies?: Movie[];
 };
 
 export type ListGridHandlers = {

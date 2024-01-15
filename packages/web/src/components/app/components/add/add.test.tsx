@@ -5,6 +5,8 @@ import { vi } from "vitest";
 import TabPanel from "./components/tab-panel/tab-panel";
 import { ADD_MOVIE, addMovieOptions } from "../../../../graphql/mutations";
 import { GraphQLError } from "graphql";
+import { TabPanelSearchProps } from "./components/tab-panel-search/tab-panel-search";
+import { TabPanelManualProps } from "./components/tab-panel-manual/tab-panel-manual";
 
 const movieData = {
   id: "111-222-333",
@@ -12,7 +14,7 @@ const movieData = {
   list: "saturday",
   title: "Test Movie",
   year: "2000",
-  runtime: "7200",
+  runtime: 7200,
   source: 1,
   genre: 2,
   poster: "https://test.com/poster.png",
@@ -35,7 +37,8 @@ const MOCK_ADD_MOVIE = {
   },
   result: {
     // addMovieOptions builds the expected response data which adds additional fields to the movieData.
-    data: addMovieOptions(movieData, { id: "saturday" }).optimisticResponse,
+    data: addMovieOptions(movieData, { id: "saturday", label: "Saturday" })
+      .optimisticResponse,
   },
 };
 
@@ -47,12 +50,12 @@ vi.mock("uuid", () => ({
 
 const navigateMock = vi.fn();
 vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual("react-router-dom");
+  const actual: any = await vi.importActual("react-router-dom");
   return { ...actual, useNavigate: () => navigateMock };
 });
 
 vi.mock("./components/tab-panel-search/tab-panel-search", () => ({
-  default: ({ tabId, hidden, onAddMovie }) => (
+  default: ({ tabId, hidden, onAddMovie }: TabPanelSearchProps) => (
     <TabPanel tabId={tabId} hidden={hidden}>
       <button
         // Simulate the info collected about the movie and returned to the Add component
@@ -61,11 +64,12 @@ vi.mock("./components/tab-panel-search/tab-panel-search", () => ({
             imdbID: "tt1234567",
             title: "Test Movie",
             year: "2000",
-            runtime: "7200",
+            runtime: 7200,
             source: 1,
             genre: 2,
             poster: "https://test.com/poster.png",
             ratings: {
+              id: "1",
               IMDB: "20%",
               ROTTEN_TOMATOES: "80%",
               METACRITIC: "60%",
@@ -80,9 +84,9 @@ vi.mock("./components/tab-panel-search/tab-panel-search", () => ({
 }));
 
 vi.mock("./components/tab-panel-manual/tab-panel-manual", () => ({
-  default: ({ tabId, hidden, onAddMovie }) => (
+  default: ({ tabId, hidden, onAddMovie }: TabPanelManualProps) => (
     <TabPanel tabId={tabId} hidden={hidden}>
-      <button onClick={() => onAddMovie({})}>Add</button>
+      <button onClick={() => onAddMovie({ title: "Test Movie" })}>Add</button>
     </TabPanel>
   ),
 }));
@@ -91,7 +95,7 @@ const { MOCK_SET_TOAST } = vi.hoisted(() => ({
   MOCK_SET_TOAST: vi.fn(),
 }));
 vi.mock("../../../../context/app-context", async () => {
-  const actual = await vi.importActual("../../../../context/app-context");
+  const actual: any = await vi.importActual("../../../../context/app-context");
   return {
     ...actual,
     useAppContext: vi.fn().mockReturnValue({

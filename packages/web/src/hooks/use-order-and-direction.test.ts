@@ -8,7 +8,7 @@ const { MOCK_USE_PARAMS } = vi.hoisted(() => ({
 }));
 
 vi.mock("react-router-dom", async (original) => {
-  const actual = await original();
+  const actual: any = await original();
 
   return {
     ...actual,

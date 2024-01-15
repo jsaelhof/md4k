@@ -50,7 +50,7 @@ const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
       )
     );
 
-    return partitionMovies(movies);
+    return partitionMovies(movies ?? []);
   }, [movies]);
 
   const sections = useMemo(() => {
