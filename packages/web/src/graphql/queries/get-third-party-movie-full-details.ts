@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import {
   GetThirdPartyMovieFullDetailsQuery,
+  GetThirdPartyMovieFullDetailsQueryVariables,
   Maybe,
 } from "../../__generated__/graphql";
 
@@ -43,17 +44,17 @@ export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`
 `;
 
 export const useGetThirdPartyFullDetails = (imdbID?: Maybe<string>) => {
-  const { data, ...rest } = useQuery<GetThirdPartyMovieFullDetailsQuery>(
-    GET_THIRD_PARTY_MOVIE_FULL_DETAILS,
-    {
-      skip: !imdbID,
-      errorPolicy: "all",
-      variables: {
-        imdbID: imdbID,
-      },
-      fetchPolicy: "cache-and-network",
-    }
-  );
+  const { data, ...rest } = useQuery<
+    GetThirdPartyMovieFullDetailsQuery,
+    GetThirdPartyMovieFullDetailsQueryVariables
+  >(GET_THIRD_PARTY_MOVIE_FULL_DETAILS, {
+    skip: !imdbID,
+    errorPolicy: "all",
+    variables: {
+      imdbID: imdbID ?? "",
+    },
+    fetchPolicy: "cache-and-network",
+  });
 
   return {
     data: { ...data?.thirdPartyMovie },

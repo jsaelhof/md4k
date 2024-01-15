@@ -252,6 +252,7 @@ const TabPanelSearch = ({
               title: selectedMovie.title ?? "",
               poster: selectedMovie.poster,
               background: selectedMovie.background,
+              imdbID: selectedMovie.imdbID,
             },
             onAddMovie,
             onChangeBackdrop: (url): void => {
