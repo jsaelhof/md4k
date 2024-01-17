@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 
 export const List = (): ReactElement => {
   const navigate = useNavigate();
-  const { list, movies, lists, setToast } = useAppContext();
+  const { list, lists, movies, loading, setToast } = useAppContext();
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation(["list"]);
 
@@ -96,7 +96,7 @@ export const List = (): ReactElement => {
 
   // Controls the fade-out and unmount of the countdown animation.
   // Transition is used so it unmounts after the animation completes.
-  const loadingTransitions = useTransition(!movies, {
+  const loadingTransitions = useTransition(loading, {
     from: { opacity: 1 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -122,7 +122,7 @@ export const List = (): ReactElement => {
             )
         )}
 
-        {movies && (
+        {!loading && (
           <>
             <ActionBar
               disabled={!movies || movies?.length === 0}

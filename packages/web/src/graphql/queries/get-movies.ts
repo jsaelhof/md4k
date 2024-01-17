@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { QueryResult, gql, useQuery } from "@apollo/client";
 import { GetMovieItem, GetListsItem } from "../types";
 import { GetMoviesQuery } from "../../__generated__/graphql";
 import { notEmpty } from "../../utils/not-empty";
@@ -32,8 +32,11 @@ export const GET_MOVIES = gql`
 
 export const useGetMovies = (
   list: GetListsItem | undefined | null
-): { movies: GetMovieItem[]; moviesById: { [key: string]: GetMovieItem } } => {
-  const { data, ...rest } = useQuery<GetMoviesQuery>(GET_MOVIES, {
+): {
+  movies: GetMovieItem[];
+  moviesById: { [key: string]: GetMovieItem };
+} & Omit<QueryResult<GetMoviesQuery>, "movies" | "data"> => {
+  const { data, loading, ...rest } = useQuery<GetMoviesQuery>(GET_MOVIES, {
     skip: !list,
     variables: { list: list?.id },
     fetchPolicy: "cache-and-network",
@@ -47,6 +50,7 @@ export const useGetMovies = (
       if (movie) acc[movie.id] = movie;
       return acc;
     }, {}),
+    loading: loading && !data,
     ...rest,
   };
 };

@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import { animated } from "react-spring";
 
 const needleAnim = keyframes`
     0% {
@@ -21,7 +22,7 @@ const numberAnim = keyframes`
     }
 `;
 
-export const Container = styled("div")(() => ({
+export const Container = styled(animated.div)(() => ({
   position: "absolute",
   top: 0,
   bottom: 0,

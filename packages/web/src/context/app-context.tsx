@@ -9,6 +9,7 @@ export type AppContextType = {
   lists: GetListsItem[];
   list: GetListsItem | null;
   setList: (list: GetListsItem) => void;
+  loading: boolean;
   movies: GetMovieItem[];
   moviesById: { [key: string]: GetMovieItem };
   pick: string | null;
@@ -23,6 +24,7 @@ const AppContext = createContext<AppContextType>({
   list: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setList: () => {},
+  loading: true,
   movies: [],
   moviesById: {},
   toast: null,
@@ -37,11 +39,17 @@ const AppContext = createContext<AppContextType>({
 
 const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
   const [list, _setList] = useState<GetListsItem | null>(null);
-  const { lists } = useGetLists({ onCompleted: _setList });
+  const { lists, loading: listsLoading } = useGetLists({
+    onCompleted: _setList,
+  });
 
   // Initialize using the list but if it's undefined and "lists" has data (from the persisted cache) use that to avoid waiting for useGetLists to complete.
   // It completes after the network part of cache-and-network is done so its late if there is cached data available. We want to take advantage of that to load really fast.
-  const { movies, moviesById } = useGetMovies(list ?? lists?.[0]);
+  const {
+    movies,
+    moviesById,
+    loading: moviesLoading,
+  } = useGetMovies(list ?? lists?.[0]);
   const [toast, setToast] = useState<ToastProps | null>(null);
   const [pick, setPick] = useState<string | null>(null);
 
@@ -55,10 +63,13 @@ const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
     setPick(null);
   }, []);
 
+  console.log({ loading: listsLoading || moviesLoading });
+
   const context = {
     lists,
     list,
     setList,
+    loading: listsLoading || moviesLoading,
     movies,
     moviesById,
     pick,
