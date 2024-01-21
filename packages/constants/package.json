@@ -4,12 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "yarn@3.2.2",
-  "main": "src/index.js",
-  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
-  },
-  "devDependencies": {
-    "typescript": "^4.6.4"
+    "dev": "tsc --watch --preserveWatchOutput",
+    "build": "npx tsc"
   }
 }
