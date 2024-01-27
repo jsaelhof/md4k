@@ -4,7 +4,7 @@
     "target": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": false,
-    "module": "ESNext",
+    "module": "NodeNext",
     "forceConsistentCasingInFileNames": true,
     "rootDir": "src",
     "declaration": true,
