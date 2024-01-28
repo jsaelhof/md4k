@@ -6,7 +6,7 @@
   "packageManager": "yarn@3.2.2",
   "scripts": {
     "build": "yarn run generate && npx tsc",
-    "dev": "yarn run generate && tsc --p './tsconfig-typecheck.json' && NODE_ENV=development node ./scripts/dev.js && tsc --watch --preserveWatchOutput",
+    "dev": "yarn run generate && tsc && NODE_ENV=development node ./scripts/dev.js && tsc --watch --preserveWatchOutput",
     "lint": "npx eslint \"./src/**/*.{js,ts}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
     "test": "vitest",

@@ -1,5 +1,6 @@
 {
   "include": ["src"],
+  "exclude": ["**/*.test.*"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext",
