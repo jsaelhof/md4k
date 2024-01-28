@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "yarn run generate && vite --port 4000",
-    "build": "yarn run generate && npx tsc && vite build",
+    "build": "yarn ../constants run build && yarn run generate && npx tsc && vite build",
     "preview": "vite preview",
     "lint": "npx eslint \"./src/**/*.{js,jsx,ts,tsx}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
