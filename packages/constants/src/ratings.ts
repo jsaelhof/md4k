@@ -1,8 +1,8 @@
-export const ratingsSource = Object.freeze({
+export const ratingsSource = {
   IMDB: "IMDB",
   ROTTEN_TOMATOES: "ROTTEN_TOMATOES",
   METACRITIC: "METACRITIC",
-});
+} as const;
 
 export const ratingsSources = [
   ratingsSource.IMDB,
