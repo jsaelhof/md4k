@@ -3,7 +3,7 @@ import { flow, groupBy, mapValues } from "lodash/fp";
 import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import FiveStarRating from "../../../../../five-star-rating/five-star-rating";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { ListGridProps } from "../../types";
@@ -17,7 +17,7 @@ const partitionMovies = flow(
     orderBy(
       movies,
       [sort.RATING, sort.TITLE],
-      [sortDirection.DESC, sortDirection.ASC]
+      [SortDirection.DESC, SortDirection.ASC]
     )
   )
 );
@@ -38,7 +38,7 @@ const SortedRating = ({ movies, ...handlers }: ListGridProps): ReactElement => {
       })
     );
 
-    return direction === sortDirection.ASC
+    return direction === SortDirection.ASC
       ? sectionDescriptors
       : sectionDescriptors.reverse();
   }, [direction, byRating, t]);

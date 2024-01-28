@@ -11,7 +11,7 @@ import {
 import { Button } from "@mui/material";
 import React, { ReactElement, useMemo } from "react";
 import { formatRuntime } from "../../../../utils/format-runtime";
-import { Genre, Source, genres, sources } from "md4k-constants";
+import { genres, sources } from "md4k-constants";
 import { sourceLogos } from "../../../../constants/sources";
 import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
@@ -26,7 +26,7 @@ import { useTranslation } from "react-i18next";
 export type ManualMovieFormProps = {
   actionLabel: string;
   ActionIcon: SvgIconComponent;
-  initialState?: Omit<Movie, "id" | "title"> & { title?: string }; // Title needs to be optional for new movies.
+  initialState?: Omit<Movie, "id" | "title" | "list"> & { title?: string }; // Title needs to be optional for new movies.
   onChange: (movie: Omit<Movie, "id">) => void;
   onCancel: () => void;
 };

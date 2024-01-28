@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { sortDirection } from "../constants/sorts";
+import { SortDirection } from "../constants/sorts";
 import { vi } from "vitest";
 import { useSortDirection } from "./use-sort-direction";
 
@@ -19,12 +19,12 @@ vi.mock("react-router-dom", async (original) => {
 describe("useSortDirection", () => {
   it("should get the default value", () => {
     const { result } = renderHook(() => useSortDirection());
-    expect(result.current).toBe(sortDirection.ASC);
+    expect(result.current).toBe(SortDirection.ASC);
   });
 
   it("should get the value from params", () => {
     MOCK_USE_PARAMS.mockReturnValue({ direction: "desc" });
     const { result } = renderHook(() => useSortDirection());
-    expect(result.current).toBe(sortDirection.DESC);
+    expect(result.current).toBe(SortDirection.DESC);
   });
 });

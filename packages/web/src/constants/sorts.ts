@@ -7,7 +7,7 @@ export const sort = {
   SOURCE: "source",
 };
 
-export const sortDirection = {
-  ASC: "asc",
-  DESC: "desc",
-} as const;
+export enum SortDirection {
+  ASC = "asc",
+  DESC = "desc",
+}

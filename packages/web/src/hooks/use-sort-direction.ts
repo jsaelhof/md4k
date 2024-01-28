@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
-import { sortDirection } from "../constants/sorts";
-import { ValueOf } from "../types";
+import { SortDirection } from "../constants/sorts";
 
-export const useSortDirection = (): ValueOf<typeof sortDirection> => {
-  const { direction = sortDirection.ASC } = useParams();
-  return direction as ValueOf<typeof sortDirection>;
+export const useSortDirection = (): SortDirection => {
+  const { direction = SortDirection.ASC } = useParams();
+  return direction as SortDirection;
 };

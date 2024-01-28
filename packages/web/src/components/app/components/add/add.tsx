@@ -36,7 +36,7 @@ export const Add = (): ReactElement => {
     },
   });
 
-  const onAddMovie = useCallback<(movie: Omit<Movie, "id">) => void>(
+  const onAddMovie = useCallback<(movie: Omit<Movie, "id" | "list">) => void>(
     (movie) =>
       list &&
       addMovieMutation(addMovieOptions({ ...movie, locked: false }, list)),

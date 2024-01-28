@@ -15,7 +15,7 @@
     "generate": "yarn run ts-typegen && yarn run i18n-typegen",
     "ts-typegen": "graphql-codegen --config codegen.ts",
     "i18n-typegen": "find ./src -path '*/i18n/en/*.json' | node ./src/i18next/generate.js",
-    "typecheck": "tsc --p './tsconfig-typecheck.json' --noEmit"
+    "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

@@ -93,7 +93,7 @@ export const removeMovieOptions = (
     removeMovie: {
       id,
       list,
-      __typename: "Movie",
+      __typename: "DeletedMovie",
     },
   },
 });

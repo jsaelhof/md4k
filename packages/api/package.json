@@ -13,7 +13,7 @@
     "test-ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "generate": "graphql-codegen",
-    "typecheck": "npx tsc --p './tsconfig-typecheck.json' --noEmit"
+    "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",

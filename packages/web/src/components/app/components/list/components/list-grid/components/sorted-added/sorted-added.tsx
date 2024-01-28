@@ -2,7 +2,7 @@ import { differenceInDays, parseISO } from "date-fns";
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
 import { ReactElement, useMemo } from "react";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { ListGridProps } from "../../types";
@@ -66,7 +66,7 @@ const SortedAdded = ({ movies, ...handlers }: ListGridProps): ReactElement => {
     ];
 
     return [
-      ...(direction === sortDirection.ASC
+      ...(direction === SortDirection.ASC
         ? sectionDescriptors.reverse()
         : sectionDescriptors),
     ];

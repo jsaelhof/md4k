@@ -3,7 +3,7 @@ import { flow, groupBy, mapValues } from "lodash/fp";
 import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { ListGridProps } from "../../types";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,7 @@ const SortedGenre = ({ movies, ...handlers }: ListGridProps): ReactElement => {
         )
       ),
       mapValues((movies) =>
-        orderBy(movies, [sort.RUNTIME], [sortDirection.ASC])
+        orderBy(movies, [sort.RUNTIME], [SortDirection.ASC])
       )
     );
 
@@ -38,7 +38,7 @@ const SortedGenre = ({ movies, ...handlers }: ListGridProps): ReactElement => {
       list,
     }));
 
-    return direction === sortDirection.ASC
+    return direction === SortDirection.ASC
       ? sectionDescriptors
       : sectionDescriptors.reverse();
   }, [direction, byGenre]);

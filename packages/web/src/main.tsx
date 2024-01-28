@@ -9,7 +9,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { sort, sortDirection } from "./constants/sorts";
+import { sort, SortDirection } from "./constants/sorts";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
 import { i18nextConfig } from "./i18next/i18next-config";
@@ -25,13 +25,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+          <Navigate replace to={`/list/${sort.ADDED}/${SortDirection.DESC}`} />
         ),
       },
       {
         path: "/list",
         element: (
-          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+          <Navigate replace to={`/list/${sort.ADDED}/${SortDirection.DESC}`} />
         ),
       },
       {

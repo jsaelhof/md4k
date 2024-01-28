@@ -8,7 +8,7 @@ import {
 } from "./sort-nav.styles";
 import { useNavigate } from "react-router-dom";
 import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-and-direction";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import resources from "../../../../../../../../__generated__/resources";
@@ -20,10 +20,10 @@ const SortNav = (): ReactElement => {
 
   const SortOrderIcon =
     order === sort.ADDED
-      ? direction === sortDirection.ASC
+      ? direction === SortDirection.ASC
         ? KeyboardArrowUp
         : KeyboardArrowDown
-      : direction === sortDirection.ASC
+      : direction === SortDirection.ASC
       ? KeyboardArrowDown
       : KeyboardArrowUp;
 
@@ -31,11 +31,11 @@ const SortNav = (): ReactElement => {
     key,
     key !== order
       ? [sort.ADDED, sort.RATING].includes(key)
-        ? sortDirection.DESC
-        : sortDirection.ASC
-      : direction === sortDirection.ASC
-      ? sortDirection.DESC
-      : sortDirection.ASC,
+        ? SortDirection.DESC
+        : SortDirection.ASC
+      : direction === SortDirection.ASC
+      ? SortDirection.DESC
+      : SortDirection.ASC,
   ];
 
   return (

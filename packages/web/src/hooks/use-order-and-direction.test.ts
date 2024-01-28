@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { useOrderAndDirection } from "./use-order-and-direction";
-import { sort, sortDirection } from "../constants/sorts";
+import { sort, SortDirection } from "../constants/sorts";
 import { vi } from "vitest";
 
 const { MOCK_USE_PARAMS } = vi.hoisted(() => ({
@@ -21,7 +21,7 @@ describe("useOrderAndDirection", () => {
     const { result } = renderHook(() => useOrderAndDirection());
 
     expect(result.current.order).toBe(sort.ADDED);
-    expect(result.current.direction).toBe(sortDirection.ASC);
+    expect(result.current.direction).toBe(SortDirection.ASC);
   });
 
   it("should get the values fron the params", () => {
@@ -31,6 +31,6 @@ describe("useOrderAndDirection", () => {
     const { result } = renderHook(() => useOrderAndDirection());
 
     expect(result.current.order).toBe(sort.RUNTIME);
-    expect(result.current.direction).toBe(sortDirection.DESC);
+    expect(result.current.direction).toBe(SortDirection.DESC);
   });
 });

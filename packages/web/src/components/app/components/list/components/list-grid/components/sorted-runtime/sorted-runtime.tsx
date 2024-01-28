@@ -1,7 +1,7 @@
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
 import { ReactElement, useMemo } from "react";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { Movie } from "../../../../../../../../__generated__/graphql";
@@ -20,7 +20,7 @@ const partitionMovies = flow(
       return "long";
     }
   }),
-  mapValues((movies) => orderBy(movies, [sort.RUNTIME], [sortDirection.ASC]))
+  mapValues((movies) => orderBy(movies, [sort.RUNTIME], [SortDirection.ASC]))
 );
 
 const SortedRuntime = ({
@@ -55,7 +55,7 @@ const SortedRuntime = ({
     ];
 
     return [
-      ...(direction === sortDirection.ASC
+      ...(direction === SortDirection.ASC
         ? sectionDescriptors
         : sectionDescriptors.reverse()),
       { list: unknown, title: t("list_grid:sorted_runtime.unknown.title") },

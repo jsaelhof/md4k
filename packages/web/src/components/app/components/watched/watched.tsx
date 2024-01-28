@@ -13,7 +13,7 @@ import {
   useEditMovie,
   useRemoveWatchedMovie,
 } from "../../../../graphql/mutations";
-import { sortDirection } from "../../../../constants/sorts";
+import { SortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import { useGetWatchedMovies } from "../../../../graphql/queries";
@@ -36,7 +36,7 @@ export const Watched = (): ReactElement | null => {
 
   const sortedMovies = useMemo(
     () =>
-      orderBy(watchedMovies, "watchedOn", [sortDirection.DESC]).filter(
+      orderBy(watchedMovies, "watchedOn", [SortDirection.DESC]).filter(
         ({ title }) =>
           searchTerm.length === 0 ||
           title.toLowerCase().includes(searchTerm.toLowerCase())

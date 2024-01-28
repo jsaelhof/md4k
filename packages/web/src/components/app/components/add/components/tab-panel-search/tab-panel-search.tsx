@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 export type TabPanelSearchProps = {
   tabId: string;
   hidden: boolean;
-  onAddMovie: (movie: Omit<Movie, "id">) => void;
+  onAddMovie: (movie: Omit<Movie, "id" | "list">) => void;
 };
 
 const TabPanelSearch = ({

@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { sortDirection } from "../../../../../../../../constants/sorts";
+import { SortDirection } from "../../../../../../../../constants/sorts";
 import {
   renderWithProviders,
   renderWithProvidersAsRoute,
@@ -21,7 +21,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Added")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
@@ -34,7 +34,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
@@ -43,7 +43,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
@@ -56,7 +56,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
@@ -65,7 +65,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "false");
@@ -78,7 +78,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Added")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
@@ -87,7 +87,7 @@ describe("sort-nav", () => {
     expect(screen.getByText("Added")).toHaveAttribute("data-active", "true");
     expect(screen.getByText("Added")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByText("Runtime")).toHaveAttribute("data-active", "false");
     expect(screen.getByText("Title")).toHaveAttribute("data-active", "false");
@@ -101,28 +101,28 @@ describe("sort-nav", () => {
     await user.click(screen.getByText("Title"));
     expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
 
     await user.click(screen.getByText("Title"));
     expect(screen.getByText("Title")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
 
     await user.click(screen.getByText("Runtime"));
     expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
 
     await user.click(screen.getByText("Runtime"));
     expect(screen.getByText("Runtime")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
 
@@ -130,7 +130,7 @@ describe("sort-nav", () => {
     await user.click(screen.getByText("Added"));
     expect(screen.getByText("Added")).toHaveAttribute(
       "data-sort",
-      sortDirection.DESC
+      SortDirection.DESC
     );
     expect(screen.getByTestId("KeyboardArrowDownIcon")).toBeInTheDocument();
 
@@ -138,7 +138,7 @@ describe("sort-nav", () => {
     await user.click(screen.getByText("Added"));
     expect(screen.getByText("Added")).toHaveAttribute(
       "data-sort",
-      sortDirection.ASC
+      SortDirection.ASC
     );
     expect(screen.getByTestId("KeyboardArrowUpIcon")).toBeInTheDocument();
   });

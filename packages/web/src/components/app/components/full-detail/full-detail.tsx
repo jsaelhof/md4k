@@ -44,17 +44,16 @@ import { ActionsView } from "./components/actions-view/actions-view";
 import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
 import { Movie } from "../../../../__generated__/graphql";
-import { SourceValue } from "../../../../types";
 import { notEmpty } from "../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
 import resources from "../../../../__generated__/resources";
 
 export type FullDetailProps = {
-  movie: Omit<Movie, "id">; // This needs to omit id because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial.
+  movie: Omit<Movie, "id" | "list">; // This needs to omit id because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial.
   showCloseButton?: boolean;
   onClose?: () => void;
   actionSet?: "addMovie" | "viewMovie";
-  onAddMovie?: (movie: Omit<Movie, "id">) => void;
+  onAddMovie?: (movie: Omit<Movie, "id" | "list">) => void;
   onChangeBackdrop?: (url: string) => void;
 };
 
@@ -99,11 +98,9 @@ const FullDetail = ({
       : !isNil(data.source)
       ? data.source
       : Source.NONE
-  ) as SourceValue;
+  ) as Source;
 
-  const canStream = !([Source.DVD, Source.NONE] as SourceValue[]).includes(
-    source
-  );
+  const canStream = ![Source.DVD, Source.NONE].includes(source);
 
   const backdrop = useMemo(
     () => movie.background || data.backdrops?.[0],

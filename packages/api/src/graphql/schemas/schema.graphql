@@ -23,7 +23,7 @@ type Movie {
   id: ID!
   imdbID: String
   title: String!
-  list: String
+  list: String!
   runtime: Int
   source: Int
   genre: Int

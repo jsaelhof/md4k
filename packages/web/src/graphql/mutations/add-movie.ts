@@ -77,7 +77,7 @@ export const useAddMovie = ({
 };
 
 export const addMovieOptions = (
-  movie: Omit<MovieInput, "id">,
+  movie: Omit<MovieInput, "id" | "list">,
   list: GetListsItem
 ): AddMovieMutationOptions => {
   const id = uuidv4();

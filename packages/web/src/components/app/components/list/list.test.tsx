@@ -5,7 +5,7 @@ import { SpyInstance, vi } from "vitest";
 import * as appContext from "../../../../context/app-context";
 
 import { Globals } from "react-spring";
-import { sort, sortDirection } from "../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../constants/sorts";
 import {
   EDIT_MOVIE,
   MARK_WATCHED,
@@ -247,7 +247,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`
+      `/list/${sort.ADDED}/${SortDirection.DESC}`
     );
 
     expect(await screen.findByText(/Pick/)).toBeInTheDocument();
@@ -257,7 +257,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`
+      `/list/${sort.ADDED}/${SortDirection.DESC}`
     );
 
     // The list grid renders all the movies but all this component do is render it and pass the movies and handlers along.
@@ -268,7 +268,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      `/list/${sort.ADDED}/${SortDirection.DESC}`,
       {
         mocks: [REMOVE_MOVIE_ERROR_MOCK],
       }
@@ -286,7 +286,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      `/list/${sort.ADDED}/${SortDirection.DESC}`,
       {
         mocks: [MARK_WATCHED_MOCK],
       }
@@ -314,7 +314,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      `/list/${sort.ADDED}/${SortDirection.DESC}`,
       {
         mocks: [EDIT_MOVIE_MOCK],
       }
@@ -335,7 +335,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`
+      `/list/${sort.ADDED}/${SortDirection.DESC}`
     );
 
     expect(
@@ -355,7 +355,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      `/list/${sort.ADDED}/${SortDirection.DESC}`,
       {
         mocks: [REMOVE_MOVIE_MOCK],
       }
@@ -372,7 +372,7 @@ describe("list", () => {
     renderWithProvidersAsRoute(
       <List />,
       `/list/*`,
-      `/list/${sort.ADDED}/${sortDirection.DESC}`,
+      `/list/${sort.ADDED}/${SortDirection.DESC}`,
       {
         // Mock an empty list
         listsMock: {

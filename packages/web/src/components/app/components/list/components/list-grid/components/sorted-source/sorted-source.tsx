@@ -7,7 +7,7 @@ import reduce from "lodash/fp/reduce";
 import { ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { sort, sortDirection } from "../../../../../../../../constants/sorts";
+import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { sourceLogosLarge } from "../../../../../../../../constants/sources";
 import { Source } from "md4k-constants";
 import { ListGridProps } from "../../types";
@@ -35,7 +35,7 @@ const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
     const partitionMovies: (movies: Movie[]) => [number, Movie[]][] = flow(
       groupBy<NonNullable<Movie>>((movie) => movie.source ?? 0),
       mapValues<Movie[], Movie[]>((movies) =>
-        orderBy(movies, [sort.TITLE], [sortDirection.ASC])
+        orderBy(movies, [sort.TITLE], [SortDirection.ASC])
       ),
       toPairs,
       reduce<[string, Movie[]], [number, Movie[]][]>(
@@ -77,7 +77,7 @@ const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {
         source,
       }));
 
-    return direction === sortDirection.ASC
+    return direction === SortDirection.ASC
       ? sectionDescriptors
       : sectionDescriptors.reverse();
   }, [direction, bySource, t]);

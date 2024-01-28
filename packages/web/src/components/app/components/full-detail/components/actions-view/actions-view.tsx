@@ -4,12 +4,11 @@ import Search from "@mui/icons-material/Search";
 import { Source } from "md4k-constants";
 import { searchStreaming, searchTorrent } from "../../../../../../utils/search";
 import { ReactElement } from "react";
-import { SourceValue } from "../../../../../../types";
 import { useTranslation } from "react-i18next";
 
 export type ActionsViewProps = {
   title: string;
-  source: SourceValue;
+  source: Source;
 };
 
 export const ActionsView = ({
@@ -17,9 +16,7 @@ export const ActionsView = ({
   source,
 }: ActionsViewProps): ReactElement => {
   const { t } = useTranslation(["full_detail"]);
-  const canStream = !([Source.DVD, Source.NONE] as SourceValue[]).includes(
-    source
-  );
+  const canStream = ![Source.DVD, Source.NONE].includes(source);
 
   return (
     <>
