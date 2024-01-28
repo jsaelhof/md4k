@@ -37,7 +37,7 @@ describe("list-select", () => {
 
     await user.click(screen.getByRole("combobox"));
 
-    Object.values(Source).forEach((source) => {
+    sources.forEach((source) => {
       expect(
         screen.getByRole("option", { name: t(`common:sources.${source}`) })
       ).toBeInTheDocument();
