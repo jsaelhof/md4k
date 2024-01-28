@@ -7,11 +7,11 @@ import {
 
 import ListSelectItem from "./components/list-select-item/list-select-item";
 import { ReactElement } from "react";
-import { Source, sources } from "md4k-constants";
+import { Genre, Source, genres, sources } from "md4k-constants";
 
 export type ListSelectProps = {
-  value?: Source | null;
-  values: typeof sources;
+  value?: Genre | Source | null;
+  values: typeof sources | typeof genres;
   onChange: (value: number) => void;
   hideLabelForSelection?: boolean;
   label: string;

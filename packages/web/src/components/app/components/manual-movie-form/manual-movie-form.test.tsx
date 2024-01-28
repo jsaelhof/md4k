@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { vi } from "vitest";
 import { Source } from "md4k-constants";
-import { genres } from "md4k-constants";
+import { Genre } from "md4k-constants";
 import { ManualMovieForm, ManualMovieFormProps } from "./manual-movie-form";
 import Clear from "@mui/icons-material/Clear";
 
@@ -97,7 +97,7 @@ describe("manual-movie-form", () => {
     await user.click(screen.getByRole("button", { name: "Save" }));
     expect(props.onChange).toHaveBeenCalledWith({
       background: "https://www.test.com/background.jpg",
-      genre: genres.HORROR,
+      genre: Genre.HORROR,
       imdbID: "tt1234567",
       poster: "https://www.test.com/poster.jpg",
       runtime: 7200,

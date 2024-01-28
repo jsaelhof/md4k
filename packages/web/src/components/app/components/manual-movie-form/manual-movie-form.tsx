@@ -11,7 +11,7 @@ import {
 import { Button } from "@mui/material";
 import React, { ReactElement, useMemo } from "react";
 import { formatRuntime } from "../../../../utils/format-runtime";
-import { genres, Source, sources } from "md4k-constants";
+import { Genre, Source, genres, sources } from "md4k-constants";
 import { sourceLogos } from "../../../../constants/sources";
 import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
