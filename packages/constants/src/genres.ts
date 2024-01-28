@@ -21,19 +21,3 @@ export const genres: Genre[] = Object.values(Genre).reduce<Genre[]>(
   },
   []
 );
-
-// TODO: This is not used by the frontend. Movie to API.
-// The backend uses the english genre labels when reverse-mapping the third-party API genre to my genre id's
-export const genreLabels = Object.freeze({
-  [Genre.NONE]: "None",
-  [Genre.COMEDY]: "Comedy",
-  [Genre.DRAMA]: "Drama",
-  [Genre.ACTION]: "Action",
-  [Genre.SCI_FI]: "Sci-Fi",
-  [Genre.ADVENTURE]: "Adventure",
-  [Genre.FAMILY]: "Family",
-  [Genre.THRILLER]: "Thriller",
-  [Genre.MUSICAL]: "Musical",
-  [Genre.DOCUMENTARY]: "Documentary",
-  [Genre.HORROR]: "Horror",
-});

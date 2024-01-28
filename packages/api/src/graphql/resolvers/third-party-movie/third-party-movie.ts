@@ -1,9 +1,24 @@
 import lodash from "lodash";
-import { genreLabels } from "md4k-constants";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 import { QueryResolvers } from "../../../__generated__/graphql.js";
+import { Genre } from "md4k-constants";
 
 const { findKey } = lodash;
+
+// The backend uses the english genre labels when reverse-mapping the third-party API genre to my genre id's
+export const genreLabels = Object.freeze({
+  [Genre.NONE]: "None",
+  [Genre.COMEDY]: "Comedy",
+  [Genre.DRAMA]: "Drama",
+  [Genre.ACTION]: "Action",
+  [Genre.SCI_FI]: "Sci-Fi",
+  [Genre.ADVENTURE]: "Adventure",
+  [Genre.FAMILY]: "Family",
+  [Genre.THRILLER]: "Thriller",
+  [Genre.MUSICAL]: "Musical",
+  [Genre.DOCUMENTARY]: "Documentary",
+  [Genre.HORROR]: "Horror",
+});
 
 export const thirdPartyMovie: QueryResolvers["thirdPartyMovie"] = async (
   parent,
