@@ -1,7 +1,7 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedSource from "./sorted-source";
 import { vi } from "vitest";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { MovieProps } from "../movie/movie";
 import { ListGridProps } from "../../types";
 
@@ -40,42 +40,42 @@ describe("sorted-source", () => {
         {
           id: "0",
           title: "Movie 0 - NONE",
-          source: sources.NONE,
+          source: Source.NONE,
         },
         {
           id: "1",
           title: "Movie 1 - NETFLIX",
-          source: sources.NETFLIX,
+          source: Source.NETFLIX,
         },
         {
           id: "2",
           title: "Movie 2 - PRIME VIDEO",
-          source: sources.PRIME_VIDEO,
+          source: Source.PRIME_VIDEO,
         },
         {
           id: "3",
           title: "Movie 3 - APPLE TV",
-          source: sources.APPLE_TV,
+          source: Source.APPLE_TV,
         },
         {
           id: "4",
           title: "Movie 4 - PLEX",
-          source: sources.PLEX,
+          source: Source.PLEX,
         },
         {
           id: "5",
           title: "Movie 5 - DVD",
-          source: sources.DVD,
+          source: Source.DVD,
         },
         {
           id: "6",
           title: "Movie 6 - DISNEY PLUS",
-          source: sources.DISNEY_PLUS,
+          source: Source.DISNEY_PLUS,
         },
         {
           id: "7",
           title: "Movie 7 - TUBI",
-          source: sources.TUBI_TV,
+          source: Source.TUBI_TV,
         },
       ],
       onEditMovie: vi.fn(),

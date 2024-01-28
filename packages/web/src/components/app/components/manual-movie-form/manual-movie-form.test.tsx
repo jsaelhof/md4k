@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { vi } from "vitest";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { genres } from "md4k-constants";
 import { ManualMovieForm, ManualMovieFormProps } from "./manual-movie-form";
 import Clear from "@mui/icons-material/Clear";
@@ -101,7 +101,7 @@ describe("manual-movie-form", () => {
       imdbID: "tt1234567",
       poster: "https://www.test.com/poster.jpg",
       runtime: 7200,
-      source: sources.NETFLIX,
+      source: Source.NETFLIX,
       title: "Batman",
       year: "2005",
     });

@@ -9,7 +9,7 @@ import { useSortDirection } from "../../../../../../../../hooks/use-sort-directi
 import MovieSection from "../movie-section/movie-section";
 import { sort, sortDirection } from "../../../../../../../../constants/sorts";
 import { sourceLogosLarge } from "../../../../../../../../constants/sources";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { ListGridProps } from "../../types";
 import { Movie } from "../../../../../../../../__generated__/graphql";
 import { notEmpty } from "../../../../../../../../utils/not-empty";
@@ -17,14 +17,14 @@ import { useTranslation } from "react-i18next";
 import resources from "../../../../../../../../__generated__/resources";
 
 const preferredSourceOrder: number[] = [
-  sources.PLEX,
-  sources.NETFLIX,
-  sources.PRIME_VIDEO,
-  sources.DISNEY_PLUS,
-  sources.APPLE_TV,
-  sources.TUBI_TV,
-  sources.DVD,
-  sources.NONE,
+  Source.PLEX,
+  Source.NETFLIX,
+  Source.PRIME_VIDEO,
+  Source.DISNEY_PLUS,
+  Source.APPLE_TV,
+  Source.TUBI_TV,
+  Source.DVD,
+  Source.NONE,
 ];
 
 const SortedSource = ({ movies, ...handlers }: ListGridProps): ReactElement => {

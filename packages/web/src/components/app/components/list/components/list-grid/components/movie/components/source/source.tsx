@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 import { sourceLogos } from "../../../../../../../../../../constants/sources";
 import { SourceBorder, SourceImage, SourceLayout } from "./source.styles";
-import { sources } from "md4k-constants";
-import { ValueOf } from "../../../../../../../../../../types";
+import { Source as SourceConstants } from "md4k-constants";
 import { useTranslation } from "react-i18next";
+import { Maybe } from "../../../../../../../../../../__generated__/graphql";
 
 export type SourceProps = {
-  source: ValueOf<typeof sources>;
+  source?: Maybe<SourceConstants>;
 };
 
 const Source = ({ source }: SourceProps): ReactElement => {
@@ -16,9 +16,11 @@ const Source = ({ source }: SourceProps): ReactElement => {
     <SourceLayout>
       <SourceBorder />
       <SourceImage
-        aria-label={t(`common:sources.${source}`)}
+        aria-label={t(`common:sources.${source ?? SourceConstants.NONE}`)}
         sx={{
-          backgroundImage: `url("${sourceLogos[source]}")`,
+          backgroundImage: `url("${
+            sourceLogos[source ?? SourceConstants.NONE]
+          }")`,
         }}
       />
     </SourceLayout>

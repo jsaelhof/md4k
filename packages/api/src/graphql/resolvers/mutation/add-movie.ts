@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server-errors";
 import lodash from "lodash";
-import { sources, errorCodes } from "md4k-constants";
+import { Source, errorCodes } from "md4k-constants";
 import { MutationResolvers } from "../../../__generated__/graphql.js";
 
 const { isNil } = lodash;
@@ -11,7 +11,7 @@ export const addMovie: MutationResolvers["addMovie"] = async (
   { db }
 ) => {
   if (!movie.title) throw new ApolloError(errorCodes.NO_TITLE);
-  if (isNil(movie.source)) movie.source = sources.NONE;
+  if (isNil(movie.source)) movie.source = Source.NONE;
   if (isNil(movie.locked)) movie.locked = false;
 
   try {

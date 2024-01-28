@@ -20,7 +20,7 @@ const PosterGrid = ({
     <Layout aria-label={t("poster_grid:label")}>
       {searchResults.map((searchResult, i) => (
         <PosterGridItem
-          key={searchResult.title}
+          key={searchResult.imdbID}
           height={250}
           searchResult={searchResult}
           onClick={onClick}

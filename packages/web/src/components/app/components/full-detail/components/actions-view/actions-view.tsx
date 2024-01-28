@@ -1,7 +1,7 @@
 import { DetailButton } from "../actions/actions.styles";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import Search from "@mui/icons-material/Search";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { searchStreaming, searchTorrent } from "../../../../../../utils/search";
 import { ReactElement } from "react";
 import { SourceValue } from "../../../../../../types";
@@ -17,7 +17,7 @@ export const ActionsView = ({
   source,
 }: ActionsViewProps): ReactElement => {
   const { t } = useTranslation(["full_detail"]);
-  const canStream = !([sources.DVD, sources.NONE] as SourceValue[]).includes(
+  const canStream = !([Source.DVD, Source.NONE] as SourceValue[]).includes(
     source
   );
 
@@ -35,7 +35,7 @@ export const ActionsView = ({
         </DetailButton>
       )}
 
-      {source === sources.NONE && (
+      {source === Source.NONE && (
         <DetailButton
           color="primary"
           startIcon={<Search />}

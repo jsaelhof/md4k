@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { ActionsView, ActionsViewProps } from "./actions-view";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 
 interface LocalTestContext {
   props: ActionsViewProps;
@@ -16,7 +16,7 @@ describe("actions-view", () => {
   beforeEach<LocalTestContext>((context) => {
     context.props = {
       title: "Test Movie",
-      source: sources.NETFLIX,
+      source: Source.NETFLIX,
     };
   });
 
@@ -49,7 +49,7 @@ describe("actions-view", () => {
   it<LocalTestContext>("should not render the stream button when the source is DVD", ({
     props,
   }) => {
-    render(<ActionsView {...props} source={sources.DVD} />);
+    render(<ActionsView {...props} source={Source.DVD} />);
     expect(
       screen.queryByRole("button", { name: "Stream Movie" })
     ).not.toBeInTheDocument();
@@ -58,7 +58,7 @@ describe("actions-view", () => {
   it<LocalTestContext>("should not render the stream button and should render the torrent search when the source is NONE", ({
     props,
   }) => {
-    render(<ActionsView {...props} source={sources.NONE} />);
+    render(<ActionsView {...props} source={Source.NONE} />);
     expect(
       screen.queryByRole("button", { name: "Stream Movie" })
     ).not.toBeInTheDocument();
@@ -71,7 +71,7 @@ describe("actions-view", () => {
     props,
     user,
   }) => {
-    render(<ActionsView {...props} source={sources.NONE} />);
+    render(<ActionsView {...props} source={Source.NONE} />);
 
     await user.click(screen.getByRole("button", { name: "Torrent Search" }));
     expect(window.open).toHaveBeenCalledWith(

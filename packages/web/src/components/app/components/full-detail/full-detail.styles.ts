@@ -182,7 +182,7 @@ export const MovieData = styled("div")(({ theme: { palette, spacing } }) => ({
   },
 }));
 
-export const Source = styled("img")`
+export const SourceLogo = styled("img")`
   grid-area: source;
   height: 40px;
   margin-left: auto;

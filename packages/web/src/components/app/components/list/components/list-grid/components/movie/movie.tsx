@@ -28,8 +28,6 @@ import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update
 import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
 import { Movie as MovieType } from "../../../../../../../../__generated__/graphql";
 import { ListGridHandlers } from "../../types";
-import { ValueOf } from "../../../../../../../../types";
-import { sources } from "md4k-constants";
 
 const isTouchInterface = "ontouchstart" in window;
 
@@ -184,7 +182,7 @@ const Movie = ({
                 </InfoFooterLayout>
 
                 <SourceLayout>
-                  <Source source={movie.source as ValueOf<typeof sources>} />
+                  <Source source={movie.source} />
                 </SourceLayout>
               </InfoLayout>
             </OverflowWrapper>

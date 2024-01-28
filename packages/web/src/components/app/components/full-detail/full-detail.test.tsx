@@ -1,6 +1,6 @@
 import FullDetail, { FullDetailProps } from "./full-detail";
 import { waitFor, screen } from "@testing-library/react";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { vi, beforeEach } from "vitest";
 import { renderWithProviders } from "../../../../test-utils/render-with-providers";
 import { createMatchMedia } from "../../../../test-utils/create-match-media";
@@ -344,7 +344,7 @@ describe("full-detail", () => {
     t,
   }) => {
     renderWithProviders(
-      <FullDetail {...props} movie={{ ...props.movie, source: sources.DVD }} />,
+      <FullDetail {...props} movie={{ ...props.movie, source: Source.DVD }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
@@ -361,10 +361,7 @@ describe("full-detail", () => {
     t,
   }) => {
     renderWithProviders(
-      <FullDetail
-        {...props}
-        movie={{ ...props.movie, source: sources.NONE }}
-      />,
+      <FullDetail {...props} movie={{ ...props.movie, source: Source.NONE }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
@@ -399,7 +396,7 @@ describe("full-detail", () => {
     props,
   }) => {
     renderWithProviders(
-      <FullDetail {...props} movie={{ ...props.movie, source: sources.DVD }} />,
+      <FullDetail {...props} movie={{ ...props.movie, source: Source.DVD }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 
@@ -417,10 +414,7 @@ describe("full-detail", () => {
     window.open = vi.fn();
 
     renderWithProviders(
-      <FullDetail
-        {...props}
-        movie={{ ...props.movie, source: sources.NONE }}
-      />,
+      <FullDetail {...props} movie={{ ...props.movie, source: Source.NONE }} />,
       { mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK] }
     );
 

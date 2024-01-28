@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import ListSelect, { ListSelectProps } from "./list-select";
 import { sourceLogos } from "../../../../../../constants/sources";
-import { sources } from "md4k-constants";
+import { Source, sources } from "md4k-constants";
 import { vi } from "vitest";
 
 interface LocalTestContext {
@@ -11,7 +11,7 @@ interface LocalTestContext {
 describe("list-select", () => {
   beforeEach<LocalTestContext>((context) => {
     context.props = {
-      value: sources.NETFLIX,
+      value: Source.NETFLIX,
       values: sources,
       label: "Netflix",
       hideLabelForSelection: false,
@@ -37,7 +37,7 @@ describe("list-select", () => {
 
     await user.click(screen.getByRole("combobox"));
 
-    Object.values(sources).forEach((source) => {
+    Object.values(Source).forEach((source) => {
       expect(
         screen.getByRole("option", { name: t(`common:sources.${source}`) })
       ).toBeInTheDocument();
@@ -47,6 +47,6 @@ describe("list-select", () => {
       screen.getByRole("option", { name: t("common:sources.6") })
     );
 
-    expect(props.onChange).toHaveBeenCalledWith(sources.DISNEY_PLUS);
+    expect(props.onChange).toHaveBeenCalledWith(Source.DISNEY_PLUS);
   });
 });

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ListSelectItem, { ListSelectItemProps } from "./list-select-item";
 import { sourceLogos } from "../../../../../../../../constants/sources";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 
 interface LocalTestContext {
   props: ListSelectItemProps;
@@ -12,7 +12,7 @@ describe("list-select-item", () => {
     context.props = {
       variant: "sources",
       images: sourceLogos,
-      value: sources.NETFLIX,
+      value: Source.NETFLIX,
       hideLabelForSelection: false,
     };
   });
@@ -21,7 +21,7 @@ describe("list-select-item", () => {
     render(<ListSelectItem {...props} />);
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      props.images?.[sources.NETFLIX]
+      props.images?.[Source.NETFLIX]
     );
     expect(screen.getByText(t("common:sources.1"))).toBeInTheDocument();
   });
@@ -33,7 +33,7 @@ describe("list-select-item", () => {
     render(<ListSelectItem {...props} hideLabelForSelection={true} />);
     expect(screen.getByRole("img")).toHaveAttribute(
       "src",
-      props.images?.[sources.NETFLIX]
+      props.images?.[Source.NETFLIX]
     );
     expect(screen.queryByText(t("common:sources.1"))).not.toBeInTheDocument();
   });

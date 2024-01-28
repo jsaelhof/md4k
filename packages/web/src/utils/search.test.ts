@@ -6,7 +6,7 @@ import {
   searchTorrent,
   searchStreaming,
 } from "./search";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 
 describe("searchIMDB", () => {
   it("should return the url", () => {
@@ -50,34 +50,32 @@ describe("searchTorrent", () => {
 
 describe("searchStreaming", () => {
   it("should return the Netflix url", () => {
-    expect(searchStreaming("Batman: The Dark Knight", sources.NETFLIX)).toBe(
+    expect(searchStreaming("Batman: The Dark Knight", Source.NETFLIX)).toBe(
       "http://netflix.com/search?q=Batman:%20The%20Dark%20Knight"
     );
   });
 
   it("should return the Prime Video url", () => {
-    expect(
-      searchStreaming("Batman: The Dark Knight", sources.PRIME_VIDEO)
-    ).toBe(
+    expect(searchStreaming("Batman: The Dark Knight", Source.PRIME_VIDEO)).toBe(
       "https://www.primevideo.com/search/ref=atv_nb_sr?phrase=Batman:%20The%20Dark%20Knight&ie=UTF8"
     );
   });
 
   it("should return the Plex url", () => {
-    expect(searchStreaming("Batman: The Dark Knight", sources.PLEX)).toBe(
+    expect(searchStreaming("Batman: The Dark Knight", Source.PLEX)).toBe(
       "http://192.168.1.5:32400/web/index.html#!/search?query=Batman:%20The%20Dark%20Knight"
     );
   });
 
   it("should return the Apple TV url without search params (Apple TV doesn't have a search URL format to use)", () => {
-    expect(searchStreaming("Batman: The Dark Knight", sources.APPLE_TV)).toBe(
+    expect(searchStreaming("Batman: The Dark Knight", Source.APPLE_TV)).toBe(
       "https://tv.apple.com/ca"
     );
   });
 
   it("should return the Disney Plus url without search params (Disney Plus doesn't have a search URL format to use)", () => {
-    expect(
-      searchStreaming("Batman: The Dark Knight", sources.DISNEY_PLUS)
-    ).toBe("https://disneyplus.com");
+    expect(searchStreaming("Batman: The Dark Knight", Source.DISNEY_PLUS)).toBe(
+      "https://disneyplus.com"
+    );
   });
 });

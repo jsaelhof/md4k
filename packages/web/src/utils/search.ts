@@ -1,4 +1,4 @@
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 
 export const searchIMDB = (imdbId: string): string =>
   `https://www.imdb.com/title/${imdbId}`;
@@ -20,11 +20,11 @@ export const searchTorrent = (title: string): string =>
 export const searchStreaming = (title: string, source: number): string =>
   ((
     {
-      [sources.NETFLIX]: `http://netflix.com/search?q=%s`, // FIXME: Doesn't like commas in the search...possibly other special chars. Other sites maybe the same?
-      [sources.PRIME_VIDEO]: `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=%s&ie=UTF8`,
-      [sources.PLEX]: `http://192.168.1.5:32400/web/index.html#!/search?query=%s`,
-      [sources.APPLE_TV]: "https://tv.apple.com/ca",
-      [sources.DISNEY_PLUS]: "https://disneyplus.com",
-      [sources.TUBI_TV]: `https://tubitv.com/search/%s`,
+      [Source.NETFLIX]: `http://netflix.com/search?q=%s`, // FIXME: Doesn't like commas in the search...possibly other special chars. Other sites maybe the same?
+      [Source.PRIME_VIDEO]: `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=%s&ie=UTF8`,
+      [Source.PLEX]: `http://192.168.1.5:32400/web/index.html#!/search?query=%s`,
+      [Source.APPLE_TV]: "https://tv.apple.com/ca",
+      [Source.DISNEY_PLUS]: "https://disneyplus.com",
+      [Source.TUBI_TV]: `https://tubitv.com/search/%s`,
     }[source] ?? ""
   ).replace("%s", encodeURI(title)));

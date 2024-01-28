@@ -2,11 +2,12 @@ import { ReactElement } from "react";
 import { Item } from "./list-select-item.styles";
 import { useTranslation } from "react-i18next";
 import resources from "../../../../../../../../__generated__/resources";
+import { Source } from "md4k-constants";
 
 export type ListSelectItemProps = {
   variant: "sources" | "genres";
   images?: { [key: number]: string };
-  value: number;
+  value: number | Source;
   hideLabelForSelection?: boolean;
 };
 

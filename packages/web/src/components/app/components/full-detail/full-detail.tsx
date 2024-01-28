@@ -9,7 +9,7 @@ import isNil from "lodash/isNil";
 
 import { formatRuntime } from "../../../../utils/format-runtime";
 import { searchStreaming, searchTMDB } from "../../../../utils/search";
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { useGetThirdPartyFullDetails } from "../../../../graphql/queries";
 import {
   Backdrop,
@@ -26,7 +26,7 @@ import {
   PrevBackgroundButton,
   RatingsArea,
   smallMovieTitle,
-  Source,
+  SourceLogo,
   streamable,
   TrailerLayout,
 } from "./full-detail.styles";
@@ -98,10 +98,10 @@ const FullDetail = ({
       ? movie.source
       : !isNil(data.source)
       ? data.source
-      : sources.NONE
+      : Source.NONE
   ) as SourceValue;
 
-  const canStream = !([sources.DVD, sources.NONE] as SourceValue[]).includes(
+  const canStream = !([Source.DVD, Source.NONE] as SourceValue[]).includes(
     source
   );
 
@@ -225,7 +225,7 @@ const FullDetail = ({
           <Rated rated={data.rated} />
         </MovieData>
 
-        <Source
+        <SourceLogo
           sx={[canStream && streamable]}
           src={sourceLogosLarge[source]}
           alt={t(`common:sources.${source}`)}

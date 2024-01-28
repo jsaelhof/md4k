@@ -1,21 +1,19 @@
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 
-type SourceValue = typeof sources[keyof typeof sources]; // TODO: Should remove this type an make sources an enumeration
+const nonStreamingSources: Source[] = [Source.PLEX, Source.DVD];
 
-const nonStreamingSources: SourceValue[] = [sources.PLEX, sources.DVD];
-
-const flatRateSources: SourceValue[] = [
-  sources.NETFLIX,
-  sources.DISNEY_PLUS,
-  sources.PRIME_VIDEO,
-  sources.APPLE_TV,
+const flatRateSources: Source[] = [
+  Source.NETFLIX,
+  Source.DISNEY_PLUS,
+  Source.PRIME_VIDEO,
+  Source.APPLE_TV,
 ];
 
-const adSupportedSources: SourceValue[] = [sources.TUBI_TV];
+const adSupportedSources: Source[] = [Source.TUBI_TV];
 
 export const shouldUpdateSource = (
-  currentSource: SourceValue,
-  availableSources: SourceValue[]
+  currentSource: Source,
+  availableSources: Source[]
 ) => {
   const hasAvailableFlatRateSource =
     availableSources.length > 0 &&
@@ -30,7 +28,7 @@ export const shouldUpdateSource = (
 
   const noAvailableSources = availableSources.length === 0;
 
-  const noCurrentSource = currentSource === sources.NONE;
+  const noCurrentSource = currentSource === Source.NONE;
 
   const currentSourceIsNonStreaming =
     nonStreamingSources.includes(currentSource);
@@ -48,7 +46,7 @@ export const shouldUpdateSource = (
   // 1. The current source is a streaming source but no streaming sources are found.
   // The source shouldn't change to None if it's a non-streaming source like DVD or PLEX
   // ...those will never be found through the API and we don't want to change that source to None.
-  if (currentSourceIsDead && noAvailableSources) return sources.NONE;
+  if (currentSourceIsDead && noAvailableSources) return Source.NONE;
 
   // 2. Available sources exist that are better than the current source:
   // - The current source is none but there is an available source

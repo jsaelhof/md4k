@@ -1,4 +1,4 @@
-import { sources } from "md4k-constants";
+import { Source } from "md4k-constants";
 import { toSubscribedSources } from "./to-subscribed-sources.js";
 
 describe("toSubscribedSources", () => {
@@ -14,7 +14,7 @@ describe("toSubscribedSources", () => {
           },
         },
       })
-    ).toEqual([sources.NETFLIX, sources.DISNEY_PLUS]);
+    ).toEqual([Source.NETFLIX, Source.DISNEY_PLUS]);
   });
 
   it("should filter out sources that aren't subscribed", () => {
@@ -31,7 +31,7 @@ describe("toSubscribedSources", () => {
           },
         },
       })
-    ).toEqual([sources.NETFLIX, sources.DISNEY_PLUS]);
+    ).toEqual([Source.NETFLIX, Source.DISNEY_PLUS]);
   });
 
   it("should handle missing flatrate", () => {
