@@ -18,7 +18,7 @@ import { join } from "path";
 // Note: this uses a path relative to the project's
 // root directory, which is the current working directory
 // if the server is executed using `npm run`.
-const a = readFileSync(join(__dirname, "schema.graphql"), {
+const a = readFileSync(join(process.cwd(), "packages/api/schema.graphql"), {
   encoding: "utf-8",
 });
 console.log(a);
