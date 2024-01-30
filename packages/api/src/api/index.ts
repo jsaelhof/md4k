@@ -24,6 +24,9 @@ import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
 //     encoding: "utf-8",
 //   }
 // );
+
+console.log("TEST", process.cwd());
+
 const typeDefs = `
 # TODO: watched, addedOn and editedOn are date strings. Is there a better way to handle this in graph?
 type List {
