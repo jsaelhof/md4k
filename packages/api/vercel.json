@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/*.js": {
+      "includeFiles": "src/graphql/schemas/schema.graphql"
+    }
+  }
 }
