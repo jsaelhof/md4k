@@ -18,12 +18,9 @@ import { resolve } from "path";
 // Note: this uses a path relative to the project's
 // root directory, which is the current working directory
 // if the server is executed using `npm run`.
-const a = readFileSync(
-  resolve(process.cwd(), "src/graphql/schemas/schema.graphql"),
-  {
-    encoding: "utf-8",
-  }
-);
+const a = readFileSync(resolve(process.cwd(), "schema.graphql"), {
+  encoding: "utf-8",
+});
 console.log(a);
 
 console.log("TEST", process.cwd());
