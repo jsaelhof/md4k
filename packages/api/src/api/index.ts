@@ -17,7 +17,7 @@ import { readFileSync } from "fs";
 // Note: this uses a path relative to the project's
 // root directory, which is the current working directory
 // if the server is executed using `npm run`.
-const typeDefs = readFileSync("./src/graphql/schemas/schema.graphql", {
+const typeDefs = readFileSync("../graphql/schemas/schema.graphql", {
   encoding: "utf-8",
 });
 
