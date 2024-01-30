@@ -12,18 +12,19 @@ import dotenv from "dotenv";
 import { isTokenValid } from "../auth/validate.js";
 import { OMDBDataSource } from "../graphql/datasources/omdb-datasource.js";
 import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
-// import { readFileSync } from "fs";
-// import { resolve } from "path";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 
 // Note: this uses a path relative to the project's
 // root directory, which is the current working directory
 // if the server is executed using `npm run`.
-// const typeDefs = readFileSync(
-//   resolve(process.cwd(), "./src/graphql/schemas/schema.graphql"),
-//   {
-//     encoding: "utf-8",
-//   }
-// );
+const a = readFileSync(
+  resolve(process.cwd(), "src/graphql/schemas/schema.graphql"),
+  {
+    encoding: "utf-8",
+  }
+);
+console.log(a);
 
 console.log("TEST", process.cwd());
 
