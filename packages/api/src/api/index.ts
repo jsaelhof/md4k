@@ -12,18 +12,151 @@ import dotenv from "dotenv";
 import { isTokenValid } from "../auth/validate.js";
 import { OMDBDataSource } from "../graphql/datasources/omdb-datasource.js";
 import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
-import { readFileSync } from "fs";
-import { resolve } from "path";
+// import { readFileSync } from "fs";
+// import { resolve } from "path";
 
 // Note: this uses a path relative to the project's
 // root directory, which is the current working directory
 // if the server is executed using `npm run`.
-const typeDefs = readFileSync(
-  resolve(process.cwd(), "./src/graphql/schemas/schema.graphql"),
-  {
-    encoding: "utf-8",
-  }
-);
+// const typeDefs = readFileSync(
+//   resolve(process.cwd(), "./src/graphql/schemas/schema.graphql"),
+//   {
+//     encoding: "utf-8",
+//   }
+// );
+const typeDefs = `
+# TODO: watched, addedOn and editedOn are date strings. Is there a better way to handle this in graph?
+type List {
+  id: ID!
+  label: String!
+  userId: String!
+}
+
+type Ratings {
+  id: ID!
+  IMDB: String
+  ROTTEN_TOMATOES: String
+  METACRITIC: String
+}
+
+input RatingsInput {
+  id: ID!
+  IMDB: String
+  ROTTEN_TOMATOES: String
+  METACRITIC: String
+}
+
+type Movie {
+  id: ID!
+  imdbID: String
+  title: String!
+  list: String!
+  runtime: Int
+  source: Int
+  genre: Int
+  year: String
+  poster: String
+  addedOn: String
+  watchedOn: String
+  locked: Boolean
+  ratings: Ratings
+  fiveStarRating: Float
+  background: String
+}
+
+input MovieInput {
+  id: ID!
+  imdbID: String
+  title: String!
+  list: String!
+  runtime: Int
+  source: Int
+  genre: Int
+  year: String
+  poster: String
+  addedOn: String
+  watchedOn: String
+  locked: Boolean
+  ratings: RatingsInput
+  background: String
+}
+
+type DeletedMovie {
+  id: ID!
+  list: String!
+}
+
+type SearchResult {
+  title: String
+  year: String
+  imdbID: String
+  poster: String
+}
+
+type PageInfo {
+  pages: Int
+  page: Int
+}
+
+type SearchResults {
+  results: [SearchResult]
+  pageInfo: PageInfo
+}
+
+type ThirdPartyMovie {
+  imdbID: ID!
+  title: String
+  year: String
+  runtime: Int
+  genre: Int
+  rated: String
+  cast: [ThirdPartyCastMember]
+  director: [ThirdPartyDirector]
+  ratings: Ratings
+  fiveStarRating: Float
+  poster: String
+  backdrop: String
+  backdrops: [String]
+  trailer: ThirdPartyTrailer
+  plot: String
+  source: Int
+}
+
+type ThirdPartyTrailer {
+  site: String
+  key: ID!
+}
+
+type ThirdPartyCastMember {
+  id: ID!
+  name: String
+  character: String
+  image: String
+}
+
+type ThirdPartyDirector {
+  id: ID!
+  name: String
+  image: String
+}
+
+type Query {
+  lists: [List]
+  movies(list: String!): [Movie]
+  watchedMovies(list: String!): [Movie]
+  searchByTitle(title: String!, year: String, page: Int): SearchResults
+  thirdPartyMovie(imdbID: ID!): ThirdPartyMovie
+}
+
+type Mutation {
+  addList(name: String!): List
+  addMovie(movie: MovieInput!, list: String!): Movie
+  editMovie(movie: MovieInput!, list: String!, removeKeys: [String]): Movie
+  removeMovie(movieId: ID!, list: String!): DeletedMovie
+  updateMovie(movieId: ID!, list: String!): Movie
+}
+
+`;
 
 export interface GraphQLContext extends ExpressContext {
   db: Db;
