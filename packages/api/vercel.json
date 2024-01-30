@@ -1,7 +1,7 @@
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
   "functions": {
-    "api/*.js": {
+    "api/index.ts": {
       "includeFiles": "src/graphql/schemas/schema.graphql"
     }
   }
