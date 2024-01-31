@@ -15,11 +15,14 @@ import { TMDBDataSource } from "../graphql/datasources/tmdb-datasource.js";
 import { readFileSync } from "fs";
 import { join } from "path";
 
-// Note: this uses a path relative to the project's
-// root directory, which is the current working directory
-// if the server is executed using `npm run`.
+// Note: this uses a path relative to the project's root directory.
+// On Vercel, this is the monorepo root so the path must start with "/packages/api".
+// In Dev, this is the api package root and must omit that prefix.
 const typeDefs = readFileSync(
-  join(process.cwd(), "packages/api/src/graphql/schemas/schema.graphql"),
+  join(
+    process.cwd(),
+    process.env.SCHEMA_PATH ?? "packages/api/src/graphql/schemas/schema.graphql"
+  ),
   {
     encoding: "utf-8",
   }
