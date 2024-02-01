@@ -1,3 +1,12 @@
+### PR #158 - #150: convert to ts
+##### 2024-02-01
+
+Converts the app (web, api and constants) to typescript with type-generation of GraphQL schema.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/158)
+
+----
+
 ### PR #151 - #144 - Sort by preferred source order
 ##### 2023-12-17
 
