@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { App } from "./components/app/app";
@@ -9,7 +9,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { sort, sortDirection } from "./constants/sorts";
+import { sort, SortDirection } from "./constants/sorts";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
 import { i18nextConfig } from "./i18next/i18next-config";
@@ -25,13 +25,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+          <Navigate replace to={`/list/${sort.ADDED}/${SortDirection.DESC}`} />
         ),
       },
       {
         path: "/list",
         element: (
-          <Navigate replace to={`/list/${sort.ADDED}/${sortDirection.DESC}`} />
+          <Navigate replace to={`/list/${sort.ADDED}/${SortDirection.DESC}`} />
         ),
       },
       {
@@ -102,7 +102,9 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.render(
+// @ts-expect-error getting root could return null
+const root = createRoot(document.getElementById("root"));
+root.render(
   <ErrorBoundary>
     {/* https://auth0.com/docs/get-started/architecture-scenarios/spa-api */}
     <Auth0Provider
@@ -115,6 +117,5 @@ ReactDOM.render(
         <RouterProvider router={router} />
       </I18nextProvider>
     </Auth0Provider>
-  </ErrorBoundary>,
-  document.getElementById("root")
+  </ErrorBoundary>
 );

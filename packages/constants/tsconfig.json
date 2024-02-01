@@ -1,0 +1,17 @@
+{
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "module": "NodeNext",
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "src",
+    "declaration": true,
+    "outDir": "dist",
+    "declarationMap": true,
+    // This is required to allow this package to be linked by other packages in the monorepo and to build when the consuming packages build.
+    "composite": true,
+    "strict": true
+  }
+}

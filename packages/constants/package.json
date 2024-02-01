@@ -4,5 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "yarn@3.2.2",
-  "main": "src/index.js"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "npx tsc --watch --preserveWatchOutput",
+    "build": "npx tsc",
+    "typecheck": "npx tsc --noEmit"
+  }
 }

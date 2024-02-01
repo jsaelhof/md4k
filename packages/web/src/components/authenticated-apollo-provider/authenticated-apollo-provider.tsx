@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -7,6 +7,7 @@ import {
   NormalizedCacheObject,
   from,
 } from "@apollo/client";
+import { removeTypenameFromVariables } from "@apollo/client/link/remove-typename";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,13 +15,13 @@ import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 
 export const AuthenticatedApolloProvider = ({
   children,
-}: PropsWithChildren) => {
+}: PropsWithChildren): ReactElement | null => {
   const { getAccessTokenSilently } = useAuth0();
 
   const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
 
   useEffect(() => {
-    async function init() {
+    async function init(): Promise<void> {
       const errorLink = onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path, extensions }) => {
@@ -39,6 +40,8 @@ export const AuthenticatedApolloProvider = ({
           });
         if (networkError) console.log(`[Network error]: ${networkError}`);
       });
+
+      const removeTypenameLink = removeTypenameFromVariables();
 
       const httpLink = new HttpLink({
         uri: import.meta.env.VITE_GRAPHQL_URL,
@@ -102,7 +105,7 @@ export const AuthenticatedApolloProvider = ({
 
       setClient(
         new ApolloClient({
-          link: from([errorLink, authLink, httpLink]),
+          link: from([errorLink, authLink, removeTypenameLink, httpLink]),
           cache,
         })
       );

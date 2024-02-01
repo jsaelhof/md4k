@@ -1,17 +1,36 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/prop-types": 0,
     "react/no-unknown-property": 2,
     "jsx-a11y/alt-text": 0,
-    "react/display-name": 0
+    "react/display-name": 0,
+    "@typescript-eslint/explicit-function-return-type": 0
   },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "excludedFiles": ["*.test.ts", "*.test.tsx", "**/graphql/**"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": 2
+      }
+    },
+    {
+      // enable the rule specifically for test files
+      "files": ["*.test.ts", "*.test.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": 0
+      }
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -19,5 +38,6 @@
   },
   "env": {
     "browser": true
-  }
+  },
+  "ignorePatterns": ["src/__generated__/**"]
 }

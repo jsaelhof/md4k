@@ -5,12 +5,15 @@
   "type": "module",
   "packageManager": "yarn@3.2.2",
   "scripts": {
-    "dev": "NODE_ENV=development node ./scripts/dev.js",
-    "lint": "npx eslint \"./**/*.{js,ts}\" --max-warnings=0",
+    "build": "yarn workspace md4k-constants run build && yarn run generate && npx tsc",
+    "dev": "yarn run generate && tsc && NODE_ENV=development node ./scripts/dev.js && tsc --watch --preserveWatchOutput",
+    "lint": "npx eslint \"./src/**/*.{js,ts}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
-    "test": "vitest",
+    "test": "yarn workspace md4k-constants run build && yarn run generate && npx tsc && vitest",
     "test-ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "generate": "graphql-codegen",
+    "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",
@@ -27,9 +30,14 @@
     "mongodb": "^4.8.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-mongodb": "3.0.0",
+    "@graphql-codegen/typescript-resolvers": "4.0.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.5",
     "@vitest/coverage-c8": "^0.22.1",
     "@vitest/ui": "^0.22.1",
-    "typescript": "^4.6.4",
     "vitest": "^0.31.0"
   },
   "peerDependencies": {
@@ -38,6 +46,6 @@
     "eslint": "*"
   },
   "engines": {
-    "node": "18.0.0"
+    "node": "18"
   }
 }

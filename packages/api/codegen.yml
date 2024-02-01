@@ -1,0 +1,9 @@
+schema: ./src/graphql/schemas/schema.graphql
+generates:
+  ./src/__generated__/graphql.ts:
+    config:
+      # The path here is <path>#<TS interface name> and must be relative to the location of the generated types file (first line under "generates")
+      contextType: ../api/index.js#GraphQLContext
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"

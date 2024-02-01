@@ -18,11 +18,11 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true };
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.error("Uncaught error:", error, errorInfo);
   }
 
-  public render() {
+  public render(): ReactNode {
     if (this.state.hasError) {
       // FIXME: Implement an error page
       return <h1>FIXME: Implement an error page</h1>;
