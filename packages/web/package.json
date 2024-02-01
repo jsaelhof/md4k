@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "yarn run generate && vite --port 4000",
-    "build": "yarn ../constants run build && yarn run generate && npx tsc && vite build",
+    "build": "yarn workspace md4k-constants run build && yarn run generate && npx tsc && vite build",
     "preview": "vite preview",
     "lint": "npx eslint \"./src/**/*.{js,jsx,ts,tsx}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
-    "test": "vitest",
+    "test": "yarn workspace md4k-constants run build && yarn run generate && npx tsc && vitest",
     "test-ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "generate": "yarn run ts-typegen && yarn run i18n-typegen",

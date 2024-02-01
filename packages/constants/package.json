@@ -7,7 +7,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "tsc --watch --preserveWatchOutput",
+    "dev": "npx tsc --watch --preserveWatchOutput",
     "build": "npx tsc",
     "typecheck": "npx tsc --noEmit"
   }

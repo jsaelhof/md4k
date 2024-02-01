@@ -12,9 +12,9 @@
     "prettier": "yarn workspaces foreach -vp run prettier",
     "prepare": "husky install",
     "lintstaged": "yarn workspaces foreach -vp run lint-staged",
-    "test": "yarn workspaces foreach -vpi run vitest",
-    "test:api": "cd packages/api && run vitest",
-    "test:web": "cd packages/web && run vitest",
+    "test": "yarn workspaces foreach -vpi run test",
+    "test:api": "yarn workspace md4k-api run test",
+    "test:web": "yarn workspace md4k-web run test",
     "coverage": "yarn workspaces foreach -vpi run coverage",
     "typecheck": "yarn workspaces foreach -vpi run typecheck"
   },
