@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { ActionsView, ActionsViewProps } from "./actions-view";
+import { ActionsView, type ActionsViewProps } from "./actions-view";
 import { Source } from "md4k-constants";
 
 interface LocalTestContext {

@@ -1,7 +1,7 @@
 import { render, waitFor, screen } from "@testing-library/react";
 import { createMatchMedia } from "../../../../../../test-utils/create-match-media";
 import { StarRatingLayout } from "./star-rating-layout";
-import { Ratings } from "../../../../../../__generated__/graphql";
+import { type Ratings } from "../../../../../../__generated__/graphql";
 
 interface LocalTestContext {
   ratings: Ratings;

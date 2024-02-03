@@ -1,5 +1,5 @@
-import { QueryResolvers } from "../../../__generated__/graphql.js";
-import { List } from "../../types/db.types.js";
+import { type QueryResolvers } from "../../../__generated__/graphql.js";
+import { type List } from "../../types/db.types.js";
 
 export const lists: QueryResolvers["lists"] = async (
   parent,

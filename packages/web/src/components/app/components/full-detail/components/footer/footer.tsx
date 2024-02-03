@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 
 import {
   searchCommonSense,
@@ -7,7 +7,7 @@ import {
   searchTMDB,
 } from "../../../../../../utils/search";
 import { ActionImage, Container } from "./footer.styles";
-import { Maybe } from "../../../../../../__generated__/graphql";
+import { type Maybe } from "../../../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 
 export type FooterProps = {

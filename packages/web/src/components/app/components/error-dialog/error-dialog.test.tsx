@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ErrorDialog, { ErrorDialogProps } from "./error-dialog";
+import ErrorDialog, { type ErrorDialogProps } from "./error-dialog";
 import { vi } from "vitest";
 
 interface LocalTestContext {

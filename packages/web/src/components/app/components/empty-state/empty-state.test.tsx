@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import EmptyState, { EmptyStateProps } from "./empty-state";
+import EmptyState, { type EmptyStateProps } from "./empty-state";
 
 interface LocalTestContext {
   props: EmptyStateProps;

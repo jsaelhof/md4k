@@ -1,4 +1,4 @@
-import FullDetail, { FullDetailProps } from "./full-detail";
+import FullDetail, { type FullDetailProps } from "./full-detail";
 import { waitFor, screen } from "@testing-library/react";
 import { Source } from "md4k-constants";
 import { vi, beforeEach } from "vitest";

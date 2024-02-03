@@ -9,7 +9,7 @@ import {
   Number,
   VerticalLine,
 } from "./countdown.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useSpring } from "react-spring";
 
 export const Countdown = (): ReactElement => {

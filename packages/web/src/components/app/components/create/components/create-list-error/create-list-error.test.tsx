@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import CreateListError from "./create-list-error";
-import { Mock, vi } from "vitest";
+import { type Mock, vi } from "vitest";
 
 interface LocalTestContext {
   reset: Mock;

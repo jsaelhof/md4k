@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import { renderWithProvidersAsRoute } from "../../../../test-utils/render-with-providers";
 import { List } from "./list";
-import { SpyInstance, vi } from "vitest";
+import { type SpyInstance, vi } from "vitest";
 import * as appContext from "../../../../context/app-context";
 
 import { Globals } from "react-spring";
@@ -12,17 +12,17 @@ import {
   REMOVE_MOVIE,
 } from "../../../../graphql/mutations";
 import { GET_LISTS } from "../../../../graphql/queries";
-import { ListGridProps } from "./components/list-grid/types";
+import { type ListGridProps } from "./components/list-grid/types";
 import {
-  EditMovieMutation,
-  EditMovieMutationVariables,
-  MarkWatchedMutation,
-  MarkWatchedMutationVariables,
-  Movie,
-  RemoveMovieMutation,
-  RemoveMovieMutationVariables,
+  type EditMovieMutation,
+  type EditMovieMutationVariables,
+  type MarkWatchedMutation,
+  type MarkWatchedMutationVariables,
+  type Movie,
+  type RemoveMovieMutation,
+  type RemoveMovieMutationVariables,
 } from "../../../../__generated__/graphql";
-import { MockedResponse } from "@apollo/client/testing";
+import { type MockedResponse } from "@apollo/client/testing";
 
 Globals.assign({
   skipAnimation: true,

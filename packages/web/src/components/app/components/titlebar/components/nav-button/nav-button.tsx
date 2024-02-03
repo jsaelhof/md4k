@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { PropsWithChildren, ReactElement, ReactNode } from "react";
+import { type PropsWithChildren, type ReactElement, type ReactNode } from "react";
 
 export type NavButtonProps = {
   href?: string;

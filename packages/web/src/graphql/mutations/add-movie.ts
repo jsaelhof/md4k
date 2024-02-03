@@ -1,6 +1,6 @@
 import {
-  BaseMutationOptions,
-  MutationTuple,
+  type BaseMutationOptions,
+  type MutationTuple,
   gql,
   useMutation,
 } from "@apollo/client";
@@ -8,11 +8,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import { GET_MOVIES } from "../queries";
 import {
-  AddMovieMutation,
-  AddMovieMutationVariables,
-  MovieInput,
+  type AddMovieMutation,
+  type AddMovieMutationVariables,
+  type MovieInput,
 } from "../../__generated__/graphql";
-import { GetListsItem, NewMovieInput } from "../types";
+import { type GetListsItem, type NewMovieInput } from "../types";
 
 export const ADD_MOVIE = gql`
   mutation AddMovie($movie: MovieInput!, $list: String!) {

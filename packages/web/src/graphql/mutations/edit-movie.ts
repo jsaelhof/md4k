@@ -1,15 +1,15 @@
 import {
-  BaseMutationOptions,
-  MutationTuple,
+  type BaseMutationOptions,
+  type MutationTuple,
   gql,
   useMutation,
 } from "@apollo/client";
 import {
-  EditMovieMutation,
-  EditMovieMutationVariables,
-  Movie,
+  type EditMovieMutation,
+  type EditMovieMutationVariables,
+  type Movie,
 } from "../../__generated__/graphql";
-import { GetListsItem } from "../types";
+import { type GetListsItem } from "../types";
 
 export const EDIT_MOVIE = gql`
   mutation EditMovie(

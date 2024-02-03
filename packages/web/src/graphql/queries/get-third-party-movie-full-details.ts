@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import {
-  GetThirdPartyMovieFullDetailsQuery,
-  GetThirdPartyMovieFullDetailsQueryVariables,
-  Maybe,
+  type GetThirdPartyMovieFullDetailsQuery,
+  type GetThirdPartyMovieFullDetailsQueryVariables,
+  type Maybe,
 } from "../../__generated__/graphql";
 
 export const GET_THIRD_PARTY_MOVIE_FULL_DETAILS = gql`

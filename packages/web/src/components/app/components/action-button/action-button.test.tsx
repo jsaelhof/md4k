@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ActionButton from "./action-button";
 import Close from "@mui/icons-material/Close";
-import { Mock, vi } from "vitest";
+import { type Mock, vi } from "vitest";
 
 interface LocalTestContext {
   onClick: Mock;

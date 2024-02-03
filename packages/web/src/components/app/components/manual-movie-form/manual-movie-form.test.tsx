@@ -2,7 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import { vi } from "vitest";
 import { Source } from "md4k-constants";
 import { Genre } from "md4k-constants";
-import { ManualMovieForm, ManualMovieFormProps } from "./manual-movie-form";
+import { ManualMovieForm, type ManualMovieFormProps } from "./manual-movie-form";
 import Clear from "@mui/icons-material/Clear";
 
 interface LocalTestContext {

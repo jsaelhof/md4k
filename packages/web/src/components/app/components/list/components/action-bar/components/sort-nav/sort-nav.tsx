@@ -9,9 +9,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-and-direction";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import resources from "../../../../../../../../__generated__/resources";
+import type resources from "../../../../../../../../__generated__/resources";
 
 const SortNav = (): ReactElement => {
   const { t } = useTranslation(["list"]);

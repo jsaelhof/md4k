@@ -10,15 +10,28 @@
   ],
   "plugins": ["@typescript-eslint", "vitest", "testing-library"],
   "rules": {
-    "no-unused-vars": "error",
     "require-await": "error",
     "vitest/no-focused-tests": "error",
     "vitest/no-disabled-tests": "error",
     "vitest/no-duplicate-hooks": "error",
     "vitest/consistent-test-filename": "error",
     "vitest/consistent-test-it": "error",
-    "vitest/prefer-comparison-matcher": "error"
+    "vitest/prefer-comparison-matcher": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "fixStyle": "inline-type-imports" }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
+  "overrides": [
+    {
+      // enable the rule specifically for test files
+      "files": ["*.test.ts", "*.test.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": 0
+      }
+    }
+  ],
   "env": {
     "node": true,
     "jest": true

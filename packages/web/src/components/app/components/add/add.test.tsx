@@ -5,8 +5,8 @@ import { vi } from "vitest";
 import TabPanel from "./components/tab-panel/tab-panel";
 import { ADD_MOVIE, addMovieOptions } from "../../../../graphql/mutations";
 import { GraphQLError } from "graphql";
-import { TabPanelSearchProps } from "./components/tab-panel-search/tab-panel-search";
-import { TabPanelManualProps } from "./components/tab-panel-manual/tab-panel-manual";
+import { type TabPanelSearchProps } from "./components/tab-panel-search/tab-panel-search";
+import { type TabPanelManualProps } from "./components/tab-panel-manual/tab-panel-manual";
 
 const movieData = {
   id: "111-222-333",

@@ -1,5 +1,5 @@
-import { Tab, Tabs, TabsOwnProps } from "@mui/material";
-import { ReactElement, useCallback, useState } from "react";
+import { Tab, Tabs, type TabsOwnProps } from "@mui/material";
+import { type ReactElement, useCallback, useState } from "react";
 import { Layout, tabStyles, tabsStyles } from "./add.styles";
 import { addMovieOptions, useAddMovie } from "../../../../graphql/mutations";
 import { useAppContext } from "../../../../context/app-context";
@@ -8,7 +8,7 @@ import TabPanelSearch from "./components/tab-panel-search/tab-panel-search";
 import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
 import { useTranslation } from "react-i18next";
-import { NewMovie } from "../../../../graphql/types";
+import { type NewMovie } from "../../../../graphql/types";
 
 export const Add = (): ReactElement => {
   const { t } = useTranslation(["add", "common"]);

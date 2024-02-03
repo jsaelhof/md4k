@@ -2,9 +2,9 @@ import TabPanel from "../tab-panel/tab-panel";
 import { ManualMovieForm } from "../../../manual-movie-form/manual-movie-form";
 import LibraryAdd from "@mui/icons-material/LibraryAdd";
 import { useNavigate } from "react-router-dom";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { NewMovieInput } from "../../../../../../graphql/types";
+import { type NewMovieInput } from "../../../../../../graphql/types";
 
 export type TabPanelManualProps = {
   tabId: string;

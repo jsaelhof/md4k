@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import { Character, Headshot, Layout, Name } from "./cast.styles";
-import { ReactElement } from "react";
-import { Maybe } from "../../../../../../__generated__/graphql";
+import { type ReactElement } from "react";
+import { type Maybe } from "../../../../../../__generated__/graphql";
 
 export type CastProps = {
   name?: Maybe<string>;

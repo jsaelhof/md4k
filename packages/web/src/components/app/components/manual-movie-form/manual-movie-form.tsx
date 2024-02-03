@@ -9,17 +9,17 @@ import {
   SmallField,
 } from "./manual-movie-form.styles";
 import { Button } from "@mui/material";
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { formatRuntime } from "../../../../utils/format-runtime";
 import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
 import { parseRuntime } from "../../../../utils/parse-runtime";
 import TextInput from "./components/text-input/text-input.jsx";
-import { Movie } from "../../../../__generated__/graphql";
-import { SvgIconComponent } from "@mui/icons-material";
-import { MovieFormFields } from "./types";
+import { type Movie } from "../../../../__generated__/graphql";
+import { type SvgIconComponent } from "@mui/icons-material";
+import { type MovieFormFields } from "./types";
 import { useTranslation } from "react-i18next";
-import { NewMovieInput } from "../../../../graphql/types";
+import { type NewMovieInput } from "../../../../graphql/types";
 import GenreSelect from "./components/genre-select/genre-select";
 import SourceSelect from "./components/source-select/source-select";
 

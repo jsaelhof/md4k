@@ -1,9 +1,9 @@
-import { ApolloServer, ExpressContext } from "apollo-server-express";
+import { ApolloServer, type ExpressContext } from "apollo-server-express";
 import {
   ApolloServerPluginDrainHttpServer,
   AuthenticationError,
 } from "apollo-server-core";
-import { Db, MongoClient } from "mongodb";
+import { type Db, MongoClient } from "mongodb";
 import http from "http";
 import express from "express";
 import cors from "cors";

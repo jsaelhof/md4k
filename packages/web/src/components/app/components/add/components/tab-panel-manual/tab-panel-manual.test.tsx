@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import TabPanelManual, { TabPanelManualProps } from "./tab-panel-manual";
+import TabPanelManual, { type TabPanelManualProps } from "./tab-panel-manual";
 
 interface LocalTestContext {
   props: TabPanelManualProps;

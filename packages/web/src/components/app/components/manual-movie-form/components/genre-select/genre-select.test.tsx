@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import GenreSelect, { GenreSelectProps } from "./genre-select";
+import GenreSelect, { type GenreSelectProps } from "./genre-select";
 import { Genre, genres } from "md4k-constants";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 

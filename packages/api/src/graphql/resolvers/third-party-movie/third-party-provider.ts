@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import { toSubscribedSources } from "../utils/to-subscribed-sources.js";
-import { ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
+import { type ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
 
 const { first } = lodash;
 

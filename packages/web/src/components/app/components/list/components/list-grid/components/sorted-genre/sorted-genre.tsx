@@ -1,13 +1,13 @@
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
-import { ListGridProps } from "../../types";
-import { Movie } from "../../../../../../../../__generated__/graphql";
+import { type ListGridProps } from "../../types";
+import { type Movie } from "../../../../../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
-import resources from "../../../../../../../../__generated__/resources";
+import type resources from "../../../../../../../../__generated__/resources";
 
 const SortedGenre = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const { t } = useTranslation(["common"]);

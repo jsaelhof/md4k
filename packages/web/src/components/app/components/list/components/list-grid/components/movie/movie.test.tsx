@@ -1,10 +1,10 @@
 import { waitFor, screen } from "@testing-library/react";
-import Movie, { MovieProps } from "./movie";
+import Movie, { type MovieProps } from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 import { Globals } from "react-spring";
 import { UPDATE_MOVIE } from "../../../../../../../../graphql/mutations/update-movie";
-import { FullDetailModalProps } from "../../../../../full-detail-modal/full-detail-modal";
+import { type FullDetailModalProps } from "../../../../../full-detail-modal/full-detail-modal";
 
 Globals.assign({
   skipAnimation: true,

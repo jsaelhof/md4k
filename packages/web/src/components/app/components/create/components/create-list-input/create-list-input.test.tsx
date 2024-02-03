@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import CreateListInput from "./create-list-input";
-import { Mock, vi } from "vitest";
+import { type Mock, vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 
 interface LocalTestContext {

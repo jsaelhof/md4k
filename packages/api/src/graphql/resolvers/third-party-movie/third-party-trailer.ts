@@ -1,5 +1,5 @@
 import lodash from "lodash";
-import { ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
+import { type ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
 
 const { filter, find, first, isNil, pick, reject } = lodash;
 

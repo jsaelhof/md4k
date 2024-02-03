@@ -1,6 +1,6 @@
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { buildMovieMock } from "../../../../../../test-utils/build-movie-mock";
-import WatchedMovie, { WatchedMovieProps } from "./watched-movie";
+import WatchedMovie, { type WatchedMovieProps } from "./watched-movie";
 import { vi } from "vitest";
 import { buildThirdPartyMovieMock } from "../../../../../../test-utils/build-third-party-movie-mock";
 import { within, screen } from "@testing-library/react";

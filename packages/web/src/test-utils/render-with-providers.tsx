@@ -1,11 +1,11 @@
 import {
-  RenderHookResult,
-  RenderOptions,
-  RenderResult,
+  type RenderHookResult,
+  type RenderOptions,
+  type RenderResult,
   render,
   renderHook,
 } from "@testing-library/react";
-import { MockedProvider, MockedResponse } from "@apollo/client/testing";
+import { MockedProvider, type MockedResponse } from "@apollo/client/testing";
 import { AppProvider } from "../context/app-context";
 import { GET_LISTS, GET_MOVIES } from "../graphql/queries";
 import { ThemeProvider } from "@mui/material";
@@ -15,12 +15,12 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { buildMovieMock } from "./build-movie-mock";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import {
-  GetListsQuery,
-  GetListsQueryVariables,
-  GetMoviesQuery,
-  GetMoviesQueryVariables,
+  type GetListsQuery,
+  type GetListsQueryVariables,
+  type GetMoviesQuery,
+  type GetMoviesQueryVariables,
 } from "../__generated__/graphql";
 import type { User } from "@auth0/auth0-react";
 

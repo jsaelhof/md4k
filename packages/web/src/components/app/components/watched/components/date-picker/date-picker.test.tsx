@@ -1,8 +1,8 @@
 import { screen } from "@testing-library/react";
-import DatePicker, { DatePickerProps } from "./date-picker";
+import DatePicker, { type DatePickerProps } from "./date-picker";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
-import { SpringValues } from "react-spring";
+import { type SpringValues } from "react-spring";
 
 interface LocalTestContext {
   props: DatePickerProps;

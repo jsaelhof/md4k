@@ -1,9 +1,9 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import {
-  SearchByTitleQuery,
-  SearchByTitleQueryVariables,
+  type SearchByTitleQuery,
+  type SearchByTitleQueryVariables,
 } from "../../__generated__/graphql";
-import { Maybe } from "graphql/jsutils/Maybe";
+import { type Maybe } from "graphql/jsutils/Maybe";
 
 export const SEARCH_BY_TITLE = gql`
   query SearchByTitle($title: String!, $year: String, $page: Int) {

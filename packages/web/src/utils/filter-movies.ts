@@ -2,7 +2,7 @@ import filter from "lodash/filter";
 // @ts-expect-error @types for lodash does not have a d.ts for conforms.
 import conforms from "lodash/conforms";
 import { isBefore, parseISO, subDays } from "date-fns";
-import { Movie } from "../__generated__/graphql";
+import { type Movie } from "../__generated__/graphql";
 
 export const filterMovies = (
   movies: Movie[],

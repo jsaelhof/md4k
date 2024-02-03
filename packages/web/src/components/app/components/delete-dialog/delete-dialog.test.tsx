@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import DeleteDialog, { DeleteDialogProps } from "./delete-dialog";
+import DeleteDialog, { type DeleteDialogProps } from "./delete-dialog";
 import { vi } from "vitest";
 
 interface LocalTestContext {

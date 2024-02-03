@@ -1,4 +1,4 @@
-import { QueryResolvers } from "../../../__generated__/graphql.js";
+import { type QueryResolvers } from "../../../__generated__/graphql.js";
 
 export const searchByTitle: QueryResolvers["searchByTitle"] = async (
   parent,

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import PosterGrid, { PosterGridProps } from "./poster-grid";
+import PosterGrid, { type PosterGridProps } from "./poster-grid";
 import { vi } from "vitest";
 
 interface LocalTestContext {

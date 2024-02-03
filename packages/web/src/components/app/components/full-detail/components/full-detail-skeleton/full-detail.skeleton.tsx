@@ -11,7 +11,7 @@ import {
   PlotLayout,
   Poster,
 } from "../../full-detail.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export type FullDetailSkeletonProps = {
   showCloseButton?: boolean;

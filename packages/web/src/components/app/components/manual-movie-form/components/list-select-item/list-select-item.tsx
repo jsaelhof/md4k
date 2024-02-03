@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { Item } from "./list-select-item.styles";
 
 export type ListSelectItemProps = {

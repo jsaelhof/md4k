@@ -2,8 +2,8 @@ import { screen } from "@testing-library/react";
 import ListGrid from "./list-grid";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
-import { MovieProps } from "./components/movie/movie";
-import { ListGridProps } from "./types";
+import { type MovieProps } from "./components/movie/movie";
+import { type ListGridProps } from "./types";
 
 vi.mock("./components/movie/movie", () => ({
   default: ({ onRemoveMovie, movie }: MovieProps) => (

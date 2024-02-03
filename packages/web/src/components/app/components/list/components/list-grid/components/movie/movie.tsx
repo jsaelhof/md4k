@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useState } from "react";
+import React, { type ReactElement, useRef, useState } from "react";
 import { useSpring } from "react-spring";
 import debounce from "lodash/debounce";
 
@@ -26,8 +26,8 @@ import FullDetailModal from "../../../../../full-detail-modal/full-detail-modal"
 import { useResponsive } from "../../../../../../../../hooks/use-responsive";
 import { useUpdateMovie } from "../../../../../../../../graphql/mutations/update-movie";
 import { useChangeBackdrop } from "./hooks/useChangeBackdrop";
-import { Movie as MovieType } from "../../../../../../../../__generated__/graphql";
-import { ListGridHandlers } from "../../types";
+import { type Movie as MovieType } from "../../../../../../../../__generated__/graphql";
+import { type ListGridHandlers } from "../../types";
 
 const isTouchInterface = "ontouchstart" in window;
 

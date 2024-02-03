@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { Container } from "./create-list-error.styles";
 import { useTranslation } from "react-i18next";
 

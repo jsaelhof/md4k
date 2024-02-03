@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useMemo, useState } from "react";
+import { type ReactElement, useCallback, useMemo, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorDialog from "../error-dialog/error-dialog";
@@ -7,9 +7,9 @@ import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
 import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
-import { Movie } from "../../../../__generated__/graphql";
+import { type Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
-import { NewMovieInput } from "../../../../graphql/types";
+import { type NewMovieInput } from "../../../../graphql/types";
 
 export const Edit = (): ReactElement => {
   const params = useParams();

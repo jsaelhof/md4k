@@ -1,7 +1,7 @@
 import times from "lodash/times";
 import { Star, StarRatingContainer } from "./five-star-rating.styles";
-import { ReactElement } from "react";
-import { Maybe } from "../../../../__generated__/graphql";
+import { type ReactElement } from "react";
+import { type Maybe } from "../../../../__generated__/graphql";
 
 const heights = [16, 18, 20, 18, 16];
 const margins = [0, 1, 1.5, 1, 0];

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { LogoContainer } from "./logo.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const Logo = (): ReactElement => {

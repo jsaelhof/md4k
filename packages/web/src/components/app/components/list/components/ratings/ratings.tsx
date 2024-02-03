@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 
 import { ratingsSource } from "md4k-constants";
 import { ratingsSourceImage } from "../../../../../../constants/ratings";
@@ -11,8 +11,8 @@ import {
   RatingsSourceIcon,
 } from "./ratings.styles";
 import {
-  Maybe,
-  Ratings as RatingsType,
+  type Maybe,
+  type Ratings as RatingsType,
 } from "../../../../../../__generated__/graphql";
 
 export type RatingsProps = {

@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
 
 import { useAppContext } from "../../../../context/app-context";
 import { errorCodes } from "md4k-constants";
@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import EmptyState from "../empty-state/empty-state";
 import { Button } from "@mui/material";
 import { filterMovies } from "../../../../utils/filter-movies";
-import { Movie } from "../../../../__generated__/graphql";
+import { type Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 
 const getSearchParam = (

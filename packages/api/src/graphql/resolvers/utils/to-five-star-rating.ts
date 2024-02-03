@@ -1,7 +1,7 @@
 import lodash from "lodash";
 import lodashfp from "lodash/fp.js";
 import { ratingsSources } from "md4k-constants";
-import { Maybe } from "graphql/jsutils/Maybe.js";
+import { type Maybe } from "graphql/jsutils/Maybe.js";
 
 const { isNil } = lodash;
 const { filter, flow, map, mean, pick } = lodashfp;

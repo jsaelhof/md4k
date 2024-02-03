@@ -1,7 +1,7 @@
 import { fromOmdbSource } from "../constants/ratings.js";
 
 import { ratingsSources, ratingsSource } from "md4k-constants";
-import { OMDBMovie } from "../graphql/types/omdb.types.js";
+import { type OMDBMovie } from "../graphql/types/omdb.types.js";
 
 const normalizeRating = (source: string, value: string) => {
   switch (source) {

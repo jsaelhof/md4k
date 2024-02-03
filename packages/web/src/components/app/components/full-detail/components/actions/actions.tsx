@@ -1,7 +1,7 @@
 import { DetailButton, Layout } from "./actions.styles";
 import TelevisionPlay from "mdi-material-ui/TelevisionPlay";
 import TelevisionOff from "mdi-material-ui/TelevisionOff";
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export type ActionsProps = PropsWithChildren<{

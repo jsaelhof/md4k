@@ -1,7 +1,7 @@
 import isNil from "lodash/isNil";
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { RatedContainer } from "./rated.styles";
-import { Maybe } from "../../../../../../__generated__/graphql";
+import { type Maybe } from "../../../../../../__generated__/graphql";
 
 export type RatedProps = {
   rated?: Maybe<string>;

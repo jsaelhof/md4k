@@ -1,8 +1,8 @@
 import { useSpring } from "react-spring";
 import MoviePoster from "../../../../../../../movie-poster/movie-poster";
 import { Layout, Title, Info } from "./poster-grid-item.styles";
-import React, { ReactElement } from "react";
-import { SearchResult } from "../../../../../../../../../../__generated__/graphql";
+import React, { type ReactElement } from "react";
+import { type SearchResult } from "../../../../../../../../../../__generated__/graphql";
 
 export type PosterGridItemProps = {
   height: number;

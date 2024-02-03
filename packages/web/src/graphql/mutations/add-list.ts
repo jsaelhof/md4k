@@ -1,9 +1,9 @@
-import { BaseMutationOptions, MutationTuple, gql } from "@apollo/client";
+import { type BaseMutationOptions, type MutationTuple, gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GET_LISTS } from "../queries";
 import {
-  AddListMutation,
-  AddListMutationVariables,
+  type AddListMutation,
+  type AddListMutationVariables,
 } from "../../__generated__/graphql";
 
 const ADD_LIST = gql`

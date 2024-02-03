@@ -1,4 +1,4 @@
-import Resources from "../__generated__/resources";
+import type Resources from "../__generated__/resources";
 
 declare module "i18next" {
   interface CustomTypeOptions {

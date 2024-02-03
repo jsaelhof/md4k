@@ -4,7 +4,7 @@ import CreateListInput from "./components/create-list-input/create-list-input";
 import CreateListError from "./components/create-list-error/create-list-error";
 import { addListOptions, useAddList } from "../../../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Create = (): ReactElement => {

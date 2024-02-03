@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import SourceSelect, { SourceSelectProps } from "./source-select";
+import SourceSelect, { type SourceSelectProps } from "./source-select";
 import { Source, sources } from "md4k-constants";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sourceLogos } from "../../../../../../constants/sources";

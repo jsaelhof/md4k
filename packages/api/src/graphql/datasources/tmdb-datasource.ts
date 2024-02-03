@@ -1,9 +1,9 @@
-import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
+import { RESTDataSource, type RequestOptions } from "apollo-datasource-rest";
 import {
-  TMDBError,
-  TMDBFindResult,
-  TMDBMovieResult,
-  TMDBProviderResults,
+  type TMDBError,
+  type TMDBFindResult,
+  type TMDBMovieResult,
+  type TMDBProviderResults,
 } from "../types/tmdb.types.js";
 
 export class TMDBDataSource extends RESTDataSource {

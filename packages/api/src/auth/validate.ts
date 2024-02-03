@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import jwt, { JwtHeader, JwtPayload, SigningKeyCallback } from "jsonwebtoken";
+import jwt, { type JwtHeader, type JwtPayload, type SigningKeyCallback } from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 
 dotenv.config();

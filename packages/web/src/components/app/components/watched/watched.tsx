@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { type ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import isNil from "lodash/isNil";
 
 import { StackedContainer, NoMoviesFound } from "./watched.styles";
@@ -17,7 +17,7 @@ import { SortDirection } from "../../../../constants/sorts";
 import WatchedToolbar from "./components/watched-toolbar/watched-toolbar";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import { useGetWatchedMovies } from "../../../../graphql/queries";
-import { Movie } from "../../../../__generated__/graphql";
+import { type Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 
 const INFINITE_LOAD_CHUNK_SIZE = 5;

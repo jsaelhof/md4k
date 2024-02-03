@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import DetailActions, { DetailActionsProps } from "./detail-actions";
+import DetailActions, { type DetailActionsProps } from "./detail-actions";
 import { vi } from "vitest";
 
 interface LocalTestContext {

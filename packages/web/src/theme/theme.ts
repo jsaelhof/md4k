@@ -1,4 +1,4 @@
-import { Color, PaletteColorOptions, createTheme } from "@mui/material";
+import { type Color, type PaletteColorOptions, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 // Module Augmentation: Extend the interfaces used in the theme
