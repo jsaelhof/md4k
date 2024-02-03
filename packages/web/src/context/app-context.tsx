@@ -63,8 +63,6 @@ const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
     setPick(null);
   }, []);
 
-  console.log({ loading: listsLoading || moviesLoading });
-
   const context = {
     lists,
     list,

@@ -1,25 +1,18 @@
 import { render, screen, within } from "@testing-library/react";
-import ListSelect, { ListSelectProps } from "./list-select";
-import { sourceLogos } from "../../../../../../constants/sources";
+import SourceSelect, { SourceSelectProps } from "./source-select";
 import { Source, sources } from "md4k-constants";
-import { vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { sourceLogos } from "../../../../../../constants/sources";
 
 interface LocalTestContext {
-  props: ListSelectProps;
+  props: SourceSelectProps;
 }
 
 describe("list-select", () => {
   beforeEach<LocalTestContext>((context) => {
     context.props = {
       value: Source.NETFLIX,
-      values: sources,
-      label: "Netflix",
-      hideLabelForSelection: false,
       onChange: vi.fn(),
-      listSelectItemProps: {
-        variant: "sources",
-        images: sourceLogos,
-      },
     };
   });
 
@@ -28,7 +21,7 @@ describe("list-select", () => {
     user,
     t,
   }) => {
-    render(<ListSelect {...props} />);
+    render(<SourceSelect {...props} />);
 
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     expect(
@@ -41,6 +34,11 @@ describe("list-select", () => {
       expect(
         screen.getByRole("option", { name: t(`common:sources.${source}`) })
       ).toBeInTheDocument();
+      expect(
+        within(
+          screen.getByRole("option", { name: t(`common:sources.${source}`) })
+        ).getByRole("img")
+      ).toHaveAttribute("src", sourceLogos[source]);
     });
 
     await user.click(
