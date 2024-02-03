@@ -9,6 +9,7 @@ import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
 import { Tab, Tabs } from "@mui/material";
 import { Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
+import { NewMovieInput } from "../../../../graphql/types";
 
 export const Edit = (): ReactElement => {
   const params = useParams();
@@ -33,7 +34,7 @@ export const Edit = (): ReactElement => {
   });
 
   const onEditMovie = useCallback(
-    (movieData: Omit<Movie, "id">) =>
+    (movieData: NewMovieInput) =>
       list &&
       editMovieMutation(
         editMovieOptions({ ...movie, ...movieData } as Movie, list)

@@ -47,13 +47,14 @@ import { Movie } from "../../../../__generated__/graphql";
 import { notEmpty } from "../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
 import resources from "../../../../__generated__/resources";
+import { NewMovie } from "../../../../graphql/types";
 
 export type FullDetailProps = {
-  movie: Omit<Movie, "id" | "list">; // This needs to omit id because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial.
+  movie: Omit<Movie, "id" | "list">; // This needs to omit id and list because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial but with a required title.
   showCloseButton?: boolean;
   onClose?: () => void;
   actionSet?: "addMovie" | "viewMovie";
-  onAddMovie?: (movie: Omit<Movie, "id" | "list">) => void;
+  onAddMovie?: (movie: NewMovie) => void;
   onChangeBackdrop?: (url: string) => void;
 };
 

@@ -22,12 +22,13 @@ import { SvgIconComponent } from "@mui/icons-material";
 import { MovieFormFields } from "./types";
 import ListSelect from "./components/list-select/list-select";
 import { useTranslation } from "react-i18next";
+import { NewMovieInput } from "../../../../graphql/types";
 
 export type ManualMovieFormProps = {
   actionLabel: string;
   ActionIcon: SvgIconComponent;
-  initialState?: Omit<Movie, "id" | "title" | "list"> & { title?: string }; // Title needs to be optional for new movies.
-  onChange: (movie: Omit<Movie, "id">) => void;
+  initialState?: Partial<NewMovieInput>; // Title needs to be optional for new movies.
+  onChange: (movie: NewMovieInput) => void;
   onCancel: () => void;
 };
 
@@ -111,7 +112,7 @@ export const ManualMovieForm = ({
       }
     });
 
-    onChange(diff as Omit<Movie, "id">);
+    onChange(diff as NewMovieInput);
   };
 
   return (
