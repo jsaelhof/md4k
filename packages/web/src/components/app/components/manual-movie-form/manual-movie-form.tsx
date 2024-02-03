@@ -9,10 +9,8 @@ import {
   SmallField,
 } from "./manual-movie-form.styles";
 import { Button } from "@mui/material";
-import React, { ReactElement, useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import { formatRuntime } from "../../../../utils/format-runtime";
-import { genres, sources } from "md4k-constants";
-import { sourceLogos } from "../../../../constants/sources";
 import Clear from "@mui/icons-material/Clear";
 import isNil from "lodash/isNil";
 import { parseRuntime } from "../../../../utils/parse-runtime";
@@ -20,9 +18,10 @@ import TextInput from "./components/text-input/text-input.jsx";
 import { Movie } from "../../../../__generated__/graphql";
 import { SvgIconComponent } from "@mui/icons-material";
 import { MovieFormFields } from "./types";
-import ListSelect from "./components/list-select/list-select";
 import { useTranslation } from "react-i18next";
 import { NewMovieInput } from "../../../../graphql/types";
+import GenreSelect from "./components/genre-select/genre-select";
+import SourceSelect from "./components/source-select/source-select";
 
 export type ManualMovieFormProps = {
   actionLabel: string;
@@ -39,7 +38,7 @@ export const ManualMovieForm = ({
   onChange,
   onCancel,
 }: ManualMovieFormProps): ReactElement => {
-  const { t } = useTranslation(["manual_movie_form", "common"]);
+  const { t } = useTranslation(["manual_movie_form"]);
 
   const defaultValues = useMemo(
     () => ({
@@ -237,15 +236,9 @@ export const ManualMovieForm = ({
           name="genre"
           control={control}
           render={({ field: { ref, ...field } }): ReactElement => (
-            <ListSelect
-              label="genre"
-              values={genres}
-              listSelectItemProps={{
-                variant: "genres",
-              }}
+            <GenreSelect
               selectProps={{
                 inputRef: ref,
-                fullWidth: true,
               }}
               {...field}
             />
@@ -259,16 +252,9 @@ export const ManualMovieForm = ({
           name="source"
           control={control}
           render={({ field: { ref, ...field } }): ReactElement => (
-            <ListSelect
-              label="source"
-              values={sources}
-              listSelectItemProps={{
-                variant: "sources",
-                images: sourceLogos,
-              }}
+            <SourceSelect
               selectProps={{
                 inputRef: ref,
-                fullWidth: true,
               }}
               {...field}
             />
