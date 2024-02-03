@@ -1,9 +1,9 @@
-import { RESTDataSource, RequestOptions } from "apollo-datasource-rest";
+import { RESTDataSource, type RequestOptions } from "apollo-datasource-rest";
 import {
-  OMDBGetMovieResponse,
-  OMDBSearchResponse,
+  type OMDBGetMovieResponse,
+  type OMDBSearchResponse,
 } from "../types/omdb.types.js";
-import { Maybe } from "graphql/jsutils/Maybe.js";
+import { type Maybe } from "graphql/jsutils/Maybe.js";
 
 export class OMDBDataSource extends RESTDataSource {
   constructor() {

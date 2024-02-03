@@ -1,14 +1,14 @@
 import {
-  BaseMutationOptions,
-  MutationTuple,
+  type BaseMutationOptions,
+  type MutationTuple,
   gql,
   useMutation,
 } from "@apollo/client";
 import { GET_MOVIES, GET_WATCHED_MOVIES } from "../queries";
 import {
-  Movie,
-  RemoveMovieMutation,
-  RemoveMovieMutationVariables,
+  type Movie,
+  type RemoveMovieMutation,
+  type RemoveMovieMutationVariables,
 } from "../../__generated__/graphql";
 
 export const REMOVE_MOVIE = gql`

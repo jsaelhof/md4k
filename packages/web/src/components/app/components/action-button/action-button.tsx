@@ -1,8 +1,8 @@
 import { Tooltip } from "@mui/material";
 
 import { ButtonContainer } from "./action-button.styles";
-import { SvgIconComponent } from "@mui/icons-material";
-import { ReactElement } from "react";
+import { type SvgIconComponent } from "@mui/icons-material";
+import { type ReactElement } from "react";
 
 export type ActionButtonProps = {
   Icon: SvgIconComponent;

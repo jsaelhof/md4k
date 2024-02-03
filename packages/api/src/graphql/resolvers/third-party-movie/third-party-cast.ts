@@ -1,4 +1,4 @@
-import { ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
+import { type ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
 import { toTMDBImageUrl } from "./utils/to-tmdb-image-url.js";
 
 export const thirdPartyCast: ThirdPartyMovieResolvers["cast"] = async (

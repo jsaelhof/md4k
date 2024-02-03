@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { Label } from "../../manual-movie-form.styles";
-import { Controller, UseControllerProps } from "react-hook-form";
-import { ReactElement } from "react";
-import { MovieFormFields } from "../../types";
+import { Controller, type UseControllerProps } from "react-hook-form";
+import { type ReactElement } from "react";
+import { type MovieFormFields } from "../../types";
 
 export type TextInputProps = {
   controllerProps: UseControllerProps<MovieFormFields>;

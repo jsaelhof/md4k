@@ -4,7 +4,7 @@ import {
   editMovieOptions,
   useEditMovie,
 } from "../../../../../../../../../graphql/mutations";
-import { Movie } from "../../../../../../../../../__generated__/graphql";
+import { type Movie } from "../../../../../../../../../__generated__/graphql";
 
 export const useChangeBackdrop = (
   movie: Movie

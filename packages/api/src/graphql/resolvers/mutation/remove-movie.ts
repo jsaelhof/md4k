@@ -1,4 +1,4 @@
-import { MutationResolvers } from "../../../__generated__/graphql.js";
+import { type MutationResolvers } from "../../../__generated__/graphql.js";
 
 export const removeMovie: MutationResolvers["removeMovie"] = async (
   parent,

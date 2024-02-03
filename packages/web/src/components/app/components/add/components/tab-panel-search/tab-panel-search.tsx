@@ -5,8 +5,8 @@ import Refresh from "@mui/icons-material/Refresh";
 import Search from "@mui/icons-material/Search";
 import TabPanel from "../tab-panel/tab-panel";
 import {
-  ChangeEventHandler,
-  ReactElement,
+  type ChangeEventHandler,
+  type ReactElement,
   useCallback,
   useRef,
   useState,
@@ -26,14 +26,14 @@ import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "./components/poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import {
-  PageInfo,
-  SearchByTitleQuery,
-  SearchResult,
+  type PageInfo,
+  type SearchByTitleQuery,
+  type SearchResult,
 } from "../../../../../../__generated__/graphql";
-import { Maybe } from "graphql/jsutils/Maybe";
+import { type Maybe } from "graphql/jsutils/Maybe";
 import { notEmpty } from "../../../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
-import { NewMovie } from "../../../../../../graphql/types";
+import { type NewMovie } from "../../../../../../graphql/types";
 
 export type TabPanelSearchProps = {
   tabId: string;

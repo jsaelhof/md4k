@@ -1,5 +1,5 @@
 import { Button, FormHelperText } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { type ReactElement, useState } from "react";
 import { useAppContext } from "../../../../../../context/app-context";
 import { Container, ListInput } from "./create-list-input.styles";
 import { useTranslation } from "react-i18next";

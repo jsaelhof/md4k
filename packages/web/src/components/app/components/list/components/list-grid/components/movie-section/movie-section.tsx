@@ -5,16 +5,16 @@ import {
 } from "./movie-section.styles";
 import Movie from "../movie/movie";
 import {
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { useOnWindowResize } from "rooks";
-import { Movie as MovieType } from "../../../../../../../../__generated__/graphql";
-import { ListGridHandlers } from "../../types";
+import { type Movie as MovieType } from "../../../../../../../../__generated__/graphql";
+import { type ListGridHandlers } from "../../types";
 
 export type MovieSectionProps = ListGridHandlers & {
   ariaLabel?: string;

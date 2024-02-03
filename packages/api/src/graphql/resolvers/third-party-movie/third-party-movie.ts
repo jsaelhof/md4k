@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
-import { QueryResolvers } from "../../../__generated__/graphql.js";
+import { type QueryResolvers } from "../../../__generated__/graphql.js";
 import { Genre } from "md4k-constants";
 
 const { findKey } = lodash;

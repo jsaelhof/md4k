@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import debounce from "lodash/debounce";
 import { useMediaQuery } from "@mui/material";
@@ -7,8 +7,8 @@ import { RatingContainer } from "./star-rating-layout.styles";
 import FiveStarRating from "../../../five-star-rating/five-star-rating";
 import Ratings from "../../../list/components/ratings/ratings";
 import {
-  Maybe,
-  Ratings as RatingsGQLType,
+  type Maybe,
+  type Ratings as RatingsGQLType,
 } from "../../../../../../__generated__/graphql";
 
 export type StarRatingLayoutProps = {

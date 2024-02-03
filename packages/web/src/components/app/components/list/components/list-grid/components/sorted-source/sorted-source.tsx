@@ -4,17 +4,17 @@ import groupBy from "lodash/fp/groupBy";
 import mapValues from "lodash/fp/mapValues";
 import toPairs from "lodash/fp/toPairs";
 import reduce from "lodash/fp/reduce";
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { sourceLogosLarge } from "../../../../../../../../constants/sources";
 import { Source } from "md4k-constants";
-import { ListGridProps } from "../../types";
-import { Movie } from "../../../../../../../../__generated__/graphql";
+import { type ListGridProps } from "../../types";
+import { type Movie } from "../../../../../../../../__generated__/graphql";
 import { notEmpty } from "../../../../../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
-import resources from "../../../../../../../../__generated__/resources";
+import type resources from "../../../../../../../../__generated__/resources";
 
 const preferredSourceOrder: number[] = [
   Source.PLEX,

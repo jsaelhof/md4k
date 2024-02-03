@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import FullDetailModal, { FullDetailModalProps } from "./full-detail-modal";
+import FullDetailModal, { type FullDetailModalProps } from "./full-detail-modal";
 import { vi } from "vitest";
 
 // Mock the full detail component to make this test simpler

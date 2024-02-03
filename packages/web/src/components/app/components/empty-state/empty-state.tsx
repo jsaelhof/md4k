@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { EmptyListLayout, Img, Message, Quote } from "./empty-state.styles";
-import { ReactElement, ReactNode } from "react";
+import { type ReactElement, type ReactNode } from "react";
 
 export type EmptyStateProps = {
   imgSrc: string;

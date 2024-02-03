@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import WatchedToolbar, { WatchedToolbarProps } from "./watched-toolbar";
+import WatchedToolbar, { type WatchedToolbarProps } from "./watched-toolbar";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 

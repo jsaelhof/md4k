@@ -1,6 +1,6 @@
 import { subDays } from "date-fns";
 import { filterMovies } from "./filter-movies";
-import { Movie } from "../__generated__/graphql";
+import { type Movie } from "../__generated__/graphql";
 
 interface LocalTestContext {
   movie1: Movie;

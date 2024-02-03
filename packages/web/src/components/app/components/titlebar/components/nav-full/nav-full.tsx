@@ -6,7 +6,7 @@ import { Nav } from "./nav-full.styles";
 import { useAppContext } from "../../../../../../context/app-context";
 import DbSelect from "../db-select/db-select";
 import NavButton from "../nav-button/nav-button";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const NavFull = (): ReactElement => {

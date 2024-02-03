@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import MovieSection, { MovieSectionProps } from "./movie-section";
+import MovieSection, { type MovieSectionProps } from "./movie-section";
 import { vi } from "vitest";
-import { MovieProps } from "../movie/movie";
+import { type MovieProps } from "../movie/movie";
 
 vi.mock("../movie/movie", () => ({
   default: ({

@@ -2,9 +2,9 @@ import { gql, useMutation } from "@apollo/client";
 import { isToday, isValid, parseISO } from "date-fns";
 import { useEffect } from "react";
 import {
-  Movie,
-  UpdateMovieMutation,
-  UpdateMovieMutationVariables,
+  type Movie,
+  type UpdateMovieMutation,
+  type UpdateMovieMutationVariables,
 } from "../../__generated__/graphql";
 
 export const UPDATE_MOVIE = gql`

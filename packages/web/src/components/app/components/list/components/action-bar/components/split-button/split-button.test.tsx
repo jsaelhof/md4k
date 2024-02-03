@@ -1,5 +1,5 @@
 import { waitFor, screen } from "@testing-library/react";
-import { Mock, vi } from "vitest";
+import { type Mock, vi } from "vitest";
 import SplitButton from "./split-button";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 

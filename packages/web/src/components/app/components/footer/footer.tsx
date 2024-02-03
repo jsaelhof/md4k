@@ -1,6 +1,6 @@
 import { FooterLayout } from "./footer.styles";
 import { Link } from "react-router-dom";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const Footer = (): ReactElement => {

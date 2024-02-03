@@ -3,7 +3,7 @@ import PlayArrow from "@mui/icons-material/PlayArrow";
 import Search from "@mui/icons-material/Search";
 import { Source } from "md4k-constants";
 import { searchStreaming, searchTorrent } from "../../../../../../utils/search";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export type ActionsViewProps = {

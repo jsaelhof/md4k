@@ -1,16 +1,16 @@
 import {
-  BaseMutationOptions,
-  MutationTuple,
+  type BaseMutationOptions,
+  type MutationTuple,
   gql,
   useMutation,
 } from "@apollo/client";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
-  Movie,
-  UndoMarkWatchedMutation,
-  UndoMarkWatchedMutationVariables,
+  type Movie,
+  type UndoMarkWatchedMutation,
+  type UndoMarkWatchedMutationVariables,
 } from "../../__generated__/graphql";
-import { GetListsItem } from "../types";
+import { type GetListsItem } from "../types";
 
 const UNDO_MARK_WATCHED = gql`
   mutation UndoMarkWatched(

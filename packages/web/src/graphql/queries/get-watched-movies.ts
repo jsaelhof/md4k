@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import { GetListsItem } from "../types";
-import { GetWatchedMoviesQuery, Maybe } from "../../__generated__/graphql";
+import { type GetListsItem } from "../types";
+import { type GetWatchedMoviesQuery, type Maybe } from "../../__generated__/graphql";
 import { notEmpty } from "../../utils/not-empty";
 
 export const GET_WATCHED_MOVIES = gql`

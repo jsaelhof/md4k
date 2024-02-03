@@ -1,4 +1,4 @@
-import { ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
+import { type ThirdPartyMovieResolvers } from "../../../__generated__/graphql.js";
 
 export const thirdPartyPlot: ThirdPartyMovieResolvers["plot"] = async (
   { imdbID },

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import EmptyState from "../../../../../empty-state/empty-state";
 import { useNavigate } from "react-router-dom";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const EmptyList = (): ReactElement => {

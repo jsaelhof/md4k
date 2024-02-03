@@ -1,4 +1,4 @@
-import { Theme, styled } from "@mui/material";
+import { type Theme, styled } from "@mui/material";
 import { animated } from "react-spring";
 
 export const MovieContainer = styled(animated.div)(() => ({

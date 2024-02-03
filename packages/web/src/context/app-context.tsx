@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, ReactElement, useCallback } from "react";
+import React, { type PropsWithChildren, type ReactElement, useCallback } from "react";
 import { createContext, useState } from "react";
 import { useGetLists, useGetMovies } from "../graphql/queries";
-import { GetListsItem, GetMovieItem } from "../graphql/types";
-import { Maybe } from "graphql/jsutils/Maybe";
-import { ToastProps } from "../types";
+import { type GetListsItem, type GetMovieItem } from "../graphql/types";
+import { type Maybe } from "graphql/jsutils/Maybe";
+import { type ToastProps } from "../types";
 
 export type AppContextType = {
   lists: GetListsItem[];

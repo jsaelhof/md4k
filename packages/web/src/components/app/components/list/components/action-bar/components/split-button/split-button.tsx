@@ -1,5 +1,5 @@
 import { Button, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClockIcon from "mdi-material-ui/ClockOutline";
 import ClockFastIcon from "mdi-material-ui/ClockFast";
@@ -18,10 +18,10 @@ import {
 } from "./split-button.styles";
 import { filterMovies } from "../../../../../../../../utils/filter-movies";
 import { useAppContext } from "../../../../../../../../context/app-context";
-import { PickOption } from "../../../../../../../../types";
-import { SvgIconComponent } from "@mui/icons-material";
+import { type PickOption } from "../../../../../../../../types";
+import { type SvgIconComponent } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import resources from "../../../../../../../../__generated__/resources";
+import type resources from "../../../../../../../../__generated__/resources";
 
 const splitButtonItems: {
   value: string;

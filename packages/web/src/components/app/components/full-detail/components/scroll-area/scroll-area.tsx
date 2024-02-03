@@ -1,9 +1,9 @@
 import { useSpring } from "react-spring";
-import { ReactElement, UIEvent, useCallback, useState } from "react";
+import { type ReactElement, type UIEvent, useCallback, useState } from "react";
 import { useOnWindowResize } from "rooks";
 
 import { Layout, Shade, TextArea } from "./scroll-area.styles";
-import { Maybe } from "../../../../../../__generated__/graphql";
+import { type Maybe } from "../../../../../../__generated__/graphql";
 
 export type ScrollAreaProps = {
   text?: Maybe<string>;

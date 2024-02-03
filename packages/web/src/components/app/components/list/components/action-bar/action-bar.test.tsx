@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
-import ActionBar, { ActionBarProps } from "./action-bar";
+import ActionBar, { type ActionBarProps } from "./action-bar";
 
 const { MOCK_USE_MEDIA_QUERY } = vi.hoisted(() => ({
   MOCK_USE_MEDIA_QUERY: vi.fn().mockReturnValue(true),

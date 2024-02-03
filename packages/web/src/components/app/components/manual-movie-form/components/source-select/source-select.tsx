@@ -1,13 +1,13 @@
 import {
   MenuItem,
   Select,
-  SelectChangeEvent,
-  SelectProps,
+  type SelectChangeEvent,
+  type SelectProps,
 } from "@mui/material";
 
 import ListSelectItem from "../list-select-item/list-select-item";
-import { ReactElement } from "react";
-import { Source, sources } from "md4k-constants";
+import { type ReactElement } from "react";
+import { type Source, sources } from "md4k-constants";
 import { sourceLogos } from "../../../../../../constants/sources";
 import { useTranslation } from "react-i18next";
 

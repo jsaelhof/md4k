@@ -7,7 +7,7 @@ import {
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
 import { Layout, Status } from "./watched-toolbar.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export type WatchedToolbarProps = {

@@ -1,4 +1,4 @@
-import { Theme, styled } from "@mui/material";
+import { type Theme, styled } from "@mui/material";
 
 export const SortNavList = styled("ul")(
   ({ theme: { breakpoints, spacing } }) => ({

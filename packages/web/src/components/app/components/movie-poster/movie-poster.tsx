@@ -9,8 +9,8 @@ import {
   shadowStyles,
 } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
-import { ReactElement } from "react";
-import { Maybe } from "../../../../__generated__/graphql";
+import { type ReactElement } from "react";
+import { type Maybe } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 
 export type MoviePosterProps = {

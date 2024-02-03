@@ -1,17 +1,17 @@
 import {
-  BaseMutationOptions,
-  MutationTuple,
+  type BaseMutationOptions,
+  type MutationTuple,
   gql,
   useMutation,
 } from "@apollo/client";
 import { GET_MOVIES } from "../queries";
 import { GET_WATCHED_MOVIES } from "../queries/get-watched-movies";
 import {
-  MarkWatchedMutation,
-  MarkWatchedMutationVariables,
-  Movie,
+  type MarkWatchedMutation,
+  type MarkWatchedMutationVariables,
+  type Movie,
 } from "../../__generated__/graphql";
-import { GetListsItem } from "../types";
+import { type GetListsItem } from "../types";
 
 export const MARK_WATCHED = gql`
   mutation MarkWatched($movie: MovieInput!, $list: String!) {

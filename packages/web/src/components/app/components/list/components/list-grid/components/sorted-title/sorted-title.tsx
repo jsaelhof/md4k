@@ -1,9 +1,9 @@
 import orderBy from "lodash/orderBy";
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { sort } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { ListGridProps } from "../../types";
+import { type ListGridProps } from "../../types";
 
 const SortedTitle = ({ movies, ...handlers }: ListGridProps): ReactElement => {
   const direction = useSortDirection();

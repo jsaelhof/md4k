@@ -1,4 +1,4 @@
-import { Movie } from "../../../../../../../__generated__/graphql";
+import { type Movie } from "../../../../../../../__generated__/graphql";
 
 export type ListGridProps = ListGridHandlers & {
   movies?: Movie[];

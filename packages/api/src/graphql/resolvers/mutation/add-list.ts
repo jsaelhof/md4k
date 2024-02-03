@@ -1,7 +1,7 @@
 import { ApolloError } from "apollo-server-errors";
 import { errorCodes } from "md4k-constants";
 import { v4 as uuidv4 } from "uuid";
-import { MutationResolvers } from "../../../__generated__/graphql.js";
+import { type MutationResolvers } from "../../../__generated__/graphql.js";
 
 export const addList: MutationResolvers["addList"] = async (
   parent,

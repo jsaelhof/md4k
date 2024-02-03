@@ -1,4 +1,4 @@
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { Attribution, Layout, Quote } from "./movie-quote.styles";
 import { useTranslation } from "react-i18next";
 import resources from "../../../../../../../../__generated__/resources";

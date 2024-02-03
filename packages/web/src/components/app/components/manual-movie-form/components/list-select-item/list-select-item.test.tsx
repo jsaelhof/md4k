@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ListSelectItem, { ListSelectItemProps } from "./list-select-item";
+import ListSelectItem, { type ListSelectItemProps } from "./list-select-item";
 import { Source } from "md4k-constants";
 import { it, expect, beforeEach } from "vitest";
 

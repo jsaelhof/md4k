@@ -1,5 +1,5 @@
 import { format, parseISO } from "date-fns";
-import { useState, useMemo, ReactElement } from "react";
+import { useState, useMemo, type ReactElement } from "react";
 import { useGetThirdPartyFullDetails } from "../../../../../../graphql/queries";
 import DatePicker from "../date-picker/date-picker";
 import MoviePoster from "../../../movie-poster/movie-poster";
@@ -14,8 +14,8 @@ import {
   Content,
 } from "./watched-movie.styles";
 import { useMediaQuery } from "@mui/material";
-import { SpringValues, useSpring } from "react-spring";
-import { Movie } from "../../../../../../__generated__/graphql";
+import { type SpringValues, useSpring } from "react-spring";
+import { type Movie } from "../../../../../../__generated__/graphql";
 
 export type WatchedMovieProps = {
   movie: Movie;

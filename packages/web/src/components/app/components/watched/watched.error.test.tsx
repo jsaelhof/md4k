@@ -5,13 +5,13 @@ import { vi } from "vitest";
 import { GET_WATCHED_MOVIES } from "../../../../graphql/queries/get-watched-movies";
 import { REMOVE_MOVIE } from "../../../../graphql/mutations";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
-import { WatchedMovieProps } from "./components/watched-movie/watched-movie";
-import { MockedResponse } from "@apollo/client/testing";
+import { type WatchedMovieProps } from "./components/watched-movie/watched-movie";
+import { type MockedResponse } from "@apollo/client/testing";
 import {
-  GetWatchedMoviesQuery,
-  GetWatchedMoviesQueryVariables,
-  RemoveMovieMutation,
-  RemoveMovieMutationVariables,
+  type GetWatchedMoviesQuery,
+  type GetWatchedMoviesQueryVariables,
+  type RemoveMovieMutation,
+  type RemoveMovieMutationVariables,
 } from "../../../../__generated__/graphql";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({

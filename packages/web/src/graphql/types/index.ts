@@ -1,10 +1,10 @@
 import {
-  GetListsQuery,
-  GetMoviesQuery,
-  Movie,
-  MovieInput,
+  type GetListsQuery,
+  type GetMoviesQuery,
+  type Movie,
+  type MovieInput,
 } from "../../__generated__/graphql";
-import { ArrayElement } from "../utils";
+import { type ArrayElement } from "../utils";
 
 export type GetListsItem = NonNullable<
   ArrayElement<NonNullable<GetListsQuery["lists"]>>

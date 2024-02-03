@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useMemo, useState } from "react";
+import { type ReactElement, useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useMediaQuery } from "@mui/material";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
@@ -43,11 +43,11 @@ import { ActionsAdd } from "./components/actions-add/actions-add";
 import { ActionsView } from "./components/actions-view/actions-view";
 import Cast from "./components/cast/cast";
 import { Actions } from "./components/actions/actions";
-import { Movie } from "../../../../__generated__/graphql";
+import { type Movie } from "../../../../__generated__/graphql";
 import { notEmpty } from "../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
-import resources from "../../../../__generated__/resources";
-import { NewMovie } from "../../../../graphql/types";
+import type resources from "../../../../__generated__/resources";
+import { type NewMovie } from "../../../../graphql/types";
 
 export type FullDetailProps = {
   movie: Omit<Movie, "id" | "list">; // This needs to omit id and list because it could be a SearchResult which creates additional type issues. This makes Movie basically an interface/Partial but with a required title.

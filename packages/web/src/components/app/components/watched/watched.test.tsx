@@ -4,11 +4,11 @@ import { renderWithProviders } from "../../../../test-utils/render-with-provider
 import { vi } from "vitest";
 import { GET_WATCHED_MOVIES } from "../../../../graphql/queries/get-watched-movies";
 import { buildMovieMock } from "../../../../test-utils/build-movie-mock";
-import { WatchedMovieProps } from "./components/watched-movie/watched-movie";
-import { MockedResponse } from "@apollo/client/testing";
+import { type WatchedMovieProps } from "./components/watched-movie/watched-movie";
+import { type MockedResponse } from "@apollo/client/testing";
 import {
-  GetWatchedMoviesQuery,
-  GetWatchedMoviesQueryVariables,
+  type GetWatchedMoviesQuery,
+  type GetWatchedMoviesQueryVariables,
 } from "../../../../__generated__/graphql";
 
 vi.mock("./components/watched-movie/watched-movie", () => ({

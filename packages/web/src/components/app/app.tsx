@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactElement, useEffect } from "react";
+import { type ReactElement, useEffect } from "react";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material";
 import { theme } from "../../theme/theme";
 import { AppProvider } from "../../context/app-context";

@@ -1,9 +1,9 @@
 import PosterGridItem, {
-  PosterGridItemProps,
+  type PosterGridItemProps,
 } from "./components/poster-grid-item/poster-grid-item";
 import { Layout } from "./poster-grid.styles";
-import { SearchResult } from "../../../../../../../../__generated__/graphql";
-import { ReactElement } from "react";
+import { type SearchResult } from "../../../../../../../../__generated__/graphql";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export type PosterGridProps = Pick<PosterGridItemProps, "onClick"> & {

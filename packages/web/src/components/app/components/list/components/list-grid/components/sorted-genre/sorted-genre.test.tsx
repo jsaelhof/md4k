@@ -1,8 +1,8 @@
 import { render, within, screen } from "@testing-library/react";
 import SortedGenre from "./sorted-genre";
 import { vi } from "vitest";
-import { MovieProps } from "../movie/movie";
-import { ListGridProps } from "../../types";
+import { type MovieProps } from "../movie/movie";
+import { type ListGridProps } from "../../types";
 
 const { MOCK_USE_SORT_DIRECTION } = vi.hoisted(() => ({
   MOCK_USE_SORT_DIRECTION: vi.fn().mockReturnValue("asc"),

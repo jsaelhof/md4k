@@ -1,7 +1,7 @@
 import { Button, IconButton, Snackbar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppContext } from "../../../../context/app-context";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 const Toast = (): ReactElement => {

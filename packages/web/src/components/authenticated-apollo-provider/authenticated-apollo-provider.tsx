@@ -1,10 +1,10 @@
-import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { type PropsWithChildren, type ReactElement, useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloProvider,
   HttpLink,
   InMemoryCache,
-  NormalizedCacheObject,
+  type NormalizedCacheObject,
   from,
 } from "@apollo/client";
 import { removeTypenameFromVariables } from "@apollo/client/link/remove-typename";

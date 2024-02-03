@@ -1,6 +1,6 @@
-import { QueryResult, gql, useQuery } from "@apollo/client";
-import { GetMovieItem, GetListsItem } from "../types";
-import { GetMoviesQuery } from "../../__generated__/graphql";
+import { type QueryResult, gql, useQuery } from "@apollo/client";
+import { type GetMovieItem, type GetListsItem } from "../types";
+import { type GetMoviesQuery } from "../../__generated__/graphql";
 import { notEmpty } from "../../utils/not-empty";
 
 export const GET_MOVIES = gql`

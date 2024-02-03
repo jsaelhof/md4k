@@ -6,8 +6,8 @@ import UnlockIcon from "mdi-material-ui/LockOpenVariant";
 
 import { Actions } from "./detail-actions.styles";
 import ActionButton from "../../../../../../../action-button/action-button";
-import { Movie } from "../../../../../../../../../../__generated__/graphql";
-import { ReactElement } from "react";
+import { type Movie } from "../../../../../../../../../../__generated__/graphql";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 export type DetailActionsProps = {

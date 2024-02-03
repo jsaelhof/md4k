@@ -1,8 +1,8 @@
-import { MouseEventHandler, ReactElement, useState } from "react";
+import { type MouseEventHandler, type ReactElement, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   ClickAwayListener,
-  ClickAwayListenerProps,
+  type ClickAwayListenerProps,
   IconButton,
   Menu,
   MenuItem,

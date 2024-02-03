@@ -1,8 +1,8 @@
 import { convertOmdbRatings } from "../../../utils/convert-omdb-ratings.js";
 import { shouldUpdateSource } from "./utils/should-update-source.js";
 import { toSubscribedSources } from "../utils/to-subscribed-sources.js";
-import { MutationResolvers } from "../../../__generated__/graphql.js";
-import { Movie } from "../../types/db.types.js";
+import { type MutationResolvers } from "../../../__generated__/graphql.js";
+import { type Movie } from "../../types/db.types.js";
 
 export const updateMovie: MutationResolvers["updateMovie"] = async (
   parent,

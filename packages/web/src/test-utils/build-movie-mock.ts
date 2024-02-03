@@ -1,5 +1,5 @@
-import { Movie } from "../__generated__/graphql";
-import { GetMovieItem } from "../graphql/types";
+import { type Movie } from "../__generated__/graphql";
+import { type GetMovieItem } from "../graphql/types";
 
 export const buildMovieMock = (
   mockData: Partial<Movie> = {}

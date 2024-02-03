@@ -18,7 +18,7 @@ import {
   thirdPartyProvider,
   thirdPartyTrailer,
 } from "./third-party-movie/index.js";
-import { Resolvers } from "../../__generated__/graphql.js";
+import { type Resolvers } from "../../__generated__/graphql.js";
 
 export const resolvers: Resolvers = {
   Query: {

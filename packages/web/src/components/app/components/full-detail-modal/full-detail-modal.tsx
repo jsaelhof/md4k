@@ -1,9 +1,9 @@
 import { useSpring } from "react-spring";
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import { type ReactElement, useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import FullDetail, { FullDetailProps } from "../full-detail/full-detail";
+import FullDetail, { type FullDetailProps } from "../full-detail/full-detail";
 import { ModalBackdrop, ModalContent } from "./full-detail-modal.styles";
-import { Maybe } from "../../../../__generated__/graphql";
+import { type Maybe } from "../../../../__generated__/graphql";
 
 export type FullDetailModalProps = {
   preload?: boolean;

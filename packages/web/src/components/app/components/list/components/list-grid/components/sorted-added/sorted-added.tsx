@@ -1,13 +1,13 @@
 import { differenceInDays, parseISO } from "date-fns";
 import orderBy from "lodash/orderBy";
 import { flow, groupBy, mapValues } from "lodash/fp";
-import { ReactElement, useMemo } from "react";
+import { type ReactElement, useMemo } from "react";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
 import MovieSection from "../movie-section/movie-section";
-import { ListGridProps } from "../../types";
-import { Movie } from "../../../../../../../../__generated__/graphql";
-import { Dictionary, List } from "lodash";
+import { type ListGridProps } from "../../types";
+import { type Movie } from "../../../../../../../../__generated__/graphql";
+import { type Dictionary, type List } from "lodash";
 import { useTranslation } from "react-i18next";
 
 const partitionMovies = (

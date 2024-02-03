@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Trailer from "./trailer";
-import { Mock, vi } from "vitest";
+import { type Mock, vi } from "vitest";
 
 vi.mock("react-youtube", () => ({
   default: () => <div data-testid="youtube" />,

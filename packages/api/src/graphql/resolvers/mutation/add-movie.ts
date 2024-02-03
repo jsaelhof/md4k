@@ -1,7 +1,7 @@
 import { ApolloError } from "apollo-server-errors";
 import lodash from "lodash";
 import { Source, errorCodes } from "md4k-constants";
-import { MutationResolvers } from "../../../__generated__/graphql.js";
+import { type MutationResolvers } from "../../../__generated__/graphql.js";
 
 const { isNil } = lodash;
 

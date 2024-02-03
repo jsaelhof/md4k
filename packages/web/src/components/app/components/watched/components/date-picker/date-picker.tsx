@@ -1,6 +1,6 @@
 import "react-day-picker/dist/style.css";
 
-import { MouseEventHandler, ReactElement, useState } from "react";
+import { type MouseEventHandler, type ReactElement, useState } from "react";
 import { Drawer } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Delete from "@mui/icons-material/Delete";
@@ -18,7 +18,7 @@ import {
   dayPickerSmallStyles,
 } from "./date-picker.styles";
 import ActionButton from "../../../action-button/action-button";
-import { SpringValues } from "react-spring";
+import { type SpringValues } from "react-spring";
 
 const preventBubbling: MouseEventHandler = (e) => e.stopPropagation();
 

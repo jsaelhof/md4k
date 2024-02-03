@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import TabPanelSearch, { TabPanelSearchProps } from "./tab-panel-search";
+import TabPanelSearch, { type TabPanelSearchProps } from "./tab-panel-search";
 import { renderWithProviders } from "../../../../../../test-utils/render-with-providers";
 import { screen } from "@testing-library/react";
 import { SEARCH_BY_TITLE } from "../../../../../../graphql/queries";

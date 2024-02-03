@@ -1,6 +1,6 @@
 import lodash from "lodash";
 import { Source } from "md4k-constants";
-import { TMDBProviderResults } from "../../types/tmdb.types.js";
+import { type TMDBProviderResults } from "../../types/tmdb.types.js";
 
 const { isNil } = lodash;
 

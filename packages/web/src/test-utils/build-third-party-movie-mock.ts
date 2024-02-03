@@ -1,4 +1,4 @@
-import { ThirdPartyMovie } from "../__generated__/graphql";
+import { type ThirdPartyMovie } from "../__generated__/graphql";
 
 export const buildThirdPartyMovieMock = (
   mockData: Partial<ThirdPartyMovie> = {}

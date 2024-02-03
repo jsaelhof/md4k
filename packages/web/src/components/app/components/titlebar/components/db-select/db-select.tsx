@@ -1,9 +1,9 @@
-import { MenuItem, Button, Divider, SelectChangeEvent } from "@mui/material";
+import { MenuItem, Button, Divider, type SelectChangeEvent } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../../../../../../context/app-context";
 import { Select } from "./db-select.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const NEW_LIST = "NEW_LIST";

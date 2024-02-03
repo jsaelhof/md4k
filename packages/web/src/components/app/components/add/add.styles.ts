@@ -1,4 +1,4 @@
-import { Theme, styled } from "@mui/material";
+import { type Theme, styled } from "@mui/material";
 import { app } from "../../../../constants/app";
 
 export const Layout = styled("div")(({ theme: { spacing } }) => ({

@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from "react";
+import { type ReactElement, useCallback, useState } from "react";
 import { useAppContext } from "../../../../context/app-context";
 import {
   editMovieOptions,
@@ -17,8 +17,8 @@ import ActionBar from "./components/action-bar/action-bar";
 import ListGrid from "./components/list-grid/list-grid";
 import ErrorDialog from "../error-dialog/error-dialog";
 import map from "lodash/map";
-import { Movie } from "../../../../__generated__/graphql";
-import { PickOption } from "../../../../types";
+import { type Movie } from "../../../../__generated__/graphql";
+import { type PickOption } from "../../../../types";
 import { useTranslation } from "react-i18next";
 
 export const List = (): ReactElement => {

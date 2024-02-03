@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { Actions, ActionsProps } from "./actions";
+import { Actions, type ActionsProps } from "./actions";
 
 interface LocalTestContext {
   props: ActionsProps;

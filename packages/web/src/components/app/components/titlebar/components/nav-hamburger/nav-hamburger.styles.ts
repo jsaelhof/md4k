@@ -1,4 +1,4 @@
-import { styled, Divider, Theme } from "@mui/material";
+import { styled, Divider, type Theme } from "@mui/material";
 import Refresh from "@mui/icons-material/Refresh";
 import Eye from "mdi-material-ui/Eye";
 import Movie from "mdi-material-ui/Movie";

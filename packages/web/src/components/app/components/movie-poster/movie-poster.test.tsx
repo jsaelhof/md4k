@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import MoviePoster, { MoviePosterProps } from "./movie-poster";
+import MoviePoster, { type MoviePosterProps } from "./movie-poster";
 import { vi } from "vitest";
 
 const { MOCK_USE_IN_VIEW_REF } = vi.hoisted(() => ({

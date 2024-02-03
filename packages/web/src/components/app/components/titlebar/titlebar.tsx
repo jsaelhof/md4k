@@ -13,7 +13,7 @@ import {
   pickScreenToolbarStyles,
   toolbarStyles,
 } from "./titlebar.styles";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 const TitleBar = (): ReactElement => {

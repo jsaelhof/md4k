@@ -9,8 +9,8 @@ import {
   SecondaryActions,
 } from "./action-bar.styles";
 import { useNavigate } from "react-router-dom";
-import { ReactElement } from "react";
-import { PickOption } from "../../../../../../types";
+import { type ReactElement } from "react";
+import { type PickOption } from "../../../../../../types";
 import { useTranslation } from "react-i18next";
 
 export type ActionBarProps = {
