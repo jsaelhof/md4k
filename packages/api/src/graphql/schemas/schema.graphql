@@ -60,7 +60,7 @@ type DeletedMovie {
 }
 
 type SearchResult {
-  title: String
+  title: String!
   year: String
   imdbID: String
   poster: String

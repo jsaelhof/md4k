@@ -12,7 +12,7 @@ import {
   AddMovieMutationVariables,
   MovieInput,
 } from "../../__generated__/graphql";
-import { GetListsItem } from "../types";
+import { GetListsItem, NewMovieInput } from "../types";
 
 export const ADD_MOVIE = gql`
   mutation AddMovie($movie: MovieInput!, $list: String!) {
@@ -77,7 +77,7 @@ export const useAddMovie = ({
 };
 
 export const addMovieOptions = (
-  movie: Omit<MovieInput, "id" | "list">,
+  movie: NewMovieInput,
   list: GetListsItem
 ): AddMovieMutationOptions => {
   const id = uuidv4();

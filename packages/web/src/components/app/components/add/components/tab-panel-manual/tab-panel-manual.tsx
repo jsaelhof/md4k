@@ -3,14 +3,14 @@ import { ManualMovieForm } from "../../../manual-movie-form/manual-movie-form";
 import LibraryAdd from "@mui/icons-material/LibraryAdd";
 import { useNavigate } from "react-router-dom";
 import { ReactElement, useCallback } from "react";
-import { Movie } from "../../../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
+import { NewMovieInput } from "../../../../../../graphql/types";
 
 export type TabPanelManualProps = {
   tabId: string;
   hidden: boolean;
-  onAddMovie: (movie: Omit<Movie, "id">) => void;
-  initialState?: Omit<Movie, "id">;
+  onAddMovie: (movie: NewMovieInput) => void;
+  initialState?: NewMovieInput;
 };
 
 const TabPanelManual = ({

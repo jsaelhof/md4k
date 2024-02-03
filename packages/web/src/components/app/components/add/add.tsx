@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import TabPanelSearch from "./components/tab-panel-search/tab-panel-search";
 import TabPanelManual from "./components/tab-panel-manual/tab-panel-manual";
 import ErrorDialog from "../error-dialog/error-dialog";
-import { Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
+import { NewMovie } from "../../../../graphql/types";
 
 export const Add = (): ReactElement => {
   const { t } = useTranslation(["add", "common"]);
@@ -36,7 +36,7 @@ export const Add = (): ReactElement => {
     },
   });
 
-  const onAddMovie = useCallback<(movie: Omit<Movie, "id" | "list">) => void>(
+  const onAddMovie = useCallback<(movie: NewMovie) => void>(
     (movie) =>
       list &&
       addMovieMutation(addMovieOptions({ ...movie, locked: false }, list)),

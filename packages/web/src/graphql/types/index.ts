@@ -1,4 +1,9 @@
-import { GetListsQuery, GetMoviesQuery } from "../../__generated__/graphql";
+import {
+  GetListsQuery,
+  GetMoviesQuery,
+  Movie,
+  MovieInput,
+} from "../../__generated__/graphql";
 import { ArrayElement } from "../utils";
 
 export type GetListsItem = NonNullable<
@@ -8,3 +13,7 @@ export type GetListsItem = NonNullable<
 export type GetMovieItem = NonNullable<
   ArrayElement<NonNullable<GetMoviesQuery["movies"]>>
 >;
+
+export type NewMovie = Omit<Movie, "id" | "list">;
+
+export type NewMovieInput = Omit<MovieInput, "id" | "list">;

@@ -26,7 +26,6 @@ import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "./components/poster-grid/poster-grid";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import {
-  Movie,
   PageInfo,
   SearchByTitleQuery,
   SearchResult,
@@ -34,11 +33,12 @@ import {
 import { Maybe } from "graphql/jsutils/Maybe";
 import { notEmpty } from "../../../../../../utils/not-empty";
 import { useTranslation } from "react-i18next";
+import { NewMovie } from "../../../../../../graphql/types";
 
 export type TabPanelSearchProps = {
   tabId: string;
   hidden: boolean;
-  onAddMovie: (movie: Omit<Movie, "id" | "list">) => void;
+  onAddMovie: (movie: NewMovie) => void;
 };
 
 const TabPanelSearch = ({
@@ -249,7 +249,7 @@ const TabPanelSearch = ({
           }}
           fullDetailProps={{
             movie: {
-              title: selectedMovie.title ?? "",
+              title: selectedMovie.title,
               poster: selectedMovie.poster,
               background: selectedMovie.background,
               imdbID: selectedMovie.imdbID,
