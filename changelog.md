@@ -1,3 +1,12 @@
+### PR #164 - #155: fix imports that are type only, clean up the configs
+##### 2024-02-03
+
+Cleans up the eslint configs a bit now that the app is converted to typescript, including adding a config for api. Mostly fixes all the imports that were only for types.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/164)
+
+----
+
 ### PR #162 - #153: Split list select into separate lists for source and genre
 ##### 2024-02-03
 
