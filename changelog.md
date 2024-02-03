@@ -1,3 +1,12 @@
+### PR #161 - #157: clean up types
+##### 2024-02-03
+
+Extract and clean up types, make title a non-nullable field in the schema
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/161)
+
+----
+
 ### PR #158 - #150: convert to ts
 ##### 2024-02-01
 
