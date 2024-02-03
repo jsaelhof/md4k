@@ -1,3 +1,12 @@
+### PR #162 - #153: Split list select into separate lists for source and genre
+##### 2024-02-03
+
+Split up the list select into two separate components. It was taking too much configuration and there was unneeded complexity in the new design.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/162)
+
+----
+
 ### PR #161 - #157: clean up types
 ##### 2024-02-03
 
