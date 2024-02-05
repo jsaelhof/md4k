@@ -1,3 +1,12 @@
+### PR #165 - #160: refactor to remove use of sx prop
+##### 2024-02-05
+
+Refactors the code to remove the use of the sx prop. I didn't like to "inline" nature of how styles were applied so I moved everything into styled components, usually existing ones that were being augmented by sx.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/165)
+
+----
+
 ### PR #164 - #155: fix imports that are type only, clean up the configs
 ##### 2024-02-03
 
