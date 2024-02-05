@@ -13,13 +13,7 @@ export type FiveStarRatingProps = {
 const FiveStarRating = ({ stars }: FiveStarRatingProps): ReactElement => (
   <StarRatingContainer>
     {times(5, (i) => (
-      <Star
-        key={i}
-        sx={{
-          height: heights[i],
-          marginBottom: `${margins[i]}px`,
-        }}
-      >
+      <Star key={i} $height={heights[i]} $marginBottom={margins[i]}>
         {[
           (stars ?? 0) - i >= 1
             ? "star-full"

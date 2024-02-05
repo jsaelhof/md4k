@@ -78,14 +78,18 @@ export const BackdropWrapper = styled("div")`
   }
 `;
 
-export const Backdrop = styled(animated.div)`
-  grid-area: main;
-  background-size: cover;
-  background-position-x: center;
-  height: 100%;
-  width: 100%;
-  background-image: linear-gradient(to top, #eee, #bbb);
-`;
+export const Backdrop = styled(animated.div)<{ $backdrop?: string | null }>(
+  ({ $backdrop }) => ({
+    gridArea: "main",
+    backgroundSize: "cover",
+    backgroundPositionX: "center",
+    height: "100%",
+    width: "100%",
+    backgroundImage: $backdrop
+      ? `url("${$backdrop}")`
+      : "linear-gradient(to top, #eee, #bbb)",
+  })
+);
 
 export const TrailerLayout = styled("div")`
   grid-area: main;
@@ -137,29 +141,28 @@ export const Poster = styled(animated.div)`
   }
 `;
 
-export const MovieTitle = styled("div")(({ theme: { palette, spacing } }) => ({
-  gridArea: "title",
-  fontSize: 48,
-  fontWeight: "bold",
-  color: palette.grey[900],
-  display: "flex",
-  justifyContent: "flex-end",
-  flexDirection: "column",
-  textShadow: "0 0 3px white",
-  marginBottom: 8,
+export const MovieTitle = styled("div")<{ $size?: "sm" | "lg" }>(
+  ({ $size, theme: { palette, spacing } }) => ({
+    gridArea: "title",
+    fontSize: 48,
+    ...($size === "sm" && { fontSize: 32 }),
+    fontWeight: "bold",
+    color: palette.grey[900],
+    display: "flex",
+    justifyContent: "flex-end",
+    flexDirection: "column",
+    textShadow: "0 0 3px white",
+    marginBottom: 8,
 
-  "@media (max-width: 750px)": {
-    fontSize: 32,
-    alignItems: "center",
-    textAlign: "center",
-    paddingTop: spacing(3),
-    marginBottom: spacing(2),
-  },
-}));
-
-export const smallMovieTitle = {
-  fontSize: 32,
-};
+    "@media (max-width: 750px)": {
+      fontSize: 32,
+      alignItems: "center",
+      textAlign: "center",
+      paddingTop: spacing(3),
+      marginBottom: spacing(2),
+    },
+  })
+);
 
 export const RatingsArea = styled("div")`
   grid-area: ratings;
@@ -182,16 +185,20 @@ export const MovieData = styled("div")(({ theme: { palette, spacing } }) => ({
   },
 }));
 
-export const SourceLogo = styled("img")`
-  grid-area: source;
-  height: 40px;
-  margin-left: auto;
-`;
+interface SourceLogoProps {
+  $streamable?: boolean;
+}
 
-export const streamable = {
-  cursor: "pointer",
-  "&:hover": { transform: "scale(1.1)" },
-};
+export const SourceLogo = styled("img")<SourceLogoProps>(({ $streamable }) => ({
+  gridArea: "source",
+  height: "40px",
+  marginLeft: "auto",
+
+  ...($streamable && {
+    cursor: "pointer",
+    "&:hover": { transform: "scale(1.1)" },
+  }),
+}));
 
 export const PlotLayout = styled("div")(({ theme: { spacing } }) => ({
   gridArea: "plot",

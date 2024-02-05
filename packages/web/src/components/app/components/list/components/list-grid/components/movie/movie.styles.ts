@@ -1,15 +1,14 @@
-import { type Theme, styled } from "@mui/material";
+import { styled } from "@mui/material";
 import { animated } from "react-spring";
 
-export const MovieContainer = styled(animated.div)(() => ({
-  position: "relative",
-  borderRadius: 4,
-}));
+export const MovieContainer = styled(animated.div)<{ $focused: boolean }>(
+  ({ $focused, theme: { zIndex } }) => ({
+    position: "relative",
+    borderRadius: 4,
 
-export const movieContainerFocused = ({ zIndex }: Theme) =>
-  ({
-    zIndex: zIndex.movieHover,
-  } as const);
+    ...($focused && { zIndex: zIndex.movieHover }),
+  })
+);
 
 export const MoviePosterContainer = styled("div")`
   border-radius: 4px;
@@ -17,23 +16,25 @@ export const MoviePosterContainer = styled("div")`
   position: relative;
 `;
 
-export const MovieDetailPositioner = styled("div")(() => ({
-  width: 240,
-  marginLeft: `calc((160px - 240px) / 2)` /* Use diff between zoomed and standard widths to determine horizontal offset to center */,
-  marginTop: -71,
-  position: "absolute",
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  pointerEvents: "none",
-  opacity: 0,
-}));
+export const MovieDetailPositioner = styled("div")<{ $focused: boolean }>(
+  ({ $focused }) => ({
+    width: 240,
+    marginLeft: `calc((160px - 240px) / 2)` /* Use diff between zoomed and standard widths to determine horizontal offset to center */,
+    marginTop: -71,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    pointerEvents: "none",
+    opacity: 0,
 
-export const movieDetailPositionerFocused = {
-  pointerEvents: "initial",
-  opacity: 1,
-};
+    ...($focused && {
+      pointerEvents: "initial",
+      opacity: 1,
+    }),
+  })
+);
 
 export const MovieDetail = styled(animated.div)`
   border-radius: 4px;

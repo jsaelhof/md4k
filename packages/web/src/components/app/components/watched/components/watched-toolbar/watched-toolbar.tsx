@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
-import { Layout, Status } from "./watched-toolbar.styles";
+import { CloseIconButton, Layout, Status } from "./watched-toolbar.styles";
 import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -60,16 +60,13 @@ const WatchedToolbar = ({
           ),
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
+              <CloseIconButton
+                $visible={searchTerm.length > 0}
                 size="small"
-                sx={{
-                  mr: "-8px",
-                  visibility: searchTerm.length ? "visible" : "hidden",
-                }}
                 onClick={(): void => onSearch("")}
               >
                 <Close />
-              </IconButton>
+              </CloseIconButton>
             </InputAdornment>
           ),
         }}

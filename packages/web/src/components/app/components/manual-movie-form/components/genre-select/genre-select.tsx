@@ -1,6 +1,5 @@
 import {
   MenuItem,
-  Select,
   type SelectChangeEvent,
   type SelectProps,
 } from "@mui/material";
@@ -9,6 +8,7 @@ import ListSelectItem from "../list-select-item/list-select-item";
 import { type ReactElement } from "react";
 import { type Genre, genres } from "md4k-constants";
 import { useTranslation } from "react-i18next";
+import { Select } from "./genre-select.styles";
 
 export type GenreSelectProps = {
   value?: Genre | null;
@@ -25,12 +25,7 @@ const GenreSelect = ({
 }: GenreSelectProps): ReactElement => {
   const { t } = useTranslation(["common"]);
   return (
-    <Select<number>
-      sx={{
-        "& div": {
-          padding: "6px 8px",
-        },
-      }}
+    <Select
       id="genre"
       labelId="genre"
       data-testid="genre"

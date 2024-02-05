@@ -29,6 +29,7 @@ const SortedRuntime = ({
 }: ListGridProps): ReactElement => {
   const { t } = useTranslation(["list_grid"]);
   const direction = useSortDirection();
+  const reverse = direction === SortDirection.DESC;
 
   const { unknown, short, regular, long } = useMemo(
     () => partitionMovies(movies),
@@ -38,29 +39,30 @@ const SortedRuntime = ({
   const sections = useMemo(() => {
     const sectionDescriptors = [
       {
-        list: short,
+        list: reverse ? short.reverse() : short,
         title: t("list_grid:sorted_runtime.short.title"),
         subtitle: t("list_grid:sorted_runtime.short.subtitle"),
       },
       {
-        list: regular,
+        list: reverse ? regular.reverse() : regular,
         title: t("list_grid:sorted_runtime.regular.title"),
         subtitle: t("list_grid:sorted_runtime.regular.subtitle"),
       },
       {
-        list: long,
+        list: reverse ? long.reverse() : long,
         title: t("list_grid:sorted_runtime.long.title"),
         subtitle: t("list_grid:sorted_runtime.long.subtitle"),
       },
     ];
 
     return [
-      ...(direction === SortDirection.ASC
-        ? sectionDescriptors
-        : sectionDescriptors.reverse()),
-      { list: unknown, title: t("list_grid:sorted_runtime.unknown.title") },
+      ...(reverse ? sectionDescriptors.reverse() : sectionDescriptors),
+      {
+        list: reverse ? unknown.reverse() : unknown,
+        title: t("list_grid:sorted_runtime.unknown.title"),
+      },
     ];
-  }, [direction, long, regular, short, t, unknown]);
+  }, [long, regular, reverse, short, t, unknown]);
 
   return (
     <span data-testid={sort.RUNTIME}>

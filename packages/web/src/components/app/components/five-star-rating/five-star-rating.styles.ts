@@ -6,12 +6,19 @@ export const StarRatingContainer = styled("div")`
   align-items: end;
 `;
 
-export const Star = styled("div")`
-  font-size: 0;
-  width: 100%;
+interface StarProps {
+  $height: number;
+  $marginBottom: number;
+}
 
-  > img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+export const Star = styled("div")<StarProps>(({ $height, $marginBottom }) => ({
+  fontSize: 0,
+  width: "100%",
+  height: $height,
+  marginBottom: $marginBottom,
+
+  "> img": {
+    width: "100%",
+    height: "100%",
+  },
+}));

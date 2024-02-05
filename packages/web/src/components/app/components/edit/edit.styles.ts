@@ -1,4 +1,9 @@
-import { type Theme, styled } from "@mui/material";
+import {
+  type Theme,
+  styled,
+  Tabs as MUITabs,
+  Tab as MUITab,
+} from "@mui/material";
 import { app } from "../../../../constants/app";
 
 export const Layout = styled("div")(({ theme: { spacing } }) => ({
@@ -11,23 +16,21 @@ export const Layout = styled("div")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const tabStyles = ({ spacing, palette }: Theme) =>
-  ({
-    paddingLeft: 0,
-    paddingRight: 0,
-    minWidth: 0,
-    marginRight: spacing(6),
-    color: palette.grey[500],
+export const Tabs = styled(MUITabs)(() => ({
+  borderBottom: "1px solid #ddd",
+}));
 
-    "&:last-of-type": {
-      marginRight: 0,
-    },
-  } as const);
+export const Tab = styled(MUITab)(({ theme: { spacing, palette } }) => ({
+  paddingLeft: 0,
+  paddingRight: 0,
+  minWidth: 0,
+  marginRight: spacing(6),
+  color: palette.grey[500],
 
-export const tabsStyles = () =>
-  ({
-    borderBottom: "1px solid #ddd",
-  } as const);
+  "&:last-of-type": {
+    marginRight: 0,
+  },
+}));
 
 export const NotFoundLayout = styled("div")(({ theme: { spacing } }) => ({
   marginTop: spacing(3),

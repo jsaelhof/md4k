@@ -1,4 +1,4 @@
-import { FormGroup, styled } from "@mui/material";
+import { FormGroup, IconButton, styled } from "@mui/material";
 import { app } from "../../../../../../constants/app";
 
 export const Layout = styled(FormGroup)(
@@ -22,3 +22,10 @@ export const Status = styled("div")(({ theme: { palette } }) => ({
   whiteSpace: "nowrap",
   color: palette.grey[700],
 }));
+
+export const CloseIconButton = styled(IconButton)<{ $visible: boolean }>(
+  ({ $visible }) => ({
+    marginRight: "-8px",
+    visibility: $visible ? "visible" : "hidden",
+  })
+);

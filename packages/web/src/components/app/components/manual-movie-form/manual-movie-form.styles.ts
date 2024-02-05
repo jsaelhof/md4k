@@ -36,20 +36,26 @@ export const Actions = styled("div")(({ theme: { spacing } }) => ({
   },
 }));
 
-export const Preview = styled("div")(() => ({
-  width: "100%",
-  height: "100%",
-  backgroundColor: "#eee",
-  backgroundSize: "contain",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  border: "1px solid lightgrey",
-  borderRadius: 8,
-}));
+export const Preview = styled("div")<{ $poster?: string | null }>(
+  ({ $poster }) => ({
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#eee",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    border: "1px solid lightgrey",
+    borderRadius: 8,
+    backgroundImage: `url(${$poster})`,
+  })
+);
 
-export const BackgroundPreview = styled(Preview)`
-  background-size: cover;
-`;
+export const BackgroundPreview = styled(Preview)<{
+  $background?: string | null;
+}>(({ $background }) => ({
+  backgroundImage: `url(${$background})`,
+  backgroundSize: "cover",
+}));
 
 export const PreviewLayout = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",

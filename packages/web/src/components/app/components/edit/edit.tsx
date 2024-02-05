@@ -5,8 +5,7 @@ import ErrorDialog from "../error-dialog/error-dialog";
 import { ManualMovieForm } from "../manual-movie-form/manual-movie-form";
 import Check from "@mui/icons-material/Check";
 import { editMovieOptions, useEditMovie } from "../../../../graphql/mutations";
-import { Layout, NotFoundLayout, tabStyles, tabsStyles } from "./edit.styles";
-import { Tab, Tabs } from "@mui/material";
+import { Layout, NotFoundLayout, Tab, Tabs } from "./edit.styles";
 import { type Movie } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 import { type NewMovieInput } from "../../../../graphql/types";
@@ -49,19 +48,8 @@ export const Edit = (): ReactElement => {
   return (
     <>
       <Layout>
-        <Tabs
-          sx={tabsStyles}
-          value={0}
-          textColor="primary"
-          indicatorColor="primary"
-          centered
-        >
-          <Tab
-            sx={tabStyles}
-            label="Update Movie"
-            id="tab-0"
-            aria-controls="tabpanel-0"
-          />
+        <Tabs value={0} textColor="primary" indicatorColor="primary" centered>
+          <Tab label="Update Movie" id="tab-0" aria-controls="tabpanel-0" />
         </Tabs>
 
         {movie ? (

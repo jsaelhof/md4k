@@ -7,7 +7,7 @@ import { type ReactElement } from "react";
 export type ActionButtonProps = {
   Icon: SvgIconComponent;
   tooltip?: string;
-  fontSize?: number;
+  size?: "sm" | "md" | "lg";
   critical?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -16,7 +16,7 @@ export type ActionButtonProps = {
 const ActionButton = ({
   Icon,
   tooltip = "",
-  fontSize = 20,
+  size = "sm",
   critical = false,
   disabled = false,
   onClick,
@@ -29,8 +29,8 @@ const ActionButton = ({
     enterNextDelay={1000}
   >
     <ButtonContainer
+      $size={size}
       $critical={critical}
-      sx={[{ fontSize }]}
       onClick={(e): void => {
         e.stopPropagation();
         !disabled && onClick();

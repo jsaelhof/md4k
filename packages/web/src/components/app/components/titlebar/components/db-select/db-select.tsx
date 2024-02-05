@@ -1,8 +1,13 @@
-import { MenuItem, Button, Divider, type SelectChangeEvent } from "@mui/material";
+import {
+  MenuItem,
+  Button,
+  Divider,
+  type SelectChangeEvent,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../../../../../../context/app-context";
-import { Select } from "./db-select.styles";
+import { NewListMenuItem, Select } from "./db-select.styles";
 import { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -43,9 +48,9 @@ const DbSelect = (): ReactElement | null => {
           </MenuItem>
         ))}
         <Divider variant="middle" />
-        <MenuItem value={NEW_LIST} sx={{ fontStyle: "italic" }}>
+        <NewListMenuItem value={NEW_LIST}>
           {t("titlebar:db_select.new_list")}
-        </MenuItem>
+        </NewListMenuItem>
       </Select>
     </div>
   );

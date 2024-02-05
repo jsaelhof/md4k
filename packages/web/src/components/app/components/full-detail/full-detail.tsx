@@ -25,9 +25,7 @@ import {
   Poster,
   PrevBackgroundButton,
   RatingsArea,
-  smallMovieTitle,
   SourceLogo,
-  streamable,
   TrailerLayout,
 } from "./full-detail.styles";
 import { FullDetailSkeleton } from "./components/full-detail-skeleton/full-detail.skeleton";
@@ -125,11 +123,7 @@ const FullDetail = ({
       <BackdropWrapper>
         <Backdrop
           data-testid={backdrop}
-          sx={[
-            {
-              backgroundImage: `url("${backdrop}")`,
-            },
-          ]}
+          $backdrop={backdrop}
           style={{
             ...fadeSpring,
           }}
@@ -195,9 +189,7 @@ const FullDetail = ({
           />
         </Poster>
 
-        <MovieTitle
-          sx={[(small || movie.title.length >= 25) && smallMovieTitle]}
-        >
+        <MovieTitle $size={small || movie.title.length >= 25 ? "sm" : "lg"}>
           <div>{movie.title}</div>
 
           <RatingsArea>
@@ -224,7 +216,7 @@ const FullDetail = ({
         </MovieData>
 
         <SourceLogo
-          sx={[canStream && streamable]}
+          $streamable={canStream}
           src={sourceLogosLarge[source]}
           alt={t(`common:sources.${source}`)}
           onClick={(): void => {

@@ -1,33 +1,36 @@
-import { styled } from "@mui/system";
+import { styled } from "@mui/material";
 import { app } from "../../../../constants/app";
 import NavButton from "./components/nav-button/nav-button";
-import { type Theme } from "@mui/material";
+import { Box, Toolbar as MUIToolbar } from "@mui/material";
 
-export const appBarContainerStyles = ({ palette, zIndex }: Theme) =>
-  ({
+export const AppBarContainer = styled(Box)(
+  ({ theme: { palette, zIndex } }) => ({
     position: "fixed",
     width: "100%",
     zIndex: zIndex.titleBar,
     background: `linear-gradient(75deg, ${palette.darkGrey[600]}, ${palette.darkGrey[800]} 80%)`,
-  } as const);
+  })
+);
 
-export const toolbarStyles = {
-  display: "grid",
-  gridTemplateColumns: "auto 1fr auto",
-  gridTemplateAreas: `"logo nav profile"`,
-  minHeight: `${app.TITLE_BAR_HEIGHT}px`,
+export const Toolbar = styled(MUIToolbar)<{ $pickScreen: boolean }>(
+  ({ $pickScreen }) => ({
+    display: "grid",
+    gridTemplateColumns: "auto 1fr auto",
+    gridTemplateAreas: `"logo nav profile"`,
+    minHeight: `${app.TITLE_BAR_HEIGHT}px`,
 
-  "@media (max-width: 580px)": {
-    gridTemplateAreas: `"nav logo profile"`,
-  },
-};
+    "@media (max-width: 580px)": {
+      gridTemplateAreas: `"nav logo profile"`,
+    },
 
-export const pickScreenToolbarStyles = {
-  "@media (max-width: 580px)": {
-    gridTemplateAreas: `"nav logo pick profile"`,
-    gridTemplateColumns: "auto max-content 1fr auto",
-  },
-};
+    ...($pickScreen && {
+      "@media (max-width: 580px)": {
+        gridTemplateAreas: `"nav logo pick profile"`,
+        gridTemplateColumns: "auto max-content 1fr auto",
+      },
+    }),
+  })
+);
 
 export const PickAgainButton = styled(NavButton)(({ theme: { spacing } }) => ({
   gridArea: "pick",

@@ -20,11 +20,14 @@ export const BackdropWrapper = styled("div")(() => ({
     "linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 40%, rgba(0,0,0,0.1) 100%)",
 }));
 
-export const Backdrop = styled("div")(() => ({
-  backgroundPosition: "center 20%",
-  backgroundSize: "cover",
-  height: "100%",
-}));
+export const Backdrop = styled("div")<{ $imageUrl?: string | null }>(
+  ($imageUrl) => ({
+    backgroundImage: `url(${$imageUrl})`,
+    backgroundPosition: "center 20%",
+    backgroundSize: "cover",
+    height: "100%",
+  })
+);
 
 interface ContentProps {
   $right: boolean;

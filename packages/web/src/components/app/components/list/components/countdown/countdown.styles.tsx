@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material";
 import { animated } from "react-spring";
 
 const needleAnim = keyframes`

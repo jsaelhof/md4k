@@ -1,35 +1,39 @@
 import { type Theme, styled } from "@mui/material";
 import { animated } from "react-spring";
 
-export const Picker = styled(animated.div)(({ theme: { palette } }) => ({
-  position: "absolute",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  background: `${palette.darkGrey[800]}EE`,
-  color: palette.grey[400],
-  border: "1px solid rgba(0, 0, 0, 0.25)",
-  top: 0,
-  bottom: 0,
-  right: 0,
+interface PickerProps {
+  $useDrawer: boolean;
+  $align: "left" | "right";
+}
 
-  "@media (max-width:550px)": {
-    margin: "0 auto",
-    background: "transparent",
-    border: "none",
-  },
-}));
+export const Picker = styled(animated.div)<PickerProps>(
+  ({ $useDrawer, $align, theme: { palette } }) => ({
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    background: `${palette.darkGrey[800]}EE`,
+    color: palette.grey[400],
+    border: "1px solid rgba(0, 0, 0, 0.25)",
+    top: 0,
+    bottom: 0,
 
-export const RightAlignedPicker = {
-  right: "unset",
-  left: 0,
-};
+    ...($useDrawer && {
+      position: "initial",
+      textAlign: "center",
+      paddingBottom: "1em",
+    }),
 
-export const DrawerPicker = {
-  position: "initial",
-  textAlign: "center",
-  paddingBottom: "1em",
-};
+    ...($align === "left" && { right: 0, left: "unset" }),
+    ...($align === "right" && { right: "unset", left: 0 }),
+
+    "@media (max-width:550px)": {
+      margin: "0 auto",
+      background: "transparent",
+      border: "none",
+    },
+  })
+);
 
 export const DrawerPaper = ({ palette }: Theme) =>
   ({

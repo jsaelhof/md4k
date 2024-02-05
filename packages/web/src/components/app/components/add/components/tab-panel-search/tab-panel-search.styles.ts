@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { IconButton, styled } from "@mui/material";
 import { app } from "../../../../../../constants/app";
 import { keyframes } from "@emotion/react";
 
@@ -82,3 +82,10 @@ export const NoMoviesFound = styled("div")(({ theme: { palette } }) => ({
     fontSize: "2.5em",
   },
 }));
+
+export const CloseIconButton = styled(IconButton)<{ $visible: boolean }>(
+  ({ $visible }) => ({
+    marginRight: "-8px",
+    visibility: $visible ? "visible" : "hidden",
+  })
+);

@@ -1,4 +1,4 @@
-import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import CalendarMonth from "@mui/icons-material/CalendarMonth";
 import Close from "@mui/icons-material/Close";
 import Refresh from "@mui/icons-material/Refresh";
@@ -15,6 +15,7 @@ import debounce from "lodash/debounce";
 import FullDetailModal from "../../../full-detail-modal/full-detail-modal";
 import { useSearchByTitle } from "../../../../../../graphql/queries";
 import {
+  CloseIconButton,
   NoMoviesFound,
   SearchInput,
   SearchLayout,
@@ -163,16 +164,13 @@ const TabPanelSearch = ({
                 ),
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
+                    <CloseIconButton
                       size="small"
-                      sx={{
-                        mr: "-8px",
-                        visibility: titleSearch ? "visible" : "hidden",
-                      }}
+                      $visible={!!titleSearch}
                       onClick={onResetSearch}
                     >
                       <Close />
-                    </IconButton>
+                    </CloseIconButton>
                   </InputAdornment>
                 ),
               }}

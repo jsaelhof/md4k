@@ -46,7 +46,7 @@ export const StarRatingLayout = ({
     >
       <FiveStarRating stars={stars} />
       <animated.div style={ratingsSpring} data-testid="ratingsBreakdown">
-        <Ratings ratings={ratings} size="small" dense />
+        <Ratings ratings={ratings} size="sm" dense />
       </animated.div>
     </RatingContainer>
   );

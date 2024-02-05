@@ -13,7 +13,7 @@ export const SourceLayout = styled("div")(() => ({
   overflow: "hidden",
 }));
 
-export const SourceImage = styled("div")(() => ({
+export const SourceImage = styled("div")<{ $logo: string }>(({ $logo }) => ({
   width: "100%",
   height: "100%",
   backgroundSize: "contain",
@@ -22,6 +22,7 @@ export const SourceImage = styled("div")(() => ({
   backgroundClip: "padding-box",
   borderRadius: "inherit",
   boxSizing: "border-box",
+  backgroundImage: `url("${$logo}")`,
 }));
 
 export const SourceBorder = styled("div")(() => ({

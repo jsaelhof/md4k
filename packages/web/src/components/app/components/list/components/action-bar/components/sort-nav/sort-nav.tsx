@@ -1,11 +1,6 @@
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
-import {
-  SortNavList,
-  SortNavListItem,
-  sortNavSelectedItem,
-  sortOrderIcon,
-} from "./sort-nav.styles";
+import { SortNavList, SortNavListItem, sortOrderIcon } from "./sort-nav.styles";
 import { useNavigate } from "react-router-dom";
 import { useOrderAndDirection } from "../../../../../../../../hooks/use-order-and-direction";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
@@ -49,7 +44,7 @@ const SortNav = (): ReactElement => {
             key={key}
             data-active={key === order}
             data-sort={key === order ? direction : undefined}
-            sx={[key === order && sortNavSelectedItem]}
+            $active={key === order}
             onClick={(): void => {
               navigate(`/list/${resolveOrder(key).join("/")}`);
             }}
