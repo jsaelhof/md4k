@@ -17,11 +17,7 @@ const Source = ({ source }: SourceProps): ReactElement => {
       <SourceBorder />
       <SourceImage
         aria-label={t(`common:sources.${source ?? SourceConstants.NONE}`)}
-        sx={{
-          backgroundImage: `url("${
-            sourceLogos[source ?? SourceConstants.NONE]
-          }")`,
-        }}
+        $logo={sourceLogos[source ?? SourceConstants.NONE]}
       />
     </SourceLayout>
   );

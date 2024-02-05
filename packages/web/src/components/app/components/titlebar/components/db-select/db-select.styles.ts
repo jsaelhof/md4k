@@ -1,4 +1,4 @@
-import { Select as MuiSelect, styled } from "@mui/material";
+import { MenuItem, Select as MuiSelect, styled } from "@mui/material";
 
 export const Select = styled(MuiSelect<string>)(({ theme: { palette } }) => ({
   color: palette.secondary.main,
@@ -15,4 +15,8 @@ export const Select = styled(MuiSelect<string>)(({ theme: { palette } }) => ({
     color: palette.secondary.main,
     right: 6,
   },
+}));
+
+export const NewListMenuItem = styled(MenuItem)(() => ({
+  fontStyle: "italic",
 }));

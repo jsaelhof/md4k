@@ -3,11 +3,8 @@ import React, { type ReactElement } from "react";
 import { ratingsSource } from "md4k-constants";
 import { ratingsSourceImage } from "../../../../../../constants/ratings";
 import {
-  denseMargins,
   RatingsList,
-  small,
   RatingsListItem,
-  ratingsSourceIconSmall,
   RatingsSourceIcon,
 } from "./ratings.styles";
 import {
@@ -17,24 +14,24 @@ import {
 
 export type RatingsProps = {
   ratings?: Maybe<RatingsType>;
-  size?: "small" | "medium";
+  size?: "sm" | "md";
   dense?: boolean;
 };
 
 const Ratings = ({
   ratings,
-  size = "medium",
+  size = "md",
   dense = false,
 }: RatingsProps): ReactElement | null => {
   if (!ratings) return null;
 
   return (
-    <RatingsList sx={[dense && denseMargins, size === "small" && small]}>
+    <RatingsList $size={size} $dense={dense}>
       {Object.entries(ratings).map(([source, rating]) =>
         ratingsSource[source as keyof typeof ratingsSource] && rating ? (
           <RatingsListItem key={source}>
             <RatingsSourceIcon
-              sx={[size === "small" && ratingsSourceIconSmall]}
+              $size={size}
               src={`/images/ratings/${
                 ratingsSourceImage[source as keyof typeof ratingsSource]
               }`}

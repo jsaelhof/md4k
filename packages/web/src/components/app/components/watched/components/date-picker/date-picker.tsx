@@ -9,10 +9,8 @@ import { DayPicker } from "react-day-picker";
 
 import {
   ButtonGroup,
-  DrawerPicker,
   DrawerPaper,
   Picker,
-  RightAlignedPicker,
   Title,
   dayPickerStyles,
   dayPickerSmallStyles,
@@ -43,11 +41,12 @@ const DatePicker = ({
   onDelete,
   spring,
 }: DatePickerProps): ReactElement => {
-  const actionSize = useDrawer ? 28 : 24;
+  const size = useDrawer ? "lg" : "md";
   const [day, setDay] = useState<Date>(defaultDate);
   const picker = (
     <Picker
-      sx={[useDrawer && DrawerPicker, right && RightAlignedPicker]}
+      $useDrawer={useDrawer}
+      $align={right ? "right" : "left"}
       style={!useDrawer ? (spring as SpringValues) : undefined}
       onClick={preventBubbling}
       data-testid="datePicker"
@@ -76,14 +75,14 @@ const DatePicker = ({
           Icon={Delete}
           onClick={onDelete}
           critical={true}
-          fontSize={actionSize}
+          size={size}
         />
         <span />
-        <ActionButton Icon={Close} onClick={onCancel} fontSize={actionSize} />
+        <ActionButton Icon={Close} onClick={onCancel} size={size} />
         <ActionButton
           Icon={CalendarCheck}
           onClick={(): void => onSave(day)}
-          fontSize={actionSize}
+          size={size}
         />
       </ButtonGroup>
     </Picker>

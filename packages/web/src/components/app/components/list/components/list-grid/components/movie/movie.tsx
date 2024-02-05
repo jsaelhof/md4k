@@ -11,8 +11,6 @@ import {
   MoviePosterContainer,
   MovieContainer,
   OverflowWrapper,
-  movieDetailPositionerFocused,
-  movieContainerFocused,
   StarRatingLayout,
   SourceLayout,
 } from "./movie.styles";
@@ -103,7 +101,7 @@ const Movie = ({
     <>
       <MovieContainer
         key={movie.id}
-        sx={[focused && movieContainerFocused]}
+        $focused={focused}
         onMouseOver={focus}
         onMouseEnter={focus}
         onMouseLeave={unfocus}
@@ -115,7 +113,7 @@ const Movie = ({
         </MoviePosterContainer>
 
         <MovieDetailPositioner
-          sx={[focused && movieDetailPositionerFocused]}
+          $focused={focused}
           onClick={(): void => {
             unfocus();
             setExpanded(true);
@@ -178,7 +176,7 @@ const Movie = ({
                 </InfoFooterLayout>
 
                 <InfoFooterLayout style={ratingsSpring} data-testid="ratings">
-                  <Ratings ratings={movie.ratings} size="small" dense />
+                  <Ratings ratings={movie.ratings} size="sm" dense />
                 </InfoFooterLayout>
 
                 <SourceLayout>

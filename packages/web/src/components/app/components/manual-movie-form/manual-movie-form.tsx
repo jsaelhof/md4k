@@ -145,10 +145,7 @@ export const ManualMovieForm = ({
           multiline={true}
         />
 
-        <Preview
-          data-testid="Preview"
-          sx={{ backgroundImage: `url(${posterValue})` }}
-        />
+        <Preview data-testid="Preview" $poster={posterValue} />
       </PreviewLayout>
 
       <PreviewLayout>
@@ -169,7 +166,7 @@ export const ManualMovieForm = ({
 
         <BackgroundPreview
           data-testid="BackgroundPreview"
-          sx={{ backgroundImage: `url(${backgroundValue})` }}
+          $background={backgroundValue}
         />
       </PreviewLayout>
 

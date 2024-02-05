@@ -1,6 +1,6 @@
-import { Tab, Tabs, type TabsOwnProps } from "@mui/material";
+import { type TabsOwnProps } from "@mui/material";
 import { type ReactElement, useCallback, useState } from "react";
-import { Layout, tabStyles, tabsStyles } from "./add.styles";
+import { Layout, Tabs, Tab } from "./add.styles";
 import { addMovieOptions, useAddMovie } from "../../../../graphql/mutations";
 import { useAppContext } from "../../../../context/app-context";
 import { useNavigate } from "react-router-dom";
@@ -49,19 +49,16 @@ export const Add = (): ReactElement => {
         <Tabs
           value={activeTab}
           onChange={onTabChange}
-          sx={tabsStyles}
           textColor="primary"
           indicatorColor="primary"
           centered
         >
           <Tab
-            sx={tabStyles}
             label={t("add:add_by_search")}
             id="tab-0"
             aria-controls="tabpanel-0"
           />
           <Tab
-            sx={tabStyles}
             label={t("add:add_manually")}
             id="tab-1"
             aria-controls="tabpanel-1"

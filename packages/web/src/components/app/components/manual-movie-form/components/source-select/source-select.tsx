@@ -1,6 +1,5 @@
 import {
   MenuItem,
-  Select,
   type SelectChangeEvent,
   type SelectProps,
 } from "@mui/material";
@@ -10,6 +9,7 @@ import { type ReactElement } from "react";
 import { type Source, sources } from "md4k-constants";
 import { sourceLogos } from "../../../../../../constants/sources";
 import { useTranslation } from "react-i18next";
+import { Select } from "./source-select.styles";
 
 export type SourceSelectProps = {
   value?: Source | null;
@@ -27,12 +27,7 @@ const SourceSelect = ({
   const { t } = useTranslation(["common"]);
 
   return (
-    <Select<number>
-      sx={{
-        "& div": {
-          padding: "6px 8px",
-        },
-      }}
+    <Select
       id="source"
       labelId="source"
       data-testid="source"

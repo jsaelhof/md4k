@@ -17,6 +17,7 @@ import {
   MenuDivider,
   MovieIcon,
   NavMenu,
+  NewListMenuItem,
   RefreshIcon,
 } from "./nav-hamburger.styles";
 import { useTranslation } from "react-i18next";
@@ -122,15 +123,14 @@ const NavHamburger = (): ReactElement | null => {
                   </MenuItem>
                 ))}
 
-                <MenuItem
-                  sx={{ fontStyle: "italic" }}
+                <NewListMenuItem
                   onClick={(): void => {
                     navigate("/create");
                     handleClose();
                   }}
                 >
                   <AddListIcon /> {t("titlebar:nav.action_new_list")}
-                </MenuItem>
+                </NewListMenuItem>
               </>
             )}
           </div>

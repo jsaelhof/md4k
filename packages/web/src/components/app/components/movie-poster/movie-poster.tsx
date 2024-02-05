@@ -1,13 +1,4 @@
-import {
-  active,
-  Lock,
-  locked,
-  NoPoster,
-  noPosterZoom,
-  Poster,
-  PosterLayout,
-  shadowStyles,
-} from "./movie-poster.styles";
+import { Lock, NoPoster, Poster, PosterLayout } from "./movie-poster.styles";
 import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
 import { type ReactElement } from "react";
 import { type Maybe } from "../../../../__generated__/graphql";
@@ -44,14 +35,9 @@ const MoviePoster = ({
 
   return (
     <PosterLayout
-      sx={[
-        !noRel && { position: "relative" },
-        isLocked && !noLock && locked,
-        {
-          width: height * 0.64,
-          height,
-        },
-      ]}
+      $height={height}
+      $noRel={noRel}
+      $locked={isLocked && !noLock}
       aria-label={t("movie_poster:label", {
         title: movie.title ?? t("movie_poster:no_title"),
       })}
@@ -61,19 +47,17 @@ const MoviePoster = ({
       {/* Fallback if the poster is missing or a broken link */}
       <NoPoster
         data-testid="fallback"
-        sx={[variant === "zoom" && noPosterZoom, shadow && shadowStyles]}
+        $disableZoom={variant === "zoom"}
+        $shadow={shadow}
+        $active={!!onClick}
       >
         <div>{movie.title ? movie.title : t("movie_poster:no_title")}</div>
       </NoPoster>
 
       <Poster
         data-testid="poster"
-        sx={[
-          {
-            ...(visible && { backgroundImage: `url(${movie.poster})` }),
-          },
-          !!onClick && active,
-        ]}
+        $poster={visible && movie.poster}
+        $active={!!onClick}
       />
 
       {isLocked && !noLock && <Lock />}

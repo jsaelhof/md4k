@@ -92,11 +92,7 @@ const WatchedMovie = ({
       }}
     >
       <BackdropWrapper>
-        <Backdrop
-          sx={{
-            backgroundImage: `url(${movie.background || data?.backdrop})`,
-          }}
-        />
+        <Backdrop $imageUrl={movie.background || data?.backdrop} />
       </BackdropWrapper>
       <Content $right={right} data-testid="content">
         {right ? nodes.reverse() : nodes}
