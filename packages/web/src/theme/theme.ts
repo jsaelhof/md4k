@@ -1,11 +1,9 @@
-import { type Color, type PaletteColorOptions, createTheme } from "@mui/material";
+import { type Color, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 // Module Augmentation: Extend the interfaces used in the theme
 declare module "@mui/material/styles" {
   interface Palette {
-    tertiary: PaletteColorOptions;
-    darkBlue: Partial<Color>;
     darkGrey: Partial<Color>;
     accent: string;
     icon: string;
@@ -13,8 +11,6 @@ declare module "@mui/material/styles" {
   }
 
   interface PaletteOptions {
-    tertiary: PaletteColorOptions;
-    darkBlue: Partial<Color>;
     darkGrey: Partial<Color>;
     accent: string;
     icon: string;
@@ -49,12 +45,6 @@ declare module "@mui/material/Button" {
   }
 }
 
-const darkBlue = {
-  50: "#b4b5de",
-  500: "#37476c",
-  900: "#1e1e30",
-};
-
 const darkGrey = {
   50: "#e3e3e3",
   100: "#e7e7e7",
@@ -74,10 +64,6 @@ export const theme = createTheme({
     secondary: {
       main: darkGrey[50],
     },
-    tertiary: {
-      main: accent,
-    },
-    darkBlue,
     darkGrey,
     grey,
     accent,
