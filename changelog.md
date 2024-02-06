@@ -1,3 +1,12 @@
+### PR #166 - #152: remove unused theme config
+##### 2024-02-06
+
+Removes colors that were leftover from the old blue design
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/166)
+
+----
+
 ### PR #165 - #160: refactor to remove use of sx prop
 ##### 2024-02-05
 
