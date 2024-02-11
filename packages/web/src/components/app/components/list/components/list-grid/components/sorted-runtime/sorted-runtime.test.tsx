@@ -209,4 +209,42 @@ describe("sorted-runtime", () => {
       expect.objectContaining({ title: "Movie 1" })
     );
   });
+
+  it<LocalTestContext>("should not render short movies when the category is empty", ({
+    props,
+  }) => {
+    render(<SortedRuntime {...props} movies={[...props.movies.slice(1)]} />);
+    expect(screen.queryByText(/short/i)).not.toBeInTheDocument();
+  });
+
+  it<LocalTestContext>("should not render regular movies when the category is empty", ({
+    props,
+  }) => {
+    render(
+      <SortedRuntime
+        {...props}
+        movies={[...props.movies.slice(0, 1), ...props.movies?.slice(2)]}
+      />
+    );
+    expect(screen.queryByText(/regular/i)).not.toBeInTheDocument();
+  });
+
+  it<LocalTestContext>("should not render long movies when the category is empty", ({
+    props,
+  }) => {
+    render(
+      <SortedRuntime
+        {...props}
+        movies={[...props.movies.slice(0, 2), ...props.movies?.slice(3)]}
+      />
+    );
+    expect(screen.queryByText(/long/i)).not.toBeInTheDocument();
+  });
+
+  it<LocalTestContext>("should not render unknown length movies when the category is empty", ({
+    props,
+  }) => {
+    render(<SortedRuntime {...props} movies={[...props.movies.slice(0, 3)]} />);
+    expect(screen.queryByText(/unknown/i)).not.toBeInTheDocument();
+  });
 });

@@ -1,5 +1,4 @@
 import orderBy from "lodash/orderBy";
-import { flow, groupBy, mapValues } from "lodash/fp";
 import { type ReactElement, useMemo } from "react";
 import { sort, SortDirection } from "../../../../../../../../constants/sorts";
 import { useSortDirection } from "../../../../../../../../hooks/use-sort-direction";
@@ -8,20 +7,12 @@ import { type Movie } from "../../../../../../../../__generated__/graphql";
 import { type ListGridProps } from "../../types";
 import { useTranslation } from "react-i18next";
 
-const partitionMovies = flow(
-  groupBy<NonNullable<Movie>>((movie) => {
-    if (!movie.runtime) {
-      return "unknown";
-    } else if (movie.runtime <= 6000) {
-      return "short";
-    } else if (movie.runtime <= 7800) {
-      return "regular";
-    } else {
-      return "long";
-    }
-  }),
-  mapValues((movies) => orderBy(movies, [sort.RUNTIME], [SortDirection.ASC]))
-);
+type RuntimeGroup = {
+  short: "short";
+  regular: "regular";
+  long: "long";
+  unknown: "unknown";
+};
 
 const SortedRuntime = ({
   movies,
@@ -32,24 +23,61 @@ const SortedRuntime = ({
   const reverse = direction === SortDirection.DESC;
 
   const { unknown, short, regular, long } = useMemo(
-    () => partitionMovies(movies),
-    [movies]
+    () =>
+      Object.entries(
+        (movies ?? []).reduce<Record<keyof RuntimeGroup, Movie[]>>(
+          (grouped, movie) => {
+            if (!movie.runtime) {
+              grouped.unknown.push(movie);
+            } else if (movie.runtime <= 6000) {
+              grouped.short.push(movie);
+            } else if (movie.runtime <= 7800) {
+              grouped.regular.push(movie);
+            } else {
+              grouped.long.push(movie);
+            }
+            return grouped;
+          },
+          {
+            short: [],
+            regular: [],
+            long: [],
+            unknown: [],
+          }
+        )
+      ).reduce<Record<keyof RuntimeGroup, Movie[]>>(
+        (grouped, [group, movies]) => {
+          grouped[group as keyof RuntimeGroup] = orderBy(
+            movies,
+            [sort.RUNTIME],
+            [direction]
+          );
+          return grouped;
+        },
+        {
+          short: [],
+          regular: [],
+          long: [],
+          unknown: [],
+        }
+      ),
+    [direction, movies]
   );
 
   const sections = useMemo(() => {
     const sectionDescriptors = [
       {
-        list: reverse ? short.reverse() : short,
+        list: short,
         title: t("list_grid:sorted_runtime.short.title"),
         subtitle: t("list_grid:sorted_runtime.short.subtitle"),
       },
       {
-        list: reverse ? regular.reverse() : regular,
+        list: regular,
         title: t("list_grid:sorted_runtime.regular.title"),
         subtitle: t("list_grid:sorted_runtime.regular.subtitle"),
       },
       {
-        list: reverse ? long.reverse() : long,
+        list: long,
         title: t("list_grid:sorted_runtime.long.title"),
         subtitle: t("list_grid:sorted_runtime.long.subtitle"),
       },
@@ -58,7 +86,7 @@ const SortedRuntime = ({
     return [
       ...(reverse ? sectionDescriptors.reverse() : sectionDescriptors),
       {
-        list: reverse ? unknown.reverse() : unknown,
+        list: unknown,
         title: t("list_grid:sorted_runtime.unknown.title"),
       },
     ];
@@ -66,9 +94,11 @@ const SortedRuntime = ({
 
   return (
     <span data-testid={sort.RUNTIME}>
-      {sections.map((props) => (
-        <MovieSection key={props.title} {...props} {...handlers} />
-      ))}
+      {sections.map((props) =>
+        props.list.length > 0 ? (
+          <MovieSection key={props.title} {...props} {...handlers} />
+        ) : null
+      )}
     </span>
   );
 };
