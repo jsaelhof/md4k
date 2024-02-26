@@ -73,6 +73,36 @@ describe("watched-movie", () => {
     expect(screen.getByLabelText("Test Movie Poster")).toBeInTheDocument();
   });
 
+  it<LocalTestContext>("should render the backdrop when the movie has a background", async ({
+    props,
+  }) => {
+    renderWithProviders(
+      <WatchedMovie
+        {...props}
+        movie={{ ...props.movie, background: "https://movie_background" }}
+      />,
+      {
+        mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+      }
+    );
+
+    expect(
+      await screen.findByTestId("https://movie_background")
+    ).toBeInTheDocument();
+  });
+
+  it<LocalTestContext>("should render the backdrop when the third party data has a backdrop and the movie does not", async ({
+    props,
+  }) => {
+    renderWithProviders(<WatchedMovie {...props} />, {
+      mocks: [GET_THIRD_PARTY_MOVIE_FULL_DETAILS_MOCK],
+    });
+
+    expect(
+      await screen.findByTestId("http://image.tmdb.org/t/1.jpg")
+    ).toBeInTheDocument();
+  });
+
   it<LocalTestContext>("should render the poster followed by the info when left-aligned", ({
     props,
   }) => {
