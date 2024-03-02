@@ -24,18 +24,15 @@ export const PosterLayout = styled("div")<PosterLayoutProps>(
   })
 );
 
-export const Poster = styled("div")<{
-  $poster?: false | null | string;
+export const Poster = styled("img")<{
   $active: boolean;
-}>(({ $poster, $active }) => ({
+}>(({ $active }) => ({
   gridArea: "poster",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
   overflow: "hidden",
   borderRadius: 4,
-
-  ...($poster && { backgroundImage: `url(${$poster})` }),
 
   ...($active && {
     cursor: "pointer",
@@ -52,11 +49,13 @@ export const Lock = styled(LockIcon)`
   opacity: 0.4;
 `;
 
-export const NoPoster = styled(Poster)<{
+export const NoPoster = styled("div")<{
+  $active: boolean;
   $disableZoom: boolean;
   $shadow: boolean;
-}>(({ $disableZoom, $shadow, theme: { palette } }) => ({
+}>(({ $active, $disableZoom, $shadow, theme: { palette } }) => ({
   gridArea: "poster",
+  borderRadius: 4,
   display: "grid",
   justifyItems: "center",
   alignItems: "center",
@@ -67,6 +66,13 @@ export const NoPoster = styled(Poster)<{
   boxSizing: "border-box",
   border: "1px solid rgba(0,0,0,10%)",
   padding: 12,
+
+  ...($active && {
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.025)",
+    },
+  }),
 
   ...($disableZoom && {
     gridTemplateRows: "1fr 100px 32px",

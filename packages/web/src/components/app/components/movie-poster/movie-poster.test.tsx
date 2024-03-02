@@ -2,14 +2,6 @@ import { render, screen } from "@testing-library/react";
 import MoviePoster, { type MoviePosterProps } from "./movie-poster";
 import { vi } from "vitest";
 
-const { MOCK_USE_IN_VIEW_REF } = vi.hoisted(() => ({
-  MOCK_USE_IN_VIEW_REF: vi.fn().mockReturnValue([null, true]),
-}));
-
-vi.mock("rooks/dist/esm/hooks/useInViewRef", () => ({
-  useInViewRef: MOCK_USE_IN_VIEW_REF,
-}));
-
 interface LocalTestContext {
   props: MoviePosterProps;
 }
@@ -40,23 +32,20 @@ describe("movie-poster", () => {
     props,
   }) => {
     render(<MoviePoster {...props} />);
-    expect(screen.getByTestId("poster")).toHaveStyle({
-      "background-image": `url(${props.movie.poster})`,
-    });
+    expect(screen.getByTestId("poster")).toHaveAttribute(
+      "src",
+      props.movie.poster
+    );
     expect(screen.getByText(/Bourne/)).toBeInTheDocument();
   });
 
-  it<LocalTestContext>("should render the placeholder when the poster is not intersecting the viewport", ({
+  it<LocalTestContext>("should not render the poster when a url does not exist in the movie", ({
     props,
   }) => {
-    MOCK_USE_IN_VIEW_REF.mockReturnValueOnce([null, false]);
-
-    render(<MoviePoster {...props} />);
-
-    expect(screen.getByTestId("poster")).toHaveStyle({
-      "background-image": "",
-    });
-    expect(screen.getByText(/Bourne/)).toBeInTheDocument();
+    render(
+      <MoviePoster {...props} movie={{ ...props.movie, poster: undefined }} />
+    );
+    expect(screen.queryByTestId("poster")).not.toBeInTheDocument();
   });
 
   it<LocalTestContext>("should be active when an onClick handler is provided", ({
