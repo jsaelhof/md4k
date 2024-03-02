@@ -1,3 +1,12 @@
+### PR #172 - #171: change to use img lazy
+##### 2024-03-02
+
+In my initial tests, I found that using img lazy relies on how the browser determines an img is close enough to the viewport to be loaded. This is making it load more posters than I was with intersection observer. To compare, I took some baseline lighthouse tests with the current version. In those tests I noticed that many extra DOM nodes are also being loaded because of all the invisible hover card states. So this PR also removes those until hover occurs to see if it will cause an issue and to see how it impacts lighthouse.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/172)
+
+----
+
 ### PR #170 - #169: fix missing backdrop and add tests
 ##### 2024-02-26
 
