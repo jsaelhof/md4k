@@ -65,6 +65,7 @@ const Movie = ({
     isTouchInterface ? 0 : 500
   );
   const unfocus = (): void => {
+    console.log("unfocus");
     focus.cancel();
     setFocused(false);
     // This is ugly. Occasionally, posters get stuck in the focused state because they unfocus and then trigger a very fast
@@ -120,71 +121,74 @@ const Movie = ({
           }}
           data-testid="positioner"
         >
-          <MovieDetail style={posterSpring}>
-            <OverflowWrapper>
-              <MoviePoster movie={movie} height={375} variant="zoom" />
+          {focused && (
+            <MovieDetail style={posterSpring}>
+              <OverflowWrapper>
+                <MoviePoster movie={movie} height={375} variant="zoom" />
 
-              <InfoLayout>
-                <StarRatingLayout
-                  onMouseEnter={switchToRatings}
-                  onMouseLeave={(): void => {
-                    switchToRatings.cancel();
-                    setInfoState("actions");
-                  }}
-                  onClick={(e): void => {
-                    // OnClick, toggle the state.
-                    // Works for desktop and mobile but mainly here for mobile.
-                    setInfoState(
-                      infoState === "ratings" ? "actions" : "ratings"
-                    );
-
-                    // This prevents the card from expanding when tapping the stars on mobile to
-                    // display the ratings breakdown.
-                    if (
-                      "ontouchstart" in window ||
-                      navigator.maxTouchPoints > 0
-                    ) {
-                      e.stopPropagation();
-                    }
-                  }}
-                  data-testid="rating"
-                >
-                  <FiveStarRating stars={movie.fiveStarRating} />
-                </StarRatingLayout>
-
-                <InfoRuntime>{formatRuntime(movie.runtime)}</InfoRuntime>
-
-                <InfoFooterLayout style={actionsSpring} data-testid="actions">
-                  <DetailActions
-                    movie={movie}
-                    onEdit={(): void => {
-                      setFocused(false);
-                      onEditMovie(movie);
+                <InfoLayout>
+                  <StarRatingLayout
+                    onMouseEnter={switchToRatings}
+                    onMouseLeave={(): void => {
+                      switchToRatings.cancel();
+                      setInfoState("actions");
                     }}
-                    onMarkWatched={(): void => {
-                      setFocused(false);
-                      onMarkWatched(movie);
-                    }}
-                    onToggleLock={(locked: boolean): void => {
-                      onEditMovie({ ...movie, locked }, false);
-                    }}
-                    onDelete={(): void => {
-                      setFocused(false);
-                      onRemoveMovie(movie);
-                    }}
-                  />
-                </InfoFooterLayout>
+                    onClick={(e): void => {
+                      // OnClick, toggle the state.
+                      // Works for desktop and mobile but mainly here for mobile.
+                      setInfoState(
+                        infoState === "ratings" ? "actions" : "ratings"
+                      );
 
-                <InfoFooterLayout style={ratingsSpring} data-testid="ratings">
-                  <Ratings ratings={movie.ratings} size="sm" dense />
-                </InfoFooterLayout>
+                      // This prevents the card from expanding when tapping the stars on mobile to
+                      // display the ratings breakdown.
+                      if (
+                        "ontouchstart" in window ||
+                        navigator.maxTouchPoints > 0
+                      ) {
+                        e.stopPropagation();
+                      }
+                    }}
+                    data-testid="rating"
+                  >
+                    <FiveStarRating stars={movie.fiveStarRating} />
+                  </StarRatingLayout>
 
-                <SourceLayout>
-                  <Source source={movie.source} />
-                </SourceLayout>
-              </InfoLayout>
-            </OverflowWrapper>
-          </MovieDetail>
+                  <InfoRuntime>{formatRuntime(movie.runtime)}</InfoRuntime>
+
+                  <InfoFooterLayout style={actionsSpring} data-testid="actions">
+                    <DetailActions
+                      movie={movie}
+                      onEdit={(): void => {
+                        setFocused(false);
+                        onEditMovie(movie);
+                      }}
+                      onMarkWatched={(): void => {
+                        setFocused(false);
+                        onMarkWatched(movie);
+                      }}
+                      onToggleLock={(locked: boolean): void => {
+                        console.log("TOGGLE LOCK");
+                        onEditMovie({ ...movie, locked }, false);
+                      }}
+                      onDelete={(): void => {
+                        setFocused(false);
+                        onRemoveMovie(movie);
+                      }}
+                    />
+                  </InfoFooterLayout>
+
+                  <InfoFooterLayout style={ratingsSpring} data-testid="ratings">
+                    <Ratings ratings={movie.ratings} size="sm" dense />
+                  </InfoFooterLayout>
+
+                  <SourceLayout>
+                    <Source source={movie.source} />
+                  </SourceLayout>
+                </InfoLayout>
+              </OverflowWrapper>
+            </MovieDetail>
+          )}
         </MovieDetailPositioner>
       </MovieContainer>
 

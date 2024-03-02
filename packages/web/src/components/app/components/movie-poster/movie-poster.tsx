@@ -1,6 +1,5 @@
 import { Lock, NoPoster, Poster, PosterLayout } from "./movie-poster.styles";
-import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
-import { type ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import { type Maybe } from "../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
 
@@ -29,9 +28,10 @@ const MoviePoster = ({
   shadow = false,
 }: MoviePosterProps): ReactElement => {
   const { t } = useTranslation(["movie_poster"]);
-  const [ref, visible] = useInViewRef();
 
   const isLocked = movie.locked ?? false;
+
+  const [brokenPoster, setBrokenPoster] = useState(false);
 
   return (
     <PosterLayout
@@ -42,7 +42,6 @@ const MoviePoster = ({
         title: movie.title ?? t("movie_poster:no_title"),
       })}
       onClick={onClick}
-      ref={ref}
     >
       {/* Fallback if the poster is missing or a broken link */}
       <NoPoster
@@ -54,11 +53,15 @@ const MoviePoster = ({
         <div>{movie.title ? movie.title : t("movie_poster:no_title")}</div>
       </NoPoster>
 
-      <Poster
-        data-testid="poster"
-        $poster={visible && movie.poster}
-        $active={!!onClick}
-      />
+      {movie.poster && !brokenPoster && (
+        <Poster
+          data-testid="poster"
+          src={movie.poster}
+          loading="lazy"
+          $active={!!onClick}
+          onError={() => setBrokenPoster(true)}
+        />
+      )}
 
       {isLocked && !noLock && <Lock />}
     </PosterLayout>
