@@ -125,67 +125,65 @@ const Movie = ({
             <OverflowWrapper>
               <MoviePoster movie={movie} height={375} variant="zoom" />
 
-              {focused && (
-                <InfoLayout>
-                  <StarRatingLayout
-                    onMouseEnter={switchToRatings}
-                    onMouseLeave={(): void => {
-                      switchToRatings.cancel();
-                      setInfoState("actions");
+              <InfoLayout>
+                <StarRatingLayout
+                  onMouseEnter={switchToRatings}
+                  onMouseLeave={(): void => {
+                    switchToRatings.cancel();
+                    setInfoState("actions");
+                  }}
+                  onClick={(e): void => {
+                    // OnClick, toggle the state.
+                    // Works for desktop and mobile but mainly here for mobile.
+                    setInfoState(
+                      infoState === "ratings" ? "actions" : "ratings"
+                    );
+
+                    // This prevents the card from expanding when tapping the stars on mobile to
+                    // display the ratings breakdown.
+                    if (
+                      "ontouchstart" in window ||
+                      navigator.maxTouchPoints > 0
+                    ) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  data-testid="rating"
+                >
+                  <FiveStarRating stars={movie.fiveStarRating} />
+                </StarRatingLayout>
+
+                <InfoRuntime>{formatRuntime(movie.runtime)}</InfoRuntime>
+
+                <InfoFooterLayout style={actionsSpring} data-testid="actions">
+                  <DetailActions
+                    movie={movie}
+                    onEdit={(): void => {
+                      setFocused(false);
+                      onEditMovie(movie);
                     }}
-                    onClick={(e): void => {
-                      // OnClick, toggle the state.
-                      // Works for desktop and mobile but mainly here for mobile.
-                      setInfoState(
-                        infoState === "ratings" ? "actions" : "ratings"
-                      );
-
-                      // This prevents the card from expanding when tapping the stars on mobile to
-                      // display the ratings breakdown.
-                      if (
-                        "ontouchstart" in window ||
-                        navigator.maxTouchPoints > 0
-                      ) {
-                        e.stopPropagation();
-                      }
+                    onMarkWatched={(): void => {
+                      setFocused(false);
+                      onMarkWatched(movie);
                     }}
-                    data-testid="rating"
-                  >
-                    <FiveStarRating stars={movie.fiveStarRating} />
-                  </StarRatingLayout>
+                    onToggleLock={(locked: boolean): void => {
+                      onEditMovie({ ...movie, locked }, false);
+                    }}
+                    onDelete={(): void => {
+                      setFocused(false);
+                      onRemoveMovie(movie);
+                    }}
+                  />
+                </InfoFooterLayout>
 
-                  <InfoRuntime>{formatRuntime(movie.runtime)}</InfoRuntime>
+                <InfoFooterLayout style={ratingsSpring} data-testid="ratings">
+                  <Ratings ratings={movie.ratings} size="sm" dense />
+                </InfoFooterLayout>
 
-                  <InfoFooterLayout style={actionsSpring} data-testid="actions">
-                    <DetailActions
-                      movie={movie}
-                      onEdit={(): void => {
-                        setFocused(false);
-                        onEditMovie(movie);
-                      }}
-                      onMarkWatched={(): void => {
-                        setFocused(false);
-                        onMarkWatched(movie);
-                      }}
-                      onToggleLock={(locked: boolean): void => {
-                        onEditMovie({ ...movie, locked }, false);
-                      }}
-                      onDelete={(): void => {
-                        setFocused(false);
-                        onRemoveMovie(movie);
-                      }}
-                    />
-                  </InfoFooterLayout>
-
-                  <InfoFooterLayout style={ratingsSpring} data-testid="ratings">
-                    <Ratings ratings={movie.ratings} size="sm" dense />
-                  </InfoFooterLayout>
-
-                  <SourceLayout>
-                    <Source source={movie.source} />
-                  </SourceLayout>
-                </InfoLayout>
-              )}
+                <SourceLayout>
+                  <Source source={movie.source} />
+                </SourceLayout>
+              </InfoLayout>
             </OverflowWrapper>
           </MovieDetail>
         </MovieDetailPositioner>
