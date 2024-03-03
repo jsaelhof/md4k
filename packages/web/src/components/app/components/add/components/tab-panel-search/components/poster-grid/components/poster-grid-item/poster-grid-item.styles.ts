@@ -9,7 +9,7 @@ export const Layout = styled(animated.div)(
     paddingTop: spacing(0.5),
     color: palette.grey[900],
 
-    "& :hover > div": {
+    "&:hover > div:first-child": {
       transform: `translateY(${spacing(-0.5)})`,
       boxShadow: "0px 6px 8px rgba(0, 0, 0, 0.15)",
     },
