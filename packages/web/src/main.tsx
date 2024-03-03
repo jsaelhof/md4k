@@ -110,8 +110,12 @@ root.render(
     <Auth0Provider
       domain={import.meta.env.VITE_AUTH0_DOMAIN} // This is the domain of the SPA App on Auth0
       clientId={import.meta.env.VITE_AUTH0_CLIENT_ID} // This is the client id of the SPA App on Auth0
-      redirectUri={window.location.origin}
-      audience={import.meta.env.VITE_AUTH0_AUDIENCE} // This is the audience of the API on Auth0, without this the token return will not be valid to access the API
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE, // This is the audience of the API on Auth0, without this the token return will not be valid to access the API
+      }}
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
     >
       <I18nextProvider i18n={i18n}>
         <RouterProvider router={router} />

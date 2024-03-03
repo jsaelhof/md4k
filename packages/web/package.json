@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
-    "@auth0/auth0-react": "^1.10.2",
+    "@auth0/auth0-react": "2.2.4",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "5.15.2",
