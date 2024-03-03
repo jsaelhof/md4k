@@ -1,14 +1,10 @@
-import { waitFor, screen, fireEvent } from "@testing-library/react";
+import { waitFor, screen } from "@testing-library/react";
 import Movie, { type MovieProps } from "./movie";
 import { vi } from "vitest";
 import { renderWithProviders } from "../../../../../../../../test-utils/render-with-providers";
 import { Globals } from "react-spring";
 import { UPDATE_MOVIE } from "../../../../../../../../graphql/mutations/update-movie";
 import { type FullDetailModalProps } from "../../../../../full-detail-modal/full-detail-modal";
-
-// NOTE: Throughout this test, I'm using fireEvent to click on things after the hover state is focused because using user.click
-// causes the click to propagate up and close the hover/focus state immediately. This is not how it behaves in the browser
-// making it impossible to test the correct functionality.
 
 Globals.assign({
   skipAnimation: true,
@@ -100,7 +96,7 @@ describe("movie", () => {
     expect(screen.getByText("Expanded")).toHaveAttribute("data-open", "false");
   });
 
-  it<LocalTestContext>("should render the vocused movie card", async ({
+  it<LocalTestContext>("should render the focused movie card", async ({
     props,
     user,
   }) => {
@@ -211,10 +207,7 @@ describe("movie", () => {
       transform: "translateX(0px)",
     });
 
-    // Have to use fireEvent here.
-    // If I use user.hover, its causing the listItem to get a mouseLeave event that unfocuses and removes the hovered card state so nothing can be tested.
-    // Not ideal, but in reality, that isn't what happens.
-    fireEvent.mouseOver(screen.getByTestId("rating"));
+    await user.hover(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).not.toHaveStyle({
@@ -225,7 +218,7 @@ describe("movie", () => {
       transform: "translateX(0px)",
     });
 
-    fireEvent.mouseOut(screen.getByTestId("rating"));
+    await user.unhover(screen.getByTestId("rating"));
 
     await waitFor(() => {
       expect(screen.getByTestId("actions")).toHaveStyle({
@@ -248,7 +241,7 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByLabelText("Edit"));
+    await user.click(screen.getByLabelText("Edit"));
     expect(props.onEditMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -266,7 +259,7 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByLabelText("Mark as Watched"));
+    await user.click(screen.getByLabelText("Mark as Watched"));
     expect(props.onMarkWatched).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -284,7 +277,7 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByLabelText("Delete"));
+    await user.click(screen.getByLabelText("Delete"));
     expect(props.onRemoveMovie).toHaveBeenCalledWith(props.movie);
     await waitFor(() =>
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 })
@@ -302,7 +295,7 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByLabelText("Lock"));
+    await user.click(screen.getByLabelText("Lock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,
@@ -325,7 +318,7 @@ describe("movie", () => {
       expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 1 })
     );
 
-    fireEvent.click(screen.getByLabelText("Unlock"));
+    await user.click(screen.getByLabelText("Unlock"));
     expect(props.onEditMovie).toHaveBeenCalledWith(
       {
         ...props.movie,
