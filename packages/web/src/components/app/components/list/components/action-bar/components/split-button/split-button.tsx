@@ -77,7 +77,12 @@ const SplitButton = ({ onPick }: SplitButtonProps): ReactElement => {
   return (
     <SplitButtonContainer aria-label={t("list:pick.title")}>
       <MainButton variant="contained" onClick={(): void => onPick()}>
-        <RandomIcon src="/images/random.png" width="20px" height="18px" />
+        <RandomIcon
+          src="/images/random.png"
+          width="20px"
+          height="18px"
+          alt=""
+        />
         {t("list:pick.title")}
       </MainButton>
       <Button

@@ -58,6 +58,7 @@ const MoviePoster = ({
           src={movie.poster}
           loading="lazy"
           $active={!!onClick}
+          alt={`Poster for ${movie.title ?? "unknown movie"}`}
           onError={() => setBrokenPoster(true)}
         />
       )}
