@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
-import { TestContext, beforeAll, beforeEach, vi } from "vitest";
-import userEvent, { UserEvent } from "@testing-library/user-event";
-import i18n, { TFunction } from "i18next";
+import { type TestContext, beforeAll, beforeEach, vi } from "vitest";
+import userEvent, { type UserEvent } from "@testing-library/user-event";
+import i18n, { type TFunction } from "i18next";
 import { globSync } from "glob";
 import { i18nextConfig } from "./src/i18next/i18next-config";
 
