@@ -1,3 +1,12 @@
+### PR #175 - #171: revert to preload the detail poster
+##### 2024-03-03
+
+The detail poster is still flickering on mobile. Revert the change so its created before being used and memoize it.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/175)
+
+----
+
 ### PR #174 - #171: Additional fixes for lazy img
 ##### 2024-03-03
 
