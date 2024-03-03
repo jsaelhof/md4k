@@ -1,3 +1,12 @@
+### PR #182 - #181: update Auth0 in web
+##### 2024-03-03
+
+Update auth0 dependency in web and use refresh token rotation with cache in localstorage
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/182)
+
+----
+
 ### PR #180 - #178: additional lighthouse fixes
 ##### 2024-03-03
 
