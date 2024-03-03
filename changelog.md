@@ -1,3 +1,12 @@
+### PR #179 - #178: add robots.txt
+##### 2024-03-03
+
+Add a robots.txt to prevent indexing
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/179)
+
+----
+
 ### PR #177 - #171: Revert conditional mounting of hover cards, add source map & noindex
 ##### 2024-03-03
 
