@@ -1,3 +1,12 @@
+### PR #177 - #171: Revert conditional mounting of hover cards, add source map & noindex
+##### 2024-03-03
+
+This removes any conditional mounting of hover card elements. Its just flickering and causing too many small DOM shifts. I'm going to stick with the lazy loaded images for now but I'm going to look at some other solutions to prevent too many movie cards from loading immediately on the main page to try and reduce excessive DOM elements that way. This also adds source maps and a noindex directive to try and fix a couple small lighthouse suggestions.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/177)
+
+----
+
 ### PR #176 - #171: Keep both posters mounted
 ##### 2024-03-03
 
