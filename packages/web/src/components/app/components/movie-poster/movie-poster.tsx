@@ -24,7 +24,6 @@ const MoviePoster = ({
   onClick,
   noLock = false,
   noRel = false,
-  variant = "default",
   shadow = false,
 }: MoviePosterProps): ReactElement => {
   const { t } = useTranslation(["movie_poster"]);
@@ -46,9 +45,9 @@ const MoviePoster = ({
       {/* Fallback if the poster is missing or a broken link */}
       <NoPoster
         data-testid="fallback"
-        $disableZoom={variant === "zoom"}
         $shadow={shadow}
         $active={!!onClick}
+        $height={height}
       >
         <div>{movie.title ? movie.title : t("movie_poster:no_title")}</div>
       </NoPoster>
