@@ -1,3 +1,12 @@
+### PR #174 - #171: Additional fixes for lazy img
+##### 2024-03-03
+
+Put zoomed movie poster back inside the JSX so the extra DOM elements aren't loading initially. The flickering of the poster on zoom was being caused by the cache being disabled in dev tools.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/174)
+
+----
+
 ### PR #173 - 171: Additional lazy img fixes
 ##### 2024-03-03
 
