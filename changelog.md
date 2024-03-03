@@ -1,3 +1,12 @@
+### PR #183 - Create dependabot.yml
+##### 2024-03-03
+
+Enable dependabot for web and api packages
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/183)
+
+----
+
 ### PR #182 - #181: update Auth0 in web
 ##### 2024-03-03
 
