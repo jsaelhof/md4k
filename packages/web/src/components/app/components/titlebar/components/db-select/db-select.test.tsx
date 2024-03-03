@@ -16,7 +16,9 @@ describe("db-select", () => {
   it("should render the list with the active list when closed", async () => {
     renderWithProviders(<DbSelect />);
     expect(await screen.findByLabelText("Choose a List")).toBeInTheDocument();
-    expect(await screen.findByLabelText(/Saturday/)).toBeInTheDocument();
+    expect(
+      await screen.findByRole("combobox", { name: /Saturday/ })
+    ).toBeInTheDocument();
   });
 
   it("should render the list with the available options and an option for making a new list", async ({
@@ -54,7 +56,9 @@ describe("db-select", () => {
     );
 
     expect(navigateMock).toHaveBeenCalledWith("/");
-    expect(screen.getByLabelText(/Family/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("combobox", { name: /Family/ })
+    ).toBeInTheDocument();
   });
 
   it("should push to the create page", async ({ user }) => {
