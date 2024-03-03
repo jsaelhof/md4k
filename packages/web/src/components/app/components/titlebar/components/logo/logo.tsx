@@ -15,7 +15,12 @@ const Logo = (): ReactElement => {
       }}
       aria-label={t("titlebar:logo.label")}
     >
-      <img width="82px" height="20px" src={"/images/logo.png"} />
+      <img
+        width="82px"
+        height="20px"
+        src={"/images/logo.png"}
+        alt="The Movie Decider 4000"
+      />
     </LogoContainer>
   );
 };

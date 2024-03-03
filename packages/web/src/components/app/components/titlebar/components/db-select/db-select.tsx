@@ -41,9 +41,12 @@ const DbSelect = (): ReactElement | null => {
           </Button>
         )}
         aria-label={t("titlebar:db_select.label")}
+        inputProps={{
+          "aria-label": list.label,
+        }}
       >
         {lists.map((list) => (
-          <MenuItem key={list.id} value={list.id}>
+          <MenuItem key={list.id} value={list.id} aria-label={list.label}>
             {list.label}
           </MenuItem>
         ))}
