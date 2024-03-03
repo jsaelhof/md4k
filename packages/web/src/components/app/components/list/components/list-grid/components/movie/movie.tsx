@@ -1,4 +1,4 @@
-import React, { type ReactElement, useRef, useState, useMemo } from "react";
+import React, { type ReactElement, useRef, useState } from "react";
 import { useSpring } from "react-spring";
 import debounce from "lodash/debounce";
 
@@ -98,13 +98,6 @@ const Movie = ({
 
   useUpdateMovie(movie, focused);
 
-  // This is instantiated here so that its already loaded when the detail is mounted.
-  // Otherwise, it flickers on mobile when it loads the poster image while mounting.
-  const detailPoster = useMemo(
-    () => <MoviePoster movie={movie} height={375} variant="zoom" />,
-    [movie]
-  );
-
   return (
     <>
       <MovieContainer
@@ -128,11 +121,11 @@ const Movie = ({
           }}
           data-testid="positioner"
         >
-          {focused && (
-            <MovieDetail style={posterSpring}>
-              <OverflowWrapper>
-                {detailPoster}
+          <MovieDetail style={posterSpring}>
+            <OverflowWrapper>
+              <MoviePoster movie={movie} height={375} variant="zoom" />
 
+              {focused && (
                 <InfoLayout>
                   <StarRatingLayout
                     onMouseEnter={switchToRatings}
@@ -175,7 +168,6 @@ const Movie = ({
                         onMarkWatched(movie);
                       }}
                       onToggleLock={(locked: boolean): void => {
-                        console.log("TOGGLE LOCK");
                         onEditMovie({ ...movie, locked }, false);
                       }}
                       onDelete={(): void => {
@@ -193,9 +185,9 @@ const Movie = ({
                     <Source source={movie.source} />
                   </SourceLayout>
                 </InfoLayout>
-              </OverflowWrapper>
-            </MovieDetail>
-          )}
+              )}
+            </OverflowWrapper>
+          </MovieDetail>
         </MovieDetailPositioner>
       </MovieContainer>
 

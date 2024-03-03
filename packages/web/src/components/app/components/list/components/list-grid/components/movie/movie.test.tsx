@@ -90,8 +90,8 @@ describe("movie", () => {
   it<LocalTestContext>("should render a movie list entry", ({ props }) => {
     renderWithProviders(<Movie {...props} />);
 
-    // Should be only one of two posters in the dom when not focused.
-    expect(screen.getAllByLabelText(/Bourne.*Poster/)).toHaveLength(1);
+    // Should be two posters in the dom, one for the unhoverd poster and one for the hover detail poster.
+    expect(screen.getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
 
     // The larger poster is invisible by default
     expect(screen.getByTestId("positioner")).toHaveStyle({ opacity: 0 });
@@ -124,7 +124,7 @@ describe("movie", () => {
     expect(screen.getByText("68%")).toBeInTheDocument();
     expect(screen.getByLabelText("Netflix")).toBeInTheDocument();
 
-    // Should be two posters in the dom when focused.
+    // Should be two posters in the dom, one for the unhoverd poster and one for the hover detail poster.
     expect(screen.getAllByLabelText(/Bourne.*Poster/)).toHaveLength(2);
   });
 
