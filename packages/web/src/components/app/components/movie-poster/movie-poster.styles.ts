@@ -51,9 +51,9 @@ export const Lock = styled(LockIcon)`
 
 export const NoPoster = styled("div")<{
   $active: boolean;
-  $disableZoom: boolean;
   $shadow: boolean;
-}>(({ $active, $disableZoom, $shadow, theme: { palette } }) => ({
+  $height: number;
+}>(({ $active, $shadow, $height, theme: { palette } }) => ({
   gridArea: "poster",
   borderRadius: 4,
   display: "grid",
@@ -61,7 +61,7 @@ export const NoPoster = styled("div")<{
   alignItems: "center",
   textAlign: "center",
   color: palette.grey[800],
-  fontSize: "0.9rem",
+  fontSize: `calc(0.9rem * (${$height} / 250))`,
   background: "#f7f7fc",
   boxSizing: "border-box",
   border: "1px solid rgba(0,0,0,10%)",
@@ -72,11 +72,6 @@ export const NoPoster = styled("div")<{
     "&:hover": {
       transform: "scale(1.025)",
     },
-  }),
-
-  ...($disableZoom && {
-    gridTemplateRows: "1fr 100px 32px",
-    fontSize: "1.2rem",
   }),
 
   ...($shadow && {
