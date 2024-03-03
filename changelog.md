@@ -1,3 +1,12 @@
+### PR #173 - 171: Additional lazy img fixes
+##### 2024-03-03
+
+Fixes the hover state on posters in the add dialog. Also makes sure the hovered image poster on the main grid is loaded before its needed to prevent flickering on hover.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/173)
+
+----
+
 ### PR #172 - #171: change to use img lazy
 ##### 2024-03-02
 
