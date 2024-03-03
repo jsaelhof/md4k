@@ -54,7 +54,9 @@ const ProfileMenu = (): ReactElement | null => {
               <Button
                 onClick={(): void => {
                   onCloseMenu();
-                  logout({ returnTo: window.location.origin });
+                  logout({
+                    logoutParams: { returnTo: window.location.origin },
+                  });
                 }}
                 variant="outlined"
               >
