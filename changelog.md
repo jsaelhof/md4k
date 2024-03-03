@@ -1,3 +1,12 @@
+### PR #180 - #178: additional lighthouse fixes
+##### 2024-03-03
+
+Addresses a number of small lighthouse issues related to meta tags, a11y, sourcemaps etc
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/180)
+
+----
+
 ### PR #179 - #178: add robots.txt
 ##### 2024-03-03
 
