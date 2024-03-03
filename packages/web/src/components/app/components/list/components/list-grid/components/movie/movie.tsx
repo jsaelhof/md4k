@@ -98,8 +98,6 @@ const Movie = ({
 
   useUpdateMovie(movie, focused);
 
-  const poster = <MoviePoster movie={movie} height={375} variant="zoom" />;
-
   return (
     <>
       <MovieContainer
@@ -126,7 +124,7 @@ const Movie = ({
           {focused && (
             <MovieDetail style={posterSpring}>
               <OverflowWrapper>
-                {poster}
+                <MoviePoster movie={movie} height={375} variant="zoom" />
 
                 <InfoLayout>
                   <StarRatingLayout
