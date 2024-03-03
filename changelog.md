@@ -1,3 +1,12 @@
+### PR #176 - #171: Keep both posters mounted
+##### 2024-03-03
+
+Poster still flickering on mobile. Try keeping both posters mounted only mounting the bottom section of the card on hover.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/176)
+
+----
+
 ### PR #175 - #171: revert to preload the detail poster
 ##### 2024-03-03
 
