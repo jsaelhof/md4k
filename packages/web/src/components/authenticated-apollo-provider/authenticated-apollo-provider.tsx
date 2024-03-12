@@ -1,4 +1,9 @@
-import { type PropsWithChildren, type ReactElement, useEffect, useState } from "react";
+import {
+  type PropsWithChildren,
+  type ReactElement,
+  useEffect,
+  useState,
+} from "react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -16,7 +21,7 @@ import { LocalStorageWrapper, persistCache } from "apollo3-cache-persist";
 export const AuthenticatedApolloProvider = ({
   children,
 }: PropsWithChildren): ReactElement | null => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
 
   const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
 
@@ -26,11 +31,6 @@ export const AuthenticatedApolloProvider = ({
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path, extensions }) => {
             switch (extensions.code) {
-              case "UNAUTHORIZED":
-                console.log(
-                  `[GraphQL UNAUTHORIZED error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-                );
-                break;
               default:
                 console.log(
                   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -52,10 +52,14 @@ export const AuthenticatedApolloProvider = ({
         try {
           token = await getAccessTokenSilently();
         } catch (error) {
-          console.log(error);
+          console.log("Error getting Auth0 access token silently");
         }
 
-        if (!token) return { headers, ...rest };
+        // Redirect to the main page of the app.
+        // The url to redirect to is configured in main.tsx in the Auth0Provider props.
+        // A different URL can be passed here using the options (ex returning the user to the page they were on).
+        // For now, I'm just going to push the user back to main page of the app.
+        if (!token) await loginWithRedirect();
 
         return {
           ...rest,
@@ -112,7 +116,7 @@ export const AuthenticatedApolloProvider = ({
     }
 
     init().catch(console.error);
-  }, [getAccessTokenSilently]);
+  }, [getAccessTokenSilently, loginWithRedirect]);
 
   // Note: While client is undefined, I can return some default HTML like <H2>Loading...</H2>.
   return !client ? null : (
