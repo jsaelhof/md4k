@@ -1,3 +1,12 @@
+### PR #197 - #195: Auth0 token refresh redirect
+##### 2024-03-13
+
+Redirect to login on token issue. Also add a stub error boundary and throw from app context if primary GQL request fail.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/197)
+
+----
+
 ### PR #183 - Create dependabot.yml
 ##### 2024-03-03
 
