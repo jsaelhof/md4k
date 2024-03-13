@@ -1,4 +1,8 @@
-import React, { type PropsWithChildren, type ReactElement, useCallback } from "react";
+import React, {
+  type PropsWithChildren,
+  type ReactElement,
+  useCallback,
+} from "react";
 import { createContext, useState } from "react";
 import { useGetLists, useGetMovies } from "../graphql/queries";
 import { type GetListsItem, type GetMovieItem } from "../graphql/types";
@@ -39,7 +43,11 @@ const AppContext = createContext<AppContextType>({
 
 const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
   const [list, _setList] = useState<GetListsItem | null>(null);
-  const { lists, loading: listsLoading } = useGetLists({
+  const {
+    lists,
+    loading: listsLoading,
+    error: listsError,
+  } = useGetLists({
     onCompleted: _setList,
   });
 
@@ -49,9 +57,15 @@ const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
     movies,
     moviesById,
     loading: moviesLoading,
+    error: moviesError,
   } = useGetMovies(list ?? lists?.[0]);
   const [toast, setToast] = useState<ToastProps | null>(null);
   const [pick, setPick] = useState<string | null>(null);
+
+  // If we can't get the lists or movies, throw an error. The whole app isn't going to work.
+  // This is almost always an error due to expired auth which is handled in the Apollo client.
+  // But if something else goes wrong, this will show the error screen.
+  if (listsError || moviesError) throw new Error("GraphQL Error at AppContext");
 
   // Expose a list change function so that we can clear any state from the old list while changing to a new one
   const setList = useCallback((list: GetListsItem) => {

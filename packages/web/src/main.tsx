@@ -6,13 +6,16 @@ import { App } from "./components/app/app";
 import { ErrorBoundary } from "./components/error-boundary/error-boundary";
 import {
   createBrowserRouter,
+  isRouteErrorResponse,
   Navigate,
   RouterProvider,
+  useRouteError,
 } from "react-router-dom";
 import { sort, SortDirection } from "./constants/sorts";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
 import { i18nextConfig } from "./i18next/i18next-config";
+import { type ReactNode } from "react";
 
 // Setup the i18next instance
 i18nextConfig();
@@ -21,6 +24,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    ErrorBoundary: (): ReactNode => {
+      // FIXME: Implement an error screen.
+      const error = useRouteError() as Error;
+
+      return (
+        <div>
+          <div>An error occurred</div>
+          <div>{error.message}</div>
+        </div>
+      );
+    },
     children: [
       {
         index: true,
