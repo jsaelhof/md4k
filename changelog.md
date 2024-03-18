@@ -1,3 +1,12 @@
+### PR #203 - #159: align package scripts
+##### 2024-03-18
+
+Cleans up the package scripts. Also creates a separate tsconfig for building with tests excluded. This prevents the tests from having a bunch of errors in the IDE (because tests file are checked by the base tsconfig) but those file are not considered when running scripts like build and typecheck to prevent non-essential files from breaking the build.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/203)
+
+----
+
 ### PR #197 - #195: Auth0 token refresh redirect
 ##### 2024-03-13
 
