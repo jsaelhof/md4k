@@ -14,9 +14,10 @@
     "ts-typegen": "graphql-codegen --config codegen.ts",
     "i18n-typegen": "find ./src -path '*/i18n/en/*.json' | node ./src/i18next/generate.js",
     "typecheck": "yarn tsc --noEmit",
+    "typecheck:tests": "npx tsc --noEmit",
     "lint": "npx eslint \"./src/**/*.{js,jsx,ts,tsx}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
-    "tsc": "npx tsc -p ./tsconfig.prod.json"
+    "tsc": "npx tsc -p ./tsconfig.build.json"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

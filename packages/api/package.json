@@ -14,7 +14,8 @@
     "coverage": "vitest run --coverage",
     "generate": "yarn workspace md4k-constants run build && graphql-codegen",
     "typecheck": "yarn run tsc --noEmit",
-    "tsc": "npx tsc -p ./tsconfig.prod.json"
+    "typecheck:tests": "npx tsc --noEmit",
+    "tsc": "npx tsc -p ./tsconfig.build.json"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",
