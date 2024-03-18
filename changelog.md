@@ -1,3 +1,30 @@
+### PR #197 - #195: Auth0 token refresh redirect
+##### 2024-03-13
+
+Redirect to login on token issue. Also add a stub error boundary and throw from app context if primary GQL request fail.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/197)
+
+----
+
+### PR #183 - Create dependabot.yml
+##### 2024-03-03
+
+Enable dependabot for web and api packages
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/183)
+
+----
+
+### PR #182 - #181: update Auth0 in web
+##### 2024-03-03
+
+Update auth0 dependency in web and use refresh token rotation with cache in localstorage
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/182)
+
+----
+
 ### PR #180 - #178: additional lighthouse fixes
 ##### 2024-03-03
 

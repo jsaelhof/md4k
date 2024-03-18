@@ -129,7 +129,7 @@ describe("watched", () => {
 
   it("should render the movies as watched movie items in reverse chronological order", async () => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -154,7 +154,7 @@ describe("watched", () => {
     user,
   }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -177,7 +177,7 @@ describe("watched", () => {
     user,
   }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -211,7 +211,7 @@ describe("watched", () => {
 
   it("should enable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -227,7 +227,7 @@ describe("watched", () => {
 
   it("should save the movie and disable editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
@@ -266,7 +266,7 @@ describe("watched", () => {
 
   it("should cancel editing", async ({ user }) => {
     renderWithProviders(<Watched />, {
-      moviesMock: GET_WATCHED_MOVIES_MOCK,
+      mocks: [GET_WATCHED_MOVIES_MOCK],
     });
 
     expect(await screen.findByText(/Bourne/)).toBeInTheDocument();
