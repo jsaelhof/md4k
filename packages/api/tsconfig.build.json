@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  // I need to exclude tests from the production build, typechecking for PR workflows etc but I want to keep them being typechecked in the IDE.
+  "exclude": ["**/*.test.*"]
+}
