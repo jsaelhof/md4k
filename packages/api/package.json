@@ -5,15 +5,17 @@
   "type": "module",
   "packageManager": "yarn@3.2.2",
   "scripts": {
-    "build": "yarn workspace md4k-constants run build && yarn run generate && npx tsc",
-    "dev": "yarn run generate && tsc && NODE_ENV=development node ./scripts/dev.js && tsc --watch --preserveWatchOutput",
+    "build": "yarn run generate && yarn run tsc",
+    "dev": "yarn run generate && yarn run tsc && NODE_ENV=development node ./scripts/dev.js && tsc --watch --preserveWatchOutput",
     "lint": "npx eslint \"./src/**/*.{js,ts}\" --max-warnings=0",
     "prettier": "npx prettier --write .",
-    "test": "yarn workspace md4k-constants run build && yarn run generate && npx tsc && vitest",
+    "test": "yarn run generate && yarn run tsc && vitest",
     "test-ui": "vitest --ui",
     "coverage": "vitest run --coverage",
-    "generate": "graphql-codegen",
-    "typecheck": "npx tsc --noEmit"
+    "generate": "yarn workspace md4k-constants run build && graphql-codegen",
+    "typecheck": "yarn run tsc --noEmit",
+    "typecheck:tests": "npx tsc --noEmit",
+    "tsc": "npx tsc -p ./tsconfig.build.json"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.7.0",
