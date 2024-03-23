@@ -128,7 +128,7 @@ describe("tab-panel-search", () => {
     user,
   }) => {
     renderWithProviders(<TabPanelSearch {...props} />, {
-      mocks: [SEARCH_MOCK_PAGE_1],
+      mocks: [{ ...SEARCH_MOCK_PAGE_1, delay: 100 }],
     });
 
     await user.type(screen.getByLabelText(/Search/), "Batman");

@@ -15,7 +15,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { buildMovieMock } from "./build-movie-mock";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
-import { type ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 import {
   type GetListsQuery,
   type GetListsQueryVariables,
@@ -59,11 +59,7 @@ export const renderWithProviders = (
     ...options,
   };
 
-  const RenderWrapper = ({
-    children,
-  }: {
-    children: ReactElement;
-  }): ReactElement => (
+  const RenderWrapper = ({ children }: PropsWithChildren): ReactElement => (
     <MockedProvider
       mocks={[
         options?.listsMock || GET_LISTS_MOCK,
@@ -104,11 +100,7 @@ export const renderHookWithProviders = (
     ...options,
   };
 
-  const RenderWrapper = ({
-    children,
-  }: {
-    children: ReactElement;
-  }): ReactElement => (
+  const RenderWrapper = ({ children }: PropsWithChildren): ReactElement => (
     <MockedProvider
       mocks={[
         GET_LISTS_MOCK,
