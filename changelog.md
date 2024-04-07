@@ -1,3 +1,12 @@
+### PR #214 - api-cors: add liberal cors policy
+##### 2024-04-07
+
+Adds a very open CORS policy as Vercel is suddenly blocking api requests from the md4k-web subdomain to the md4k-api subdomain. I'll tighten this up once I know this is the right way to fix it.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/214)
+
+----
+
 ### PR #208 - Bump the development-dependencies group in /packages/web with 10 updates
 ##### 2024-03-23
 
