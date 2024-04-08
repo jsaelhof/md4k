@@ -65,7 +65,12 @@ const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
   // If we can't get the lists or movies, throw an error. The whole app isn't going to work.
   // This is almost always an error due to expired auth which is handled in the Apollo client.
   // But if something else goes wrong, this will show the error screen.
-  if (listsError || moviesError) throw new Error("GraphQL Error at AppContext");
+  if (listsError || moviesError) {
+    console.error(listsError ?? moviesError);
+    throw new Error(
+      `GraphQL Error at AppContext.\n${listsError?.message ?? moviesError?.message ?? "Unknown"}.\n\n${listsError ?? moviesError}`
+    );
+  }
 
   // Expose a list change function so that we can clear any state from the old list while changing to a new one
   const setList = useCallback((list: GetListsItem) => {
