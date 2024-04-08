@@ -1,3 +1,12 @@
+### PR #218 - #196: add some additional logging around graph errors
+##### 2024-04-08
+
+Adding more logging to try and diagnose some token issues I'm seeing on Vercel, particularly on iOS.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/218)
+
+----
+
 ### PR #214 - api-cors: add liberal cors policy
 ##### 2024-04-07
 
