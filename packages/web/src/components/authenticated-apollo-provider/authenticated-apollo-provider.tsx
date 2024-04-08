@@ -51,6 +51,7 @@ export const AuthenticatedApolloProvider = ({
         let token;
         try {
           token = await getAccessTokenSilently();
+          console.log({ token });
         } catch (error) {
           console.log("Error getting Auth0 access token silently");
         }
@@ -59,6 +60,7 @@ export const AuthenticatedApolloProvider = ({
         // The url to redirect to is configured in main.tsx in the Auth0Provider props.
         // A different URL can be passed here using the options (ex returning the user to the page they were on).
         // For now, I'm just going to push the user back to main page of the app.
+        if (!token) console.error("No Token. Redirect to login.");
         if (!token) await loginWithRedirect();
 
         return {
