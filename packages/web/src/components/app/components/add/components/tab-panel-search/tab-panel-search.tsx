@@ -25,7 +25,7 @@ import {
 import { MovieQuote } from "./components/movie-quote/movie-quote";
 import MovieRemove from "mdi-material-ui/MovieRemove";
 import PosterGrid from "./components/poster-grid/poster-grid";
-import { useInViewRef } from "rooks/dist/esm/hooks/useInViewRef";
+import { useInViewRef } from "rooks";
 import {
   type PageInfo,
   type SearchByTitleQuery,
@@ -147,7 +147,7 @@ const TabPanelSearch = ({
   }, []);
 
   // Checks if a 0-height div is within view and displays
-  const [ref, visible] = useInViewRef(undefined, { rootMargin: "-184px" });
+  const [ref, visible] = useInViewRef({ rootMargin: "-184px" });
 
   return (
     <>

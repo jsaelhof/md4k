@@ -1,5 +1,3 @@
-import { useOnWindowResize } from "rooks";
-
 import { useSpring } from "react-spring";
 import { type ReactElement, useCallback, useState } from "react";
 import {
@@ -8,6 +6,7 @@ import {
   YouTubePlayerInline,
   YouTubePlayerOverlay,
 } from "./trailer.styles";
+import { useOnWindowResize } from "../../../../../../hooks/use-on-window-resize";
 
 // This is making an assumption that the youtube player is always 640x360.
 // The video is actually varying sizes postioned centered within this by youtube.
@@ -64,9 +63,11 @@ const Trailer = ({
     updateSize(node);
   }, []);
 
-  useOnWindowResize(() => {
+  const updateTrailerSize = useCallback(() => {
     trailerNode && updateSize(trailerNode);
-  });
+  }, [trailerNode]);
+
+  useOnWindowResize(updateTrailerSize);
 
   const TrailerLayout = overlay ? TrailerOverlay : TrailerInline;
   const YouTubePlayer = overlay ? YouTubePlayerOverlay : YouTubePlayerInline;

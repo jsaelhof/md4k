@@ -12,9 +12,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { useOnWindowResize } from "rooks";
 import { type Movie as MovieType } from "../../../../../../../../__generated__/graphql";
 import { type ListGridHandlers } from "../../types";
+import { useOnWindowResize } from "../../../../../../../../hooks/use-on-window-resize";
 
 export type MovieSectionProps = ListGridHandlers & {
   ariaLabel?: string;
@@ -43,6 +43,7 @@ const MovieSection = ({
   }, []);
 
   useEffect(updateTitleOffset, [updateTitleOffset]);
+
   useOnWindowResize(updateTitleOffset);
 
   return list ? (
