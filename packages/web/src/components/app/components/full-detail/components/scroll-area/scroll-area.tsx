@@ -1,6 +1,6 @@
 import { useSpring } from "react-spring";
 import { type ReactElement, type UIEvent, useCallback, useState } from "react";
-import { useOnWindowResize } from "rooks";
+import { useOnWindowResize } from "../../../../../../hooks/use-on-window-resize";
 
 import { Layout, Shade, TextArea } from "./scroll-area.styles";
 import { type Maybe } from "../../../../../../__generated__/graphql";
@@ -46,9 +46,11 @@ const ScrollArea = ({
     [updateOverflows]
   );
 
-  useOnWindowResize(() => {
+  const updateTextNodeOverflows = useCallback(() => {
     updateOverflows(textNode);
-  });
+  }, [textNode, updateOverflows]);
+
+  useOnWindowResize(updateTextNodeOverflows);
 
   const plotShadeTopSpring = useSpring({
     opacity: topOverflow ? 1 : 0,

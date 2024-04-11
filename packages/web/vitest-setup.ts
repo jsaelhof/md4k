@@ -35,9 +35,13 @@ globSync("**/i18n.js").forEach(async (path) => {
 beforeAll(() => {
   // Define a mock for Rooks useInViewRef hook.
   // Currently this is simply returning a null ref and always returns true for intersecting.
-  vi.mock("rooks/dist/esm/hooks/useInViewRef", () => ({
-    useInViewRef: vi.fn().mockReturnValue([null, true]),
-  }));
+  vi.mock("rooks", async (importOriginal) => {
+    const original = await importOriginal<object>();
+    return {
+      ...original,
+      useInViewRef: vi.fn().mockReturnValue([null, true]),
+    };
+  });
 });
 
 beforeEach<TestContext>((context) => {
