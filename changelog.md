@@ -1,3 +1,28 @@
+### PR #219 - Bump the development-dependencies group with 13 updates
+##### 2024-04-12
+
+Bumps the development-dependencies group with 13 updates:
+
+| Package | From | To |
+| --- | --- | --- |
+| [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) | `7.3.1` | `7.6.0` |
+| [@typescript-eslint/parser](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser) | `7.3.1` | `7.6.0` |
+| [eslint](https://github.com/eslint/eslint) | `8.57.0` | `9.0.0` |
+| [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest) | `0.3.26` | `0.5.1` |
+| [typescript](https://github.com/Microsoft/TypeScript) | `5.4.3` | `5.4.5` |
+| [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node) | `20.11.30` | `20.12.7` |
+| [@graphql-codegen/client-preset](https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/presets/client) | `4.2.4` | `4.2.5` |
+| [@testing-library/dom](https://github.com/testing-library/dom-testing-library) | `9.3.4` | `10.0.0` |
+| [@testing-library/react](https://github.com/testing-library/react-testing-library) | `14.2.2` | `15.0.0` |
+| [@types/react](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/react) | `18.2.69` | `18.2.75` |
+| [@types/react-dom](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/react-dom) | `18.2.22` | `18.2.24` |
+| [glob](https://github.com/isaacs/node-glob) | `10.3.10` | `10.3.12` |
+| [vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite) | `5.2.6` | `5.2.8` |
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/219)
+
+----
+
 ### PR #217 - Bump the production-dependencies group with 24 updates
 ##### 2024-04-11
 
