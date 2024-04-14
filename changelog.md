@@ -1,3 +1,12 @@
+### PR #223 - #221: downgrade eslint to 8
+##### 2024-04-14
+
+Downgrades a few dependencies to go back to a working eslint state
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/223)
+
+----
+
 ### PR #219 - Bump the development-dependencies group with 13 updates
 ##### 2024-04-12
 
