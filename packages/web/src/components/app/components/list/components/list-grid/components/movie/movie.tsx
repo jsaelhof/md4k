@@ -65,7 +65,6 @@ const Movie = ({
     isTouchInterface ? 0 : 500
   );
   const unfocus = (): void => {
-    console.log("unfocus");
     focus.cancel();
     setFocused(false);
     // This is ugly. Occasionally, posters get stuck in the focused state because they unfocus and then trigger a very fast
