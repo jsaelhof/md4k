@@ -39,18 +39,22 @@ describe("sorted-title", () => {
         {
           id: "0",
           title: "Movie 1",
+          list: "list1",
         },
         {
           id: "1",
           title: "Movie 2",
+          list: "list1",
         },
         {
           id: "2",
           title: "Movie 3",
+          list: "list1",
         },
         {
           id: "3",
           title: "Movie 4",
+          list: "list1",
         },
       ],
       onEditMovie: vi.fn(),

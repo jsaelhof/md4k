@@ -1,9 +1,4 @@
-import {
-  type Theme,
-  styled,
-  Tabs as MUITabs,
-  Tab as MUITab,
-} from "@mui/material";
+import { styled, Tabs as MUITabs, Tab as MUITab } from "@mui/material";
 import { app } from "../../../../constants/app";
 
 export const Layout = styled("div")(({ theme: { spacing } }) => ({

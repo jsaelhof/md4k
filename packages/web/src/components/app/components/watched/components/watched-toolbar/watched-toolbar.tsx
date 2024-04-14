@@ -1,9 +1,4 @@
-import {
-  IconButton,
-  InputAdornment,
-  TextField,
-  useMediaQuery,
-} from "@mui/material";
+import { InputAdornment, TextField, useMediaQuery } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Search from "@mui/icons-material/Search";
 import { CloseIconButton, Layout, Status } from "./watched-toolbar.styles";
