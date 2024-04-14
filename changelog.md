@@ -1,3 +1,12 @@
+### PR #224 - #220: Late list-select load
+##### 2024-04-14
+
+add a cache read to populate the current list value from the cache on load (if available)
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/224)
+
+----
+
 ### PR #223 - #221: downgrade eslint to 8
 ##### 2024-04-14
 
