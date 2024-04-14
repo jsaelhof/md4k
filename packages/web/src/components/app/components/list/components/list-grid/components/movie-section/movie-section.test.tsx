@@ -32,6 +32,7 @@ describe("movie-section", () => {
         {
           id: "1",
           title: "Movie #1",
+          list: "list1",
         },
       ],
       onEditMovie: vi.fn(),

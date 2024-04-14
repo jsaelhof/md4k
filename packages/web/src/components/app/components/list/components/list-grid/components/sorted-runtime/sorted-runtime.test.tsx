@@ -40,20 +40,24 @@ describe("sorted-runtime", () => {
           id: "0",
           title: "Movie 1",
           runtime: 5400,
+          list: "list1",
         },
         {
           id: "1",
           title: "Movie 2",
           runtime: 6600,
+          list: "list1",
         },
         {
           id: "2",
           title: "Movie 3",
           runtime: 9000,
+          list: "list1",
         },
         {
           id: "3",
           title: "Movie 4",
+          list: "list1",
           // Mising Runtime
         },
       ],
@@ -213,7 +217,9 @@ describe("sorted-runtime", () => {
   it<LocalTestContext>("should not render short movies when the category is empty", ({
     props,
   }) => {
-    render(<SortedRuntime {...props} movies={[...props.movies.slice(1)]} />);
+    render(
+      <SortedRuntime {...props} movies={[...(props?.movies ?? []).slice(1)]} />
+    );
     expect(screen.queryByText(/short/i)).not.toBeInTheDocument();
   });
 
@@ -223,7 +229,10 @@ describe("sorted-runtime", () => {
     render(
       <SortedRuntime
         {...props}
-        movies={[...props.movies.slice(0, 1), ...props.movies?.slice(2)]}
+        movies={[
+          ...(props?.movies ?? []).slice(0, 1),
+          ...(props?.movies ?? []).slice(2),
+        ]}
       />
     );
     expect(screen.queryByText(/regular/i)).not.toBeInTheDocument();
@@ -235,7 +244,10 @@ describe("sorted-runtime", () => {
     render(
       <SortedRuntime
         {...props}
-        movies={[...props.movies.slice(0, 2), ...props.movies?.slice(3)]}
+        movies={[
+          ...(props?.movies ?? []).slice(0, 2),
+          ...(props?.movies ?? []).slice(3),
+        ]}
       />
     );
     expect(screen.queryByText(/long/i)).not.toBeInTheDocument();
@@ -244,7 +256,12 @@ describe("sorted-runtime", () => {
   it<LocalTestContext>("should not render unknown length movies when the category is empty", ({
     props,
   }) => {
-    render(<SortedRuntime {...props} movies={[...props.movies.slice(0, 3)]} />);
+    render(
+      <SortedRuntime
+        {...props}
+        movies={[...(props?.movies ?? []).slice(0, 3)]}
+      />
+    );
     expect(screen.queryByText(/unknown/i)).not.toBeInTheDocument();
   });
 });
