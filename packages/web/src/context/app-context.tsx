@@ -4,11 +4,10 @@ import React, {
   useCallback,
 } from "react";
 import { createContext, useState } from "react";
-import { GET_LISTS, useGetLists, useGetMovies } from "../graphql/queries";
+import { useGetLists, useGetMovies } from "../graphql/queries";
 import { type GetListsItem, type GetMovieItem } from "../graphql/types";
 import { type Maybe } from "graphql/jsutils/Maybe";
 import { type ToastProps } from "../types";
-import { useQuery, useFragment, gql } from "@apollo/client";
 import { useGetInitialList } from "../graphql/queries/get-initial-list";
 
 export type AppContextType = {
