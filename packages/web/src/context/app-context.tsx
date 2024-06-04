@@ -55,7 +55,6 @@ const AppProvider = ({ children }: PropsWithChildren): ReactElement => {
   } = useGetLists({
     onCompleted: _setList,
   });
-  console.log("CONTEXT", lists);
 
   // Initialize using the list but if it's undefined and "lists" has data (from the persisted cache) use that to avoid waiting for useGetLists to complete.
   // It completes after the network part of cache-and-network is done so its late if there is cached data available. We want to take advantage of that to load really fast.
