@@ -1,3 +1,673 @@
+### PR #240 - Bump the development-dependencies group across 1 directory with 23 updates
+##### 2024-06-04
+
+Bumps the development-dependencies group with 23 updates in the / directory:
+
+| Package | From | To |
+| --- | --- | --- |
+| [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) | `7.6.0` | `7.11.0` |
+| [@typescript-eslint/parser](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser) | `7.6.0` | `7.11.0` |
+| [eslint](https://github.com/eslint/eslint) | `8.57.0` | `9.4.0` |
+| [eslint-plugin-testing-library](https://github.com/testing-library/eslint-plugin-testing-library) | `6.2.0` | `6.2.2` |
+| [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest) | `0.3.26` | `0.5.4` |
+| [lint-staged](https://github.com/okonet/lint-staged) | `15.2.2` | `15.2.5` |
+| [prettier](https://github.com/prettier/prettier) | `3.2.5` | `3.3.0` |
+| [@graphql-codegen/typescript](https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/plugins/typescript/typescript) | `4.0.6` | `4.0.7` |
+| [@graphql-codegen/typescript-resolvers](https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/plugins/typescript/resolvers) | `4.0.6` | `4.1.0` |
+| [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node) | `20.12.7` | `20.14.0` |
+| [@vitest/ui](https://github.com/vitest-dev/vitest/tree/HEAD/packages/ui) | `1.4.0` | `1.6.0` |
+| [vitest](https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest) | `1.4.0` | `1.6.0` |
+| [@graphql-codegen/client-preset](https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/presets/client) | `4.2.5` | `4.2.6` |
+| [@testing-library/dom](https://github.com/testing-library/dom-testing-library) | `10.0.0` | `10.1.0` |
+| [@testing-library/jest-dom](https://github.com/testing-library/jest-dom) | `6.4.2` | `6.4.5` |
+| [@testing-library/react](https://github.com/testing-library/react-testing-library) | `15.0.0` | `15.0.7` |
+| [@types/lodash](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/lodash) | `4.17.0` | `4.17.4` |
+| [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/HEAD/packages/plugin-react) | `4.2.1` | `4.3.0` |
+| [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) | `7.34.1` | `7.34.2` |
+| [eslint-plugin-react-hooks](https://github.com/facebook/react/tree/HEAD/packages/eslint-plugin-react-hooks) | `4.6.0` | `4.6.2` |
+| [glob](https://github.com/isaacs/node-glob) | `10.3.12` | `10.4.1` |
+| [jsdom](https://github.com/jsdom/jsdom) | `24.0.0` | `24.1.0` |
+| [vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite) | `5.2.8` | `5.2.12` |
+
+
+Updates `@typescript-eslint/eslint-plugin` from 7.6.0 to 7.11.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/releases"><code>@​typescript-eslint/eslint-plugin</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>v7.11.0</h2>
+<h2>7.11.0 (2024-05-27)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> deprecate prefer-ts-expect-error in favor of ban-ts-comment (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9081">#9081</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>ast-spec:</strong> add <code>EmptyStatement</code> to <code>Statement</code> (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8892">#8892</a>)</li>
+<li><strong>eslint-plugin:</strong> [consistent-type-assertions] prevent syntax errors on arrow functions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8826">#8826</a>)</li>
+<li><strong>typescript-estree:</strong> truncate number of files printed by the maximum file error (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9127">#9127</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>auvred <a href="https://github.com/auvred"><code>@​auvred</code></a></li>
+<li>Dom Armstrong <a href="https://github.com/domarmstrong"><code>@​domarmstrong</code></a></li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>v7.10.0</h2>
+<h2>7.10.0 (2024-05-20)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [sort-type-constituents] support case sensitive sorting (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8760">#8760</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [prefer-regexp-exec] fix heuristic to check whether regex may contain global flag (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8764">#8764</a>)</li>
+<li><strong>typescript-estree:</strong> don't add in-project files to defaultProjectMatchedFiles (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9097">#9097</a>)</li>
+<li><strong>utils:</strong> remove function form type from flat config <code>files</code> and <code>ignores</code> (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9111">#9111</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>auvred <a href="https://github.com/auvred"><code>@​auvred</code></a></li>
+<li>Emanuel Hoogeveen <a href="https://github.com/ehoogeveen-medweb"><code>@​ehoogeveen-medweb</code></a></li>
+<li>jsfm01 <a href="https://github.com/jsfm01"><code>@​jsfm01</code></a></li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>v7.9.0</h2>
+<h2>7.9.0 (2024-05-13)</h2>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/CHANGELOG.md"><code>@​typescript-eslint/eslint-plugin</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>7.11.0 (2024-05-27)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> deprecate prefer-ts-expect-error in favor of ban-ts-comment</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [consistent-type-assertions] prevent syntax errors on arrow functions</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>auvred</li>
+<li>Dom Armstrong</li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.10.0 (2024-05-20)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [sort-type-constituents] support case sensitive sorting</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [prefer-regexp-exec] fix heuristic to check whether regex may contain global flag</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>auvred</li>
+<li>Emanuel Hoogeveen</li>
+<li>jsfm01</li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.9.0 (2024-05-13)</h2>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [explicit-function-return-types] fix false positive on default parameters</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/e36054187fb31113ba64c33c257d2a86cb3afc54"><code>e360541</code></a> chore(release): publish 7.11.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/b230385a3daf5562fb147572b59d44ec460332d5"><code>b230385</code></a> feat(eslint-plugin): deprecate prefer-ts-expect-error in favor of ban-ts-comm...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/3461f45479cf2483c0b26346229d251d7d0b08b2"><code>3461f45</code></a> test(eslint-plugin): [consistent-type-assertions] add missing <code>output: null</code> ...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/342b873f9f7ff9936d21ed527386f19ab094e729"><code>342b873</code></a> fix(eslint-plugin): [consistent-type-assertions] prevent syntax errors on arr...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/b5ce43b1fc76322eb65b709f63490ce49e622706"><code>b5ce43b</code></a> chore(eslint-plugin): replaced map/reduce with flatMap in normalizedOptions i...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/c18226e05e5c112352753ce61fde6997bde2af2c"><code>c18226e</code></a> chore(release): publish 7.10.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/8d92ba8533e65360877de1af12979c42b6c836e2"><code>8d92ba8</code></a> docs: [no-floating-promises] fix capitalization typo (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9118">#9118</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/d951d8321152eca8e491156e9b741596e5d54591"><code>d951d83</code></a> fix(eslint-plugin): [prefer-regexp-exec] fix heuristic to check whether regex...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/987a96ee578a4d934ce019aa7e905657b6447710"><code>987a96e</code></a> feat(eslint-plugin): [sort-type-constituents] support case sensitive sorting ...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/77fc366aa03f3cee1ebcf91a10dc0be8b669520e"><code>77fc366</code></a> chore(release): publish 7.9.0</li>
+<li>Additional commits viewable in <a href="https://github.com/typescript-eslint/typescript-eslint/commits/v7.11.0/packages/eslint-plugin">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@typescript-eslint/parser` from 7.6.0 to 7.11.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/releases"><code>@​typescript-eslint/parser</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>v7.11.0</h2>
+<h2>7.11.0 (2024-05-27)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> deprecate prefer-ts-expect-error in favor of ban-ts-comment (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9081">#9081</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>ast-spec:</strong> add <code>EmptyStatement</code> to <code>Statement</code> (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8892">#8892</a>)</li>
+<li><strong>eslint-plugin:</strong> [consistent-type-assertions] prevent syntax errors on arrow functions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8826">#8826</a>)</li>
+<li><strong>typescript-estree:</strong> truncate number of files printed by the maximum file error (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9127">#9127</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>auvred <a href="https://github.com/auvred"><code>@​auvred</code></a></li>
+<li>Dom Armstrong <a href="https://github.com/domarmstrong"><code>@​domarmstrong</code></a></li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>v7.10.0</h2>
+<h2>7.10.0 (2024-05-20)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [sort-type-constituents] support case sensitive sorting (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8760">#8760</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [prefer-regexp-exec] fix heuristic to check whether regex may contain global flag (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8764">#8764</a>)</li>
+<li><strong>typescript-estree:</strong> don't add in-project files to defaultProjectMatchedFiles (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9097">#9097</a>)</li>
+<li><strong>utils:</strong> remove function form type from flat config <code>files</code> and <code>ignores</code> (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9111">#9111</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>auvred <a href="https://github.com/auvred"><code>@​auvred</code></a></li>
+<li>Emanuel Hoogeveen <a href="https://github.com/ehoogeveen-medweb"><code>@​ehoogeveen-medweb</code></a></li>
+<li>jsfm01 <a href="https://github.com/jsfm01"><code>@​jsfm01</code></a></li>
+<li>Kirk Waiblinger</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>v7.9.0</h2>
+<h2>7.9.0 (2024-05-13)</h2>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/CHANGELOG.md"><code>@​typescript-eslint/parser</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>7.11.0 (2024-05-27)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.10.0 (2024-05-20)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.9.0 (2024-05-13)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.8.0 (2024-04-29)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.7.1 (2024-04-22)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+<h2>7.7.0 (2024-04-15)</h2>
+<p>This was a version bump only for parser to align it with other projects, there were no code changes.</p>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/e36054187fb31113ba64c33c257d2a86cb3afc54"><code>e360541</code></a> chore(release): publish 7.11.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/c18226e05e5c112352753ce61fde6997bde2af2c"><code>c18226e</code></a> chore(release): publish 7.10.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/77fc366aa03f3cee1ebcf91a10dc0be8b669520e"><code>77fc366</code></a> chore(release): publish 7.9.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/f53fece3678fdba005814fab080b6aa1b905a189"><code>f53fece</code></a> chore: add knip (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser/issues/8192">#8192</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/ee677f6f67259f0081ad1a87b1fd9c89692eda21"><code>ee677f6</code></a> chore(release): publish 7.8.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/3e19436e83fe8fe2bc633847f2d9eb4026710203"><code>3e19436</code></a> chore(release): publish 7.7.1</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/e44a1a280f08f9fd0d29f74e5c3e73b7b64a9606"><code>e44a1a2</code></a> chore(release): publish 7.7.0</li>
+<li>See full diff in <a href="https://github.com/typescript-eslint/typescript-eslint/commits/v7.11.0/packages/parser">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `eslint` from 8.57.0 to 9.4.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/eslint/eslint/releases">eslint's releases</a>.</em></p>
+<blockquote>
+<h2>v9.4.0</h2>
+<h2>Features</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/89a4a0a260b8eb11487fe3d5d4d80f4630933eb3"><code>89a4a0a</code></a> feat: ignore IIFE's in the <code>no-loop-func</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/17528">#17528</a>) (Nitin Kumar)</li>
+</ul>
+<h2>Bug Fixes</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/f6534d14033e04f6c7c88a1f0c44a8077148ec6b"><code>f6534d1</code></a> fix: skip processor code blocks that match only universal patterns (<a href="https://redirect.github.com/eslint/eslint/issues/18507">#18507</a>) (Milos Djermanovic)</li>
+<li><a href="https://github.com/eslint/eslint/commit/7226ebd69df04a4cc5fe546641f3443b60ec47e9"><code>7226ebd</code></a> fix: allow implicit undefined return in <code>no-constructor-return</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18515">#18515</a>) (Ali Rezvani)</li>
+<li><a href="https://github.com/eslint/eslint/commit/389744be255717c507fafc158746e579ac08d77e"><code>389744b</code></a> fix: use <code>@eslint/config-inspector@latest</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18483">#18483</a>) (唯然)</li>
+<li><a href="https://github.com/eslint/eslint/commit/70118a5b11860fce364028d3c515393b6a586aae"><code>70118a5</code></a> fix: <code>func-style</code> false positive with arrow functions and <code>super</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18473">#18473</a>) (Milos Djermanovic)</li>
+</ul>
+<h2>Documentation</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/d7ab6f589d39c64bc5daaef4be3a972032f04c05"><code>d7ab6f5</code></a> docs: update theme when when <code>prefers-color-scheme</code> changes (<a href="https://redirect.github.com/eslint/eslint/issues/18510">#18510</a>) (Nitin Kumar)</li>
+<li><a href="https://github.com/eslint/eslint/commit/525fdffde4cb34010bc503f6d54855b3f9d07811"><code>525fdff</code></a> docs: fix components files (<a href="https://redirect.github.com/eslint/eslint/issues/18519">#18519</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/80747d23dec69b30ea2c3620a1198f7d06b012b8"><code>80747d2</code></a> docs: refactor <code>prefer-destructuring</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18472">#18472</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/f06e0b5f51ae1aad8957d27aa0ea4d6d0ad51455"><code>f06e0b5</code></a> docs: clarify func-style (<a href="https://redirect.github.com/eslint/eslint/issues/18477">#18477</a>) (Cameron Steffen)</li>
+</ul>
+<h2>Chores</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/010dd2ef50456a1ba5892152192b6c9d9d5fd470"><code>010dd2e</code></a> chore: upgrade to <code>@eslint/js@9.4.0</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18534">#18534</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/5e1b5dc9a3d839737125571c8fd4e239d81608de"><code>5e1b5dc</code></a> chore: package.json update for <code>@​eslint/js</code> release (Jenkins)</li>
+<li><a href="https://github.com/eslint/eslint/commit/594145f493d913e2b7e25a27accf33c44e1d4687"><code>594145f</code></a> refactor: switch to <code>@eslint/config-array</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18527">#18527</a>) (Francesco Trotta)</li>
+</ul>
+<h2>v9.3.0</h2>
+<h2>Features</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/b32153c97317c6fc593c2abbf6ae994519d473b4"><code>b32153c</code></a> feat: add <code>overrides.namedExports</code> to <code>func-style</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18444">#18444</a>) (Percy Ma)</li>
+<li><a href="https://github.com/eslint/eslint/commit/b67eba4514026ef7e489798fd883beb678817a46"><code>b67eba4</code></a> feat: add <code>restrictedNamedExportsPattern</code> to <code>no-restricted-exports</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18431">#18431</a>) (Akul Srivastava)</li>
+<li><a href="https://github.com/eslint/eslint/commit/069aa680c78b8516b9a1b568519f1d01e74fb2a2"><code>069aa68</code></a> feat: add option <code>allowEscape</code> to <code>no-misleading-character-class</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18208">#18208</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/05ef92dd15949014c0735125c89b7bd70dec58c8"><code>05ef92d</code></a> feat: deprecate <code>multiline-comment-style</code> &amp; <code>line-comment-position</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18435">#18435</a>) (唯然)</li>
+<li><a href="https://github.com/eslint/eslint/commit/db0b174c3ace60e29585bfc3520727c44cefcfc5"><code>db0b174</code></a> feat: add <code>enforceForInnerExpressions</code> option to <code>no-extra-boolean-cast</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18222">#18222</a>) (Kirk Waiblinger)</li>
+</ul>
+<h2>Bug Fixes</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/8db0eff4ba89b45f439c27ba1202ed056ae92e83"><code>8db0eff</code></a> fix: Improve config error messages (<a href="https://redirect.github.com/eslint/eslint/issues/18457">#18457</a>) (Nicholas C. Zakas)</li>
+<li><a href="https://github.com/eslint/eslint/commit/5c28d9a367e1608e097c491f40b8afd0730a8b9e"><code>5c28d9a</code></a> fix: don't remove comments between key and value in object-shorthand (<a href="https://redirect.github.com/eslint/eslint/issues/18442">#18442</a>) (Kuba Jastrzębski)</li>
+<li><a href="https://github.com/eslint/eslint/commit/39fb0ee9cd33f952707294e67f194d414261a571"><code>39fb0ee</code></a> fix: object-shorthand loses type parameters when auto-fixing (<a href="https://redirect.github.com/eslint/eslint/issues/18438">#18438</a>) (dalaoshu)</li>
+<li><a href="https://github.com/eslint/eslint/commit/37eba48d6f2d3c99c5ecf2fc3967e428a6051dbb"><code>37eba48</code></a> fix: don't crash when <code>fs.readFile</code> returns promise from another realm (<a href="https://redirect.github.com/eslint/eslint/issues/18416">#18416</a>) (Milos Djermanovic)</li>
+</ul>
+<h2>Documentation</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/ceada8c702d4903d6872f46a25d68b672d2c6289"><code>ceada8c</code></a> docs: explain how to use &quot;tsc waiting&quot; label (<a href="https://redirect.github.com/eslint/eslint/issues/18466">#18466</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/62e686c5e90411fed2b5561be5688d7faf64d791"><code>62e686c</code></a> docs: Add troubleshooting info for plugin compatibility (<a href="https://redirect.github.com/eslint/eslint/issues/18451">#18451</a>) (Nicholas C. Zakas)</li>
+<li><a href="https://github.com/eslint/eslint/commit/e17e1c0dd5d5dc5a4cae5888116913f6555b1f1e"><code>e17e1c0</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/2465a1e3f3b78f302f64e62e5f0d851626b81b3c"><code>2465a1e</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/d23574c5c0275c8b3714a7a6d3e8bf2108af60f1"><code>d23574c</code></a> docs: Clarify usage of <code>no-unreachable</code> with TypeScript (<a href="https://redirect.github.com/eslint/eslint/issues/18445">#18445</a>) (benj-dobs)</li>
+<li><a href="https://github.com/eslint/eslint/commit/1db9bae944b69945e3b05f76754cced16ae83838"><code>1db9bae</code></a> docs: Fix typos (<a href="https://redirect.github.com/eslint/eslint/issues/18443">#18443</a>) (Frieder Bluemle)</li>
+<li><a href="https://github.com/eslint/eslint/commit/70651968beb0f907c9689c2477721c0b991acc4a"><code>7065196</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/04e7c6e0a24bd2d7691ae641e2dc0e6d538dcdfd"><code>04e7c6e</code></a> docs: update deprecation notice of <code>no-return-await</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18433">#18433</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/e7635126f36145b47fe5d135ab258af43b2715c9"><code>e763512</code></a> docs: Link global ignores section in config object property list (<a href="https://redirect.github.com/eslint/eslint/issues/18430">#18430</a>) (MaoShizhong)</li>
+<li><a href="https://github.com/eslint/eslint/commit/ac7f718de66131187302387fc26907c4c93196f9"><code>ac7f718</code></a> docs: reflect release of v9 in config migration guide (<a href="https://redirect.github.com/eslint/eslint/issues/18412">#18412</a>) (Peter Briggs)</li>
+<li><a href="https://github.com/eslint/eslint/commit/0de0909e001191a3464077d37e8c0b3f67e9a1cb"><code>0de0909</code></a> docs: fix grammar in configuration file resolution (<a href="https://redirect.github.com/eslint/eslint/issues/18419">#18419</a>) (Mike McCready)</li>
+</ul>
+<h2>Chores</h2>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/58e271924aeb8ac2b8864845cd787ef3f9239939"><code>58e2719</code></a> chore: update dependencies for v9.3.0 release (<a href="https://redirect.github.com/eslint/eslint/issues/18469">#18469</a>) (Francesco Trotta)</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/eslint/eslint/blob/main/CHANGELOG.md">eslint's changelog</a>.</em></p>
+<blockquote>
+<p>v9.4.0 - May 31, 2024</p>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/010dd2ef50456a1ba5892152192b6c9d9d5fd470"><code>010dd2e</code></a> chore: upgrade to <code>@eslint/js@9.4.0</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18534">#18534</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/5e1b5dc9a3d839737125571c8fd4e239d81608de"><code>5e1b5dc</code></a> chore: package.json update for <code>@​eslint/js</code> release (Jenkins)</li>
+<li><a href="https://github.com/eslint/eslint/commit/d7ab6f589d39c64bc5daaef4be3a972032f04c05"><code>d7ab6f5</code></a> docs: update theme when when <code>prefers-color-scheme</code> changes (<a href="https://redirect.github.com/eslint/eslint/issues/18510">#18510</a>) (Nitin Kumar)</li>
+<li><a href="https://github.com/eslint/eslint/commit/594145f493d913e2b7e25a27accf33c44e1d4687"><code>594145f</code></a> refactor: switch to <code>@eslint/config-array</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18527">#18527</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/525fdffde4cb34010bc503f6d54855b3f9d07811"><code>525fdff</code></a> docs: fix components files (<a href="https://redirect.github.com/eslint/eslint/issues/18519">#18519</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/89a4a0a260b8eb11487fe3d5d4d80f4630933eb3"><code>89a4a0a</code></a> feat: ignore IIFE's in the <code>no-loop-func</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/17528">#17528</a>) (Nitin Kumar)</li>
+<li><a href="https://github.com/eslint/eslint/commit/80747d23dec69b30ea2c3620a1198f7d06b012b8"><code>80747d2</code></a> docs: refactor <code>prefer-destructuring</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18472">#18472</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/f6534d14033e04f6c7c88a1f0c44a8077148ec6b"><code>f6534d1</code></a> fix: skip processor code blocks that match only universal patterns (<a href="https://redirect.github.com/eslint/eslint/issues/18507">#18507</a>) (Milos Djermanovic)</li>
+<li><a href="https://github.com/eslint/eslint/commit/7226ebd69df04a4cc5fe546641f3443b60ec47e9"><code>7226ebd</code></a> fix: allow implicit undefined return in <code>no-constructor-return</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18515">#18515</a>) (Ali Rezvani)</li>
+<li><a href="https://github.com/eslint/eslint/commit/f06e0b5f51ae1aad8957d27aa0ea4d6d0ad51455"><code>f06e0b5</code></a> docs: clarify func-style (<a href="https://redirect.github.com/eslint/eslint/issues/18477">#18477</a>) (Cameron Steffen)</li>
+<li><a href="https://github.com/eslint/eslint/commit/389744be255717c507fafc158746e579ac08d77e"><code>389744b</code></a> fix: use <code>@eslint/config-inspector@latest</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18483">#18483</a>) (唯然)</li>
+<li><a href="https://github.com/eslint/eslint/commit/70118a5b11860fce364028d3c515393b6a586aae"><code>70118a5</code></a> fix: <code>func-style</code> false positive with arrow functions and <code>super</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18473">#18473</a>) (Milos Djermanovic)</li>
+</ul>
+<p>v9.3.0 - May 17, 2024</p>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/58e271924aeb8ac2b8864845cd787ef3f9239939"><code>58e2719</code></a> chore: update dependencies for v9.3.0 release (<a href="https://redirect.github.com/eslint/eslint/issues/18469">#18469</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/b681ecbdf0882cbb7902682a9d35c1e76ac76c30"><code>b681ecb</code></a> chore: package.json update for <code>@​eslint/js</code> release (Jenkins)</li>
+<li><a href="https://github.com/eslint/eslint/commit/8db0eff4ba89b45f439c27ba1202ed056ae92e83"><code>8db0eff</code></a> fix: Improve config error messages (<a href="https://redirect.github.com/eslint/eslint/issues/18457">#18457</a>) (Nicholas C. Zakas)</li>
+<li><a href="https://github.com/eslint/eslint/commit/ceada8c702d4903d6872f46a25d68b672d2c6289"><code>ceada8c</code></a> docs: explain how to use &quot;tsc waiting&quot; label (<a href="https://redirect.github.com/eslint/eslint/issues/18466">#18466</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/b32153c97317c6fc593c2abbf6ae994519d473b4"><code>b32153c</code></a> feat: add <code>overrides.namedExports</code> to <code>func-style</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18444">#18444</a>) (Percy Ma)</li>
+<li><a href="https://github.com/eslint/eslint/commit/06f1d1cd874dfc40a6651b08d766f6522a67b3f0"><code>06f1d1c</code></a> chore: update dependency <code>@​humanwhocodes/retry</code> to ^0.3.0 (<a href="https://redirect.github.com/eslint/eslint/issues/18463">#18463</a>) (renovate[bot])</li>
+<li><a href="https://github.com/eslint/eslint/commit/5c28d9a367e1608e097c491f40b8afd0730a8b9e"><code>5c28d9a</code></a> fix: don't remove comments between key and value in object-shorthand (<a href="https://redirect.github.com/eslint/eslint/issues/18442">#18442</a>) (Kuba Jastrzębski)</li>
+<li><a href="https://github.com/eslint/eslint/commit/62e686c5e90411fed2b5561be5688d7faf64d791"><code>62e686c</code></a> docs: Add troubleshooting info for plugin compatibility (<a href="https://redirect.github.com/eslint/eslint/issues/18451">#18451</a>) (Nicholas C. Zakas)</li>
+<li><a href="https://github.com/eslint/eslint/commit/e17e1c0dd5d5dc5a4cae5888116913f6555b1f1e"><code>e17e1c0</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/39fb0ee9cd33f952707294e67f194d414261a571"><code>39fb0ee</code></a> fix: object-shorthand loses type parameters when auto-fixing (<a href="https://redirect.github.com/eslint/eslint/issues/18438">#18438</a>) (dalaoshu)</li>
+<li><a href="https://github.com/eslint/eslint/commit/b67eba4514026ef7e489798fd883beb678817a46"><code>b67eba4</code></a> feat: add <code>restrictedNamedExportsPattern</code> to <code>no-restricted-exports</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18431">#18431</a>) (Akul Srivastava)</li>
+<li><a href="https://github.com/eslint/eslint/commit/2465a1e3f3b78f302f64e62e5f0d851626b81b3c"><code>2465a1e</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/d23574c5c0275c8b3714a7a6d3e8bf2108af60f1"><code>d23574c</code></a> docs: Clarify usage of <code>no-unreachable</code> with TypeScript (<a href="https://redirect.github.com/eslint/eslint/issues/18445">#18445</a>) (benj-dobs)</li>
+<li><a href="https://github.com/eslint/eslint/commit/1db9bae944b69945e3b05f76754cced16ae83838"><code>1db9bae</code></a> docs: Fix typos (<a href="https://redirect.github.com/eslint/eslint/issues/18443">#18443</a>) (Frieder Bluemle)</li>
+<li><a href="https://github.com/eslint/eslint/commit/069aa680c78b8516b9a1b568519f1d01e74fb2a2"><code>069aa68</code></a> feat: add option <code>allowEscape</code> to <code>no-misleading-character-class</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18208">#18208</a>) (Francesco Trotta)</li>
+<li><a href="https://github.com/eslint/eslint/commit/70651968beb0f907c9689c2477721c0b991acc4a"><code>7065196</code></a> docs: Update README (GitHub Actions Bot)</li>
+<li><a href="https://github.com/eslint/eslint/commit/05ef92dd15949014c0735125c89b7bd70dec58c8"><code>05ef92d</code></a> feat: deprecate <code>multiline-comment-style</code> &amp; <code>line-comment-position</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18435">#18435</a>) (唯然)</li>
+<li><a href="https://github.com/eslint/eslint/commit/a63ed722a64040d2be90f36e45f1f5060a9fe28e"><code>a63ed72</code></a> refactor: Use <code>node:</code> protocol for built-in Node.js modules (<a href="https://redirect.github.com/eslint/eslint/issues/18434">#18434</a>) (Milos Djermanovic)</li>
+<li><a href="https://github.com/eslint/eslint/commit/04e7c6e0a24bd2d7691ae641e2dc0e6d538dcdfd"><code>04e7c6e</code></a> docs: update deprecation notice of <code>no-return-await</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18433">#18433</a>) (Tanuj Kanti)</li>
+<li><a href="https://github.com/eslint/eslint/commit/e7635126f36145b47fe5d135ab258af43b2715c9"><code>e763512</code></a> docs: Link global ignores section in config object property list (<a href="https://redirect.github.com/eslint/eslint/issues/18430">#18430</a>) (MaoShizhong)</li>
+<li><a href="https://github.com/eslint/eslint/commit/37eba48d6f2d3c99c5ecf2fc3967e428a6051dbb"><code>37eba48</code></a> fix: don't crash when <code>fs.readFile</code> returns promise from another realm (<a href="https://redirect.github.com/eslint/eslint/issues/18416">#18416</a>) (Milos Djermanovic)</li>
+<li><a href="https://github.com/eslint/eslint/commit/040700a7a19726bb9568fc190bff95e88fb87269"><code>040700a</code></a> chore: update dependency markdownlint-cli to ^0.40.0 (<a href="https://redirect.github.com/eslint/eslint/issues/18425">#18425</a>) (renovate[bot])</li>
+<li><a href="https://github.com/eslint/eslint/commit/f47847c1b45ef1ac5f05f3a37f5f8c46b860c57f"><code>f47847c</code></a> chore: update actions/stale action to v9 (<a href="https://redirect.github.com/eslint/eslint/issues/18426">#18426</a>) (renovate[bot])</li>
+<li><a href="https://github.com/eslint/eslint/commit/c18ad252c280443e85f788c70ce597e1941f8ff5"><code>c18ad25</code></a> chore: update actions/upload-artifact action to v4 (<a href="https://redirect.github.com/eslint/eslint/issues/18427">#18427</a>) (renovate[bot])</li>
+<li><a href="https://github.com/eslint/eslint/commit/27e3060f7519d84501a11218343c34df4947b303"><code>27e3060</code></a> chore: Disable documentation label (<a href="https://redirect.github.com/eslint/eslint/issues/18423">#18423</a>) (Nicholas C. Zakas)</li>
+<li><a href="https://github.com/eslint/eslint/commit/ac7f718de66131187302387fc26907c4c93196f9"><code>ac7f718</code></a> docs: reflect release of v9 in config migration guide (<a href="https://redirect.github.com/eslint/eslint/issues/18412">#18412</a>) (Peter Briggs)</li>
+<li><a href="https://github.com/eslint/eslint/commit/db0b174c3ace60e29585bfc3520727c44cefcfc5"><code>db0b174</code></a> feat: add <code>enforceForInnerExpressions</code> option to <code>no-extra-boolean-cast</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18222">#18222</a>) (Kirk Waiblinger)</li>
+<li><a href="https://github.com/eslint/eslint/commit/0de0909e001191a3464077d37e8c0b3f67e9a1cb"><code>0de0909</code></a> docs: fix grammar in configuration file resolution (<a href="https://redirect.github.com/eslint/eslint/issues/18419">#18419</a>) (Mike McCready)</li>
+</ul>
+<p>v9.2.0 - May 3, 2024</p>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/b3466052802a1586560ad56a8128d603284d58c2"><code>b346605</code></a> chore: upgrade <code>@​eslint/js</code><a href="https://github.com/9"><code>@​9</code></a>.2.0 (<a href="https://redirect.github.com/eslint/eslint/issues/18413">#18413</a>) (Milos Djermanovic)</li>
+<li><a href="https://github.com/eslint/eslint/commit/c4c18e05fc866b73218dbe58b760546f39a2a620"><code>c4c18e0</code></a> chore: package.json update for <code>@​eslint/js</code> release (Jenkins)</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/eslint/eslint/commit/a5f7e589eca05a8a30bd2532380c304759cc8225"><code>a5f7e58</code></a> 9.4.0</li>
+<li><a href="https://github.com/eslint/eslint/commit/8c6d0c3436ed9828b6945721e8ba3f121fb16b40"><code>8c6d0c3</code></a> Build: changelog update for 9.4.0</li>
+<li><a href="https://github.com/eslint/eslint/commit/010dd2ef50456a1ba5892152192b6c9d9d5fd470"><code>010dd2e</code></a> chore: upgrade to <code>@eslint/js@9.4.0</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18534">#18534</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/5e1b5dc9a3d839737125571c8fd4e239d81608de"><code>5e1b5dc</code></a> chore: package.json update for <code>@​eslint/js</code> release</li>
+<li><a href="https://github.com/eslint/eslint/commit/d7ab6f589d39c64bc5daaef4be3a972032f04c05"><code>d7ab6f5</code></a> docs: update theme when when <code>prefers-color-scheme</code> changes (<a href="https://redirect.github.com/eslint/eslint/issues/18510">#18510</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/594145f493d913e2b7e25a27accf33c44e1d4687"><code>594145f</code></a> refactor: switch to <code>@eslint/config-array</code> (<a href="https://redirect.github.com/eslint/eslint/issues/18527">#18527</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/525fdffde4cb34010bc503f6d54855b3f9d07811"><code>525fdff</code></a> docs: fix components files (<a href="https://redirect.github.com/eslint/eslint/issues/18519">#18519</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/89a4a0a260b8eb11487fe3d5d4d80f4630933eb3"><code>89a4a0a</code></a> feat: ignore IIFE's in the <code>no-loop-func</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/17528">#17528</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/80747d23dec69b30ea2c3620a1198f7d06b012b8"><code>80747d2</code></a> docs: refactor <code>prefer-destructuring</code> rule (<a href="https://redirect.github.com/eslint/eslint/issues/18472">#18472</a>)</li>
+<li><a href="https://github.com/eslint/eslint/commit/f6534d14033e04f6c7c88a1f0c44a8077148ec6b"><code>f6534d1</code></a> fix: skip processor code blocks that match only universal patterns (<a href="https://redirect.github.com/eslint/eslint/issues/18507">#18507</a>)</li>
+<li>Additional commits viewable in <a href="https://github.com/eslint/eslint/compare/v8.57.0...v9.4.0">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `eslint-plugin-testing-library` from 6.2.0 to 6.2.2
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/testing-library/eslint-plugin-testing-library/releases">eslint-plugin-testing-library's releases</a>.</em></p>
+<blockquote>
+<h2>v6.2.2</h2>
+<h2><a href="https://github.com/testing-library/eslint-plugin-testing-library/compare/v6.2.1...v6.2.2">6.2.2</a> (2024-04-15)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>await-async-events:</strong> false positives for userEvent.setup() returned (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/895">#895</a>) (<a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/fb32c5c07dbbd7449b8b1d3983683765912b9e72">fb32c5c</a>)</li>
+</ul>
+<h2>v6.2.1</h2>
+<h2><a href="https://github.com/testing-library/eslint-plugin-testing-library/compare/v6.2.0...v6.2.1">6.2.1</a> (2024-04-12)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>await-async-events:</strong> false positive reports on awaited expressions evaluating to promise (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/890">#890</a>) (<a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/767f1be6c15f05d430f662b09fc467b2feeff6ed">767f1be</a>)</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/fb32c5c07dbbd7449b8b1d3983683765912b9e72"><code>fb32c5c</code></a> fix(await-async-events): false positives for userEvent.setup() returned (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/895">#895</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/767f1be6c15f05d430f662b09fc467b2feeff6ed"><code>767f1be</code></a> fix(await-async-events): false positive reports on awaited expressions evalua...</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/6b39e606a4de8070eb6378f999d3762feab0f644"><code>6b39e60</code></a> build(deps-dev): bump eslint-doc-generator from 1.4.3 to 1.7.0 (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/885">#885</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/88120fe88f6eb0acc4d81c0a867c933de57c3957"><code>88120fe</code></a> build(deps-dev): bump eslint-plugin-import from 2.29.0 to 2.29.1 (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/874">#874</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/b5bb061407732dc75f718b05b5045d1511aee466"><code>b5bb061</code></a> build(deps): bump codecov/codecov-action from 3 to 4 (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/879">#879</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/5497dc269825c89c7022febed7efed741826b6b2"><code>5497dc2</code></a> refactor: fix ts-expect-error (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/873">#873</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/93a6ab91d34a9130b505fc181bca06db48338cd9"><code>93a6ab9</code></a> chore: upgrade TypeScript to v5.0 (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/858">#858</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/9126dc7387e8958504e354b86c90e1c32fe72622"><code>9126dc7</code></a> chore: add codecov step (<a href="https://redirect.github.com/testing-library/eslint-plugin-testing-library/issues/871">#871</a>)</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/13a4f7059eeec10c5346a885aeb2e05ff513b2c2"><code>13a4f70</code></a> docs: add codecov badge to README</li>
+<li><a href="https://github.com/testing-library/eslint-plugin-testing-library/commit/6d7930b853597e6f40c52589cea21fbb929349cf"><code>6d7930b</code></a> style: format README</li>
+<li>Additional commits viewable in <a href="https://github.com/testing-library/eslint-plugin-testing-library/compare/v6.2.0...v6.2.2">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `eslint-plugin-vitest` from 0.3.26 to 0.5.4
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/veritem/eslint-plugin-vitest/releases">eslint-plugin-vitest's releases</a>.</em></p>
+<blockquote>
+<h2>v0.5.4</h2>
+<h3>Features</h3>
+<ul>
+<li>support old Eslint configuration</li>
+<li>update dependencies</li>
+</ul>
+<h2>v0.5.3</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>configs in plugin declaration file (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/428">#428</a>) (<a href="https://github.com/veritem/eslint-plugin-vitest/commit/a554dd2">a554dd2</a>)</li>
+</ul>
+<h2>v0.5.2</h2>
+<h3>Features</h3>
+<ul>
+<li><strong>no-focused-tests:</strong> add autofix (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/424">#424</a>) (<a href="https://github.com/veritem/eslint-plugin-vitest/commit/07be616">07be616</a>)</li>
+</ul>
+<h2>v0.5.1</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>no-focused-tests:</strong> support .each template strings (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/420">#420</a>) (<a href="https://github.com/veritem/eslint-plugin-vitest/commit/36e5b9a">36e5b9a</a>)</li>
+</ul>
+<h2>v0.5.0</h2>
+<h4>‼️ Breaking Change 🚨</h4>
+<p>This version only supports new eslint flat config!</p>
+<p>If you run into issues, consider downgrading and opening an issue. Remember to include a minimum repro example to help me fix issues quickly!</p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/veritem/eslint-plugin-vitest/compare/v0.5.0...v0.5.0">https://github.com/veritem/eslint-plugin-vitest/compare/v0.5.0...v0.5.0</a></p>
+<h2>v0.4.2-beta.5</h2>
+<p>No release notes provided.</p>
+<h2>v0.4.2-beta.4</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>rules:</strong> replace <code>context</code> deprecations (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/416">#416</a>) (<a href="https://github.com/veritem/eslint-plugin-vitest/commit/575951c">575951c</a>)</li>
+</ul>
+<h2>v0.4.2-beta.3</h2>
+<h3>Features</h3>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/2d95ccffd9b6f3135cbbbbee0cdfa793581c9493"><code>2d95ccf</code></a> chore: release v0.5.4</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/2696f0dbaf0c08780f899082f7f429076575a9ac"><code>2696f0d</code></a> chore(legacy): add support for legacy configs (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/434">#434</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/0535b89f27a0dbf2f4ae7e9dfb28ee280f16e1b4"><code>0535b89</code></a> feat(cleanup): remove unnecessary files and updat deps (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/430">#430</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/58d2e781caf4cadb218979f61ed2095899e4fd2e"><code>58d2e78</code></a> chore: release v0.5.3</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/a554dd271033511f2a0fee0c277d1a6ca393b386"><code>a554dd2</code></a> fix: configs in plugin declaration file (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/428">#428</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/5ec480923291bd315201efc6adf133f30547a509"><code>5ec4809</code></a> typo (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/426">#426</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/f8f39f0ebe74728144106c93f65c911ca1c67801"><code>f8f39f0</code></a> Docs/readme (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/425">#425</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/1672d43cca6b2f5b689685c779ffb5c6c81a92f8"><code>1672d43</code></a> chore: release v0.5.2</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/07be61665979a4b993fb8b7311148986637bf636"><code>07be616</code></a> feat(no-focused-tests): add autofix (<a href="https://redirect.github.com/veritem/eslint-plugin-vitest/issues/424">#424</a>)</li>
+<li><a href="https://github.com/veritem/eslint-plugin-vitest/commit/b082ce655cda927682dc4b4a259eb90c28d9b8a7"><code>b082ce6</code></a> chore: release v0.5.1</li>
+<li>Additional commits viewable in <a href="https://github.com/veritem/eslint-plugin-vitest/compare/v0.3.26...v0.5.4">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `lint-staged` from 15.2.2 to 15.2.5
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/okonet/lint-staged/releases">lint-staged's releases</a>.</em></p>
+<blockquote>
+<h2>v15.2.5</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1424">#1424</a> <a href="https://github.com/lint-staged/lint-staged/commit/31a1f9548ea8202bc5bd718076711f747396e3ca"><code>31a1f95</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Allow approximately equivalent versions of direct dependencies by using the &quot;~&quot; character in the version ranges. This means a more recent patch version of a dependency is allowed if available.</p>
+</li>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1423">#1423</a> <a href="https://github.com/lint-staged/lint-staged/commit/91abea0d298154d92113ba34bae4020704e22918"><code>91abea0</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Improve error logging when failing to read or parse a configuration file</p>
+</li>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1424">#1424</a> <a href="https://github.com/lint-staged/lint-staged/commit/ee43f154097753dd5448766f792387e60e0ea453"><code>ee43f15</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Upgrade micromatch@4.0.7</p>
+</li>
+</ul>
+<h2>v15.2.4</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/4f4537a75ebfba816826f6f67a325dbc7f25908a"><code>4f4537a</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Fix release issue with previous version; update dependencies</li>
+</ul>
+<h2>v15.2.3</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1407">#1407</a> <a href="https://github.com/lint-staged/lint-staged/commit/d6981627472315adb01a46f797c8581393e8a637"><code>d698162</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Update dependencies</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/lint-staged/lint-staged/blob/master/CHANGELOG.md">lint-staged's changelog</a>.</em></p>
+<blockquote>
+<h2>15.2.5</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1424">#1424</a> <a href="https://github.com/lint-staged/lint-staged/commit/31a1f9548ea8202bc5bd718076711f747396e3ca"><code>31a1f95</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Allow approximately equivalent versions of direct dependencies by using the &quot;~&quot; character in the version ranges. This means a more recent patch version of a dependency is allowed if available.</p>
+</li>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1423">#1423</a> <a href="https://github.com/lint-staged/lint-staged/commit/91abea0d298154d92113ba34bae4020704e22918"><code>91abea0</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Improve error logging when failing to read or parse a configuration file</p>
+</li>
+<li>
+<p><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1424">#1424</a> <a href="https://github.com/lint-staged/lint-staged/commit/ee43f154097753dd5448766f792387e60e0ea453"><code>ee43f15</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Upgrade micromatch@4.0.7</p>
+</li>
+</ul>
+<h2>15.2.4</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/4f4537a75ebfba816826f6f67a325dbc7f25908a"><code>4f4537a</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Fix release issue with previous version; update dependencies</li>
+</ul>
+<h2>15.2.3</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a href="https://redirect.github.com/lint-staged/lint-staged/pull/1407">#1407</a> <a href="https://github.com/lint-staged/lint-staged/commit/d6981627472315adb01a46f797c8581393e8a637"><code>d698162</code></a> Thanks <a href="https://github.com/iiroj"><code>@​iiroj</code></a>! - Update dependencies</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/f7e410641c33a7dc7aa9da21254125ae0e2639d1"><code>f7e4106</code></a> chore(changeset): release</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/fc753030eaf6986b13b727f3c4a850d7c2c6511e"><code>fc75303</code></a> build(release): lower next version bump from minor to patch</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/91abea0d298154d92113ba34bae4020704e22918"><code>91abea0</code></a> fix: improve error logging when failing to parse config file (<a href="https://redirect.github.com/okonet/lint-staged/issues/1423">#1423</a>)</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/31a1f9548ea8202bc5bd718076711f747396e3ca"><code>31a1f95</code></a> build(deps): allow approximately equivalent versions of direct dependencies</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/ee43f154097753dd5448766f792387e60e0ea453"><code>ee43f15</code></a> build(deps): upgrade micromatch@4.0.7</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/8be6c8e7280ef4d819f0199830ec62c6bcda7e78"><code>8be6c8e</code></a> chore(changeset): release (<a href="https://redirect.github.com/okonet/lint-staged/issues/1419">#1419</a>)</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/4f4537a75ebfba816826f6f67a325dbc7f25908a"><code>4f4537a</code></a> build(husky): fix release issue with Husky</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/95d096d5643105704bb7f1b9f02140eb2e6503dd"><code>95d096d</code></a> chore(changeset): release (<a href="https://redirect.github.com/okonet/lint-staged/issues/1411">#1411</a>)</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/72483cb8a89bb74e96b45f9d67d3d4fecad22714"><code>72483cb</code></a> docs: fix typo (<a href="https://redirect.github.com/okonet/lint-staged/issues/1417">#1417</a>)</li>
+<li><a href="https://github.com/lint-staged/lint-staged/commit/86fba6f11b962bbd2345764d629b553706d6c09e"><code>86fba6f</code></a> build(deps): update dependencies (<a href="https://redirect.github.com/okonet/lint-staged/issues/1418">#1418</a>)</li>
+<li>Additional commits viewable in <a href="https://github.com/okonet/lint-staged/compare/v15.2.2...v15.2.5">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `prettier` from 3.2.5 to 3.3.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/prettier/prettier/releases">prettier's releases</a>.</em></p>
+<blockquote>
+<h2>3.3.0</h2>
+<p><a href="https://github.com/prettier/prettier/compare/3.2.5...3.3.0">diff</a></p>
+<p>🔗 <a href="https://prettier.io/blog/2024/06/01/3.3.0.html">Release note</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/prettier/prettier/blob/main/CHANGELOG.md">prettier's changelog</a>.</em></p>
+<blockquote>
+<h1>3.3.0</h1>
+<p><a href="https://github.com/prettier/prettier/compare/3.2.5...3.3.0">diff</a></p>
+<p>🔗 <a href="https://prettier.io/blog/2024/06/01/3.3.0.html">Release Notes</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/prettier/prettier/commit/c4ab460357478d2b847c60a1efb40098b1181931"><code>c4ab460</code></a> Release 3.3.0</li>
+<li><a href="https://github.com/prettier/prettier/commit/8a88cdce6d4605f206305ebb9204a0cabf96a070"><code>8a88cdc</code></a> Respect <code>trailingComma</code> in angular templates (<a href="https://redirect.github.com/prettier/prettier/issues/15926">#15926</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/c2e20fbae8ce1800ac0c8242c176d9379db5c001"><code>c2e20fb</code></a> chore(deps): update babel to v7.24.6 (<a href="https://redirect.github.com/prettier/prettier/issues/16326">#16326</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/41f1dffed08b33fe6d43da1e82d798b23ba0b57c"><code>41f1dff</code></a> Add newline between markdown footnote definitions (<a href="https://redirect.github.com/prettier/prettier/issues/16063">#16063</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/da5ad84bf441afd5c157bf83840814b1deaa39b1"><code>da5ad84</code></a> chore(deps): update babel to v7.24.6 (<a href="https://redirect.github.com/prettier/prettier/issues/16325">#16325</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/f790be81319a70f08942b1e3c12d68ee392d3269"><code>f790be8</code></a> chore(deps): update dependency file-entry-cache to v9 (<a href="https://redirect.github.com/prettier/prettier/issues/16324">#16324</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/7250556e287922508d9f28c12a82165a60bab5d7"><code>7250556</code></a> chore(deps): update dependency meriyah to v4.4.3 (<a href="https://redirect.github.com/prettier/prettier/issues/16323">#16323</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/96e057a0dc1efa7247b1c50843c9422a0ed66900"><code>96e057a</code></a> chore(deps): update dependency <code>@​angular/compiler</code> to v18 (<a href="https://redirect.github.com/prettier/prettier/issues/16322">#16322</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/a4ea5a2e2fcebe72315c9c0523b35bc79fe91405"><code>a4ea5a2</code></a> chore(deps): update dependency eslint-plugin-regexp to v2.6.0 (<a href="https://redirect.github.com/prettier/prettier/issues/16320">#16320</a>)</li>
+<li><a href="https://github.com/prettier/prettier/commit/229006cd5b5178c195e5d66ce924d2b58bfde4ef"><code>229006c</code></a> chore(deps): update dependency micromatch to v4.0.7 (<a href="https://redirect.github.com/prettier/prettier/issues/16319">#16319</a>)</li>
+<li>Additional commits viewable in <a href="https://github.com/prettier/prettier/compare/3.2.5...3.3.0">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@graphql-codegen/typescript` from 4.0.6 to 4.0.7
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/dotansimha/graphql-code-generator/blob/master/packages/plugins/typescript/typescript/CHANGELOG.md"><code>@​graphql-codegen/typescript</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>4.0.7</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li>Updated dependencies [<a href="https://github.com/dotansimha/graphql-code-generator/commit/dfc5310ab476bed6deaefc608f311ff368722f7e"><code>dfc5310</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/156cc2b9a2a5129beba121cfa987b04e29899431"><code>156cc2b</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/dfc5310ab476bed6deaefc608f311ff368722f7e"><code>dfc5310</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/b49457b5f29328d2dc23c642788a2e697cb8966e"><code>b49457b</code></a>]:
+<ul>
+<li><code>@​graphql-codegen/plugin-helpers</code><a href="https://github.com/5"><code>@​5</code></a>.0.4</li>
+<li><code>@​graphql-codegen/visitor-plugin-common</code><a href="https://github.com/5"><code>@​5</code></a>.2.0</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/dotansimha/graphql-code-generator/commit/21fbf0db2ba7a560aeb0aa52e9b9bf792ac94227"><code>21fbf0d</code></a> chore(release): update monorepo packages versions (<a href="https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/plugins/typescript/typescript/issues/9947">#9947</a>)</li>
+<li><a href="https://github.com/dotansimha/graphql-code-generator/commit/227bb4240a91045172d72caee67a972f8487fa67"><code>227bb42</code></a> Fix linting issue (temporary solution) (<a href="https://github.com/dotansimha/graphql-code-generator/tree/HEAD/packages/plugins/typescript/typescript/issues/9928">#9928</a>)</li>
+<li>See full diff in <a href="https://github.com/dotansimha/graphql-code-generator/commits/@graphql-codegen/typescript@4.0.7/packages/plugins/typescript/typescript">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@graphql-codegen/typescript-resolvers` from 4.0.6 to 4.1.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/dotansimha/graphql-code-generator/releases"><code>@​graphql-codegen/typescript-resolvers</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>Release 2022-08-04T13:12:01.667Z</h2>
+<h2><code>@​graphql-codegen/graphql-modules-preset</code><a href="https://github.com/2"><code>@​2</code></a>.5.0</h2>
+<h3>Minor Changes</h3>
+<ul>
+<li><a href="https://redirect.github.com/dotansimha/graphql-code-generator/pull/6796">#6796</a> <a href="https://github.com/dotansimha/graphql-code-generator/commit/8b6e8e6648f2d95cc40873cfc008a545d8a9c46f"><code>8b6e8e664</code></a> Thanks <a href="https://github.com/kamilkisiela"><code>@​kamilkisiela</code></a>! - Introduce requireRootResolvers flag</li>
+</ul>
+<h2>Release 2022-08-04T13:05:23.977Z</h2>
+<p>No release notes provided.</p>
+<h2>Release 2022-08-04T13:02:57.827Z</h2>
+<p>No release notes provided.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/dotansimha/graphql-code-generator/blob/master/packages/plugins/typescript/resolvers/CHANGELOG.md"><code>@​graphql-codegen/typescript-resolvers</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>4.1.0</h2>
+<h3>Minor Changes</h3>
+<ul>
+<li><a href="https://redirect.github.com/dotansimha/graphql-code-generator/pull/9961">#9961</a> <a href="https://github.com/dotansimha/graphql-code-generator/commit/dfc5310ab476bed6deaefc608f311ff368722f7e"><code>dfc5310</code></a> Thanks <a href="https://github.com/eddeee888"><code>@​eddeee888</code></a>! - Update typescript-resolvers to report generated resolver types in the run to meta field in the output</li>
+</ul>
+<h3>Patch Changes</h3>
+<ul>
+<li>
+<p><a href="https://redirect.github.com/dotansimha/graphql-code-generator/pull/9944">#9944</a> <a href="https://github.com/dotansimha/graphql-code-generator/commit/156cc2b9a2a5129beba121cfa987b04e29899431"><code>156cc2b</code></a> Thanks <a href="https://github.com/eddeee888"><code>@​eddeee888</code></a>! - Add _ prefix to generated <code>RefType</code> in <code>ResolversInterfaceTypes</code> and <code>ResolversUnionTypes</code> as it is sometimes unused</p>
+</li>
+<li>
+<p><a href="https://redirect.github.com/dotansimha/graphql-code-generator/pull/9962">#9962</a> <a href="https://github.com/dotansimha/graphql-code-generator/commit/b49457b5f29328d2dc23c642788a2e697cb8966e"><code>b49457b</code></a> Thanks <a href="https://github.com/eddeee888"><code>@​eddeee888</code></a>! - Fix interface mappers not working in nested/self-referencing scenarios</p>
+</li>
+<li>
+<p>Updated dependencies [<a href="https://github.com/dotansimha/graphql-code-generator/commit/dfc5310ab476bed6deaefc608f311ff368722f7e"><code>dfc5310</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/156cc2b9a2a5129beba121cfa987b04e29899431"><code>156cc2b</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/dfc5310ab476bed6deaefc608f311ff368722f7e"><code>dfc5310</code></a>, <a href="https://github.com/dotansimha/graphql-code-generator/commit/b49457b5f29328d2dc23c642788a2e697cb8966e"><code>b49457b</code></a>]:</p>
+<ul>
+<li><code>@​graphql-codegen/plugin-helpers</code><a href="https://github.com/5"><code>@​5</code></a>.0.4</li>
+<li><code>@​graphql-codegen/visitor-plugin-common</code><a href="https://github.com/5"><code>@​5</code></a>.2.0</li>
+<li><code>@​graphql-codegen/typ...
+
+_Description has been truncated_
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/240)
+
+----
+
 ### PR #224 - #220: Late list-select load
 ##### 2024-04-14
 
