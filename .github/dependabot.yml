@@ -9,6 +9,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "eslint"
+        versions: ["9.x"]
     groups:
       production-dependencies:
         dependency-type: "production"
