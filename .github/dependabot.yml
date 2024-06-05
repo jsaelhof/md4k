@@ -9,6 +9,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "eslint"
+        versions: ["9.x"]
+      - dependency-name: "eslint-plugin-vitest"
     groups:
       production-dependencies:
         dependency-type: "production"
