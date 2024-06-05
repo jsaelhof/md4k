@@ -1,3 +1,12 @@
+### PR #241 - rollback and ignore eslint 9
+##### 2024-06-05
+
+ESLint isn't fully ready, particularly for monorepos. Dependabot keeps updating it so for now i'm rolling it back again and now ignoring version 9 until I can make it work.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/241)
+
+----
+
 ### PR #240 - Bump the development-dependencies group across 1 directory with 23 updates
 ##### 2024-06-04
 
