@@ -1,3 +1,262 @@
+### PR #244 - Bump the development-dependencies group with 4 updates
+##### 2024-06-05
+
+Bumps the development-dependencies group with 4 updates: [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin), [@typescript-eslint/parser](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser), [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node) and [@testing-library/react](https://github.com/testing-library/react-testing-library).
+
+Updates `@typescript-eslint/eslint-plugin` from 7.11.0 to 7.12.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/releases"><code>@​typescript-eslint/eslint-plugin</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>v7.12.0</h2>
+<h2>7.12.0 (2024-06-03)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [no-useless-template-literals] rename to <code>no-useless-template-expression</code> (deprecate <code>no-useless-template-literals</code>) (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8821">#8821</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-floating-promises] add option 'allowForKnownSafePromises' (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9186">#9186</a>)</li>
+<li><strong>rule-tester:</strong> check for parsing errors in suggestion fixes (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9052">#9052</a>)</li>
+<li><strong>rule-tester:</strong> port <code>checkDuplicateTestCases</code> from ESLint (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9026">#9026</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li>no-useless-template-expression -&gt; no-unnecessary-template-expression (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9174">#9174</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] combine template literal check with <code>const</code> variable check (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8820">#8820</a>)</li>
+<li><strong>eslint-plugin:</strong> [dot-notation] fix false positive when accessing private/protected property with optional chaining (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8851">#8851</a>)</li>
+<li><strong>eslint-plugin:</strong> [explicit-member-accessibility] refine report locations (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8869">#8869</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] declares are always defined, so always check <code>declare</code>s (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8901">#8901</a>)</li>
+<li><strong>eslint-plugin:</strong> [prefer-literal-enum-member] allow using member it self on allowBitwiseExpressions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9114">#9114</a>)</li>
+<li><strong>eslint-plugin:</strong> [return-await] clean up in-try-catch detection and make autofixes safe (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9031">#9031</a>)</li>
+<li><strong>eslint-plugin:</strong> [member-ordering] also TSMethodSignature can be get/set (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9193">#9193</a>)</li>
+<li><strong>types:</strong> correct typing ParserOptions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9202">#9202</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>Han Yeong-woo <a href="https://github.com/nix6839"><code>@​nix6839</code></a></li>
+<li>Joshua Chen</li>
+<li>Kim Sang Du <a href="https://github.com/developer-bandi"><code>@​developer-bandi</code></a></li>
+<li>Kirk Waiblinger</li>
+<li>YeonJuan <a href="https://github.com/yeonjuan"><code>@​yeonjuan</code></a></li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/CHANGELOG.md"><code>@​typescript-eslint/eslint-plugin</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>7.12.0 (2024-06-03)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li>
+<p><strong>eslint-plugin:</strong> [no-useless-template-literals] rename to <code>no-useless-template-expression</code> (deprecate <code>no-useless-template-literals</code>)</p>
+</li>
+<li>
+<p><strong>rule-tester:</strong> check for parsing errors in suggestion fixes</p>
+</li>
+<li>
+<p><strong>rule-tester:</strong> port <code>checkDuplicateTestCases</code> from ESLint</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [no-floating-promises] add option 'allowForKnownSafePromises'</p>
+</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li>
+<p>no-useless-template-expression -&gt; no-unnecessary-template-expression</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] combine template literal check with <code>const</code> variable check</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [dot-notation] fix false positive when accessing private/protected property with optional chaining</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [explicit-member-accessibility] refine report locations</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] declares are always defined, so always check <code>declare</code>s</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [prefer-literal-enum-member] allow using member it self on allowBitwiseExpressions</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [return-await] clean up in-try-catch detection and make autofixes safe</p>
+</li>
+<li>
+<p><strong>eslint-plugin:</strong> [member-ordering] also TSMethodSignature can be get/set</p>
+</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>Han Yeong-woo</li>
+<li>Joshua Chen</li>
+<li>Kim Sang Du</li>
+<li>Kirk Waiblinger</li>
+<li>YeonJuan</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/7e93b286667fe3b86a3baac973d402414228c7a3"><code>7e93b28</code></a> chore(release): publish 7.12.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/d0adcf197558b1a043ed1a449920689dd62e9c3a"><code>d0adcf1</code></a> docs: clarify what require-await does (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9200">#9200</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/04990d545fc119329551ae3a55d79dfc0c7bf147"><code>04990d5</code></a> feat(eslint-plugin): [no-floating-promises] add option 'allowForKnownSafeProm...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/ad85249a2788565d42386e6561e2540bc2bdef58"><code>ad85249</code></a> docs: mention related ESLint rules in no-unused-vars page (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9198">#9198</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/e80a8d69337804fe35f0a8322330931494e0d257"><code>e80a8d6</code></a> docs: improve description for no-dynamic-delete (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9195">#9195</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/9f92b304f50455323e8292cf7ae83155fceea1ee"><code>9f92b30</code></a> docs: explicitly mention unbound-method limitation with thisArg (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9197">#9197</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/08a944856bde593909bc085d775f98fa488f7147"><code>08a9448</code></a> docs: add example with PascalCase function components (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9196">#9196</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/5ca7f6e563779157cac1ac1592e2f1b82068715a"><code>5ca7f6e</code></a> feat(rule-tester): port <code>checkDuplicateTestCases</code> from ESLint (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin/issues/9026">#9026</a>)</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/a9dd526ec733701ad8a0423b6b86cc50009f5aeb"><code>a9dd526</code></a> fix(eslint-plugin): [member-ordering] also TSMethodSignature can be get/set (...</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/2619c3b5e6718a6b70519d9e9807ee7acb745369"><code>2619c3b</code></a> fix(eslint-plugin): [return-await] clean up in-try-catch detection and make a...</li>
+<li>Additional commits viewable in <a href="https://github.com/typescript-eslint/typescript-eslint/commits/v7.12.0/packages/eslint-plugin">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@typescript-eslint/parser` from 7.11.0 to 7.12.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/releases"><code>@​typescript-eslint/parser</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>v7.12.0</h2>
+<h2>7.12.0 (2024-06-03)</h2>
+<h3>🚀 Features</h3>
+<ul>
+<li><strong>eslint-plugin:</strong> [no-useless-template-literals] rename to <code>no-useless-template-expression</code> (deprecate <code>no-useless-template-literals</code>) (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8821">#8821</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-floating-promises] add option 'allowForKnownSafePromises' (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9186">#9186</a>)</li>
+<li><strong>rule-tester:</strong> check for parsing errors in suggestion fixes (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9052">#9052</a>)</li>
+<li><strong>rule-tester:</strong> port <code>checkDuplicateTestCases</code> from ESLint (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9026">#9026</a>)</li>
+</ul>
+<h3>🩹 Fixes</h3>
+<ul>
+<li>no-useless-template-expression -&gt; no-unnecessary-template-expression (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9174">#9174</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] combine template literal check with <code>const</code> variable check (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8820">#8820</a>)</li>
+<li><strong>eslint-plugin:</strong> [dot-notation] fix false positive when accessing private/protected property with optional chaining (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8851">#8851</a>)</li>
+<li><strong>eslint-plugin:</strong> [explicit-member-accessibility] refine report locations (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8869">#8869</a>)</li>
+<li><strong>eslint-plugin:</strong> [no-unnecessary-type-assertion] declares are always defined, so always check <code>declare</code>s (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/8901">#8901</a>)</li>
+<li><strong>eslint-plugin:</strong> [prefer-literal-enum-member] allow using member it self on allowBitwiseExpressions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9114">#9114</a>)</li>
+<li><strong>eslint-plugin:</strong> [return-await] clean up in-try-catch detection and make autofixes safe (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9031">#9031</a>)</li>
+<li><strong>eslint-plugin:</strong> [member-ordering] also TSMethodSignature can be get/set (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9193">#9193</a>)</li>
+<li><strong>types:</strong> correct typing ParserOptions (<a href="https://redirect.github.com/typescript-eslint/typescript-eslint/pull/9202">#9202</a>)</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>Han Yeong-woo <a href="https://github.com/nix6839"><code>@​nix6839</code></a></li>
+<li>Joshua Chen</li>
+<li>Kim Sang Du <a href="https://github.com/developer-bandi"><code>@​developer-bandi</code></a></li>
+<li>Kirk Waiblinger</li>
+<li>YeonJuan <a href="https://github.com/yeonjuan"><code>@​yeonjuan</code></a></li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href="https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/CHANGELOG.md"><code>@​typescript-eslint/parser</code>'s changelog</a>.</em></p>
+<blockquote>
+<h2>7.12.0 (2024-06-03)</h2>
+<h3>🩹 Fixes</h3>
+<ul>
+<li><strong>types:</strong> correct typing ParserOptions</li>
+</ul>
+<h3>❤️  Thank You</h3>
+<ul>
+<li>Abraham Guo</li>
+<li>Han Yeong-woo</li>
+<li>Joshua Chen</li>
+<li>Kim Sang Du</li>
+<li>Kirk Waiblinger</li>
+<li>YeonJuan</li>
+</ul>
+<p>You can read about our <a href="https://main--typescript-eslint.netlify.app/users/versioning">versioning strategy</a> and <a href="https://main--typescript-eslint.netlify.app/users/releases">releases</a> on our website.</p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/7e93b286667fe3b86a3baac973d402414228c7a3"><code>7e93b28</code></a> chore(release): publish 7.12.0</li>
+<li><a href="https://github.com/typescript-eslint/typescript-eslint/commit/2bbf6565dfa629a8f91891b8e5decc3a16613b6c"><code>2bbf656</code></a> fix(types): correct typing ParserOptions (<a href="https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser/issues/9202">#9202</a>)</li>
+<li>See full diff in <a href="https://github.com/typescript-eslint/typescript-eslint/commits/v7.12.0/packages/parser">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@types/node` from 20.14.0 to 20.14.1
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/node">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `@testing-library/react` from 15.0.7 to 16.0.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href="https://github.com/testing-library/react-testing-library/releases"><code>@​testing-library/react</code>'s releases</a>.</em></p>
+<blockquote>
+<h2>v16.0.0</h2>
+<h1><a href="https://github.com/testing-library/react-testing-library/compare/v15.0.7...v16.0.0">16.0.0</a> (2024-06-03)</h1>
+<h3>Features</h3>
+<ul>
+<li>Move <code>@testing-library/dom</code> and <code>@types/react-dom</code>  to peer dependencies (<a href="https://redirect.github.com/testing-library/react-testing-library/issues/1305">#1305</a>) (<a href="https://github.com/testing-library/react-testing-library/commit/a4744fa904bf11812c92093226c3805450472636">a4744fa</a>)</li>
+</ul>
+<h3>BREAKING CHANGES</h3>
+<ul>
+<li><code>@testing-library/dom</code> was moved to a peer dependency and needs to be explicitly installed. This reduces the chance of having conflicting versions of <code>@testing-library/dom</code> installed that frequently caused bugs when used with <code>@testing-library/user-event</code>. We will also be able to allow new versions of <code>@testing-library/dom</code> being used without a SemVer major release of <code>@testing-library/react</code> by just widening the peer dependency.
+<code>@types/react-dom</code> needs to be installed if you're typechecking files using <code>@testing-library/react</code>.</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href="https://github.com/testing-library/react-testing-library/commit/a4744fa904bf11812c92093226c3805450472636"><code>a4744fa</code></a> feat: Move <code>@testing-library/dom</code> and <code>@types/react-dom</code>  to peer dependencie...</li>
+<li>See full diff in <a href="https://github.com/testing-library/react-testing-library/compare/v15.0.7...v16.0.0">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions
+
+
+</details>
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/244)
+
+----
+
 ### PR #241 - rollback and ignore eslint 9
 ##### 2024-06-05
 
