@@ -46,7 +46,7 @@
     "react-spring": "^9.5.2",
     "react-youtube": "10.1.0",
     "rooks": "^7.14.1",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
