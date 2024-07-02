@@ -1,3 +1,12 @@
+### PR #253 - Add an ignore for major new version of mongodb
+##### 2024-07-02
+
+Until I can get mongodb updated, I'm going to ignore major version updates
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/253)
+
+----
+
 ### PR #244 - Bump the development-dependencies group with 4 updates
 ##### 2024-06-05
 
