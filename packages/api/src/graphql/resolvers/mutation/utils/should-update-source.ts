@@ -1,11 +1,16 @@
 import { Source } from "md4k-constants";
 
-const nonStreamingSources: Source[] = [Source.PLEX, Source.DVD];
+const nonStreamingSources: Source[] = [
+  Source.PLEX,
+  Source.YOU_TUBE,
+  Source.DVD,
+];
 
 const flatRateSources: Source[] = [
   Source.NETFLIX,
   Source.DISNEY_PLUS,
   Source.PRIME_VIDEO,
+  Source.PARAMOUNT_PLUS,
   Source.APPLE_TV,
 ];
 

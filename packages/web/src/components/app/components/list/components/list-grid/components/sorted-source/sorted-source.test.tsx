@@ -85,6 +85,18 @@ describe("sorted-source", () => {
           source: Source.TUBI_TV,
           list: "list1",
         },
+        {
+          id: "8",
+          title: "Movie 8 - PARAMOUNT PLUS",
+          source: Source.PARAMOUNT_PLUS,
+          list: "list1",
+        },
+        {
+          id: "9",
+          title: "Movie 9 - YOU TUBE",
+          source: Source.YOU_TUBE,
+          list: "list1",
+        },
       ],
       onEditMovie: vi.fn(),
       onMarkWatched: vi.fn(),
@@ -144,44 +156,66 @@ describe("sorted-source", () => {
     expect(
       within(
         screen.getByTestId("source").childNodes[4] as HTMLElement
-      ).getByAltText("AppleTV+")
+      ).getByAltText("Paramount+")
     ).toBeInTheDocument();
     expect(
       within(
         screen.getByTestId("source").childNodes[4] as HTMLElement
+      ).getByText("Movie 8 - PARAMOUNT PLUS")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[5] as HTMLElement
+      ).getByAltText("AppleTV+")
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[5] as HTMLElement
       ).getByText("Movie 3 - APPLE TV")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[5] as HTMLElement
+        screen.getByTestId("source").childNodes[6] as HTMLElement
+      ).getByAltText("YouTube")
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[6] as HTMLElement
+      ).getByText("Movie 9 - YOU TUBE")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[7] as HTMLElement
       ).getByAltText("Tubi")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[5] as HTMLElement
+        screen.getByTestId("source").childNodes[7] as HTMLElement
       ).getByText("Movie 7 - TUBI")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[6] as HTMLElement
+        screen.getByTestId("source").childNodes[8] as HTMLElement
       ).getByAltText("DVD")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[6] as HTMLElement
+        screen.getByTestId("source").childNodes[8] as HTMLElement
       ).getByText("Movie 5 - DVD")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[7] as HTMLElement
+        screen.getByTestId("source").childNodes[9] as HTMLElement
       ).getByAltText("None")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[7] as HTMLElement
+        screen.getByTestId("source").childNodes[9] as HTMLElement
       ).getByText("Movie 0 - NONE")
     ).toBeInTheDocument();
   });
@@ -195,57 +229,79 @@ describe("sorted-source", () => {
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[7] as HTMLElement
+        screen.getByTestId("source").childNodes[9] as HTMLElement
       ).getByAltText("Plex")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[7] as HTMLElement
+        screen.getByTestId("source").childNodes[9] as HTMLElement
       ).getByText("Movie 4 - PLEX")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[6] as HTMLElement
+        screen.getByTestId("source").childNodes[8] as HTMLElement
       ).getByAltText("Netflix")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[6] as HTMLElement
+        screen.getByTestId("source").childNodes[8] as HTMLElement
       ).getByText("Movie 1 - NETFLIX")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[5] as HTMLElement
+        screen.getByTestId("source").childNodes[7] as HTMLElement
       ).getByAltText("Prime Video")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[5] as HTMLElement
+        screen.getByTestId("source").childNodes[7] as HTMLElement
       ).getByText("Movie 2 - PRIME VIDEO")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[4] as HTMLElement
+        screen.getByTestId("source").childNodes[6] as HTMLElement
       ).getByAltText("Disney+")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[4] as HTMLElement
+        screen.getByTestId("source").childNodes[6] as HTMLElement
       ).getByText("Movie 6 - DISNEY PLUS")
     ).toBeInTheDocument();
 
     expect(
       within(
-        screen.getByTestId("source").childNodes[3] as HTMLElement
+        screen.getByTestId("source").childNodes[5] as HTMLElement
+      ).getByAltText("Paramount+")
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[5] as HTMLElement
+      ).getByText("Movie 8 - PARAMOUNT PLUS")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[4] as HTMLElement
       ).getByAltText("AppleTV+")
     ).toBeInTheDocument();
     expect(
       within(
-        screen.getByTestId("source").childNodes[3] as HTMLElement
+        screen.getByTestId("source").childNodes[4] as HTMLElement
       ).getByText("Movie 3 - APPLE TV")
+    ).toBeInTheDocument();
+
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[3] as HTMLElement
+      ).getByAltText("YouTube")
+    ).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByTestId("source").childNodes[3] as HTMLElement
+      ).getByText("Movie 9 - YOU TUBE")
     ).toBeInTheDocument();
 
     expect(
