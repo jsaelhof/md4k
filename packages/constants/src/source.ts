@@ -7,6 +7,8 @@ export enum Source {
   DVD = 5,
   DISNEY_PLUS = 6,
   TUBI_TV = 7,
+  PARAMOUNT_PLUS = 8,
+  YOU_TUBE = 9,
 }
 
 // TS Enum like `Source` has keys defined both ways (None: 0 and 0: "None").

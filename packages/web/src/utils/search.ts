@@ -18,13 +18,15 @@ export const searchTorrent = (title: string): string =>
   `http://1337x.to/search/${title}/1/`;
 
 export const searchStreaming = (title: string, source: number): string =>
-  ((
-    {
+  (
+    ({
       [Source.NETFLIX]: `http://netflix.com/search?q=%s`, // FIXME: Doesn't like commas in the search...possibly other special chars. Other sites maybe the same?
       [Source.PRIME_VIDEO]: `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=%s&ie=UTF8`,
       [Source.PLEX]: `http://192.168.1.5:32400/web/index.html#!/search?query=%s`,
       [Source.APPLE_TV]: "https://tv.apple.com/ca",
       [Source.DISNEY_PLUS]: "https://disneyplus.com",
       [Source.TUBI_TV]: `https://tubitv.com/search/%s`,
-    }[source] ?? ""
-  ).replace("%s", encodeURI(title)));
+      [Source.PARAMOUNT_PLUS]: `https://www.paramountplus.com/search`,
+      [Source.YOU_TUBE]: `https://www.youtube.com/results?search_query=%s`,
+    })[source] ?? ""
+  ).replace("%s", encodeURI(title));

@@ -78,4 +78,16 @@ describe("searchStreaming", () => {
       "https://disneyplus.com"
     );
   });
+
+  it("should return the Paramount Plus url without search params (Paramount Plus doesn't have a search URL format to use)", () => {
+    expect(
+      searchStreaming("Batman: The Dark Knight", Source.PARAMOUNT_PLUS)
+    ).toBe("https://www.paramountplus.com/search");
+  });
+
+  it("should return the YouTube url", () => {
+    expect(searchStreaming("Batman: The Dark Knight", Source.YOU_TUBE)).toBe(
+      "https://www.youtube.com/results?search_query=Batman:%20The%20Dark%20Knight"
+    );
+  });
 });
