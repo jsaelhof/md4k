@@ -1,3 +1,12 @@
+### PR #258 - #251: Add sources for Paramount+ and YouTube
+##### 2024-07-05
+
+Add sources to api and web with new logos
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/258)
+
+----
+
 ### PR #253 - Add an ignore for major new version of mongodb
 ##### 2024-07-02
 
