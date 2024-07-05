@@ -11,6 +11,8 @@ export const sourceLogos = {
   [Source.DVD]: `${sourceLogoBase}dvd.png`,
   [Source.DISNEY_PLUS]: `${sourceLogoBase}disney+.png`,
   [Source.TUBI_TV]: `${sourceLogoBase}tubitv.png`,
+  [Source.PARAMOUNT_PLUS]: `${sourceLogoBase}paramount+.png`,
+  [Source.YOU_TUBE]: `${sourceLogoBase}youtube.png`,
 };
 
 const sourceLogoLargeBase = "/images/source_large/";
@@ -24,4 +26,6 @@ export const sourceLogosLarge = {
   [Source.DVD]: `${sourceLogoLargeBase}dvd.png`,
   [Source.DISNEY_PLUS]: `${sourceLogoLargeBase}disney+.png`,
   [Source.TUBI_TV]: `${sourceLogoLargeBase}tubitv.png`,
+  [Source.PARAMOUNT_PLUS]: `${sourceLogoLargeBase}paramount+.png`,
+  [Source.YOU_TUBE]: `${sourceLogoLargeBase}youtube.png`,
 };

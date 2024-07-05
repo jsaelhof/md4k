@@ -12,6 +12,7 @@ export const fromTMDBProvider: {
     | Source.PRIME_VIDEO
     | Source.APPLE_TV
     | Source.TUBI_TV
+    | Source.PARAMOUNT_PLUS
     | undefined;
 } = {
   "Disney Plus": Source.DISNEY_PLUS,
@@ -19,6 +20,7 @@ export const fromTMDBProvider: {
   "Amazon Prime Video": Source.PRIME_VIDEO,
   "Apple TV Plus": Source.APPLE_TV,
   "Tubi TV": Source.TUBI_TV,
+  "Paramount Plus": Source.PARAMOUNT_PLUS,
 };
 
 export const toSubscribedSources = (providerData: TMDBProviderResults | null) =>
