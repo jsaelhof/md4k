@@ -15,8 +15,6 @@ updates:
       - dependency-name: "eslint-plugin-vitest"
       - dependency-name: "mongodb"
         versions: ["5.x", "6.x"]
-      - dependency-name: "vite"
-        versions: ["5.3.x"]
     groups:
       production-dependencies:
         dependency-type: "production"

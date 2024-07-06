@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/list/*",
-        async lazy() {
+        lazy: async () => {
           const { List } = await import(
             "./components/app/components/list/list"
           );
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/watched",
-        async lazy() {
+        lazy: async () => {
           const { Watched } = await import(
             "./components/app/components/watched/watched"
           );
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/create",
-        async lazy() {
+        lazy: async () => {
           const { Create } = await import(
             "./components/app/components/create/create"
           );
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/pick",
-        async lazy() {
+        lazy: async () => {
           const { Pick } = await import(
             "./components/app/components/pick/pick"
           );
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add",
-        async lazy() {
+        lazy: async () => {
           const { Add } = await import("./components/app/components/add/add");
           return {
             Component: Add,
@@ -102,7 +102,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/edit/:movieId",
-        async lazy() {
+        lazy: async () => {
           const { Edit } = await import(
             "./components/app/components/edit/edit"
           );
