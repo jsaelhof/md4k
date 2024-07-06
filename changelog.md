@@ -1,3 +1,12 @@
+### PR #266 - #260: Update to MongoDB v6
+##### 2024-07-06
+
+Update from MongoDB 4.x to 6.x. Remove the ignore for dependabot now that I'm up to date.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/266)
+
+----
+
 ### PR #263 - #259: update to vite 5.3.3 and remove denpedabot ignore
 ##### 2024-07-06
 
