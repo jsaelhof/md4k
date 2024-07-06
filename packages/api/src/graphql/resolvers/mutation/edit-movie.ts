@@ -6,7 +6,7 @@ export const editMovie: MutationResolvers["editMovie"] = async (
   { movie, list, removeKeys },
   { db }
 ) => {
-  const { value, ok } = await db.collection<Movie>(list).findOneAndUpdate(
+  const value = await db.collection<Movie>(list).findOneAndUpdate(
     {
       id: movie.id,
     },
@@ -34,7 +34,7 @@ export const editMovie: MutationResolvers["editMovie"] = async (
     }
   );
 
-  if (ok === 1 && value !== null) {
+  if (value !== null) {
     return value;
   } else {
     throw new Error(`Error editing movie: ${movie.title}`);
