@@ -1,3 +1,12 @@
+### PR #263 - #259: update to vite 5.3.3 and remove denpedabot ignore
+##### 2024-07-06
+
+Had to rewrite the the lazy function syntax to get vite 5.3.x to build it
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/263)
+
+----
+
 ### PR #258 - #251: Add sources for Paramount+ and YouTube
 ##### 2024-07-05
 
