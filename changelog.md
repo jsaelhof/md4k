@@ -1,3 +1,12 @@
+### PR #269 - #267: Include the year when adding a movie
+##### 2024-07-06
+
+The year was not being returned with other data in the onAddMovie callback.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/269)
+
+----
+
 ### PR #266 - #260: Update to MongoDB v6
 ##### 2024-07-06
 
