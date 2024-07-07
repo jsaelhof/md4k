@@ -28,7 +28,7 @@ describe("searchIMDBTitle", () => {
 describe("searchIMDBParentalGuide", () => {
   it("should return the url", () => {
     expect(searchIMDBParentalGuide("tt1234567")).toBe(
-      "https://www.imdb.com/tt1234567/parentalguide"
+      "https://www.imdb.com/title/tt1234567/parentalguide"
     );
   });
 });
