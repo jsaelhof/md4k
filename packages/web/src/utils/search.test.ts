@@ -1,6 +1,7 @@
 import {
   searchIMDB,
   searchIMDBTitle,
+  searchIMDBParentalGuide,
   searchTMDB,
   searchCommonSense,
   searchTorrent,
@@ -20,6 +21,14 @@ describe("searchIMDBTitle", () => {
   it("should return the url with uri encoded title", () => {
     expect(searchIMDBTitle("The Dark Knight")).toBe(
       "https://www.imdb.com/find?q=The%20Dark%20Knight"
+    );
+  });
+});
+
+describe("searchIMDBParentalGuide", () => {
+  it("should return the url", () => {
+    expect(searchIMDBParentalGuide("tt1234567")).toBe(
+      "https://www.imdb.com/title/tt1234567/parentalguide"
     );
   });
 });

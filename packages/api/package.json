@@ -29,15 +29,15 @@
     "jwks-rsa": "^3.1.0",
     "lodash": "^4.17.21",
     "md4k-constants": "*",
-    "mongodb": "^4.17.2"
+    "mongodb": "^6.8.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
-    "@graphql-codegen/typescript": "4.0.7",
+    "@graphql-codegen/typescript": "4.0.9",
     "@graphql-codegen/typescript-mongodb": "3.0.0",
-    "@graphql-codegen/typescript-resolvers": "4.1.0",
+    "@graphql-codegen/typescript-resolvers": "4.2.1",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.10",
     "@vitest/coverage-c8": "^0.33.0",
     "@vitest/ui": "^1.6.0",
     "vitest": "^1.6.0"

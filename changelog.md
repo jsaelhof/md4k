@@ -1,3 +1,39 @@
+### PR #270 - #215: IMDB Parental Guide link
+##### 2024-07-07
+
+Adds a link to the IMDB parental guide
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/270)
+
+----
+
+### PR #269 - #267: Include the year when adding a movie
+##### 2024-07-06
+
+The year was not being returned with other data in the onAddMovie callback.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/269)
+
+----
+
+### PR #266 - #260: Update to MongoDB v6
+##### 2024-07-06
+
+Update from MongoDB 4.x to 6.x. Remove the ignore for dependabot now that I'm up to date.
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/266)
+
+----
+
+### PR #263 - #259: update to vite 5.3.3 and remove denpedabot ignore
+##### 2024-07-06
+
+Had to rewrite the the lazy function syntax to get vite 5.3.x to build it
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/263)
+
+----
+
 ### PR #258 - #251: Add sources for Paramount+ and YouTube
 ##### 2024-07-05
 

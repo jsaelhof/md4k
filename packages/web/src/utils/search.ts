@@ -14,6 +14,9 @@ export const searchCommonSense = (title: string): string =>
     .replaceAll(" ", "-")
     .replaceAll(":", "")}`;
 
+export const searchIMDBParentalGuide = (imdbId: string): string =>
+  `https://www.imdb.com/title/${imdbId}/parentalguide`;
+
 export const searchTorrent = (title: string): string =>
   `http://1337x.to/search/${title}/1/`;
 

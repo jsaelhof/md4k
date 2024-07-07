@@ -11,6 +11,7 @@
   "footer": {
     "tmdb": "TMDB",
     "imdb": "IMDB",
+    "imdb_parental_guide": "IMDB Parental Guide",
     "common_sense": "Common Sense Media",
     "search": "Search {site}"
   }
