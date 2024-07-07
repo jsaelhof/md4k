@@ -1,3 +1,12 @@
+### PR #271 - #243: Testing auth redirect 
+##### 2024-07-07
+
+Testing auth link without returning a response from the auth link on failure
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/271)
+
+----
+
 ### PR #270 - #215: IMDB Parental Guide link
 ##### 2024-07-07
 
