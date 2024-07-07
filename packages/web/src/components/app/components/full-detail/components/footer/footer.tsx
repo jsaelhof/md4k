@@ -3,12 +3,14 @@ import React, { type ReactElement } from "react";
 import {
   searchCommonSense,
   searchIMDB,
+  searchIMDBParentalGuide,
   searchIMDBTitle,
   searchTMDB,
 } from "../../../../../../utils/search";
 import { ActionImage, Container } from "./footer.styles";
 import { type Maybe } from "../../../../../../__generated__/graphql";
 import { useTranslation } from "react-i18next";
+import { notEmpty } from "../../../../../../utils/not-empty";
 
 export type FooterProps = {
   title: string;
@@ -33,6 +35,14 @@ const Footer = ({ title, imdbID }: FooterProps): ReactElement => {
           "movieInfo"
         ),
     },
+    imdbID
+      ? {
+          label: t("full_detail:footer.imdb_parental_guide"),
+          src: "/images/third_party/imdb_parental_guide.png",
+          action: () =>
+            window.open(searchIMDBParentalGuide(imdbID), "movieInfo"),
+        }
+      : null,
     {
       label: t("full_detail:footer.common_sense"),
       src: "/images/third_party/commonsense.png",
@@ -42,7 +52,7 @@ const Footer = ({ title, imdbID }: FooterProps): ReactElement => {
 
   return (
     <Container>
-      {actions.map(({ label, src, action }) => (
+      {actions.filter(notEmpty).map(({ label, src, action }) => (
         <ActionImage
           key={label}
           alt={t("full_detail:footer.search", { site: label })}

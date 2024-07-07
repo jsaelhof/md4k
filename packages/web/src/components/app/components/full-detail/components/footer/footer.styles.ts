@@ -5,6 +5,10 @@ export const Container = styled("div")(() => ({
   gridAutoFlow: "column",
   gap: 72,
   margin: "32px 0",
+
+  "@media (max-width: 500px)": {
+    gap: 48,
+  },
 }));
 
 export const ActionImage = styled("img")(() => ({
