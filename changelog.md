@@ -1,3 +1,12 @@
+### PR #270 - #215: IMDB Parental Guide link
+##### 2024-07-07
+
+Adds a link to the IMDB parental guide
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/270)
+
+----
+
 ### PR #269 - #267: Include the year when adding a movie
 ##### 2024-07-06
 
