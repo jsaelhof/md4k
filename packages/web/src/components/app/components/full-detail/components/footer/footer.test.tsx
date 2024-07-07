@@ -77,4 +77,27 @@ describe("full detail footer", () => {
       "movieInfo"
     );
   });
+
+  it<LocalTestContext>("should open IMDB Parental Guide when clicked", async ({
+    title,
+    imdbID,
+    user,
+  }) => {
+    render(<Footer title={title} imdbID={imdbID} />);
+    await user.click(screen.getByAltText("Search IMDB Parental Guide"));
+    expect(global.open).toHaveBeenCalledWith(
+      // Without replicating the entire URL, this should ensure the URL has the right domain and the imdbID
+      expect.stringMatching(
+        new RegExp(`www.imdb.com/title/${imdbID}/parentalguide`)
+      ),
+      "movieInfo"
+    );
+  });
+
+  it<LocalTestContext>("should filter out null items", ({ title }) => {
+    render(<Footer title={title} imdbID={undefined} />);
+    expect(
+      screen.queryByAltText("Search IMDB Parental Guide")
+    ).not.toBeInTheDocument();
+  });
 });
