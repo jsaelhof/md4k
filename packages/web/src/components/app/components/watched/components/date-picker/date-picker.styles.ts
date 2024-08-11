@@ -1,4 +1,5 @@
 import { type Theme, styled } from "@mui/material";
+import { DayPicker, type DayPickerProps } from "react-day-picker";
 import { animated } from "react-spring";
 
 interface PickerProps {
@@ -35,10 +36,53 @@ export const Picker = styled(animated.div)<PickerProps>(
   })
 );
 
+export const StyledDayPicker = styled(DayPicker)<
+  DayPickerProps & { $drawer: boolean }
+>(({ $drawer }) => ({
+  padding: "8px",
+
+  ".rdp-month_caption": {
+    paddingLeft: "15px",
+    fontWeight: "normal",
+    fontSize: "1em",
+
+    ...(!$drawer && {
+      paddingLeft: "8px",
+    }),
+  },
+
+  ".rdp-chevron": {
+    fill: "#bdbdbd",
+  },
+
+  ".rdp-selected > .rdp-day_button": {
+    background: "var(--rdp-accent-color)",
+    color: "white",
+  },
+
+  ...(!$drawer && {
+    marginBottom: 0,
+    fontSize: "0.9rem",
+  }),
+}));
+
+// Using this as a method to set the css variables for day picker. All actual styling is done in the styled component.
+export const dayPickerStyles = ({ drawer }: { drawer: boolean }) => ({
+  "--rdp-accent-color": "#6494ed99",
+  "--rdp-outline": "2px solid var(--rdp-accent-color)",
+  "--rdp-selected-font": "1em",
+  "--rdp-weekday-padding": 0,
+
+  ...(!drawer && {
+    "--rdp-day-height": "32px",
+    "--rdp-day-width": "32px",
+  }),
+});
+
 export const DrawerPaper = ({ palette }: Theme) =>
   ({
     background: `${palette.darkGrey[800]}EE`,
-  } as const);
+  }) as const;
 
 export const ButtonGroup = styled("div")(({ theme: { spacing } }) => ({
   display: "grid",
@@ -58,15 +102,3 @@ export const Title = styled("div")(({ theme: { palette, spacing } }) => ({
   color: palette.grey[400],
   padding: `${spacing(2)} ${spacing(2)}`,
 }));
-
-export const dayPickerStyles = {
-  "--rdp-accent-color": "#6494ed99",
-  "--rdp-background-color": "#ffffff22",
-  "--rdp-outline": "2px solid var(--rdp-accent-color)",
-  fontSize: "0.9rem",
-};
-
-export const dayPickerSmallStyles = {
-  "--rdp-cell-size": "32px",
-  marginBottom: 0,
-};

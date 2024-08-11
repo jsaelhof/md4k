@@ -57,27 +57,30 @@ describe("date-picker", () => {
   it<LocalTestContext>("should set the default date", ({ props }) => {
     renderWithProviders(<DatePicker {...props} />);
     expect(screen.getByText("January 2022")).toBeInTheDocument();
-    expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
-      "rdp-day_selected"
-    );
+    expect(
+      screen.getByRole("button", { name: /January 2nd, 2022, selected/ })
+    ).toBeInTheDocument();
   });
 
   it<LocalTestContext>("should change the date", async ({ props, user }) => {
     renderWithProviders(<DatePicker {...props} />);
 
-    expect(screen.getByRole("gridcell", { name: "2" })).toHaveClass(
-      "rdp-day_selected"
-    );
+    expect(
+      screen.getByRole("button", { name: /January 2nd, 2022, selected/ })
+    ).toBeInTheDocument();
 
-    await user.click(screen.getByRole("gridcell", { name: "1" }));
+    await user.click(screen.getByRole("button", { name: /January 1st, 2022/ }));
 
-    expect(screen.getByRole("gridcell", { name: "2" })).not.toHaveClass(
-      "rdp-day_selected"
-    );
+    expect(
+      screen.getByRole("button", { name: /January 2nd, 2022/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /January 2nd, 2022, selected/ })
+    ).not.toBeInTheDocument();
 
-    expect(screen.getByRole("gridcell", { name: "1" })).toHaveClass(
-      "rdp-day_selected"
-    );
+    expect(
+      screen.getByRole("button", { name: /January 1st, 2022, selected/ })
+    ).toBeInTheDocument();
   });
 
   it<LocalTestContext>("should call onDelete", async ({ props, user }) => {

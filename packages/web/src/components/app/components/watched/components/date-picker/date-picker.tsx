@@ -5,7 +5,6 @@ import { Drawer } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import Delete from "@mui/icons-material/Delete";
 import CalendarCheck from "mdi-material-ui/CalendarCheck";
-import { DayPicker } from "react-day-picker";
 
 import {
   ButtonGroup,
@@ -13,7 +12,7 @@ import {
   Picker,
   Title,
   dayPickerStyles,
-  dayPickerSmallStyles,
+  StyledDayPicker,
 } from "./date-picker.styles";
 import ActionButton from "../../../action-button/action-button";
 import { type SpringValues } from "react-spring";
@@ -51,11 +50,12 @@ const DatePicker = ({
       onClick={preventBubbling}
       data-testid="datePicker"
     >
-      <DayPicker
+      <StyledDayPicker
+        $drawer={useDrawer}
+        // @ts-expect-error Having an issue getting the types to line up.
         styles={{
           root: {
-            ...dayPickerStyles,
-            ...(!useDrawer && dayPickerSmallStyles),
+            ...dayPickerStyles({ drawer: useDrawer }),
           },
         }}
         defaultMonth={defaultDate}

@@ -30,7 +30,7 @@ export const AuthenticatedApolloProvider = ({
       const errorLink = onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-            switch (extensions.code) {
+            switch (extensions?.code) {
               default:
                 console.log(
                   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -50,7 +50,6 @@ export const AuthenticatedApolloProvider = ({
       const authLink = setContext(async (_, { headers, ...rest }) => {
         try {
           const token = await getAccessTokenSilently();
-          console.log({ token });
 
           return {
             ...rest,
@@ -59,6 +58,7 @@ export const AuthenticatedApolloProvider = ({
               authorization: `Bearer ${token}`,
             },
           };
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           // Redirect to the main page of the app.
           // The url to redirect to is configured in main.tsx in the Auth0Provider props.

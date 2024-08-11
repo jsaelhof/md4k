@@ -214,7 +214,9 @@ describe("watched-movie", () => {
 
     expect(await screen.findByTestId("datePicker")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("gridcell", { name: "10" }));
+    await user.click(
+      screen.getByRole("button", { name: /September 10th, 2021/ })
+    );
 
     await user.click(screen.getByTestId("CalendarCheckIcon"));
 
