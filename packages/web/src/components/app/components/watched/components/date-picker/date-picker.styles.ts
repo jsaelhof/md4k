@@ -1,5 +1,5 @@
 import { type Theme, styled } from "@mui/material";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, type DayPickerProps } from "react-day-picker";
 import { animated } from "react-spring";
 
 interface PickerProps {
@@ -36,35 +36,35 @@ export const Picker = styled(animated.div)<PickerProps>(
   })
 );
 
-export const StyledDayPicker = styled(DayPicker)(
-  ({ $drawer }: { $drawer: boolean }) => ({
-    padding: "8px",
+export const StyledDayPicker = styled(DayPicker)<
+  DayPickerProps & { $drawer: boolean }
+>(({ $drawer }) => ({
+  padding: "8px",
 
-    ".rdp-month_caption": {
-      paddingLeft: "15px",
-      fontWeight: "normal",
-      fontSize: "1em",
-
-      ...(!$drawer && {
-        paddingLeft: "8px",
-      }),
-    },
-
-    ".rdp-chevron": {
-      fill: "#bdbdbd",
-    },
-
-    ".rdp-selected > .rdp-day_button": {
-      background: "var(--rdp-accent-color)",
-      color: "white",
-    },
+  ".rdp-month_caption": {
+    paddingLeft: "15px",
+    fontWeight: "normal",
+    fontSize: "1em",
 
     ...(!$drawer && {
-      marginBottom: 0,
-      fontSize: "0.9rem",
+      paddingLeft: "8px",
     }),
-  })
-);
+  },
+
+  ".rdp-chevron": {
+    fill: "#bdbdbd",
+  },
+
+  ".rdp-selected > .rdp-day_button": {
+    background: "var(--rdp-accent-color)",
+    color: "white",
+  },
+
+  ...(!$drawer && {
+    marginBottom: 0,
+    fontSize: "0.9rem",
+  }),
+}));
 
 // Using this as a method to set the css variables for day picker. All actual styling is done in the styled component.
 export const dayPickerStyles = ({ drawer }: { drawer: boolean }) => ({

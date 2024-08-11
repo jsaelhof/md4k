@@ -52,6 +52,7 @@ const DatePicker = ({
     >
       <StyledDayPicker
         $drawer={useDrawer}
+        // @ts-expect-error Having an issue getting the types to line up.
         styles={{
           root: {
             ...dayPickerStyles({ drawer: useDrawer }),
