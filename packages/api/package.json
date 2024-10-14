@@ -23,13 +23,13 @@
     "apollo-server-express": "^3.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "graphql": "^16.9.0",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
     "lodash": "^4.17.21",
     "md4k-constants": "*",
-    "mongodb": "^6.8.0"
+    "mongodb": "^6.9.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
