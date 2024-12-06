@@ -1,3 +1,12 @@
+### PR #312 - Update to node 22.x
+##### 2024-12-06
+
+
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/312)
+
+----
+
 ### PR #311 - Update to node 22
 ##### 2024-12-06
 
