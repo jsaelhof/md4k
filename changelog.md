@@ -1,3 +1,12 @@
+### PR #311 - Update to node 22
+##### 2024-12-06
+
+Add an engines declaration on the web package for node 22, update the api package to 22. 
+
+![](public/images/link.png) [Pull Request](https://github.com/jsaelhof/md4k/pull/311)
+
+----
+
 ### PR #271 - #243: Testing auth redirect 
 ##### 2024-07-07
 
