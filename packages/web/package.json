@@ -81,5 +81,8 @@
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
     "eslint": "*"
+  },
+  "engines": {
+    "node": "22"
   }
 }
